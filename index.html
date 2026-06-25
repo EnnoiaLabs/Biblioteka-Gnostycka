@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gnostyk - biblioteka gnostycka</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Nawigacja">
+        <div class="brand">
+          <img class="brand-icon" src="assets/gnostyk-icon.png" alt="">
+          <div>
+            <img class="brand-logo" src="assets/gnostyk-logo.png" alt="Gnostyk">
+            <p>Biblioteka gnostycka</p>
+          </div>
+        </div>
+
+        <section class="library-card" aria-label="Księgi w bibliotece">
+          <span class="eyebrow">Aktualna pozycja biblioteki</span>
+          <h2>Pistis Sophia</h2>
+          <p>Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
+          <div class="library-status">
+            <span>Pełna księga</span>
+            <span>Kolejne teksty w przygotowaniu</span>
+          </div>
+        </section>
+
+        <label class="search">
+          <span>Szukaj</span>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="światło, Sophia, mystery">
+        </label>
+
+        <div class="tabs" role="tablist" aria-label="Widoki">
+          <button class="tab is-active" data-tab="chapters" type="button">Rozdziały</button>
+          <button class="tab" data-tab="themes" type="button">Motywy</button>
+          <button class="tab" data-tab="marks" type="button">Zakładki</button>
+        </div>
+
+        <div class="panel is-active" id="chaptersPanel"></div>
+        <div class="panel" id="themesPanel"></div>
+        <div class="panel" id="marksPanel"></div>
+      </aside>
+
+      <main class="reader">
+        <section class="reader-hero">
+          <img src="assets/gnostyk-slit-bg.png" alt="">
+          <div class="hero-copy">
+            <p class="eyebrow">Gnostyk · biblioteka tekstów źródłowych</p>
+            <h2>Biblioteka gnostycka</h2>
+            <p class="hero-subtitle">Pistis Sophia: tekst źródłowy, polski przekład, aparat cytowania i notatki czytelnicze.</p>
+          </div>
+          <div class="hero-stats">
+            <span><strong id="pageCount">255</strong> stron</span>
+            <span><strong id="chapterCount">148</strong> rozdziałów</span>
+          </div>
+        </section>
+
+        <section class="toolbar" aria-label="Narzędzia czytania">
+          <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
+          <div class="page-jump">
+            <span>Strona</span>
+            <input id="pageInput" type="number" min="1" value="1">
+          </div>
+          <button id="nextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
+          <div class="mode-switch" aria-label="Tryb tekstu">
+            <button id="polishMode" class="text-button is-active" type="button">Po polsku</button>
+            <button id="sourceMode" class="text-button" type="button">Oryginał EN</button>
+          </div>
+          <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
+          <button id="copyButton" class="text-button" type="button">Kopiuj fragment</button>
+          <label class="toggle">
+            <input id="focusToggle" type="checkbox">
+            <span>Tryb skupienia</span>
+          </label>
+        </section>
+
+        <section class="content-layout">
+          <article class="text-surface" aria-live="polite">
+            <div class="reading-meta">
+              <span id="currentPageLabel">Strona 1</span>
+              <span id="currentChapterLabel">Wstęp</span>
+            </div>
+            <div id="polishGuide" class="polish-guide"></div>
+            <div id="pageText" class="page-text"></div>
+          </article>
+
+          <aside class="notes" aria-label="Notatki">
+            <h3>Notatki</h3>
+            <textarea id="notesInput" placeholder="Twoje notatki do tej strony"></textarea>
+            <div class="note-actions">
+              <button id="clearNote" class="text-button subtle" type="button">Wyczyść</button>
+              <span id="saveStatus">Zapis lokalny</span>
+            </div>
+          </aside>
+        </section>
+
+        <footer class="legal-footer">
+          <strong>Domena publiczna i prawa do opracowania</strong>
+          <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
+          <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi.</p>
+          <p class="library-version">Gnostyk Biblioteka v1.0</p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
