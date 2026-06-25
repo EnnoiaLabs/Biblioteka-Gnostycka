@@ -1,9 +1,36 @@
 const data = window.PISTIS_SOPHIA_DATA;
+const libraryMeta = {
+  id: "gnostyk-biblioteka",
+  name: "Gnostyk Biblioteka",
+  version: "1.0.10",
+  updated: "2026-06-25",
+  currentWork: {
+    id: "pistis-sophia",
+    title: "Pistis Sophia",
+    status: "Pełna księga",
+    source: "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
+    sourceRights: "Domena publiczna",
+    creativeLayer: "Polski przekład, dobór terminologii, układ czytelniczy, noty i aparat cytowania"
+  }
+};
+
+const savedSettings = JSON.parse(localStorage.getItem("ps.settings") || "{}");
 const state = {
-  page: 1,
+  page: Number(localStorage.getItem("ps.lastPage") || 1),
   query: "",
+  mobileChapterQuery: "",
   tab: "chapters",
-  readerMode: "pl",
+  mobilePanel: "toc",
+  readerMode: localStorage.getItem("ps.readerMode") || "pl",
+  citationFormat: localStorage.getItem("ps.citationFormat") || "simple",
+  aboutOpen: localStorage.getItem("ps.aboutOpen") === "true",
+  settingsOpen: localStorage.getItem("ps.settingsOpen") === "true",
+  settings: {
+    theme: savedSettings.theme || "dark",
+    fontSize: savedSettings.fontSize || "medium",
+    lineHeight: savedSettings.lineHeight || "normal",
+    width: savedSettings.width || "standard"
+  },
   marks: JSON.parse(localStorage.getItem("ps.marks") || "[]"),
   notes: JSON.parse(localStorage.getItem("ps.notes") || "{}")
 };
@@ -5217,17 +5244,60 @@ const els = {
   currentChapter: document.querySelector("#currentChapterLabel"),
   prev: document.querySelector("#prevPage"),
   next: document.querySelector("#nextPage"),
+  continue: document.querySelector("#continueButton"),
   polishMode: document.querySelector("#polishMode"),
   sourceMode: document.querySelector("#sourceMode"),
   bookmark: document.querySelector("#bookmarkButton"),
+  citationFormat: document.querySelector("#citationFormat"),
   copy: document.querySelector("#copyButton"),
+  aboutToggle: document.querySelector("#aboutToggle"),
+  aboutPanel: document.querySelector("#aboutPanel"),
+  settingsToggle: document.querySelector("#settingsToggle"),
+  settingsPanel: document.querySelector("#settingsPanel"),
+  themeSetting: document.querySelector("#themeSetting"),
+  fontSizeSetting: document.querySelector("#fontSizeSetting"),
+  lineHeightSetting: document.querySelector("#lineHeightSetting"),
+  widthSetting: document.querySelector("#widthSetting"),
   notes: document.querySelector("#notesInput"),
   clearNote: document.querySelector("#clearNote"),
   saveStatus: document.querySelector("#saveStatus"),
   focus: document.querySelector("#focusToggle"),
   pageCount: document.querySelector("#pageCount"),
-  chapterCount: document.querySelector("#chapterCount")
+  chapterCount: document.querySelector("#chapterCount"),
+  mobileSheet: document.querySelector("#mobileSheet"),
+  mobileOverlay: document.querySelector("#mobileOverlay"),
+  mobileClose: document.querySelector("#mobileClose"),
+  mobileSheetTitle: document.querySelector("#mobileSheetTitle"),
+  mobileChapterSearch: document.querySelector("#mobileChapterSearch"),
+  mobileSearch: document.querySelector("#mobileSearchInput"),
+  mobileChapters: document.querySelector("#mobileChaptersPanel"),
+  mobileSearchPanel: document.querySelector("#mobileSearchPanel"),
+  mobileMarks: document.querySelector("#mobileMarksPanel"),
+  mobileCurrentPage: document.querySelector("#mobileCurrentPage"),
+  mobilePrev: document.querySelector("#mobilePrevPage"),
+  mobileNext: document.querySelector("#mobileNextPage"),
+  mobileBookmark: document.querySelector("#mobileBookmarkButton"),
+  mobileCopy: document.querySelector("#mobileCopyButton"),
+  mobileAbout: document.querySelector("#mobileAboutButton"),
+  mobileSettings: document.querySelector("#mobileSettingsButton"),
+  mobileReaderMode: document.querySelector("#mobileReaderMode"),
+  mobileCitationFormat: document.querySelector("#mobileCitationFormat"),
+  libraryVersion: document.querySelector("#libraryVersion"),
+  libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
+  offlineNotice: document.querySelector("#offlineNotice")
 };
+
+function listen(element, eventName, handler) {
+  if (element) element.addEventListener(eventName, handler);
+}
+
+function setText(element, text) {
+  if (element) element.textContent = text;
+}
+
+function setValue(element, value) {
+  if (element) element.value = value;
+}
 
 function pageByNumber(page) {
   return data.pages[Math.max(0, Math.min(data.pages.length - 1, page - 1))];
@@ -5262,6 +5332,34 @@ function chapterNavExcerpt(chapter) {
     .replace(/^CHAPTER\s+\d+\s*/i, "")
     .trim();
   return compactText(withoutHead, 120);
+}
+
+function chapterMatchesQuery(chapter, query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return true;
+  const polishText = polishTranslations[chapter.page] || "";
+  const hay = `${readableChapter(chapter)} ${chapter.title} ${chapter.subtitle} ${polishText}`.toLowerCase();
+  return hay.includes(normalized) || pageByNumber(chapter.page).text.toLowerCase().includes(normalized);
+}
+
+function chapterButtonHtml(chapter) {
+  const active = chapterForPage(state.page)?.number === chapter.number;
+  return `
+    <button class="nav-item ${active ? "is-active" : ""}" data-page="${chapter.page}" type="button">
+      <strong>${escapeHtml(readableChapter(chapter))}</strong>
+      <span>str. ${chapter.page} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
+    </button>
+  `;
+}
+
+function markButtonHtml(page) {
+  const item = pageByNumber(page);
+  return `
+    <button class="mark-item" data-page="${page}" type="button">
+      <strong>Strona ${page}</strong>
+      <span>${escapeHtml(item.preview || "Zapisana strona")}</span>
+    </button>
+  `;
 }
 
 function hitsForPage(page) {
@@ -5313,6 +5411,20 @@ function citationForPage(page, chapter) {
   return parts.join(" · ");
 }
 
+function formattedCitation(page, chapter) {
+  const refs = manuscriptRefsForPage(page);
+  const chapterPart = chapter ? `rozdz. ${chapter.number}` : "materiał wprowadzający";
+  const schw = refs.length ? `Schw.-Pet. ${refs.join(", ")}` : "bez znacznika Schw.-Pet.";
+  const source = "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921";
+  const formats = {
+    simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""}`,
+    scholarly: `Pistis Sophia, tłum. i oprac. Gnostyk Biblioteka, na podst. ${source}, Mead s. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}.`,
+    mead: `Pistis Sophia, Mead s. ${page.page}, ${chapterPart}.`,
+    schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead s. ${page.page}.` : `Pistis Sophia, Mead s. ${page.page}; brak osobnego znacznika Schw.-Pet. na tej stronie.`
+  };
+  return formats[state.citationFormat] || formats.simple;
+}
+
 function renderReferenceStrip(page, chapter) {
   const refs = manuscriptRefsForPage(page);
   const chapterLabel = chapter ? `Rozdział ${chapter.number}` : "Materiał wprowadzający";
@@ -5332,6 +5444,83 @@ function renderReferenceStrip(page, chapter) {
       <small>${escapeHtml(note)}</small>
     </div>
   `;
+}
+
+function saveReadingState() {
+  localStorage.setItem("ps.lastPage", String(state.page));
+  localStorage.setItem("ps.readerMode", state.readerMode);
+  localStorage.setItem("ps.citationFormat", state.citationFormat);
+}
+
+function saveSettings() {
+  localStorage.setItem("ps.settings", JSON.stringify(state.settings));
+}
+
+function applySettings() {
+  document.body.dataset.theme = state.settings.theme;
+  document.body.dataset.fontSize = state.settings.fontSize;
+  document.body.dataset.lineHeight = state.settings.lineHeight;
+  document.body.dataset.width = state.settings.width;
+  setValue(els.themeSetting, state.settings.theme);
+  setValue(els.fontSizeSetting, state.settings.fontSize);
+  setValue(els.lineHeightSetting, state.settings.lineHeight);
+  setValue(els.widthSetting, state.settings.width);
+}
+
+function updateOfflineNotice() {
+  const offline = !navigator.onLine;
+  if (els.offlineNotice) els.offlineNotice.hidden = !offline;
+}
+
+function setLibraryVersion(version) {
+  libraryMeta.version = version;
+  setText(els.libraryVersion, version);
+  setText(els.libraryVersionFooter, version);
+}
+
+function versionFromChangelog(text) {
+  const match = text.match(/^##\s+Gnostyk Biblioteka\s+([0-9]+\.[0-9]+\.[0-9]+)/m);
+  return match ? match[1] : null;
+}
+
+async function loadLibraryVersion() {
+  setLibraryVersion(libraryMeta.version);
+  if (location.protocol === "file:") return;
+  try {
+    const response = await fetch("./CHANGELOG.md", { cache: "no-store" });
+    if (!response.ok) return;
+    const version = versionFromChangelog(await response.text());
+    if (version) setLibraryVersion(version);
+  } catch {
+    setLibraryVersion(libraryMeta.version);
+  }
+}
+
+function setPanelVisibility(panel, open) {
+  if (!panel) return;
+  panel.hidden = !open;
+  panel.classList.toggle("is-open", open);
+}
+
+function renderPanelState() {
+  setPanelVisibility(els.aboutPanel, state.aboutOpen);
+  setPanelVisibility(els.settingsPanel, state.settingsOpen);
+  els.aboutToggle?.classList.toggle("is-active", state.aboutOpen);
+  els.settingsToggle?.classList.toggle("is-active", state.settingsOpen);
+}
+
+function setReaderPanel(panel) {
+  if (panel === "about") {
+    state.aboutOpen = !state.aboutOpen;
+    state.settingsOpen = false;
+  }
+  if (panel === "settings") {
+    state.settingsOpen = !state.settingsOpen;
+    state.aboutOpen = false;
+  }
+  localStorage.setItem("ps.aboutOpen", String(state.aboutOpen));
+  localStorage.setItem("ps.settingsOpen", String(state.settingsOpen));
+  renderPanelState();
 }
 
 function polishPageText(page, chapter) {
@@ -5376,10 +5565,25 @@ function saveNotes() {
   localStorage.setItem("ps.notes", JSON.stringify(state.notes));
 }
 
-function goToPage(page) {
+function isMobileLayout() {
+  return window.matchMedia("(max-width: 920px)").matches;
+}
+
+function scrollToReaderText() {
+  document.querySelector(".text-surface")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function goToPage(page, options = {}) {
   state.page = Math.max(1, Math.min(data.pageCount, Number(page) || 1));
+  saveReadingState();
   renderReader();
   renderLists();
+  if (options.scrollToText || isMobileLayout()) {
+    requestAnimationFrame(scrollToReaderText);
+  }
 }
 
 function renderReader() {
@@ -5387,38 +5591,36 @@ function renderReader() {
   const chapter = chapterForPage(state.page);
   renderPolishGuide(page, chapter);
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
-  els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${highlight(text)}`;
-  els.pageInput.value = state.page;
-  els.currentPage.textContent = `Strona ${state.page}`;
-  els.currentChapter.textContent = readableChapter(chapter);
-  els.polishMode.classList.toggle("is-active", state.readerMode === "pl");
-  els.sourceMode.classList.toggle("is-active", state.readerMode === "source");
-  els.bookmark.classList.toggle("is-active", state.marks.includes(state.page));
-  els.notes.value = state.notes[state.page] || "";
+  if (els.pageText) els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${highlight(text)}`;
+  setValue(els.pageInput, state.page);
+  setText(els.currentPage, `Strona ${state.page}`);
+  setText(els.currentChapter, readableChapter(chapter));
+  els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
+  els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
+  els.bookmark?.classList.toggle("is-active", state.marks.includes(state.page));
+  setValue(els.notes, state.notes[state.page] || "");
+  setText(els.mobileCurrentPage, `Str. ${state.page}`);
+  setValue(els.citationFormat, state.citationFormat);
+  setValue(els.mobileReaderMode, state.readerMode);
+  setValue(els.mobileCitationFormat, state.citationFormat);
+  setText(els.mobileBookmark, state.marks.includes(state.page) ? "Usuń zakładkę" : "Dodaj zakładkę");
 }
 
 function renderLists() {
   renderChapters();
   renderThemes();
   renderMarks();
+  renderMobileNavigation();
 }
 
 function renderChapters() {
-  const query = state.query.toLowerCase();
-  const matches = data.chapters.filter(chapter => {
-    const polishText = polishTranslations[chapter.page] || "";
-    const hay = `${readableChapter(chapter)} ${chapter.title} ${chapter.subtitle} ${polishText}`.toLowerCase();
-    return !query || hay.includes(query) || pageByNumber(chapter.page).text.toLowerCase().includes(query);
-  });
-  els.chapters.innerHTML = matches.map(chapter => `
-      <button class="nav-item ${chapterForPage(state.page)?.number === chapter.number ? "is-active" : ""}" data-page="${chapter.page}" type="button">
-      <strong>${escapeHtml(readableChapter(chapter))}</strong>
-      <span>str. ${chapter.page} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
-    </button>
-  `).join("") || `<div class="empty">Brak wyników</div>`;
+  const matches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
+  if (!els.chapters) return;
+  els.chapters.innerHTML = matches.map(chapterButtonHtml).join("") || `<div class="empty">Brak wyników</div>`;
 }
 
 function renderThemes() {
+  if (!els.themes) return;
   els.themes.innerHTML = themes.map(theme => {
     const count = data.pages.reduce((sum, page) => {
       const text = page.text.toLowerCase();
@@ -5435,64 +5637,77 @@ function renderThemes() {
 
 function renderMarks() {
   const marks = [...state.marks].sort((a, b) => a - b);
-  els.marks.innerHTML = marks.map(page => {
-    const item = pageByNumber(page);
-    return `
-      <button class="mark-item" data-page="${page}" type="button">
-        <strong>Strona ${page}</strong>
-        <span>${escapeHtml(item.preview || "Zapisana strona")}</span>
-      </button>
-    `;
-  }).join("") || `<div class="empty">Brak zakładek</div>`;
+  if (!els.marks) return;
+  els.marks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">Brak zakładek</div>`;
 }
 
-function setTab(tab) {
-  state.tab = tab;
-  document.querySelectorAll(".tab").forEach(button => {
-    button.classList.toggle("is-active", button.dataset.tab === tab);
-  });
-  document.querySelectorAll(".panel").forEach(panel => {
-    panel.classList.toggle("is-active", panel.id === `${tab}Panel`);
+function chaptersByRange(chapters) {
+  return chapterRanges.map(range => ({
+    ...range,
+    chapters: chapters.filter(chapter => chapter.number >= range.from && chapter.number <= range.to)
+  })).filter(range => range.chapters.length);
+}
+
+function renderMobileChapterGroups(chapters) {
+  return chaptersByRange(chapters).map(range => `
+    <details class="chapter-group" ${range.chapters.some(chapter => chapterForPage(state.page)?.number === chapter.number) ? "open" : ""}>
+      <summary>
+        <strong>${escapeHtml(range.title)}</strong>
+        <span>${range.chapters.length} rozdz.</span>
+      </summary>
+      <div class="chapter-group-list">
+        ${range.chapters.map(chapterButtonHtml).join("")}
+      </div>
+    </details>
+  `).join("") || `<div class="empty">Brak wyników</div>`;
+}
+
+function renderMobileNavigation() {
+  const chapterMatches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.mobileChapterQuery));
+  const searchMatches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
+  const marks = [...state.marks].sort((a, b) => a - b);
+  if (els.mobileChapters) els.mobileChapters.innerHTML = renderMobileChapterGroups(chapterMatches);
+  if (els.mobileSearchPanel) els.mobileSearchPanel.innerHTML = searchMatches.map(chapterButtonHtml).join("") || `<div class="empty">Brak wyników</div>`;
+  if (els.mobileMarks) els.mobileMarks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">Brak zakładek</div>`;
+  setText(els.mobileCurrentPage, `Str. ${state.page}`);
+}
+
+function setMobilePanel(panel) {
+  state.mobilePanel = panel;
+  const titles = {
+    toc: "Spis treści",
+    search: "Szukaj",
+    marks: "Zakładki",
+    more: "Więcej"
+  };
+  setText(els.mobileSheetTitle, titles[panel] || "Nawigacja");
+  document.querySelectorAll("[data-mobile-content]").forEach(item => {
+    item.classList.toggle("is-active", item.dataset.mobileContent === panel);
   });
 }
 
-document.addEventListener("click", event => {
-  const pageButton = event.target.closest("[data-page]");
-  if (pageButton) goToPage(pageButton.dataset.page);
+function openMobileSheet(panel = state.mobilePanel) {
+  if (!els.mobileSheet || !els.mobileOverlay) return;
+  setMobilePanel(panel);
+  els.mobileOverlay.hidden = false;
+  els.mobileSheet.classList.add("is-open");
+  els.mobileSheet.setAttribute("aria-hidden", "false");
+}
 
-  const themeButton = event.target.closest("[data-theme]");
-  if (themeButton) {
-    const theme = themes.find(item => item.label === themeButton.dataset.theme);
-    state.query = theme.terms[0];
-    els.search.value = state.query;
-    setTab("chapters");
-    const first = data.pages.find(page => page.text.toLowerCase().includes(state.query.toLowerCase()));
-    if (first) goToPage(first.page);
-  }
+function closeMobileSheet() {
+  if (!els.mobileSheet || !els.mobileOverlay) return;
+  els.mobileOverlay.hidden = true;
+  els.mobileSheet.classList.remove("is-open");
+  els.mobileSheet.setAttribute("aria-hidden", "true");
+}
 
-  const tab = event.target.closest(".tab");
-  if (tab) setTab(tab.dataset.tab);
-});
-
-els.search.addEventListener("input", event => {
-  state.query = event.target.value;
+function setReaderMode(mode) {
+  state.readerMode = mode;
+  saveReadingState();
   renderReader();
-  renderLists();
-});
+}
 
-els.pageInput.addEventListener("change", event => goToPage(event.target.value));
-els.prev.addEventListener("click", () => goToPage(state.page - 1));
-els.next.addEventListener("click", () => goToPage(state.page + 1));
-els.polishMode.addEventListener("click", () => {
-  state.readerMode = "pl";
-  renderReader();
-});
-els.sourceMode.addEventListener("click", () => {
-  state.readerMode = "source";
-  renderReader();
-});
-
-els.bookmark.addEventListener("click", () => {
+function toggleBookmark() {
   if (state.marks.includes(state.page)) {
     state.marks = state.marks.filter(page => page !== state.page);
   } else {
@@ -5501,13 +5716,14 @@ els.bookmark.addEventListener("click", () => {
   saveMarks();
   renderReader();
   renderMarks();
-});
+  renderMobileNavigation();
+}
 
-els.copy.addEventListener("click", async () => {
+async function copyCurrentFragment() {
   const page = pageByNumber(state.page);
   const chapter = chapterForPage(state.page);
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
-  const textWithCitation = `[Pistis Sophia · ${citationForPage(page, chapter)}]\n\n${text}`;
+  const textWithCitation = `[${formattedCitation(page, chapter)}]\n\n${text}`;
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(textWithCitation);
   } else {
@@ -5521,28 +5737,173 @@ els.copy.addEventListener("click", async () => {
     document.execCommand("copy");
     helper.remove();
   }
-  els.copy.textContent = "Skopiowano";
+}
+
+function setTab(tab) {
+  state.tab = tab;
+  document.querySelectorAll(".tab").forEach(button => {
+    button.classList.toggle("is-active", button.dataset.tab === tab);
+  });
+  document.querySelectorAll(".panel").forEach(panel => {
+    panel.classList.toggle("is-active", panel.id === `${tab}Panel`);
+  });
+}
+
+document.addEventListener("click", event => {
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+  if (!target) return;
+
+  const pageButton = target.closest("[data-page]");
+  if (pageButton) {
+    goToPage(pageButton.dataset.page, { scrollToText: true });
+    if (pageButton.closest(".mobile-sheet")) closeMobileSheet();
+  }
+
+  const themeButton = event.target.closest("[data-theme]");
+  if (themeButton) {
+    const theme = themes.find(item => item.label === themeButton.dataset.theme);
+    state.query = theme.terms[0];
+    setValue(els.search, state.query);
+    setTab("chapters");
+    const first = data.pages.find(page => page.text.toLowerCase().includes(state.query.toLowerCase()));
+    if (first) goToPage(first.page, { scrollToText: true });
+  }
+
+  const tab = target.closest(".tab");
+  if (tab) setTab(tab.dataset.tab);
+
+  const mobilePanelButton = target.closest("[data-mobile-panel]");
+  if (mobilePanelButton) openMobileSheet(mobilePanelButton.dataset.mobilePanel);
+});
+
+document.querySelectorAll("[data-mobile-panel]").forEach(button => {
+  listen(button, "click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    openMobileSheet(button.dataset.mobilePanel);
+  });
+});
+
+listen(els.search, "input", event => {
+  state.query = event.target.value;
+  setValue(els.mobileSearch, state.query);
+  renderReader();
+  renderLists();
+});
+
+listen(els.mobileChapterSearch, "input", event => {
+  state.mobileChapterQuery = event.target.value;
+  renderMobileNavigation();
+});
+
+listen(els.mobileSearch, "input", event => {
+  state.query = event.target.value;
+  setValue(els.search, state.query);
+  renderReader();
+  renderLists();
+});
+
+listen(els.pageInput, "change", event => goToPage(event.target.value));
+listen(els.prev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
+listen(els.next, "click", () => goToPage(state.page + 1, { scrollToText: true }));
+listen(els.continue, "click", () => goToPage(localStorage.getItem("ps.lastPage") || state.page, { scrollToText: true }));
+listen(els.mobilePrev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
+listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
+listen(els.mobileCurrentPage, "click", scrollToReaderText);
+listen(els.mobileClose, "click", closeMobileSheet);
+listen(els.mobileOverlay, "click", closeMobileSheet);
+listen(els.polishMode, "click", () => setReaderMode("pl"));
+listen(els.sourceMode, "click", () => setReaderMode("source"));
+
+listen(els.citationFormat, "change", event => {
+  state.citationFormat = event.target.value;
+  setValue(els.mobileCitationFormat, state.citationFormat);
+  saveReadingState();
+});
+
+listen(els.aboutToggle, "click", () => {
+  setReaderPanel("about");
+});
+
+listen(els.settingsToggle, "click", () => {
+  setReaderPanel("settings");
+});
+
+[els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting].filter(Boolean).forEach(control => {
+  listen(control, "change", event => {
+    const map = {
+      themeSetting: "theme",
+      fontSizeSetting: "fontSize",
+      lineHeightSetting: "lineHeight",
+      widthSetting: "width"
+    };
+    state.settings[map[event.target.id]] = event.target.value;
+    saveSettings();
+    applySettings();
+  });
+});
+
+listen(els.bookmark, "click", toggleBookmark);
+
+listen(els.copy, "click", async () => {
+  await copyCurrentFragment();
+  setText(els.copy, "Skopiowano");
   setTimeout(() => {
-    els.copy.textContent = "Kopiuj fragment";
+    setText(els.copy, "Kopiuj fragment");
   }, 1100);
 });
 
-els.notes.addEventListener("input", event => {
+listen(els.mobileBookmark, "click", () => {
+  toggleBookmark();
+  closeMobileSheet();
+});
+
+listen(els.mobileCopy, "click", async () => {
+  await copyCurrentFragment();
+  setText(els.mobileCopy, "Skopiowano");
+  setTimeout(() => {
+    setText(els.mobileCopy, "Kopiuj cytat");
+  }, 1100);
+});
+
+listen(els.mobileAbout, "click", () => {
+  closeMobileSheet();
+  setReaderPanel("about");
+  requestAnimationFrame(scrollToReaderText);
+});
+
+listen(els.mobileSettings, "click", () => {
+  closeMobileSheet();
+  setReaderPanel("settings");
+  requestAnimationFrame(scrollToReaderText);
+});
+
+listen(els.mobileReaderMode, "change", event => {
+  setReaderMode(event.target.value);
+});
+
+listen(els.mobileCitationFormat, "change", event => {
+  state.citationFormat = event.target.value;
+  setValue(els.citationFormat, state.citationFormat);
+  saveReadingState();
+});
+
+listen(els.notes, "input", event => {
   state.notes[state.page] = event.target.value;
   saveNotes();
-  els.saveStatus.textContent = "Zapisano";
+  setText(els.saveStatus, "Zapisano");
   setTimeout(() => {
-    els.saveStatus.textContent = "Zapis lokalny";
+    setText(els.saveStatus, "Zapis lokalny");
   }, 900);
 });
 
-els.clearNote.addEventListener("click", () => {
+listen(els.clearNote, "click", () => {
   delete state.notes[state.page];
   saveNotes();
-  els.notes.value = "";
+  setValue(els.notes, "");
 });
 
-els.focus.addEventListener("change", event => {
+listen(els.focus, "change", event => {
   document.body.classList.toggle("focus", event.target.checked);
 });
 
@@ -5552,11 +5913,25 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") goToPage(state.page + 1);
   if (event.key === "/") {
     event.preventDefault();
-    els.search.focus();
+    els.search?.focus();
   }
+  if (event.key === "Escape") closeMobileSheet();
 });
 
-els.pageCount.textContent = data.pageCount;
-els.chapterCount.textContent = data.chapters.length;
+setText(els.pageCount, data.pageCount);
+setText(els.chapterCount, data.chapters.length);
+loadLibraryVersion();
+state.page = Math.max(1, Math.min(data.pageCount, state.page));
+applySettings();
+renderPanelState();
+updateOfflineNotice();
+window.addEventListener("online", updateOfflineNotice);
+window.addEventListener("offline", updateOfflineNotice);
 renderReader();
 renderLists();
+
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}

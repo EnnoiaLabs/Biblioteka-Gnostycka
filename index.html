@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gnostyk - biblioteka gnostycka</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Gnostyk Biblioteka: polskie opracowania tekstów gnostyckich, aparat cytowania, notatki i tryb PWA.">
+    <meta name="theme-color" content="#0d0b09">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Gnostyk">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.10">
+    <link rel="icon" href="assets/pwa-icon-192.png">
+    <link rel="apple-touch-icon" href="assets/pwa-icon-192.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.10">
   </head>
   <body>
     <div class="app-shell">
@@ -54,11 +61,32 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
+            <span><strong id="libraryVersion">1.0.10</strong> wersja biblioteki</span>
           </div>
+        </section>
+
+        <section class="work-meta" aria-label="Metadane tekstu">
+          <article>
+            <span>Status</span>
+            <strong>Pełna księga</strong>
+          </article>
+          <article>
+            <span>Podstawa</span>
+            <strong>Mead 1921</strong>
+          </article>
+          <article>
+            <span>Paginacja</span>
+            <strong>Mead / Schw.-Pet.</strong>
+          </article>
+          <article>
+            <span>Prawa</span>
+            <strong>Domena publiczna + nowa warstwa twórcza</strong>
+          </article>
         </section>
 
         <section class="toolbar" aria-label="Narzędzia czytania">
           <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
+          <button id="continueButton" class="text-button" type="button">Kontynuuj</button>
           <div class="page-jump">
             <span>Strona</span>
             <input id="pageInput" type="number" min="1" value="1">
@@ -69,7 +97,15 @@
             <button id="sourceMode" class="text-button" type="button">Oryginał EN</button>
           </div>
           <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
+          <select id="citationFormat" class="select-button" aria-label="Format cytowania">
+            <option value="simple">Cytat prosty</option>
+            <option value="scholarly">Cytat naukowy</option>
+            <option value="mead">Mead</option>
+            <option value="schwpet">Schw.-Pet.</option>
+          </select>
           <button id="copyButton" class="text-button" type="button">Kopiuj fragment</button>
+          <button id="aboutToggle" class="text-button" type="button">O tekście</button>
+          <button id="settingsToggle" class="text-button" type="button">Ustawienia</button>
           <label class="toggle">
             <input id="focusToggle" type="checkbox">
             <span>Tryb skupienia</span>
@@ -83,6 +119,46 @@
               <span id="currentChapterLabel">Wstęp</span>
             </div>
             <div id="polishGuide" class="polish-guide"></div>
+            <section id="aboutPanel" class="reader-panel" hidden>
+              <h3>O tekście</h3>
+              <p><strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
+              <dl>
+                <div><dt>Źródło</dt><dd>G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921.</dd></div>
+                <div><dt>Aparat cytowania</dt><dd>Zachowano strony wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym.</dd></div>
+                <div><dt>Warstwa twórcza</dt><dd>Polski przekład, terminologia, układ czytelniczy, noty i aparat biblioteki są nowym opracowaniem.</dd></div>
+              </dl>
+            </section>
+            <section id="settingsPanel" class="reader-panel settings-panel" hidden>
+              <h3>Ustawienia czytania</h3>
+              <label>Motyw
+                <select id="themeSetting">
+                  <option value="sepia">Sepia</option>
+                  <option value="light">Jasny</option>
+                  <option value="dark">Ciemny</option>
+                </select>
+              </label>
+              <label>Rozmiar tekstu
+                <select id="fontSizeSetting">
+                  <option value="small">Mały</option>
+                  <option value="medium">Średni</option>
+                  <option value="large">Duży</option>
+                </select>
+              </label>
+              <label>Interlinia
+                <select id="lineHeightSetting">
+                  <option value="compact">Zwarta</option>
+                  <option value="normal">Normalna</option>
+                  <option value="wide">Szeroka</option>
+                </select>
+              </label>
+              <label>Szerokość kolumny
+                <select id="widthSetting">
+                  <option value="standard">Standardowa</option>
+                  <option value="narrow">Wąska</option>
+                  <option value="wide">Szeroka</option>
+                </select>
+              </label>
+            </section>
             <div id="pageText" class="page-text"></div>
           </article>
 
@@ -100,12 +176,75 @@
           <strong>Domena publiczna i prawa do opracowania</strong>
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi.</p>
-          <p class="library-version">Gnostyk Biblioteka v1.0</p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.10</span></p>
         </footer>
       </main>
     </div>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <div id="offlineNotice" class="offline-notice" hidden>Aplikacja jest offline. Biblioteka korzysta z zapisanej wersji PWA.</div>
+
+    <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+    <section id="mobileSheet" class="mobile-sheet" aria-hidden="true" aria-label="Mobilna nawigacja">
+      <div class="mobile-sheet-head">
+        <strong id="mobileSheetTitle">Spis treści</strong>
+        <button id="mobileClose" class="text-button subtle" type="button">Zamknij</button>
+      </div>
+
+      <div class="mobile-panel is-active" data-mobile-content="toc">
+        <label class="mobile-search">
+          <span>Szukaj w rozdziałach</span>
+          <input id="mobileChapterSearch" type="search" autocomplete="off" placeholder="Sophia, światłość, misterium">
+        </label>
+        <div id="mobileChaptersPanel" class="mobile-list"></div>
+      </div>
+
+      <div class="mobile-panel" data-mobile-content="search">
+        <label class="mobile-search">
+          <span>Szukaj w całym tekście</span>
+          <input id="mobileSearchInput" type="search" autocomplete="off" placeholder="Wpisz motyw lub słowo">
+        </label>
+        <div id="mobileSearchPanel" class="mobile-list"></div>
+      </div>
+
+      <div class="mobile-panel" data-mobile-content="marks">
+        <div id="mobileMarksPanel" class="mobile-list"></div>
+      </div>
+
+      <div class="mobile-panel" data-mobile-content="more">
+        <div class="mobile-tools">
+          <button id="mobileBookmarkButton" class="text-button" type="button">Dodaj zakładkę</button>
+          <button id="mobileCopyButton" class="text-button" type="button">Kopiuj cytat</button>
+          <button id="mobileAboutButton" class="text-button" type="button">O tekście</button>
+          <button id="mobileSettingsButton" class="text-button" type="button">Ustawienia</button>
+        </div>
+        <label class="mobile-search">
+          <span>Tryb tekstu</span>
+          <select id="mobileReaderMode">
+            <option value="pl">Po polsku</option>
+            <option value="source">Oryginał EN</option>
+          </select>
+        </label>
+        <label class="mobile-search">
+          <span>Format cytowania</span>
+          <select id="mobileCitationFormat">
+            <option value="simple">Cytat prosty</option>
+            <option value="scholarly">Cytat naukowy</option>
+            <option value="mead">Mead</option>
+            <option value="schwpet">Schw.-Pet.</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <nav class="mobile-bottom-nav" aria-label="Szybka nawigacja">
+      <button data-mobile-panel="toc" type="button">Spis treści</button>
+      <button id="mobilePrevPage" type="button">‹</button>
+      <button id="mobileCurrentPage" type="button">Str. 1</button>
+      <button id="mobileNextPage" type="button">›</button>
+      <button data-mobile-panel="more" type="button">Więcej</button>
+    </nav>
+
+    <script src="data.js?v=1.0.10"></script>
+    <script src="app.js?v=1.0.10"></script>
   </body>
 </html>

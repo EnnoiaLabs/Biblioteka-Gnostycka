@@ -1,0 +1,21 @@
+{
+  "library": {
+    "id": "gnostyk-biblioteka",
+    "name": "Gnostyk Biblioteka",
+    "version": "1.0.10",
+    "rightsNote": "Teksty źródłowe w domenie publicznej; polski przekład, opracowanie, terminologia, układ czytelniczy i aparat biblioteki jako nowa warstwa twórcza."
+  },
+  "works": [
+    {
+      "id": "pistis-sophia",
+      "title": "Pistis Sophia",
+      "status": "Pełna księga",
+      "language": "pl",
+      "sourceLanguageLayer": "en",
+      "source": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
+      "sourceRights": "Domena publiczna",
+      "citation": ["Mead", "Schwartze-Petermann"],
+      "tags": ["gnostycyzm", "Sophia", "misteria", "światłość"]
+    }
+  ]
+}
