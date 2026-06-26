@@ -1,5 +1,80 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.22 - trzy czasy i Adamas
+
+- Dodano znaczniki Schwartze-Petermanna `|160`-`|171` oraz `|173` do polskiej warstwy stron 137-144.
+- Skolacjonowano kontynuację pieśni Sophii, interpretacje Maryi, Marty i Andrzeja oraz zapowiedź trzech czasów i ponownego ucisku przez Adamasa.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|172`.
+
+## Gnostyk Biblioteka 1.0.21 - pieśni wybawienia Sophii
+
+- Dodano znaczniki Schwartze-Petermanna `|147`-`|159` do polskiej warstwy stron 129-136.
+- Skolacjonowano rozwiązanie Jakuba, pieśń Sophii po wyjściu z chaosu oraz interpretacje Tomasza i Mateusza z Ód Salomona.
+- Zachowano ciągłość cytowania drugiej księgi po odcinku strumienia światłości.
+
+## Gnostyk Biblioteka 1.0.20 - strumień światłości
+
+- Dodano znaczniki Schwartze-Petermanna `|131`-`|146` do polskiej warstwy stron 121-128.
+- Skolacjonowano opowieść o strumieniu światłości, interpretację Piotra oraz początek walki z emanacjami Samowolnego i Adamasa.
+- Zachowano przerwy numeracyjne źródła: w tym odcinku nie występują znaczniki `|137` i `|140`.
+
+## Gnostyk Biblioteka 1.0.19 - koniec pierwszej księgi
+
+- Dodano znaczniki Schwartze-Petermanna `|115`-`|130` do polskiej warstwy stron 113-120.
+- Skolacjonowano końcową część Księgi Pierwszej, notę skryby oraz początek Księgi Drugiej z Janową interpretacją i strumieniem światłości.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|126`.
+
+## Gnostyk Biblioteka 1.0.18 - dwunasta i trzynasta pokuta
+
+- Dodano znaczniki Schwartze-Petermanna `|103` oraz `|105`-`|114` do polskiej warstwy stron 105-112.
+- Skolacjonowano interpretację Salome, dwunastą pokutę Sophii, interpretację Andrzeja oraz początek trzynastej pokuty i pieśni chwały.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|104`.
+
+## Gnostyk Biblioteka 1.0.17 - dziewiąta i dziesiąta pokuta
+
+- Dodano znaczniki Schwartze-Petermanna `|89`-`|102` do polskiej warstwy stron 97-104.
+- Skolacjonowano dziewiątą pokutę Sophii, interpretację Jakuba, przyjęcie pokuty oraz początek dziesiątej i jedenastej pokuty.
+- Utrzymano numerację biblioteki w plikach PWA, stopce i cache aplikacji.
+
+## Gnostyk Biblioteka 1.0.16 - siódma i ósma pokuta
+
+- Dodano znaczniki Schwartze-Petermanna `|76`-`|88` do polskiej warstwy stron 89-96.
+- Skolacjonowano przejście od szóstej pokuty przez interpretację Maryi, siódmą pokutę Sophii oraz początek ósmej pokuty.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|87`.
+
+## Gnostyk Biblioteka 1.0.15 - piąta i szósta pokuta
+
+- Dodano znaczniki Schwartze-Petermanna `|64`-`|75` do polskiej warstwy stron 81-88.
+- Skolacjonowano końcówkę czwartej pokuty, rozwiązanie Jana, piątą pokutę Sophii oraz początek szóstej pokuty.
+- Utrzymano numerację biblioteki w stopce, PWA i cache aplikacji zgodnie z changelogiem.
+
+## Gnostyk Biblioteka 1.0.14 - pokuty Sophii
+
+- Dodano kolejne znaczniki Schwartze-Petermanna w polskiej warstwie stron 73-80.
+- Skolacjonowano fragment pierwszej i drugiej pokuty Sophii oraz początek czwartej pokuty.
+- Zaktualizowano audyt przekładu: liczba stron bez znaczników w polskiej warstwie spadła do 175.
+
+## Gnostyk Biblioteka 1.0.13 - kolacja historii Sophii
+
+- Dodano kolejne jednoznaczne znaczniki Schwartze-Petermanna w polskim tekście dla stron 66-72.
+- Rozpoczęto kolację partii o Melchizedeku, zmianie biegów eonów i początku historii Pistis Sophii.
+- Zaktualizowano audyt przekładu: zmniejszono liczbę stron bez znaczników w polskiej warstwie do 182.
+
+## Gnostyk Biblioteka 1.0.12 - kolacja znaczników rękopisu
+
+- Wprowadzono znaczniki Schwartze-Petermanna w polskiej warstwie stron 50-64 dla pierwszych jednoznacznych przejść rękopisu.
+- Dodano status „część znaczników w tekście”, aby strony częściowo skolacjonowane nie były oznaczane jako w pełni gotowe.
+- Rozszerzono audyt przekładu o `partial_manuscript_refs`.
+- Zaktualizowano `translation-audit.json`.
+
+## Gnostyk Biblioteka 1.0.11 - redakcja przekładu
+
+- Dodano status redakcyjny przy stronach: przekład roboczy, znaczniki w aparacie albo opracowanie do kolacji.
+- Uzupełniono początek strony 49 i wprowadzono tam znaczniki rękopisu `|2`, `|3`, `|4`.
+- Dodano notę w panelu „O tekście”, że polska warstwa jest pełna, ale wybrane miejsca wymagają dalszej kolacji ze źródłem.
+- Dodano narzędzie `tools/audit-translation.mjs`, które generuje `translation-audit.json` i kontroluje brakujące znaczniki rękopisu oraz podejrzanie krótkie strony.
+- Odświeżono cache PWA i wersjonowanie plików aplikacji.
+
 ## Gnostyk Biblioteka 1.0.10 - naprawa mobilnych paneli
 
 - Dodano bezpośrednią obsługę kliknięć dla dolnych przycisków „Spis treści” i „Więcej”.

@@ -1,4 +1,4 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.0.10";
+const CACHE_NAME = "gnostyk-biblioteka-v1.0.22";
 
 const APP_SHELL = [
   "./",
@@ -10,6 +10,9 @@ const APP_SHELL = [
   "./VERSION.json",
   "./library.json",
   "./CHANGELOG.md",
+  "./TRANSLATION_REPORT.md",
+  "./translation-audit.json",
+  "./tools/audit-translation.mjs",
   "./assets/gnostyk-icon.png",
   "./assets/gnostyk-logo.png",
   "./assets/gnostyk-slit-bg.png",

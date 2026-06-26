@@ -1,0 +1,1075 @@
+{
+  "generatedAt": "2026-06-26T09:07:46.435Z",
+  "pages": 255,
+  "translatedPages": 255,
+  "issueCounts": {
+    "very_short_polish": 13,
+    "partial_manuscript_refs": 10,
+    "missing_manuscript_refs": 111
+  },
+  "issues": [
+    {
+      "page": 19,
+      "type": "very_short_polish",
+      "sourceLength": 2957,
+      "polishLength": 1325
+    },
+    {
+      "page": 35,
+      "type": "very_short_polish",
+      "sourceLength": 3065,
+      "polishLength": 1290
+    },
+    {
+      "page": 36,
+      "type": "very_short_polish",
+      "sourceLength": 2850,
+      "polishLength": 969
+    },
+    {
+      "page": 37,
+      "type": "very_short_polish",
+      "sourceLength": 2514,
+      "polishLength": 729
+    },
+    {
+      "page": 38,
+      "type": "very_short_polish",
+      "sourceLength": 2697,
+      "polishLength": 1004
+    },
+    {
+      "page": 40,
+      "type": "very_short_polish",
+      "sourceLength": 3118,
+      "polishLength": 1050
+    },
+    {
+      "page": 42,
+      "type": "very_short_polish",
+      "sourceLength": 2769,
+      "polishLength": 1098
+    },
+    {
+      "page": 44,
+      "type": "very_short_polish",
+      "sourceLength": 2899,
+      "polishLength": 985
+    },
+    {
+      "page": 45,
+      "type": "very_short_polish",
+      "sourceLength": 2732,
+      "polishLength": 1171
+    },
+    {
+      "page": 46,
+      "type": "very_short_polish",
+      "sourceLength": 3193,
+      "polishLength": 998
+    },
+    {
+      "page": 47,
+      "type": "very_short_polish",
+      "sourceLength": 3267,
+      "polishLength": 1395
+    },
+    {
+      "page": 57,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "21",
+        "22"
+      ],
+      "polishRefs": [
+        "21"
+      ]
+    },
+    {
+      "page": 58,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "23",
+        "24"
+      ],
+      "polishRefs": [
+        "23"
+      ]
+    },
+    {
+      "page": 59,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "25",
+        "26"
+      ],
+      "polishRefs": [
+        "25"
+      ]
+    },
+    {
+      "page": 61,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "28",
+        "29"
+      ],
+      "polishRefs": [
+        "29"
+      ]
+    },
+    {
+      "page": 62,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "30",
+        "31",
+        "32"
+      ],
+      "polishRefs": [
+        "30"
+      ]
+    },
+    {
+      "page": 64,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "34",
+        "35",
+        "36"
+      ],
+      "polishRefs": [
+        "34"
+      ]
+    },
+    {
+      "page": 66,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "38",
+        "39",
+        "40"
+      ],
+      "polishRefs": [
+        "38"
+      ]
+    },
+    {
+      "page": 68,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "43",
+        "44"
+      ],
+      "polishRefs": [
+        "43"
+      ]
+    },
+    {
+      "page": 69,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "45",
+        "46"
+      ],
+      "polishRefs": [
+        "45"
+      ]
+    },
+    {
+      "page": 71,
+      "type": "partial_manuscript_refs",
+      "sourceRefs": [
+        "49",
+        "50"
+      ],
+      "polishRefs": [
+        "49"
+      ]
+    },
+    {
+      "page": 79,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "62"
+      ]
+    },
+    {
+      "page": 145,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "174"
+      ]
+    },
+    {
+      "page": 146,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "175",
+        "176"
+      ]
+    },
+    {
+      "page": 147,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "177"
+      ]
+    },
+    {
+      "page": 148,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "178",
+        "179"
+      ]
+    },
+    {
+      "page": 149,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "180"
+      ]
+    },
+    {
+      "page": 150,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "181"
+      ]
+    },
+    {
+      "page": 151,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "182",
+        "183",
+        "184"
+      ]
+    },
+    {
+      "page": 152,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "185",
+        "186"
+      ]
+    },
+    {
+      "page": 153,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "187",
+        "188"
+      ]
+    },
+    {
+      "page": 154,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "189"
+      ]
+    },
+    {
+      "page": 155,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "192"
+      ]
+    },
+    {
+      "page": 156,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "193",
+        "194",
+        "195"
+      ]
+    },
+    {
+      "page": 157,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "196"
+      ]
+    },
+    {
+      "page": 158,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "197",
+        "198"
+      ]
+    },
+    {
+      "page": 159,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "199",
+        "200"
+      ]
+    },
+    {
+      "page": 160,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "201"
+      ]
+    },
+    {
+      "page": 161,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "203",
+        "204"
+      ]
+    },
+    {
+      "page": 162,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "205",
+        "206"
+      ]
+    },
+    {
+      "page": 163,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "207",
+        "208"
+      ]
+    },
+    {
+      "page": 164,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "209",
+        "210"
+      ]
+    },
+    {
+      "page": 165,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "211"
+      ]
+    },
+    {
+      "page": 166,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "212",
+        "213"
+      ]
+    },
+    {
+      "page": 167,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "214",
+        "215"
+      ]
+    },
+    {
+      "page": 168,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "216"
+      ]
+    },
+    {
+      "page": 169,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "217",
+        "218",
+        "219"
+      ]
+    },
+    {
+      "page": 170,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "220"
+      ]
+    },
+    {
+      "page": 171,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "221",
+        "222"
+      ]
+    },
+    {
+      "page": 172,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "223",
+        "224"
+      ]
+    },
+    {
+      "page": 173,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "225",
+        "226"
+      ]
+    },
+    {
+      "page": 174,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "227",
+        "228",
+        "229"
+      ]
+    },
+    {
+      "page": 175,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "230"
+      ]
+    },
+    {
+      "page": 176,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "231",
+        "232"
+      ]
+    },
+    {
+      "page": 177,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "233",
+        "234"
+      ]
+    },
+    {
+      "page": 178,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "235",
+        "236"
+      ]
+    },
+    {
+      "page": 179,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "237",
+        "238"
+      ]
+    },
+    {
+      "page": 180,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "239",
+        "240"
+      ]
+    },
+    {
+      "page": 181,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "241",
+        "242",
+        "243"
+      ]
+    },
+    {
+      "page": 182,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "244"
+      ]
+    },
+    {
+      "page": 183,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "245",
+        "246"
+      ]
+    },
+    {
+      "page": 184,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "247",
+        "248",
+        "249"
+      ]
+    },
+    {
+      "page": 185,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "250",
+        "251"
+      ]
+    },
+    {
+      "page": 186,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "252",
+        "253"
+      ]
+    },
+    {
+      "page": 187,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "254"
+      ]
+    },
+    {
+      "page": 188,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "256"
+      ]
+    },
+    {
+      "page": 189,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "257",
+        "258"
+      ]
+    },
+    {
+      "page": 190,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "259",
+        "260"
+      ]
+    },
+    {
+      "page": 191,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "261"
+      ]
+    },
+    {
+      "page": 191,
+      "type": "very_short_polish",
+      "sourceLength": 2711,
+      "polishLength": 1021
+    },
+    {
+      "page": 192,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "263",
+        "264"
+      ]
+    },
+    {
+      "page": 193,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "265",
+        "266"
+      ]
+    },
+    {
+      "page": 194,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "267",
+        "268"
+      ]
+    },
+    {
+      "page": 195,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "269",
+        "270",
+        "271"
+      ]
+    },
+    {
+      "page": 196,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "272",
+        "273"
+      ]
+    },
+    {
+      "page": 197,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "274",
+        "275"
+      ]
+    },
+    {
+      "page": 198,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "276",
+        "277"
+      ]
+    },
+    {
+      "page": 199,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "278",
+        "279"
+      ]
+    },
+    {
+      "page": 200,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "280",
+        "281"
+      ]
+    },
+    {
+      "page": 201,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "282",
+        "283"
+      ]
+    },
+    {
+      "page": 202,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "284",
+        "285",
+        "286"
+      ]
+    },
+    {
+      "page": 203,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "287",
+        "288"
+      ]
+    },
+    {
+      "page": 204,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "289",
+        "290"
+      ]
+    },
+    {
+      "page": 205,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "291",
+        "292",
+        "293"
+      ]
+    },
+    {
+      "page": 206,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "294",
+        "295"
+      ]
+    },
+    {
+      "page": 207,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "296",
+        "297"
+      ]
+    },
+    {
+      "page": 208,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "298",
+        "299",
+        "300"
+      ]
+    },
+    {
+      "page": 209,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "301",
+        "302"
+      ]
+    },
+    {
+      "page": 210,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "303",
+        "304"
+      ]
+    },
+    {
+      "page": 211,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "305"
+      ]
+    },
+    {
+      "page": 211,
+      "type": "very_short_polish",
+      "sourceLength": 2697,
+      "polishLength": 1165
+    },
+    {
+      "page": 212,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "307",
+        "308"
+      ]
+    },
+    {
+      "page": 213,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "309",
+        "310"
+      ]
+    },
+    {
+      "page": 214,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "311",
+        "312"
+      ]
+    },
+    {
+      "page": 215,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "313"
+      ]
+    },
+    {
+      "page": 216,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "314",
+        "315",
+        "316"
+      ]
+    },
+    {
+      "page": 217,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "317",
+        "318"
+      ]
+    },
+    {
+      "page": 218,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "319"
+      ]
+    },
+    {
+      "page": 219,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "320",
+        "321"
+      ]
+    },
+    {
+      "page": 220,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "322",
+        "323"
+      ]
+    },
+    {
+      "page": 221,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "324",
+        "325"
+      ]
+    },
+    {
+      "page": 222,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "326",
+        "327"
+      ]
+    },
+    {
+      "page": 223,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "328",
+        "329",
+        "330"
+      ]
+    },
+    {
+      "page": 224,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "332"
+      ]
+    },
+    {
+      "page": 225,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "333",
+        "334"
+      ]
+    },
+    {
+      "page": 226,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "336"
+      ]
+    },
+    {
+      "page": 227,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "337",
+        "338",
+        "339"
+      ]
+    },
+    {
+      "page": 228,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "340",
+        "341"
+      ]
+    },
+    {
+      "page": 229,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "342",
+        "343"
+      ]
+    },
+    {
+      "page": 230,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "344",
+        "345",
+        "346"
+      ]
+    },
+    {
+      "page": 231,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "347",
+        "348"
+      ]
+    },
+    {
+      "page": 232,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "349",
+        "350"
+      ]
+    },
+    {
+      "page": 233,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "351",
+        "352"
+      ]
+    },
+    {
+      "page": 234,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "354"
+      ]
+    },
+    {
+      "page": 235,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "356"
+      ]
+    },
+    {
+      "page": 236,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "357",
+        "358"
+      ]
+    },
+    {
+      "page": 237,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "359",
+        "360"
+      ]
+    },
+    {
+      "page": 238,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "361",
+        "362"
+      ]
+    },
+    {
+      "page": 239,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "363"
+      ]
+    },
+    {
+      "page": 240,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "364",
+        "365"
+      ]
+    },
+    {
+      "page": 241,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "366",
+        "367"
+      ]
+    },
+    {
+      "page": 242,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "368",
+        "369"
+      ]
+    },
+    {
+      "page": 243,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "371"
+      ]
+    },
+    {
+      "page": 244,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "372",
+        "373"
+      ]
+    },
+    {
+      "page": 245,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "374"
+      ]
+    },
+    {
+      "page": 246,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "375",
+        "376",
+        "377"
+      ]
+    },
+    {
+      "page": 247,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "378"
+      ]
+    },
+    {
+      "page": 248,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "379",
+        "380"
+      ]
+    },
+    {
+      "page": 249,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "381"
+      ]
+    },
+    {
+      "page": 250,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "382",
+        "383"
+      ]
+    },
+    {
+      "page": 251,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "384"
+      ]
+    },
+    {
+      "page": 252,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "385",
+        "386"
+      ]
+    },
+    {
+      "page": 253,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "387"
+      ]
+    },
+    {
+      "page": 254,
+      "type": "missing_manuscript_refs",
+      "refs": [
+        "389",
+        "390"
+      ]
+    }
+  ]
+}
