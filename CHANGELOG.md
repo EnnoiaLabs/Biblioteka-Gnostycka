@@ -1,5 +1,91 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.36 - kontrola profesjonalna
+
+- Uporz?dkowano techniczne zako?czenie ostatniej strony przek?adu, aby skanery jako?ci jednoznacznie rozpoznawa?y granic? strony 255.
+- Wyr?wnano granice stron 200-204 z paginacj? Meada i znacznikami Schwartze-Petermanna `|280`-`|290`.
+- Zachowano polskie zako?czenie tekstu: `KONIEC`.
+- Ponownie sprawdzono audyt przek?adu i integralno?? PWA.
+
+## Gnostyk Biblioteka 1.0.35 - pełniejsze strony audytu
+
+- Rozwinięto 13 stron oznaczonych przez audyt jako zbyt krótkie: 19, 35-38, 40, 42, 44-47, 191 i 211.
+- Uzupełniono pełniejsze brzmienie stron 191 i 211 w tekście głównym Pistis Sophia, bez zmiany numeracji Schwartze-Petermanna.
+- Rozszerzono wstępno-bibliograficzne partie Meada, aby nie były skrótem udającym pełny przekład.
+
+## Gnostyk Biblioteka 1.0.34 - ostatnie bramy i objawienia
+
+- Dodano znacznik Schwartze-Petermanna `|62` oraz znaczniki `|359`-`|369`, `|371`-`|387` i `|389`-`|390` do polskiej warstwy stron 79 oraz 237-254.
+- Uzupełniono wcześniejsze częściowe oznaczenia stron 57-71: `|22`, `|24`, `|26`, `|28`, `|31`-`|32`, `|35`-`|36`, `|39`-`|40`, `|44`, `|46` i `|50`.
+- Skolacjonowano finałowe partie przekładu z nauką o misteriach, losach dusz i ostatnich odpowiedziach Zbawcy.
+- Zachowano przerwy numeracyjne źródła: w tym odcinku nie występują znaczniki `|370` i `|388`.
+
+## Gnostyk Biblioteka 1.0.33 - kielich zapomnienia i klucze misteriów
+
+- Dodano znaczniki Schwartze-Petermanna `|337`-`|352`, `|354` oraz `|356`-`|358` do polskiej warstwy stron 227-236.
+- Skolacjonowano naukę o kielichu zapomnienia, kształtowaniu duszy, duchu naśladowczym, poczęciu, przeznaczeniu i kluczach misteriów.
+- Zachowano przerwy numeracyjne źródła: w tym odcinku nie występują znaczniki `|353` i `|355`.
+
+## Gnostyk Biblioteka 1.0.32 - zewnętrzna ciemność i imiona smoka
+
+- Dodano znaczniki Schwartze-Petermanna `|320`-`|330`, `|332`-`|334` oraz `|336` do polskiej warstwy stron 219-226.
+- Skolacjonowano początek czwartej księgi: smoka zewnętrznej ciemności, dwanaście lochów, rodzaje dusz prowadzonych do karania oraz pomoc przez imiona smoka.
+- Zachowano przerwy numeracyjne źródła: w tym odcinku nie występują znaczniki `|331` i `|335`.
+
+## Gnostyk Biblioteka 1.0.31 - odpuszczenie, pokuta i próba Piotra
+
+- Dodano znaczniki Schwartze-Petermanna `|301`-`|305` oraz `|307`-`|319` do polskiej warstwy stron 209-218.
+- Skolacjonowano wyjaśnienie chrztów, wyższych misteriów odpuszczenia, pokuty po wtajemniczeniu oraz próbę Piotra wobec kobiety czyniącej pokutę.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|306`.
+
+## Gnostyk Biblioteka 1.0.30 - dusza, duch naśladowczy i chrzty
+
+- Dodano znaczniki Schwartze-Petermanna `|282`-`|300` do polskiej warstwy stron 201-208.
+- Skolacjonowano naukę o budowie człowieka, stanie duszy po śmierci, duchu naśladowczym, Losie oraz obronach duszy w drodze przez krainy.
+- Utrzymano aparat cytowania przy interpretacjach Maryi i wprowadzeniu do misteriów chrztów odpuszczających grzechy.
+
+## Gnostyk Biblioteka 1.0.29 - pokuta, świadkowie i misteria uzdrowienia
+
+- Dodano znaczniki Schwartze-Petermanna `|265`-`|281` do polskiej warstwy stron 193-200.
+- Skolacjonowano naukę o wielokrotnym przebaczeniu, granicach przekazywania misteriów, pozorantach oraz pomocy duszom po wyjściu z ciała.
+- Utrzymano ciągłość aparatu cytowania przy przejściu do misterium wskrzeszania umarłych i zakazu jego powszechnego przekazywania.
+
+## Gnostyk Biblioteka 1.0.28 - oczyszczenie i granice dróg
+
+- Dodano znaczniki Schwartze-Petermanna `|250`-`|254`, `|256`-`|261` oraz `|263`-`|264` do polskiej warstwy stron 185-192.
+- Skolacjonowano naukę o misteriach oczyszczających, zakończenie ksiąg Zbawcy, początek trzeciej księgi oraz katalog wyrzeczeń i dróg godnych.
+- Zachowano przerwy numeracyjne źródła: w tym odcinku nie występują znaczniki `|255` i `|262`.
+
+## Gnostyk Biblioteka 1.0.27 - gnoza słowa i Księgi Jeu
+
+- Dodano znaczniki Schwartze-Petermanna `|233`-`|249` do polskiej warstwy stron 177-184.
+- Skolacjonowano rozróżnienie między gnozą wszechświata a misteriami Światłości, trzy i pięć misteriów Niewypowiadalnego oraz wprowadzenie do Ksiąg Jeu.
+- Utrzymano ciągłość aparatu cytowania w przejściu do pytania Andrzeja o przejście przez porządki i moce.
+
+## Gnostyk Biblioteka 1.0.26 - jedyne słowo Niewypowiadalnego
+
+- Dodano znaczniki Schwartze-Petermanna `|217`-`|232` do polskiej warstwy stron 169-176.
+- Skolacjonowano objaśnienie prostoty Misterium Niewypowiadalnego, rozdarcie i emanację mocy oraz rangę duszy, która otrzymuje jedno i jedyne słowo.
+- Utrzymano ciągłość aparatu cytowania w przejściu do nauki o godności tronów w królestwie.
+
+## Gnostyk Biblioteka 1.0.25 - Misterium Niewypowiadalnego
+
+- Dodano znaczniki Schwartze-Petermanna `|203`-`|216` do polskiej warstwy stron 161-168.
+- Skolacjonowano odpowiedź Jana o porządkach misteriów oraz katalog gnozy Misterium Niewypowiadalnego.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występuje znacznik `|202`.
+
+## Gnostyk Biblioteka 1.0.24 - Dziedzictwo Światłości i Pomocnicy
+
+- Dodano znaczniki Schwartze-Petermanna `|187`-`|189` oraz `|192`-`|201` do polskiej warstwy stron 153-160.
+- Skolacjonowano naukę o chwale Dziedzictwa, dwunastu zbawcach, rangach królestwa, wzniesieniu dusz doskonałych oraz pierwszych Pomocnikach.
+- Zachowano przerwę numeracyjną źródła: w tym odcinku nie występują znaczniki `|190` i `|191`.
+
+## Gnostyk Biblioteka 1.0.23 - niewidzialni i koniec opowieści Sophii
+
+- Dodano znaczniki Schwartze-Petermanna `|174`-`|186` do polskiej warstwy stron 145-152.
+- Skolacjonowano mowę Sophii do Adamasa, interpretację Marty, powrót Sophii do trzynastego eonu oraz pieśń pośród dwudziestu czterech niewidzialnych.
+- Rozpoczęto kolejny dział nauki: pytanie Maryi o chwałę dwudziestu czterech niewidzialnych i porządki wyższych krain.
+
 ## Gnostyk Biblioteka 1.0.22 - trzy czasy i Adamas
 
 - Dodano znaczniki Schwartze-Petermanna `|160`-`|171` oraz `|173` do polskiej warstwy stron 137-144.
