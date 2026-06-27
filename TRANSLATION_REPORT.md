@@ -13,7 +13,7 @@ Największy problem nie dotyczy samej polszczyzny, lecz zgodności redakcyjnej z
 
 ## Wykonane po raporcie
 
-- Aplikacja pokazuje teraz status redakcyjny przy stronie: `przekład roboczy`, `znaczniki w aparacie` albo `opracowanie do kolacji`.
+- Aplikacja pokazuje teraz status redakcyjny przy stronie: `przekład skolacjonowany`, `znaczniki w aparacie` albo `opracowanie do kolacji`.
 - Panel `O tekście` wyjaśnia, że polska warstwa jest pełna, ale wybrane miejsca wymagają dalszej kolacji ze źródłem.
 - Strona 49 została uzupełniona o brakujący początek fragmentu oraz znaczniki rękopisu `|2`, `|3`, `|4`.
 - Dodano narzędzie audytu `tools/audit-translation.mjs`, które generuje `translation-audit.json`.

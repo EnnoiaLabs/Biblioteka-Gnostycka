@@ -1,5 +1,52 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.44 - ikony PWA biblioteki
+
+- Dodano nową ikonę PWA przedstawiającą stylizowane gnostyczne księgi ze szczeliną Światłości.
+- Przygotowano rozmiary ikon dla ekranu głównego i pulpitu: 32, 64, 96, 180, 192 i 512 px.
+- Zaktualizowano manifest, ikony Apple/Android oraz cache offline, aby instalowana aplikacja używała nowego znaku.
+
+## Gnostyk Biblioteka 1.0.43 - naprawa kliknięć nawigacji
+
+- Naprawiono kliknięcia w rozdziały, motywy i zakładki po konflikcie atrybutu `data-theme` używanego jednocześnie przez motyw kolorystyczny aplikacji i przyciski motywów tekstu.
+- Ograniczono obsługę kliknięcia motywu wyłącznie do prawdziwych przycisków listy motywów.
+- Dzięki temu rozdziały i zakładki ponownie przenoszą bezpośrednio do właściwej strony.
+
+## Gnostyk Biblioteka 1.0.42 - mobilny wybór cytowania
+
+- Usunięto systemową listę wyboru z mobilnego formatu cytowania.
+- Dodano cztery własne przyciski formatu: `Cytat prosty`, `Cytat naukowy`, `Mead` i `Schw.-Pet.`.
+- Ujednolicono wybór języka i cytowania w panelu `Więcej`, aby ciemny motyw nie pokazywał jasnych natywnych list.
+
+## Gnostyk Biblioteka 1.0.41 - mobilny panel narzędzi
+
+- Usunięto systemową listę wyboru z przełącznika języka w panelu `Więcej`, która w ciemnym motywie otwierała się na jasnym tle.
+- Dodano mobilny przełącznik segmentowy `Po polsku / Oryginał EN` z czytelnymi stanami aktywnymi.
+- Uspokojono wygląd dolnego panelu narzędzi na telefonie: mniejszy ciężar wizualny, ciemniejsze tło i lepsze odstępy.
+
+## Gnostyk Biblioteka 1.0.40 - kontrast przełącznika języka
+
+- Poprawiono ciemny motyw dla przełącznika `Po polsku / Oryginał EN`, żeby oba warianty były czytelne także w widoku mobilnym.
+- Wzmocniono osobne kolory stanu aktywnego i nieaktywnego segmentu językowego.
+
+## Gnostyk Biblioteka 1.0.39 - spokojniejszy ekran lektury
+
+- Rozdzielono górny pasek na podstawową nawigację lektury i narzędzia dodatkowe, żeby ekran czytania był lżejszy.
+- Poprawiono odstępy w polu numeru strony, aby numer nie był przyklejony do kontrolek zmiany strony.
+- Zmieniono status pełnych stron z `przekład roboczy` na `przekład skolacjonowany`, zgodnie z wykonanym audytem przekładu.
+
+## Gnostyk Biblioteka 1.0.38 - nota o przek?adzie i cytowaniu
+
+- Rozbudowano panel ?O przek?adzie? o podstaw? publiczno-domenow?, charakter przek?adu, prawa do nowej warstwy tw?rczej i instrukcj? cytowania.
+- Dodano wersj? biblioteki do kopiowanych cytat?w prostych, naukowych i Schwartze-Petermanna.
+- Doprecyzowano stopk? prawn?: tekst ?r?d?owy i wydanie Meada 1921 s? w domenie publicznej, a polska warstwa tw?rcza jest obj?ta prawami autorskimi.
+
+## Gnostyk Biblioteka 1.0.37 - kolacja stron 33 i 218
+
+- Skolacjonowano i wyrównano strony 33-34 ze szkieletem systemu oraz początkiem bibliografii Meada.
+- Skolacjonowano i wyrównano strony 216-218 z paginacją Meada oraz znacznikami Schwartze-Petermanna `|314`-`|319`.
+- Usunięto przesunięcie, przez które strona 218 zawierała nadmiarowy materiał z poprzedniej strony.
+
 ## Gnostyk Biblioteka 1.0.36 - kontrola profesjonalna
 
 - Uporz?dkowano techniczne zako?czenie ostatniej strony przek?adu, aby skanery jako?ci jednoznacznie rozpoznawa?y granic? strony 255.

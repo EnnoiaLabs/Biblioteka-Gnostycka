@@ -8,10 +8,11 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.36">
-    <link rel="icon" href="assets/pwa-icon-192.png">
-    <link rel="apple-touch-icon" href="assets/pwa-icon-192.png">
-    <link rel="stylesheet" href="styles.css?v=1.0.36">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.44">
+    <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
+    <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.44">
   </head>
   <body>
     <div class="app-shell">
@@ -61,7 +62,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.36</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.44</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -85,31 +86,35 @@
         </section>
 
         <section class="toolbar" aria-label="Narzędzia czytania">
-          <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
-          <button id="continueButton" class="text-button" type="button">Kontynuuj</button>
-          <div class="page-jump">
-            <span>Strona</span>
-            <input id="pageInput" type="number" min="1" value="1">
+          <div class="toolbar-primary" aria-label="Nawigacja lektury">
+            <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
+            <button id="continueButton" class="text-button" type="button">Kontynuuj</button>
+            <div class="page-jump">
+              <span>Strona</span>
+              <input id="pageInput" type="number" min="1" value="1">
+            </div>
+            <button id="nextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
+            <div class="mode-switch" aria-label="Tryb tekstu">
+              <button id="polishMode" class="text-button is-active" type="button">Po polsku</button>
+              <button id="sourceMode" class="text-button" type="button">Oryginał EN</button>
+            </div>
           </div>
-          <button id="nextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
-          <div class="mode-switch" aria-label="Tryb tekstu">
-            <button id="polishMode" class="text-button is-active" type="button">Po polsku</button>
-            <button id="sourceMode" class="text-button" type="button">Oryginał EN</button>
+          <div class="toolbar-secondary" aria-label="Narzędzia dodatkowe">
+            <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
+            <select id="citationFormat" class="select-button" aria-label="Format cytowania">
+              <option value="simple">Cytat prosty</option>
+              <option value="scholarly">Cytat naukowy</option>
+              <option value="mead">Mead</option>
+              <option value="schwpet">Schw.-Pet.</option>
+            </select>
+            <button id="copyButton" class="text-button" type="button">Kopiuj fragment</button>
+            <button id="aboutToggle" class="text-button" type="button">O przekładzie</button>
+            <button id="settingsToggle" class="text-button" type="button">Ustawienia</button>
+            <label class="toggle">
+              <input id="focusToggle" type="checkbox">
+              <span>Tryb skupienia</span>
+            </label>
           </div>
-          <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
-          <select id="citationFormat" class="select-button" aria-label="Format cytowania">
-            <option value="simple">Cytat prosty</option>
-            <option value="scholarly">Cytat naukowy</option>
-            <option value="mead">Mead</option>
-            <option value="schwpet">Schw.-Pet.</option>
-          </select>
-          <button id="copyButton" class="text-button" type="button">Kopiuj fragment</button>
-          <button id="aboutToggle" class="text-button" type="button">O tekście</button>
-          <button id="settingsToggle" class="text-button" type="button">Ustawienia</button>
-          <label class="toggle">
-            <input id="focusToggle" type="checkbox">
-            <span>Tryb skupienia</span>
-          </label>
         </section>
 
         <section class="content-layout">
@@ -120,14 +125,17 @@
             </div>
             <div id="polishGuide" class="polish-guide"></div>
             <section id="aboutPanel" class="reader-panel" hidden>
-              <h3>O tekście</h3>
-              <p><strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład misteryjny i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
+              <h3>O przekładzie</h3>
+              <p><strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
               <dl>
-                <div><dt>Źródło</dt><dd>G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921.</dd></div>
-                <div><dt>Status przekładu</dt><dd>Pełna księga jest dostępna w warstwie polskiej, ale wybrane strony wstępu i aparat znaczników rękopisu są oznaczone jako wymagające dalszej kolacji ze źródłem.</dd></div>
-                <div><dt>Aparat cytowania</dt><dd>Zachowano strony wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym. Status przy stronie pokazuje, czy znaczniki są już w polskiej warstwie tekstu, czy tylko w aparacie.</dd></div>
-                <div><dt>Warstwa twórcza</dt><dd>Polski przekład, terminologia, układ czytelniczy, noty i aparat biblioteki są nowym opracowaniem.</dd></div>
+                <div><dt>Podstawa</dt><dd>G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921. Wydanie Meada oraz tekst starożytny pozostają w domenie publicznej.</dd></div>
+                <div><dt>Charakter przekładu</dt><dd>Przekład zachowuje misteryjne formuły, powtórzenia, nazwy własne i rytm objawieniowego dialogu. Terminologia została dobrana tak, aby tekst brzmiał po polsku, ale nie tracił swojej gnostyckiej obcości.</dd></div>
+                <div><dt>Aparat cytowania</dt><dd>Zachowano paginację wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym. Numery te pozwalają odwoływać się zarówno do strony wydania angielskiego, jak i do tradycyjnej numeracji rękopiśmiennej.</dd></div>
+                <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
+              <h3>Jak cytować</h3>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.44</span>.</strong></p>
+              <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <section id="settingsPanel" class="reader-panel settings-panel" hidden>
               <h3>Ustawienia czytania</h3>
@@ -176,8 +184,8 @@
         <footer class="legal-footer">
           <strong>Domena publiczna i prawa do opracowania</strong>
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
-          <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.36</span></p>
+          <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.44</span></p>
         </footer>
       </main>
     </div>
@@ -218,22 +226,22 @@
           <button id="mobileAboutButton" class="text-button" type="button">O tekście</button>
           <button id="mobileSettingsButton" class="text-button" type="button">Ustawienia</button>
         </div>
-        <label class="mobile-search">
+        <div class="mobile-field">
           <span>Tryb tekstu</span>
-          <select id="mobileReaderMode">
-            <option value="pl">Po polsku</option>
-            <option value="source">Oryginał EN</option>
-          </select>
-        </label>
-        <label class="mobile-search">
+          <div class="mobile-segmented" aria-label="Tryb tekstu">
+            <button id="mobilePolishMode" class="is-active" type="button">Po polsku</button>
+            <button id="mobileSourceMode" type="button">Oryginał EN</button>
+          </div>
+        </div>
+        <div class="mobile-field">
           <span>Format cytowania</span>
-          <select id="mobileCitationFormat">
-            <option value="simple">Cytat prosty</option>
-            <option value="scholarly">Cytat naukowy</option>
-            <option value="mead">Mead</option>
-            <option value="schwpet">Schw.-Pet.</option>
-          </select>
-        </label>
+          <div class="mobile-citation-options" aria-label="Format cytowania">
+            <button class="is-active" data-mobile-citation="simple" type="button">Cytat prosty</button>
+            <button data-mobile-citation="scholarly" type="button">Cytat naukowy</button>
+            <button data-mobile-citation="mead" type="button">Mead</button>
+            <button data-mobile-citation="schwpet" type="button">Schw.-Pet.</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -245,7 +253,7 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.36"></script>
-    <script src="app.js?v=1.0.36"></script>
+    <script src="data.js?v=1.0.44"></script>
+    <script src="app.js?v=1.0.44"></script>
   </body>
 </html>

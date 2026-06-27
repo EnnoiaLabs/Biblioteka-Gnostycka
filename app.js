@@ -2,8 +2,8 @@ const data = window.PISTIS_SOPHIA_DATA;
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.36",
-  updated: "2026-06-26",
+  version: "1.0.44",
+  updated: "2026-06-27",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -360,14 +360,68 @@ Posługa Pierwszego Misterium. W Pistis Sophia Jezus jest wszędzie najwyższy i
   32: `Sceneria po zmartwychwstaniu. Cała sceneria jest pozmartwychwstaniowa. W działach I-III Jezus przez jedenaście lat po ukrzyżowaniu pouczał już swoich uczniów, mężczyzn i kobiety, w Gnozie. Scena ukazuje teraz uczniów zgromadzonych wokół Zbawcy na Górze Oliwnej na ziemi. Zakres tego wcześniejszego nauczania można zobaczyć w dziale IV, gdzie słowa wprowadzające mówią po prostu, że odbywa się ono po ukrzyżowaniu. W tej warstwie scena jest inna. Ryt sakramentalny dokonuje się na ziemi, lecz na Górze Galilejskiej, a nie na Górze Oliwnej. Scena nie ogranicza się jednak tylko do ziemi, ponieważ uczniowie zostają także zabrani do niektórych krain świata niewidzialnego, wyższych i niższych, otrzymują tam widzenie i zostają pouczeni o jego znaczeniu. W działach I-III Jezus obiecuje zabrać uczniów do sfer i niebios, by bezpośrednio pokazać ich naturę, jakość i mieszkańców, ale w zachowanych przez nas wyciągach z Ksiąg Zbawcy nie ma spełnienia tej obietnicy. Nie należy jednak przypuszczać, że dział IV jest częścią spełnienia wzniosłej obietnicy złożonej w poprzednich wyciągach; w nim bowiem poruszamy się we wcześniejszej fazie nauczania i w atmosferze niższych misteriów niż te wskazane w części poprzedzającej.
 
 Wyższe objawienie w tej scenerii. Działy I-III nieustannie głoszą objawienie wyższych misteriów. Jest ono możliwe dopiero teraz dzięki najwyżej radosnemu faktowi, że w dwunastym roku wewnętrznej posługi nauczania dokonał się wielki, jeśli nie najwyższy, moment w życiu Zbawcy: jego ziemska posługa jest teraz wypełniona i zostaje przyobleczony w pełny blask swojej potrójnej szaty chwały, obejmującej wszystkie moce wszechświata. Wstępuje do nieba w olśniewającej Światłości, która oślepia uczniów. Po trzydziestu godzinach powraca i ze współczucia cofa swój oślepiający blask, aby udzielić wiernym ostatniego nauczania w znajomej postaci.`,
-  33: `Oznacza to, że Księgi Zbawcy chcą zawierać nie tylko nauczanie pozmartwychwstaniowe, a więc objawienie gnostyckie uzupełniające publiczne głoszenie sprzed ukrzyżowania, lecz także jeszcze wyższe i bardziej wewnętrzne odsłonięcie w obrębie pozmartwychwstaniowego pouczenia już istniejącego w tradycji. Jeśli w poprzedniej literaturze były elementy apokaliptyczne i wizje, teraz, przy dopełnieniu posługi, miały nadejść objawienia jeszcze bardziej transcendentalne. Dopóki przyobleczenie, a raczej ponowne przyobleczenie, nie dokonało się według boskiego przykazania, Zbawca nie mógł mówić w całkowitej jawności, twarzą w twarz, o wszystkich rzeczach; teraz może. Taka jest konwencja.
+  33: `ii. Druga Przestrzeń Niewysłowionego, albo Pierwsza Przestrzeń Pierwszego Misterium.
 
-Nauka o eonach. W działach I-III wszędzie zakłada się system eonów i reszty, już bardzo złożony i wykazujący wyraźne ślady stadiów, które kiedyś stanowiły szczyt wcześniejszych systemów, a teraz zostały kolejno podporządkowane. Jest więc jasne, że jeśli mają zostać wprowadzone na scenę jeszcze wyższe hierarchie, może się to dokonać tylko przez ponowne zredukowanie tego, co wcześniej uważano za „koniec wszystkich końców”, do pozycji podrzędnej. Tę właśnie metodę przyjęto, i gubimy się w wyliczaniu nazw oraz atrybutów coraz bardziej transcendentalnych bytów, przestrzeni i misteriów.
+iii. Trzecia Przestrzeń Niewysłowionego, albo Druga Przestrzeń Pierwszego Misterium.
 
-Epizod Sophii. W tym wszystkim nie widać jednak zainteresowania spekulacją metafizyczną; nie ma tu filozofowania. Nie zatem żaden właściwy element myśli helleńskiej w eonologii, który - jak mówi się - był tak silny w nauce samego Walentyna, skłonił tylu do przypuszczenia walentyniańskiego pochodzenia. Wpłynął na nich raczej długi epizod cierpiącej Sophii. Epizod ten odbija na niższym poziomie kosmicznej skali coś z motywu „tragicznego mitu” duszy świata, którego wynalazek zwykle przypisuje się samemu Walentynowi, choć mógł on przekształcić albo opracować już istniejące materiały czy pojęcia. To ten długi epizod Sophii oraz jego zręcznie odwrócona egzegeza mistyczna i interpretacja alegoryczna, idące za metodami rozwiniętymi przez aleksandryjskich kontemplatyków, wywołały u wielu wrażenie, że miał on fundamentalne znaczenie dla systemu Pistis Sophia.`,
-  34: `Zainteresowanie etyczne. Jest to z pewnością znak głębokiego zainteresowania tego kręgu pokutą i psalmami pokutnymi. Zainteresowanie jest tu jednak etyczne raczej niż kosmologiczne. Pistis Sophia zdaje się przedstawiać typ wiernej, pokutującej duszy indywidualnej. Wszędzie głównym zainteresowaniem jest zbawienie i odkupienie. Zdobywa się je przez pokutę i wyrzeczenie się świata, jego przynęt i trosk, lecz przede wszystkim przez wiarę w Zbawcę, Boską Światłość, i jego misteria. Pierwszym wymogiem jest szczera pokuta. Głównym tematem, wokół którego naturalnie skupia się całe nauczanie etyczne, jest grzech, jego przyczyna i oczyszczenie, oraz objawienie Misterium odpuszczenia grzechów i nieskończonego współczucia Pierwszego Misterium.
+II. Wyższy, albo Pośredni, Świat Światłości.
 
-Misteria. Całość przedstawiona jest w kategoriach tych misteriów, które teraz pojmuje się w sposób o wiele bardziej żywotny niż, jak się zdaje, w literaturze wcześniejszej. Po stronie niższej misteria wciąż pod pewnymi względami pozostają w związku z tradycją słów mocy, prawdziwych i niezniszczalnych imion. Wyraźnie jednak zamierza się, aby wyższe misteria pojmować w świetle faktu, że sam Zbawca jest konkretnie Pierwszym Misterium, a istotnie także Ostatnim Misterium.`,
+i. Skarbiec Światłości.
+
+1. Emanacje Światłości.
+
+2. Porządki Porządków.
+
+ii. Kraina Prawej Strony.
+
+iii. Kraina Pośrodka.
+
+III. Niższa Światłość, albo świat eonów, czyli Mieszanina Światłości i Materii.
+
+i. Kraina Lewicy.
+
+1. Trzynasty eon.
+
+2. Dwanaście eonów.
+
+3. Los.
+
+4. Sfera.
+
+5. Władcy dróg niższego Pośrodka.
+
+6. Firmament.
+
+ii. Świat, kosmos, zwłaszcza ludzkość.
+
+iii. Podziemie.
+
+1. Amente.
+
+2. Chaos.
+
+3. Zewnętrzna ciemność.
+
+Bibliografia, która następuje, nie jest po prostu listą nazwisk autorów i tytułów ich prac. Została opatrzona notami, które mają krótko wskazać główne momenty rozwoju literatury oraz historii opinii. Bez wątpienia w dawnych numerach czasopism ukrywa się jeszcze kilka artykułów,`,
+  34: `które należałoby dodać, aby lista była pełna; nie mogą one jednak mieć większej wagi, inaczej odwołałby się do nich któryś z późniejszych autorów.
+
+BIBLIOGRAFIA ANOTOWANA
+
+1. 1770. Artykuł w Brittische theol. Magazin (?); zob. niżej Köstlin, nr 13.
+
+2. 1773. Woide (C. G.). Artykuł w Journal des Savants, Paryż.
+
+3. 1778. Woide (C. G.). Artykuł w J. A. Cramer's Beyträge zur Beförderung theologischer und andrer wichtigen Kenntnisse, Kilonia i Hamburg, t. III, s. 82 nn.
+
+To Woide wydał w 1786 roku Nowy Testament według tekstu słynnego Kodeksu Aleksandryjskiego, czcionkami uncjalnymi odlanymi tak, aby naśladowały pismo rękopisu. W dodatku do tego wielkiego przedsięwzięcia, w 1799 roku, dodał pewne fragmenty Nowego Testamentu w dialekcie tebaicko-koptyjskim wraz z rozprawą o koptyjskiej wersji Nowego Testamentu. Kodeks Aleksandryjski zwykle datuje się na V wiek i, z wyjątkiem Kodeksu Watykańskiego oraz Synajskiego, niekiedy umieszczanych w IV wieku, jest najstarszym zachowanym rękopisem Nowego Testamentu.
+
+Wobec tego warto przytoczyć z Beyträge opinię Woidego o dacie rękopisu Pistis Sophia, który został mu wypożyczony przez dra Askewa i który przepisał od pierwszego słowa do ostatniego. Według Woidego Pistis Sophia jest bardzo starym rękopisem quarto na pergaminie, zapisanym greckimi literami uncjalnymi, mniej okrągłymi niż w rękopisie aleksandryjskim w Londynie i w rękopisie klaromontańskim w Paryżu. Litery tego rękopisu są nieco dłuższe i bardziej kanciaste, dlatego Woide uważał je za starsze od obu tamtych rękopisów, w których eta, theta, omikron, rho i sigma są znacznie bardziej okrągłe. Tak więc Woide datował rękopis ku końcowi IV wieku.
+
+4. 1794. Buhle (J. G.). Literarischer Briefwechsel von Johann David Michaelis, Lipsk, 3 tomy, 1794-1796, t. III, s. 69.
+
+Pod datą 1773 znajduje się list Woidego do Michaelisa, w którym Woide mówi o Kodeksie Pistis Sophia, że Askew znalazł go przypadkiem w księgarni. Następnie podany jest opis rękopisu.
+
+5. 1799. Woide (C. G.). Appendix ad Editionem Novi Testamenti Graeci e Codice MS. Alexandrino... cum Dissertatione de Versione Bibliorum Aegyptiaca quibus subjicitur Codicis Vaticani Collatio, Oksford, s. 137.`,
   35: `Woide datuje Kodeks Pistis Sophia mniej więcej na IV wiek i uważa autora greckiego oryginału za Walentyna.
 
 6. 1812. Münter (F.). Odae Gnosticae Salomoni Tributae, Thebaice et Latine, Prefatione et Adnotationibus philologicis illustratae; Hafniae.
@@ -4763,53 +4817,43 @@ Gdy Zbawca to powiedział, Maryja odpowiedziała i rzekła: 'Panie mój, wielkie
 ROZDZIAŁ 122
 
 Jezus wystawia Piotra na próbę. Potem Jezus ujrzał kobietę, która przyszła czynić pokutę. Ochrzcił ją trzy razy, a jednak nie uczyniła tego, co godne chrztów. I Zbawca zapragnął wypróbować Piotra, aby zobaczyć, czy jest współczujący i odpuszczający, jak im nakazał. Rzekł do Piotra: 'Oto trzy razy ochrzciłem tę duszę, a jednak przy tym trzecim razie nie uczyniła tego, co godne misteriów Światłości. Dlaczego więc czyni swoje ciało bezpożytecznym? Teraz więc, Piotrze, dokonaj Misterium, które odcina dusze od Dziedzictw Światłości; dokonaj tego Misterium, aby odcięło duszę tej kobiety od Dziedzictwa Światłości.'`,
-  216: `|314. |315. |316.\n\nGdy więc Zbawca to powiedział, wystawił Piotra na próbę, aby zobaczyć, czy jest współczujący i odpuszczający.
+  216: `otrzymał, albo |314. raczej dać mu Misterium z niższych misteriów - czy wolno, czy nie?
 
-Gdy więc Zbawca to powiedział, Piotr rzekł: 'Panie mój, zostaw ją jeszcze tym razem, abyśmy dali jej wyższe misteria; a jeśli jest godna, wtedy pozwoliłeś jej odziedziczyć królestwo Światłości; lecz jeśli nie jest godna, wtedy masz ją odciąć od królestwa Światłości.'
+W przypadku pokuty tylko misteria wyższe niż wcześniej otrzymane mogą odpuścić grzechy. Zbawca odpowiedział i rzekł do Maryi: 'Amen, amen, mówię wam: ani Misterium, które otrzymał, ani niższe nie wysłuchują go, aby odpuścić jego grzechy; lecz misteria, które są wyższe niż te, które otrzymał, wysłuchują go i odpuszczają jego grzechy. Teraz więc, Maryjo, niech twoi bracia dadzą mu Misterium, które jest wyższe niż to, które otrzymał, i mają przyjąć od niego jego pokutę oraz odpuścić jego grzechy - to ostatnie dlatego, że otrzymał je jeszcze raz, a tamto wcześniejsze dlatego, że wzbił się ponad nie ku górze. To ostatnie zaprawdę nie wysłuchuje go, aby odpuścić jego grzech; lecz Misterium, które jest wyższe niż to, które otrzymał, odpuszcza jego grzechy. Lecz jeśli z drugiej strony otrzymał trzy misteria w dwóch przestrzeniach albo w trzeciej od wewnątrz, i zawrócił, i przekroczył prawo, żadne Misterium go nie wysłuchuje, aby pomóc mu w pokucie, ani wyższe, ani niższe, z wyjątkiem Misterium Pierwszego Misterium i misteriów Niewysłowionego. To one go wysłuchują i przyjmują od niego jego pokutę'.
 
-Gdy więc Piotr to powiedział, Zbawca poznał, że Piotr jest współczujący jak on i odpuszczający.
+Maryja odpowiedziała i rzekła: 'Panie mój, człowiek, który otrzymał misteria aż do dwóch albo trzech |315. w drugiej albo trzeciej przestrzeni i nie przekroczył prawa, lecz trwa jeszcze w swojej wierze, w prawości i bez udawania - co się z nim stanie?'
 
-Gdy więc wszystko to zostało powiedziane, Zbawca rzekł do swoich uczniów: 'Czy zrozumieliście wszystkie te słowa i typ tej kobiety?'
-
-Maryja interpretuje zdarzenie z dawniejszego powiedzenia. Maryja odpowiedziała i rzekła: 'Panie mój, zrozumiałam misteria rzeczy, które przypadły tej kobiecie. Co do rzeczy więc, które przypadły jej w udziale, mówiłeś nam przedtem w podobieństwie, mówiąc: "Pewien człowiek miał drzewo figowe w swojej winnicy; i przyszedł szukać na nim owocu, a nie znalazł na nim ani jednego. Rzekł do ogrodnika: Oto od trzech lat przychodzę szukać owocu na tym drzewie figowym i nie mam z niego żadnego plonu. Wytnij je więc; dlaczego czyni ziemię bezpożyteczną? Lecz on odpowiedział i rzekł do niego: Panie mój, miej cierpliwość jeszcze w tym roku, aż okopię je i dam nawóz; a jeśli za rok wyda owoc, pozwoliłeś mu trwać, lecz jeśli nie znajdziesz żadnego owocu, wtedy masz je wyciąć." Oto, Panie mój, jest rozwiązanie słowa.'
-
-Zbawca odpowiedział i rzekł do Maryi: 'Dobrze powiedziane, duchowa. Oto jest rozwiązanie słowa.'`,
-  217: `|317. |318.\n\nROZDZIAŁ 123
-
-Maryja znowu kontynuowała i rzekła do Zbawcy: 'Panie mój, człowiek, który otrzymał misteria i nie uczynił tego, co ich godne, lecz zawrócił i zgrzeszył, a potem znowu pokutował i był w wielkiej pokucie - czy wolno moim braciom odnowić dla niego Misterium, które otrzymał, czy raczej dać mu Misterium z niższych misteriów? Czy wolno, czy nie?'
-
-W przypadku pokuty tylko misteria wyższe niż wcześniej otrzymane mogą odpuścić grzechy. Zbawca odpowiedział i rzekł do Maryi: 'Amen, amen, mówię wam: ani Misterium, które otrzymał, ani niższe nie wysłuchują go, aby odpuścić jego grzechy; lecz misteria, które są wyższe niż te, które otrzymał, wysłuchują go i odpuszczają jego grzechy. Teraz więc, Maryjo, niech twoi bracia dadzą mu Misterium, które jest wyższe niż to, które otrzymał, i mają przyjąć od niego jego pokutę i odpuścić jego grzechy - to ostatnie zaprawdę, ponieważ otrzymał je jeszcze raz, a tamto wcześniejsze, ponieważ wzbił się ponad nie ku górze. To ostatnie zaprawdę nie wysłuchuje go, aby odpuścić jego grzech; lecz Misterium, które jest wyższe niż to, które otrzymał, odpuszcza jego grzechy. Lecz jeśli z drugiej strony otrzymał trzy misteria w dwóch przestrzeniach albo w trzeciej od wewnątrz, i zawrócił, i przekroczył prawo, żadne Misterium go nie wysłuchuje, aby pomóc mu w pokucie, ani wyższe, ani niższe, z wyjątkiem Misterium Pierwszego Misterium i misteriów Niewypowiadalnego. To one go wysłuchują i przyjmują od niego jego pokutę.'`,
-  218: `Maryja odpowiedziała i rzekła: 'Panie mój, człowiek, który otrzymał misteria aż do dwóch albo trzech w drugiej albo trzeciej przestrzeni i nie przekroczył prawa, lecz trwa jeszcze w swojej wierze, w prawości i bez udawania - co się z nim stanie?'
-
-Nie ma granicy liczby misteriów, które wierni mogą otrzymać. A Zbawca odpowiedział i rzekł do Maryi: 'Każdy człowiek, który otrzymał misteria w drugiej i w trzeciej przestrzeni, a nie przekroczył prawa, lecz trwa jeszcze w swojej wierze bez udawania, temu wolno otrzymać misteria w przestrzeni, która mu się podoba, od pierwszej aż do ostatniej, ponieważ nie przekroczył prawa.'
+Nie ma granicy liczby misteriów, które wierni mogą otrzymać. A Zbawca odpowiedział i rzekł do Maryi: 'Każdy człowiek, który otrzymał misteria w drugiej i w trzeciej przestrzeni, a nie przekroczył prawa, lecz trwa jeszcze w swojej wierze bez udawania, temu wolno otrzymać misteria w przestrzeni, która mu się podoba, od pierwszej aż do ostatniej, ponieważ nie przekroczył prawa'.
 
 ROZDZIAŁ 124
 
 Maryja znowu kontynuowała i rzekła: 'Panie mój, człowiek, który poznał boskość i otrzymał z misteriów Światłości, a zawrócił, przekroczył prawo, czynił bezprawie i nie zawrócił ku pokucie; i człowiek z drugiej strony, który nie znalazł boskości ani jej nie poznał, a ten człowiek jest grzesznikiem i nadto bezbożnikiem - i obaj wyszli z ciała - który z nich otrzyma większe cierpienie w sądach?'
 
-Los gnostyka, który grzeszy, jest straszniejszy niż los grzesznika nieświadomego. Zbawca znowu odpowiedział i rzekł do Maryi: 'Amen, amen, mówię ci: człowiek, który poznał boskość i otrzymał misteria Światłości, i zgrzeszył, i nie zawrócił ku pokucie, otrzyma cierpienie w karaniach sądów, w wielkich cierpieniach i sądach nadzwyczaj o wiele większych w porównaniu z bezbożnym i łamiącym prawo człowiekiem, który nie poznał boskości. Teraz więc, kto ma uszy do słuchania, niechaj słucha.'
+Los gnostyka, który grzeszy, jest straszniejszy niż los grzesznika nieświadomego. Zbawca znowu odpowiedział i rzekł do Maryi: 'Amen, amen, mówię ci: człowiek, który poznał boskość i otrzymał misteria Światłości, i zgrzeszył, i nie zawrócił ku pokucie, otrzyma cierpienie w karaniach sądów, w wielkich cierpieniach i |316. sądach nadzwyczaj o wiele większych w porównaniu z bezbożnym i łamiącym prawo człowiekiem, który nie poznał boskości. Teraz więc, kto ma uszy do słuchania, niechaj słucha'.`,
+  217: `Maryja interpretuje to samo z dawniejszego powiedzenia. Gdy więc Zbawca to powiedział, Maryja wystąpiła i rzekła: 'Panie mój, mój człowiek światłości ma uszy i zrozumiałam całe słowo, które wypowiedziałeś. Co do tego słowa więc mówiłeś nam w podobieństwie:
 
-Maryja interpretuje to samo z dawniejszego powiedzenia. Gdy więc Zbawca to powiedział, Maryja wystąpiła gwałtownie i rzekła: 'Panie mój, mój człowiek światłości ma uszy i zrozumiałam całe słowo, które wypowiedziałeś. Co do tego słowa więc mówiłeś nam w podobieństwie: "Sługa, który znał wolę swego pana, a nie przygotował się ani nie uczynił woli swego pana, otrzyma wielkie razy; lecz ten, który nie znał i nie uczynił, będzie zasługiwał na mniejsze. Albowiem od każdego, komu więcej powierzono, od tego więcej będą żądać; i komu wiele przekazano, od tego wiele wymagać będą" - to znaczy, Panie mój: ten, kto poznał boskość i znalazł misteria Światłości, a przekroczył prawo, będzie karany karaniem o wiele większym niż ten, kto nie poznał boskości. To, Panie mój, jest rozwiązanie słowa.'
+'Sługa, który znał wolę swego pana, a nie przygotował się ani nie uczynił woli swego pana, otrzyma wielkie razy; lecz ten, który nie znał i nie uczynił, będzie zasługiwał na mniejsze. Albowiem od każdego, komu więcej powierzono, od tego więcej będą żądać; i komu wiele przekazano, od tego wiele wymagać będą' - to znaczy, Panie mój: ten, kto poznał boskość i znalazł misteria Światłości, a przekroczył prawo, będzie karany karaniem o wiele większym niż ten, kto nie poznał boskości. To, Panie mój, jest rozwiązanie słowa'.
 
 ROZDZIAŁ 125
 
-Maryja znowu kontynuowała i rzekła do Zbawcy: 'Panie mój, jeśli wiara i misteria objawiły się - teraz więc, jeśli dusze przychodzą na świat w wielu obiegach i zaniedbują otrzymanie misteriów, mając nadzieję, że jeśli przyjdą na świat w innym obiegu, otrzymają je - czy nie będą wtedy w niebezpieczeństwie, że nie powiedzie im się otrzymać misteriów?'
+Maryja znowu kontynuowała i rzekła do Zbawcy: 'Panie mój, jeśli wiara i misteria objawiły się - teraz więc, jeśli dusze przychodzą na świat w wielu obiegach i zaniedbują otrzymanie misteriów, mając nadzieję, że jeśli przyjdą na świat w innym obiegu, otrzymają je - czy nie będą wtedy w niebezpieczeństwie |317. że nie powiedzie im się otrzymać misteriów?'
 
-O tych, którzy odkładają, mówiąc, że mają przed sobą wiele narodzin. Zbawca odpowiedział i rzekł do swoich uczniów: 'Głoście całemu światu i mówcie ludziom: Zabiegajcie odtąd, abyście otrzymali misteria Światłości w tym czasie ucisku i weszli do królestwa Światłości. Nie łączcie dnia z dniem ani obiegu z obiegiem, mając nadzieję, że powiedzie się wam otrzymać misteria, jeśli przyjdziecie na świat w innym obiegu.
+O tych, którzy odkładają, mówiąc, że mają przed sobą wiele narodzin. Zbawca odpowiedział i rzekł do swoich uczniów: 'Głoście całemu światu i mówcie ludziom: Zabiegajcie odtąd, abyście otrzymali misteria Światłości w tym czasie ucisku i weszli do Królestwa Światłości. Nie łączcie dnia z dniem ani obiegu z obiegiem, mając nadzieję, że powiedzie się wam otrzymać misteria, jeśli przyjdziecie na świat w innym obiegu.
 
 'A oni nie wiedzą, kiedy przybliży się liczba dusz doskonałych; albowiem jeśli liczba dusz doskonałych się przybliży, wtedy zamknę bramy Światłości, i od tej godziny nikt już nie wejdzie, ani nikt potem nie wyjdzie, ponieważ liczba dusz doskonałych została dopełniona i Misterium Pierwszego Misterium zostało dopełnione, dla którego powstał wszechświat - to znaczy: Ja jestem tym Misterium.
 
-O czasie dopełnienia. 'I od tej godziny nikt nie będzie zdolny wejść do Światłości i nikt nie będzie zdolny wyjść. Albowiem przy dopełnieniu czasu liczby dusz doskonałych, zanim podłożę ogień pod świat, aby oczyścił eony, zasłony, firmamenty i całą ziemię, a także wszystkie materie, które są na niej, ludzkość będzie jeszcze istnieć.
+O czasie dopełnienia. 'I od tej godziny nikt nie będzie zdolny wejść do Światłości i nikt nie będzie zdolny wyjść. Albowiem przy dopełnieniu czasu liczby dusz doskonałych, zanim podłożę ogień pod świat, aby oczyścił eony, zasłony, firmamenty i całą ziemię, a także wszystkie materie, które są na niej, ludzkość |318. będzie jeszcze istnieć.
 
-Ci, którzy odkładają, zostają wyłączeni ze Światłości. 'Wtedy wiara objawi się jeszcze bardziej, i misteria w owych dniach. A wiele dusz przyjdzie przez obiegi zmian ciała; i wracając na świat, będą wśród nich niektórzy z obecnego czasu, którzy słuchali mnie, jak nauczałem, którzy przy dopełnieniu liczby dusz doskonałych znajdą misteria Światłości, otrzymają je i przyjdą do bram Światłości, i znajdą, że liczba dusz doskonałych jest dopełniona, co jest dopełnieniem Pierwszego Misterium i gnozą wszechświata. I znajdą, że zamknąłem bramy Światłości i że niemożliwe jest, aby ktokolwiek wszedł albo aby ktokolwiek wyszedł od tej godziny.
+Ci, którzy odkładają, zostają wyłączeni ze Światłości. 'Wtedy wiara objawi się jeszcze bardziej, i misteria w owych dniach. A wiele dusz przyjdzie przez obiegi zmian ciała,`,
+  218: `i wracając na świat, będą wśród nich niektórzy z obecnego czasu, którzy słuchali mnie, jak nauczałem, którzy przy dopełnieniu liczby dusz doskonałych znajdą misteria Światłości, otrzymają je i przyjdą do bram Światłości, i znajdą, że liczba dusz doskonałych jest dopełniona, co jest dopełnieniem Pierwszego Misterium i gnozą wszechświata. I znajdą, że zamknąłem bramy Światłości i że niemożliwe jest, aby ktokolwiek wszedł albo aby ktokolwiek wyszedł od tej godziny.
 
 Ich błagania u bram Światłości. 'Dusze te wtedy będą kołatać do bram Światłości, mówiąc: Panie, otwórz nam! A ja odpowiem im: Nie znam was, skąd jesteście. I powiedzą mi: Otrzymaliśmy z twoich misteriów i wypełniliśmy całą twoją naukę, i ty nauczałeś nas na wysokich drogach. A ja odpowiem i powiem im: Nie znam was, kim jesteście, wy, którzy aż dotąd czynicie nieprawość i zło. Dlatego idźcie w zewnętrzną ciemność. I |319. od tej godziny pójdą w zewnętrzną ciemność, tam gdzie jest wycie i zgrzytanie zębów.
 
 'Z tej przyczyny więc głoście całemu światu i mówcie im: Zabiegajcie odtąd, aby wyrzec się całego świata i całej materii w nim, abyście otrzymali misteria Światłości, zanim liczba dusz doskonałych zostanie dopełniona, aby nie zatrzymano was przed bramami Światłości i nie odprowadzono was do zewnętrznej ciemności.
 
-'Teraz więc, kto ma uszy do słuchania, niechaj słucha.'
+'Teraz więc, kto ma uszy do słuchania, niechaj słucha'.
 
-Maryja interpretuje to samo. Gdy więc Zbawca to powiedział, Maryja znowu wystąpiła gwałtownie i rzekła: 'Panie mój, nie tylko mój człowiek światłości ma uszy, lecz moja dusza usłyszała i zrozumiała wszystkie słowa, które mówisz. Teraz więc, Panie mój, co do słów, które wypowiedziałeś: "Głoście ludziom świata i mówcie im: Zabiegajcie odtąd, aby otrzymać misteria Światłości w tym czasie ucisku, abyście odziedziczyli królestwo Światłości..."
+Maryja interpretuje to samo. Gdy więc Zbawca to powiedział, Maryja znowu wystąpiła gwałtownie i rzekła: 'Panie mój, nie tylko mój człowiek światłości ma uszy, lecz moja dusza usłyszała i zrozumiała wszystkie słowa, które mówisz. Teraz więc, Panie mój, co do słów, które wypowiedziałeś: „Głoście ludziom świata i mówcie im: Zabiegajcie odtąd, aby otrzymać misteria Światłości w tym czasie ucisku, abyście odziedziczyli Królestwo Światłości...”
 
 [TU W TEKŚCIE WYSTĘPUJE ZNACZNA LUKA.]
 
@@ -5423,8 +5467,9 @@ const els = {
   mobileCopy: document.querySelector("#mobileCopyButton"),
   mobileAbout: document.querySelector("#mobileAboutButton"),
   mobileSettings: document.querySelector("#mobileSettingsButton"),
-  mobileReaderMode: document.querySelector("#mobileReaderMode"),
-  mobileCitationFormat: document.querySelector("#mobileCitationFormat"),
+  mobilePolishMode: document.querySelector("#mobilePolishMode"),
+  mobileSourceMode: document.querySelector("#mobileSourceMode"),
+  mobileCitationFormats: document.querySelectorAll("[data-mobile-citation]"),
   libraryVersion: document.querySelector("#libraryVersion"),
   libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
   offlineNotice: document.querySelector("#offlineNotice")
@@ -5580,7 +5625,7 @@ function reviewStatusForPage(page) {
   }
   return {
     level: "aligned",
-    label: "przekład roboczy",
+    label: "przekład skolacjonowany",
     note: refs.length ? "Polski tekst zawiera znaczniki rękopisu tej strony." : "Strona bez osobnego znacznika rękopisu w podstawie."
   };
 }
@@ -5602,11 +5647,12 @@ function formattedCitation(page, chapter) {
   const chapterPart = chapter ? `rozdz. ${chapter.number}` : "materiał wprowadzający";
   const schw = refs.length ? `Schw.-Pet. ${refs.join(", ")}` : "bez znacznika Schw.-Pet.";
   const source = "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921";
+  const library = `Gnostyk Biblioteka v${libraryMeta.version}`;
   const formats = {
-    simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""}`,
-    scholarly: `Pistis Sophia, tłum. i oprac. Gnostyk Biblioteka, na podst. ${source}, Mead s. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}.`,
+    simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""} · ${library}`,
+    scholarly: `Pistis Sophia, tłum. i oprac. Gnostyk Biblioteka, na podst. ${source}, Mead s. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}, ${library}.`,
     mead: `Pistis Sophia, Mead s. ${page.page}, ${chapterPart}.`,
-    schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead s. ${page.page}.` : `Pistis Sophia, Mead s. ${page.page}; brak osobnego znacznika Schw.-Pet. na tej stronie.`
+    schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead s. ${page.page}, ${library}.` : `Pistis Sophia, Mead s. ${page.page}; brak osobnego znacznika Schw.-Pet. na tej stronie, ${library}.`
   };
   return formats[state.citationFormat] || formats.simple;
 }
@@ -5791,8 +5837,11 @@ function renderReader() {
   setValue(els.notes, state.notes[state.page] || "");
   setText(els.mobileCurrentPage, `Str. ${state.page}`);
   setValue(els.citationFormat, state.citationFormat);
-  setValue(els.mobileReaderMode, state.readerMode);
-  setValue(els.mobileCitationFormat, state.citationFormat);
+  els.mobilePolishMode?.classList.toggle("is-active", state.readerMode === "pl");
+  els.mobileSourceMode?.classList.toggle("is-active", state.readerMode === "source");
+  els.mobileCitationFormats?.forEach(button => {
+    button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
+  });
   setText(els.mobileBookmark, state.marks.includes(state.page) ? "Usuń zakładkę" : "Dodaj zakładkę");
 }
 
@@ -5949,9 +5998,10 @@ document.addEventListener("click", event => {
     if (pageButton.closest(".mobile-sheet")) closeMobileSheet();
   }
 
-  const themeButton = event.target.closest("[data-theme]");
+  const themeButton = target.closest(".theme-item[data-theme]");
   if (themeButton) {
     const theme = themes.find(item => item.label === themeButton.dataset.theme);
+    if (!theme) return;
     state.query = theme.terms[0];
     setValue(els.search, state.query);
     setTab("chapters");
@@ -6007,7 +6057,9 @@ listen(els.sourceMode, "click", () => setReaderMode("source"));
 
 listen(els.citationFormat, "change", event => {
   state.citationFormat = event.target.value;
-  setValue(els.mobileCitationFormat, state.citationFormat);
+  els.mobileCitationFormats?.forEach(button => {
+    button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
+  });
   saveReadingState();
 });
 
@@ -6068,14 +6120,18 @@ listen(els.mobileSettings, "click", () => {
   requestAnimationFrame(scrollToReaderText);
 });
 
-listen(els.mobileReaderMode, "change", event => {
-  setReaderMode(event.target.value);
-});
+listen(els.mobilePolishMode, "click", () => setReaderMode("pl"));
+listen(els.mobileSourceMode, "click", () => setReaderMode("source"));
 
-listen(els.mobileCitationFormat, "change", event => {
-  state.citationFormat = event.target.value;
-  setValue(els.citationFormat, state.citationFormat);
-  saveReadingState();
+els.mobileCitationFormats?.forEach(button => {
+  listen(button, "click", () => {
+    state.citationFormat = button.dataset.mobileCitation;
+    setValue(els.citationFormat, state.citationFormat);
+    els.mobileCitationFormats.forEach(item => {
+      item.classList.toggle("is-active", item === button);
+    });
+    saveReadingState();
+  });
 });
 
 listen(els.notes, "input", event => {
