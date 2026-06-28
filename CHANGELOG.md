@@ -1,5 +1,44 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.50 - czysty start czytania
+
+- Ustawienia czytania i panel `O przekładzie` nie są już zapamiętywane jako stale otwarte.
+- Po wejściu w książkę na mobile domyślnie widoczny jest aparat cytowania i tekst, bez panelu ustawień.
+- Przy zmianie strony na mobile oraz przy powrocie do biblioteki panele pomocnicze są automatycznie zamykane.
+
+## Gnostyk Biblioteka 1.0.49 - porządek informacji biblioteki
+
+- Dodano w katalogu biblioteki sekcję `O bibliotece` oraz listę ostatnich zmian.
+- Pozostawiono informacje o domenie publicznej i prawach przy widoku książki `Pistis Sophia`.
+- Przeniesiono powrót do biblioteki w bardziej intuicyjne miejsce: panel boczny książki oraz mobilny nagłówek książki.
+- Dodano automatyczne odczytywanie ostatnich wpisów z `CHANGELOG.md`, gdy aplikacja działa z serwera.
+
+## Gnostyk Biblioteka 1.0.48 - nawigacja wewnątrz książki
+
+- Przeniesiono rozdziały, motywy, zakładki i wyszukiwanie do widoku książki `Pistis Sophia`.
+- W widoku biblioteki ukryto panel narzędzi książki, aby katalog nie mieszał się z czytnikiem.
+- Przy powrocie do biblioteki zamykany jest mobilny panel książki.
+
+## Gnostyk Biblioteka 1.0.47 - osobny widok książki
+
+- Rozdzielono widok katalogu biblioteki od widoku książki `Pistis Sophia`.
+- Ukryto panel książki, metadane, narzędzia i tekst do momentu wejścia w księgę.
+- Zmieniono drugi nagłówek z `Biblioteka gnostycka` na `Pistis Sophia`, aby nie dublować poziomów nawigacji.
+- Dodano powrót z widoku książki do katalogu biblioteki.
+
+## Gnostyk Biblioteka 1.0.46 - ekran startowy biblioteki
+
+- Dodano ekran startowy `Biblioteka gnostycka` przed czytnikiem.
+- Dodano kartę pierwszej księgi `Pistis Sophia` z przyciskiem `Czytaj`.
+- Dodano pozycję `Kolejne teksty` jako miejsce na przyszłe księgi biblioteki.
+- Podpięto przycisk `Czytaj`, aby przenosił bezpośrednio do narzędzi lektury.
+
+## Gnostyk Biblioteka 1.0.45 - ikona bez tła
+
+- Zastąpiono ikonę PWA wersją bez tła, z samym stosem stylizowanych gnostycznych ksiąg.
+- Poprawiono rysunek centralnej księgi: szczelina Światłości znajduje się na wyraźnym grzbiecie książki, a nie na formie przypominającej zagiętą kartkę.
+- Odbudowano rozmiary ikon 32, 64, 96, 180, 192 i 512 px z przezroczystością.
+
 ## Gnostyk Biblioteka 1.0.44 - ikony PWA biblioteki
 
 - Dodano nową ikonę PWA przedstawiającą stylizowane gnostyczne księgi ze szczeliną Światłości.

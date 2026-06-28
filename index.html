@@ -8,13 +8,13 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.44">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.50">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
-    <link rel="stylesheet" href="styles.css?v=1.0.44">
+    <link rel="stylesheet" href="styles.css?v=1.0.50">
   </head>
-  <body>
+  <body data-view="library">
     <div class="app-shell">
       <aside class="sidebar" aria-label="Nawigacja">
         <div class="brand">
@@ -24,8 +24,9 @@
             <p>Biblioteka gnostycka</p>
           </div>
         </div>
+        <button id="backToLibraryButton" class="text-button subtle sidebar-back book-nav" type="button">← Biblioteka</button>
 
-        <section class="library-card" aria-label="Księgi w bibliotece">
+        <section class="library-card book-nav" aria-label="Panel książki">
           <span class="eyebrow">Aktualna pozycja biblioteki</span>
           <h2>Pistis Sophia</h2>
           <p>Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
@@ -35,38 +36,91 @@
           </div>
         </section>
 
-        <label class="search">
+        <label class="search book-nav">
           <span>Szukaj</span>
           <input id="searchInput" type="search" autocomplete="off" placeholder="światło, Sophia, mystery">
         </label>
 
-        <div class="tabs" role="tablist" aria-label="Widoki">
+        <div class="tabs book-nav" role="tablist" aria-label="Widoki książki">
           <button class="tab is-active" data-tab="chapters" type="button">Rozdziały</button>
           <button class="tab" data-tab="themes" type="button">Motywy</button>
           <button class="tab" data-tab="marks" type="button">Zakładki</button>
         </div>
 
-        <div class="panel is-active" id="chaptersPanel"></div>
-        <div class="panel" id="themesPanel"></div>
-        <div class="panel" id="marksPanel"></div>
+        <div class="panel book-nav is-active" id="chaptersPanel"></div>
+        <div class="panel book-nav" id="themesPanel"></div>
+        <div class="panel book-nav" id="marksPanel"></div>
       </aside>
 
       <main class="reader">
-        <section class="reader-hero">
+        <section class="library-home" aria-label="Ekran startowy biblioteki">
+          <div class="library-home-copy">
+            <p class="eyebrow">Gnostyk Biblioteka</p>
+            <h2>Biblioteka gnostycka</h2>
+            <p>Polskie przekłady, opracowania i aparaty cytowania tekstów gnostyckich. Pierwszą księgą biblioteki jest pełne wydanie <strong>Pistis Sophia</strong>.</p>
+          </div>
+
+          <div class="library-shelf" aria-label="Księgi">
+            <article class="work-tile is-available">
+              <img src="assets/pwa-icon-192.png" alt="">
+              <div>
+                <span>Pełny przekład</span>
+                <h3>Pistis Sophia</h3>
+                <p>Tekst źródłowy, polski przekład, paginacja Meada i Schwartze-Petermanna, cytowanie oraz notatki.</p>
+                <button id="openWorkButton" class="text-button library-read-button" type="button">Czytaj</button>
+              </div>
+            </article>
+
+            <article class="work-tile is-planned">
+              <div class="planned-mark" aria-hidden="true">+</div>
+              <div>
+                <span>W przygotowaniu</span>
+                <h3>Kolejne teksty</h3>
+                <p>Miejsce na następne księgi biblioteki: traktaty, ewangelie, hymny i pisma pokrewne.</p>
+              </div>
+            </article>
+          </div>
+
+          <section class="library-about" aria-label="O bibliotece">
+            <article>
+              <h3>O bibliotece</h3>
+              <p>Gnostyk Biblioteka jest katalogiem tekstów gnostyckich w polskim opracowaniu. Każda księga ma własny panel, własne informacje o podstawie tekstu, aparacie cytowania i prawach do nowej warstwy twórczej.</p>
+            </article>
+            <article>
+              <h3>Ostatnie zmiany</h3>
+              <ol id="libraryUpdates" class="library-updates">
+                <li><strong>1.0.50</strong> Ustawienia czytania nie otwierają się już automatycznie przy wejściu w tekst.</li>
+                <li><strong>1.0.49</strong> Uporządkowano informacje biblioteki, prawa i powrót z książki.</li>
+                <li><strong>1.0.48</strong> Nawigacja rozdziałów, motywów i zakładek została przeniesiona do widoku książki.</li>
+                <li><strong>1.0.47</strong> Rozdzielono katalog biblioteki od widoku Pistis Sophia.</li>
+              </ol>
+            </article>
+          </section>
+        </section>
+
+        <section class="reader-hero book-view">
           <img src="assets/gnostyk-slit-bg.png" alt="">
           <div class="hero-copy">
-            <p class="eyebrow">Gnostyk · biblioteka tekstów źródłowych</p>
-            <h2>Biblioteka gnostycka</h2>
-            <p class="hero-subtitle">Pistis Sophia: tekst źródłowy, polski przekład, aparat cytowania i notatki czytelnicze.</p>
+            <p class="eyebrow">Pistis Sophia · księga biblioteki</p>
+            <h2>Pistis Sophia</h2>
+            <p class="hero-subtitle">Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.</p>
           </div>
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.44</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.50</strong> wersja biblioteki</span>
           </div>
         </section>
 
-        <section class="work-meta" aria-label="Metadane tekstu">
+        <section class="mobile-book-head book-view" aria-label="Aktualna książka">
+          <button id="mobileBackToLibraryButton" class="text-button subtle" type="button">← Biblioteka</button>
+          <div>
+            <span>Pistis Sophia</span>
+            <strong>Pełny przekład · Mead 1921</strong>
+          </div>
+        </section>
+
+        <section class="work-meta book-view" aria-label="Metadane tekstu">
           <article>
             <span>Status</span>
             <strong>Pełny tekst</strong>
@@ -85,7 +139,7 @@
           </article>
         </section>
 
-        <section class="toolbar" aria-label="Narzędzia czytania">
+        <section id="readerControls" class="toolbar book-view" aria-label="Narzędzia czytania">
           <div class="toolbar-primary" aria-label="Nawigacja lektury">
             <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
             <button id="continueButton" class="text-button" type="button">Kontynuuj</button>
@@ -117,7 +171,7 @@
           </div>
         </section>
 
-        <section class="content-layout">
+        <section class="content-layout book-view">
           <article class="text-surface" aria-live="polite">
             <div class="reading-meta">
               <span id="currentPageLabel">Strona 1</span>
@@ -134,7 +188,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.44</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.50</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <section id="settingsPanel" class="reader-panel settings-panel" hidden>
@@ -181,11 +235,11 @@
           </aside>
         </section>
 
-        <footer class="legal-footer">
+        <footer class="legal-footer book-view">
           <strong>Domena publiczna i prawa do opracowania</strong>
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.44</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.50</span></p>
         </footer>
       </main>
     </div>
@@ -253,7 +307,7 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.44"></script>
-    <script src="app.js?v=1.0.44"></script>
+    <script src="data.js?v=1.0.50"></script>
+    <script src="app.js?v=1.0.50"></script>
   </body>
 </html>

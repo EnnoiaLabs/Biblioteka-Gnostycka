@@ -2,7 +2,7 @@ const data = window.PISTIS_SOPHIA_DATA;
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.44",
+  version: "1.0.50",
   updated: "2026-06-27",
   currentWork: {
     id: "pistis-sophia",
@@ -16,6 +16,7 @@ const libraryMeta = {
 
 const savedSettings = JSON.parse(localStorage.getItem("ps.settings") || "{}");
 const state = {
+  view: localStorage.getItem("ps.view") || "library",
   page: Number(localStorage.getItem("ps.lastPage") || 1),
   query: "",
   mobileChapterQuery: "",
@@ -23,8 +24,8 @@ const state = {
   mobilePanel: "toc",
   readerMode: localStorage.getItem("ps.readerMode") || "pl",
   citationFormat: localStorage.getItem("ps.citationFormat") || "simple",
-  aboutOpen: localStorage.getItem("ps.aboutOpen") === "true",
-  settingsOpen: localStorage.getItem("ps.settingsOpen") === "true",
+  aboutOpen: false,
+  settingsOpen: false,
   settings: {
     theme: savedSettings.theme || "dark",
     fontSize: savedSettings.fontSize || "medium",
@@ -5449,6 +5450,10 @@ const els = {
   clearNote: document.querySelector("#clearNote"),
   saveStatus: document.querySelector("#saveStatus"),
   focus: document.querySelector("#focusToggle"),
+  openWork: document.querySelector("#openWorkButton"),
+  backToLibrary: document.querySelector("#backToLibraryButton"),
+  mobileBackToLibrary: document.querySelector("#mobileBackToLibraryButton"),
+  readerControls: document.querySelector("#readerControls"),
   pageCount: document.querySelector("#pageCount"),
   chapterCount: document.querySelector("#chapterCount"),
   mobileSheet: document.querySelector("#mobileSheet"),
@@ -5472,6 +5477,7 @@ const els = {
   mobileCitationFormats: document.querySelectorAll("[data-mobile-citation]"),
   libraryVersion: document.querySelector("#libraryVersion"),
   libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
+  libraryUpdates: document.querySelector("#libraryUpdates"),
   offlineNotice: document.querySelector("#offlineNotice")
 };
 
@@ -5717,14 +5723,24 @@ function versionFromChangelog(text) {
   return match ? match[1] : null;
 }
 
+function renderLibraryUpdatesFromChangelog(text) {
+  if (!els.libraryUpdates) return;
+  const entries = [...text.matchAll(/^##\s+Gnostyk Biblioteka\s+([0-9]+\.[0-9]+\.[0-9]+)\s+-\s+(.+)$/gm)]
+    .slice(0, 4)
+    .map(match => `<li><strong>${escapeHtml(match[1])}</strong> ${escapeHtml(match[2])}</li>`);
+  if (entries.length) els.libraryUpdates.innerHTML = entries.join("");
+}
+
 async function loadLibraryVersion() {
   setLibraryVersion(libraryMeta.version);
   if (location.protocol === "file:") return;
   try {
     const response = await fetch("./CHANGELOG.md", { cache: "no-store" });
     if (!response.ok) return;
-    const version = versionFromChangelog(await response.text());
+    const changelogText = await response.text();
+    const version = versionFromChangelog(changelogText);
     if (version) setLibraryVersion(version);
+    renderLibraryUpdatesFromChangelog(changelogText);
   } catch {
     setLibraryVersion(libraryMeta.version);
   }
@@ -5752,8 +5768,6 @@ function setReaderPanel(panel) {
     state.settingsOpen = !state.settingsOpen;
     state.aboutOpen = false;
   }
-  localStorage.setItem("ps.aboutOpen", String(state.aboutOpen));
-  localStorage.setItem("ps.settingsOpen", String(state.settingsOpen));
   renderPanelState();
 }
 
@@ -5805,6 +5819,18 @@ function isMobileLayout() {
   return window.matchMedia("(max-width: 920px)").matches;
 }
 
+function setAppView(view) {
+  state.view = view;
+  document.body.dataset.view = view;
+  localStorage.setItem("ps.view", view);
+}
+
+function closeReaderPanels() {
+  state.aboutOpen = false;
+  state.settingsOpen = false;
+  renderPanelState();
+}
+
 function scrollToReaderText() {
   document.querySelector(".text-surface")?.scrollIntoView({
     behavior: "smooth",
@@ -5812,7 +5838,18 @@ function scrollToReaderText() {
   });
 }
 
+function scrollToReaderControls() {
+  setAppView("reader");
+  closeReaderPanels();
+  (els.readerControls || document.querySelector(".text-surface"))?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
 function goToPage(page, options = {}) {
+  setAppView("reader");
+  if (isMobileLayout()) closeReaderPanels();
   state.page = Math.max(1, Math.min(data.pageCount, Number(page) || 1));
   saveReadingState();
   renderReader();
@@ -6050,6 +6087,16 @@ listen(els.continue, "click", () => goToPage(localStorage.getItem("ps.lastPage")
 listen(els.mobilePrev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
 listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
 listen(els.mobileCurrentPage, "click", scrollToReaderText);
+listen(els.openWork, "click", scrollToReaderControls);
+function returnToLibrary() {
+  setAppView("library");
+  closeReaderPanels();
+  closeMobileSheet();
+  document.querySelector(".library-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+listen(els.backToLibrary, "click", returnToLibrary);
+listen(els.mobileBackToLibrary, "click", returnToLibrary);
 listen(els.mobileClose, "click", closeMobileSheet);
 listen(els.mobileOverlay, "click", closeMobileSheet);
 listen(els.polishMode, "click", () => setReaderMode("pl"));
@@ -6169,6 +6216,7 @@ setText(els.chapterCount, data.chapters.length);
 loadLibraryVersion();
 state.page = Math.max(1, Math.min(data.pageCount, state.page));
 applySettings();
+setAppView(state.view);
 renderPanelState();
 updateOfflineNotice();
 window.addEventListener("online", updateOfflineNotice);
