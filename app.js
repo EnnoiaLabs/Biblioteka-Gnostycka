@@ -1,9 +1,9 @@
-const data = window.PISTIS_SOPHIA_DATA;
+﻿const data = window.PISTIS_SOPHIA_DATA;
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.50",
-  updated: "2026-06-27",
+  version: "1.0.55",
+  updated: "2026-06-29",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -5451,6 +5451,14 @@ const els = {
   saveStatus: document.querySelector("#saveStatus"),
   focus: document.querySelector("#focusToggle"),
   openWork: document.querySelector("#openWorkButton"),
+  libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
+  libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
+  libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
+  footerInfo: document.querySelector("#footerInfoButton"),
+  footerChanges: document.querySelector("#footerChangesButton"),
+  libraryBooksPanel: document.querySelector("#libraryBooksPanel"),
+  libraryInfoPanel: document.querySelector("#libraryInfoPanel"),
+  libraryChangesPanel: document.querySelector("#libraryChangesPanel"),
   backToLibrary: document.querySelector("#backToLibraryButton"),
   mobileBackToLibrary: document.querySelector("#mobileBackToLibraryButton"),
   readerControls: document.querySelector("#readerControls"),
@@ -5477,6 +5485,7 @@ const els = {
   mobileCitationFormats: document.querySelectorAll("[data-mobile-citation]"),
   libraryVersion: document.querySelector("#libraryVersion"),
   libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
+  libraryVersionFooterHome: document.querySelector("#libraryVersionFooterHome"),
   libraryUpdates: document.querySelector("#libraryUpdates"),
   offlineNotice: document.querySelector("#offlineNotice")
 };
@@ -5716,6 +5725,8 @@ function setLibraryVersion(version) {
   libraryMeta.version = version;
   setText(els.libraryVersion, version);
   setText(els.libraryVersionFooter, version);
+  setText(els.libraryVersionFooterHome, version);
+  document.querySelectorAll(".inline-library-version").forEach(item => setText(item, version));
 }
 
 function versionFromChangelog(text) {
@@ -5823,6 +5834,23 @@ function setAppView(view) {
   state.view = view;
   document.body.dataset.view = view;
   localStorage.setItem("ps.view", view);
+}
+
+function setLibrarySection(section) {
+  const isBooks = section === "books";
+  const isInfo = section === "info";
+  const isChanges = section === "changes";
+  if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
+  if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
+  if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
+  els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
+  els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
+  els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
+  els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
+  els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
+  els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
+  const target = isInfo ? els.libraryInfoPanel : isChanges ? els.libraryChangesPanel : els.libraryBooksPanel;
+  requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
 function closeReaderPanels() {
@@ -6088,10 +6116,16 @@ listen(els.mobilePrev, "click", () => goToPage(state.page - 1, { scrollToText: t
 listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
 listen(els.mobileCurrentPage, "click", scrollToReaderText);
 listen(els.openWork, "click", scrollToReaderControls);
+listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
+listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
+listen(els.libraryChangesToggle, "click", () => setLibrarySection("changes"));
+listen(els.footerInfo, "click", () => setLibrarySection("info"));
+listen(els.footerChanges, "click", () => setLibrarySection("changes"));
 function returnToLibrary() {
   setAppView("library");
   closeReaderPanels();
   closeMobileSheet();
+  setLibrarySection("books");
   document.querySelector(".library-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 

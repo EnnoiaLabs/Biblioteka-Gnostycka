@@ -1,5 +1,38 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.55 - profesjonalne info i stopka
+
+- Uproszczono panel `Info` do jednej noty redakcyjnej o bibliotece, zamiast wielu osobnych punktów.
+- Dodano spokojny pasek podstawowych informacji bez ciężkiego układu kafelkowego.
+- Dodano stopkę strony biblioteki z linkami do `Info`, `Zmiany` i numerem wersji.
+- Podłączono wersję w nowej stopce do tego samego mechanizmu, który zczytuje numer z changeloga.
+
+## Gnostyk Biblioteka 1.0.54 - jednolity widok biblioteki
+
+- Usunięto boczny panel książki z widoku biblioteki na desktopie.
+- Dodano główny pasek marki w widoku biblioteki, aby desktop i mobile miały tę samą logikę.
+- Ułożono katalog ksiąg pod zakładką `Księgi`, zamiast obok bocznego logo.
+- Widok książki nadal korzysta z bocznego panelu rozdziałów, motywów i zakładek.
+
+## Gnostyk Biblioteka 1.0.53 - zakładki biblioteki
+
+- Zamieniono pasek biblioteki na działające zakładki `Księgi`, `Info` i `Zmiany`.
+- Przeniesiono katalog `Pistis Sophia` do zakładki `Księgi`.
+- Przeniesiono historię zmian do osobnej zakładki `Zmiany`.
+- Uspokojono wygląd panelu `Info`, zastępując kafle tekstem dzielonym separatorami.
+
+## Gnostyk Biblioteka 1.0.52 - ukryty panel info
+
+- Dodano pasek nawigacyjny biblioteki z przyciskami `Księgi`, `Info` i `Zmiany`.
+- Ukryto pełne informacje o aplikacji za panelem `Info`, aby ekran biblioteki był lżejszy.
+- Zmieniono układ informacji z siatki kafli na spokojny panel tekstowy z separatorami.
+
+## Gnostyk Biblioteka 1.0.51 - pełne info aplikacji
+
+- Rozbudowano ekran biblioteki o pełny panel informacyjny `O aplikacji i bibliotece`.
+- Dodano sekcje: zakres i status, podstawa tekstów, metoda przekładu, prawa, cytowanie, prywatność, PWA/offline oraz autorstwo opracowania.
+- Uporządkowano ostatnie zmiany w katalogu biblioteki jako część informacji o aplikacji.
+
 ## Gnostyk Biblioteka 1.0.50 - czysty start czytania
 
 - Ustawienia czytania i panel `O przekładzie` nie są już zapamiętywane jako stale otwarte.
