@@ -1,5 +1,25 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.58 - korekta paginacji i audytu
+
+- Skorygowano granicę tekstu na Mead s. 195/196, aby cytowanie stron było wierniejsze.
+- Potwierdzono audytem automatycznym czyste zakresy Mead s. 81-120, 121-160 oraz 161-200.
+- Rozszerzono kontrolę terminologii o odmiany słowa `pokuta`, aby raport nie zgłaszał poprawnych form jako błędów.
+
+## Gnostyk Biblioteka 1.0.57 - ustawienia w bibliotece
+
+- Przeniesiono `Ustawienia` z widoku książki `Pistis Sophia` do głównych zakładek biblioteki.
+- Dodano zakładkę `Ustawienia` obok `Księgi`, `Info` i `Zmiany`.
+- Usunięto przycisk `Ustawienia` z paska narzędzi książki oraz z mobilnego panelu `Więcej`.
+- Ustawienia czytania nadal działają globalnie i zapisują się lokalnie w przeglądarce.
+
+## Gnostyk Biblioteka 1.0.56 - spójny czytnik i ustawienia na pasku
+
+- Ograniczono szerokość widoku czytnika do tego samego webowego kontenera co strona biblioteki.
+- Czytnik na dużych ekranach jest teraz wyśrodkowany, zamiast rozciągać się na pełną szerokość okna.
+- Przeniesiono panel ustawień czytania z treści strony do wysuwanego panelu przy pasku narzędzi.
+- Zachowano działanie ustawień na telefonie jako wysuwany panel nad dolną nawigacją.
+
 ## Gnostyk Biblioteka 1.0.55 - profesjonalne info i stopka
 
 - Uproszczono panel `Info` do jednej noty redakcyjnej o bibliotece, zamiast wielu osobnych punktów.

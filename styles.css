@@ -309,6 +309,19 @@ body[data-view="library"] .reader {
   padding: clamp(14px, 2.5vw, 34px);
 }
 
+body[data-view="reader"] {
+  background: #090806;
+}
+
+body[data-view="reader"] .app-shell {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+body[data-view="reader"] .reader {
+  min-height: 100vh;
+}
+
 body[data-view="reader"] .library-home {
   display: none;
 }
@@ -432,6 +445,10 @@ body[data-view="reader"] .library-home {
   margin-top: 7px;
   color: #cdb493;
   line-height: 1.55;
+}
+
+.library-settings .library-info-head {
+  grid-column: 1 / -1;
 }
 
 .library-about article {
@@ -741,6 +758,7 @@ body[data-view="reader"] .library-only {
 }
 
 .toolbar {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, auto) minmax(260px, 1fr);
   align-items: center;
@@ -937,6 +955,16 @@ body[data-view="reader"] .library-only {
   background: var(--white);
   color: var(--ink);
   padding: 0 10px;
+}
+
+.library-settings label {
+  padding: 16px 18px 18px;
+}
+
+.library-settings select {
+  border-color: rgba(216, 160, 82, 0.34);
+  background: rgba(255, 247, 234, 0.08);
+  color: #fff8e8;
 }
 
 .guide-head {

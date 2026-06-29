@@ -2,7 +2,7 @@
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.55",
+  version: "1.0.58",
   updated: "2026-06-29",
   currentWork: {
     id: "pistis-sophia",
@@ -2970,14 +2970,24 @@ To jest interpretacja drugiego: aaaa, aaaa, aaaa; to jest interpretacja całego 
 
 [KONIEC KSIĘGI PIERWSZEJ]
 
-Następna strona źródła rozpoczyna Księgę Drugą od rozdziału 63.`
-,
-
-  119: `[KSIĘGA DRUGA PISTIS SOPHII]
+[KSIĘGA DRUGA PISTIS SOPHII]
 
 ROZDZIAŁ 63
 
-Jan dalej interpretuje to samo Pismo.
+Jan także wystąpił i rzekł:
+
+„O Panie, pozwól i mnie wypowiedzieć rozwiązanie słów, które twoja moc światłości prorokowała dawniej przez Dawida”.
+
+A Jezus odpowiedział i rzekł do Jana:
+
+„Tobie także, Janie, daję polecenie, abyś wypowiedział rozwiązanie słów, które moja moc światłości prorokowała przez Dawida:
+
+'10. Łaska i prawda spotkały się razem, a sprawiedliwość i pokój pocałowały się nawzajem.
+
+'11. Prawda wykiełkowała z ziemi, a sprawiedliwość spojrzała z nieba'”.`
+,
+
+  119: `Jan dalej interpretuje to samo Pismo.
 
 I Jan odpowiedział, i rzekł:
 
@@ -3127,8 +3137,8 @@ I stało się więc, gdy ją uciskały i trwożyły ponad wszelką miarę, że z
 
 '3. Albowiem ty jesteś moim zbawcą od emanacji Samowolnego i Adamasa, Tyrana, i wybawisz mnie od wszystkich jego gwałtownych gróźb.'
 
-Gabriel i Michał oraz strumień światłości znowu idą jej na pomoc. A gdy Pistis Sophia to powiedziała, wtedy na rozkaz |138.`,
-  125: `mego Ojca, Pierwszego Misterium, które patrzy do wnętrza, posłałem znowu Gabriela i Michała oraz wielki strumień światłości, aby pomogli Pistis Sophii. I dałem rozkaz Gabrielowi i Michałowi, aby nieśli Pistis Sophię w swoich rękach, żeby jej stopy nie dotknęły ciemności poniżej; i dałem im nadto rozkaz, aby prowadzili ją w krainach chaosu, z których miała zostać wyprowadzona.
+Gabriel i Michał oraz strumień światłości znowu idą jej na pomoc. A gdy Pistis Sophia to powiedziała, wtedy na rozkaz |138. mego Ojca, Pierwszego Misterium, które patrzy`,
+  125: `do wnętrza, posłałem znowu Gabriela i Michała oraz wielki strumień światłości, aby pomogli Pistis Sophii. I dałem rozkaz Gabrielowi i Michałowi, aby nieśli Pistis Sophię w swoich rękach, żeby jej stopy nie dotknęły ciemności poniżej; i dałem im nadto rozkaz, aby prowadzili ją w krainach chaosu, z których miała zostać wyprowadzona.
 
 I stało się więc, gdy aniołowie zstąpili w chaos, oni i strumień światłości, a nadto gdy wszystkie emanacje Samowolnego i emanacje Adamasa ujrzały strumień światłości, jak jaśniał ponad wszelką miarę i nie było miary światłości wokół niego, ogarnęło je przerażenie i opuściły Pistis Sophię.
 
@@ -4557,11 +4567,12 @@ Dalej o odpuszczeniu grzechów. A Zbawca odpowiedział i rzekł do Jana pośród
 
 'Jeśli raz dacie mu z misteriów drugiej przestrzeni albo trzeciej, a on znowu się odwróci i zgrzeszy, macie kontynuować znowu drugi raz aż do trzeciego razu. Jeśli nadal grzeszy, nie będziecie kontynuować dawania mu, albowiem te trzy misteria będą mu świadkami jego ostatniej pokuty. I amen, mówię wam: ten, kto ponownie da temu człowiekowi misteria drugiej przestrzeni albo trzeciej, winien jest wielkiego potępienia. Lecz niech będzie dla was jako przekraczający i jako zgorszenie.
 
-'Amen, mówię wam: dusza tego człowieka od tej chwili nie może zostać wrzucona z powrotem w świat |271.; lecz jej mieszkanie jest pośród szczęk smoka
-zewnętrznej ciemności, krainy wycia i zgrzytania zębów. A przy rozwiązaniu świata jego dusza zostanie zamrożona i zginie w gwałtownym zimnie i nadzwyczaj gwałtownym ogniu, i będzie nieistniejąca na wieczność.
+'Amen, mówię wam: dusza tego człowieka od tej chwili nie może zostać wrzucona z powrotem w świat |271.; lecz jej mieszkanie jest pośród szczęk smoka`,
+  196: `zewnętrznej ciemności, krainy wycia i zgrzytania zębów. A przy rozwiązaniu świata jego dusza zostanie zamrożona i zginie w gwałtownym zimnie i nadzwyczaj gwałtownym ogniu, i będzie nieistniejąca na wieczność.
 
-'Nawet jeśli jeszcze raz się odwróci i wyrzeknie się całego świata, i wszystkich jego trosk, i wszystkich jego grzechów, i będzie w wielkim obywatelstwie i wielkiej pokucie, żadne Misterium nie może przyjąć od niego jego pokuty; ani nie może go wysłuchać, aby zmiłować się nad nim, przyjąć jego pokutę i odpuścić jego grzechy, oprócz Misterium Pierwszego Misterium i Misterium Niewypowiadalnego. Tylko one przyjmą pokutę tego człowieka i odpuszczą jego grzechy; albowiem zaprawdę owe misteria są współczujące, miłosiernie usposobione i odpuszczające grzechy w każdym czasie.'`,
-  196: `ROZDZIAŁ 107
+'Nawet jeśli jeszcze raz się odwróci i wyrzeknie się całego świata, i wszystkich jego trosk, i wszystkich jego grzechów, i będzie w wielkim obywatelstwie i wielkiej pokucie, żadne Misterium nie może przyjąć od niego jego pokuty; ani nie może go wysłuchać, aby zmiłować się nad nim, przyjąć jego pokutę i odpuścić jego grzechy, oprócz Misterium Pierwszego Misterium i Misterium Niewypowiadalnego. Tylko one przyjmą pokutę tego człowieka i odpuszczą jego grzechy; albowiem zaprawdę owe misteria są współczujące, miłosiernie usposobione i odpuszczające grzechy w każdym czasie.'
+
+ROZDZIAŁ 107
 
 Jan kontynuuje swoje pytanie. A gdy Zbawca to powiedział, Jan znowu kontynuował i rzekł: 'Panie mój, znieś mnie, jeśli cię pytam, i nie gniewaj się na mnie, albowiem pytam o wszystkie rzeczy z pewnością i pewnością dla poznania sposobu, jak mamy głosić to ludziom świata.'
 
@@ -5420,6 +5431,127 @@ Głoszenie apostołów. ... sprawiedliwy. Wyszli po trzech do czterech stref nie
 KONIEC.`,
 };
 
+Object.assign(polishTranslations, {
+  208: `których także wszyscy bogowie, którzy są poniżej człowieka, nie znają. Teraz więc, Maryjo, pytaj o to, o co możesz pytać, a objawię ci to twarzą w twarz, bez podobieństwa”.
+
+ROZDZIAŁ 115
+
+A Maryja odpowiedziała i rzekła: „Panie mój, w jakim typie więc |298. chrzty odpuszczają grzechy? Słyszałam, jak mówiłeś: 'Sługi odpłaty podążają za duszą, będąc jej świadkami we wszystkich grzechach, które popełnia, aby oskarżyć ją w sądach'. Teraz więc, Panie mój, czy misteria chrztów wymazują grzechy, które są w rękach sług odpłaty, tak że je zapominają? Teraz więc, Panie mój, powiedz nam typ, w jaki sposób odpuszczają grzechy; zaprawdę, pragniemy poznać to z pewnością”.
+
+O sługach odpłaty. A Zbawca odpowiedział i rzekł do Maryi: „Pięknie powiedziałaś. Sługi zaprawdę są tymi, którzy świadczą o wszystkich grzechach; lecz przebywają w sądach, chwytając dusze i oskarżając wszystkie dusze grzeszników, którzy nie otrzymali misteriów; i trzymają je mocno w chaosie, karząc je. A owi odbiorcy odpłaty nie mogą przekroczyć chaosu, aby dojść do porządków, które są ponad chaosem, i oskarżać dusze, które wychodzą z tamtych krain. Teraz więc nie wolno używać przemocy wobec dusz, które otrzymują misteria, i prowadzić ich do chaosu, aby sługi odpłaty je oskarżały. Lecz sługi odpłaty oskarżają |299. dusze grzeszników i trzymają mocno tych, którzy nie otrzymali misteriów mogących wyprowadzić ich z chaosu. Co do dusz zaś, które otrzymują misteria - nie mają mocy ich oskarżać, ponieważ nie wychodzą one z ich krain; a także jeśli wyjdą do ich krain, nie są zdolni ich powstrzymać; zaprawdę, nie mogą ich prowadzić do owego chaosu.
+
+Jak dusza grzesznika zostaje naznaczona jego grzechami. Słuchajcie ponadto, abym powiedział wam słowo w prawdzie: w jakim typie Misterium chrztu odpuszcza grzechy. Teraz więc, jeśli dusze grzeszą, gdy są jeszcze w świecie, sługi odpłaty przychodzą i są świadkami wszystkich grzechów, które dusza popełnia, aby naprawdę nie wyszły z krain chaosu, lecz mogły je oskarżyć w sądach, które są poza chaosem. A duch naśladowczy staje się świadkiem wszystkich grzechów, które dusza popełni, aby oskarżyć ją w sądach, które są poza chaosem; nie tylko zaś świadczy o nich, lecz wszystkie grzechy dusz pieczętuje i mocuje do duszy, aby wszyscy władcy karań grzeszników rozpoznali ją, że jest duszą grzeszną, i aby poznali liczbę grzechów, które popełniła, według pieczęci, które duch naśladowczy umocował na niej, tak aby została ukarana według |300. liczby grzechów, które popełniła. Tak czynią ze wszystkimi duszami grzesznymi. Teraz więc ten, kto otrzyma`,
+  209: `misteria chrztów - wtedy ich Misterium staje się wielkim, nadzwyczaj gwałtownym, mądrym ogniem; spala grzechy, wchodzi tajemnie do duszy i pochłania wszystkie grzechy, które duch naśladowczy umocował na niej.
+
+Jak chrzty oczyszczają grzechy. A gdy skończy oczyszczać wszystkie grzechy, które duch naśladowczy umocował na duszy, wchodzi tajemnie do ciała i ściga tajemnie wszystkich ścigających, i oddziela ich po stronie części ciała.
+
+Oddzielenie części przez Misterium chrztu. Albowiem ściga ducha naśladowczego i Los, i oddziela ich od mocy i od duszy, i kładzie ich po stronie ciała, tak że oddziela ducha naśladowczego, Los i ciało w jedną część; duszę i moc zaś oddziela w inną. Misterium chrztu przeciwnie pozostaje pośrodku tych dwóch, nieustannie oddzielając je jedno od drugiego, tak że czyni je czystymi i oczyszcza je, aby nie zostały splamione materią.
+
+„Teraz więc, Maryjo, oto sposób, w jaki misteria chrztów odpuszczają grzechy i wszystkie nieprawości”.
+
+ROZDZIAŁ 116
+
+Gdy więc |301. Zbawca to powiedział, rzekł do swoich uczniów: „Czy rozumiecie, w jaki sposób rozprawiam z wami?”
+
+Maryja interpretuje to samo z dawniejszego powiedzenia. Wtedy Maryja wystąpiła i rzekła: „Tak, Panie mój, w prawdzie badam dokładnie wszystkie słowa, które wypowiadasz. Co do słowa o odpuszczeniu grzechów, mówiłeś nam przedtem w podobieństwie, mówiąc: 'Przyszedłem rzucić ogień na ziemię', i znowu: 'Czego chcę, jeśli już płonie?' I znowu wyraźnie to rozróżniłeś, mówiąc: 'Mam chrzest, którym mam być ochrzczony; i jakże zniosę, aż się dokona? Czy myślicie, że przyszedłem rzucić pokój na ziemię? Nie, lecz przyszedłem rzucić podział. Albowiem odtąd pięciu będzie w jednym domu; trzech będzie podzielonych przeciw dwóm, a dwóch przeciw trzem'. To, Panie mój, jest słowo, które wypowiedziałeś jasno.
+
+„Słowo zaś, które wypowiedziałeś: 'Przyszedłem rzucić ogień na ziemię, i czego chcę, jeśli już płonie?' - to znaczy, Panie mój: przyniosłeś misteria chrztów na świat, a twoim upodobaniem jest, aby pochłonęły wszystkie grzechy duszy i oczyściły je. A potem znowu wyraźnie to rozróżniłeś, mówiąc: 'Mam chrzest, którym mam być ochrzczony; i |302. jakże zniosę, aż się dokona?' - to znaczy: nie pozostaniesz w świecie, aż chrzty zostaną dokonane i oczyszczą dusze doskonałe.
+
+„A ponadto słowo, które powiedziałeś nam przedtem: 'Czy myślicie, że przyszedłem rzucić pokój na ziemię? Nie, lecz przyszedłem rzucić podział. Albowiem odtąd pięciu będzie w jednym domu; trzech będzie podzielonych przeciw dwóm, a dwóch przeciw trzem' - to znaczy: przyniosłeś Misterium chrztów na świat, a ono dokonało podziału w`,
+  210: `ciałach świata, ponieważ oddzieliło ducha naśladowczego, ciało i Los w jedną część; duszę i moc zaś oddzieliło w inną część. To jest: trzech będzie przeciw dwóm, a dwóch przeciw trzem”.
+
+A gdy Maryja to powiedziała, Zbawca rzekł: „Dobrze powiedziałaś, ty duchowa i światło-czysta Maryjo. Oto jest rozwiązanie słowa”.
+
+ROZDZIAŁ 117
+
+Maryja dalej pyta Jezusa. Maryja znowu odpowiedziała i rzekła: „Panie mój, nadal będę cię pytać. Teraz więc, Panie mój, znieś mnie, gdy cię pytam. Oto jawnie poznaliśmy typ, w którym chrzty odpuszczają grzechy. Z drugiej strony zaś: Misterium tych trzech przestrzeni i misteria tego Pierwszego Misterium, i misteria Niewypowiadalnego - w jakim typie odpuszczają grzechy? Czy odpuszczają w typie |303. chrztów, czy nie?”
+
+O odpuszczeniu grzechów według wyższych misteriów. Zbawca odpowiedział znowu i rzekł: „Nie; lecz wszystkie misteria trzech przestrzeni odpuszczają duszy, we wszystkich krainach władców, wszystkie grzechy, które dusza popełniła od początku. Odpuszczają je, a ponadto odpuszczają grzechy, które potem popełni, aż do czasu, do którego każde z misteriów będzie skuteczne - czas zaś, do którego każde z misteriów będzie skuteczne, powiem wam przy rozpostarciu wszechświata.
+
+„A ponadto Misterium Pierwszego Misterium i misteria Niewypowiadalnego odpuszczają duszy, we wszystkich krainach władców, wszystkie grzechy i wszystkie nieprawości, które dusza popełniła; i nie tylko odpuszczają jej wszystko, lecz nie przypisują jej żadnego grzechu od tej godziny aż po całą wieczność, z powodu daru owego wielkiego Misterium i jego nadzwyczaj wielkiej chwały”.
+
+ROZDZIAŁ 118
+
+Gdy więc Zbawca to powiedział, rzekł do swoich uczniów: „Czy rozumiecie, w jaki sposób mówię z wami?”
+
+A Maryja znowu odpowiedziała i rzekła: „Tak, Panie mój, już uchwyciłam wszystkie słowa, które wypowiadasz. Teraz więc, Panie mój, co do słowa, które wypowiadasz: |304. 'Wszystkie misteria trzech przestrzeni odpuszczają grzechy i zakrywają ich nieprawości' - Dawid, prorok, prorokował`,
+  211: `dawniej o tym słowie, mówiąc: 'Błogosławieni ci, których grzechy są odpuszczone i których nieprawości są zakryte'.
+
+„A o słowie, które wypowiedziałeś: 'Misterium Pierwszego Misterium i Misterium Niewypowiadalnego odpuszczają wszystkim ludziom, którzy otrzymają owe misteria, nie tylko grzechy, które popełnili od początku, lecz także nie przypisują im ich od tej godziny aż po całą wieczność' - o tym słowie Dawid prorokował dawniej, mówiąc: 'Błogosławieni są ci, którym Pan Bóg nie przypisze grzechów' - to jest: grzechy nie będą przypisane od tej godziny tym, którzy otrzymali misteria Pierwszego Misterium i którzy otrzymali Misterium Niewypowiadalnego”.
+
+Rzekł: „Dobrze powiedziałaś, Maryjo, ty duchowa i światło-czysta Maryjo. Oto jest rozwiązanie słowa”.
+
+A Maryja znowu kontynuowała i rzekła: „Panie mój, jeśli człowiek otrzymuje misteria z misteriów |305. Pierwszego Misterium, a potem znowu zawraca, grzeszy i przekracza prawo, a jeśli potem znowu zawraca, pokutuje i modli się w którymś z misteriów swego Misterium - czy będzie mu odpuszczone, czy nie?”
+
+Zbawca odpowiedział i rzekł do Maryi: „Amen, amen, mówię wam: każdy, kto otrzyma misteria Pierwszego Misterium,
+
+O odpuszczeniu aż do dwunastu razy tym, którzy otrzymali misteria Pierwszego Misterium. jeśli znowu zawróci i przekroczy prawo dwanaście razy, i znowu dwanaście razy pokutuje, modląc się w Misterium Pierwszego Misterium, będzie mu odpuszczone.
+
+„Lecz jeśli po dwunastu razach znowu przekroczy prawo, zawraca i przekracza prawo, nie będzie mu odpuszczone na wieki, aby mógł zwrócić się do któregokolwiek z misteriów swego Misterium; i ten nie ma pokuty, chyba że otrzyma misteria Niewypowiadalnego, które współczują w każdym czasie i odpuszczają w każdym czasie”.
+
+ROZDZIAŁ 119
+
+Maryja znowu kontynuowała i rzekła: „Panie mój, jeśli z drugiej strony ci, którzy otrzymali misteria Pierwszego Misterium, zawrócą i przekroczą prawo, i jeśli wyjdą z ciała, zanim pokutowali, czy odziedziczą królestwo, czy nie, skoro rzeczywiście otrzymali dar Pierwszego Misterium?”
+
+O takich wtajemniczonych, którzy grzeszą i umierają bez pokuty. Zbawca odpowiedział i rzekł do Maryi: „Amen, amen, mówię wam: każdy człowiek, który otrzymał misteria w Pierwszym Misterium, przekroczywszy prawo po raz pierwszy, drugi i trzeci, i jeśli wyjdzie z ciała, zanim pokutował, jego sąd jest o wiele surowszy niż wszystkie sądy; albowiem jego mieszkanie jest pośrodku szczęk smoka zewnętrznej ciemności, a przy końcu tego wszystkiego zostanie skrzepnięty w karaniach i zginie na wieki,`,
+  212: `ponieważ otrzymał dar Pierwszego Misterium i nie wytrwał w nim.
+
+O nieustannym odpuszczeniu tym, którzy otrzymali Misterium Niewypowiadalnego. Maryja odpowiedziała i rzekła: „Panie mój, wszyscy ludzie, którzy otrzymają misteria Misterium Niewypowiadalnego, a potem znowu zawrócą, przekroczą prawo i ustaną w swojej wierze, a następnie znowu, gdy są jeszcze w życiu, zawrócą i będą pokutować - ile razy będzie im odpuszczone?”
+
+Zbawca odpowiedział i rzekł do Maryi: „Amen, amen, mówię wam: każdemu człowiekowi, który otrzyma misteria Niewypowiadalnego, nie tylko wtedy, gdy raz przekroczy prawo, zawróci znowu i będzie pokutować, zostanie odpuszczone; lecz jeśli kiedykolwiek przekroczy prawo i jeśli, będąc jeszcze w życiu, zawróci znowu i będzie pokutować bez odgrywania roli, i znowu jeśli zawróci, będzie pokutować i modlić się w którymś ze swoich misteriów, wtedy zostanie mu odpuszczone, ponieważ otrzymał z daru misteriów |307. Niewypowiadalnego, a ponadto ponieważ owe misteria są współczujące i odpuszczają w każdym czasie”.
+
+A Maryja znowu odpowiedziała i rzekła do Jezusa: „Panie mój, ci, którzy otrzymają misteria Niewypowiadalnego, a potem znowu zawrócą, przekroczą prawo i ustaną w swojej wierze, i ponadto wyjdą z ciała, zanim pokutowali - co stanie się takim?”
+
+O takich wtajemniczonych, którzy grzeszą i umierają bez pokuty. A Zbawca odpowiedział i rzekł do Maryi: „Amen, amen, mówię wam: wszyscy ludzie, którzy otrzymają misteria Niewypowiadalnego - błogosławione zaprawdę są dusze, które otrzymają z owych misteriów; lecz jeśli zawrócą, przekroczą prawo i wyjdą z ciała, zanim pokutowali, sąd tych ludzi jest sroższy niż wszystkie sądy i jest nadzwyczaj gwałtowny, nawet jeśli owe dusze są nowe i jest to ich pierwszy raz przyjścia na świat. Od tej godziny nie powrócą do zmian ciał i nie będą mogły nic uczynić, lecz zostaną wyrzucone w zewnętrzną ciemność, i zginą, i będą nieistniejące na wieki”.
+
+ROZDZIAŁ 120
+
+A gdy Zbawca to powiedział, rzekł do swoich uczniów: „Czy rozumiecie, w jaki sposób mówię z wami?”
+
+Maryja interpretuje to samo z dawniejszego powiedzenia. Maryja odpowiedziała |308. i rzekła: „Uchwyciłam słowa, które wypowiedziałeś. Teraz więc, Panie mój, oto słowo, które wypowiedziałeś: 'Ci, którzy otrzymają misteria Niewypowiadalnego - błogosławione zaprawdę są owe dusze;`,
+  213: `lecz jeśli zawrócą, przekroczą prawo i ustaną w swojej wierze, a jeśli wyjdą z ciała bez pokuty, od tej godziny nie są już zdatne powrócić do zmian ciała ani do czegokolwiek w ogóle, lecz zostają wyrzucone w zewnętrzną ciemność; zginą w owej krainie i będą nieistniejące na wieki' - co do tego słowa mówiłeś nam przedtem, mówiąc: 'Sól jest dobra; lecz jeśli sól stanie się jałowa, czym ją posolą? Nie nadaje się ani na gnój, ani na ziemię; lecz wyrzucają ją precz' - to znaczy: błogosławione są wszystkie dusze, które otrzymają z misteriów Niewypowiadalnego; lecz jeśli raz przekroczą prawo, od tej godziny nie są już zdatne powrócić do ciała ani do czegokolwiek w ogóle, lecz zostają wyrzucone w zewnętrzną ciemność i giną w owej krainie”.
+
+A gdy to powiedziała, Zbawca rzekł: „Dobrze powiedziałaś, ty duchowa, światło-czysta Maryjo. Oto jest rozwiązanie słowa”.
+
+A Maryja znowu kontynuowała |309. i rzekła: „Panie mój, wszyscy ludzie, którzy otrzymali misteria Pierwszego Misterium i misteria Niewypowiadalnego, ci, którzy nie przekroczyli prawa, lecz których wiara w misteria była szczera, bez odgrywania roli - oni potem znowu zgrzeszyli przez przymus Losu, i znowu zawrócili, i pokutowali, i znowu modlili się w którymkolwiek z misteriów - jak często będzie im odpuszczone?”
+
+O nieustannym współczuciu wielkich misteriów wobec pokutujących. A Zbawca odpowiedział i rzekł do Maryi pośród swoich uczniów: „Amen, amen, mówię wam: wszyscy ludzie, którzy otrzymają misteria Niewypowiadalnego, a ponadto misteria Pierwszego Misterium, grzeszą za każdym razem przez przymus Losu; i jeśli, gdy są jeszcze w życiu, zawrócą, pokutują i trwają w którymkolwiek ze swoich misteriów, będzie im odpuszczone za każdym razem, ponieważ owe misteria są współczujące i przebaczające przez cały czas. Z tej przyczyny więc powiedziałem wam przedtem: owe misteria nie tylko odpuszczą im grzechy, które popełnili od początku, lecz nie przypisują im ich od tej godziny; o tym mówiłem wam, że przyjmują pokutę w każdym czasie i że odpuszczą także grzechy, które popełniają na nowo.
+
+O niepokutujących. „Jeśli z drugiej strony ci, którzy otrzymają misteria |310. Misterium Niewypowiadalnego i misteria Pierwszego Misterium, zawrócą, zgrzeszą i wyjdą z ciała bez pokuty, wtedy będą takimi, jakimi będą ci, którzy przekroczyli prawo i nie pokutowali. Ich mieszkanie także jest pośród szczęk smoka zewnętrznej ciemności, i zginą, i przestaną istnieć na wieki. Z tej przyczyny powiedziałem wam: wszyscy ludzie, którzy otrzymają misteria, gdyby znali czas, kiedy wychodzą z ciała, czuwaliby nad sobą i nie grzeszyliby, aby odziedziczyć królestwo Światłości na wieki”.`,
+  214: `ROZDZIAŁ 121
+
+Gdy więc Zbawca powiedział to swoim uczniom, rzekł do nich: „Czy rozumiecie, w jaki sposób mówię z wami?”
+
+Maryja interpretuje z dawniejszego powiedzenia. Maryja odpowiedziała i rzekła: „Tak, Panie mój, z dokładnością podążyłam za wszystkimi słowami, które wypowiedziałeś. O tym słowie mówiłeś nam przedtem: 'Gdyby gospodarz wiedział, o której godzinie nocy przychodzi złodziej, aby włamać się do domu, czuwałby i nie pozwoliłby człowiekowi włamać się do jego domu'”.
+
+Gdy więc Maryja to powiedziała, Zbawca rzekł: „Dobrze powiedziałaś, duchowa Maryjo. Oto jest słowo”.
+
+Zbawca znowu kontynuował i rzekł do swoich uczniów: „Teraz więc głoście wszystkim ludziom, którzy otrzymają misteria w Światłości, i mówcie |311. im: Czuwajcie nad sobą i nie grzeszcie, abyście nie nagromadzili zła na zło i nie wyszli z ciała bez pokuty, i nie stali się obcymi królestwu Światłości na wieki”.
+
+Gdy Zbawca to powiedział, Maryja odpowiedziała i rzekła: „Panie mój, wielkie jest współczucie owych misteriów, które odpuszczają grzechy w każdym czasie”.
+
+Jeśli nawet ludzie na ziemi są współczujący, o ileż bardziej najwyższe misteria? Zbawca odpowiedział i rzekł do Maryi pośród uczniów: „Jeśli dzisiaj król, który jest człowiekiem świata, daje dar ludziom podobnym sobie i odpuszcza także mordercom, i tym, którzy obcują z mężczyznami, i pozostałe bardzo ciężkie grzechy zasługujące na śmierć - jeśli przystoi mu, człowiekowi świata, tak uczynić, o ileż bardziej Niewypowiadalne i Pierwsze Misterium, które są panami wszechświata, mają władzę czynić we wszystkim, jak im się podoba, aby odpuścić każdemu, kto otrzyma misteria.
+
+„Albo jeśli z drugiej strony król dzisiaj przyodziewa żołnierza w królewską szatę i posyła go do obcych krain, a on popełnia morderstwa i inne ciężkie grzechy zasługujące na śmierć, wtedy nie przypisują mu ich i nie mogą uczynić mu nic złego, ponieważ jest przyodziany w królewską szatę - o ileż bardziej ci, którzy noszą misteria szat Niewypowiadalnego i tych Pierwszego Misterium, którzy są panami nad wszystkimi z wysokości i wszystkimi z głębi!”
+
+ROZDZIAŁ 122
+
+Jezus poddaje Piotra próbie. Potem Jezus ujrzał kobietę, która przyszła, aby pokutować. |312. Ochrzcił ją trzy razy, a jednak nie uczyniła tego, co godne chrztów. I Zbawca zapragnął wystawić Piotra na próbę, aby zobaczyć, czy jest współczujący i przebaczający, jak im`,
+  215: `nakazał. Rzekł do Piotra: „Oto trzy razy ochrzciłem tę duszę, a jednak za tym trzecim razem nie uczyniła tego, co godne misteriów Światłości. Dlaczego więc czyni swoje ciało bezpożytecznym? Teraz więc, Piotrze, dokonaj Misterium, które odcina dusze od Dziedzictw Światłości; dokonaj tego Misterium, aby odcięło duszę tej kobiety od Dziedzictwa Światłości”.
+
+Gdy więc Zbawca to powiedział, wystawił Piotra na próbę, aby zobaczyć, czy jest współczujący i przebaczający. Gdy więc Zbawca to powiedział, Piotr rzekł: „Panie mój, pozwól jej jeszcze tym razem, abyśmy dali jej wyższe misteria; a jeśli jest zdatna, wtedy pozwoliłeś jej odziedziczyć Królestwo Światłości, lecz jeśli nie jest zdatna, wtedy odetniesz ją od Królestwa Światłości”.
+
+Gdy więc Piotr to powiedział, Zbawca poznał, że Piotr jest współczujący jak on i przebaczający. Gdy więc to wszystko zostało powiedziane, Zbawca rzekł do swoich uczniów: „Czy zrozumieliście wszystkie te słowa i typ |313. tej kobiety?”
+
+Maryja interpretuje zdarzenie z dawniejszego powiedzenia. Maryja odpowiedziała i rzekła: „Panie mój, zrozumiałam misteria rzeczy, które przypadły w udziale tej kobiecie. Co do rzeczy więc, które jej przypadły, mówiłeś nam przedtem w podobieństwie, mówiąc: 'Pewien człowiek miał drzewo figowe w swojej winnicy; i przyszedł szukać jego owocu, a nie znalazł na nim ani jednego. Rzekł do ogrodnika: Oto trzy lata przychodzę szukać owocu na tym drzewie figowym, a nie mam z niego żadnego plonu. Zetnij je więc; po co czyni także ziemię bezpożyteczną? Lecz on odpowiedział i rzekł mu: Panie mój, miej cierpliwość do niego jeszcze ten rok, aż je okopię i dam nawóz; a jeśli wyda owoc w następnym roku, pozwoliłeś mu trwać, lecz jeśli nie znajdziesz żadnego owocu, wtedy je zetniesz'. Oto, Panie mój, jest rozwiązanie słowa”.
+
+Zbawca odpowiedział i rzekł do Maryi: „Dobrze powiedziałaś, duchowa. Oto jest rozwiązanie słowa”.
+
+ROZDZIAŁ 123
+
+Maryja znowu kontynuowała i rzekła do Zbawcy: „Panie mój, człowiek, który otrzymał misteria i nie uczynił tego, co jest ich godne, lecz zawrócił i zgrzeszył, a potem znowu pokutował i był w wielkiej pokucie - czy wolno moim braciom odnowić mu Misterium, które`,
+});
+
 const els = {
   search: document.querySelector("#searchInput"),
   chapters: document.querySelector("#chaptersPanel"),
@@ -5440,7 +5572,7 @@ const els = {
   copy: document.querySelector("#copyButton"),
   aboutToggle: document.querySelector("#aboutToggle"),
   aboutPanel: document.querySelector("#aboutPanel"),
-  settingsToggle: document.querySelector("#settingsToggle"),
+  settingsToggle: document.querySelector("#librarySettingsToggle"),
   settingsPanel: document.querySelector("#settingsPanel"),
   themeSetting: document.querySelector("#themeSetting"),
   fontSizeSetting: document.querySelector("#fontSizeSetting"),
@@ -5454,6 +5586,7 @@ const els = {
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
   libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
+  librarySettingsToggle: document.querySelector("#librarySettingsToggle"),
   footerInfo: document.querySelector("#footerInfoButton"),
   footerChanges: document.querySelector("#footerChangesButton"),
   libraryBooksPanel: document.querySelector("#libraryBooksPanel"),
@@ -5768,16 +5901,13 @@ function renderPanelState() {
   setPanelVisibility(els.settingsPanel, state.settingsOpen);
   els.aboutToggle?.classList.toggle("is-active", state.aboutOpen);
   els.settingsToggle?.classList.toggle("is-active", state.settingsOpen);
+  els.aboutToggle?.setAttribute("aria-expanded", String(state.aboutOpen));
+  els.settingsToggle?.setAttribute("aria-expanded", String(state.settingsOpen));
 }
 
 function setReaderPanel(panel) {
   if (panel === "about") {
     state.aboutOpen = !state.aboutOpen;
-    state.settingsOpen = false;
-  }
-  if (panel === "settings") {
-    state.settingsOpen = !state.settingsOpen;
-    state.aboutOpen = false;
   }
   renderPanelState();
 }
@@ -5840,16 +5970,21 @@ function setLibrarySection(section) {
   const isBooks = section === "books";
   const isInfo = section === "info";
   const isChanges = section === "changes";
+  const isSettings = section === "settings";
   if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
   if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
   if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
+  if (els.settingsPanel) els.settingsPanel.hidden = !isSettings;
+  state.settingsOpen = isSettings;
   els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
   els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
   els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
+  els.librarySettingsToggle?.classList.toggle("is-active", isSettings);
   els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
   els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
   els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
-  const target = isInfo ? els.libraryInfoPanel : isChanges ? els.libraryChangesPanel : els.libraryBooksPanel;
+  els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
+  const target = isInfo ? els.libraryInfoPanel : isChanges ? els.libraryChangesPanel : isSettings ? els.settingsPanel : els.libraryBooksPanel;
   requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
@@ -6149,7 +6284,7 @@ listen(els.aboutToggle, "click", () => {
 });
 
 listen(els.settingsToggle, "click", () => {
-  setReaderPanel("settings");
+  setLibrarySection("settings");
 });
 
 [els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting].filter(Boolean).forEach(control => {
@@ -6263,3 +6398,4 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
