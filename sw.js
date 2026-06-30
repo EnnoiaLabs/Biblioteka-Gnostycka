@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.60";
+﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.68";
 
 const APP_SHELL = [
   "./",
@@ -76,6 +76,14 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+
+
+
+
+
+
+
 
 
 

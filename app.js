@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.60",
+  version: "1.0.68",
   updated: "2026-06-30",
   currentWork: {
     id: "pistis-sophia",
@@ -5584,6 +5584,13 @@ const els = {
   clearNote: document.querySelector("#clearNote"),
   saveStatus: document.querySelector("#saveStatus"),
   focus: document.querySelector("#focusToggle"),
+  focusExit: document.querySelector("#focusExit"),
+  focusPrev: document.querySelector("#focusPrevPage"),
+  focusNext: document.querySelector("#focusNextPage"),
+  focusPageInput: document.querySelector("#focusPageInput"),
+  focusModeToggle: document.querySelector("#focusModeToggle"),
+  focusModeMenu: document.querySelector("#focusModeMenu"),
+  focusModeItems: document.querySelectorAll("[data-focus-mode]"),
   openWork: document.querySelector("#openWorkButton"),
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
@@ -5638,6 +5645,14 @@ function setValue(element, value) {
   if (element) element.value = value;
 }
 
+function setChecked(element, checked) {
+  if (element) element.checked = Boolean(checked);
+}
+
+function setHidden(element, hidden) {
+  if (element) element.hidden = Boolean(hidden);
+}
+
 function pageByNumber(page) {
   return data.pages[Math.max(0, Math.min(data.pages.length - 1, page - 1))];
 }
@@ -5660,6 +5675,12 @@ function readableChapter(chapter) {
   if (!chapter) return "Wstęp, spis treści i opracowanie historyczne";
   const range = rangeForChapter(chapter);
   return range ? `${range.title} - rozdział ${chapter.number}` : `Rozdział ${chapter.number}`;
+}
+
+function readerModeLabel(mode) {
+  if (mode === "source") return "Oryginał EN";
+  if (mode === "coptic") return "Koptyjski";
+  return "Po polsku";
 }
 
 function chapterNavExcerpt(chapter) {
@@ -5753,7 +5774,7 @@ function copticPageText(page) {
   const entries = copticEntriesForPage(page);
   if (!entries.length) {
     return `
-      <div class="coptic-source-note">
+      <div class="coptic-source-note coptic-empty-note">
         <strong>Koptyjski tekst nie jest przypisany do tej strony.</strong>
         <p>Ta strona Meada nie zawiera znacznika Schwartze-Petermanna, według którego biblioteka łączy tekst koptyjski z przekładem. Przejdź do strony z oznaczeniem typu <span>|298</span>, aby zobaczyć odpowiadające linie koptyjskie.</p>
       </div>
@@ -6082,14 +6103,21 @@ function renderReader() {
   const isCoptic = state.readerMode === "coptic";
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
   if (els.pageText) {
-    els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${isCoptic ? copticPageText(page) : highlight(text)}`;
+    const body = isCoptic ? copticPageText(page) : `<div class="page-prose">${highlight(text)}</div>`;
+    els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
   }
   setValue(els.pageInput, state.page);
+  setValue(els.focusPageInput, state.page);
   setText(els.currentPage, `Strona ${state.page}`);
+  setText(els.focusPageLabel, `Str. ${state.page}`);
   setText(els.currentChapter, readableChapter(chapter));
   els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
   els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
+  setText(els.focusModeToggle, readerModeLabel(state.readerMode));
+  els.focusModeItems?.forEach(button => {
+    button.classList.toggle("is-active", button.dataset.focusMode === state.readerMode);
+  });
   els.bookmark?.classList.toggle("is-active", state.marks.includes(state.page));
   setValue(els.notes, state.notes[state.page] || "");
   setText(els.mobileCurrentPage, `Str. ${state.page}`);
@@ -6313,8 +6341,11 @@ listen(els.mobileSearch, "input", event => {
 });
 
 listen(els.pageInput, "change", event => goToPage(event.target.value));
+listen(els.focusPageInput, "change", event => goToPage(event.target.value));
 listen(els.prev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
 listen(els.next, "click", () => goToPage(state.page + 1, { scrollToText: true }));
+listen(els.focusPrev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
+listen(els.focusNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
 listen(els.continue, "click", () => goToPage(localStorage.getItem("ps.lastPage") || state.page, { scrollToText: true }));
 listen(els.mobilePrev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
 listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
@@ -6340,6 +6371,20 @@ listen(els.mobileOverlay, "click", closeMobileSheet);
 listen(els.polishMode, "click", () => setReaderMode("pl"));
 listen(els.sourceMode, "click", () => setReaderMode("source"));
 listen(els.copticMode, "click", () => setReaderMode("coptic"));
+listen(els.focusModeToggle, "click", event => {
+  event.stopPropagation();
+  const isOpen = !els.focusModeMenu?.hidden;
+  setHidden(els.focusModeMenu, isOpen);
+  els.focusModeToggle?.setAttribute("aria-expanded", String(!isOpen));
+});
+els.focusModeItems?.forEach(button => {
+  listen(button, "click", event => {
+    event.stopPropagation();
+    setReaderMode(button.dataset.focusMode);
+    setHidden(els.focusModeMenu, true);
+    els.focusModeToggle?.setAttribute("aria-expanded", "false");
+  });
+});
 
 listen(els.citationFormat, "change", event => {
   state.citationFormat = event.target.value;
@@ -6440,6 +6485,20 @@ listen(els.focus, "change", event => {
   document.body.classList.toggle("focus", event.target.checked);
 });
 
+listen(els.focusExit, "click", () => {
+  setChecked(els.focus, false);
+  setHidden(els.focusModeMenu, true);
+  els.focusModeToggle?.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("focus");
+});
+
+document.addEventListener("click", event => {
+  if (els.focusModeMenu?.hidden) return;
+  if (event.target.closest(".focus-mode-field")) return;
+  setHidden(els.focusModeMenu, true);
+  els.focusModeToggle?.setAttribute("aria-expanded", "false");
+});
+
 document.addEventListener("keydown", event => {
   if (event.target.matches("input, textarea")) return;
   if (event.key === "ArrowLeft") goToPage(state.page - 1);
@@ -6448,7 +6507,15 @@ document.addEventListener("keydown", event => {
     event.preventDefault();
     els.search?.focus();
   }
-  if (event.key === "Escape") closeMobileSheet();
+  if (event.key === "Escape") {
+    setHidden(els.focusModeMenu, true);
+    els.focusModeToggle?.setAttribute("aria-expanded", "false");
+    if (document.body.classList.contains("focus")) {
+      setChecked(els.focus, false);
+      document.body.classList.remove("focus");
+    }
+    closeMobileSheet();
+  }
 });
 
 setText(els.pageCount, data.pageCount);

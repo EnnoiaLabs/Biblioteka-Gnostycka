@@ -8,11 +8,11 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.60">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.68">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
-    <link rel="stylesheet" href="styles.css?v=1.0.60">
+    <link rel="stylesheet" href="styles.css?v=1.0.68">
   </head>
   <body data-view="library">
     <div class="app-shell">
@@ -102,7 +102,7 @@
               <h4>Czym jest Gnostyk Biblioteka</h4>
               <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce. Pierwszą pozycją jest <strong>Pistis Sophia</strong>, przygotowana jako pełny przekład z odniesieniami do wydania G. R. S. Meada z 1921 roku i aparatem Schwartze-Petermanna.</p>
               <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polski przekład, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Przekład zachowuje misteryjne formuły, rytm dialogu objawieniowego, nazwy własne i gnostycką terminologię, ale prowadzi je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: kolejne traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.60</span></strong>.</p>
+              <p>Biblioteka jest rozwijana modułowo: kolejne traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.68</span></strong>.</p>
               <div class="library-info-strip" aria-label="Podstawowe informacje">
                 <span><strong>Pierwsza księga</strong>Pistis Sophia</span>
                 <span><strong>Podstawa</strong>Mead 1921</span>
@@ -120,11 +120,11 @@
               <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
             </header>
             <ol id="libraryUpdates" class="library-updates">
-              <li><strong>1.0.60</strong> Uporządkowano odstępy czytnika i stopkę strony głównej.</li>
-              <li><strong>1.0.59</strong> Dodano roboczą warstwę koptyjską Unicode.</li>
-              <li><strong>1.0.58</strong> Skorygowano paginację i raport audytu przekładu.</li>
-              <li><strong>1.0.57</strong> Przeniesiono ustawienia czytania do zakładek biblioteki.</li>
-              <li><strong>1.0.56</strong> Ujednolicono szerokość czytnika z biblioteką i przeniesiono ustawienia na pasek.</li>
+              <li><strong>1.0.68</strong> Zastąpiono natywną listę wersji tekstu ciemnym menu w stylu paska mobilnego.</li>
+              <li><strong>1.0.67</strong> Zwężono pasek skupienia, dodano listę wersji tekstu i komunikat dla stron bez koptyjskiego.</li>
+              <li><strong>1.0.65</strong> Poprawiono automatyczne odznaczanie trybu skupienia po wyjściu.</li>
+              <li><strong>1.0.64</strong> Dodano pasek roboczy trybu skupienia z nawigacją stron.</li>
+              <li><strong>1.0.63</strong> Przeniesiono tryb skupienia i uproszczono widok do samego tekstu.</li>
             </ol>
           </section>
 
@@ -174,7 +174,7 @@
           <div class="site-footer-links">
             <button id="footerInfoButton" class="footer-link" type="button">Info</button>
             <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
-            <span>v<span id="libraryVersionFooterHome">1.0.60</span></span>
+            <span>v<span id="libraryVersionFooterHome">1.0.68</span></span>
           </div>
         </footer>
 
@@ -188,7 +188,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.60</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.68</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -234,8 +234,7 @@
               <button id="copticMode" class="text-button" type="button">Koptyjski</button>
             </div>
           </div>
-          <div class="toolbar-secondary" aria-label="Narzędzia dodatkowe">
-            <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
+          <div class="toolbar-secondary citation-tools" aria-label="Aparat cytowania">
             <select id="citationFormat" class="select-button" aria-label="Format cytowania">
               <option value="simple">Cytat prosty</option>
               <option value="scholarly">Cytat naukowy</option>
@@ -243,11 +242,6 @@
               <option value="schwpet">Schw.-Pet.</option>
             </select>
             <button id="copyButton" class="text-button" type="button">Kopiuj fragment</button>
-            <button id="aboutToggle" class="text-button" type="button" aria-expanded="false">O przekładzie</button>
-            <label class="toggle">
-              <input id="focusToggle" type="checkbox">
-              <span>Tryb skupienia</span>
-            </label>
           </div>
         </section>
 
@@ -269,7 +263,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.60</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.68</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <div id="pageText" class="page-text"></div>
@@ -282,6 +276,14 @@
               <button id="clearNote" class="text-button subtle" type="button">Wyczyść</button>
               <span id="saveStatus">Zapis lokalny</span>
             </div>
+            <div class="reader-side-actions" aria-label="Dodatkowe narzędzia czytania">
+              <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
+              <button id="aboutToggle" class="text-button" type="button" aria-expanded="false">O przekładzie</button>
+              <label class="toggle reader-focus-toggle">
+                <input id="focusToggle" type="checkbox">
+                <span>Tryb skupienia</span>
+              </label>
+            </div>
           </aside>
         </section>
 
@@ -290,12 +292,30 @@
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
           <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.60</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.68</span></p>
         </footer>
       </main>
     </div>
 
     <div id="offlineNotice" class="offline-notice" hidden>Aplikacja jest offline. Biblioteka korzysta z zapisanej wersji PWA.</div>
+    <section class="focus-bar" aria-label="Pasek trybu skupienia">
+      <button id="focusExit" class="text-button subtle" type="button">Wyjdź</button>
+      <button id="focusPrevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
+      <label class="focus-page-jump">
+        <span>Strona</span>
+        <input id="focusPageInput" type="number" min="1" value="1">
+      </label>
+      <button id="focusNextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
+      <div class="focus-mode-field">
+        <span>Wersja</span>
+        <button id="focusModeToggle" class="focus-mode-toggle" type="button" aria-expanded="false">Po polsku</button>
+        <div id="focusModeMenu" class="focus-mode-menu" hidden>
+          <button data-focus-mode="pl" type="button">Po polsku</button>
+          <button data-focus-mode="source" type="button">Oryginał EN</button>
+          <button data-focus-mode="coptic" type="button">Koptyjski</button>
+        </div>
+      </div>
+    </section>
 
     <div id="mobileOverlay" class="mobile-overlay" hidden></div>
     <section id="mobileSheet" class="mobile-sheet" aria-hidden="true" aria-label="Mobilna nawigacja">
@@ -358,9 +378,16 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.60"></script>
-    <script src="coptic-data.js?v=1.0.60"></script>
-    <script src="app.js?v=1.0.60"></script>
+    <script src="data.js?v=1.0.68"></script>
+    <script src="coptic-data.js?v=1.0.68"></script>
+    <script src="app.js?v=1.0.68"></script>
   </body>
 </html>
+
+
+
+
+
+
+
 

@@ -1,5 +1,44 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.68 - menu wersji w skupieniu
+
+- Zastąpiono natywną listę wersji tekstu własnym ciemnym menu w kolorystyce dolnego paska.
+
+## Gnostyk Biblioteka 1.0.67 - skupienie i koptyjski
+
+- Zwężono dolny pasek trybu skupienia do szerokości kolumny czytania.
+- Zastąpiono trzy przyciski wersji tekstu jedną listą rozwijaną w trybie skupienia.
+- Przywrócono komunikat o braku przypisanego tekstu koptyjskiego w trybie skupienia.
+
+## Gnostyk Biblioteka 1.0.66 - dolny pasek skupienia
+
+- Przeniesiono pasek trybu skupienia na dół ekranu i ujednolicono go wizualnie z paskiem mobilnym.
+- Dodano do trybu skupienia przełączanie wersji tekstu: polskiej, angielskiej i koptyjskiej.
+
+## Gnostyk Biblioteka 1.0.65 - odznaczanie trybu skupienia
+
+- Poprawiono wyjście z trybu skupienia tak, aby przełącznik był automatycznie odznaczany po kliknięciu `Wyjdź` lub naciśnięciu `Escape`.
+
+## Gnostyk Biblioteka 1.0.64 - pasek trybu skupienia
+
+- Zastąpiono pływający przycisk wyjścia paskiem roboczym trybu skupienia.
+- Dodano w trybie skupienia zmianę stron, pole wyboru strony i bieżący numer strony.
+
+## Gnostyk Biblioteka 1.0.63 - tryb skupienia
+
+- Przeniesiono przełącznik trybu skupienia do bocznego panelu narzędzi czytelniczych.
+- Uproszczono tryb skupienia tak, aby zostawiał przede wszystkim sam tekst i dyskretny przycisk wyjścia.
+
+## Gnostyk Biblioteka 1.0.62 - porządek w narzędziach czytnika
+
+- Uporządkowano pasek narzędzi: format cytowania i kopiowanie fragmentu są teraz obok siebie jako aparat cytowania.
+- Przeniesiono zakładkę i informacje o przekładzie do bocznego panelu notatek jako drugorzędne akcje czytelnicze.
+
+## Gnostyk Biblioteka 1.0.61 - zwarte bloki czytnika
+
+- Usunięto efekt dużych odstępów powodowany przez dziedziczenie `white-space: pre-wrap` przez ramki aparatu cytowania i warstwy koptyjskiej.
+- Przeniesiono zachowanie łamań tekstu do osobnego kontenera zwykłego tekstu.
+
 ## Gnostyk Biblioteka 1.0.60 - korekta wyglądu czytnika
 
 - Zmniejszono pionowe odstępy między blokami w czytniku, zwłaszcza przy aparacie cytowania i warstwie koptyjskiej.
