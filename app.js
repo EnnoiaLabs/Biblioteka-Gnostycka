@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.72",
+  version: "1.0.77",
   updated: "2026-06-30",
   currentWork: {
     id: "pistis-sophia",
@@ -5594,12 +5594,15 @@ const els = {
   openWork: document.querySelector("#openWorkButton"),
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
+  libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
   libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
   librarySettingsToggle: document.querySelector("#librarySettingsToggle"),
   footerInfo: document.querySelector("#footerInfoButton"),
+  footerPrivacy: document.querySelector("#footerPrivacyButton"),
   footerChanges: document.querySelector("#footerChangesButton"),
   libraryBooksPanel: document.querySelector("#libraryBooksPanel"),
   libraryInfoPanel: document.querySelector("#libraryInfoPanel"),
+  libraryPrivacyPanel: document.querySelector("#libraryPrivacyPanel"),
   libraryChangesPanel: document.querySelector("#libraryChangesPanel"),
   backToLibrary: document.querySelector("#backToLibraryButton"),
   mobileBackToLibrary: document.querySelector("#mobileBackToLibraryButton"),
@@ -5938,16 +5941,59 @@ function setLibraryVersion(version) {
 }
 
 function versionFromChangelog(text) {
-  const match = text.match(/^##\s+Gnostyk Biblioteka\s+([0-9]+\.[0-9]+\.[0-9]+)/m);
+  const match = text.match(/^##\s+(?:Gnostyk Biblioteka\s+)?([0-9]+\.[0-9]+\.[0-9]+)/m);
   return match ? match[1] : null;
 }
 
 function renderLibraryUpdatesFromChangelog(text) {
   if (!els.libraryUpdates) return;
-  const entries = [...text.matchAll(/^##\s+Gnostyk Biblioteka\s+([0-9]+\.[0-9]+\.[0-9]+)\s+-\s+(.+)$/gm)]
-    .slice(0, 4)
-    .map(match => `<li><strong>${escapeHtml(match[1])}</strong> ${escapeHtml(match[2])}</li>`);
-  if (entries.length) els.libraryUpdates.innerHTML = entries.join("");
+  const groups = [];
+  let currentGroup = null;
+  let count = 0;
+  let activeVersion = "";
+  let activeTitle = "";
+  const pushPoint = (version, point) => {
+    if (!version || !point || count >= 10) return;
+    let group = groups.find(item => item.version === version);
+    if (!group) {
+      group = { version, points: [] };
+      groups.push(group);
+    }
+    group.points.push(point);
+    count += 1;
+  };
+  for (const rawLine of text.split(/\r?\n/)) {
+    const heading = rawLine.match(/^##\s+(?:Gnostyk Biblioteka\s+)?([0-9]+\.[0-9]+\.[0-9]+)(?:\s+-\s+(.+))?\s*$/);
+    if (heading) {
+      if (activeVersion && activeTitle && currentGroup && currentGroup.points.length === 0) pushPoint(activeVersion, activeTitle);
+      activeVersion = heading[1];
+      activeTitle = heading[2] || "";
+      currentGroup = groups.find(item => item.version === activeVersion);
+      if (!currentGroup) {
+        currentGroup = { version: activeVersion, points: [] };
+        groups.push(currentGroup);
+      }
+      if (count >= 10) break;
+      continue;
+    }
+    const bullet = rawLine.match(/^\s*-\s+(.+?)\s*$/);
+    if (activeVersion && bullet) {
+      pushPoint(activeVersion, bullet[1]);
+      if (count >= 10) break;
+    }
+  }
+  if (activeVersion && activeTitle && currentGroup && currentGroup.points.length === 0 && count < 10) pushPoint(activeVersion, activeTitle);
+  const rendered = groups
+    .filter(group => group.points.length)
+    .map(group => `
+      <li class="library-update-group">
+        <strong>${escapeHtml(group.version)}</strong>
+        <ul>
+          ${group.points.map(point => `<li>${escapeHtml(point)}</li>`).join("")}
+        </ul>
+      </li>
+    `);
+  if (rendered.length) els.libraryUpdates.innerHTML = rendered.join("");
 }
 
 async function loadLibraryVersion() {
@@ -6044,22 +6090,26 @@ function setAppView(view) {
 function setLibrarySection(section) {
   const isBooks = section === "books";
   const isInfo = section === "info";
+  const isPrivacy = section === "privacy";
   const isChanges = section === "changes";
   const isSettings = section === "settings";
   if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
   if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
+  if (els.libraryPrivacyPanel) els.libraryPrivacyPanel.hidden = !isPrivacy;
   if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
   if (els.settingsPanel) els.settingsPanel.hidden = !isSettings;
   state.settingsOpen = isSettings;
   els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
   els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
+  els.libraryPrivacyToggle?.classList.toggle("is-active", isPrivacy);
   els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
   els.librarySettingsToggle?.classList.toggle("is-active", isSettings);
   els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
   els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
+  els.libraryPrivacyToggle?.setAttribute("aria-expanded", String(isPrivacy));
   els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
   els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
-  const target = isInfo ? els.libraryInfoPanel : isChanges ? els.libraryChangesPanel : isSettings ? els.settingsPanel : els.libraryBooksPanel;
+  const target = isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isSettings ? els.settingsPanel : els.libraryBooksPanel;
   requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
@@ -6354,8 +6404,10 @@ listen(els.mobileCurrentPage, "click", scrollToReaderText);
 listen(els.openWork, "click", scrollToReaderControls);
 listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
 listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
+listen(els.libraryPrivacyToggle, "click", () => setLibrarySection("privacy"));
 listen(els.libraryChangesToggle, "click", () => setLibrarySection("changes"));
 listen(els.footerInfo, "click", () => setLibrarySection("info"));
+listen(els.footerPrivacy, "click", () => setLibrarySection("privacy"));
 listen(els.footerChanges, "click", () => setLibrarySection("changes"));
 function returnToLibrary() {
   setAppView("library");
@@ -6557,5 +6609,3 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
-
-

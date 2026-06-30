@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.77
+- Dodano panel polityki prywatności na stronie głównej biblioteki.
+
+## 1.0.76
+- Poprawiono czytelność pól wyboru w ustawieniach dla motywów jasnego i sepia.
+- Dopasowano zakładki sidebaru oraz kafle biblioteki do jasnych motywów.
+
+## 1.0.75
+- Uzupełniono działanie motywów jasnego i sepia dla biblioteki, sidebaru, paneli mobilnych, listy zmian oraz paska trybu skupienia.
+
+## 1.0.74
+- Pogrupowano widok `Zmiany` według wersji, aby numer wersji nie powtarzał się przy każdym punkcie.
+- Uzupełniono brakujące wpisy przejściowe w historii paska trybu skupienia.
+
+## 1.0.73
+- Poprawiono sekcję `Zmiany`, aby wyświetlała maksymalnie 10 najnowszych punktów z changeloga.
+- Ujednolicono odczyt wpisów changeloga dla nagłówków w formacie `## 1.0.x` oraz `## Gnostyk Biblioteka 1.0.x - opis`.
+
 ## 1.0.72
 - Podbito wersję biblioteki we wszystkich metadanych i plikach aplikacji.
 
@@ -12,6 +30,14 @@
 
 - Usunięto zdublowaną etykietę „Wersja” z dolnego paska trybu skupienia.
 - Przycisk wyboru wersji pozostaje jeden i nie pokazuje już aktualnie wybranej wersji na pasku.
+
+## Gnostyk Biblioteka 1.0.69 - korekta paska wersji
+
+- Ujednolicono zachowanie przycisku wersji tekstu w dolnym pasku trybu skupienia.
+
+## Gnostyk Biblioteka 1.0.68 - menu wersji w skupieniu
+
+- Zastąpiono natywną listę wersji tekstu własnym ciemnym menu w kolorystyce dolnego paska.
 
 ## Gnostyk Biblioteka 1.0.67 - skupienie i koptyjski
 
