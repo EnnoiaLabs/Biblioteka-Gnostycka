@@ -116,19 +116,6 @@ h1 {
   line-height: 1.45;
 }
 
-.library-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.library-status span {
-  border: 1px solid rgba(216, 160, 82, 0.28);
-  color: #e1c09c;
-  padding: 5px 8px;
-  font-size: 0.76rem;
-}
-
 .sidebar-back {
   width: 100%;
   margin: -4px 0 14px;
@@ -641,6 +628,22 @@ body[data-view="reader"] .library-only {
   font-size: 0.86rem;
 }
 
+.site-footer .site-copyright {
+  margin-top: 8px;
+  font-size: 0.82rem;
+}
+
+.site-footer a {
+  color: #d8a052;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: #fff4df;
+  text-decoration: underline;
+}
+
 .site-footer-links {
   display: flex;
   align-items: center;
@@ -881,26 +884,26 @@ body[data-view="reader"] .library-only {
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
-  margin-bottom: 18px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .polish-guide {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   border: 1px solid rgba(29, 109, 104, 0.24);
   background: rgba(29, 109, 104, 0.08);
-  padding: 14px;
-  margin-bottom: 18px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 
 .reader-panel {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   border: 1px solid rgba(185, 137, 53, 0.3);
   background: rgba(247, 241, 227, 0.72);
-  padding: 16px;
-  margin-bottom: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
   line-height: 1.55;
 }
 
@@ -1038,6 +1041,77 @@ body[data-view="reader"] .library-only {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.08rem;
   line-height: 1.75;
+}
+
+.coptic-source-note {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(185, 137, 53, 0.28);
+  background: rgba(255, 247, 234, 0.72);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  white-space: normal;
+}
+
+.coptic-source-note strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.coptic-source-note p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.coptic-source-note span {
+  font-weight: 700;
+}
+
+.coptic-text {
+  display: grid;
+  gap: 12px;
+  font-family: "New Athena Unicode", "Noto Sans Coptic", "Segoe UI Historic", "Segoe UI Symbol", serif;
+  white-space: normal;
+}
+
+.coptic-page {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.coptic-page header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.coptic-page header strong {
+  color: var(--ink);
+}
+
+.coptic-line {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(122, 91, 60, 0.14);
+  line-height: 1.7;
+}
+
+.coptic-line span {
+  color: var(--muted);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.76rem;
+}
+
+.coptic-line bdi {
+  unicode-bidi: isolate;
 }
 
 body[data-font-size="small"] .page-text {
@@ -1201,6 +1275,29 @@ body[data-theme="dark"] .mode-switch .text-button.is-active {
   color: #fff8e8;
 }
 
+body[data-theme="dark"] .coptic-source-note {
+  border-color: rgba(216, 160, 82, 0.28);
+  background: rgba(18, 14, 10, 0.92);
+}
+
+body[data-theme="dark"] .coptic-source-note p,
+body[data-theme="dark"] .coptic-line span,
+body[data-theme="dark"] .coptic-page header {
+  color: #c6ad8d;
+}
+
+body[data-theme="dark"] .coptic-page {
+  border-top-color: rgba(216, 160, 82, 0.24);
+}
+
+body[data-theme="dark"] .coptic-page header strong {
+  color: #fff5df;
+}
+
+body[data-theme="dark"] .coptic-line {
+  border-bottom-color: rgba(216, 160, 82, 0.12);
+}
+
 body[data-theme="dark"] .page-jump span,
 body[data-theme="dark"] .reading-meta,
 body[data-theme="dark"] .note-actions,
@@ -1260,10 +1357,10 @@ body[data-theme="dark"] .legal-footer strong {
 
 .reference-strip {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   white-space: normal;
-  margin-bottom: 22px;
-  padding: 12px 14px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
   border: 1px solid rgba(185, 137, 53, 0.35);
   background: rgba(247, 241, 227, 0.72);
   font-family: Inter, system-ui, sans-serif;
@@ -1667,7 +1764,7 @@ body.focus .reader {
 
   .mobile-segmented {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     overflow: hidden;
     border: 1px solid rgba(216, 160, 82, 0.28);
     background: rgba(255, 247, 234, 0.055);

@@ -1,9 +1,10 @@
 ﻿const data = window.PISTIS_SOPHIA_DATA;
+const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.58",
-  updated: "2026-06-29",
+  version: "1.0.60",
+  updated: "2026-06-30",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -5567,6 +5568,7 @@ const els = {
   continue: document.querySelector("#continueButton"),
   polishMode: document.querySelector("#polishMode"),
   sourceMode: document.querySelector("#sourceMode"),
+  copticMode: document.querySelector("#copticMode"),
   bookmark: document.querySelector("#bookmarkButton"),
   citationFormat: document.querySelector("#citationFormat"),
   copy: document.querySelector("#copyButton"),
@@ -5615,6 +5617,7 @@ const els = {
   mobileSettings: document.querySelector("#mobileSettingsButton"),
   mobilePolishMode: document.querySelector("#mobilePolishMode"),
   mobileSourceMode: document.querySelector("#mobileSourceMode"),
+  mobileCopticMode: document.querySelector("#mobileCopticMode"),
   mobileCitationFormats: document.querySelectorAll("[data-mobile-citation]"),
   libraryVersion: document.querySelector("#libraryVersion"),
   libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
@@ -5733,6 +5736,56 @@ function escapeHtml(text) {
 function manuscriptRefsForPage(page) {
   const refs = [...page.text.matchAll(/\|(\d{1,3})\.?/g)].map(match => match[1]);
   return [...new Set(refs)];
+}
+
+function copticRefsForPage(page) {
+  const refs = manuscriptRefsForPage(page);
+  if (page.page === 48 && !refs.includes("1")) refs.unshift("1");
+  return refs;
+}
+
+function copticEntriesForPage(page) {
+  return copticRefsForPage(page).flatMap(ref => copticData.pages?.[ref] || []);
+}
+
+function copticPageText(page) {
+  const refs = copticRefsForPage(page);
+  const entries = copticEntriesForPage(page);
+  if (!entries.length) {
+    return `
+      <div class="coptic-source-note">
+        <strong>Koptyjski tekst nie jest przypisany do tej strony.</strong>
+        <p>Ta strona Meada nie zawiera znacznika Schwartze-Petermanna, według którego biblioteka łączy tekst koptyjski z przekładem. Przejdź do strony z oznaczeniem typu <span>|298</span>, aby zobaczyć odpowiadające linie koptyjskie.</p>
+      </div>
+    `;
+  }
+  const grouped = refs.map(ref => {
+    const lines = entries.filter(entry => String(entry.page) === String(ref));
+    if (!lines.length) return "";
+    return `
+      <section class="coptic-page" aria-label="Schwartze-Petermann ${escapeHtml(ref)}">
+        <header>
+          <strong>Schw.-Pet. ${escapeHtml(ref)}</strong>
+          <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} linii</span>
+        </header>
+        ${lines.map(line => `
+          <p class="coptic-line">
+            <span>${escapeHtml(line.ref)}</span>
+            <bdi>${escapeHtml(line.text)}</bdi>
+          </p>
+        `).join("")}
+      </section>
+    `;
+  }).join("");
+  const source = copticData.meta?.source || "cyfrowa transkrypcja Unicode";
+  const note = copticData.meta?.note || "Warstwa koptyjska ma status roboczy i wymaga dalszej kolacji.";
+  return `
+    <div class="coptic-source-note">
+      <strong>Warstwa koptyjska Unicode</strong>
+      <p>${escapeHtml(source)}. ${escapeHtml(note)}</p>
+    </div>
+    <div class="coptic-text">${grouped}</div>
+  `;
 }
 
 function manuscriptRefsInPolish(page) {
@@ -6026,19 +6079,24 @@ function renderReader() {
   const page = pageByNumber(state.page);
   const chapter = chapterForPage(state.page);
   renderPolishGuide(page, chapter);
+  const isCoptic = state.readerMode === "coptic";
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
-  if (els.pageText) els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${highlight(text)}`;
+  if (els.pageText) {
+    els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${isCoptic ? copticPageText(page) : highlight(text)}`;
+  }
   setValue(els.pageInput, state.page);
   setText(els.currentPage, `Strona ${state.page}`);
   setText(els.currentChapter, readableChapter(chapter));
   els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
+  els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
   els.bookmark?.classList.toggle("is-active", state.marks.includes(state.page));
   setValue(els.notes, state.notes[state.page] || "");
   setText(els.mobileCurrentPage, `Str. ${state.page}`);
   setValue(els.citationFormat, state.citationFormat);
   els.mobilePolishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.mobileSourceMode?.classList.toggle("is-active", state.readerMode === "source");
+  els.mobileCopticMode?.classList.toggle("is-active", state.readerMode === "coptic");
   els.mobileCitationFormats?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
   });
@@ -6141,9 +6199,20 @@ function closeMobileSheet() {
 }
 
 function setReaderMode(mode) {
+  if (!["pl", "source", "coptic"].includes(mode)) mode = "pl";
   state.readerMode = mode;
   saveReadingState();
   renderReader();
+}
+
+function currentPlainText(page, chapter) {
+  if (state.readerMode === "pl") return polishPageText(page, chapter);
+  if (state.readerMode === "coptic") {
+    const entries = copticEntriesForPage(page);
+    if (!entries.length) return "Brak przypisanej warstwy koptyjskiej dla tej strony Meada.";
+    return entries.map(entry => `(${entry.ref}) ${entry.text}`).join("\n");
+  }
+  return page.text;
 }
 
 function toggleBookmark() {
@@ -6161,7 +6230,7 @@ function toggleBookmark() {
 async function copyCurrentFragment() {
   const page = pageByNumber(state.page);
   const chapter = chapterForPage(state.page);
-  const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
+  const text = currentPlainText(page, chapter);
   const textWithCitation = `[${formattedCitation(page, chapter)}]\n\n${text}`;
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(textWithCitation);
@@ -6270,6 +6339,7 @@ listen(els.mobileClose, "click", closeMobileSheet);
 listen(els.mobileOverlay, "click", closeMobileSheet);
 listen(els.polishMode, "click", () => setReaderMode("pl"));
 listen(els.sourceMode, "click", () => setReaderMode("source"));
+listen(els.copticMode, "click", () => setReaderMode("coptic"));
 
 listen(els.citationFormat, "change", event => {
   state.citationFormat = event.target.value;
@@ -6338,6 +6408,7 @@ listen(els.mobileSettings, "click", () => {
 
 listen(els.mobilePolishMode, "click", () => setReaderMode("pl"));
 listen(els.mobileSourceMode, "click", () => setReaderMode("source"));
+listen(els.mobileCopticMode, "click", () => setReaderMode("coptic"));
 
 els.mobileCitationFormats?.forEach(button => {
   listen(button, "click", () => {
@@ -6398,4 +6469,5 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
+
 

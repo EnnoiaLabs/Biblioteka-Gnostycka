@@ -1,5 +1,18 @@
 # Changelog
 
+## Gnostyk Biblioteka 1.0.60 - korekta wyglądu czytnika
+
+- Zmniejszono pionowe odstępy między blokami w czytniku, zwłaszcza przy aparacie cytowania i warstwie koptyjskiej.
+- Usunięto etykiety `Pełna księga` i `Kolejne teksty w przygotowaniu` z panelu bocznego książki.
+- Dodano copyright EnnoiaLabs w stopce strony głównej.
+
+## Gnostyk Biblioteka 1.0.59 - koptyjski Unicode
+
+- Dodano roboczą warstwę koptyjską Unicode z transkrypcji Marcion według edycji Schwartze/Petermann.
+- Dodano trzeci tryb czytnika: `Koptyjski`, powiązany ze znacznikami Schwartze-Petermanna obecnymi na stronach Meada.
+- Dodano `coptic-data.js` do PWA, aby tekst koptyjski działał także offline.
+- Uzupełniono informacje źródłowe i prawne o status koptyjskiej warstwy roboczej.
+
 ## Gnostyk Biblioteka 1.0.58 - korekta paginacji i audytu
 
 - Skorygowano granicę tekstu na Mead s. 195/196, aby cytowanie stron było wierniejsze.

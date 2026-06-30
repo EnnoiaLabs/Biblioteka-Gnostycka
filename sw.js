@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.58";
+﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.60";
 
 const APP_SHELL = [
   "./",
@@ -6,6 +6,7 @@ const APP_SHELL = [
   "./styles.css",
   "./app.js",
   "./data.js",
+  "./coptic-data.js",
   "./manifest.webmanifest",
   "./VERSION.json",
   "./library.json",
@@ -75,4 +76,6 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+
 
