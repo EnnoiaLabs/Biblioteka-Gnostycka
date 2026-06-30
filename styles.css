@@ -1576,18 +1576,18 @@ mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 10px;
+  padding: 0;
 }
 
-.focus-mode-toggle {
-  min-height: 30px;
+.focus-bar .focus-mode-toggle {
+  width: 100%;
+  min-height: 44px;
   min-width: 112px;
   border: 0;
   background: transparent;
   color: #fff8e8;
   font: inherit;
-  text-align: left;
+  text-align: center;
 }
 
 .focus-mode-toggle::after {

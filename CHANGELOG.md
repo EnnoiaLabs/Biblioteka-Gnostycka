@@ -1,8 +1,17 @@
 # Changelog
 
-## Gnostyk Biblioteka 1.0.68 - menu wersji w skupieniu
+## 1.0.72
+- Podbito wersję biblioteki we wszystkich metadanych i plikach aplikacji.
 
-- Zastąpiono natywną listę wersji tekstu własnym ciemnym menu w kolorystyce dolnego paska.
+## 1.0.71
+- Dodano wejście do trybu skupienia z panelu mobilnego „Więcej”.
+- Wyjście z trybu skupienia na telefonie wraca do mobilnego układu czytania.
+
+
+## Gnostyk Biblioteka 1.0.70 - pojedynczy przycisk wersji w skupieniu
+
+- Usunięto zdublowaną etykietę „Wersja” z dolnego paska trybu skupienia.
+- Przycisk wyboru wersji pozostaje jeden i nie pokazuje już aktualnie wybranej wersji na pasku.
 
 ## Gnostyk Biblioteka 1.0.67 - skupienie i koptyjski
 

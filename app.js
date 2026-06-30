@@ -1,9 +1,9 @@
-﻿const data = window.PISTIS_SOPHIA_DATA;
+const data = window.PISTIS_SOPHIA_DATA;
 const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.68",
+  version: "1.0.72",
   updated: "2026-06-30",
   currentWork: {
     id: "pistis-sophia",
@@ -5622,6 +5622,7 @@ const els = {
   mobileCopy: document.querySelector("#mobileCopyButton"),
   mobileAbout: document.querySelector("#mobileAboutButton"),
   mobileSettings: document.querySelector("#mobileSettingsButton"),
+  mobileFocus: document.querySelector("#mobileFocusButton"),
   mobilePolishMode: document.querySelector("#mobilePolishMode"),
   mobileSourceMode: document.querySelector("#mobileSourceMode"),
   mobileCopticMode: document.querySelector("#mobileCopticMode"),
@@ -6114,7 +6115,7 @@ function renderReader() {
   els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
   els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
-  setText(els.focusModeToggle, readerModeLabel(state.readerMode));
+  setText(els.focusModeToggle, "Wersja");
   els.focusModeItems?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.focusMode === state.readerMode);
   });
@@ -6451,6 +6452,8 @@ listen(els.mobileSettings, "click", () => {
   requestAnimationFrame(scrollToReaderText);
 });
 
+listen(els.mobileFocus, "click", enterFocusMode);
+
 listen(els.mobilePolishMode, "click", () => setReaderMode("pl"));
 listen(els.mobileSourceMode, "click", () => setReaderMode("source"));
 listen(els.mobileCopticMode, "click", () => setReaderMode("coptic"));
@@ -6481,16 +6484,35 @@ listen(els.clearNote, "click", () => {
   setValue(els.notes, "");
 });
 
-listen(els.focus, "change", event => {
-  document.body.classList.toggle("focus", event.target.checked);
-});
+function enterFocusMode() {
+  setAppView("reader");
+  closeReaderPanels();
+  closeMobileSheet();
+  setChecked(els.focus, true);
+  document.body.classList.add("focus");
+  requestAnimationFrame(scrollToReaderText);
+}
 
-listen(els.focusExit, "click", () => {
+function exitFocusMode() {
   setChecked(els.focus, false);
   setHidden(els.focusModeMenu, true);
   els.focusModeToggle?.setAttribute("aria-expanded", "false");
   document.body.classList.remove("focus");
+  if (isMobileLayout()) {
+    closeMobileSheet();
+    requestAnimationFrame(scrollToReaderText);
+  }
+}
+
+listen(els.focus, "change", event => {
+  if (event.target.checked) {
+    enterFocusMode();
+  } else {
+    exitFocusMode();
+  }
 });
+
+listen(els.focusExit, "click", exitFocusMode);
 
 document.addEventListener("click", event => {
   if (els.focusModeMenu?.hidden) return;
@@ -6511,8 +6533,7 @@ document.addEventListener("keydown", event => {
     setHidden(els.focusModeMenu, true);
     els.focusModeToggle?.setAttribute("aria-expanded", "false");
     if (document.body.classList.contains("focus")) {
-      setChecked(els.focus, false);
-      document.body.classList.remove("focus");
+      exitFocusMode();
     }
     closeMobileSheet();
   }
