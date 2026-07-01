@@ -3,8 +3,8 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.77",
-  updated: "2026-06-30",
+  version: "1.0.83",
+  updated: "2026-07-01",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -23,11 +23,13 @@ const state = {
   mobileChapterQuery: "",
   tab: "chapters",
   mobilePanel: "toc",
+  changelogText: "",
   readerMode: localStorage.getItem("ps.readerMode") || "pl",
   citationFormat: localStorage.getItem("ps.citationFormat") || "simple",
   aboutOpen: false,
   settingsOpen: false,
   settings: {
+    language: savedSettings.language || "auto",
     theme: savedSettings.theme || "dark",
     fontSize: savedSettings.fontSize || "medium",
     lineHeight: savedSettings.lineHeight || "normal",
@@ -36,6 +38,267 @@ const state = {
   marks: JSON.parse(localStorage.getItem("ps.marks") || "[]"),
   notes: JSON.parse(localStorage.getItem("ps.notes") || "{}")
 };
+
+const uiText = {
+  pl: {
+    librarySubtitle: "Biblioteka gnostycka",
+    backLibrary: "← Biblioteka",
+    search: "Szukaj",
+    chapters: "Rozdziały",
+    themes: "Motywy",
+    bookmarks: "Zakładki",
+    libraryTitle: "Biblioteka gnostycka",
+    libraryLead: "Cyfrowa biblioteka polskich przekładów, opracowań i aparatów cytowania tekstów gnostyckich.",
+    books: "Księgi",
+    info: "Info",
+    privacy: "Prywatność",
+    changes: "Zmiany",
+    settings: "Ustawienia",
+    read: "Czytaj",
+    workStatus: "Pełny przekład",
+    workDescription: "Tekst źródłowy, polski przekład, paginacja Meada i Schwartze-Petermanna, cytowanie oraz notatki.",
+    planned: "W przygotowaniu",
+    nextTexts: "Kolejne teksty",
+    nextTextsNote: "Miejsce na następne księgi biblioteki: traktaty, ewangelie, hymny i pisma pokrewne.",
+    settingsKicker: "Ustawienia",
+    settingsTitle: "Ustawienia czytania",
+    settingsLead: "Te ustawienia dotyczą całej biblioteki i zostają zapamiętane lokalnie w przeglądarce.",
+    autoLanguageHint: "Tryb Auto wykrywa język z przeglądarki lub systemu PWA. Obecnie wykryto: {language}.",
+    infoKicker: "Info",
+    infoTitle: "O bibliotece",
+    infoLead: "Krótka nota redakcyjna o projekcie, zakresie tekstów i sposobie korzystania z wydań.",
+    infoHeading: "Czym jest Gnostyk Biblioteka",
+    infoP1: "<strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.",
+    infoP2: "Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.",
+    infoP3: "Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class=\"inline-library-version\">{version}</span></strong>.",
+    infoScopeLabel: "Zakres",
+    infoScopeValue: "Teksty gnostyckie",
+    infoFormLabel: "Forma",
+    infoFormValue: "Przekład i opracowanie",
+    infoApparatusLabel: "Aparat",
+    infoApparatusValue: "Cytowanie i paginacja",
+    infoDataLabel: "Dane czytelnicze",
+    infoDataValue: "Lokalnie w przeglądarce",
+    infoModeLabel: "Tryb",
+    infoModeValue: "PWA i offline",
+    privacyKicker: "Prywatność",
+    privacyTitle: "Polityka prywatności",
+    privacyLead: "Gnostyk Biblioteka działa lokalnie w przeglądarce i nie wymaga konta użytkownika.",
+    privacyP1: "<strong>Dane lokalne.</strong> Zakładki, notatki, ostatnia czytana strona oraz ustawienia czytania są zapisywane lokalnie w przeglądarce użytkownika.",
+    privacyP2: "<strong>Brak wysyłania danych.</strong> Aplikacja nie wysyła notatek, zakładek ani ustawień na zewnętrzny serwer. Dane pozostają na urządzeniu, dopóki użytkownik ich nie usunie albo nie wyczyści danych przeglądarki.",
+    privacyP3: "<strong>Tryb offline.</strong> Jako aplikacja PWA biblioteka może zapisywać pliki tekstów w pamięci podręcznej przeglądarki, aby działały również bez połączenia z internetem.",
+    privacyP4: "<strong>Brak śledzenia.</strong> W tej wersji aplikacja nie korzysta z kont użytkowników, newslettera, analityki ani mechanizmów śledzących.",
+    privacyP5: "<strong>Zmiany w przyszłości.</strong> Jeśli biblioteka otrzyma synchronizację, konto użytkownika, newsletter lub analitykę, polityka prywatności powinna zostać zaktualizowana przed publikacją takiej funkcji.",
+    changesKicker: "Zmiany",
+    changesTitle: "Historia zmian",
+    changesLead: "Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.",
+    footerLead: "Cyfrowa biblioteka polskich opracowań tekstów gnostyckich.",
+    bookEyebrow: "Pistis Sophia · księga biblioteki",
+    bookSubtitle: "Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.",
+    mobileBookMeta: "Pełny przekład · Mead 1921",
+    aboutTitle: "O przekładzie",
+    citeTitle: "Jak cytować",
+    legalTitle: "Domena publiczna i prawa do opracowania",
+    legalP1: "Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.",
+    legalP2: "Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.",
+    legalP3: "Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.",
+    language: "Język interfejsu",
+    theme: "Motyw",
+    fontSize: "Rozmiar tekstu",
+    lineHeight: "Interlinia",
+    columnWidth: "Szerokość kolumny",
+    auto: "Auto",
+    polish: "Polski",
+    english: "English",
+    sepia: "Sepia",
+    light: "Jasny",
+    dark: "Ciemny",
+    small: "Mały",
+    medium: "Średni",
+    large: "Duży",
+    compact: "Zwarta",
+    normal: "Normalna",
+    wide: "Szeroka",
+    narrow: "Wąska",
+    standard: "Standardowa",
+    continue: "Kontynuuj",
+    page: "Strona",
+    pageShort: "Str.",
+    version: "Wersja",
+    polishText: "Po polsku",
+    source: "Oryginał EN",
+    coptic: "Koptyjski",
+    exitFocus: "Wyjdź",
+    close: "Zamknij",
+    textMode: "Tryb tekstu",
+    citationFormat: "Format cytowania",
+    simpleCitation: "Cytat prosty",
+    scholarlyCitation: "Cytat naukowy",
+    copyFragment: "Kopiuj fragment",
+    copied: "Skopiowano",
+    copyQuote: "Kopiuj cytat",
+    aboutTranslation: "O przekładzie",
+    focusMode: "Tryb skupienia",
+    notes: "Notatki",
+    notesPlaceholder: "Twoje notatki do tej strony",
+    clear: "Wyczyść",
+    localSave: "Zapis lokalny",
+    saved: "Zapisano",
+    noResults: "Brak wyników",
+    noBookmarks: "Brak zakładek",
+    mobileToc: "Spis treści",
+    mobileSearch: "Szukaj",
+    mobileMore: "Więcej",
+    searchChapters: "Szukaj w rozdziałach",
+    searchAll: "Szukaj w całym tekście",
+    offline: "Aplikacja jest offline. Biblioteka korzysta z zapisanej wersji PWA.",
+    fullText: "Pełny tekst",
+    status: "Status",
+    sourceBase: "Podstawa",
+    pagination: "Paginacja",
+    rights: "Prawa",
+    publicDomainCreative: "Domena publiczna + nowa warstwa twórcza",
+    pagesLabel: "stron",
+    chaptersLabel: "rozdziałów",
+    libraryVersionLabel: "wersja biblioteki"
+  },
+  en: {
+    librarySubtitle: "Gnostic library",
+    backLibrary: "← Library",
+    search: "Search",
+    chapters: "Chapters",
+    themes: "Themes",
+    bookmarks: "Bookmarks",
+    libraryTitle: "Gnostic library",
+    libraryLead: "A digital library of Polish translations, studies, and citation tools for Gnostic texts.",
+    books: "Books",
+    info: "Info",
+    privacy: "Privacy",
+    changes: "Changes",
+    settings: "Settings",
+    read: "Read",
+    workStatus: "Full translation",
+    workDescription: "Source text, Polish translation, Mead and Schwartze-Petermann pagination, citation tools, and notes.",
+    planned: "In preparation",
+    nextTexts: "More texts",
+    nextTextsNote: "A place for future books in the library: tractates, gospels, hymns, and related writings.",
+    settingsKicker: "Settings",
+    settingsTitle: "Reading settings",
+    settingsLead: "These settings apply to the whole library and are saved locally in your browser.",
+    autoLanguageHint: "Auto detects the language from your browser or PWA system context. Currently detected: {language}.",
+    infoKicker: "Info",
+    infoTitle: "About the library",
+    infoLead: "A short editorial note on the project, its textual scope, and how to use the editions.",
+    infoHeading: "What Gnostyk Library Is",
+    infoP1: "<strong>Gnostyk Library</strong> is a digital library of Polish editions of Gnostic texts. It is not only a reader: each book has its own source basis, editorial status, citation apparatus, pagination, notes, and reading settings saved locally in the browser.",
+    infoP2: "The project is both editorial and reader-focused. Source texts and public-domain editions remain free, while Polish translations, terminology choices, notes, application layout, and the reading apparatus form a new creative layer. The library is meant to preserve mystery formulas, the rhythm of revelatory texts, proper names, and Gnostic terminology while giving them a readable Polish form.",
+    infoP3: "The library is developed modularly: tractates, gospels, hymns, and related writings will be added as separate books. When citing, give the book title, the source-edition page, any manuscript or editorial pagination, and the library version, e.g. <strong>Gnostyk Library v<span class=\"inline-library-version\">{version}</span></strong>.",
+    infoScopeLabel: "Scope",
+    infoScopeValue: "Gnostic texts",
+    infoFormLabel: "Form",
+    infoFormValue: "Translation and editorial work",
+    infoApparatusLabel: "Apparatus",
+    infoApparatusValue: "Citation and pagination",
+    infoDataLabel: "Reader data",
+    infoDataValue: "Local in the browser",
+    infoModeLabel: "Mode",
+    infoModeValue: "PWA and offline",
+    privacyKicker: "Privacy",
+    privacyTitle: "Privacy policy",
+    privacyLead: "Gnostyk Library works locally in the browser and does not require a user account.",
+    privacyP1: "<strong>Local data.</strong> Bookmarks, notes, the last read page, and reading settings are stored locally in the user's browser.",
+    privacyP2: "<strong>No data sending.</strong> The app does not send notes, bookmarks, or settings to an external server. The data stays on the device until the user removes it or clears browser data.",
+    privacyP3: "<strong>Offline mode.</strong> As a PWA, the library can cache text files in the browser so they remain available without an internet connection.",
+    privacyP4: "<strong>No tracking.</strong> This version does not use user accounts, newsletters, analytics, or tracking mechanisms.",
+    privacyP5: "<strong>Future changes.</strong> If sync, user accounts, newsletters, or analytics are added later, this privacy policy should be updated before those features are published.",
+    changesKicker: "Changes",
+    changesTitle: "Change history",
+    changesLead: "Recent updates to the library and application. The complete history is available in the changelog file.",
+    footerLead: "A digital library of Polish studies and editions of Gnostic texts.",
+    bookEyebrow: "Pistis Sophia · library book",
+    bookSubtitle: "Complete Polish translation, source text, citation apparatus, and reader notes.",
+    mobileBookMeta: "Full translation · Mead 1921",
+    aboutTitle: "About the translation",
+    citeTitle: "How to cite",
+    legalTitle: "Public domain and editorial rights",
+    legalP1: "The translation is based on the public-domain edition by G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London 1921. The ancient text and this source edition remain in the public domain.",
+    legalP2: "The Polish translation, terminology choices, reading layout, notes, citation apparatus, and editorial layer of Gnostyk Library form a new creative layer protected by copyright. When citing, include the Mead page, any Schwartze-Petermann number, and the library version.",
+    legalP3: "The Coptic Unicode layer is marked as a working layer: it is based on the Marcion digital transcription according to the Schwartze/Petermann edition and supports source control for manuscript pagination.",
+    language: "Interface language",
+    theme: "Theme",
+    fontSize: "Text size",
+    lineHeight: "Line spacing",
+    columnWidth: "Column width",
+    auto: "Auto",
+    polish: "Polish",
+    english: "English",
+    sepia: "Sepia",
+    light: "Light",
+    dark: "Dark",
+    small: "Small",
+    medium: "Medium",
+    large: "Large",
+    compact: "Compact",
+    normal: "Normal",
+    wide: "Wide",
+    narrow: "Narrow",
+    standard: "Standard",
+    continue: "Continue",
+    page: "Page",
+    pageShort: "p.",
+    version: "Version",
+    polishText: "Polish",
+    source: "Source EN",
+    coptic: "Coptic",
+    exitFocus: "Exit",
+    close: "Close",
+    textMode: "Text mode",
+    citationFormat: "Citation format",
+    simpleCitation: "Simple citation",
+    scholarlyCitation: "Scholarly citation",
+    copyFragment: "Copy fragment",
+    copied: "Copied",
+    copyQuote: "Copy citation",
+    aboutTranslation: "About the translation",
+    focusMode: "Focus mode",
+    notes: "Notes",
+    notesPlaceholder: "Your notes for this page",
+    clear: "Clear",
+    localSave: "Local save",
+    saved: "Saved",
+    noResults: "No results",
+    noBookmarks: "No bookmarks",
+    mobileToc: "Contents",
+    mobileSearch: "Search",
+    mobileMore: "More",
+    searchChapters: "Search chapters",
+    searchAll: "Search full text",
+    offline: "The app is offline. The library is using the saved PWA version.",
+    fullText: "Full text",
+    status: "Status",
+    sourceBase: "Source",
+    pagination: "Pagination",
+    rights: "Rights",
+    publicDomainCreative: "Public domain + new creative layer",
+    pagesLabel: "pages",
+    chaptersLabel: "chapters",
+    libraryVersionLabel: "library version"
+  }
+};
+
+function detectedLanguage() {
+  const languages = navigator.languages?.length ? navigator.languages : [navigator.language || "pl"];
+  return languages.some(lang => String(lang).toLowerCase().startsWith("pl")) ? "pl" : "en";
+}
+
+function currentLanguage() {
+  return state.settings.language === "auto" ? detectedLanguage() : state.settings.language;
+}
+
+function t(key) {
+  const lang = currentLanguage();
+  return uiText[lang]?.[key] || uiText.pl[key] || key;
+}
 
 const themes = [
   {
@@ -5576,6 +5839,8 @@ const els = {
   aboutPanel: document.querySelector("#aboutPanel"),
   settingsToggle: document.querySelector("#librarySettingsToggle"),
   settingsPanel: document.querySelector("#settingsPanel"),
+  languageSetting: document.querySelector("#languageSetting"),
+  languageAutoHint: document.querySelector("#languageAutoHint"),
   themeSetting: document.querySelector("#themeSetting"),
   fontSizeSetting: document.querySelector("#fontSizeSetting"),
   lineHeightSetting: document.querySelector("#lineHeightSetting"),
@@ -5676,15 +5941,15 @@ function rangeForChapter(chapter) {
 }
 
 function readableChapter(chapter) {
-  if (!chapter) return "Wstęp, spis treści i opracowanie historyczne";
+  if (!chapter) return currentLanguage() === "pl" ? "Wstęp, spis treści i opracowanie historyczne" : "Introduction, contents, and historical study";
   const range = rangeForChapter(chapter);
-  return range ? `${range.title} - rozdział ${chapter.number}` : `Rozdział ${chapter.number}`;
+  return range ? `${range.title} - ${currentLanguage() === "pl" ? "rozdział" : "chapter"} ${chapter.number}` : `${currentLanguage() === "pl" ? "Rozdział" : "Chapter"} ${chapter.number}`;
 }
 
 function readerModeLabel(mode) {
-  if (mode === "source") return "Oryginał EN";
-  if (mode === "coptic") return "Koptyjski";
-  return "Po polsku";
+  if (mode === "source") return t("source");
+  if (mode === "coptic") return t("coptic");
+  return t("polishText");
 }
 
 function chapterNavExcerpt(chapter) {
@@ -5701,9 +5966,13 @@ function chapterNavExcerpt(chapter) {
 function chapterMatchesQuery(chapter, query) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return true;
+  const matchedTheme = themeForQuery(normalized);
   const polishText = polishTranslations[chapter.page] || "";
   const hay = `${readableChapter(chapter)} ${chapter.title} ${chapter.subtitle} ${polishText}`.toLowerCase();
-  return hay.includes(normalized) || pageByNumber(chapter.page).text.toLowerCase().includes(normalized);
+  const sourceText = pageByNumber(chapter.page).text.toLowerCase();
+  return hay.includes(normalized)
+    || sourceText.includes(normalized)
+    || Boolean(matchedTheme && matchedTheme.terms.some(term => sourceText.includes(term.toLowerCase())));
 }
 
 function chapterButtonHtml(chapter) {
@@ -5720,8 +5989,8 @@ function markButtonHtml(page) {
   const item = pageByNumber(page);
   return `
     <button class="mark-item" data-page="${page}" type="button">
-      <strong>Strona ${page}</strong>
-      <span>${escapeHtml(item.preview || "Zapisana strona")}</span>
+      <strong>${t("page")} ${page}</strong>
+      <span>${escapeHtml(item.preview || (currentLanguage() === "pl" ? "Zapisana strona" : "Saved page"))}</span>
     </button>
   `;
 }
@@ -5738,6 +6007,45 @@ function hitsForPage(page) {
     }))
     .filter(theme => theme.count > 0)
     .sort((a, b) => b.count - a.count);
+}
+
+function themeForQuery(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return null;
+  return themes.find(theme => {
+    const labels = [theme.label, localizedThemeLabel(theme), ...(theme.aliases || [])].map(item => item.toLowerCase());
+    return labels.includes(normalized) || theme.terms.some(term => term.toLowerCase() === normalized);
+  }) || null;
+}
+
+function localizedThemeLabel(theme) {
+  if (currentLanguage() === "pl") return theme.label;
+  const labels = {
+    "Pistis Sophia": "Pistis Sophia",
+    "Światłość": "Light",
+    "Misteria": "Mysteries",
+    "Eony i władcy": "Aeons and rulers",
+    "Maria Magdalena": "Mary Magdalene",
+    "Pokuta Sophii": "Sophia's repentance",
+    "Dusza": "Soul",
+    "Rytuały": "Rituals"
+  };
+  return labels[theme.label] || theme.label;
+}
+
+function localizedThemeNote(theme) {
+  if (currentLanguage() === "pl") return theme.note;
+  const notes = {
+    "Pistis Sophia": "a figure in the drama of fall, loss of light, and gradual salvation",
+    "Światłość": "the language of divine fullness, power, salvation, and spiritual knowledge",
+    "Misteria": "secret knowledge and rites needed by the soul on its way toward the kingdom of light",
+    "Eony i władcy": "cosmic levels and powers that limit or imprison the light",
+    "Maria Magdalena": "the most important interlocutor of Jesus in many parts of the dialogue",
+    "Pokuta Sophii": "Sophia's prayers and laments interpreted by the disciples",
+    "Dusza": "the human fate after death, purification, and passage through the spheres",
+    "Rytuały": "initiatory practices and formulas in the later parts of the text"
+  };
+  return notes[theme.label] || theme.note;
 }
 
 function highlight(text) {
@@ -5917,14 +6225,232 @@ function saveSettings() {
 }
 
 function applySettings() {
+  document.documentElement.lang = currentLanguage();
   document.body.dataset.theme = state.settings.theme;
   document.body.dataset.fontSize = state.settings.fontSize;
   document.body.dataset.lineHeight = state.settings.lineHeight;
   document.body.dataset.width = state.settings.width;
+  setValue(els.languageSetting, state.settings.language);
   setValue(els.themeSetting, state.settings.theme);
   setValue(els.fontSizeSetting, state.settings.fontSize);
   setValue(els.lineHeightSetting, state.settings.lineHeight);
   setValue(els.widthSetting, state.settings.width);
+}
+
+function setSelectLabels(select, labels) {
+  if (!select) return;
+  Object.entries(labels).forEach(([value, label]) => {
+    const option = select.querySelector(`option[value="${value}"]`);
+    if (option) option.textContent = label;
+  });
+}
+
+function setFieldLabel(select, label) {
+  const field = select?.closest("label");
+  if (field?.firstChild) field.firstChild.textContent = `${label}\n              `;
+}
+
+function localizedPlaceholder(key) {
+  const placeholders = {
+    search: {
+      pl: "światło, Sophia, mystery",
+      en: "light, Sophia, mystery"
+    },
+    chapterSearch: {
+      pl: "Sophia, światłość, misterium",
+      en: "Sophia, light, mystery"
+    },
+    fullSearch: {
+      pl: "Wpisz motyw lub słowo",
+      en: "Enter a theme or word"
+    }
+  };
+  return placeholders[key]?.[currentLanguage()] || "";
+}
+
+function setTextForAll(selector, key) {
+  document.querySelectorAll(selector).forEach(element => setText(element, t(key)));
+}
+
+function setHtmlForAll(selector, key) {
+  document.querySelectorAll(selector).forEach(element => {
+    if (element) element.innerHTML = t(key).replace("{version}", libraryMeta.version);
+  });
+}
+
+function rawDetectedLanguage() {
+  const languages = navigator.languages?.length ? navigator.languages : [navigator.language || "pl"];
+  return languages.filter(Boolean).map(lang => String(lang)).join(", ") || "pl";
+}
+
+function localizeLibraryInfo() {
+  setTextForAll("#libraryInfoPanel .library-info-head span", "infoKicker");
+  setTextForAll("#libraryInfoPanel .library-info-head h3", "infoTitle");
+  setTextForAll("#libraryInfoPanel .library-info-head p", "infoLead");
+  setTextForAll("#libraryInfoPanel .library-prose h4", "infoHeading");
+  setHtmlForAll("#libraryInfoPanel .library-prose > p:nth-of-type(1)", "infoP1");
+  setHtmlForAll("#libraryInfoPanel .library-prose > p:nth-of-type(2)", "infoP2");
+  setHtmlForAll("#libraryInfoPanel .library-prose > p:nth-of-type(3)", "infoP3");
+  const labels = ["infoScopeLabel", "infoFormLabel", "infoApparatusLabel", "infoDataLabel", "infoModeLabel"];
+  const values = ["infoScopeValue", "infoFormValue", "infoApparatusValue", "infoDataValue", "infoModeValue"];
+  document.querySelectorAll("#libraryInfoPanel .library-info-strip span").forEach((item, index) => {
+    item.innerHTML = `<strong>${t(labels[index])}</strong>${t(values[index])}`;
+  });
+}
+
+function localizePrivacyInfo() {
+  setTextForAll("#libraryPrivacyPanel .library-info-head span", "privacyKicker");
+  setTextForAll("#libraryPrivacyPanel .library-info-head h3", "privacyTitle");
+  setTextForAll("#libraryPrivacyPanel .library-info-head p", "privacyLead");
+  ["privacyP1", "privacyP2", "privacyP3", "privacyP4", "privacyP5"].forEach((key, index) => {
+    setHtmlForAll(`#libraryPrivacyPanel .library-prose > p:nth-of-type(${index + 1})`, key);
+  });
+}
+
+function localizeChangesInfo() {
+  setTextForAll("#libraryChangesPanel .library-info-head span", "changesKicker");
+  setTextForAll("#libraryChangesPanel .library-info-head h3", "changesTitle");
+  setTextForAll("#libraryChangesPanel .library-info-head p", "changesLead");
+}
+
+function localizeBookInfo() {
+  setTextForAll(".reader-hero .eyebrow", "bookEyebrow");
+  setTextForAll(".reader-hero .hero-subtitle", "bookSubtitle");
+  setTextForAll(".mobile-book-head strong", "mobileBookMeta");
+  setTextForAll("#aboutPanel h3:first-of-type", "aboutTitle");
+  setTextForAll("#aboutPanel h3:nth-of-type(2)", "citeTitle");
+  setTextForAll(".legal-footer strong", "legalTitle");
+  setHtmlForAll(".legal-footer p:nth-of-type(1)", "legalP1");
+  setHtmlForAll(".legal-footer p:nth-of-type(2)", "legalP2");
+  setHtmlForAll(".legal-footer p:nth-of-type(3)", "legalP3");
+}
+
+function localizeStaticText() {
+  [
+    [".brand p", "librarySubtitle"],
+    [".library-topbar span", "librarySubtitle"],
+    ["#backToLibraryButton", "backLibrary"],
+    [".search span", "search"],
+    ['[data-tab="chapters"]', "chapters"],
+    ['[data-tab="themes"]', "themes"],
+    ['[data-tab="marks"]', "bookmarks"],
+    [".library-home-copy h2", "libraryTitle"],
+    [".library-home-copy > p:not(.eyebrow)", "libraryLead"],
+    ["#libraryBooksToggle", "books"],
+    ["#libraryInfoToggle", "info"],
+    ["#libraryPrivacyToggle", "privacy"],
+    ["#libraryChangesToggle", "changes"],
+    ["#librarySettingsToggle", "settings"],
+    ["#openWorkButton", "read"],
+    [".work-tile.is-available span", "workStatus"],
+    [".work-tile.is-available p", "workDescription"],
+    [".work-tile.is-planned span", "planned"],
+    [".work-tile.is-planned h3", "nextTexts"],
+    [".work-tile.is-planned p", "nextTextsNote"],
+    ["#settingsPanel .library-info-head span", "settingsKicker"],
+    ["#settingsPanel .library-info-head h3", "settingsTitle"],
+    ["#settingsPanel .library-info-head p", "settingsLead"],
+    ["#continueButton", "continue"],
+    [".page-jump span", "page"],
+    ["#polishMode", "polishText"],
+    ["#sourceMode", "source"],
+    ["#copticMode", "coptic"],
+    ["#copyButton", "copyFragment"],
+    ["#aboutToggle", "aboutTranslation"],
+    ["#bookmarkButton", "bookmarks"],
+    [".notes h3", "notes"],
+    ["#clearNote", "clear"],
+    ["#saveStatus", "localSave"],
+    ["#offlineNotice", "offline"],
+    ["#mobileBackToLibraryButton", "backLibrary"],
+    ["#mobileCopyButton", "copyQuote"],
+    ["#mobileAboutButton", "aboutTranslation"],
+    ["#mobileSettingsButton", "settings"],
+    ["#mobileFocusButton", "focusMode"],
+    ["#mobileClose", "close"],
+    ["#mobilePolishMode", "polishText"],
+    ["#mobileSourceMode", "source"],
+    ["#mobileCopticMode", "coptic"],
+    ['[data-mobile-panel="toc"]', "mobileToc"],
+    ['[data-mobile-panel="search"]', "mobileSearch"],
+    ['[data-mobile-panel="marks"]', "bookmarks"],
+    ['[data-mobile-panel="more"]', "mobileMore"],
+    ["#focusExit", "exitFocus"],
+    [".focus-page-field span", "page"],
+    ["#footerInfoButton", "info"],
+    ["#footerPrivacyButton", "privacy"],
+    ["#footerChangesButton", "changes"]
+  ].forEach(([selector, key]) => setTextForAll(selector, key));
+  setTextForAll(".site-footer.library-only > div:first-child p:not(.site-copyright)", "footerLead");
+  localizeLibraryInfo();
+  localizePrivacyInfo();
+  localizeChangesInfo();
+  localizeBookInfo();
+}
+
+function localizeMobileLabels() {
+  document.querySelectorAll(".mobile-panel label.mobile-search span").forEach((item, index) => {
+    setText(item, index === 0 ? t("searchChapters") : t("searchAll"));
+  });
+  document.querySelectorAll(".mobile-field > span").forEach((item, index) => {
+    setText(item, index === 0 ? t("textMode") : t("citationFormat"));
+  });
+}
+
+function localizeMetaBlocks() {
+  document.querySelectorAll(".work-meta article").forEach((item, index) => {
+    const labels = ["status", "sourceBase", "pagination", "rights"];
+    const values = ["fullText", null, null, "publicDomainCreative"];
+    setText(item.querySelector("span"), t(labels[index]));
+    if (values[index]) setText(item.querySelector("strong"), t(values[index]));
+  });
+  document.querySelectorAll(".hero-stats span").forEach((item, index) => {
+    const strong = item.querySelector("strong")?.outerHTML || "";
+    const labels = ["pagesLabel", "chaptersLabel", "libraryVersionLabel"];
+    item.innerHTML = `${strong} ${t(labels[index])}`;
+  });
+}
+
+function localizePlaceholders() {
+  if (els.search) els.search.placeholder = localizedPlaceholder("search");
+  if (els.mobileChapterSearch) els.mobileChapterSearch.placeholder = localizedPlaceholder("chapterSearch");
+  if (els.mobileSearch) els.mobileSearch.placeholder = localizedPlaceholder("fullSearch");
+  if (els.notes) els.notes.placeholder = t("notesPlaceholder");
+}
+
+function localizeModeControls() {
+  setText(document.querySelector('[data-focus-mode="pl"]'), t("polishText"));
+  setText(document.querySelector('[data-focus-mode="source"]'), t("source"));
+  setText(document.querySelector('[data-focus-mode="coptic"]'), t("coptic"));
+  setText(document.querySelector('[data-mobile-citation="simple"]'), t("simpleCitation"));
+  setText(document.querySelector('[data-mobile-citation="scholarly"]'), t("scholarlyCitation"));
+}
+
+function localizeSettingsControls() {
+  setFieldLabel(els.languageSetting, t("language"));
+  setFieldLabel(els.themeSetting, t("theme"));
+  setFieldLabel(els.fontSizeSetting, t("fontSize"));
+  setFieldLabel(els.lineHeightSetting, t("lineHeight"));
+  setFieldLabel(els.widthSetting, t("columnWidth"));
+  setSelectLabels(els.languageSetting, { auto: t("auto"), pl: t("polish"), en: t("english") });
+  setSelectLabels(els.themeSetting, { sepia: t("sepia"), light: t("light"), dark: t("dark") });
+  setSelectLabels(els.fontSizeSetting, { small: t("small"), medium: t("medium"), large: t("large") });
+  setSelectLabels(els.lineHeightSetting, { compact: t("compact"), normal: t("normal"), wide: t("wide") });
+  setSelectLabels(els.widthSetting, { standard: t("standard"), narrow: t("narrow"), wide: t("wide") });
+  setText(els.languageAutoHint, t("autoLanguageHint").replace("{language}", rawDetectedLanguage()));
+}
+
+function applyLanguage() {
+  document.documentElement.lang = currentLanguage();
+  localizeStaticText();
+  localizeMobileLabels();
+  localizeMetaBlocks();
+  localizePlaceholders();
+  localizeModeControls();
+  localizeSettingsControls();
+  if (state.changelogText) renderLibraryUpdatesFromChangelog(state.changelogText);
+  else localizeRenderedLibraryUpdates();
+  renderPanelState();
 }
 
 function updateOfflineNotice() {
@@ -5943,6 +6469,33 @@ function setLibraryVersion(version) {
 function versionFromChangelog(text) {
   const match = text.match(/^##\s+(?:Gnostyk Biblioteka\s+)?([0-9]+\.[0-9]+\.[0-9]+)/m);
   return match ? match[1] : null;
+}
+
+const changelogTranslations = {
+  en: {
+    "Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.": "Completed the English localization of library panels, the footer, and interface messages, and added a note showing the language detected in Auto mode.",
+    "Oczyszczono paczkę produkcyjną z raportów, audytów i narzędzi roboczych oraz uproszczono cache PWA.": "Cleaned the production package by removing reports, audits, and working tools, and simplified the PWA cache.",
+    "Uporządkowano kod lokalizacji interfejsu, rozdzielając tłumaczenia na mniejsze funkcje.": "Organized the interface-localization code by splitting translations into smaller functions.",
+    "Dodano wybór języka interfejsu z trybem automatycznym zależnym od języka przeglądarki lub systemu PWA.": "Added interface language selection with an automatic mode based on the browser or PWA system language.",
+    "Po kliknięciu motywu wyszukiwarka pokazuje polską nazwę, zachowując dopasowanie do terminów źródłowych.": "After choosing a theme, search shows the Polish label while preserving matching against source terms.",
+    "Uogólniono stronę główną, aby opisywała bibliotekę zamiast pojedynczej księgi.": "Generalized the home page so it describes the library rather than a single book.",
+    "Dodano panel polityki prywatności na stronie głównej biblioteki.": "Added a privacy-policy panel to the library home page.",
+    "Poprawiono czytelność pól wyboru w ustawieniach dla motywów jasnego i sepia.": "Improved the readability of settings select fields in the light and sepia themes.",
+    "Dopasowano zakładki sidebaru oraz kafle biblioteki do jasnych motywów.": "Adjusted sidebar tabs and library tiles for light themes.",
+    "Uzupełniono działanie motywów jasnego i sepia dla biblioteki, sidebaru, paneli mobilnych, listy zmian oraz paska trybu skupienia.": "Completed light and sepia theme coverage for the library, sidebar, mobile panels, change list, and focus-mode bar."
+  }
+};
+
+function localizedChangelogPoint(point) {
+  return changelogTranslations[currentLanguage()]?.[point] || point;
+}
+
+function localizeRenderedLibraryUpdates() {
+  if (!els.libraryUpdates) return;
+  els.libraryUpdates.querySelectorAll("li li").forEach(item => {
+    if (!item.dataset.sourceText) item.dataset.sourceText = item.textContent.trim();
+    setText(item, localizedChangelogPoint(item.dataset.sourceText));
+  });
 }
 
 function renderLibraryUpdatesFromChangelog(text) {
@@ -5989,11 +6542,12 @@ function renderLibraryUpdatesFromChangelog(text) {
       <li class="library-update-group">
         <strong>${escapeHtml(group.version)}</strong>
         <ul>
-          ${group.points.map(point => `<li>${escapeHtml(point)}</li>`).join("")}
+          ${group.points.map(point => `<li>${escapeHtml(localizedChangelogPoint(point))}</li>`).join("")}
         </ul>
       </li>
     `);
   if (rendered.length) els.libraryUpdates.innerHTML = rendered.join("");
+  localizeRenderedLibraryUpdates();
 }
 
 async function loadLibraryVersion() {
@@ -6003,6 +6557,7 @@ async function loadLibraryVersion() {
     const response = await fetch("./CHANGELOG.md", { cache: "no-store" });
     if (!response.ok) return;
     const changelogText = await response.text();
+    state.changelogText = changelogText;
     const version = versionFromChangelog(changelogText);
     if (version) setLibraryVersion(version);
     renderLibraryUpdatesFromChangelog(changelogText);
@@ -6060,7 +6615,7 @@ function renderPolishGuide(page, chapter) {
   els.polishGuide.innerHTML = `
     <div class="guide-head">
       <strong>${escapeHtml(readableChapter(chapter))}</strong>
-      <span>${translated ? escapeHtml(status.label) : "oczekuje na przekład"} · ${range ? `Rozdziały ${range.from}-${range.to}` : "materiał wprowadzający"}</span>
+      <span>${translated ? escapeHtml(status.label) : (currentLanguage() === "pl" ? "oczekuje na przekład" : "awaiting translation")} · ${range ? `${currentLanguage() === "pl" ? "Rozdziały" : "Chapters"} ${range.from}-${range.to}` : (currentLanguage() === "pl" ? "materiał wprowadzający" : "introductory material")}</span>
     </div>
     <p class="review-note ${status.level}">${escapeHtml(status.note)}</p>
     <div class="guide-chips">
@@ -6159,19 +6714,19 @@ function renderReader() {
   }
   setValue(els.pageInput, state.page);
   setValue(els.focusPageInput, state.page);
-  setText(els.currentPage, `Strona ${state.page}`);
-  setText(els.focusPageLabel, `Str. ${state.page}`);
+  setText(els.currentPage, `${t("page")} ${state.page}`);
+  setText(els.focusPageLabel, `${t("pageShort")} ${state.page}`);
   setText(els.currentChapter, readableChapter(chapter));
   els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
   els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
-  setText(els.focusModeToggle, "Wersja");
+  setText(els.focusModeToggle, t("version"));
   els.focusModeItems?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.focusMode === state.readerMode);
   });
   els.bookmark?.classList.toggle("is-active", state.marks.includes(state.page));
   setValue(els.notes, state.notes[state.page] || "");
-  setText(els.mobileCurrentPage, `Str. ${state.page}`);
+  setText(els.mobileCurrentPage, `${t("pageShort")} ${state.page}`);
   setValue(els.citationFormat, state.citationFormat);
   els.mobilePolishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.mobileSourceMode?.classList.toggle("is-active", state.readerMode === "source");
@@ -6179,7 +6734,7 @@ function renderReader() {
   els.mobileCitationFormats?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
   });
-  setText(els.mobileBookmark, state.marks.includes(state.page) ? "Usuń zakładkę" : "Dodaj zakładkę");
+  setText(els.mobileBookmark, state.marks.includes(state.page) ? (currentLanguage() === "pl" ? "Usuń zakładkę" : "Remove bookmark") : (currentLanguage() === "pl" ? "Dodaj zakładkę" : "Add bookmark"));
 }
 
 function renderLists() {
@@ -6192,7 +6747,7 @@ function renderLists() {
 function renderChapters() {
   const matches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
   if (!els.chapters) return;
-  els.chapters.innerHTML = matches.map(chapterButtonHtml).join("") || `<div class="empty">Brak wyników</div>`;
+  els.chapters.innerHTML = matches.map(chapterButtonHtml).join("") || `<div class="empty">${t("noResults")}</div>`;
 }
 
 function renderThemes() {
@@ -6204,8 +6759,8 @@ function renderThemes() {
     }, 0);
     return `
       <button class="theme-item" data-theme="${theme.label}" type="button">
-        <strong>${theme.label}</strong>
-        <span>${count} trafień · ${theme.note}</span>
+        <strong>${escapeHtml(localizedThemeLabel(theme))}</strong>
+        <span>${count} ${currentLanguage() === "pl" ? "trafień" : "matches"} · ${escapeHtml(localizedThemeNote(theme))}</span>
       </button>
     `;
   }).join("");
@@ -6214,7 +6769,7 @@ function renderThemes() {
 function renderMarks() {
   const marks = [...state.marks].sort((a, b) => a - b);
   if (!els.marks) return;
-  els.marks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">Brak zakładek</div>`;
+  els.marks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">${t("noBookmarks")}</div>`;
 }
 
 function chaptersByRange(chapters) {
@@ -6229,13 +6784,13 @@ function renderMobileChapterGroups(chapters) {
     <details class="chapter-group" ${range.chapters.some(chapter => chapterForPage(state.page)?.number === chapter.number) ? "open" : ""}>
       <summary>
         <strong>${escapeHtml(range.title)}</strong>
-        <span>${range.chapters.length} rozdz.</span>
+        <span>${range.chapters.length} ${currentLanguage() === "pl" ? "rozdz." : "chap."}</span>
       </summary>
       <div class="chapter-group-list">
         ${range.chapters.map(chapterButtonHtml).join("")}
       </div>
     </details>
-  `).join("") || `<div class="empty">Brak wyników</div>`;
+  `).join("") || `<div class="empty">${t("noResults")}</div>`;
 }
 
 function renderMobileNavigation() {
@@ -6243,20 +6798,20 @@ function renderMobileNavigation() {
   const searchMatches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
   const marks = [...state.marks].sort((a, b) => a - b);
   if (els.mobileChapters) els.mobileChapters.innerHTML = renderMobileChapterGroups(chapterMatches);
-  if (els.mobileSearchPanel) els.mobileSearchPanel.innerHTML = searchMatches.map(chapterButtonHtml).join("") || `<div class="empty">Brak wyników</div>`;
-  if (els.mobileMarks) els.mobileMarks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">Brak zakładek</div>`;
-  setText(els.mobileCurrentPage, `Str. ${state.page}`);
+  if (els.mobileSearchPanel) els.mobileSearchPanel.innerHTML = searchMatches.map(chapterButtonHtml).join("") || `<div class="empty">${t("noResults")}</div>`;
+  if (els.mobileMarks) els.mobileMarks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">${t("noBookmarks")}</div>`;
+  setText(els.mobileCurrentPage, `${t("pageShort")} ${state.page}`);
 }
 
 function setMobilePanel(panel) {
   state.mobilePanel = panel;
   const titles = {
-    toc: "Spis treści",
-    search: "Szukaj",
-    marks: "Zakładki",
-    more: "Więcej"
+    toc: t("mobileToc"),
+    search: t("mobileSearch"),
+    marks: t("bookmarks"),
+    more: t("mobileMore")
   };
-  setText(els.mobileSheetTitle, titles[panel] || "Nawigacja");
+  setText(els.mobileSheetTitle, titles[panel] || (currentLanguage() === "pl" ? "Nawigacja" : "Navigation"));
   document.querySelectorAll("[data-mobile-content]").forEach(item => {
     item.classList.toggle("is-active", item.dataset.mobileContent === panel);
   });
@@ -6350,10 +6905,11 @@ document.addEventListener("click", event => {
   if (themeButton) {
     const theme = themes.find(item => item.label === themeButton.dataset.theme);
     if (!theme) return;
-    state.query = theme.terms[0];
+    state.query = localizedThemeLabel(theme);
     setValue(els.search, state.query);
+    setValue(els.mobileSearch, state.query);
     setTab("chapters");
-    const first = data.pages.find(page => page.text.toLowerCase().includes(state.query.toLowerCase()));
+    const first = data.pages.find(page => theme.terms.some(term => page.text.toLowerCase().includes(term.toLowerCase())));
     if (first) goToPage(first.page, { scrollToText: true });
   }
 
@@ -6455,9 +7011,10 @@ listen(els.settingsToggle, "click", () => {
   setLibrarySection("settings");
 });
 
-[els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting].filter(Boolean).forEach(control => {
+[els.languageSetting, els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting].filter(Boolean).forEach(control => {
   listen(control, "change", event => {
     const map = {
+      languageSetting: "language",
       themeSetting: "theme",
       fontSizeSetting: "fontSize",
       lineHeightSetting: "lineHeight",
@@ -6466,6 +7023,9 @@ listen(els.settingsToggle, "click", () => {
     state.settings[map[event.target.id]] = event.target.value;
     saveSettings();
     applySettings();
+    applyLanguage();
+    renderReader();
+    renderLists();
   });
 });
 
@@ -6473,9 +7033,9 @@ listen(els.bookmark, "click", toggleBookmark);
 
 listen(els.copy, "click", async () => {
   await copyCurrentFragment();
-  setText(els.copy, "Skopiowano");
+  setText(els.copy, t("copied"));
   setTimeout(() => {
-    setText(els.copy, "Kopiuj fragment");
+    setText(els.copy, t("copyFragment"));
   }, 1100);
 });
 
@@ -6486,9 +7046,9 @@ listen(els.mobileBookmark, "click", () => {
 
 listen(els.mobileCopy, "click", async () => {
   await copyCurrentFragment();
-  setText(els.mobileCopy, "Skopiowano");
+  setText(els.mobileCopy, t("copied"));
   setTimeout(() => {
-    setText(els.mobileCopy, "Kopiuj cytat");
+    setText(els.mobileCopy, t("copyQuote"));
   }, 1100);
 });
 
@@ -6524,9 +7084,9 @@ els.mobileCitationFormats?.forEach(button => {
 listen(els.notes, "input", event => {
   state.notes[state.page] = event.target.value;
   saveNotes();
-  setText(els.saveStatus, "Zapisano");
+  setText(els.saveStatus, t("saved"));
   setTimeout(() => {
-    setText(els.saveStatus, "Zapis lokalny");
+    setText(els.saveStatus, t("localSave"));
   }, 900);
 });
 
@@ -6596,6 +7156,7 @@ setText(els.chapterCount, data.chapters.length);
 loadLibraryVersion();
 state.page = Math.max(1, Math.min(data.pageCount, state.page));
 applySettings();
+applyLanguage();
 setAppView(state.view);
 renderPanelState();
 updateOfflineNotice();

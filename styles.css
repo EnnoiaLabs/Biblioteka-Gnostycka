@@ -1002,6 +1002,14 @@ body[data-view="reader"] .library-only {
   color: #fff8e8;
 }
 
+.setting-hint {
+  grid-column: 1 / -1;
+  margin: -6px 18px 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
 .guide-head {
   display: grid;
   gap: 3px;

@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.83
+- Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.
+
+## 1.0.82
+- Oczyszczono paczkę produkcyjną z raportów, audytów i narzędzi roboczych oraz uproszczono cache PWA.
+
+## 1.0.81
+- Uporządkowano kod lokalizacji interfejsu, rozdzielając tłumaczenia na mniejsze funkcje.
+
+## 1.0.80
+- Dodano wybór języka interfejsu z trybem automatycznym zależnym od języka przeglądarki lub systemu PWA.
+
+## 1.0.79
+- Po kliknięciu motywu wyszukiwarka pokazuje polską nazwę, zachowując dopasowanie do terminów źródłowych.
+
+## 1.0.78
+- Uogólniono stronę główną, aby opisywała bibliotekę zamiast pojedynczej księgi.
+
 ## 1.0.77
 - Dodano panel polityki prywatności na stronie głównej biblioteki.
 

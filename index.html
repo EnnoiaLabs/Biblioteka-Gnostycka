@@ -8,11 +8,11 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.77">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.83">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
-    <link rel="stylesheet" href="styles.css?v=1.0.77">
+    <link rel="stylesheet" href="styles.css?v=1.0.83">
   </head>
   <body data-view="library">
     <div class="app-shell">
@@ -61,7 +61,7 @@
           <div class="library-home-copy">
             <p class="eyebrow">Gnostyk Biblioteka</p>
             <h2>Biblioteka gnostycka</h2>
-            <p>Polskie przekłady, opracowania i aparaty cytowania tekstów gnostyckich. Pierwszą księgą biblioteki jest pełne wydanie <strong>Pistis Sophia</strong>.</p>
+            <p>Cyfrowa biblioteka polskich przekładów, opracowań i aparatów cytowania tekstów gnostyckich.</p>
             <nav class="library-nav" aria-label="Nawigacja biblioteki">
               <button id="libraryBooksToggle" class="text-button is-active" type="button" aria-expanded="true">Księgi</button>
               <button id="libraryInfoToggle" class="text-button" type="button" aria-expanded="false">Info</button>
@@ -101,13 +101,13 @@
 
             <article class="library-prose">
               <h4>Czym jest Gnostyk Biblioteka</h4>
-              <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce. Pierwszą pozycją jest <strong>Pistis Sophia</strong>, przygotowana jako pełny przekład z odniesieniami do wydania G. R. S. Meada z 1921 roku i aparatem Schwartze-Petermanna.</p>
-              <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polski przekład, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Przekład zachowuje misteryjne formuły, rytm dialogu objawieniowego, nazwy własne i gnostycką terminologię, ale prowadzi je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: kolejne traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.77</span></strong>.</p>
+              <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
+              <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
+              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.83</span></strong>.</p>
               <div class="library-info-strip" aria-label="Podstawowe informacje">
-                <span><strong>Pierwsza księga</strong>Pistis Sophia</span>
-                <span><strong>Podstawa</strong>Mead 1921</span>
-                <span><strong>Koptyjski</strong>Schw.-Pet. / Marcion Unicode</span>
+                <span><strong>Zakres</strong>Teksty gnostyckie</span>
+                <span><strong>Forma</strong>Przekład i opracowanie</span>
+                <span><strong>Aparat</strong>Cytowanie i paginacja</span>
                 <span><strong>Dane czytelnicze</strong>Lokalnie w przeglądarce</span>
                 <span><strong>Tryb</strong>PWA i offline</span>
               </div>
@@ -137,13 +137,15 @@
               <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
             </header>
             <ol id="libraryUpdates" class="library-updates">
+              <li class="library-update-group"><strong>1.0.83</strong><ul><li>Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.82</strong><ul><li>Oczyszczono paczkę produkcyjną z raportów, audytów i narzędzi roboczych oraz uproszczono cache PWA.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.81</strong><ul><li>Uporządkowano kod lokalizacji interfejsu, rozdzielając tłumaczenia na mniejsze funkcje.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.80</strong><ul><li>Dodano wybór języka interfejsu z trybem automatycznym zależnym od języka przeglądarki lub systemu PWA.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.79</strong><ul><li>Po kliknięciu motywu wyszukiwarka pokazuje polską nazwę, zachowując dopasowanie do terminów źródłowych.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.78</strong><ul><li>Uogólniono stronę główną, aby opisywała bibliotekę zamiast pojedynczej księgi.</li></ul></li>
               <li class="library-update-group"><strong>1.0.77</strong><ul><li>Dodano panel polityki prywatności na stronie głównej biblioteki.</li></ul></li>
               <li class="library-update-group"><strong>1.0.76</strong><ul><li>Poprawiono czytelność pól wyboru w ustawieniach dla motywów jasnego i sepia.</li><li>Dopasowano zakładki sidebaru oraz kafle biblioteki do jasnych motywów.</li></ul></li>
               <li class="library-update-group"><strong>1.0.75</strong><ul><li>Uzupełniono działanie motywów jasnego i sepia dla biblioteki, sidebaru, paneli mobilnych, listy zmian oraz paska trybu skupienia.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.74</strong><ul><li>Pogrupowano widok `Zmiany` według wersji, aby numer wersji nie powtarzał się przy każdym punkcie.</li><li>Uzupełniono brakujące wpisy przejściowe w historii paska trybu skupienia.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.73</strong><ul><li>Poprawiono sekcję `Zmiany`, aby wyświetlała maksymalnie 10 najnowszych punktów z changeloga.</li><li>Ujednolicono odczyt wpisów changeloga dla nagłówków w formacie `## 1.0.x` oraz `## Gnostyk Biblioteka 1.0.x - opis`.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.72</strong><ul><li>Podbito wersję biblioteki we wszystkich metadanych i plikach aplikacji.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.71</strong><ul><li>Dodano wejście do trybu skupienia z panelu mobilnego „Więcej”.</li></ul></li>
             </ol>
           </section>
 
@@ -153,6 +155,14 @@
               <h3>Ustawienia czytania</h3>
               <p>Te ustawienia dotyczą całej biblioteki i zostają zapamiętane lokalnie w przeglądarce.</p>
             </header>
+            <label>Język interfejsu
+              <select id="languageSetting">
+                <option value="auto">Auto</option>
+                <option value="pl">Polski</option>
+                <option value="en">English</option>
+              </select>
+            </label>
+            <p id="languageAutoHint" class="setting-hint"></p>
             <label>Motyw
               <select id="themeSetting">
                 <option value="sepia">Sepia</option>
@@ -194,7 +204,7 @@
             <button id="footerInfoButton" class="footer-link" type="button">Info</button>
             <button id="footerPrivacyButton" class="footer-link" type="button">Prywatność</button>
             <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
-            <span>v<span id="libraryVersionFooterHome">1.0.77</span></span>
+            <span>v<span id="libraryVersionFooterHome">1.0.83</span></span>
           </div>
         </footer>
 
@@ -208,7 +218,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.77</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.83</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -283,7 +293,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.77</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.83</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <div id="pageText" class="page-text"></div>
@@ -312,7 +322,7 @@
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
           <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.77</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.83</span></p>
         </footer>
       </main>
     </div>
@@ -398,11 +408,12 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.77"></script>
-    <script src="coptic-data.js?v=1.0.77"></script>
-    <script src="app.js?v=1.0.77"></script>
+    <script src="data.js?v=1.0.83"></script>
+    <script src="coptic-data.js?v=1.0.83"></script>
+    <script src="app.js?v=1.0.83"></script>
   </body>
 </html>
+
 
 
 
