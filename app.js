@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.84",
+  version: "1.0.87",
   updated: "2026-07-01",
   currentWork: {
     id: "pistis-sophia",
@@ -41,13 +41,13 @@ const state = {
 
 const uiText = {
   pl: {
-    librarySubtitle: "Biblioteka gnostycka",
+    librarySubtitle: "Biblioteka gnozy",
     backLibrary: "← Biblioteka",
     search: "Szukaj",
     chapters: "Rozdziały",
     themes: "Motywy",
     bookmarks: "Zakładki",
-    libraryTitle: "Biblioteka gnostycka",
+    libraryTitle: "Biblioteka gnozy",
     libraryLead: "Cyfrowa biblioteka polskich przekładów, opracowań i aparatów cytowania tekstów gnostyckich.",
     books: "Księgi",
     info: "Info",
@@ -154,6 +154,16 @@ const uiText = {
     clear: "Wyczyść",
     localSave: "Zapis lokalny",
     saved: "Zapisano",
+    backupTitle: "Backup notatek",
+    backupStatusLocal: "Zapis lokalny w przeglądarce. Na desktopie możesz wybrać folder kopii.",
+    backupStatusReady: "Backup aktywny: notatki są zapisywane także do pliku w wybranym folderze.",
+    backupStatusUnsupported: "W tej przeglądarce zapis do wybranego folderu nie jest dostępny. Użyj eksportu pliku kopii.",
+    backupStatusSaved: "Kopia notatek zapisana.",
+    backupStatusRestored: "Notatki odzyskane z kopii.",
+    backupStatusError: "Nie udało się wykonać operacji kopii.",
+    chooseBackupFolder: "Wybierz folder",
+    exportNotes: "Eksportuj kopię",
+    importNotes: "Odzyskaj z pliku",
     noResults: "Brak wyników",
     noBookmarks: "Brak zakładek",
     mobileToc: "Spis treści",
@@ -286,6 +296,16 @@ const uiText = {
     clear: "Clear",
     localSave: "Local save",
     saved: "Saved",
+    backupTitle: "Notes backup",
+    backupStatusLocal: "Local browser save. On desktop you can choose a backup folder.",
+    backupStatusReady: "Backup active: notes are also saved to a file in the selected folder.",
+    backupStatusUnsupported: "Saving to a selected folder is not available in this browser. Use backup-file export.",
+    backupStatusSaved: "Notes backup saved.",
+    backupStatusRestored: "Notes restored from backup.",
+    backupStatusError: "The backup operation failed.",
+    chooseBackupFolder: "Choose folder",
+    exportNotes: "Export backup",
+    importNotes: "Restore from file",
     noResults: "No results",
     noBookmarks: "No bookmarks",
     mobileToc: "Contents",
@@ -5861,6 +5881,7 @@ const els = {
   settingsPanel: document.querySelector("#settingsPanel"),
   languageSetting: document.querySelector("#languageSetting"),
   languageAutoHint: document.querySelector("#languageAutoHint"),
+  languageSwitchButtons: document.querySelectorAll("[data-language-switch]"),
   themeSetting: document.querySelector("#themeSetting"),
   fontSizeSetting: document.querySelector("#fontSizeSetting"),
   lineHeightSetting: document.querySelector("#lineHeightSetting"),
@@ -5868,6 +5889,11 @@ const els = {
   notes: document.querySelector("#notesInput"),
   clearNote: document.querySelector("#clearNote"),
   saveStatus: document.querySelector("#saveStatus"),
+  backupStatus: document.querySelector("#backupStatus"),
+  chooseBackupFolder: document.querySelector("#chooseBackupFolder"),
+  exportNotes: document.querySelector("#exportNotesButton"),
+  importNotes: document.querySelector("#importNotesButton"),
+  restoreNotesInput: document.querySelector("#restoreNotesInput"),
   focus: document.querySelector("#focusToggle"),
   focusExit: document.querySelector("#focusExit"),
   focusPrev: document.querySelector("#focusPrevPage"),
@@ -5940,6 +5966,173 @@ function setChecked(element, checked) {
 
 function setHidden(element, hidden) {
   if (element) element.hidden = Boolean(hidden);
+}
+
+const NOTES_BACKUP_FILE = "gnostyk-notes-backup.json";
+const BACKUP_DB_NAME = "gnostyk-notes-backup";
+const BACKUP_STORE_NAME = "handles";
+const BACKUP_HANDLE_KEY = "notesDirectory";
+let notesBackupTimer = null;
+let backupStatusKey = "backupStatusLocal";
+
+function supportsFolderBackup() {
+  return Boolean(window.showDirectoryPicker && window.isSecureContext && window.indexedDB);
+}
+
+function openBackupDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(BACKUP_DB_NAME, 1);
+    request.onupgradeneeded = () => request.result.createObjectStore(BACKUP_STORE_NAME);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getStoredDirectoryHandle() {
+  if (!supportsFolderBackup()) return null;
+  const db = await openBackupDb();
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(BACKUP_STORE_NAME, "readonly").objectStore(BACKUP_STORE_NAME).get(BACKUP_HANDLE_KEY);
+    request.onsuccess = () => resolve(request.result || null);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function storeDirectoryHandle(handle) {
+  const db = await openBackupDb();
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(BACKUP_STORE_NAME, "readwrite").objectStore(BACKUP_STORE_NAME).put(handle, BACKUP_HANDLE_KEY);
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function verifyDirectoryPermission(handle, mode = "readwrite") {
+  if (!handle) return false;
+  const options = { mode };
+  if ((await handle.queryPermission(options)) === "granted") return true;
+  return (await handle.requestPermission(options)) === "granted";
+}
+
+function notesBackupPayload() {
+  return {
+    type: "gnostyk-notes-backup",
+    version: libraryMeta.version,
+    savedAt: new Date().toISOString(),
+    notes: state.notes,
+    marks: state.marks,
+    lastPage: state.page,
+    settings: state.settings
+  };
+}
+
+function setBackupStatus(key) {
+  backupStatusKey = key;
+  setText(els.backupStatus, t(key));
+}
+
+function applyNotesBackup(payload) {
+  if (!payload || payload.type !== "gnostyk-notes-backup") throw new Error("Invalid backup");
+  state.notes = payload.notes && typeof payload.notes === "object" ? payload.notes : {};
+  state.marks = Array.isArray(payload.marks) ? payload.marks : state.marks;
+  if (payload.settings && typeof payload.settings === "object") {
+    state.settings = { ...state.settings, ...payload.settings };
+    saveSettings();
+    applySettings();
+    applyLanguage();
+  }
+  saveMarks();
+  localStorage.setItem("ps.notes", JSON.stringify(state.notes));
+  renderReader();
+  renderLists();
+}
+
+async function writeNotesBackupToDirectory(handle) {
+  if (!handle || !(await verifyDirectoryPermission(handle))) return false;
+  const fileHandle = await handle.getFileHandle(NOTES_BACKUP_FILE, { create: true });
+  const writable = await fileHandle.createWritable();
+  await writable.write(JSON.stringify(notesBackupPayload(), null, 2));
+  await writable.close();
+  setBackupStatus("backupStatusSaved");
+  setTimeout(() => setBackupStatus("backupStatusReady"), 1400);
+  return true;
+}
+
+function scheduleNotesBackup() {
+  window.clearTimeout(notesBackupTimer);
+  notesBackupTimer = window.setTimeout(async () => {
+    try {
+      const handle = await getStoredDirectoryHandle();
+      if (handle) await writeNotesBackupToDirectory(handle);
+    } catch {
+      setBackupStatus("backupStatusError");
+    }
+  }, 700);
+}
+
+async function chooseBackupFolder() {
+  if (!supportsFolderBackup()) {
+    setBackupStatus("backupStatusUnsupported");
+    return;
+  }
+  try {
+    const handle = await window.showDirectoryPicker({ mode: "readwrite" });
+    if (!(await verifyDirectoryPermission(handle))) return;
+    await storeDirectoryHandle(handle);
+    await writeNotesBackupToDirectory(handle);
+    setBackupStatus("backupStatusReady");
+  } catch (error) {
+    if (error?.name !== "AbortError") setBackupStatus("backupStatusError");
+  }
+}
+
+function exportNotesBackup() {
+  const blob = new Blob([JSON.stringify(notesBackupPayload(), null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = NOTES_BACKUP_FILE;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  setBackupStatus("backupStatusSaved");
+}
+
+function importNotesBackupFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      applyNotesBackup(JSON.parse(reader.result));
+      setBackupStatus("backupStatusRestored");
+      scheduleNotesBackup();
+    } catch {
+      setBackupStatus("backupStatusError");
+    }
+  };
+  reader.onerror = () => setBackupStatus("backupStatusError");
+  reader.readAsText(file);
+}
+
+async function restoreNotesFromStoredBackup() {
+  if (Object.keys(state.notes || {}).length) {
+    setBackupStatus(supportsFolderBackup() ? "backupStatusLocal" : "backupStatusUnsupported");
+    return;
+  }
+  try {
+    const handle = await getStoredDirectoryHandle();
+    if (!handle || !(await verifyDirectoryPermission(handle, "read"))) {
+      setBackupStatus(supportsFolderBackup() ? "backupStatusLocal" : "backupStatusUnsupported");
+      return;
+    }
+    const fileHandle = await handle.getFileHandle(NOTES_BACKUP_FILE);
+    const file = await fileHandle.getFile();
+    applyNotesBackup(JSON.parse(await file.text()));
+    setBackupStatus("backupStatusRestored");
+  } catch {
+    setBackupStatus(supportsFolderBackup() ? "backupStatusLocal" : "backupStatusUnsupported");
+  }
 }
 
 function pageByNumber(page) {
@@ -6412,6 +6605,10 @@ function localizeStaticText() {
     ["#settingsPanel .library-info-head span", "settingsKicker"],
     ["#settingsPanel .library-info-head h3", "settingsTitle"],
     ["#settingsPanel .library-info-head p", "settingsLead"],
+    [".backup-settings strong", "backupTitle"],
+    ["#chooseBackupFolder", "chooseBackupFolder"],
+    ["#exportNotesButton", "exportNotes"],
+    ["#importNotesButton", "importNotes"],
     ["#continueButton", "continue"],
     [".page-jump span", "page"],
     ["#polishMode", "polishText"],
@@ -6507,6 +6704,7 @@ function localizeSettingsControls() {
   setSelectLabels(els.lineHeightSetting, { compact: t("compact"), normal: t("normal"), wide: t("wide") });
   setSelectLabels(els.widthSetting, { standard: t("standard"), narrow: t("narrow"), wide: t("wide") });
   setText(els.languageAutoHint, t("autoLanguageHint").replace("{language}", rawDetectedLanguage()));
+  setBackupStatus(backupStatusKey);
 }
 
 function applyLanguage() {
@@ -6517,9 +6715,29 @@ function applyLanguage() {
   localizePlaceholders();
   localizeModeControls();
   localizeSettingsControls();
+  syncLanguageSwitches();
   if (state.changelogText) renderLibraryUpdatesFromChangelog(state.changelogText);
   else localizeRenderedLibraryUpdates();
   renderPanelState();
+}
+
+function syncLanguageSwitches() {
+  const lang = currentLanguage();
+  els.languageSwitchButtons?.forEach(button => {
+    const active = button.dataset.languageSwitch === lang;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function setInterfaceLanguage(language) {
+  if (!["pl", "en"].includes(language)) return;
+  state.settings.language = language;
+  saveSettings();
+  applySettings();
+  applyLanguage();
+  renderReader();
+  renderLists();
 }
 
 function updateOfflineNotice() {
@@ -6542,6 +6760,9 @@ function versionFromChangelog(text) {
 
 const changelogTranslations = {
   en: {
+    "Dodano automatyczny backup notatek: wybór folderu na desktopie, zapis po zmianie notatki oraz eksport i import kopii odzyskiwania.": "Added automatic notes backup: desktop folder selection, saving after note changes, and backup export/import for recovery.",
+    "Dodano szybki przełącznik języka PL/EN oraz uproszczono nagłówek strony głównej.": "Added a quick PL/EN language switch and simplified the home-page header.",
+    "Zmieniono polski tytuł interfejsu na „Biblioteka gnozy” oraz dodano kopiowanie zaznaczonego fragmentu z przypisem.": "Changed the Polish interface title to “Biblioteka gnozy” and added copying of the selected passage with a citation.",
     "Dokończono angielską lokalizację widoku księgi: sidebaru, opisu strony, aparatu cytowania i skróconych akcji czytelniczych.": "Completed the English localization of the book view: sidebar, page description, citation apparatus, and shortened reader actions.",
     "Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.": "Completed the English localization of library panels, the footer, and interface messages, and added a note showing the language detected in Auto mode.",
     "Oczyszczono paczkę produkcyjną z raportów, audytów i narzędzi roboczych oraz uproszczono cache PWA.": "Cleaned the production package by removing reports, audits, and working tools, and simplified the PWA cache.",
@@ -6700,6 +6921,7 @@ function saveMarks() {
 
 function saveNotes() {
   localStorage.setItem("ps.notes", JSON.stringify(state.notes));
+  scheduleNotesBackup();
 }
 
 function isMobileLayout() {
@@ -6919,6 +7141,25 @@ function currentPlainText(page, chapter) {
   return page.text;
 }
 
+function selectedReaderText() {
+  const selection = window.getSelection?.();
+  if (!selection || selection.isCollapsed || !els.pageText) return "";
+  const textBody = els.pageText.querySelector(".page-prose, .coptic-text");
+  if (!textBody) return "";
+  const pieces = [];
+  for (let index = 0; index < selection.rangeCount; index += 1) {
+    const range = selection.getRangeAt(index);
+    if (!range.intersectsNode(textBody)) continue;
+    const fragment = range.cloneContents();
+    const wrapper = document.createElement("div");
+    wrapper.appendChild(fragment);
+    wrapper.querySelectorAll(".reference-strip, .coptic-source-note").forEach(item => item.remove());
+    const text = wrapper.textContent.replace(/\s+/g, " ").trim();
+    if (text) pieces.push(text);
+  }
+  return pieces.join("\n\n").trim();
+}
+
 function toggleBookmark() {
   if (state.marks.includes(state.page)) {
     state.marks = state.marks.filter(page => page !== state.page);
@@ -6934,7 +7175,8 @@ function toggleBookmark() {
 async function copyCurrentFragment() {
   const page = pageByNumber(state.page);
   const chapter = chapterForPage(state.page);
-  const text = currentPlainText(page, chapter);
+  const selectedText = selectedReaderText();
+  const text = selectedText || currentPlainText(page, chapter);
   const textWithCitation = `[${formattedCitation(page, chapter)}]\n\n${text}`;
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(textWithCitation);
@@ -7099,6 +7341,20 @@ listen(els.settingsToggle, "click", () => {
   });
 });
 
+listen(els.chooseBackupFolder, "click", chooseBackupFolder);
+listen(els.exportNotes, "click", exportNotesBackup);
+listen(els.importNotes, "click", () => {
+  els.restoreNotesInput?.click();
+});
+listen(els.restoreNotesInput, "change", event => {
+  importNotesBackupFile(event.target.files?.[0]);
+  event.target.value = "";
+});
+
+els.languageSwitchButtons?.forEach(button => {
+  listen(button, "click", () => setInterfaceLanguage(button.dataset.languageSwitch));
+});
+
 listen(els.bookmark, "click", toggleBookmark);
 
 listen(els.copy, "click", async () => {
@@ -7234,6 +7490,7 @@ window.addEventListener("online", updateOfflineNotice);
 window.addEventListener("offline", updateOfflineNotice);
 renderReader();
 renderLists();
+restoreNotesFromStoredBackup();
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   window.addEventListener("load", () => {

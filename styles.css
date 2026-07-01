@@ -55,6 +55,7 @@ button {
 .brand {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 18px;
 }
@@ -70,7 +71,44 @@ button {
   display: block;
   width: 148px;
   height: auto;
-  margin-bottom: 4px;
+}
+
+.language-switch {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  width: max-content;
+  border: 1px solid rgba(216, 160, 82, 0.34);
+  background: rgba(255, 247, 234, 0.045);
+}
+
+.language-switch button {
+  min-width: 38px;
+  height: 34px;
+  border: 0;
+  border-right: 1px solid rgba(216, 160, 82, 0.24);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.language-switch button:last-child {
+  border-right: 0;
+}
+
+.language-switch button:hover,
+.language-switch button:focus-visible {
+  color: var(--ink);
+  background: rgba(216, 160, 82, 0.13);
+}
+
+.language-switch button.is-active {
+  color: #fff8e8;
+  background: #4a321c;
 }
 
 h1,
@@ -328,6 +366,7 @@ body[data-view="reader"] .library-home {
 .library-topbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid rgba(216, 160, 82, 0.22);
   padding-bottom: 16px;
@@ -344,12 +383,6 @@ body[data-view="reader"] .library-home {
   display: block;
   width: 148px;
   height: auto;
-  margin-bottom: 2px;
-}
-
-.library-topbar span {
-  color: #9e9183;
-  font-size: 0.82rem;
 }
 
 .library-home-copy {
@@ -1008,6 +1041,32 @@ body[data-view="reader"] .library-only {
   color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.45;
+}
+
+.backup-settings {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+  margin: 2px 18px 18px;
+  padding: 16px;
+  border: 1px solid rgba(216, 160, 82, 0.28);
+  background: rgba(255, 247, 234, 0.04);
+}
+
+.backup-settings strong {
+  color: var(--ink);
+}
+
+.backup-settings p {
+  margin-top: 5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .guide-head {
@@ -1839,6 +1898,15 @@ body.focus .focus-bar {
     color: #ead7c5;
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  .mobile-book-head > div:not(.language-switch) {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .mobile-language-switch {
+    margin-left: auto;
   }
 
   .mobile-book-head span {
