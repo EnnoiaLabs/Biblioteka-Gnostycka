@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.84
+- Dokończono angielską lokalizację widoku księgi: sidebaru, opisu strony, aparatu cytowania i skróconych akcji czytelniczych.
+
 ## 1.0.83
 - Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.
 

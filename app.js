@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.83",
+  version: "1.0.84",
   updated: "2026-07-01",
   currentWork: {
     id: "pistis-sophia",
@@ -55,6 +55,8 @@ const uiText = {
     changes: "Zmiany",
     settings: "Ustawienia",
     read: "Czytaj",
+    currentWorkKicker: "Aktualna pozycja biblioteki",
+    workSidebarDescription: "Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.",
     workStatus: "Pełny przekład",
     workDescription: "Tekst źródłowy, polski przekład, paginacja Meada i Schwartze-Petermanna, cytowanie oraz notatki.",
     planned: "W przygotowaniu",
@@ -124,6 +126,14 @@ const uiText = {
     continue: "Kontynuuj",
     page: "Strona",
     pageShort: "Str.",
+    chapter: "rozdział",
+    chapterCapital: "Rozdział",
+    introMaterial: "Materiał wprowadzający",
+    citationTitle: "Cytowanie",
+    awaitingTranslation: "oczekuje na przekład",
+    introRange: "materiał wprowadzający",
+    copticEmptyTitle: "Koptyjski tekst nie jest przypisany do tej strony.",
+    copticEmptyNote: "Ta strona Meada nie zawiera znacznika Schwartze-Petermanna, według którego biblioteka łączy tekst koptyjski z przekładem. Przejdź do strony z oznaczeniem typu {ref}, aby zobaczyć odpowiadające linie koptyjskie.",
     version: "Wersja",
     polishText: "Po polsku",
     source: "Oryginał EN",
@@ -177,6 +187,8 @@ const uiText = {
     changes: "Changes",
     settings: "Settings",
     read: "Read",
+    currentWorkKicker: "Current library item",
+    workSidebarDescription: "Polish translation and complete editorial work based on the public-domain edition by G. R. S. Mead from 1921.",
     workStatus: "Full translation",
     workDescription: "Source text, Polish translation, Mead and Schwartze-Petermann pagination, citation tools, and notes.",
     planned: "In preparation",
@@ -246,6 +258,14 @@ const uiText = {
     continue: "Continue",
     page: "Page",
     pageShort: "p.",
+    chapter: "chapter",
+    chapterCapital: "Chapter",
+    introMaterial: "Introductory material",
+    citationTitle: "Citation",
+    awaitingTranslation: "awaiting translation",
+    introRange: "introductory material",
+    copticEmptyTitle: "No Coptic text is assigned to this page.",
+    copticEmptyNote: "This Mead page has no Schwartze-Petermann marker used by the library to connect the Coptic text with the translation. Go to a page marked like {ref} to see the corresponding Coptic lines.",
     version: "Version",
     polishText: "Polish",
     source: "Source EN",
@@ -259,7 +279,7 @@ const uiText = {
     copyFragment: "Copy fragment",
     copied: "Copied",
     copyQuote: "Copy citation",
-    aboutTranslation: "About the translation",
+    aboutTranslation: "About",
     focusMode: "Focus mode",
     notes: "Notes",
     notesPlaceholder: "Your notes for this page",
@@ -5940,10 +5960,22 @@ function rangeForChapter(chapter) {
   return chapterRanges.find(range => chapter.number >= range.from && chapter.number <= range.to);
 }
 
+function localizedRangeTitle(range) {
+  if (!range || currentLanguage() === "pl") return range?.title || "";
+  const titles = {
+    "Objawienie po zmartwychwstaniu": "Post-resurrection revelation",
+    "Upadek i ocalenie Pistis Sophii": "The fall and rescue of Pistis Sophia",
+    "Wyjaśnienia misteriów": "Explanations of the mysteries",
+    "Misteria światła i droga duszy": "Mysteries of light and the soul's path",
+    "Rytuały, sądy i pouczenia końcowe": "Rituals, judgments, and final teachings"
+  };
+  return titles[range.title] || range.title;
+}
+
 function readableChapter(chapter) {
   if (!chapter) return currentLanguage() === "pl" ? "Wstęp, spis treści i opracowanie historyczne" : "Introduction, contents, and historical study";
   const range = rangeForChapter(chapter);
-  return range ? `${range.title} - ${currentLanguage() === "pl" ? "rozdział" : "chapter"} ${chapter.number}` : `${currentLanguage() === "pl" ? "Rozdział" : "Chapter"} ${chapter.number}`;
+  return range ? `${localizedRangeTitle(range)} - ${t("chapter")} ${chapter.number}` : `${t("chapterCapital")} ${chapter.number}`;
 }
 
 function readerModeLabel(mode) {
@@ -5954,8 +5986,8 @@ function readerModeLabel(mode) {
 
 function chapterNavExcerpt(chapter) {
   const page = pageByNumber(chapter.page);
-  const translated = polishTranslations[chapter.page] || page.text;
-  const withoutHead = translated
+  const source = currentLanguage() === "pl" ? (polishTranslations[chapter.page] || page.text) : page.text;
+  const withoutHead = source
     .replace(/\[[^\]]+\]\s*/g, "")
     .replace(/^ROZDZIAŁ\s+\d+\s*/i, "")
     .replace(/^CHAPTER\s+\d+\s*/i, "")
@@ -5980,7 +6012,7 @@ function chapterButtonHtml(chapter) {
   return `
     <button class="nav-item ${active ? "is-active" : ""}" data-page="${chapter.page}" type="button">
       <strong>${escapeHtml(readableChapter(chapter))}</strong>
-      <span>str. ${chapter.page} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
+      <span>${currentLanguage() === "pl" ? "str." : t("page")} ${chapter.page} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
     </button>
   `;
 }
@@ -6087,8 +6119,8 @@ function copticPageText(page) {
   if (!entries.length) {
     return `
       <div class="coptic-source-note coptic-empty-note">
-        <strong>Koptyjski tekst nie jest przypisany do tej strony.</strong>
-        <p>Ta strona Meada nie zawiera znacznika Schwartze-Petermanna, według którego biblioteka łączy tekst koptyjski z przekładem. Przejdź do strony z oznaczeniem typu <span>|298</span>, aby zobaczyć odpowiadające linie koptyjskie.</p>
+        <strong>${escapeHtml(t("copticEmptyTitle"))}</strong>
+        <p>${t("copticEmptyNote").replace("{ref}", "<span>|298</span>")}</p>
       </div>
     `;
   }
@@ -6164,11 +6196,32 @@ function reviewStatusForPage(page) {
   };
 }
 
+function localizedReviewStatus(status, hasRefs) {
+  if (currentLanguage() === "pl") return status;
+  const labels = {
+    "needs-review": "requires collation",
+    "partial": "partial markers",
+    "apparatus": "markers in apparatus",
+    "aligned": "collated translation"
+  };
+  const notes = {
+    "needs-review": "This page requires manual alignment with the corresponding Mead page.",
+    "partial": "Some Schwartze-Petermann markers have already been added to the Polish text; the remaining markers are still visible in the citation apparatus.",
+    "apparatus": "Schwartze-Petermann numbering is preserved in the citation apparatus from the EN source; it has not yet been inserted into the Polish text.",
+    "aligned": hasRefs ? "The Polish text contains manuscript markers for this page." : "This page has no separate manuscript marker in the source."
+  };
+  return {
+    level: status.level,
+    label: labels[status.level] || status.label,
+    note: notes[status.level] || status.note
+  };
+}
+
 function citationForPage(page, chapter) {
   const refs = manuscriptRefsForPage(page);
   const parts = [`Mead s. ${page.page}`];
   if (chapter) {
-    parts.push(`rozdz. ${chapter.number}`);
+    parts.push(`${t("chapter")} ${chapter.number}`);
   }
   if (refs.length) {
     parts.push(`Schw.-Pet. ${refs.join(", ")}`);
@@ -6178,23 +6231,30 @@ function citationForPage(page, chapter) {
 
 function formattedCitation(page, chapter) {
   const refs = manuscriptRefsForPage(page);
-  const chapterPart = chapter ? `rozdz. ${chapter.number}` : "materiał wprowadzający";
-  const schw = refs.length ? `Schw.-Pet. ${refs.join(", ")}` : "bez znacznika Schw.-Pet.";
+  const chapterPart = chapter ? `${t("chapter")} ${chapter.number}` : t("introMaterial");
+  const schw = refs.length ? `Schw.-Pet. ${refs.join(", ")}` : (currentLanguage() === "pl" ? "bez znacznika Schw.-Pet." : "no Schw.-Pet. marker");
   const source = "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921";
   const library = `Gnostyk Biblioteka v${libraryMeta.version}`;
-  const formats = {
-    simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""} · ${library}`,
-    scholarly: `Pistis Sophia, tłum. i oprac. Gnostyk Biblioteka, na podst. ${source}, Mead s. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}, ${library}.`,
-    mead: `Pistis Sophia, Mead s. ${page.page}, ${chapterPart}.`,
-    schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead s. ${page.page}, ${library}.` : `Pistis Sophia, Mead s. ${page.page}; brak osobnego znacznika Schw.-Pet. na tej stronie, ${library}.`
-  };
+  const formats = currentLanguage() === "pl"
+    ? {
+      simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""} · ${library}`,
+      scholarly: `Pistis Sophia, tłum. i oprac. Gnostyk Biblioteka, na podst. ${source}, Mead s. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}, ${library}.`,
+      mead: `Pistis Sophia, Mead s. ${page.page}, ${chapterPart}.`,
+      schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead s. ${page.page}, ${library}.` : `Pistis Sophia, Mead s. ${page.page}; brak osobnego znacznika Schw.-Pet. na tej stronie, ${library}.`
+    }
+    : {
+      simple: `Pistis Sophia · Mead p. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""} · ${library}`,
+      scholarly: `Pistis Sophia, Polish translation and editorial work by Gnostyk Library, based on ${source}, Mead p. ${page.page}, ${chapterPart}${refs.length ? `, ${schw}` : ""}, ${library}.`,
+      mead: `Pistis Sophia, Mead p. ${page.page}, ${chapterPart}.`,
+      schwpet: refs.length ? `Pistis Sophia, ${schw}, Mead p. ${page.page}, ${library}.` : `Pistis Sophia, Mead p. ${page.page}; no separate Schw.-Pet. marker on this page, ${library}.`
+    };
   return formats[state.citationFormat] || formats.simple;
 }
 
 function renderReferenceStrip(page, chapter) {
   const refs = manuscriptRefsForPage(page);
-  const status = reviewStatusForPage(page);
-  const chapterLabel = chapter ? `Rozdział ${chapter.number}` : "Materiał wprowadzający";
+  const status = localizedReviewStatus(reviewStatusForPage(page), refs.length > 0);
+  const chapterLabel = chapter ? `${t("chapterCapital")} ${chapter.number}` : t("introMaterial");
   const chips = [
     `<span class="reference-chip">Mead s. ${page.page}</span>`,
     `<span class="reference-chip">${escapeHtml(chapterLabel)}</span>`,
@@ -6202,12 +6262,12 @@ function renderReferenceStrip(page, chapter) {
     `<span class="reference-chip review-chip ${status.level}">${escapeHtml(status.label)}</span>`
   ].join("");
   const note = refs.length
-    ? `Paginacja rękopisu według marginalnej numeracji Schwartze-Petermanna zachowanej w tekście źródłowym. ${status.note}`
-    : "Ta strona nie ma osobnego znacznika paginacji rękopisu w tekście źródłowym.";
+    ? `${currentLanguage() === "pl" ? "Paginacja rękopisu według marginalnej numeracji Schwartze-Petermanna zachowanej w tekście źródłowym." : "Manuscript pagination follows the marginal Schwartze-Petermann numbering preserved in the source text."} ${status.note}`
+    : (currentLanguage() === "pl" ? "Ta strona nie ma osobnego znacznika paginacji rękopisu w tekście źródłowym." : "This page has no separate manuscript pagination marker in the source text.");
 
   return `
-    <div class="reference-strip" aria-label="Cytowanie i paginacja rękopisu">
-      <strong>Cytowanie</strong>
+    <div class="reference-strip" aria-label="${escapeHtml(t("citationTitle"))}">
+      <strong>${escapeHtml(t("citationTitle"))}</strong>
       <div class="reference-chips">${chips}</div>
       <small>${escapeHtml(note)}</small>
     </div>
@@ -6341,6 +6401,8 @@ function localizeStaticText() {
     ["#libraryPrivacyToggle", "privacy"],
     ["#libraryChangesToggle", "changes"],
     ["#librarySettingsToggle", "settings"],
+    [".library-card .eyebrow", "currentWorkKicker"],
+    [".library-card p", "workSidebarDescription"],
     ["#openWorkButton", "read"],
     [".work-tile.is-available span", "workStatus"],
     [".work-tile.is-available p", "workDescription"],
@@ -6358,6 +6420,7 @@ function localizeStaticText() {
     ["#copyButton", "copyFragment"],
     ["#aboutToggle", "aboutTranslation"],
     ["#bookmarkButton", "bookmarks"],
+    [".reader-focus-toggle span", "focusMode"],
     [".notes h3", "notes"],
     ["#clearNote", "clear"],
     ["#saveStatus", "localSave"],
@@ -6422,6 +6485,12 @@ function localizeModeControls() {
   setText(document.querySelector('[data-focus-mode="pl"]'), t("polishText"));
   setText(document.querySelector('[data-focus-mode="source"]'), t("source"));
   setText(document.querySelector('[data-focus-mode="coptic"]'), t("coptic"));
+  setSelectLabels(els.citationFormat, {
+    simple: t("simpleCitation"),
+    scholarly: t("scholarlyCitation"),
+    mead: "Mead",
+    schwpet: "Schw.-Pet."
+  });
   setText(document.querySelector('[data-mobile-citation="simple"]'), t("simpleCitation"));
   setText(document.querySelector('[data-mobile-citation="scholarly"]'), t("scholarlyCitation"));
 }
@@ -6473,6 +6542,7 @@ function versionFromChangelog(text) {
 
 const changelogTranslations = {
   en: {
+    "Dokończono angielską lokalizację widoku księgi: sidebaru, opisu strony, aparatu cytowania i skróconych akcji czytelniczych.": "Completed the English localization of the book view: sidebar, page description, citation apparatus, and shortened reader actions.",
     "Uzupełniono angielską lokalizację paneli biblioteki, stopki i komunikatów oraz dodano informację o języku wykrywanym w trybie Auto.": "Completed the English localization of library panels, the footer, and interface messages, and added a note showing the language detected in Auto mode.",
     "Oczyszczono paczkę produkcyjną z raportów, audytów i narzędzi roboczych oraz uproszczono cache PWA.": "Cleaned the production package by removing reports, audits, and working tools, and simplified the PWA cache.",
     "Uporządkowano kod lokalizacji interfejsu, rozdzielając tłumaczenia na mniejsze funkcje.": "Organized the interface-localization code by splitting translations into smaller functions.",
@@ -6611,15 +6681,15 @@ function renderPolishGuide(page, chapter) {
   const hits = hitsForPage(page).slice(0, 5);
   const range = rangeForChapter(chapter);
   const translated = Boolean(polishTranslations[page.page]);
-  const status = reviewStatusForPage(page);
+  const status = localizedReviewStatus(reviewStatusForPage(page), manuscriptRefsForPage(page).length > 0);
   els.polishGuide.innerHTML = `
     <div class="guide-head">
       <strong>${escapeHtml(readableChapter(chapter))}</strong>
-      <span>${translated ? escapeHtml(status.label) : (currentLanguage() === "pl" ? "oczekuje na przekład" : "awaiting translation")} · ${range ? `${currentLanguage() === "pl" ? "Rozdziały" : "Chapters"} ${range.from}-${range.to}` : (currentLanguage() === "pl" ? "materiał wprowadzający" : "introductory material")}</span>
+      <span>${translated ? escapeHtml(status.label) : t("awaitingTranslation")} · ${range ? `${t("chapters")} ${range.from}-${range.to}` : t("introRange")}</span>
     </div>
     <p class="review-note ${status.level}">${escapeHtml(status.note)}</p>
     <div class="guide-chips">
-      ${(hits.length ? hits : themes.slice(0, 3)).map(hit => `<span>${escapeHtml(hit.label)}</span>`).join("")}
+      ${(hits.length ? hits : themes.slice(0, 3)).map(hit => `<span>${escapeHtml(localizedThemeLabel(hit))}</span>`).join("")}
     </div>
   `;
 }
@@ -6783,7 +6853,7 @@ function renderMobileChapterGroups(chapters) {
   return chaptersByRange(chapters).map(range => `
     <details class="chapter-group" ${range.chapters.some(chapter => chapterForPage(state.page)?.number === chapter.number) ? "open" : ""}>
       <summary>
-        <strong>${escapeHtml(range.title)}</strong>
+        <strong>${escapeHtml(localizedRangeTitle(range))}</strong>
         <span>${range.chapters.length} ${currentLanguage() === "pl" ? "rozdz." : "chap."}</span>
       </summary>
       <div class="chapter-group-list">
