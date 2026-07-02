@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 1.0.89
+- Uproszczono wordmark do samego napisu „Gnostyk”, bez dodatkowych słów i bez wymuszonych kapitalików.
+
+## 1.0.88
+- Zastąpiono obraz PNG logo tekstowym znakiem GNOSTYK składanym czcionką Caesar Dressing z Google Fonts.
+
 ## 1.0.87
 - Dodano automatyczny backup notatek: wybór folderu na desktopie, zapis po zmianie notatki oraz eksport i import kopii odzyskiwania.
 

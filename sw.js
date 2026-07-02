@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.87";
+﻿const CACHE_NAME = "gnostyk-biblioteka-v1.0.89";
 
 const APP_SHELL = [
   "./",
@@ -12,7 +12,6 @@ const APP_SHELL = [
   "./library.json",
   "./CHANGELOG.md",
   "./assets/gnostyk-icon.png",
-  "./assets/gnostyk-logo.png",
   "./assets/gnostyk-slit-bg.png",
   "./assets/pwa-icon-32.png",
   "./assets/pwa-icon-64.png",
@@ -73,6 +72,9 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+
+
 
 
 

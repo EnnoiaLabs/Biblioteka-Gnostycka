@@ -67,10 +67,15 @@ button {
   border: 1px solid rgba(216, 160, 82, 0.28);
 }
 
-.brand-logo {
-  display: block;
-  width: 148px;
-  height: auto;
+.brand-wordmark {
+  display: inline-block;
+  color: var(--clay);
+  font-family: "Caesar Dressing", "Segoe UI", system-ui, sans-serif;
+  font-size: 2.2rem;
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-shadow: 0 1px 0 rgba(255, 247, 234, 0.14), 0 10px 24px rgba(0, 0, 0, 0.26);
+  white-space: nowrap;
 }
 
 .language-switch {
@@ -379,10 +384,8 @@ body[data-view="reader"] .library-home {
   border: 1px solid rgba(216, 160, 82, 0.28);
 }
 
-.library-topbar-logo {
-  display: block;
-  width: 148px;
-  height: auto;
+.library-topbar-wordmark {
+  font-size: 2.25rem;
 }
 
 .library-home-copy {

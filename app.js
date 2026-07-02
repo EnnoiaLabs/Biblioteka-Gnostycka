@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.87",
+  version: "1.0.89",
   updated: "2026-07-01",
   currentWork: {
     id: "pistis-sophia",
@@ -6581,7 +6581,6 @@ function localizeBookInfo() {
 function localizeStaticText() {
   [
     [".brand p", "librarySubtitle"],
-    [".library-topbar span", "librarySubtitle"],
     ["#backToLibraryButton", "backLibrary"],
     [".search span", "search"],
     ['[data-tab="chapters"]', "chapters"],
@@ -6760,6 +6759,8 @@ function versionFromChangelog(text) {
 
 const changelogTranslations = {
   en: {
+    "Uproszczono wordmark do samego napisu „Gnostyk”, bez dodatkowych słów i bez wymuszonych kapitalików.": "Simplified the wordmark to the single name “Gnostyk”, without extra words or forced all-caps styling.",
+    "Zastąpiono obraz PNG logo tekstowym znakiem GNOSTYK składanym czcionką Caesar Dressing z Google Fonts.": "Replaced the PNG logo with a text GNOSTYK wordmark set in the Caesar Dressing Google Font.",
     "Dodano automatyczny backup notatek: wybór folderu na desktopie, zapis po zmianie notatki oraz eksport i import kopii odzyskiwania.": "Added automatic notes backup: desktop folder selection, saving after note changes, and backup export/import for recovery.",
     "Dodano szybki przełącznik języka PL/EN oraz uproszczono nagłówek strony głównej.": "Added a quick PL/EN language switch and simplified the home-page header.",
     "Zmieniono polski tytuł interfejsu na „Biblioteka gnozy” oraz dodano kopiowanie zaznaczonego fragmentu z przypisem.": "Changed the Polish interface title to “Biblioteka gnozy” and added copying of the selected passage with a citation.",
