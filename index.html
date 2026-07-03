@@ -8,14 +8,14 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.95">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.97">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1.0.95">
+    <link rel="stylesheet" href="styles.css?v=1.0.97">
   </head>
   <body data-view="library">
     <div class="app-shell">
@@ -110,7 +110,7 @@
               <h4>Czym jest Gnostyk Biblioteka</h4>
               <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
               <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.95</span></strong>.</p>
+              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.97</span></strong>.</p>
               <div class="library-info-strip" aria-label="Podstawowe informacje">
                 <span><strong>Zakres</strong>Teksty gnostyckie</span>
                 <span><strong>Forma</strong>Przekład i opracowanie</span>
@@ -144,6 +144,8 @@
               <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
             </header>
             <ol id="libraryUpdates" class="library-updates">
+              <li class="library-update-group"><strong>1.0.97</strong><ul><li>Dodano pierwszą partię glos bazowych do słownika koptyjskiej interlinii na podstawie audytu najczęstszych braków.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.96</strong><ul><li>Uzupełniono angielskie tłumaczenia najnowszych wpisów zmian oraz pełną lokalizację panelu O przekładzie.</li></ul></li>
               <li class="library-update-group"><strong>1.0.95</strong><ul><li>Poprawiono odstęp panelu Narzędzia i doprecyzowano dwuwarstwową logikę glosownika: słownik bazowy oraz glosy własne.</li></ul></li>
               <li class="library-update-group"><strong>1.0.94</strong><ul><li>Przeniesiono glosownik interlinearny do nowego panelu Narzędzia i poprawiono czytelność nagłówków w ciemnym motywie.</li></ul></li>
               <li class="library-update-group"><strong>1.0.93</strong><ul><li>Dodano lokalny glosownik interlinearny: własne glosy, eksport/import i pierwszeństwo nad słownikiem roboczym.</li></ul></li>
@@ -152,8 +154,6 @@
               <li class="library-update-group"><strong>1.0.90</strong><ul><li>Dodano tryb interlinearny: koptyjska linia źródłowa, transliteracja techniczna i robocze glosy słowo po słowie.</li></ul></li>
               <li class="library-update-group"><strong>1.0.89</strong><ul><li>Uproszczono wordmark do samego napisu „Gnostyk”, bez dodatkowych słów i bez wymuszonych kapitalików.</li></ul></li>
               <li class="library-update-group"><strong>1.0.88</strong><ul><li>Zastąpiono obraz PNG logo tekstowym znakiem GNOSTYK składanym czcionką Caesar Dressing z Google Fonts.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.87</strong><ul><li>Dodano automatyczny backup notatek: wybór folderu na desktopie, zapis po zmianie notatki oraz eksport i import kopii odzyskiwania.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.86</strong><ul><li>Dodano szybki przełącznik języka PL/EN oraz uproszczono nagłówek strony głównej.</li></ul></li>
             </ol>
           </section>
 
@@ -254,7 +254,7 @@
             <button id="footerInfoButton" class="footer-link" type="button">Info</button>
             <button id="footerPrivacyButton" class="footer-link" type="button">Prywatność</button>
             <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
-            <span>v<span id="libraryVersionFooterHome">1.0.95</span></span>
+            <span>v<span id="libraryVersionFooterHome">1.0.97</span></span>
           </div>
         </footer>
 
@@ -268,7 +268,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.95</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.97</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -348,7 +348,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.95</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.97</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <div id="pageText" class="page-text"></div>
@@ -377,7 +377,7 @@
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
           <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.95</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.97</span></p>
         </footer>
       </main>
     </div>
@@ -465,8 +465,8 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.95"></script>
-    <script src="coptic-data.js?v=1.0.95"></script>
-    <script src="app.js?v=1.0.95"></script>
+    <script src="data.js?v=1.0.97"></script>
+    <script src="coptic-data.js?v=1.0.97"></script>
+    <script src="app.js?v=1.0.97"></script>
   </body>
 </html>

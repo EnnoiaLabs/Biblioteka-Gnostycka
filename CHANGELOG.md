@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.97
+- Dodano pierwszą partię glos bazowych do słownika koptyjskiej interlinii na podstawie audytu najczęstszych braków.
+
+## 1.0.96
+- Uzupełniono angielskie tłumaczenia najnowszych wpisów zmian oraz pełną lokalizację panelu O przekładzie.
+
 ## 1.0.95
 - Poprawiono odstęp panelu Narzędzia i doprecyzowano dwuwarstwową logikę glosownika: słownik bazowy oraz glosy własne.
 
