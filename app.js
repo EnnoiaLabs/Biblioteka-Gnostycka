@@ -1,10 +1,10 @@
-const data = window.PISTIS_SOPHIA_DATA;
+﻿const data = window.PISTIS_SOPHIA_DATA;
 const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.89",
-  updated: "2026-07-01",
+  version: "1.0.95",
+  updated: "2026-07-02",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -36,7 +36,8 @@ const state = {
     width: savedSettings.width || "standard"
   },
   marks: JSON.parse(localStorage.getItem("ps.marks") || "[]"),
-  notes: JSON.parse(localStorage.getItem("ps.notes") || "{}")
+  notes: JSON.parse(localStorage.getItem("ps.notes") || "{}"),
+  customGlosses: JSON.parse(localStorage.getItem("ps.copticGlosses") || "{}")
 };
 
 const uiText = {
@@ -53,6 +54,7 @@ const uiText = {
     info: "Info",
     privacy: "Prywatność",
     changes: "Zmiany",
+    tools: "Narzędzia",
     settings: "Ustawienia",
     read: "Czytaj",
     currentWorkKicker: "Aktualna pozycja biblioteki",
@@ -94,6 +96,9 @@ const uiText = {
     changesKicker: "Zmiany",
     changesTitle: "Historia zmian",
     changesLead: "Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.",
+    toolsKicker: "Narzędzia",
+    toolsTitle: "Warsztat filologiczny",
+    toolsLead: "Robocze narzędzia wspierające pracę z tekstem źródłowym, transliteracją i aparatem interlinearnym.",
     footerLead: "Cyfrowa biblioteka polskich opracowań tekstów gnostyckich.",
     bookEyebrow: "Pistis Sophia · księga biblioteki",
     bookSubtitle: "Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.",
@@ -138,6 +143,11 @@ const uiText = {
     polishText: "Po polsku",
     source: "Oryginał EN",
     coptic: "Koptyjski",
+    interlinear: "Interlinearny",
+    interlinearTitle: "Przekład interlinearny",
+    interlinearSubtitle: "Linia koptyjska, transliteracja techniczna i robocze glosy słowo po słowie.",
+    interlinearAutoGloss: "glosa robocza",
+    interlinearNeedsGloss: "-",
     exitFocus: "Wyjdź",
     close: "Zamknij",
     textMode: "Tryb tekstu",
@@ -164,6 +174,21 @@ const uiText = {
     chooseBackupFolder: "Wybierz folder",
     exportNotes: "Eksportuj kopię",
     importNotes: "Odzyskaj z pliku",
+    glossaryTitle: "Glosownik interlinearny",
+    glossaryStatusEmpty: "Słownik bazowy jest wbudowany w bibliotekę, a własne glosy są zapisywane lokalnie i mają pierwszeństwo.",
+    glossaryStatusSaved: "Glosa zapisana.",
+    glossaryStatusImported: "Glosownik zaimportowany.",
+    glossaryStatusExported: "Glosownik wyeksportowany.",
+    glossaryStatusCleared: "Własne glosy wyczyszczone.",
+    glossaryStatusError: "Nie udało się wykonać operacji glosownika.",
+    glossaryToken: "Token koptyjski",
+    glossaryGloss: "Glosa",
+    saveGloss: "Zapisz glosę",
+    clearGlossary: "Wyczyść własne glosy",
+    exportGlossary: "Eksportuj glosownik",
+    importGlossary: "Importuj glosownik",
+    customGlossCount: "Własne glosy: {count}",
+    noCustomGlosses: "Brak własnych glos.",
     noResults: "Brak wyników",
     noBookmarks: "Brak zakładek",
     mobileToc: "Spis treści",
@@ -183,6 +208,10 @@ const uiText = {
     libraryVersionLabel: "wersja biblioteki"
   },
   en: {
+    "Poprawiono odstęp panelu Narzędzia i doprecyzowano dwuwarstwową logikę glosownika: słownik bazowy oraz glosy własne.": "Improved spacing in the Tools panel and clarified the two-layer glossary model: base glossary plus custom glosses.",
+    "Przeniesiono glosownik interlinearny do nowego panelu Narzędzia i poprawiono czytelność nagłówków w ciemnym motywie.": "Moved the interlinear glossary into the new Tools panel and improved heading readability in dark mode.",
+    "Dodano lokalny glosownik interlinearny: własne glosy, eksport/import i pierwszeństwo nad słownikiem roboczym.": "Added a local interlinear glossary: custom glosses, export/import, and priority over the working glossary.",
+    "Naprawiono rozkodowane polskie znaki w interfejsie i przywrócono poprawną mapę Unicode dla warstwy interlinearnej.": "Fixed garbled Polish characters in the interface and restored the proper Unicode map for the interlinear layer.",
     librarySubtitle: "Gnostic library",
     backLibrary: "← Library",
     search: "Search",
@@ -195,6 +224,7 @@ const uiText = {
     info: "Info",
     privacy: "Privacy",
     changes: "Changes",
+    tools: "Tools",
     settings: "Settings",
     read: "Read",
     currentWorkKicker: "Current library item",
@@ -236,6 +266,9 @@ const uiText = {
     changesKicker: "Changes",
     changesTitle: "Change history",
     changesLead: "Recent updates to the library and application. The complete history is available in the changelog file.",
+    toolsKicker: "Tools",
+    toolsTitle: "Philological workspace",
+    toolsLead: "Working tools for the source text, transliteration, and interlinear apparatus.",
     footerLead: "A digital library of Polish studies and editions of Gnostic texts.",
     bookEyebrow: "Pistis Sophia · library book",
     bookSubtitle: "Complete Polish translation, source text, citation apparatus, and reader notes.",
@@ -280,6 +313,11 @@ const uiText = {
     polishText: "Polish",
     source: "Source EN",
     coptic: "Coptic",
+    interlinear: "Interlinear",
+    interlinearTitle: "Interlinear translation",
+    interlinearSubtitle: "Coptic line, technical transliteration, and working word-by-word glosses.",
+    interlinearAutoGloss: "working gloss",
+    interlinearNeedsGloss: "-",
     exitFocus: "Exit",
     close: "Close",
     textMode: "Text mode",
@@ -306,6 +344,21 @@ const uiText = {
     chooseBackupFolder: "Choose folder",
     exportNotes: "Export backup",
     importNotes: "Restore from file",
+    glossaryTitle: "Interlinear glossary",
+    glossaryStatusEmpty: "The base glossary is built into the library, while custom glosses are saved locally and take priority.",
+    glossaryStatusSaved: "Gloss saved.",
+    glossaryStatusImported: "Glossary imported.",
+    glossaryStatusExported: "Glossary exported.",
+    glossaryStatusCleared: "Custom glosses cleared.",
+    glossaryStatusError: "The glossary operation failed.",
+    glossaryToken: "Coptic token",
+    glossaryGloss: "Gloss",
+    saveGloss: "Save gloss",
+    clearGlossary: "Clear custom glosses",
+    exportGlossary: "Export glossary",
+    importGlossary: "Import glossary",
+    customGlossCount: "Custom glosses: {count}",
+    noCustomGlosses: "No custom glosses.",
     noResults: "No results",
     noBookmarks: "No bookmarks",
     mobileToc: "Contents",
@@ -5872,6 +5925,7 @@ const els = {
   polishMode: document.querySelector("#polishMode"),
   sourceMode: document.querySelector("#sourceMode"),
   copticMode: document.querySelector("#copticMode"),
+  interlinearMode: document.querySelector("#interlinearMode"),
   bookmark: document.querySelector("#bookmarkButton"),
   citationFormat: document.querySelector("#citationFormat"),
   copy: document.querySelector("#copyButton"),
@@ -5894,6 +5948,15 @@ const els = {
   exportNotes: document.querySelector("#exportNotesButton"),
   importNotes: document.querySelector("#importNotesButton"),
   restoreNotesInput: document.querySelector("#restoreNotesInput"),
+  glossaryStatus: document.querySelector("#glossaryStatus"),
+  glossaryTokenInput: document.querySelector("#glossaryTokenInput"),
+  glossaryGlossInput: document.querySelector("#glossaryGlossInput"),
+  saveGloss: document.querySelector("#saveGlossButton"),
+  clearGlossary: document.querySelector("#clearGlossButton"),
+  exportGlossary: document.querySelector("#exportGlossaryButton"),
+  importGlossary: document.querySelector("#importGlossaryButton"),
+  restoreGlossaryInput: document.querySelector("#restoreGlossaryInput"),
+  customGlossaryList: document.querySelector("#customGlossaryList"),
   focus: document.querySelector("#focusToggle"),
   focusExit: document.querySelector("#focusExit"),
   focusPrev: document.querySelector("#focusPrevPage"),
@@ -5907,6 +5970,7 @@ const els = {
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
   libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
   libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
+  libraryToolsToggle: document.querySelector("#libraryToolsToggle"),
   librarySettingsToggle: document.querySelector("#librarySettingsToggle"),
   footerInfo: document.querySelector("#footerInfoButton"),
   footerPrivacy: document.querySelector("#footerPrivacyButton"),
@@ -5915,6 +5979,7 @@ const els = {
   libraryInfoPanel: document.querySelector("#libraryInfoPanel"),
   libraryPrivacyPanel: document.querySelector("#libraryPrivacyPanel"),
   libraryChangesPanel: document.querySelector("#libraryChangesPanel"),
+  libraryToolsPanel: document.querySelector("#libraryToolsPanel"),
   backToLibrary: document.querySelector("#backToLibraryButton"),
   mobileBackToLibrary: document.querySelector("#mobileBackToLibraryButton"),
   readerControls: document.querySelector("#readerControls"),
@@ -5940,6 +6005,7 @@ const els = {
   mobilePolishMode: document.querySelector("#mobilePolishMode"),
   mobileSourceMode: document.querySelector("#mobileSourceMode"),
   mobileCopticMode: document.querySelector("#mobileCopticMode"),
+  mobileInterlinearMode: document.querySelector("#mobileInterlinearMode"),
   mobileCitationFormats: document.querySelectorAll("[data-mobile-citation]"),
   libraryVersion: document.querySelector("#libraryVersion"),
   libraryVersionFooter: document.querySelector("#libraryVersionFooter"),
@@ -5969,11 +6035,209 @@ function setHidden(element, hidden) {
 }
 
 const NOTES_BACKUP_FILE = "gnostyk-notes-backup.json";
+const GLOSSARY_BACKUP_FILE = "gnostyk-interlinear-glossary.json";
 const BACKUP_DB_NAME = "gnostyk-notes-backup";
 const BACKUP_STORE_NAME = "handles";
 const BACKUP_HANDLE_KEY = "notesDirectory";
 let notesBackupTimer = null;
 let backupStatusKey = "backupStatusLocal";
+let glossaryStatusKey = "glossaryStatusEmpty";
+
+function saveCustomGlosses() {
+  localStorage.setItem("ps.copticGlosses", JSON.stringify(state.customGlosses));
+}
+
+function setGlossaryStatus(key) {
+  glossaryStatusKey = key;
+  const count = Object.keys(state.customGlosses || {}).length;
+  setText(els.glossaryStatus, t(key).replace("{count}", count));
+}
+
+function glossaryPayload() {
+  return {
+    type: "gnostyk-interlinear-glossary",
+    version: libraryMeta.version,
+    savedAt: new Date().toISOString(),
+    glosses: state.customGlosses
+  };
+}
+
+function applyGlossaryPayload(payload) {
+  if (!payload || payload.type !== "gnostyk-interlinear-glossary" || typeof payload.glosses !== "object") {
+    throw new Error("Invalid glossary");
+  }
+  state.customGlosses = Object.fromEntries(
+    Object.entries(payload.glosses)
+      .map(([token, gloss]) => [cleanCopticToken(token).toLowerCase(), String(gloss || "").trim()])
+      .filter(([token, gloss]) => token && gloss)
+  );
+  saveCustomGlosses();
+  renderGlossaryPanel();
+  renderReader();
+}
+
+function renderGlossaryPanel() {
+  const entries = Object.entries(state.customGlosses || {}).sort(([a], [b]) => a.localeCompare(b));
+  const statusKey = entries.length && glossaryStatusKey === "glossaryStatusEmpty" ? "customGlossCount" : glossaryStatusKey;
+  setGlossaryStatus(statusKey);
+  if (!els.customGlossaryList) return;
+  els.customGlossaryList.innerHTML = entries.length
+    ? entries.map(([token, gloss]) => `
+        <button class="custom-gloss-item" data-gloss-token="${escapeHtml(token)}" type="button">
+          <bdi>${escapeHtml(token)}</bdi>
+          <span>${escapeHtml(gloss)}</span>
+        </button>
+      `).join("")
+    : `<p>${escapeHtml(t("noCustomGlosses"))}</p>`;
+}
+
+function saveGlossFromForm() {
+  const token = cleanCopticToken(els.glossaryTokenInput?.value || "").toLowerCase();
+  const gloss = (els.glossaryGlossInput?.value || "").trim();
+  if (!token || !gloss) {
+    setGlossaryStatus("glossaryStatusError");
+    return;
+  }
+  state.customGlosses[token] = gloss;
+  saveCustomGlosses();
+  setValue(els.glossaryTokenInput, "");
+  setValue(els.glossaryGlossInput, "");
+  glossaryStatusKey = "glossaryStatusSaved";
+  renderGlossaryPanel();
+  renderReader();
+}
+
+function clearCustomGlossary() {
+  state.customGlosses = {};
+  saveCustomGlosses();
+  glossaryStatusKey = "glossaryStatusCleared";
+  renderGlossaryPanel();
+  renderReader();
+}
+
+function exportGlossary() {
+  const blob = new Blob([JSON.stringify(glossaryPayload(), null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = GLOSSARY_BACKUP_FILE;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  glossaryStatusKey = "glossaryStatusExported";
+  renderGlossaryPanel();
+}
+
+function importGlossaryFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      applyGlossaryPayload(JSON.parse(reader.result));
+      glossaryStatusKey = "glossaryStatusImported";
+      renderGlossaryPanel();
+    } catch {
+      setGlossaryStatus("glossaryStatusError");
+    }
+  };
+  reader.onerror = () => setGlossaryStatus("glossaryStatusError");
+  reader.readAsText(file);
+}
+
+const copticTransliterationMap = {
+  "ⲁ": "a", "ⲃ": "b", "ⲅ": "g", "ⲇ": "d", "ⲉ": "e", "ⲍ": "z", "ⲏ": "ē", "ⲑ": "th",
+  "ⲓ": "i", "ⲕ": "k", "ⲗ": "l", "ⲙ": "m", "ⲛ": "n", "ⲝ": "x", "ⲟ": "o", "ⲡ": "p",
+  "ⲣ": "r", "ⲥ": "s", "ⲧ": "t", "ⲩ": "u", "ⲫ": "ph", "ⲭ": "kh", "ⲯ": "ps", "ⲱ": "ō",
+  "ϣ": "sh", "ϥ": "f", "ϩ": "h", "ϫ": "j", "ϭ": "ch", "ϯ": "ti", "ϧ": "kh"
+};
+
+const copticGlosses = {
+  "p": "nota ed.",
+  "pro": "nota ed.",
+  "in": "nota ed.",
+  "sic": "nota ed.",
+  "ms": "rękopis",
+  "ⲁ": "pref. czasu przeszłego",
+  "ⲁⲩ": "oni uczynili / oni...",
+  "ⲁϥ": "on uczynił / on...",
+  "ⲁⲥ": "ona uczyniła / ona...",
+  "ⲁⲩⲱ": "i / oraz",
+  "ⲉ": "do / ku / aby",
+  "ⲉⲃⲟⲗ": "na zewnątrz / z",
+  "ⲉⲣⲟϥ": "do niego",
+  "ⲉⲣⲟⲥ": "do niej",
+  "ⲉⲣⲟⲟⲩ": "do nich",
+  "ⲉⲣⲟⲓ": "do mnie",
+  "ⲉⲣⲟⲕ": "do ciebie",
+  "ⲉⲧ": "który / która / które",
+  "ⲉⲧⲃⲉ": "z powodu / o",
+  "ⲙ": "w / z / jako",
+  "ⲙⲛ": "z / wraz z",
+  "ⲙⲁⲣⲓⲁ": "Maria",
+  "ⲙⲙⲁⲩ": "tam",
+  "ⲙⲙⲟⲥ": "ją / to",
+  "ⲙⲙⲟϥ": "jego / go",
+  "ⲙⲙⲟⲟⲩ": "ich / je",
+  "ⲙⲡⲉ": "nie / nie uczynił",
+  "ⲛ": "do / dla / z",
+  "ⲛⲁ": "do / dla / przyszłe",
+  "ⲛⲁϥ": "jemu",
+  "ⲛⲁⲥ": "jej",
+  "ⲛⲁⲩ": "im / do nich",
+  "ⲛⲉ": "były / te",
+  "ⲛⲓⲙ": "każdy / kto",
+  "ⲛϭⲓ": "znacznik podmiotu",
+  "ⲛⲧⲉ": "z / należący do",
+  "ⲛⲧⲁ": "który / forma względna",
+  "ⲛⲧⲟϥ": "on",
+  "ⲟⲩ": "jeden / jakiś",
+  "ⲟⲛ": "znowu / także",
+  "ⲡ": "ten / rodzajnik m.",
+  "ⲡⲁ": "mój / należący do",
+  "ⲡⲉ": "jest / to jest",
+  "ⲡⲉϫⲁϥ": "rzekł on",
+  "ⲡⲉϫⲁⲥ": "rzekła ona",
+  "ⲡⲉϫⲁⲩ": "rzekli oni",
+  "ⲡⲉϫⲉ": "rzekł",
+  "ⲡϫⲟⲉⲓⲥ": "Pan",
+  "ⲡⲛⲁ": "duch",
+  "ⲣ": "czynić",
+  "ⲧ": "ta / rodzajnik ż.",
+  "ⲧⲉ": "jest / to jest",
+  "ⲧⲏⲣ": "cały",
+  "ⲧⲏⲣϥ": "cały on",
+  "ⲧⲏⲣⲟⲩ": "wszyscy / wszystkie",
+  "ϣⲁ": "aż do / ku",
+  "ϩⲙ": "w",
+  "ϩⲛ": "w",
+  "ϫⲉ": "że / ponieważ",
+  "ϫⲱ": "mówić",
+  "ⲓⲥ": "Jezus",
+  "ⲭⲥ": "Chrystus",
+  "ⲥⲱⲧⲏⲣ": "Zbawca",
+  "ⲛⲟⲩⲧⲉ": "Bóg",
+  "ⲟⲩⲟⲉⲓⲛ": "światłość",
+  "ⲙⲩⲥⲧⲏⲣⲓⲟⲛ": "misterium",
+  "ⲡⲓⲥⲧⲓⲥ": "Pistis / wiara",
+  "ⲥⲟⲫⲓⲁ": "Sophia / Mądrość",
+  "ⲫⲱⲥ": "światłość",
+  "ⲁⲓⲱⲛ": "eon",
+  "ⲁⲣⲭⲱⲛ": "władca / archont"
+};
+
+const copticPrefixGlosses = [
+  ["ⲛⲧⲉ", "należący do"],
+  ["ⲉⲧ", "który"],
+  ["ⲙⲡ", "nie / negacja"],
+  ["ⲛⲁ", "do / dla"],
+  ["ⲙⲙ", "dopełnienie"],
+  ["ⲉ", "do / ku"],
+  ["ⲛ", "do / dla / z"],
+  ["ⲙ", "w / z"],
+  ["ⲡ", "rodzajnik m."],
+  ["ⲧ", "rodzajnik ż."]
+];
 
 function supportsFolderBackup() {
   return Boolean(window.showDirectoryPicker && window.isSecureContext && window.indexedDB);
@@ -6174,6 +6438,7 @@ function readableChapter(chapter) {
 function readerModeLabel(mode) {
   if (mode === "source") return t("source");
   if (mode === "coptic") return t("coptic");
+  if (mode === "interlinear") return t("interlinear");
   return t("polishText");
 }
 
@@ -6343,6 +6608,93 @@ function copticPageText(page) {
       <p>${escapeHtml(source)}. ${escapeHtml(note)}</p>
     </div>
     <div class="coptic-text">${grouped}</div>
+  `;
+}
+
+function cleanCopticToken(token) {
+  return token
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,;:!?()[\]{}"“”'‘’·]/g, "")
+    .replace(/-+$/g, "")
+    .trim();
+}
+
+function transliterateCoptic(text) {
+  return [...text.normalize("NFD")]
+    .filter(char => !/[\u0300-\u036f]/.test(char))
+    .map(char => copticTransliterationMap[char.toLowerCase()] || char)
+    .join("")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function glossCopticToken(token) {
+  const cleaned = cleanCopticToken(token).toLowerCase();
+  if (!cleaned) return "";
+  if (state.customGlosses?.[cleaned]) return state.customGlosses[cleaned];
+  if (copticGlosses[cleaned]) return copticGlosses[cleaned];
+  for (const [prefix, gloss] of copticPrefixGlosses) {
+    if (!cleaned.startsWith(prefix) || cleaned.length <= prefix.length + 1) continue;
+    const rest = cleaned.slice(prefix.length);
+    if (copticGlosses[rest]) return `${gloss} + ${copticGlosses[rest]}`;
+  }
+  if (/^[a-z]+$/i.test(cleaned)) return "nota ed.";
+  return t("interlinearNeedsGloss");
+}
+
+function interlinearTokenHtml(token) {
+  const cleaned = cleanCopticToken(token);
+  const gloss = glossCopticToken(token);
+  const unresolved = gloss === t("interlinearNeedsGloss");
+  return `
+    <span class="interlinear-token ${unresolved ? "needs-gloss" : ""}" data-coptic-token="${escapeHtml(cleaned)}">
+      <bdi class="interlinear-coptic">${escapeHtml(token)}</bdi>
+      <span class="interlinear-translit">${escapeHtml(transliterateCoptic(token))}</span>
+      <span class="interlinear-gloss">${escapeHtml(gloss)}</span>
+    </span>
+  `;
+}
+
+function interlinearLineHtml(line) {
+  const tokens = line.text.split(/\s+/).filter(Boolean);
+  return `
+    <article class="interlinear-line">
+      <header>
+        <span>${escapeHtml(line.ref)}</span>
+        <strong>${escapeHtml(t("interlinearAutoGloss"))}</strong>
+      </header>
+      <p class="interlinear-source"><bdi>${escapeHtml(line.text)}</bdi></p>
+      <div class="interlinear-tokens">
+        ${tokens.map(interlinearTokenHtml).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function interlinearPageText(page) {
+  const refs = copticRefsForPage(page);
+  const entries = copticEntriesForPage(page);
+  if (!entries.length) return copticPageText(page);
+  const grouped = refs.map(ref => {
+    const lines = entries.filter(entry => String(entry.page) === String(ref));
+    if (!lines.length) return "";
+    return `
+      <section class="interlinear-page" aria-label="Interlinear Schwartze-Petermann ${escapeHtml(ref)}">
+        <header>
+          <strong>Schw.-Pet. ${escapeHtml(ref)}</strong>
+          <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} linii</span>
+        </header>
+        ${lines.map(interlinearLineHtml).join("")}
+      </section>
+    `;
+  }).join("");
+  return `
+    <div class="coptic-source-note interlinear-note">
+      <strong>${escapeHtml(t("interlinearTitle"))}</strong>
+      <p>${escapeHtml(t("interlinearSubtitle"))}</p>
+    </div>
+    <div class="interlinear-text">${grouped}</div>
   `;
 }
 
@@ -6566,6 +6918,12 @@ function localizeChangesInfo() {
   setTextForAll("#libraryChangesPanel .library-info-head p", "changesLead");
 }
 
+function localizeToolsInfo() {
+  setTextForAll("#libraryToolsPanel .library-info-head span", "toolsKicker");
+  setTextForAll("#libraryToolsPanel .library-info-head h3", "toolsTitle");
+  setTextForAll("#libraryToolsPanel .library-info-head p", "toolsLead");
+}
+
 function localizeBookInfo() {
   setTextForAll(".reader-hero .eyebrow", "bookEyebrow");
   setTextForAll(".reader-hero .hero-subtitle", "bookSubtitle");
@@ -6592,6 +6950,7 @@ function localizeStaticText() {
     ["#libraryInfoToggle", "info"],
     ["#libraryPrivacyToggle", "privacy"],
     ["#libraryChangesToggle", "changes"],
+    ["#libraryToolsToggle", "tools"],
     ["#librarySettingsToggle", "settings"],
     [".library-card .eyebrow", "currentWorkKicker"],
     [".library-card p", "workSidebarDescription"],
@@ -6605,14 +6964,20 @@ function localizeStaticText() {
     ["#settingsPanel .library-info-head h3", "settingsTitle"],
     ["#settingsPanel .library-info-head p", "settingsLead"],
     [".backup-settings strong", "backupTitle"],
+    [".glossary-settings strong", "glossaryTitle"],
     ["#chooseBackupFolder", "chooseBackupFolder"],
     ["#exportNotesButton", "exportNotes"],
     ["#importNotesButton", "importNotes"],
+    ["#saveGlossButton", "saveGloss"],
+    ["#clearGlossButton", "clearGlossary"],
+    ["#exportGlossaryButton", "exportGlossary"],
+    ["#importGlossaryButton", "importGlossary"],
     ["#continueButton", "continue"],
     [".page-jump span", "page"],
     ["#polishMode", "polishText"],
     ["#sourceMode", "source"],
     ["#copticMode", "coptic"],
+    ["#interlinearMode", "interlinear"],
     ["#copyButton", "copyFragment"],
     ["#aboutToggle", "aboutTranslation"],
     ["#bookmarkButton", "bookmarks"],
@@ -6630,6 +6995,7 @@ function localizeStaticText() {
     ["#mobilePolishMode", "polishText"],
     ["#mobileSourceMode", "source"],
     ["#mobileCopticMode", "coptic"],
+    ["#mobileInterlinearMode", "interlinear"],
     ['[data-mobile-panel="toc"]', "mobileToc"],
     ['[data-mobile-panel="search"]', "mobileSearch"],
     ['[data-mobile-panel="marks"]', "bookmarks"],
@@ -6644,6 +7010,7 @@ function localizeStaticText() {
   localizeLibraryInfo();
   localizePrivacyInfo();
   localizeChangesInfo();
+  localizeToolsInfo();
   localizeBookInfo();
 }
 
@@ -6681,6 +7048,7 @@ function localizeModeControls() {
   setText(document.querySelector('[data-focus-mode="pl"]'), t("polishText"));
   setText(document.querySelector('[data-focus-mode="source"]'), t("source"));
   setText(document.querySelector('[data-focus-mode="coptic"]'), t("coptic"));
+  setText(document.querySelector('[data-focus-mode="interlinear"]'), t("interlinear"));
   setSelectLabels(els.citationFormat, {
     simple: t("simpleCitation"),
     scholarly: t("scholarlyCitation"),
@@ -6697,6 +7065,8 @@ function localizeSettingsControls() {
   setFieldLabel(els.fontSizeSetting, t("fontSize"));
   setFieldLabel(els.lineHeightSetting, t("lineHeight"));
   setFieldLabel(els.widthSetting, t("columnWidth"));
+  setFieldLabel(els.glossaryTokenInput, t("glossaryToken"));
+  setFieldLabel(els.glossaryGlossInput, t("glossaryGloss"));
   setSelectLabels(els.languageSetting, { auto: t("auto"), pl: t("polish"), en: t("english") });
   setSelectLabels(els.themeSetting, { sepia: t("sepia"), light: t("light"), dark: t("dark") });
   setSelectLabels(els.fontSizeSetting, { small: t("small"), medium: t("medium"), large: t("large") });
@@ -6704,6 +7074,7 @@ function localizeSettingsControls() {
   setSelectLabels(els.widthSetting, { standard: t("standard"), narrow: t("narrow"), wide: t("wide") });
   setText(els.languageAutoHint, t("autoLanguageHint").replace("{language}", rawDetectedLanguage()));
   setBackupStatus(backupStatusKey);
+  renderGlossaryPanel();
 }
 
 function applyLanguage() {
@@ -6759,6 +7130,8 @@ function versionFromChangelog(text) {
 
 const changelogTranslations = {
   en: {
+    "Poszerzono słownik interlinearny, dodano rozpoznawanie częstych prefiksów koptyjskich i wyciszono nierozpoznane glosy.": "Expanded the interlinear glossary, added recognition of common Coptic prefixes, and toned down unresolved glosses.",
+    "Dodano tryb interlinearny: koptyjska linia źródłowa, transliteracja techniczna i robocze glosy słowo po słowie.": "Added interlinear mode: Coptic source line, technical transliteration, and working word-by-word glosses.",
     "Uproszczono wordmark do samego napisu „Gnostyk”, bez dodatkowych słów i bez wymuszonych kapitalików.": "Simplified the wordmark to the single name “Gnostyk”, without extra words or forced all-caps styling.",
     "Zastąpiono obraz PNG logo tekstowym znakiem GNOSTYK składanym czcionką Caesar Dressing z Google Fonts.": "Replaced the PNG logo with a text GNOSTYK wordmark set in the Caesar Dressing Google Font.",
     "Dodano automatyczny backup notatek: wybór folderu na desktopie, zapis po zmianie notatki oraz eksport i import kopii odzyskiwania.": "Added automatic notes backup: desktop folder selection, saving after note changes, and backup export/import for recovery.",
@@ -6887,7 +7260,7 @@ function polishPageText(page, chapter) {
   const hits = hitsForPage(page).slice(0, 4);
   const range = rangeForChapter(chapter);
   const lead = chapter
-    ? `Ta część należy do bloku „${range?.title || "Pistis Sophia"}”. ${range?.summary || "Tekst rozwija dialog Jezusa z uczniami oraz kosmologię gnostyczną."}`
+    ? `Ta część należy do bloku „${range?.title || "Pistis Sophia"}”. ${range?.summary || "Tekst rozwija dialog Jezusa z uczniami oraz kosmologi? gnostyczn?."}`
     : "Ta część zawiera materiał wprowadzający: tytuł, informacje o wydaniu, spis treści, wstęp i kontekst rękopisu.";
   const concepts = hits.length
     ? hits.map(hit => `- ${hit.label}: ${hit.note}.`).join("\n")
@@ -6940,24 +7313,28 @@ function setLibrarySection(section) {
   const isInfo = section === "info";
   const isPrivacy = section === "privacy";
   const isChanges = section === "changes";
+  const isTools = section === "tools";
   const isSettings = section === "settings";
   if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
   if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
   if (els.libraryPrivacyPanel) els.libraryPrivacyPanel.hidden = !isPrivacy;
   if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
+  if (els.libraryToolsPanel) els.libraryToolsPanel.hidden = !isTools;
   if (els.settingsPanel) els.settingsPanel.hidden = !isSettings;
   state.settingsOpen = isSettings;
   els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
   els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
   els.libraryPrivacyToggle?.classList.toggle("is-active", isPrivacy);
   els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
+  els.libraryToolsToggle?.classList.toggle("is-active", isTools);
   els.librarySettingsToggle?.classList.toggle("is-active", isSettings);
   els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
   els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
   els.libraryPrivacyToggle?.setAttribute("aria-expanded", String(isPrivacy));
   els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
+  els.libraryToolsToggle?.setAttribute("aria-expanded", String(isTools));
   els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
-  const target = isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isSettings ? els.settingsPanel : els.libraryBooksPanel;
+  const target = isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : els.libraryBooksPanel;
   requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
@@ -7000,9 +7377,10 @@ function renderReader() {
   const chapter = chapterForPage(state.page);
   renderPolishGuide(page, chapter);
   const isCoptic = state.readerMode === "coptic";
+  const isInterlinear = state.readerMode === "interlinear";
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
   if (els.pageText) {
-    const body = isCoptic ? copticPageText(page) : `<div class="page-prose">${highlight(text)}</div>`;
+    const body = isInterlinear ? interlinearPageText(page) : (isCoptic ? copticPageText(page) : `<div class="page-prose">${highlight(text)}</div>`);
     els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
   }
   setValue(els.pageInput, state.page);
@@ -7013,6 +7391,7 @@ function renderReader() {
   els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
   els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
+  els.interlinearMode?.classList.toggle("is-active", state.readerMode === "interlinear");
   setText(els.focusModeToggle, t("version"));
   els.focusModeItems?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.focusMode === state.readerMode);
@@ -7024,6 +7403,7 @@ function renderReader() {
   els.mobilePolishMode?.classList.toggle("is-active", state.readerMode === "pl");
   els.mobileSourceMode?.classList.toggle("is-active", state.readerMode === "source");
   els.mobileCopticMode?.classList.toggle("is-active", state.readerMode === "coptic");
+  els.mobileInterlinearMode?.classList.toggle("is-active", state.readerMode === "interlinear");
   els.mobileCitationFormats?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
   });
@@ -7053,7 +7433,7 @@ function renderThemes() {
     return `
       <button class="theme-item" data-theme="${theme.label}" type="button">
         <strong>${escapeHtml(localizedThemeLabel(theme))}</strong>
-        <span>${count} ${currentLanguage() === "pl" ? "trafień" : "matches"} · ${escapeHtml(localizedThemeNote(theme))}</span>
+        <span>${count} ${currentLanguage() === "pl" ? "trafie?" : "matches"} · ${escapeHtml(localizedThemeNote(theme))}</span>
       </button>
     `;
   }).join("");
@@ -7126,7 +7506,7 @@ function closeMobileSheet() {
 }
 
 function setReaderMode(mode) {
-  if (!["pl", "source", "coptic"].includes(mode)) mode = "pl";
+  if (!["pl", "source", "coptic", "interlinear"].includes(mode)) mode = "pl";
   state.readerMode = mode;
   saveReadingState();
   renderReader();
@@ -7139,13 +7519,23 @@ function currentPlainText(page, chapter) {
     if (!entries.length) return "Brak przypisanej warstwy koptyjskiej dla tej strony Meada.";
     return entries.map(entry => `(${entry.ref}) ${entry.text}`).join("\n");
   }
+  if (state.readerMode === "interlinear") {
+    const entries = copticEntriesForPage(page);
+    if (!entries.length) return "Brak przypisanej warstwy koptyjskiej dla tej strony Meada.";
+    return entries.map(entry => {
+      const tokens = entry.text.split(/\s+/).filter(Boolean);
+      const transliteration = transliterateCoptic(entry.text);
+      const glosses = tokens.map(token => glossCopticToken(token)).join(" / ");
+      return `(${entry.ref}) ${entry.text}\n${transliteration}\n${glosses}`;
+    }).join("\n\n");
+  }
   return page.text;
 }
 
 function selectedReaderText() {
   const selection = window.getSelection?.();
   if (!selection || selection.isCollapsed || !els.pageText) return "";
-  const textBody = els.pageText.querySelector(".page-prose, .coptic-text");
+  const textBody = els.pageText.querySelector(".page-prose, .coptic-text, .interlinear-text");
   if (!textBody) return "";
   const pieces = [];
   for (let index = 0; index < selection.rangeCount; index += 1) {
@@ -7275,6 +7665,7 @@ listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
 listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
 listen(els.libraryPrivacyToggle, "click", () => setLibrarySection("privacy"));
 listen(els.libraryChangesToggle, "click", () => setLibrarySection("changes"));
+listen(els.libraryToolsToggle, "click", () => setLibrarySection("tools"));
 listen(els.footerInfo, "click", () => setLibrarySection("info"));
 listen(els.footerPrivacy, "click", () => setLibrarySection("privacy"));
 listen(els.footerChanges, "click", () => setLibrarySection("changes"));
@@ -7293,6 +7684,7 @@ listen(els.mobileOverlay, "click", closeMobileSheet);
 listen(els.polishMode, "click", () => setReaderMode("pl"));
 listen(els.sourceMode, "click", () => setReaderMode("source"));
 listen(els.copticMode, "click", () => setReaderMode("coptic"));
+listen(els.interlinearMode, "click", () => setReaderMode("interlinear"));
 listen(els.focusModeToggle, "click", event => {
   event.stopPropagation();
   const isOpen = !els.focusModeMenu?.hidden;
@@ -7351,6 +7743,35 @@ listen(els.restoreNotesInput, "change", event => {
   importNotesBackupFile(event.target.files?.[0]);
   event.target.value = "";
 });
+listen(els.saveGloss, "click", saveGlossFromForm);
+listen(els.clearGlossary, "click", clearCustomGlossary);
+listen(els.exportGlossary, "click", exportGlossary);
+listen(els.importGlossary, "click", () => {
+  els.restoreGlossaryInput?.click();
+});
+listen(els.restoreGlossaryInput, "change", event => {
+  importGlossaryFile(event.target.files?.[0]);
+  event.target.value = "";
+});
+listen(els.customGlossaryList, "click", event => {
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+  const item = target?.closest(".custom-gloss-item");
+  if (!item) return;
+  const token = item.dataset.glossToken;
+  setValue(els.glossaryTokenInput, token);
+  setValue(els.glossaryGlossInput, state.customGlosses[token] || "");
+  els.glossaryGlossInput?.focus();
+});
+listen(els.pageText, "click", event => {
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+  const item = target?.closest(".interlinear-token");
+  const token = item?.dataset.copticToken;
+  if (!token || !els.glossaryTokenInput) return;
+  setValue(els.glossaryTokenInput, token);
+  setValue(els.glossaryGlossInput, state.customGlosses[token] || "");
+  glossaryStatusKey = "glossaryStatusEmpty";
+  renderGlossaryPanel();
+});
 
 els.languageSwitchButtons?.forEach(button => {
   listen(button, "click", () => setInterfaceLanguage(button.dataset.languageSwitch));
@@ -7396,6 +7817,7 @@ listen(els.mobileFocus, "click", enterFocusMode);
 listen(els.mobilePolishMode, "click", () => setReaderMode("pl"));
 listen(els.mobileSourceMode, "click", () => setReaderMode("source"));
 listen(els.mobileCopticMode, "click", () => setReaderMode("coptic"));
+listen(els.mobileInterlinearMode, "click", () => setReaderMode("interlinear"));
 
 els.mobileCitationFormats?.forEach(button => {
   listen(button, "click", () => {
