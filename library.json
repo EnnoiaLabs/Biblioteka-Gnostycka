@@ -2,14 +2,14 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.0.97",
-    "rightsNote": "Teksty źródłowe w domenie publicznej; polski przekład, opracowanie, terminologia, układ czytelniczy i aparat biblioteki jako nowa warstwa twórcza."
+    "version": "1.0.136",
+    "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza."
   },
   "works": [
     {
       "id": "pistis-sophia",
       "title": "Pistis Sophia",
-      "status": "Pełna księga",
+      "status": "Pe?na ksi?ga",
       "language": "pl",
       "sourceLanguageLayers": [
         "en",
@@ -25,13 +25,29 @@
         "gnostycyzm",
         "Sophia",
         "misteria",
-        "światłość"
+        "?wiat?o??"
+      ]
+    },
+    {
+      "id": "gospel-of-thomas",
+      "title": "Ewangelia Tomasza",
+      "status": "W przygotowaniu",
+      "language": "pl",
+      "sourceLanguageLayers": [
+        "cop"
+      ],
+      "source": "Koptyjski tekst z Kodeksu II z Nag Hammadi; podstawa edytorska do ustalenia przed przek?adem.",
+      "sourceRights": "Tekst staro?ytny w domenie publicznej; opracowanie biblioteki w przygotowaniu.",
+      "citation": [
+        "logia",
+        "Nag Hammadi Codex II"
+      ],
+      "tags": [
+        "gnostycyzm",
+        "Tomasz",
+        "logia",
+        "Nag Hammadi"
       ]
     }
   ]
 }
-
-
-
-
-

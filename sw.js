@@ -1,4 +1,4 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.0.97";
+const CACHE_NAME = "gnostyk-biblioteka-v1.0.136";
 
 const APP_SHELL = [
   "./",
@@ -7,6 +7,10 @@ const APP_SHELL = [
   "./app.js",
   "./data.js",
   "./coptic-data.js",
+  "./coptic-dictionary.js",
+  "./coptic-polish-overrides.js",
+  "./coptic-missing-dictionary-map.json",
+  "./COPTIC_DICTIONARY_FALLBACK_AUDIT.md",
   "./manifest.webmanifest",
   "./VERSION.json",
   "./library.json",
@@ -49,7 +53,9 @@ self.addEventListener("fetch", event => {
     "manifest.webmanifest",
     "CHANGELOG.md",
     "VERSION.json",
-    "library.json"
+    "library.json",
+    "coptic-dictionary.js",
+    "coptic-polish-overrides.js"
   ].some(file => url.pathname.endsWith(file));
   if (networkFirst) {
     event.respondWith(
