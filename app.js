@@ -1,10 +1,13 @@
-const data = window.PISTIS_SOPHIA_DATA;
-const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
+const bookModules = window.GNOSTYK_BOOK_MODULES || {};
+const activeBookId = localStorage.getItem("gnostyk.activeBook") || "pistis-sophia";
+const activeBook = bookModules[activeBookId] || bookModules["pistis-sophia"] || {};
+const data = activeBook.data || window.PISTIS_SOPHIA_DATA;
+const copticData = activeBook.coptic || window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.142",
-  updated: "2026-07-02",
+  version: "1.0.150",
+  updated: "2026-07-07",
   currentWork: {
     id: "pistis-sophia",
     title: "Pistis Sophia",
@@ -194,7 +197,7 @@ const uiText = {
     interlinearFullTranslation: "Pełny przekład strony",
     interlinearFullTranslationSource: "Przekład polski oparty na publiczno-domenowym wydaniu G. R. S. Meada z 1921 roku.",
     interlinearAutoGloss: "glosa robocza",
-    interlinearNeedsGloss: "-",
+    interlinearNeedsGloss: "w przygot.",
     dictionaryCardTitle: "Karta słownikowa",
     dictionaryClose: "Zamknij",
     dictionaryPolish: "Polski",
@@ -252,6 +255,7 @@ const uiText = {
     dictionarySearchEmpty: "Wpisz co najmniej 2 znaki, aby przeszukać słownik.",
     dictionarySearchCount: "Wyniki: {count}",
     dictionarySearchNoResults: "Brak wyników w słowniku.",
+    dictionaryMissingPolishGloss: "Brak polskiej glosy",
     dictionarySearchFullEntry: "Pełny wpis",
     dictionarySearchShowCard: "Pokaż kartę",
     dictionaryMoreMeanings: "Więcej znaczeń",
@@ -275,6 +279,13 @@ const uiText = {
     dictionaryEntryScopeValue: "Centralne hasło używane przez wszystkie teksty biblioteki",
     dictionaryResearchNote: "Notatka słownikowa",
     dictionaryResearchNoteValue: "To hasło jest przygotowane jako część wspólnego słownika dla Pistis Sophii i kolejnych tekstów koptyjskich.",
+    dictionaryStatus: "Status",
+    dictionaryStatusReady: "Gotowe",
+    dictionaryStatusBasic: "Podstawowe",
+    dictionaryStatusPending: "W przygotowaniu",
+    dictionaryStatusReadyNote: "Hasło ma polską i angielską glosę oraz dane bazowe.",
+    dictionaryStatusBasicNote: "Hasło ma podstawową glosę, ale wymaga dalszego opracowania.",
+    dictionaryStatusPendingNote: "Hasło jest rozpoznane w tekście, ale pełny wpis zostanie dodany później.",
     noResults: "Brak wyników",
     noBookmarks: "Brak zakładek",
     mobileToc: "Spis treści",
@@ -445,7 +456,7 @@ const uiText = {
     interlinearFullTranslation: "Full page translation",
     interlinearFullTranslationSource: "English source text from G. R. S. Mead's public-domain 1921 edition.",
     interlinearAutoGloss: "working gloss",
-    interlinearNeedsGloss: "-",
+    interlinearNeedsGloss: "pending",
     dictionaryCardTitle: "Dictionary card",
     dictionaryClose: "Close",
     dictionaryPolish: "Polish",
@@ -503,6 +514,7 @@ const uiText = {
     dictionarySearchEmpty: "Type at least 2 characters to search the dictionary.",
     dictionarySearchCount: "Results: {count}",
     dictionarySearchNoResults: "No dictionary results.",
+    dictionaryMissingPolishGloss: "No Polish gloss",
     dictionarySearchFullEntry: "Full entry",
     dictionarySearchShowCard: "Show card",
     dictionaryMoreMeanings: "More meanings",
@@ -526,6 +538,13 @@ const uiText = {
     dictionaryEntryScopeValue: "Central entry shared by all library texts",
     dictionaryResearchNote: "Dictionary note",
     dictionaryResearchNoteValue: "This entry is prepared as part of the shared dictionary for Pistis Sophia and future Coptic texts.",
+    dictionaryStatus: "Status",
+    dictionaryStatusReady: "Ready",
+    dictionaryStatusBasic: "Basic",
+    dictionaryStatusPending: "In preparation",
+    dictionaryStatusReadyNote: "The entry has Polish and English glosses plus base dictionary data.",
+    dictionaryStatusBasicNote: "The entry has a basic gloss but still needs editorial work.",
+    dictionaryStatusPendingNote: "The form is recognized in the text, but the full entry will be added later.",
     noResults: "No results",
     noBookmarks: "No bookmarks",
     mobileToc: "Contents",
@@ -7274,28 +7293,75 @@ function dictionarySearchEntryDetails(key, entry) {
   };
 }
 
+function normalizeDictionarySearchText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[.,;:!?()[\]{}"“”'‘’··⸱]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function dictionarySearchWordMatch(field, query) {
+  const normalized = normalizeDictionarySearchText(field);
+  const q = normalizeDictionarySearchText(query);
+  if (!normalized || !q) return 0;
+  const words = normalized.split(/\s+/).filter(Boolean);
+  if (normalized === q) return 100;
+  if (words.includes(q)) return 80;
+  if (words.some(word => word.startsWith(q))) return 45;
+  if (normalized.includes(q)) return 20;
+  return 0;
+}
+
+function dictionarySearchScore(details, query) {
+  const q = String(query || "").trim();
+  const copticQ = cleanCopticToken(q).toLowerCase();
+  const token = cleanCopticToken(details.token || "").toLowerCase();
+  let score = 0;
+
+  if (copticQ && token === copticQ) score = Math.max(score, 220);
+  else if (copticQ && token.startsWith(copticQ)) score = Math.max(score, 170);
+  else if (copticQ && token.includes(copticQ)) score = Math.max(score, 80);
+
+  const addWeightedScore = (field, weight) => {
+    const fieldScore = dictionarySearchWordMatch(field, q);
+    if (fieldScore > 0) score = Math.max(score, fieldScore + weight);
+    return fieldScore;
+  };
+  const translitScore = addWeightedScore(details.translit, 70);
+  const shortEnglishScore = addWeightedScore(details.shortEnglish, 60);
+  const shortPolishScore = addWeightedScore(details.shortPolish, 55);
+  if (shortEnglishScore > 0) addWeightedScore(details.english, 45);
+  if (shortPolishScore > 0) addWeightedScore(details.polish, 40);
+
+  const visibleTextScore = Math.max(
+    translitScore,
+    shortEnglishScore,
+    shortPolishScore
+  );
+
+  const matchedToken = copticQ && (token === copticQ || token.startsWith(copticQ) || token.includes(copticQ));
+  if (!matchedToken && visibleTextScore < 20) return 0;
+  return score;
+}
+
 function dictionarySearchRows(query) {
   const normalizedQuery = cleanCopticToken(query || "").toLowerCase();
   const plainQuery = String(query || "").trim().toLowerCase();
   if (plainQuery.length < 2 && normalizedQuery.length < 2) return [];
   const dictionary = window.COPTIC_DICTIONARY || {};
-  const rows = [];
-  const q = normalizedQuery || plainQuery;
+  const scoredRows = [];
   for (const [key, entry] of Object.entries(dictionary)) {
     const details = dictionarySearchEntryDetails(key, entry);
-    const haystack = [
-      key,
-      details.translit,
-      details.polish,
-      details.shortPolish,
-      details.english,
-      details.shortEnglish,
-      details.pos
-    ].join(" ").toLowerCase();
-    if (haystack.includes(q)) rows.push(details);
-    if (rows.length >= 80) break;
+    const score = dictionarySearchScore(details, query);
+    if (score > 0) scoredRows.push({ details, score });
   }
-  return rows;
+  return scoredRows
+    .sort((a, b) => b.score - a.score || a.details.token.length - b.details.token.length || a.details.token.localeCompare(b.details.token))
+    .slice(0, 30)
+    .map(item => item.details);
 }
 
 function splitDictionaryMeanings(text, shortValue = "") {
@@ -7323,6 +7389,24 @@ function dictionaryMeaningCount(value, shortValue = "") {
   return values.size;
 }
 
+function dictionaryEntryStatus(details) {
+  const hasPolish = Boolean(String(details?.polish || details?.shortPolish || details?.custom || "").trim());
+  const hasEnglish = Boolean(String(details?.english || details?.shortEnglish || "").trim());
+  const hasRaw = Boolean(details?.hasData || details?.base || details?.posRaw);
+  if (hasPolish && hasEnglish && hasRaw) {
+    return { key: "ready", label: t("dictionaryStatusReady"), note: t("dictionaryStatusReadyNote") };
+  }
+  if (hasPolish || hasEnglish || hasRaw) {
+    return { key: "basic", label: t("dictionaryStatusBasic"), note: t("dictionaryStatusBasicNote") };
+  }
+  return { key: "pending", label: t("dictionaryStatusPending"), note: t("dictionaryStatusPendingNote") };
+}
+
+function dictionaryStatusPillHtml(status) {
+  if (!status) return "";
+  return `<span class="dictionary-status dictionary-status-${escapeHtml(status.key)}">${escapeHtml(status.label)}</span>`;
+}
+
 function dictionaryEntryProfileHtml(details) {
   const lemma = details.base || details.token || "";
   const lemmaText = lemma
@@ -7333,11 +7417,13 @@ function dictionaryEntryProfileHtml(details) {
   const meaningStats = t("dictionaryMeaningStatsValue")
     .replace("{pl}", String(plCount || 0))
     .replace("{en}", String(enCount || 0));
+  const status = dictionaryEntryStatus(details);
   return `
     <section class="dictionary-profile" aria-label="${escapeHtml(t("dictionaryProfile"))}">
       <h4>${escapeHtml(t("dictionaryProfile"))}</h4>
       <dl>
         ${lemmaText ? `<div><dt>${escapeHtml(t("dictionaryLemma"))}</dt><dd><bdi>${escapeHtml(lemmaText)}</bdi></dd></div>` : ""}
+        <div><dt>${escapeHtml(t("dictionaryStatus"))}</dt><dd>${dictionaryStatusPillHtml(status)} <span class="dictionary-status-note">${escapeHtml(status.note)}</span></dd></div>
         <div><dt>${escapeHtml(t("dictionaryMeaningStats"))}</dt><dd>${escapeHtml(meaningStats)}</dd></div>
         <div><dt>${escapeHtml(t("dictionaryEntryScope"))}</dt><dd>${escapeHtml(t("dictionaryEntryScopeValue"))}</dd></div>
       </dl>
@@ -7524,8 +7610,12 @@ function dictionaryFullEntryDetailsHtml(value) {
 }
 
 function dictionaryResultHtml(item) {
-  const primary = currentLanguage() === "en" ? (item.shortEnglish || item.shortPolish || item.english) : (item.shortPolish || item.shortEnglish || item.polish);
-  const secondary = currentLanguage() === "en" ? (item.shortPolish || item.polish || "") : (item.shortEnglish || "");
+  const isEnglishMode = currentLanguage() === "en";
+  const primary = isEnglishMode
+    ? (item.shortEnglish || item.shortPolish || item.english)
+    : (item.shortPolish || item.polish || t("dictionaryMissingPolishGloss"));
+  const secondary = isEnglishMode ? (item.shortPolish || item.polish || "") : "";
+  const status = dictionaryEntryStatus({ ...item, hasData: Boolean(item.polish || item.english) });
   return `
     <article class="dictionary-result" data-dictionary-token="${escapeHtml(item.token)}">
       <button class="dictionary-result-main" type="button" data-dictionary-open="${escapeHtml(item.token)}">
@@ -7535,8 +7625,9 @@ function dictionaryResultHtml(item) {
         ${secondary ? `<em>${escapeHtml(secondary)}</em>` : ""}
       </button>
       <div class="dictionary-result-meta">
+        ${dictionaryStatusPillHtml(status)}
         ${item.pos ? `<span>${escapeHtml(item.pos)}</span>` : ""}
-        ${item.shortEnglish ? `<span>EN: ${escapeHtml(item.shortEnglish)}</span>` : ""}
+        ${isEnglishMode && item.shortEnglish ? `<span>EN: ${escapeHtml(item.shortEnglish)}</span>` : ""}
       </div>
     </article>
   `;
@@ -7597,7 +7688,7 @@ function showInterlinearDictionaryCard(token) {
   const primaryLanguageFields = isEnglishMode
     ? `${dictionaryFieldHtml(t("dictionaryEnglish"), details.shortEnglish || details.english, "dictionary-primary")}
        ${dictionaryFieldHtml(t("dictionaryPolish"), details.shortPolish || details.polish, "dictionary-primary dictionary-secondary-language")}`
-    : `${dictionaryFieldHtml(t("dictionaryPolish"), details.shortPolish || details.polish, "dictionary-primary")}
+    : `${dictionaryFieldHtml(t("dictionaryPolish"), details.shortPolish || details.polish || t("dictionaryMissingPolishGloss"), "dictionary-primary")}
        ${dictionaryFieldHtml(t("dictionaryEnglish"), details.shortEnglish || details.english, "dictionary-primary dictionary-secondary-language")}`;
   const localizedMoreMeanings = isEnglishMode
     ? dictionaryMeaningsHtml(fullEnglish, details.shortEnglish)
@@ -8239,6 +8330,62 @@ function setLibraryVersion(version) {
 }
 
 const FALLBACK_CHANGELOG = `# Changelog
+
+## 1.0.150
+
+### PL
+- Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.
+- Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.
+- Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.
+
+### EN
+- Added the English meaning to the dictionary card in Polish mode, below the Polish gloss.
+- Cleaned up the changelog so English mode no longer shows Polish points as the latest update.
+- Synchronized the version number across the app, PWA files, and change history.
+
+## 1.0.149
+
+### PL
+- Poprawiono widok słownika w trybie PL: wyniki i karta nie podstawiają już angielskich glos jako głównego tekstu, gdy brakuje polskiej glosy.
+- Wyśrodkowano krzyżyk zamykania karty słownikowej.
+- Poprawiono wyszukiwanie w słowniku: wyniki są teraz sortowane według trafności.
+- Ograniczono listę do 30 najlepszych wyników, żeby nie pokazywać przypadkowych dopasowań.
+- Usunięto fałszywe trafienia typu „mój / my” przy wyszukiwaniu słowa „spirit”.
+
+### EN
+- Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.
+- Centered the dictionary card close button.
+- Improved dictionary search: results are now ranked by relevance.
+- Limited the list to the 30 best results to avoid weak accidental matches.
+- Removed false matches such as “mój / my” when searching for “spirit”.
+
+## 1.0.144
+
+### PL
+- Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.
+- Dodano najnowszą wersję do widocznej historii zmian.
+- Wyśrodkowano krzyżyk zamykania karty słownikowej.
+- Usunięto ramkę i tło ze statusów książek w katalogu.
+
+### EN
+- Synchronized the version number across the app, PWA files, and asset links.
+- Added the latest version to the visible changelog.
+- Centered the dictionary card close button.
+- Removed the border and background from catalogue book status labels.
+
+## 1.0.143
+
+### PL
+- Przebudowano strukturę danych na bibliotekę modułową w katalogu books/.
+- Przeniesiono Pistis Sophię do books/pistis-sophia/.
+- Dodano szkielet modułu Ewangelii Tomasza w books/gospel-of-thomas/ z miejscem na 114 logionów.
+- Zaktualizowano manifest biblioteki, ścieżki skryptów i cache PWA.
+
+### EN
+- Rebuilt the data structure as a modular library in the books/ directory.
+- Moved Pistis Sophia to books/pistis-sophia/.
+- Added a Gospel of Thomas module skeleton in books/gospel-of-thomas/ with space for 114 logia.
+- Updated the library manifest, script paths, and PWA cache.
 
 ## 1.0.142
 
@@ -9157,7 +9304,17 @@ function goToHome() {
 }
 
 function openLibraryWork(workId = "pistis-sophia") {
-  if (workId !== "pistis-sophia") return;
+  const module = bookModules[workId];
+  if (workId !== "pistis-sophia") {
+    if (workId === "gospel-of-thomas") {
+      setLibrarySection("books");
+      setHidden(els.thomasDetailsPanel, false);
+      els.thomasDetailsToggle?.setAttribute("aria-expanded", "true");
+      els.thomasDetailsPanel?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return;
+  }
+  localStorage.setItem("gnostyk.activeBook", module?.id || "pistis-sophia");
   scrollToReaderControls();
 }
 

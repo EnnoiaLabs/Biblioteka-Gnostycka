@@ -2,8 +2,9 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.0.142",
-    "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza."
+    "version": "1.0.150",
+    "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza.",
+    "moduleIndex": "books/index.json"
   },
   "works": [
     {
@@ -26,12 +27,16 @@
         "Sophia",
         "misteria",
         "?wiat?o??"
-      ]
+      ],
+      "module": "books/pistis-sophia/book.json",
+      "entry": "books/pistis-sophia/data.js",
+      "coptic": "books/pistis-sophia/coptic-data.js",
+      "type": "page-reader"
     },
     {
       "id": "gospel-of-thomas",
       "title": "Ewangelia Tomasza",
-      "status": "W przygotowaniu",
+      "status": "Moduł przygotowany",
       "language": "pl",
       "sourceLanguageLayers": [
         "cop"
@@ -47,7 +52,15 @@
         "Tomasz",
         "logia",
         "Nag Hammadi"
-      ]
+      ],
+      "module": "books/gospel-of-thomas/book.json",
+      "entry": "books/gospel-of-thomas/data.js",
+      "type": "logion-reader",
+      "structure": {
+        "unitName": "logion",
+        "unitCount": 114,
+        "labelPattern": "Logion {number}"
+      }
     }
   ]
 }

@@ -1,3 +1,52 @@
+# 1.0.150
+
+## PL
+- Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.
+- Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.
+- Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.
+
+## EN
+- Added the English meaning to the dictionary card in Polish mode, below the Polish gloss.
+- Cleaned up the changelog so English mode no longer shows Polish points as the latest update.
+- Synchronized the version number across the app, PWA files, and change history.
+
+# 1.0.149
+
+## PL
+- Poprawiono widok słownika w trybie PL: wyniki i karta nie podstawiają już angielskich glos jako głównego tekstu, gdy brakuje polskiej glosy.
+- Wyśrodkowano krzyżyk zamykania karty słownikowej.
+- Poprawiono wyszukiwanie w słowniku: wyniki są teraz sortowane według trafności.
+- Ograniczono listę do 30 najlepszych wyników, żeby nie pokazywać przypadkowych dopasowań.
+- Usunięto fałszywe trafienia typu „mój / my” przy wyszukiwaniu słowa „spirit”.
+
+## EN
+- Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.
+- Centered the dictionary card close button.
+- Improved dictionary search: results are now ranked by relevance.
+- Limited the list to the 30 best results to avoid weak accidental matches.
+- Removed false matches such as “mój / my” when searching for “spirit”.
+
+# 1.0.144
+
+### PL
+- Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.
+- Dodano najnowszą wersję do widocznej historii zmian.
+- Wyśrodkowano krzyżyk zamykania karty słownikowej.
+- Usunięto ramkę i tło ze statusów książek w katalogu.
+
+### EN
+- Synchronized the version number across the app, PWA files, and asset links.
+- Added the latest version to the visible changelog.
+- Centered the dictionary card close button.
+- Removed the border and background from catalogue book status labels.
+
+# 1.0.143
+
+- Przebudowano strukturę danych na bibliotekę modułową w katalogu `books/`.
+- Przeniesiono Pistis Sophię do `books/pistis-sophia/`.
+- Dodano szkielet modułu Ewangelii Tomasza w `books/gospel-of-thomas/` z miejscem na 114 logionów.
+- Zaktualizowano manifest biblioteki, ścieżki skryptów i cache PWA.
+
 ## 1.0.142
 
 ### PL
