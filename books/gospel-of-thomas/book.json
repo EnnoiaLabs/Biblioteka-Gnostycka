@@ -1,0 +1,18 @@
+{
+  "id": "gospel-of-thomas",
+  "title": "Ewangelia Tomasza",
+  "status": "Moduł przygotowany — oczekuje na tekst",
+  "type": "logion-reader",
+  "language": "pl",
+  "sourceLanguageLayers": ["cop"],
+  "entry": "books/gospel-of-thomas/data.js",
+  "readerModes": ["pl", "coptic", "interlinear", "notes"],
+  "defaultReaderMode": "pl",
+  "source": "Koptyjski tekst z Kodeksu II z Nag Hammadi; podstawa edytorska do ustalenia przed przekładem.",
+  "sourceRights": "Tekst starożytny w domenie publicznej; opracowanie biblioteki w przygotowaniu.",
+  "structure": {
+    "unitName": "logion",
+    "unitCount": 114,
+    "labelPattern": "Logion {number}"
+  }
+}

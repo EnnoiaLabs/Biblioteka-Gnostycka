@@ -1,0 +1,8 @@
+{
+  "version": "1.0.150",
+  "defaultWork": "pistis-sophia",
+  "books": [
+    "books/pistis-sophia/book.json",
+    "books/gospel-of-thomas/book.json"
+  ]
+}
