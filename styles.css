@@ -3914,3 +3914,240 @@ body[data-theme="dark"] .dictionary-status-ready {
 body[data-theme="dark"] .dictionary-status-basic {
   color: #f1aa48;
 }
+
+
+.logion-continuous {
+  white-space: normal;
+}
+
+.logion-block {
+  scroll-margin-top: 96px;
+  padding: 18px 0 22px;
+  border-bottom: 1px solid rgba(29, 109, 104, 0.16);
+}
+
+.logion-block:first-child {
+  padding-top: 0;
+}
+
+.logion-block h2 {
+  margin: 0 0 6px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+}
+
+.logion-layer-label {
+  margin: 0 0 10px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.logion-block.is-active {
+  background: linear-gradient(90deg, rgba(185, 137, 53, 0.12), transparent 62%);
+  margin-left: -12px;
+  padding-left: 12px;
+  border-radius: 14px;
+}
+
+
+.home-card[data-open-work],
+.home-card button[data-open-work] {
+  cursor: pointer;
+}
+
+
+/* v1.2.2: Home cards use subtle Material Symbols matched to theme */
+.home-card-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--muted);
+  font-size: .82rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.home-card-kicker .home-symbol {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.18rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.home-card-kicker span:not(.home-symbol) {
+  color: currentColor;
+}
+
+/* v1.2.1: Home jako ekran startowy, a Księgi jako jedyny katalog */
+.home-dashboard {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+.home-recent-updates {
+  padding: 1rem;
+  border: 1px solid rgba(214, 170, 86, 0.18);
+  border-radius: 1rem;
+  background: rgba(255,255,255,.03);
+}
+.home-recent-updates header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .75rem;
+}
+.home-recent-updates header > span {
+  color: var(--accent);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.home-recent-updates ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .5rem;
+}
+.home-recent-updates li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: .75rem;
+  align-items: start;
+  color: var(--muted);
+}
+.home-recent-updates li strong {
+  color: var(--text);
+}
+.visit-counter-card strong {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .home-recent-updates header,
+  .home-recent-updates li {
+    display: block;
+  }
+  .home-recent-updates header .text-button {
+    margin-top: .65rem;
+  }
+  .home-recent-updates li strong {
+    display: block;
+    margin-bottom: .2rem;
+  }
+}
+
+
+/* v1.2.4: Home card action buttons aligned consistently */
+.home-start-cards .home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 8.75rem;
+}
+.home-start-cards .home-card p {
+  margin-bottom: 1rem;
+}
+.home-start-cards .home-card .library-read-button {
+  margin-top: auto;
+}
+
+/* v1.2.4: Codex list rows with aligned statuses, without hand cursor */
+.codex-work-list {
+  list-style: none;
+  margin: 0.65rem 0 0;
+  padding: 0;
+}
+.codex-work-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  color: var(--muted);
+}
+.codex-work-row > span:first-child {
+  color: var(--text);
+  min-width: 0;
+}
+.codex-work-row.available > span:first-child {
+  font-weight: 700;
+}
+.codex-work-row.planned > span:first-child {
+  color: var(--muted);
+}
+.codex-work-row[data-open-work] {
+  cursor: default;
+}
+.codex-work-row[data-open-work]:hover,
+.codex-work-row[data-open-work]:focus-visible {
+  background: rgba(216, 160, 82, 0.10);
+  border-color: rgba(216, 160, 82, 0.28);
+  outline: none;
+}
+.collection-item-link,
+.work-tile[data-open-work] {
+  cursor: default;
+}
+.codex-item-with-status {
+  cursor: default;
+}
+
+.thomas-coptic-continuous .coptic-page {
+  scroll-margin-top: 1.5rem;
+}
+
+.thomas-coptic-continuous .coptic-page.is-active {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--panel-2) 86%, var(--accent) 14%);
+}
+
+
+.thomas-interlinear-continuous {
+  gap: 28px;
+}
+
+.thomas-interlinear-continuous .interlinear-page {
+  scroll-margin-top: 24px;
+}
+
+.thomas-interlinear-continuous .interlinear-line {
+  border: 0;
+  border-top: 1px solid rgba(141, 107, 79, 0.2);
+  background: transparent;
+  padding: 12px 0 16px;
+}
+
+.thomas-interlinear-continuous .interlinear-line > header {
+  margin-bottom: 2px;
+}
+
+.thomas-interlinear-continuous .interlinear-token {
+  min-width: 66px;
+  max-width: 150px;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  padding: 4px 6px 6px 0;
+}
+
+.thomas-interlinear-continuous .interlinear-token:hover {
+  background: rgba(216, 160, 82, 0.08);
+}
+
+.thomas-interlinear-continuous .interlinear-source {
+  margin-bottom: 2px;
+}

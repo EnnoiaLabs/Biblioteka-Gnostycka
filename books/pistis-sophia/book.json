@@ -4,11 +4,20 @@
   "status": "Pełna księga",
   "type": "page-reader",
   "language": "pl",
-  "sourceLanguageLayers": ["en", "cop"],
+  "sourceLanguageLayers": [
+    "en",
+    "cop"
+  ],
   "entry": "books/pistis-sophia/data.js",
   "coptic": "books/pistis-sophia/coptic-data.js",
-  "readerModes": ["pl", "source", "coptic", "interlinear"],
+  "readerModes": [
+    "pl",
+    "source",
+    "coptic",
+    "interlinear"
+  ],
   "defaultReaderMode": "pl",
   "source": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
-  "sourceRights": "Domena publiczna"
+  "sourceRights": "Domena publiczna",
+  "themes": "themes.json"
 }

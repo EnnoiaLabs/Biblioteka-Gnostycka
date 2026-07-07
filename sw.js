@@ -1,4 +1,4 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.0.150";
+const CACHE_NAME = "gnostyk-biblioteka-v1.3.8";
 
 const APP_SHELL = [
   "./",
@@ -11,6 +11,7 @@ const APP_SHELL = [
   "./books/pistis-sophia/coptic-data.js",
   "./books/gospel-of-thomas/book.json",
   "./books/gospel-of-thomas/data.js",
+  "./books/gospel-of-thomas/coptic-data.js",
   "./coptic-dictionary.js",
   "./coptic-polish-overrides.js",
   "./coptic-missing-dictionary-map.json",
@@ -64,6 +65,7 @@ self.addEventListener("fetch", event => {
     "books/pistis-sophia/coptic-data.js",
     "books/gospel-of-thomas/book.json",
     "books/gospel-of-thomas/data.js",
+    "books/gospel-of-thomas/coptic-data.js",
     "coptic-dictionary.js",
     "coptic-polish-overrides.js"
   ].some(file => url.pathname.endsWith(file));

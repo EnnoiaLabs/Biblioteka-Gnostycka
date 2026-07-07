@@ -8,14 +8,15 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.150">
+    <link rel="manifest" href="manifest.webmanifest?v=1.3.8">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1.0.150">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1.3.8">
   </head>
   <body data-view="library">
     <div class="app-shell">
@@ -87,16 +88,16 @@
               <span class="eyebrow" data-i18n-pl="Biblioteka Gnozy" data-i18n-en="Gnostyk Library">Biblioteka Gnozy</span>
               <h3 data-i18n-pl="Cyfrowa biblioteka tekstów gnostyckich" data-i18n-en="A digital library of Gnostic texts">Cyfrowa biblioteka tekstów gnostyckich</h3>
               <p data-i18n-pl="Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu." data-i18n-en="Translations, source texts, Coptic interlinear tools, a dictionary, and research features for studying Gnostic tradition in one place.">Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu.</p>
-              <button id="browseBooksButton" class="text-button library-read-button" type="button" data-i18n-pl="Przeglądaj księgi" data-i18n-en="Browse books">Przeglądaj księgi</button>
+              <button id="browseBooksButton" class="text-button library-read-button" type="button" data-i18n-pl="Przeglądaj bibliotekę" data-i18n-en="Browse library">Przeglądaj bibliotekę</button>
             </div>
 
             <div class="home-dashboard" aria-label="Stan biblioteki">
               <article>
-                <strong>1</strong>
-                <span data-i18n-pl="księga dostępna" data-i18n-en="available book">księga dostępna</span>
+                <strong>2</strong>
+                <span data-i18n-pl="księgi dostępne" data-i18n-en="available books">księgi dostępne</span>
               </article>
               <article>
-                <strong>2</strong>
+                <strong>1</strong>
                 <span data-i18n-pl="w przygotowaniu" data-i18n-en="in preparation">w przygotowaniu</span>
               </article>
               <article>
@@ -107,27 +108,48 @@
                 <strong>14k+</strong>
                 <span data-i18n-pl="form słownikowych" data-i18n-en="dictionary forms">form słownikowych</span>
               </article>
+              <article id="visitCounterCard" class="visit-counter-card">
+                <strong id="visitCounterValue">—</strong>
+                <span data-i18n-pl="odwiedzin biblioteki" data-i18n-en="library visits">odwiedzin biblioteki</span>
+              </article>
             </div>
 
-            <div class="home-cards">
+            <div class="home-cards home-start-cards">
               <article class="home-card primary">
-                <span data-i18n-pl="Kontynuuj" data-i18n-en="Continue">Kontynuuj</span>
-                <h4>Pistis Sophia</h4>
-                <p data-i18n-pl="Wróć do ostatnio czytanej strony i kontynuuj pracę z tekstem, interlinią oraz słownikiem." data-i18n-en="Return to the last page you read and continue working with the text, interlinear layer, and dictionary.">Wróć do ostatnio czytanej strony i kontynuuj pracę z tekstem, interlinią oraz słownikiem.</p>
-                <button id="homeContinueButton" class="text-button library-read-button" type="button" data-i18n-pl="Czytaj dalej" data-i18n-en="Continue reading">Czytaj dalej</button>
+                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">history_edu</span><span data-i18n-pl="Kontynuuj pracę" data-i18n-en="Continue work">Kontynuuj pracę</span></div>
+                <h4 data-i18n-pl="Wróć do ostatniego tekstu" data-i18n-en="Return to the last text">Wróć do ostatniego tekstu</h4>
+                <p data-i18n-pl="Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę." data-i18n-en="Open the last viewed book exactly where you stopped working.">Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę.</p>
+                <button id="homeContinueButton" class="text-button library-read-button" type="button" data-i18n-pl="Wróć do tekstu" data-i18n-en="Return to text">Wróć do tekstu</button>
               </article>
-              <article class="home-card">
-                <span data-i18n-pl="Następna księga" data-i18n-en="Next text">Następna księga</span>
+              <article class="home-card" data-open-work="gospel-of-thomas" role="button" tabindex="0">
+                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">auto_stories</span><span data-i18n-pl="Ostatnio dodane" data-i18n-en="Recently added">Ostatnio dodane</span></div>
                 <h4 data-i18n-pl="Ewangelia Tomasza" data-i18n-en="Gospel of Thomas">Ewangelia Tomasza</h4>
-                <p data-i18n-pl="Planowana jako pierwsza nowa pozycja z Biblioteki Nag Hammadi." data-i18n-en="Planned as the first new text from the Nag Hammadi Library.">Planowana jako pierwsza nowa pozycja z Biblioteki Nag Hammadi.</p>
+                <p data-i18n-pl="Pełny tekst 114 logionów w warstwach PL/EN/COPT." data-i18n-en="Full text of 114 logia in PL/EN/COPT layers.">Pełny tekst 114 logionów w warstwach PL/EN/COPT.</p>
+                <button class="text-button library-read-button" type="button" data-open-work="gospel-of-thomas" data-i18n-pl="Otwórz" data-i18n-en="Open">Otwórz</button>
               </article>
               <article class="home-card">
-                <span data-i18n-pl="Wsparcie" data-i18n-en="Support">Wsparcie</span>
+                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">volunteer_activism</span><span data-i18n-pl="Wsparcie" data-i18n-en="Support">Wsparcie</span></div>
                 <h4 data-i18n-pl="Pomóż rozwijać projekt" data-i18n-en="Help develop the project">Pomóż rozwijać projekt</h4>
                 <p data-i18n-pl="Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie." data-i18n-en="Your support helps develop the dictionary, interlinear tools, and future Gnostic texts.">Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie.</p>
                 <button id="homeSupportButton" class="text-button library-read-button secondary support-nav-button" type="button"><span class="support-icon" aria-hidden="true">♡</span><span data-i18n-pl="Wesprzyj" data-i18n-en="Support">Wesprzyj</span></button>
               </article>
             </div>
+
+            <section class="home-recent-updates" aria-label="Ostatnie zmiany">
+              <header>
+                <span data-i18n-pl="Ostatnie zmiany" data-i18n-en="Recent changes">Ostatnie zmiany</span>
+                <button class="text-button" type="button" data-nav-section="changes" data-i18n-pl="Pełna historia" data-i18n-en="Full history">Pełna historia</button>
+              </header>
+              <ul>
+                <li><strong>1.3.8</strong><span data-i18n-pl="Podbito wersję w całej aplikacji i uzupełniono changelog EN." data-i18n-en="Synchronized the app version and completed the EN changelog.">Podbito wersję w całej aplikacji i uzupełniono changelog EN.</span></li>
+                <li><strong>1.3.7</strong><span data-i18n-pl="Interlinia Tomasza działa teraz jako ciągły tekst 1–114." data-i18n-en="Thomas interlinear now works as a continuous 1–114 text.">Interlinia Tomasza działa teraz jako ciągły tekst 1–114.</span></li>
+                <li><strong>1.3.6</strong><span data-i18n-pl="Karta słownikowa działa kontekstowo dla Tomasza." data-i18n-en="The dictionary card now follows the Thomas context.">Karta słownikowa działa kontekstowo dla Tomasza.</span></li>
+                <li><strong>1.2.3</strong><span data-i18n-pl="Wyrównano przyciski w kafelkach Home." data-i18n-en="Aligned the buttons in the Home cards.">Wyrównano przyciski w kafelkach Home.</span></li>
+                <li><strong>1.2.2</strong><span data-i18n-pl="Uproszczono kafelki Home i dodano jednolite ikony dopasowane do motywu strony." data-i18n-en="Simplified Home cards and added consistent icons that follow the current theme.">Uproszczono kafelki Home i dodano jednolite ikony dopasowane do motywu strony.</span></li>
+                <li><strong>1.2.1</strong><span data-i18n-pl="Poprawiono powrót do ostatniego tekstu i changelog EN." data-i18n-en="Fixed return to the last text and the EN changelog.">Poprawiono powrót do ostatniego tekstu i changelog EN.</span></li>
+                <li><strong>1.1.5</strong><span data-i18n-pl="Rozdzielono motywy Pistis Sophii i Ewangelii Tomasza." data-i18n-en="Separated themes for Pistis Sophia and the Gospel of Thomas.">Rozdzielono motywy Pistis Sophii i Ewangelii Tomasza.</span></li>
+              </ul>
+            </section>
           </section>
 
           <div id="libraryBooksPanel" class="library-shelf" aria-label="Księgi" hidden>
@@ -135,7 +157,7 @@
             <header class="library-info-head library-books-head">
               <span data-i18n-pl="Księgi" data-i18n-en="Books">Księgi</span>
               <h3 data-i18n-pl="Katalog Biblioteki Gnozy" data-i18n-en="Gnostyk Library catalogue">Katalog Biblioteki Gnozy</h3>
-              <p data-i18n-pl="Księgi są pogrupowane według kolekcji i kodeksów. Pistis Sophia pozostaje w Kodeksie Askew, a Biblioteka Nag Hammadi jest przygotowana jako katalog kolejnych tekstów." data-i18n-en="Texts are grouped by collections and codices. Pistis Sophia remains under the Askew Codex, while the Nag Hammadi Library is prepared as a catalogue for future texts.">Księgi są pogrupowane według kolekcji i kodeksów. Pistis Sophia pozostaje w Kodeksie Askew, a Biblioteka Nag Hammadi jest przygotowana jako katalog kolejnych tekstów.</p>
+              <p data-i18n-pl="Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych." data-i18n-en="Texts are grouped by collections and codices. This catalogue is the main place for opening available texts and checking planned entries.">Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych.</p>
             </header>
 
             <section class="library-collections" aria-label="Kolekcje tekstów gnostyckich">
@@ -150,7 +172,7 @@
                 <summary><span data-i18n-pl="Biblioteka Nag Hammadi (Codices I–XIII)" data-i18n-en="Nag Hammadi Library (Codices I–XIII)">Biblioteka Nag Hammadi (Codices I–XIII)</span><small data-i18n-pl="katalog planowany" data-i18n-en="planned catalogue">katalog planowany</small></summary>
                 <div class="codex-grid">
                   <details><summary>Codex I <small>Jung Codex</small></summary><ul><li>Modlitwa Apostoła Pawła</li><li>Apokryf Jakuba</li><li>Ewangelia Prawdy</li><li>Traktat o Zmartwychwstaniu</li><li>Trójkształtna Protennoia</li></ul></details>
-                  <details><summary>Codex II <small data-i18n-pl="Tomasz i Filip" data-i18n-en="Thomas and Philip">Tomasz i Filip</small></summary><ul><li>Apokryf Jana</li><li class="codex-item-with-status"><span>Ewangelia Tomasza</span><span class="status-badge preparing" data-i18n-pl="w przygotowaniu" data-i18n-en="in preparation">w przygotowaniu</span></li><li class="codex-item-with-status"><span>Ewangelia Filipa</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li>Hipostaza Archontów</li><li>O początku świata</li><li>Egzegeza o duszy</li><li>Księga Tomasza Atlety</li></ul></details>
+                  <details><summary>Codex II <small data-i18n-pl="Tomasz i Filip" data-i18n-en="Thomas and Philip">Tomasz i Filip</small></summary><ul class="codex-work-list"><li class="codex-work-row planned"><span>Apokryf Jana</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row available" data-open-work="gospel-of-thomas" role="button" tabindex="0"><span>Ewangelia Tomasza</span><span class="status-badge available" data-i18n-pl="gotowe" data-i18n-en="ready">gotowe</span></li><li class="codex-work-row planned"><span>Ewangelia Filipa</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>Hipostaza Archontów</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>O początku świata</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>Egzegeza o duszy</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>Księga Tomasza Atlety</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li></ul></details>
                   <details><summary>Codex III</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li><li>Eugnostos Błogosławiony</li><li>Sophia Jezusa Chrystusa</li><li>Dialog Zbawiciela</li></ul></details>
                   <details><summary>Codex IV</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li></ul></details>
                   <details><summary>Codex V</summary><ul><li>Eugnostos</li><li>Apokalipsa Pawła</li><li>Pierwsza Apokalipsa Jakuba</li><li>Druga Apokalipsa Jakuba</li><li>Apokalipsa Adama</li></ul></details>
@@ -176,51 +198,6 @@
               </details>
             </section>
 
-            <article class="work-tile is-available" data-open-work="pistis-sophia" role="button" tabindex="0">
-              <img src="assets/pwa-icon-192.png" alt="">
-              <div>
-                <span>Pełny przekład</span>
-                <h3>Pistis Sophia</h3>
-                <p>Tekst źródłowy, polski przekład, paginacja Meada i Schwartze-Petermanna, cytowanie oraz notatki.</p>
-                <button id="openWorkButton" class="text-button library-read-button" type="button">Czytaj</button>
-              </div>
-            </article>
-
-            <article class="work-tile is-planned" data-open-work="gospel-of-thomas">
-              <div class="planned-mark" aria-hidden="true">+</div>
-              <div>
-                <span>Moduł przygotowany</span>
-                <h3>Ewangelia Tomasza</h3>
-                <p>Osobny moduł księgi w strukturze biblioteki: 114 logionów, gotowy do podpięcia tekstu, koptyjskiego źródła i interlinii.</p>
-                <button id="thomasDetailsToggle" class="text-button library-read-button secondary" type="button" aria-expanded="false" aria-controls="thomasDetailsPanel">Szczegóły</button>
-              </div>
-            </article>
-
-            <section id="thomasDetailsPanel" class="planned-work-panel" aria-label="Ewangelia Tomasza - szczegóły" hidden>
-              <header>
-                <span>Moduł przygotowany</span>
-                <h3>Ewangelia Tomasza</h3>
-                <p>Druga pozycja katalogu biblioteki. Struktura modułu jest gotowa pod 114 logionów; brakuje jeszcze właściwego tekstu i aparatu źródłowego.</p>
-              </header>
-              <div class="planned-work-grid">
-                <div>
-                  <strong>Status</strong>
-                  <span>Moduł księgi gotowy</span>
-                </div>
-                <div>
-                  <strong>Podstawa</strong>
-                  <span>Kodeks II z Nag Hammadi</span>
-                </div>
-                <div>
-                  <strong>Forma</strong>
-                  <span>Logia Jezusa</span>
-                </div>
-                <div>
-                  <strong>Następny etap</strong>
-                  <span>Wklejenie/przygotowanie tekstu logionów oraz warstwy koptyjskiej</span>
-                </div>
-              </div>
-            </section>
           </div>
 
           <section id="libraryInfoPanel" class="library-about" aria-label="Informacje o bibliotece" hidden>
@@ -234,7 +211,7 @@
               <h4>Czym jest Gnostyk Biblioteka</h4>
               <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
               <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.150</span></strong>.</p>
+              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.3.8</span></strong>.</p>
               <div class="library-info-strip" aria-label="Podstawowe informacje">
                 <span><strong>Zakres</strong>Teksty gnostyckie</span>
                 <span><strong>Forma</strong>Przekład i opracowanie</span>
@@ -256,7 +233,7 @@
               <p><strong>Dane lokalne.</strong> Zakładki, notatki, ostatnia czytana strona oraz ustawienia czytania są zapisywane lokalnie w przeglądarce użytkownika.</p>
               <p><strong>Brak wysyłania danych.</strong> Aplikacja nie wysyła notatek, zakładek ani ustawień na zewnętrzny serwer. Dane pozostają na urządzeniu, dopóki użytkownik ich nie usunie albo nie wyczyści danych przeglądarki.</p>
               <p><strong>Tryb offline.</strong> Jako aplikacja PWA biblioteka może zapisywać pliki tekstów w pamięci podręcznej przeglądarki, aby działały również bez połączenia z internetem.</p>
-              <p><strong>Brak śledzenia.</strong> W tej wersji aplikacja nie korzysta z kont użytkowników, newslettera, analityki ani mechanizmów śledzących.</p>
+              <p><strong>Licznik odwiedzin.</strong> Widoczny licznik odwiedzin jest przygotowany pod lekki, zewnętrzny licznik prywatnościowy. Jeśli nie zostanie skonfigurowany adres API, aplikacja pokaże jedynie znak „—”.</p>
               <p><strong>Zmiany w przyszłości.</strong> Jeśli biblioteka otrzyma synchronizację, konto użytkownika, newsletter lub analitykę, polityka prywatności powinna zostać zaktualizowana przed publikacją takiej funkcji.</p>
             </article>
           </section>
@@ -268,15 +245,21 @@
               <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
             </header>
             <ol id="libraryUpdates" class="library-updates">
-              <li class="library-update-group"><strong>1.0.150</strong><ul><li>Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.</li><li>Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li><li class="library-update-group"><strong>1.0.147</strong><ul><li>Wycofano pasek postępu słownika i automatyczne procenty, aby uniknąć błędnych statystyk.</li><li>Zostawiono prostszy, stabilniejszy widok słownika ze statusami haseł.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
+              <li class="library-update-group"><strong>1.3.8</strong><ul><li data-i18n-pl="Podbito numer wersji w całej aplikacji, plikach PWA, odnośnikach do zasobów i historii zmian." data-i18n-en="Synchronized the version number across the app, PWA files, asset links, and the change history.">Podbito numer wersji w całej aplikacji, plikach PWA, odnośnikach do zasobów i historii zmian.</li><li data-i18n-pl="Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zakładce Zmiany." data-i18n-en="Added the latest entry to the visible change history on Home and in the Changes tab.">Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zakładce Zmiany.</li><li data-i18n-pl="Uzupełniono angielskie wersje najnowszych wpisów changeloga, aby tryb EN nie pokazywał polskich punktów." data-i18n-en="Completed the English versions of the latest changelog entries so EN mode no longer shows Polish points.">Uzupełniono angielskie wersje najnowszych wpisów changeloga, aby tryb EN nie pokazywał polskich punktów.</li></ul></li>
+              <li class="library-update-group"><strong>1.3.7</strong><ul><li data-i18n-pl="Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114." data-i18n-en="Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114.">Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.</li><li data-i18n-pl="Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii." data-i18n-en="Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well.">Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.</li><li data-i18n-pl="Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika." data-i18n-en="Simplified the visual style of interlinear word blocks so they fit the continuous reader better.">Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.</li></ul></li>
+              <li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-pl="Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii." data-i18n-en="The dictionary card now follows the active book: in Thomas it shows logia and Gospel of Thomas occurrences instead of Pistis Sophia pages.">Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.</li><li data-i18n-pl="Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię." data-i18n-en="Generalized the shared Gnostyk Library dictionary note so it no longer points only to Pistis Sophia.">Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.</li></ul></li>
+              <li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-pl="Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM." data-i18n-en="Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM.">Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.</li><li data-i18n-pl="Zsynchronizowano widok Koptyjski z logionami 1–114." data-i18n-en="Synchronized Coptic mode with logia 1–114.">Zsynchronizowano widok Koptyjski z logionami 1–114.</li><li data-i18n-pl="Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu." data-i18n-en="Restored the Thomas Interlinear button as a technical preview based on the Coptic text layer.">Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.</li></ul></li>
+              <li class="library-update-group"><strong>1.2.3</strong><ul><li>Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.</li><li>Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.</li></ul></li>
+              <li class="library-update-group"><strong>1.2.2</strong><ul><li>Usunięto dużą ikonę książki z kafelka na stronie Home.</li><li>Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.</li><li>Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.</li></ul></li>
+              <li class="library-update-group"><strong>1.2.0</strong><ul><li>Przebudowano stronę Home, aby nie dublowała katalogu ksiąg.</li><li>Usunięto zdublowane kafelki z zakładki Księgi.</li><li>Przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.</li></ul></li>
+              <li class="library-update-group"><strong>1.1.1</strong><ul><li>Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.</li><li>Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.</li></ul></li>
+              <li class="library-update-group"><strong>1.1.0</strong><ul><li>Dodano Ewangelię Tomasza jako pełną księgę modułową.</li><li>Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.</li><li>Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.150</strong><ul><li>Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.</li><li>Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.147</strong><ul><li>Wycofano pasek postępu słownika i automatyczne procenty, aby uniknąć błędnych statystyk.</li><li>Zostawiono prostszy, stabilniejszy widok słownika ze statusami haseł.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
               <li class="library-update-group"><strong>1.0.145</strong><ul><li>Usunięto kreskowy zapis brakujących glos w interlinii i zastąpiono go statusem „w przygotowaniu”.</li><li>Dodano statusy haseł słownikowych: Gotowe, Podstawowe i W przygotowaniu.</li><li>Przygotowano słownik jako wspólną warstwę dla kolejnych modułów ksiąg.</li></ul></li>
               <li class="library-update-group"><strong>1.0.144</strong><ul><li>Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.</li><li>Dodano najnowszą wersję do widocznej historii zmian.</li><li>Wyśrodkowano krzyżyk zamykania karty słownikowej.</li><li>Usunięto ramkę i tło ze statusów książek w katalogu.</li></ul></li>
               <li class="library-update-group"><strong>1.0.143</strong><ul><li>Przebudowano dane ksiąg na strukturę modułową w katalogu <code>books/</code>.</li><li>Przeniesiono Pistis Sophię do modułu <code>books/pistis-sophia/</code>.</li><li>Dodano szkielet modułu Ewangelii Tomasza z miejscem na 114 logionów.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.142</strong><ul><li>Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.</li><li>Usunięto obramowanie logo po najechaniu kursorem.</li><li>Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.141</strong><ul><li>Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.</li><li>Kliknięcie logo Gnostyk przenosi teraz do strony Home.</li><li>Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.140</strong><ul><li>Dodano osobną stronę Home jako ekran startowy biblioteki.</li><li>Przeniesiono katalog tekstów do zakładki Księgi.</li><li>Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.139</strong><ul><li>Naprawiono kartę słownikową po zmianie języka interfejsu.</li><li>Otwarta karta słownikowa odświeża teraz etykiety PL/EN.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.138</strong><ul><li>Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.</li><li>Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.</li><li>Uspójniono prezentację danych słownikowych bez zmiany działania interlinii.</li></ul></li></ol>
+            </ol>
           </section>
 
           <section id="libraryDictionaryPanel" class="library-about library-dictionary-panel" aria-label="Słownik koptyjski" hidden>
@@ -428,7 +411,7 @@
             <button id="footerPrivacyButton" class="footer-link" type="button">Prywatność</button>
             <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
             <button id="footerSupportButton" class="footer-link footer-support-link" type="button"><span class="support-icon" aria-hidden="true">♡</span><span>Wsparcie</span></button>
-            <span>v<span id="libraryVersionFooterHome">1.0.150</span></span>
+            <span>v<span id="libraryVersionFooterHome">1.3.8</span></span>
           </div>
         </footer>
 
@@ -442,7 +425,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.150</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.3.8</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -522,7 +505,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.150</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.3.8</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <div id="pageText" class="page-text"></div>
@@ -551,7 +534,7 @@
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
           <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.150</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.3.8</span></p>
         </footer>
       </main>
     </div>
@@ -639,11 +622,12 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="books/pistis-sophia/data.js?v=1.0.150"></script>
-    <script src="books/pistis-sophia/coptic-data.js?v=1.0.150"></script>
-    <script src="books/gospel-of-thomas/data.js?v=1.0.150"></script>
-    <script src="coptic-dictionary.js?v=1.0.150"></script>
-    <script src="coptic-polish-overrides.js?v=1.0.150"></script>
-    <script src="app.js?v=1.0.150"></script>
+    <script src="books/pistis-sophia/data.js?v=1.3.8"></script>
+    <script src="books/pistis-sophia/coptic-data.js?v=1.3.8"></script>
+    <script src="books/gospel-of-thomas/data.js?v=1.3.8"></script>
+    <script src="books/gospel-of-thomas/coptic-data.js?v=1.3.8"></script>
+    <script src="coptic-dictionary.js?v=1.3.8"></script>
+    <script src="coptic-polish-overrides.js?v=1.3.8"></script>
+    <script src="app.js?v=1.3.8"></script>
   </body>
 </html>

@@ -1,18 +1,29 @@
 {
   "id": "gospel-of-thomas",
   "title": "Ewangelia Tomasza",
-  "status": "Moduł przygotowany — oczekuje na tekst",
+  "status": "Pełny tekst PL/EN/COPT",
   "type": "logion-reader",
-  "language": "pl",
-  "sourceLanguageLayers": ["cop"],
+  "language": "pl/en/cop",
+  "sourceLanguageLayers": [
+    "en",
+    "coptic"
+  ],
   "entry": "books/gospel-of-thomas/data.js",
-  "readerModes": ["pl", "coptic", "interlinear", "notes"],
+  "readerModes": [
+    "pl",
+    "source",
+    "coptic",
+    "interlinear",
+    "notes"
+  ],
   "defaultReaderMode": "pl",
-  "source": "Koptyjski tekst z Kodeksu II z Nag Hammadi; podstawa edytorska do ustalenia przed przekładem.",
-  "sourceRights": "Tekst starożytny w domenie publicznej; opracowanie biblioteki w przygotowaniu.",
+  "source": "Nag Hammadi Codex II, Gospel of Thomas. Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI; angielska warstwa public-domain Mark M. Mattison; warstwa koptyjska Coptic SCRIPTORIUM CC-BY 4.0.",
+  "sourceRights": "Angielskie tłumaczenie Mark M. Mattison w domenie publicznej; koptyjska edycja Coptic SCRIPTORIUM CC-BY 4.0; polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem AI jako warstwa twórcza.",
   "structure": {
     "unitName": "logion",
     "unitCount": 114,
     "labelPattern": "Logion {number}"
-  }
+  },
+  "themes": "themes.json",
+  "coptic": "coptic-data.js"
 }

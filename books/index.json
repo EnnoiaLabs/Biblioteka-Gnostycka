@@ -1,8 +1,10 @@
 {
-  "version": "1.0.150",
+  "version": "1.2.4",
   "defaultWork": "pistis-sophia",
   "books": [
     "books/pistis-sophia/book.json",
     "books/gospel-of-thomas/book.json"
-  ]
+  ],
+  "availableBooks": 2,
+  "preparedBooks": 2
 }

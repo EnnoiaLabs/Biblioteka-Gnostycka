@@ -1,32 +1,182 @@
 const bookModules = window.GNOSTYK_BOOK_MODULES || {};
 const activeBookId = localStorage.getItem("gnostyk.activeBook") || "pistis-sophia";
 const activeBook = bookModules[activeBookId] || bookModules["pistis-sophia"] || {};
+const isThomasBook = activeBook?.id === "gospel-of-thomas" || activeBookId === "gospel-of-thomas";
 const data = activeBook.data || window.PISTIS_SOPHIA_DATA;
-const copticData = activeBook.coptic || window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
+let copticData = activeBook.coptic || window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
+if (isThomasBook && window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic) {
+  copticData = window.GNOSTYK_BOOK_MODULES["gospel-of-thomas"].coptic;
+}
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.150",
+  version: "1.3.8",
   updated: "2026-07-07",
   currentWork: {
-    id: "pistis-sophia",
-    title: "Pistis Sophia",
-    status: "Pełna księga",
-    source: "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
-    sourceRights: "Domena publiczna",
-    creativeLayer: "Polski przekład, dobór terminologii, układ czytelniczy, noty i aparat cytowania"
+    id: activeBook.id || "pistis-sophia",
+    title: activeBook.title || "Pistis Sophia",
+    status: activeBook.status || "Pełna księga",
+    source: activeBook.data?.source || "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
+    sourceRights: activeBook.sourceRights || "Domena publiczna",
+    creativeLayer: activeBook.id === "gospel-of-thomas" ? "Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI, układ logionów i moduł biblioteki" : "Polski przekład, dobór terminologii, układ czytelniczy, noty i aparat cytowania"
   }
 };
 
+const bookUiInfo = {
+  "pistis-sophia": {
+    pl: {
+      eyebrow: "Pistis Sophia · księga biblioteki",
+      subtitle: "Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.",
+      mobileMeta: "Pełny przekład · Mead 1921",
+      sidebarDescription: "Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.",
+      status: "Pełny tekst",
+      sourceShort: "Mead 1921",
+      pagination: "Mead / Schw.-Pet.",
+      rightsShort: "Domena publiczna + nowa warstwa twórcza",
+      statUnitSingular: "strona",
+      statUnitPlural: "stron",
+      structureLabel: "rozdziałów",
+      aboutTitle: "O przekładzie",
+      aboutLead: "<strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.",
+      aboutSourceLabel: "Podstawa",
+      aboutSourceValue: "G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921. Wydanie Meada oraz tekst starożytny pozostają w domenie publicznej.",
+      aboutCopticLabel: "Koptyjski",
+      aboutCopticValue: "Warstwa koptyjska jest roboczym widokiem Unicode według numeracji Schwartze-Petermanna. Została przygotowana z cyfrowej transkrypcji Marcion na podstawie edycji Schwartze/Petermann i wymaga dalszej kolacji z wydaniami publiczno-domenowymi.",
+      aboutMethodLabel: "Charakter przekładu",
+      aboutMethodValue: "Przekład zachowuje misteryjne formuły, powtórzenia, nazwy własne i rytm objawieniowego dialogu. Terminologia została dobrana tak, aby tekst brzmiał po polsku, ale nie tracił swojej gnostyckiej obcości.",
+      aboutApparatusLabel: "Aparat cytowania",
+      aboutApparatusValue: "Zachowano paginację wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym. Numery te pozwalają odwoływać się zarówno do strony wydania angielskiego, jak i do tradycyjnej numeracji rękopiśmiennej.",
+      aboutRightsLabel: "Prawa",
+      aboutRightsValue: "Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.",
+      citeSimple: "Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class=\"inline-library-version\">{version}</span>.</strong>",
+      citeScholarly: "Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.",
+      legalTitle: "Domena publiczna i prawa do opracowania",
+      legalP1: "Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.",
+      legalP2: "Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.",
+      legalP3: "Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej."
+    },
+    en: {
+      eyebrow: "Pistis Sophia · library book",
+      subtitle: "Full Polish translation, source text, citation apparatus and reading notes.",
+      mobileMeta: "Full translation · Mead 1921",
+      sidebarDescription: "Polish translation and editorial apparatus based on G. R. S. Mead’s public-domain 1921 edition.",
+      status: "Full text",
+      sourceShort: "Mead 1921",
+      pagination: "Mead / Schw.-Pet.",
+      rightsShort: "Public domain + new creative layer",
+      statUnitSingular: "page",
+      statUnitPlural: "pages",
+      structureLabel: "chapters",
+      aboutTitle: "About the translation",
+      aboutLead: "<strong>Pistis Sophia</strong> is a Gnostic revelatory dialogue preserved in the Coptic Askew Codex. This library presents a Polish translation and editorial apparatus based on G. R. S. Mead’s public-domain 1921 edition.",
+      aboutSourceLabel: "Source base",
+      aboutSourceValue: "G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921. Mead’s edition and the ancient text are in the public domain.",
+      aboutCopticLabel: "Coptic",
+      aboutCopticValue: "The Coptic Unicode layer is a working view following the Schwartze-Petermann numbering. It was prepared from the Marcion digital transcription based on the Schwartze/Petermann edition and still requires further collation.",
+      aboutMethodLabel: "Translation character",
+      aboutMethodValue: "The translation keeps the mystery formulas, repetitions, proper names and rhythm of the revelatory dialogue while aiming for readable Polish.",
+      aboutApparatusLabel: "Citation apparatus",
+      aboutApparatusValue: "The reader keeps Mead pagination and marginal Schwartze-Petermann numbering where present, so passages can be cited against both systems.",
+      aboutRightsLabel: "Rights",
+      aboutRightsValue: "The Polish translation, terminology choices, reading layout, notes, citation apparatus and editorial layer of Gnostyk Biblioteka form a new copyrighted creative layer.",
+      citeSimple: "Simple form: <strong>Pistis Sophia, Mead p. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class=\"inline-library-version\">{version}</span>.</strong>",
+      citeScholarly: "For scholarly citation add: Polish translation and editorial apparatus by Gnostyk Biblioteka, based on G. R. S. Mead’s 1921 edition.",
+      legalTitle: "Public domain and editorial rights",
+      legalP1: "The translation is based on G. R. S. Mead’s public-domain edition, <em>Pistis Sophia: A Gnostic Miscellany</em>, London 1921. The ancient text and this source edition remain in the public domain.",
+      legalP2: "The Polish translation, terminology choices, reading layout, notes, citation apparatus and editorial layer of Gnostyk Biblioteka form a new copyrighted creative layer.",
+      legalP3: "The Coptic Unicode layer is marked as working material and is used for source control against manuscript numbering."
+    }
+  },
+  "gospel-of-thomas": {
+    pl: {
+      eyebrow: "Ewangelia Tomasza · księga biblioteki",
+      subtitle: "114 logionów w warstwach PL/EN/COPT: polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem AI, angielska warstwa Marka M. Mattisona oraz koptyjska edycja Coptic SCRIPTORIUM.",
+      mobileMeta: "Pełny tekst PL/EN/COPT · Nag Hammadi Codex II",
+      sidebarDescription: "Ewangelia Tomasza: 114 logionów z Nag Hammadi Codex II, w warstwach PL/EN/COPT, z koptyjską edycją Coptic SCRIPTORIUM.",
+      status: "Pełny tekst PL/EN/COPT",
+      sourceShort: "Nag Hammadi Codex II",
+      pagination: "Logiony 1–114",
+      rightsShort: "EN public domain + COPT CC-BY + polskie opracowanie",
+      statUnitSingular: "logion",
+      statUnitPlural: "logionów",
+      structureLabel: "jednostek",
+      aboutTitle: "O opracowaniu",
+      aboutLead: "<strong>Ewangelia Tomasza</strong> jest zbiorem 114 logionów Jezusa zachowanym w Kodeksie II z Nag Hammadi. Ta biblioteka prezentuje polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI, angielską warstwę Mark M. Mattison oraz koptyjską edycję Coptic SCRIPTORIUM.",
+      aboutSourceLabel: "Podstawa",
+      aboutSourceValue: "Nag Hammadi Codex II, <em>Gospel of Thomas</em>. Polski tekst jest opracowaniem Dariusza Kaniewskiego przygotowanym z wykorzystaniem narzędzi AI; angielska warstwa opiera się na public-domain translation Mark M. Mattison; koptyjska warstwa pochodzi z Coptic SCRIPTORIUM, ed. Paul Dilley, CC-BY 4.0.",
+      aboutCopticLabel: "Koptyjski",
+      aboutCopticValue: "Warstwa koptyjska Ewangelii Tomasza jest podłączana z otwartej edycji Coptic SCRIPTORIUM (CC-BY 4.0) i synchronizowana z logionami 1–114. Interlinia słowo po słowie pozostaje etapem 2.",
+      aboutMethodLabel: "Charakter opracowania",
+      aboutMethodValue: "Tekst został ułożony jako ciągły czytnik logionów. Każdy logion ma własny numer, a boczny spis służy do skoku do wybranego miejsca w tekście.",
+      aboutApparatusLabel: "Aparat cytowania",
+      aboutApparatusValue: "Podstawową jednostką cytowania jest numer logionu. Przy cytowaniu podawaj: Ewangelia Tomasza, logion numer, Gnostyk Biblioteka i numer wersji.",
+      aboutRightsLabel: "Prawa",
+      aboutRightsValue: "Polskie opracowanie Dariusza Kaniewskiego przygotowane z wykorzystaniem narzędzi AI, układ czytelniczy, dobór terminologii i integracja modułowa stanowią warstwę twórczą. Angielska warstwa Mark M. Mattison jest oznaczona jako public-domain, a koptyjska edycja Coptic SCRIPTORIUM jako CC-BY 4.0.",
+      citeSimple: "Najprostszy zapis: <strong>Ewangelia Tomasza, logion 1, Gnostyk Biblioteka v<span class=\"inline-library-version\">{version}</span>.</strong>",
+      citeScholarly: "Przy cytowaniu naukowym dodaj informację: polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI; angielska warstwa Mark M. Mattison, public domain; koptyjska edycja Coptic SCRIPTORIUM, CC-BY 4.0.",
+      legalTitle: "Prawa i podstawa tekstu",
+      legalP1: "Podstawą księgi jest <em>Ewangelia Tomasza</em> z Kodeksu II z Nag Hammadi. Polski tekst jest opracowaniem Dariusza Kaniewskiego przygotowanym z wykorzystaniem narzędzi AI, angielska warstwa opiera się na public-domain translation Mark M. Mattison, a koptyjska warstwa na edycji Coptic SCRIPTORIUM CC-BY 4.0.",
+      legalP2: "Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI, dobór terminologii, układ logionów, integracja modułowa i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą. Przy cytowaniu podawaj numer logionu oraz wersję biblioteki.",
+      legalP3: "Warstwa koptyjska jest ładowana z Coptic SCRIPTORIUM i grupowana według logionów. Interlinia słowo po słowie pozostaje etapem 2."
+    },
+    en: {
+      eyebrow: "Gospel of Thomas · library book",
+      subtitle: "114 logia in PL/EN/COPT layers: Dariusz Kaniewski’s Polish AI-assisted adaptation, Mark M. Mattison’s English layer and the Coptic SCRIPTORIUM edition.",
+      mobileMeta: "Full PL/EN/COPT text · Nag Hammadi Codex II",
+      sidebarDescription: "The Gospel of Thomas: 114 logia from Nag Hammadi Codex II in PL/EN/COPT layers, with the Coptic SCRIPTORIUM edition.",
+      status: "Full PL/EN/COPT text",
+      sourceShort: "Nag Hammadi Codex II",
+      pagination: "Logia 1–114",
+      rightsShort: "EN public domain + COPT CC-BY + Polish AI-assisted adaptation",
+      statUnitSingular: "logion",
+      statUnitPlural: "logia",
+      structureLabel: "units",
+      aboutTitle: "About the adaptation",
+      aboutLead: "<strong>The Gospel of Thomas</strong> is a collection of 114 sayings of Jesus preserved in Nag Hammadi Codex II. This library presents Dariusz Kaniewski’s Polish AI-assisted adaptation, Mark M. Mattison’s English layer and the Coptic SCRIPTORIUM edition.",
+      aboutSourceLabel: "Source base",
+      aboutSourceValue: "Nag Hammadi Codex II, <em>Gospel of Thomas</em>. The Polish text is an AI-assisted adaptation by Dariusz Kaniewski; the English layer is based on Mark M. Mattison’s public-domain translation; the Coptic layer uses the Coptic SCRIPTORIUM edition, ed. Paul Dilley, CC-BY 4.0.",
+      aboutCopticLabel: "Coptic",
+      aboutCopticValue: "The Coptic layer for the Gospel of Thomas is connected through the open Coptic SCRIPTORIUM edition (CC-BY 4.0) and synchronized with logia 1–114. Word-by-word interlinear alignment remains stage 2.",
+      aboutMethodLabel: "Adaptation character",
+      aboutMethodValue: "The text is presented as a continuous logion reader. Each logion has its own number and the sidebar table of contents jumps to that place in the text.",
+      aboutApparatusLabel: "Citation apparatus",
+      aboutApparatusValue: "The basic citation unit is the logion number. Cite as: Gospel of Thomas, logion number, Gnostyk Biblioteka and version number.",
+      aboutRightsLabel: "Rights",
+      aboutRightsValue: "Dariusz Kaniewski’s Polish AI-assisted adaptation, reading layout, terminology choices and modular integration form a creative layer. Mark M. Mattison’s English layer is marked as public-domain.",
+      citeSimple: "Simple form: <strong>Gospel of Thomas, logion 1, Gnostyk Biblioteka v<span class=\"inline-library-version\">{version}</span>.</strong>",
+      citeScholarly: "For scholarly citation add: Dariusz Kaniewski’s Polish AI-assisted adaptation; English layer by Mark M. Mattison, public domain.",
+      legalTitle: "Rights and text base",
+      legalP1: "This book is based on the <em>Gospel of Thomas</em> from Nag Hammadi Codex II. The Polish text is an AI-assisted adaptation by Dariusz Kaniewski and the English layer is based on Mark M. Mattison’s public-domain translation.",
+      legalP2: "The Polish AI-assisted adaptation by Dariusz Kaniewski, terminology choices, logion layout, modular integration and editorial layer of Gnostyk Biblioteka form a new creative layer. The English layer is public domain and the Coptic SCRIPTORIUM layer is CC-BY 4.0. Cite by logion number and library version.",
+      legalP3: "The Coptic layer is loaded from Coptic SCRIPTORIUM and grouped by logia. Word-by-word interlinear alignment remains stage 2."
+    }
+  }
+};
+
+function bookInfo(key) {
+  const language = currentLanguage ? currentLanguage() : "pl";
+  const bookId = activeBook?.id || "pistis-sophia";
+  const pack = bookUiInfo[bookId] || bookUiInfo["pistis-sophia"];
+  return (pack[language] && pack[language][key]) || (pack.pl && pack.pl[key]) || "";
+}
+
+
 const VALID_READER_MODES = ["pl", "source", "coptic", "interlinear"];
+function supportedReaderModes() {
+  const modes = Array.isArray(activeBook?.readerModes) && activeBook.readerModes.length
+    ? activeBook.readerModes
+    : VALID_READER_MODES;
+  return modes.filter(mode => VALID_READER_MODES.includes(mode));
+}
 function normalizeReaderMode(mode) {
-  return VALID_READER_MODES.includes(mode) ? mode : "pl";
+  const modes = supportedReaderModes();
+  return modes.includes(mode) ? mode : "pl";
 }
 
 const savedSettings = JSON.parse(localStorage.getItem("ps.settings") || "{}");
 const state = {
   view: localStorage.getItem("ps.view") || "library",
-  page: Number(localStorage.getItem("ps.lastPage") || 1),
+  page: Number(localStorage.getItem(`gnostyk.lastPage.${activeBookId}`) || localStorage.getItem("ps.lastPage") || 1),
   query: "",
   mobileChapterQuery: "",
   tab: "chapters",
@@ -123,7 +273,7 @@ const uiText = {
     privacyP1: "<strong>Dane lokalne.</strong> Zakładki, notatki, ostatnia czytana strona oraz ustawienia czytania są zapisywane lokalnie w przeglądarce użytkownika.",
     privacyP2: "<strong>Brak wysyłania danych.</strong> Aplikacja nie wysyła notatek, zakładek ani ustawień na zewnętrzny serwer. Dane pozostają na urządzeniu, dopóki użytkownik ich nie usunie albo nie wyczyści danych przeglądarki.",
     privacyP3: "<strong>Tryb offline.</strong> Jako aplikacja PWA biblioteka może zapisywać pliki tekstów w pamięci podręcznej przeglądarki, aby działały również bez połączenia z internetem.",
-    privacyP4: "<strong>Brak śledzenia.</strong> W tej wersji aplikacja nie korzysta z kont użytkowników, newslettera, analityki ani mechanizmów śledzących.",
+    privacyP4: "<strong>Licznik odwiedzin.</strong> Widoczny licznik odwiedzin jest przygotowany pod lekki, zewnętrzny licznik prywatnościowy. Jeśli nie zostanie skonfigurowany adres API, aplikacja pokaże jedynie znak „—”.",
     privacyP5: "<strong>Zmiany w przyszłości.</strong> Jeśli biblioteka otrzyma synchronizację, konto użytkownika, newsletter lub analitykę, polityka prywatności powinna zostać zaktualizowana przed publikacją takiej funkcji.",
     changesKicker: "Zmiany",
     changesTitle: "Historia zmian",
@@ -265,10 +415,10 @@ const uiText = {
     dictionaryOccurrencesEmpty: "Brak wystąpień w obecnej warstwie koptyjskiej.",
     dictionaryOccurrencesMore: "Pokazano pierwsze {count} z {total} wystąpień.",
     dictionaryOccurrencesByText: "Wystąpienia według tekstu",
-    dictionaryOccurrencesTextNote: "Indeks jest przygotowany na wiele tekstów. Obecnie aktywny jest: Pistis Sophia.",
+    dictionaryOccurrencesTextNote: "Indeks jest przygotowany na wiele tekstów. Obecnie aktywna księga zmienia się zgodnie z wybranym modułem biblioteki.",
     dictionaryOccurrencesTextMore: "Pokazano pierwsze {count} z {total} wystąpień w tym tekście.",
-    dictionaryOccurrencesNear: "Najbliżej aktualnej strony",
-    dictionaryOccurrencesRange: "Pokazano {from}-{to} z {total} · aktualna strona: {page}",
+    dictionaryOccurrencesNear: "Najbliżej aktualnej pozycji",
+    dictionaryOccurrencesRange: "Pokazano {from}-{to} z {total} · aktualna pozycja: {page}",
     dictionaryOccurrencesPrev: "Poprzednie 20",
     dictionaryOccurrencesNext: "Następne 20",
     dictionaryProfile: "Profil hasła",
@@ -278,7 +428,7 @@ const uiText = {
     dictionaryEntryScope: "Zakres słownika",
     dictionaryEntryScopeValue: "Centralne hasło używane przez wszystkie teksty biblioteki",
     dictionaryResearchNote: "Notatka słownikowa",
-    dictionaryResearchNoteValue: "To hasło jest przygotowane jako część wspólnego słownika dla Pistis Sophii i kolejnych tekstów koptyjskich.",
+    dictionaryResearchNoteValue: "To hasło należy do wspólnego słownika Biblioteki Gnozy i może być wykorzystywane we wszystkich tekstach biblioteki.",
     dictionaryStatus: "Status",
     dictionaryStatusReady: "Gotowe",
     dictionaryStatusBasic: "Podstawowe",
@@ -382,7 +532,7 @@ const uiText = {
     privacyP1: "<strong>Local data.</strong> Bookmarks, notes, the last read page, and reading settings are stored locally in the user's browser.",
     privacyP2: "<strong>No data sending.</strong> The app does not send notes, bookmarks, or settings to an external server. The data stays on the device until the user removes it or clears browser data.",
     privacyP3: "<strong>Offline mode.</strong> As a PWA, the library can cache text files in the browser so they remain available without an internet connection.",
-    privacyP4: "<strong>No tracking.</strong> This version does not use user accounts, newsletters, analytics, or tracking mechanisms.",
+    privacyP4: "<strong>Visit counter.</strong> The visible visit counter is prepared for a lightweight privacy-friendly external counter. If no API address is configured, the app shows only “—”.",
     privacyP5: "<strong>Future changes.</strong> If sync, user accounts, newsletters, or analytics are added later, this privacy policy should be updated before those features are published.",
     changesKicker: "Changes",
     changesTitle: "Change history",
@@ -524,10 +674,10 @@ const uiText = {
     dictionaryOccurrencesEmpty: "No occurrences in the current Coptic layer.",
     dictionaryOccurrencesMore: "Showing the first {count} of {total} occurrences.",
     dictionaryOccurrencesByText: "Occurrences by text",
-    dictionaryOccurrencesTextNote: "The index is ready for multiple texts. Currently active: Pistis Sophia.",
+    dictionaryOccurrencesTextNote: "The index is ready for multiple texts. The active book follows the currently selected library module.",
     dictionaryOccurrencesTextMore: "Showing the first {count} of {total} occurrences in this text.",
-    dictionaryOccurrencesNear: "Nearest to current page",
-    dictionaryOccurrencesRange: "Showing {from}-{to} of {total} · current page: {page}",
+    dictionaryOccurrencesNear: "Nearest to current position",
+    dictionaryOccurrencesRange: "Showing {from}-{to} of {total} · current position: {page}",
     dictionaryOccurrencesPrev: "Previous 20",
     dictionaryOccurrencesNext: "Next 20",
     dictionaryProfile: "Entry profile",
@@ -537,7 +687,7 @@ const uiText = {
     dictionaryEntryScope: "Dictionary scope",
     dictionaryEntryScopeValue: "Central entry shared by all library texts",
     dictionaryResearchNote: "Dictionary note",
-    dictionaryResearchNoteValue: "This entry is prepared as part of the shared dictionary for Pistis Sophia and future Coptic texts.",
+    dictionaryResearchNoteValue: "This entry belongs to the shared Gnostyk Library dictionary and may be used across all library texts.",
     dictionaryStatus: "Status",
     dictionaryStatusReady: "Ready",
     dictionaryStatusBasic: "Basic",
@@ -579,48 +729,127 @@ function t(key) {
   return uiText[lang]?.[key] || uiText.pl[key] || key;
 }
 
-const themes = [
-  {
-    label: "Pistis Sophia",
-    terms: ["Sophia", "Pistis Sophia"],
-    note: "postać u dramacie upadku, utraty światła i stopniowego ocalenia"
-  },
-  {
-    label: "Światłość",
-    terms: ["Light", "light-power", "Treasury of the Light", "light-stream"],
-    note: "język boskiej pełni, mocy, zbawienia i duchowego poznania"
-  },
-  {
-    label: "Misteria",
-    terms: ["mystery", "mysteries", "gnosis", "gnoses"],
-    note: "tajemna wiedza i rytuały potrzebne duszy w drodze ku królestwu światła"
-  },
-  {
-    label: "Eony i władcy",
-    terms: ["æon", "aeon", "rulers", "emanations", "archons"],
-    note: "kosmiczne poziomy oraz siły, które ograniczają lub więżą światło"
-  },
-  {
-    label: "Maria Magdalena",
-    terms: ["Mary Magdalene", "Mary"],
-    note: "najważniejsza rozmówczyni Jezusa w wielu partiach dialogu"
-  },
-  {
-    label: "Pokuta Sophii",
-    terms: ["repentance", "hymn", "Psalm"],
-    note: "modlitwy i lamentacje Sophii interpretowane przez uczniów"
-  },
-  {
-    label: "Dusza",
-    terms: ["soul", "souls", "spirit", "after-death"],
-    note: "los człowieka po śmierci, oczyszczenie i przejście przez sfery"
-  },
-  {
-    label: "Rytuały",
-    terms: ["baptism", "offering", "invocation", "seal", "ciphers"],
-    note: "praktyki inicjacyjne i formuły występujące w późniejszych częściach"
-  }
-];
+const bookThemes = {
+  "pistis-sophia": [
+    {
+      label: "Pistis Sophia",
+      enLabel: "Pistis Sophia",
+      terms: ["Sophia", "Pistis Sophia"],
+      note: "postać w dramacie upadku, utraty światła i stopniowego ocalenia",
+      enNote: "a figure in the drama of fall, loss of light, and gradual salvation"
+    },
+    {
+      label: "Światłość",
+      enLabel: "Light",
+      terms: ["Światłość", "światłość", "Light", "light-power", "Treasury of the Light", "light-stream"],
+      note: "język boskiej pełni, mocy, zbawienia i duchowego poznania",
+      enNote: "the language of divine fullness, power, salvation, and spiritual knowledge"
+    },
+    {
+      label: "Misteria",
+      enLabel: "Mysteries",
+      terms: ["misterium", "misteria", "mystery", "mysteries", "gnosis", "gnoses"],
+      note: "tajemna wiedza i rytuały potrzebne duszy w drodze ku królestwu światła",
+      enNote: "secret knowledge and rites needed by the soul on its way toward the kingdom of light"
+    },
+    {
+      label: "Eony i władcy",
+      enLabel: "Aeons and rulers",
+      terms: ["eon", "eony", "æon", "aeon", "władcy", "rulers", "emanations", "archons"],
+      note: "kosmiczne poziomy oraz siły, które ograniczają lub więżą światło",
+      enNote: "cosmic levels and powers that limit or imprison the light"
+    },
+    {
+      label: "Maria Magdalena",
+      enLabel: "Mary Magdalene",
+      terms: ["Maria", "Mary Magdalene", "Mary"],
+      note: "najważniejsza rozmówczyni Jezusa w wielu partiach dialogu",
+      enNote: "the most important interlocutor of Jesus in many parts of the dialogue"
+    },
+    {
+      label: "Pokuta Sophii",
+      enLabel: "Sophia's repentance",
+      terms: ["pokuta", "repentance", "hymn", "Psalm"],
+      note: "modlitwy i lamentacje Sophii interpretowane przez uczniów",
+      enNote: "Sophia's prayers and laments interpreted by the disciples"
+    },
+    {
+      label: "Dusza",
+      enLabel: "Soul",
+      terms: ["dusza", "soul", "souls", "spirit", "after-death"],
+      note: "los człowieka po śmierci, oczyszczenie i przejście przez sfery",
+      enNote: "the human fate after death, purification, and passage through the spheres"
+    },
+    {
+      label: "Rytuały",
+      enLabel: "Rituals",
+      terms: ["chrzest", "baptism", "offering", "invocation", "seal", "ciphers"],
+      note: "praktyki inicjacyjne i formuły występujące w późniejszych częściach",
+      enNote: "initiatory practices and formulas in the later parts of the text"
+    }
+  ],
+  "gospel-of-thomas": [
+    {
+      label: "Poznanie siebie",
+      enLabel: "Self-knowledge",
+      terms: ["poznacie samych siebie", "poznacie", "poznanie", "znalazł siebie", "know yourselves", "know yourself", "self-knowledge"],
+      note: "motyw rozpoznania własnej tożsamości przed Ojcem i Królestwem",
+      enNote: "the theme of recognizing one's own identity before the Father and the Kingdom"
+    },
+    {
+      label: "Królestwo wewnętrzne",
+      enLabel: "Inner Kingdom",
+      terms: ["królestwo jest w was", "Królestwo", "Królestwo Ojca", "Kingdom", "kingdom is inside you", "Father's Kingdom"],
+      note: "Królestwo jako rzeczywistość obecna, ukryta i nierozpoznana przez ludzi",
+      enNote: "the Kingdom as present, hidden, and unrecognized by people"
+    },
+    {
+      label: "Jedność",
+      enLabel: "Oneness",
+      terms: ["uczynicie z dwóch jedno", "jednym", "jedność", "two into one", "one", "single one"],
+      note: "przekroczenie podziału i powrót do jedności",
+      enNote: "the overcoming of division and return to oneness"
+    },
+    {
+      label: "Światłość",
+      enLabel: "Light",
+      terms: ["światłość", "światła", "człowieku światłości", "light", "person of light"],
+      note: "światło ukryte w człowieku i obraz światła Ojca",
+      enNote: "light hidden in the human being and the image of the Father's light"
+    },
+    {
+      label: "Ojciec Żyjący",
+      enLabel: "Living Father",
+      terms: ["Ojciec", "Ojca Żyjącego", "żyjący Ojciec", "Father", "living Father"],
+      note: "źródło życia, poznania i przynależności uczniów",
+      enNote: "the source of life, knowledge, and the disciples' belonging"
+    },
+    {
+      label: "Uczeń",
+      enLabel: "Disciple",
+      terms: ["uczniowie", "uczeń", "disciples", "disciple"],
+      note: "droga słuchania, szukania i przemiany ucznia",
+      enNote: "the path of hearing, seeking, and transformation of the disciple"
+    },
+    {
+      label: "Samotność i wybranie",
+      enLabel: "Solitude and election",
+      terms: ["samotni", "wybrani", "samotny", "solitary", "chosen", "elect"],
+      note: "samotność jako znak przynależności do Królestwa",
+      enNote: "solitude as a sign of belonging to the Kingdom"
+    },
+    {
+      label: "Ukryte i objawione",
+      enLabel: "Hidden and revealed",
+      terms: ["ukryte", "objawione", "ujawnione", "hidden", "revealed", "disclosed"],
+      note: "to, co zakryte, zostaje rozpoznane przez poznanie i słuchanie",
+      enNote: "what is hidden becomes known through knowledge and hearing"
+    }
+  ]
+};
+
+const themes = bookThemes[activeBook?.id] || bookThemes["pistis-sophia"];
+
 
 const chapterRanges = [
   { from: 1, to: 28, title: "Objawienie po zmartwychwstaniu", summary: "Jezus ukazuje uczniom wyższe regiony, szatę światła i porządek kosmosu." },
@@ -6162,6 +6391,7 @@ const els = {
   browseBooksButton: document.querySelector("#browseBooksButton"),
   homeContinueButton: document.querySelector("#homeContinueButton"),
   homeSupportButton: document.querySelector("#homeSupportButton"),
+  visitCounterValue: document.querySelector("#visitCounterValue"),
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
   libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
@@ -6875,6 +7105,7 @@ function localizedRangeTitle(range) {
 }
 
 function readableChapter(chapter) {
+  if (activeBook?.type === "logion-reader") return chapter ? `Logion ${chapter.number}` : "Ewangelia Tomasza";
   if (!chapter) return currentLanguage() === "pl" ? "Wstęp, spis treści i opracowanie historyczne" : "Introduction, contents, and historical study";
   const range = rangeForChapter(chapter);
   return range ? `${localizedRangeTitle(range)} - ${t("chapter")} ${chapter.number}` : `${t("chapterCapital")} ${chapter.number}`;
@@ -6889,7 +7120,7 @@ function readerModeLabel(mode) {
 
 function chapterNavExcerpt(chapter) {
   const page = pageByNumber(chapter.page);
-  const source = currentLanguage() === "pl" ? (polishTranslations[chapter.page] || page.text) : page.text;
+  const source = currentLanguage() === "pl" ? (page.polish || polishTranslations[chapter.page] || page.text) : page.text;
   const withoutHead = source
     .replace(/\[[^\]]+\]\s*/g, "")
     .replace(/^ROZDZIAŁ\s+\d+\s*/i, "")
@@ -6902,9 +7133,10 @@ function chapterMatchesQuery(chapter, query) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return true;
   const matchedTheme = themeForQuery(normalized);
-  const polishText = polishTranslations[chapter.page] || "";
+  const page = pageByNumber(chapter.page);
+  const polishText = page.polish || polishTranslations[chapter.page] || "";
   const hay = `${readableChapter(chapter)} ${chapter.title} ${chapter.subtitle} ${polishText}`.toLowerCase();
-  const sourceText = pageByNumber(chapter.page).text.toLowerCase();
+  const sourceText = (page.text || "").toLowerCase();
   return hay.includes(normalized)
     || sourceText.includes(normalized)
     || Boolean(matchedTheme && matchedTheme.terms.some(term => sourceText.includes(term.toLowerCase())));
@@ -6915,7 +7147,7 @@ function chapterButtonHtml(chapter) {
   return `
     <button class="nav-item ${active ? "is-active" : ""}" data-page="${chapter.page}" type="button">
       <strong>${escapeHtml(readableChapter(chapter))}</strong>
-      <span>${currentLanguage() === "pl" ? "str." : t("page")} ${chapter.page} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
+      <span>${activeBook?.type === "logion-reader" ? `Logion ${chapter.page}` : `${currentLanguage() === "pl" ? "str." : t("page")} ${chapter.page}`} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
     </button>
   `;
 }
@@ -6924,7 +7156,7 @@ function markButtonHtml(page) {
   const item = pageByNumber(page);
   return `
     <button class="mark-item" data-page="${page}" type="button">
-      <strong>${t("page")} ${page}</strong>
+      <strong>${activeBook?.type === "logion-reader" ? `Logion ${page}` : `${t("page")} ${page}`}</strong>
       <span>${escapeHtml(item.preview || (currentLanguage() === "pl" ? "Zapisana strona" : "Saved page"))}</span>
     </button>
   `;
@@ -6954,33 +7186,11 @@ function themeForQuery(query) {
 }
 
 function localizedThemeLabel(theme) {
-  if (currentLanguage() === "pl") return theme.label;
-  const labels = {
-    "Pistis Sophia": "Pistis Sophia",
-    "Światłość": "Light",
-    "Misteria": "Mysteries",
-    "Eony i władcy": "Aeons and rulers",
-    "Maria Magdalena": "Mary Magdalene",
-    "Pokuta Sophii": "Sophia's repentance",
-    "Dusza": "Soul",
-    "Rytuały": "Rituals"
-  };
-  return labels[theme.label] || theme.label;
+  return currentLanguage() === "pl" ? theme.label : (theme.enLabel || theme.label);
 }
 
 function localizedThemeNote(theme) {
-  if (currentLanguage() === "pl") return theme.note;
-  const notes = {
-    "Pistis Sophia": "a figure in the drama of fall, loss of light, and gradual salvation",
-    "Światłość": "the language of divine fullness, power, salvation, and spiritual knowledge",
-    "Misteria": "secret knowledge and rites needed by the soul on its way toward the kingdom of light",
-    "Eony i władcy": "cosmic levels and powers that limit or imprison the light",
-    "Maria Magdalena": "the most important interlocutor of Jesus in many parts of the dialogue",
-    "Pokuta Sophii": "Sophia's prayers and laments interpreted by the disciples",
-    "Dusza": "the human fate after death, purification, and passage through the spheres",
-    "Rytuały": "initiatory practices and formulas in the later parts of the text"
-  };
-  return notes[theme.label] || theme.note;
+  return currentLanguage() === "pl" ? theme.note : (theme.enNote || theme.note);
 }
 
 function highlight(text) {
@@ -6988,6 +7198,35 @@ function highlight(text) {
   const pattern = state.query.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return escapeHtml(text).replace(new RegExp(pattern, "gi"), match => `<mark>${match}</mark>`);
 }
+
+function logionTextForPage(page) {
+  if (!page) return "";
+  if (state.readerMode === "source") return page.en || page.text || "";
+  return page.polish || polishTranslations[page.page] || page.pl || page.text || "";
+}
+
+function renderLogionContinuousText() {
+  const modeClass = state.readerMode === "source" ? " source-prose" : "";
+  const modeLabel = state.readerMode === "source"
+    ? (currentLanguage() === "pl" ? "Warstwa angielska" : "English text")
+    : (currentLanguage() === "pl" ? "Tekst polski" : "Polish text");
+  return `
+    <div class="logion-continuous page-prose${modeClass}">
+      ${data.pages.map(item => {
+        const text = logionTextForPage(item);
+        const isActive = Number(item.page) === Number(state.page);
+        return `
+          <section id="logion-${escapeHtml(String(item.page))}" class="logion-block ${isActive ? "is-active" : ""}" data-logion="${escapeHtml(String(item.page))}">
+            <h2>Logion ${escapeHtml(String(item.page))}</h2>
+            <p class="logion-layer-label">${escapeHtml(modeLabel)}</p>
+            <div>${highlight(text)}</div>
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
 
 function compactText(text, max = 170) {
   const clean = text.replace(/\s+/g, " ").trim();
@@ -7007,19 +7246,58 @@ function manuscriptRefsForPage(page) {
 }
 
 function copticRefsForPage(page) {
+  if (isThomasBook || activeBook?.type === "logion-reader") return [String(page.page)];
   const refs = manuscriptRefsForPage(page);
   if (page.page === 48 && !refs.includes("1")) refs.unshift("1");
   return refs;
 }
 
 function copticEntriesForPage(page) {
+  if (isThomasBook && window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic && copticData !== window.GNOSTYK_BOOK_MODULES["gospel-of-thomas"].coptic) {
+    copticData = window.GNOSTYK_BOOK_MODULES["gospel-of-thomas"].coptic;
+  }
   return copticRefsForPage(page).flatMap(ref => copticData.pages?.[ref] || []);
+}
+
+function ensureCopticLayerLoaded() {
+  if (isThomasBook && window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic) {
+    copticData = window.GNOSTYK_BOOK_MODULES["gospel-of-thomas"].coptic;
+  }
+  if (!activeBook?.id || !copticData?.fetchUrl || copticData.loaded || copticData.loading) return;
+  if (typeof window.GNOSTYK_LOAD_COPTIC_LAYER !== "function") return;
+  window.GNOSTYK_LOAD_COPTIC_LAYER(activeBook.id).then(() => {
+    if (state.readerMode === "coptic" || state.readerMode === "interlinear") renderReader();
+  });
 }
 
 function copticPageText(page) {
   const refs = copticRefsForPage(page);
   const entries = copticEntriesForPage(page);
   if (!entries.length) {
+    if ((isThomasBook || activeBook?.type === "logion-reader") && copticData?.fetchUrl) {
+      ensureCopticLayerLoaded();
+      const loadingText = copticData.error
+        ? (currentLanguage() === "pl" ? `Nie udało się załadować warstwy koptyjskiej: ${copticData.error}` : `Could not load the Coptic layer: ${copticData.error}`)
+        : (currentLanguage() === "pl" ? "Ładowanie koptyjskiej warstwy Ewangelii Tomasza z Coptic SCRIPTORIUM…" : "Loading the Gospel of Thomas Coptic layer from Coptic SCRIPTORIUM…");
+      return `
+        <div class="coptic-source-note coptic-empty-note">
+          <strong>${escapeHtml(currentLanguage() === "pl" ? "Warstwa koptyjska" : "Coptic layer")}</strong>
+          <p>${escapeHtml(loadingText)}</p>
+        </div>
+      `;
+    }
+    if (isThomasBook) {
+      ensureCopticLayerLoaded();
+      const message = copticData?.error
+        ? (currentLanguage() === "pl" ? `Nie udało się załadować koptyjskiego tekstu Tomasza: ${copticData.error}` : `Could not load Thomas Coptic text: ${copticData.error}`)
+        : (currentLanguage() === "pl" ? "Koptyjski tekst Tomasza jest ładowany. Odśwież stronę po kilku sekundach, jeśli widzisz ten komunikat z pamięci podręcznej PWA." : "The Thomas Coptic text is loading. Refresh after a few seconds if this comes from the PWA cache.");
+      return `
+        <div class="coptic-source-note coptic-empty-note">
+          <strong>${escapeHtml(currentLanguage() === "pl" ? "Tekst koptyjski Tomasza" : "Thomas Coptic text")}</strong>
+          <p>${escapeHtml(message)}</p>
+        </div>
+      `;
+    }
     return `
       <div class="coptic-source-note coptic-empty-note">
         <strong>${escapeHtml(t("copticEmptyTitle"))}</strong>
@@ -7031,10 +7309,10 @@ function copticPageText(page) {
     const lines = entries.filter(entry => String(entry.page) === String(ref));
     if (!lines.length) return "";
     return `
-      <section class="coptic-page" aria-label="Schwartze-Petermann ${escapeHtml(ref)}">
+      <section class="coptic-page" aria-label="${(isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${escapeHtml(ref)}` : `Schwartze-Petermann ${escapeHtml(ref)}`} ">
         <header>
-          <strong>Schw.-Pet. ${escapeHtml(ref)}</strong>
-          <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} linii</span>
+          <strong>${(isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${escapeHtml(ref)}` : `Schw.-Pet. ${escapeHtml(ref)}`}</strong>
+          <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} ${currentLanguage() === "pl" ? "sekcji" : "sections"}</span>
         </header>
         ${lines.map(line => `
           <p class="coptic-line">
@@ -7053,6 +7331,101 @@ function copticPageText(page) {
       <p>${escapeHtml(source)}. ${escapeHtml(note)}</p>
     </div>
     <div class="coptic-text">${grouped}</div>
+  `;
+}
+
+
+function renderThomasCopticContinuousText() {
+  ensureCopticLayerLoaded();
+  const pages = window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic?.pages || copticData?.pages || {};
+  const refs = data.pages.map(item => String(item.page));
+  const loadedCount = refs.filter(ref => Array.isArray(pages[ref]) && pages[ref].length).length;
+  const source = copticData?.meta?.source || "Coptic SCRIPTORIUM, Gospel of Thomas, Nag Hammadi Codex II.";
+  const note = copticData?.meta?.note || "Warstwa koptyjska Unicode jest grupowana według numerów logionów.";
+
+  if (!loadedCount) {
+    const loadingText = copticData?.error
+      ? (currentLanguage() === "pl" ? `Nie udało się załadować koptyjskiego tekstu Tomasza: ${copticData.error}` : `Could not load the Thomas Coptic text: ${copticData.error}`)
+      : (currentLanguage() === "pl" ? "Ładowanie pełnego tekstu koptyjskiego Ewangelii Tomasza…" : "Loading the full Coptic text of the Gospel of Thomas…");
+    return `
+      <div class="coptic-source-note coptic-empty-note">
+        <strong>${escapeHtml(currentLanguage() === "pl" ? "Tekst koptyjski Tomasza" : "Thomas Coptic text")}</strong>
+        <p>${escapeHtml(loadingText)}</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="coptic-source-note">
+      <strong>${escapeHtml(currentLanguage() === "pl" ? "Warstwa koptyjska Unicode" : "Unicode Coptic layer")}</strong>
+      <p>${escapeHtml(source)} ${escapeHtml(note)}</p>
+    </div>
+    <div class="coptic-text thomas-coptic-continuous">
+      ${refs.map(ref => {
+        const lines = pages[ref] || [];
+        const isActive = Number(ref) === Number(state.page);
+        return `
+          <section id="logion-${escapeHtml(ref)}" class="coptic-page logion-block ${isActive ? "is-active" : ""}" data-logion="${escapeHtml(ref)}" aria-label="Logion ${escapeHtml(ref)}">
+            <header>
+              <strong>Logion ${escapeHtml(ref)}</strong>
+              <span>${escapeHtml(lines[0]?.bookTitle || "Ewangelia Tomasza · Nag Hammadi Codex II")}${lines.length ? ` · ${lines.length} ${currentLanguage() === "pl" ? "sekcji" : "sections"}` : ""}</span>
+            </header>
+            ${lines.length ? lines.map(line => `
+              <p class="coptic-line">
+                <span>${escapeHtml(line.ref)}</span>
+                <bdi>${escapeHtml(line.text)}</bdi>
+              </p>
+            `).join("") : `<p class="coptic-line"><span>Logion ${escapeHtml(ref)}</span><bdi>${escapeHtml(currentLanguage() === "pl" ? "Brak przypisanego tekstu koptyjskiego." : "No assigned Coptic text.")}</bdi></p>`}
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+
+function renderThomasInterlinearContinuousText() {
+  ensureCopticLayerLoaded();
+  const pages = window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic?.pages || copticData?.pages || {};
+  const refs = data.pages.map(item => String(item.page));
+  const loadedCount = refs.filter(ref => Array.isArray(pages[ref]) && pages[ref].length).length;
+  const source = copticData?.meta?.source || "Coptic SCRIPTORIUM, Gospel of Thomas, Nag Hammadi Codex II.";
+  const note = currentLanguage() === "pl"
+    ? "Interlinia jest ciągłym widokiem całej Ewangelii Tomasza. Glosy są robocze i korzystają ze wspólnego słownika Biblioteki Gnozy."
+    : "The interlinear view is a continuous view of the whole Gospel of Thomas. Glosses are provisional and use the shared Gnostyk Library dictionary.";
+
+  if (!loadedCount) {
+    const loadingText = copticData?.error
+      ? (currentLanguage() === "pl" ? `Nie udało się załadować interlinii Tomasza: ${copticData.error}` : `Could not load the Thomas interlinear layer: ${copticData.error}`)
+      : (currentLanguage() === "pl" ? "Ładowanie ciągłej interlinii Ewangelii Tomasza…" : "Loading the continuous Gospel of Thomas interlinear layer…");
+    return `
+      <div class="coptic-source-note coptic-empty-note">
+        <strong>${escapeHtml(currentLanguage() === "pl" ? "Interlinia Tomasza" : "Thomas interlinear")}</strong>
+        <p>${escapeHtml(loadingText)}</p>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="coptic-source-note interlinear-note">
+      <strong>${escapeHtml(t("interlinearTitle"))}</strong>
+      <p>${escapeHtml(source)} ${escapeHtml(note)}</p>
+    </div>
+    <div class="interlinear-text thomas-interlinear-continuous">
+      ${refs.map(ref => {
+        const lines = pages[ref] || [];
+        const isActive = Number(ref) === Number(state.page);
+        return `
+          <section id="logion-${escapeHtml(ref)}" class="interlinear-page logion-block ${isActive ? "is-active" : ""}" data-logion="${escapeHtml(ref)}" aria-label="Logion ${escapeHtml(ref)}">
+            <header>
+              <strong>Logion ${escapeHtml(ref)}</strong>
+              <span>${escapeHtml(lines[0]?.bookTitle || "Ewangelia Tomasza · Nag Hammadi Codex II")}${lines.length ? ` · ${lines.length} ${currentLanguage() === "pl" ? "sekcji" : "sections"}` : ""}</span>
+            </header>
+            ${lines.length ? lines.map(interlinearLineHtml).join("") : `<p class="coptic-line"><span>Logion ${escapeHtml(ref)}</span><bdi>${escapeHtml(currentLanguage() === "pl" ? "Brak przypisanego tekstu koptyjskiego." : "No assigned Coptic text.")}</bdi></p>`}
+          </section>
+        `;
+      }).join("")}
+    </div>
   `;
 }
 
@@ -7436,12 +7809,37 @@ function dictionaryEntryProfileHtml(details) {
 const DICTIONARY_OCCURRENCE_SOURCES = [
   {
     id: "pistis_sophia",
-    title: "Pistis Sophia",
+    bookId: "pistis-sophia",
+    title: () => "Pistis Sophia",
     getPages: () => data.pages || [],
     getEntriesForPage: page => copticEntriesForPage(page),
-    pageLabel: page => `${t("page")} ${page.page}`
+    pageLabel: page => `${t("page")} ${page.page}`,
+    currentLabel: () => `${t("page")} ${state.page}`
+  },
+  {
+    id: "gospel_of_thomas",
+    bookId: "gospel-of-thomas",
+    title: () => currentLanguage() === "pl" ? "Ewangelia Tomasza" : "Gospel of Thomas",
+    getPages: () => data.pages || [],
+    getEntriesForPage: page => copticEntriesForPage(page),
+    pageLabel: page => `Logion ${page.page}`,
+    currentLabel: () => `Logion ${state.page}`
   }
 ];
+
+function dictionaryOccurrenceSources() {
+  const activeId = activeBook?.id || "pistis-sophia";
+  const activeSource = DICTIONARY_OCCURRENCE_SOURCES.find(source => source.bookId === activeId);
+  return activeSource ? [activeSource] : [DICTIONARY_OCCURRENCE_SOURCES[0]];
+}
+
+function dictionaryOccurrenceSourceTitle(source) {
+  return typeof source?.title === "function" ? source.title() : (source?.title || "");
+}
+
+function dictionaryOccurrenceCurrentLabel(source) {
+  return typeof source?.currentLabel === "function" ? source.currentLabel() : String(state.page);
+}
 
 function copticTokenFormsForMatch(token) {
   const cleaned = cleanCopticToken(token || "").toLowerCase();
@@ -7477,7 +7875,7 @@ function copticOccurrencesInSourceForToken(source, token) {
       seen.add(key);
       occurrences.push({
         sourceId: source.id,
-        sourceTitle: source.title,
+        sourceTitle: dictionaryOccurrenceSourceTitle(source),
         page: page.page,
         pageLabel: typeof source.pageLabel === "function" ? source.pageLabel(page) : `${t("page")} ${page.page}`,
         ref: line.ref,
@@ -7494,7 +7892,7 @@ function copticOccurrencesInSourceForToken(source, token) {
 }
 
 function copticOccurrencesForToken(token) {
-  const sources = DICTIONARY_OCCURRENCE_SOURCES.map(source => copticOccurrencesInSourceForToken(source, token));
+  const sources = dictionaryOccurrenceSources().map(source => copticOccurrencesInSourceForToken(source, token));
   return {
     total: sources.reduce((sum, item) => sum + item.total, 0),
     sources
@@ -7557,12 +7955,12 @@ function dictionaryOccurrencesHtml(token) {
           .replace("{from}", from)
           .replace("{to}", to)
           .replace("{total}", group.total)
-          .replace("{page}", state.page);
+          .replace("{page}", dictionaryOccurrenceCurrentLabel(group.source));
         const previousDisabled = offset <= 0 ? "disabled" : "";
         const nextDisabled = offset + DICTIONARY_OCCURRENCE_PAGE_SIZE >= group.total ? "disabled" : "";
         return `
           <section class="dictionary-occurrence-source" data-occurrence-source="${escapeHtml(group.source.id)}">
-            <h4>${escapeHtml(group.source.title)} <span>(${group.total})</span></h4>
+            <h4>${escapeHtml(dictionaryOccurrenceSourceTitle(group.source))} <span>(${group.total})</span></h4>
             <p class="dictionary-occurrences-note">${escapeHtml(rangeNote)}</p>
             <div class="dictionary-occurrence-pager">
               <button type="button" ${previousDisabled} data-occurrence-page-nav="prev" data-occurrence-source="${escapeHtml(group.source.id)}" data-occurrence-token="${escapeHtml(token)}" data-occurrence-offset="${escapeHtml(String(Math.max(0, offset - DICTIONARY_OCCURRENCE_PAGE_SIZE)))}" data-occurrence-total="${escapeHtml(String(group.total))}">${escapeHtml(t("dictionaryOccurrencesPrev"))}</button>
@@ -7801,10 +8199,10 @@ function interlinearPageText(page) {
       const lines = entries.filter(entry => String(entry.page) === String(ref));
       if (!lines.length) return "";
       return `
-        <section class="interlinear-page" aria-label="Interlinear Schwartze-Petermann ${escapeHtml(ref)}">
+        <section class="interlinear-page" aria-label="${activeBook?.type === "logion-reader" ? `Interlinear Logion ${escapeHtml(ref)}` : `Interlinear Schwartze-Petermann ${escapeHtml(ref)}`}">
           <header>
-            <strong>Schw.-Pet. ${escapeHtml(ref)}</strong>
-            <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} linii</span>
+            <strong>${(isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${escapeHtml(ref)}` : `Schw.-Pet. ${escapeHtml(ref)}`}</strong>
+            <span>${escapeHtml(lines[0].bookTitle || "Tekst koptyjski")} · ${lines.length} ${currentLanguage() === "pl" ? "sekcji" : "sections"}</span>
           </header>
           ${lines.map(interlinearLineHtml).join("")}
         </section>
@@ -7890,6 +8288,10 @@ function localizedReviewStatus(status, hasRefs) {
 }
 
 function citationForPage(page, chapter) {
+  if (activeBook?.type === "logion-reader") {
+    const label = currentLanguage() === "pl" ? "Logion" : "Logion";
+    return `${label} ${page.page}`;
+  }
   const refs = manuscriptRefsForPage(page);
   const parts = [`Mead s. ${page.page}`];
   if (chapter) {
@@ -7902,11 +8304,29 @@ function citationForPage(page, chapter) {
 }
 
 function formattedCitation(page, chapter) {
+  const library = `Gnostyk Biblioteka v${libraryMeta.version}`;
+  if (activeBook?.type === "logion-reader") {
+    const number = page?.page || chapter?.number || state.page;
+    const title = currentLanguage() === "pl" ? "Ewangelia Tomasza" : "Gospel of Thomas";
+    const formats = currentLanguage() === "pl"
+      ? {
+        simple: `${title} · logion ${number} · ${library}`,
+        scholarly: `${title}, logion ${number}, polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI; warstwa angielska Mark M. Mattison, public domain, ${library}.`,
+        mead: `${title}, logion ${number}, Nag Hammadi Codex II, ${library}.`,
+        schwpet: `${title}, logion ${number}; źródła: Nag Hammadi Codex II; EN Mark M. Mattison, public domain; PL oprac. Dariusz Kaniewski z wykorzystaniem AI, ${library}.`
+      }
+      : {
+        simple: `${title} · logion ${number} · ${library}`,
+        scholarly: `${title}, logion ${number}, Dariusz Kaniewski’s Polish AI-assisted adaptation; English layer by Mark M. Mattison, public domain, ${library}.`,
+        mead: `${title}, logion ${number}, Nag Hammadi Codex II, ${library}.`,
+        schwpet: `${title}, logion ${number}; sources: Nag Hammadi Codex II; EN Mark M. Mattison, public domain; PL AI-assisted adaptation by Dariusz Kaniewski, ${library}.`
+      };
+    return formats[state.citationFormat] || formats.simple;
+  }
   const refs = manuscriptRefsForPage(page);
   const chapterPart = chapter ? `${t("chapter")} ${chapter.number}` : t("introMaterial");
   const schw = refs.length ? `Schw.-Pet. ${refs.join(", ")}` : (currentLanguage() === "pl" ? "bez znacznika Schw.-Pet." : "no Schw.-Pet. marker");
   const source = "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921";
-  const library = `Gnostyk Biblioteka v${libraryMeta.version}`;
   const formats = currentLanguage() === "pl"
     ? {
       simple: `Pistis Sophia · Mead s. ${page.page} · ${chapterPart}${refs.length ? ` · ${schw}` : ""} · ${library}`,
@@ -7924,6 +8344,28 @@ function formattedCitation(page, chapter) {
 }
 
 function renderReferenceStrip(page, chapter) {
+  if (activeBook?.type === "logion-reader") {
+    const number = page?.page || chapter?.number || state.page;
+    const title = currentLanguage() === "pl" ? "Ewangelia Tomasza" : "Gospel of Thomas";
+    const source = currentLanguage() === "pl" ? "Nag Hammadi Codex II" : "Nag Hammadi Codex II";
+    const layer = readerModeLabel(state.readerMode);
+    const chips = [
+      `<span class="reference-chip">${escapeHtml(title)}</span>`,
+      `<span class="reference-chip">Logion ${escapeHtml(String(number))}</span>`,
+      `<span class="reference-chip">${escapeHtml(source)}</span>`,
+      `<span class="reference-chip">${escapeHtml(layer)}</span>`
+    ].join("");
+    const note = currentLanguage() === "pl"
+      ? "Ewangelia Tomasza jest cytowana według numerów logionów 1–114. Warstwa koptyjska pochodzi z edycji Coptic SCRIPTORIUM CC-BY 4.0."
+      : "The Gospel of Thomas is cited by logion numbers 1–114. The Coptic layer comes from the Coptic SCRIPTORIUM CC-BY 4.0 edition.";
+    return `
+      <div class="reference-strip" aria-label="${escapeHtml(t("citationTitle"))}">
+        <strong>${escapeHtml(t("citationTitle"))}</strong>
+        <div class="reference-chips">${chips}</div>
+        <small>${escapeHtml(note)}</small>
+      </div>
+    `;
+  }
   const refs = manuscriptRefsForPage(page);
   const status = localizedReviewStatus(reviewStatusForPage(page), refs.length > 0);
   const chapterLabel = chapter ? `${t("chapterCapital")} ${chapter.number}` : t("introMaterial");
@@ -7947,6 +8389,9 @@ function renderReferenceStrip(page, chapter) {
 }
 
 function saveReadingState() {
+  const bookId = activeBook?.id || "pistis-sophia";
+  localStorage.setItem("gnostyk.lastWork", bookId);
+  localStorage.setItem(`gnostyk.lastPage.${bookId}`, String(state.page));
   localStorage.setItem("ps.lastPage", String(state.page));
   localStorage.setItem("ps.readerMode", state.readerMode);
   localStorage.setItem("ps.citationFormat", state.citationFormat);
@@ -8000,13 +8445,15 @@ function localizedPlaceholder(key) {
   return placeholders[key]?.[currentLanguage()] || "";
 }
 
-function setTextForAll(selector, key) {
-  document.querySelectorAll(selector).forEach(element => setText(element, t(key)));
+function setTextForAll(selector, key, value = null) {
+  const text = value === null ? t(key) : value;
+  document.querySelectorAll(selector).forEach(element => setText(element, text));
 }
 
-function setHtmlForAll(selector, key) {
+function setHtmlForAll(selector, key, value = null) {
+  const html = (value === null ? t(key) : value).replace("{version}", libraryMeta.version);
   document.querySelectorAll(selector).forEach(element => {
-    if (element) element.innerHTML = t(key).replace("{version}", libraryMeta.version);
+    if (element) element.innerHTML = html;
   });
 }
 
@@ -8082,25 +8529,30 @@ function localizeToolsInfo() {
 }
 
 function localizeBookInfo() {
-  setTextForAll(".reader-hero .eyebrow", "bookEyebrow");
-  setTextForAll(".reader-hero .hero-subtitle", "bookSubtitle");
-  setTextForAll(".mobile-book-head strong", "mobileBookMeta");
-  setTextForAll("#aboutPanel h3:first-of-type", "aboutTitle");
-  setHtmlForAll("#aboutPanel > p:first-of-type", "aboutLead");
+  setTextForAll(".reader-hero .eyebrow", null, bookInfo("eyebrow"));
+  setTextForAll(".reader-hero h2", null, activeBook?.title || data.title || "Pistis Sophia");
+  setTextForAll(".reader-hero .hero-subtitle", null, bookInfo("subtitle"));
+  setTextForAll(".mobile-book-head div > span", null, activeBook?.title || data.title || "Pistis Sophia");
+  setTextForAll(".mobile-book-head strong", null, bookInfo("mobileMeta"));
+  setTextForAll(".library-card h2", null, activeBook?.title || data.title || "Pistis Sophia");
+  setTextForAll(".library-card p", null, bookInfo("sidebarDescription"));
+  setTextForAll("#aboutPanel h3:first-of-type", null, bookInfo("aboutTitle"));
+  setHtmlForAll("#aboutPanel > p:first-of-type", null, bookInfo("aboutLead"));
   const aboutLabels = ["aboutSourceLabel", "aboutCopticLabel", "aboutMethodLabel", "aboutApparatusLabel", "aboutRightsLabel"];
   const aboutValues = ["aboutSourceValue", "aboutCopticValue", "aboutMethodValue", "aboutApparatusValue", "aboutRightsValue"];
   document.querySelectorAll("#aboutPanel dl div").forEach((item, index) => {
-    setText(item.querySelector("dt"), t(aboutLabels[index]));
-    item.querySelector("dd").innerHTML = t(aboutValues[index]);
+    setText(item.querySelector("dt"), bookInfo(aboutLabels[index]));
+    item.querySelector("dd").innerHTML = bookInfo(aboutValues[index]);
   });
   setTextForAll("#aboutPanel h3:nth-of-type(2)", "citeTitle");
-  setHtmlForAll("#aboutPanel > p:nth-of-type(2)", "citeSimple");
-  setHtmlForAll("#aboutPanel > p:nth-of-type(3)", "citeScholarly");
-  setTextForAll(".legal-footer strong", "legalTitle");
-  setHtmlForAll(".legal-footer p:nth-of-type(1)", "legalP1");
-  setHtmlForAll(".legal-footer p:nth-of-type(2)", "legalP2");
-  setHtmlForAll(".legal-footer p:nth-of-type(3)", "legalP3");
+  setHtmlForAll("#aboutPanel > p:nth-of-type(2)", null, bookInfo("citeSimple").replace("{version}", libraryMeta.version));
+  setHtmlForAll("#aboutPanel > p:nth-of-type(3)", null, bookInfo("citeScholarly"));
+  setTextForAll(".legal-footer strong", null, bookInfo("legalTitle"));
+  setHtmlForAll(".legal-footer p:nth-of-type(1)", null, bookInfo("legalP1"));
+  setHtmlForAll(".legal-footer p:nth-of-type(2)", null, bookInfo("legalP2"));
+  setHtmlForAll(".legal-footer p:nth-of-type(3)", null, bookInfo("legalP3"));
 }
+
 
 function localizeSupportInfo() {
   setTextForAll("#librarySupportPanel .library-info-head span", "supportKicker");
@@ -8229,16 +8681,18 @@ function localizeMobileLabels() {
 function localizeMetaBlocks() {
   document.querySelectorAll(".work-meta article").forEach((item, index) => {
     const labels = ["status", "sourceBase", "pagination", "rights"];
-    const values = ["fullText", null, null, "publicDomainCreative"];
+    const values = [bookInfo("status"), bookInfo("sourceShort"), bookInfo("pagination"), bookInfo("rightsShort")];
     setText(item.querySelector("span"), t(labels[index]));
-    if (values[index]) setText(item.querySelector("strong"), t(values[index]));
+    setText(item.querySelector("strong"), values[index]);
   });
   document.querySelectorAll(".hero-stats span").forEach((item, index) => {
     const strong = item.querySelector("strong")?.outerHTML || "";
-    const labels = ["pagesLabel", "chaptersLabel", "libraryVersionLabel"];
-    item.innerHTML = `${strong} ${t(labels[index])}`;
+    if (index === 0) item.innerHTML = `${strong} ${Number(data.pageCount) === 1 ? bookInfo("statUnitSingular") : bookInfo("statUnitPlural")}`;
+    if (index === 1) item.innerHTML = `${strong} ${bookInfo("structureLabel")}`;
+    if (index === 2) item.innerHTML = `${strong} ${t("libraryVersionLabel")}`;
   });
 }
+
 
 function localizePlaceholders() {
   if (els.search) els.search.placeholder = localizedPlaceholder("search");
@@ -8252,11 +8706,12 @@ function localizeModeControls() {
   setText(document.querySelector('[data-focus-mode="source"]'), t("source"));
   setText(document.querySelector('[data-focus-mode="coptic"]'), t("coptic"));
   setText(document.querySelector('[data-focus-mode="interlinear"]'), t("interlinear"));
+  const isLogionReader = activeBook?.type === "logion-reader";
   setSelectLabels(els.citationFormat, {
     simple: t("simpleCitation"),
     scholarly: t("scholarlyCitation"),
-    mead: "Mead",
-    schwpet: "Schw.-Pet."
+    mead: isLogionReader ? (currentLanguage() === "pl" ? "Logion" : "Logion") : "Mead",
+    schwpet: isLogionReader ? (currentLanguage() === "pl" ? "Źródła" : "Sources") : "Schw.-Pet."
   });
   setText(document.querySelector('[data-mobile-citation="simple"]'), t("simpleCitation"));
   setText(document.querySelector('[data-mobile-citation="scholarly"]'), t("scholarlyCitation"));
@@ -8331,323 +8786,73 @@ function setLibraryVersion(version) {
 
 const FALLBACK_CHANGELOG = `# Changelog
 
-## 1.0.150
-
-### PL
-- Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.
-- Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.
-- Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.
-
-### EN
-- Added the English meaning to the dictionary card in Polish mode, below the Polish gloss.
-- Cleaned up the changelog so English mode no longer shows Polish points as the latest update.
-- Synchronized the version number across the app, PWA files, and change history.
-
-## 1.0.149
-
-### PL
-- Poprawiono widok słownika w trybie PL: wyniki i karta nie podstawiają już angielskich glos jako głównego tekstu, gdy brakuje polskiej glosy.
-- Wyśrodkowano krzyżyk zamykania karty słownikowej.
-- Poprawiono wyszukiwanie w słowniku: wyniki są teraz sortowane według trafności.
-- Ograniczono listę do 30 najlepszych wyników, żeby nie pokazywać przypadkowych dopasowań.
-- Usunięto fałszywe trafienia typu „mój / my” przy wyszukiwaniu słowa „spirit”.
-
-### EN
-- Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.
-- Centered the dictionary card close button.
-- Improved dictionary search: results are now ranked by relevance.
-- Limited the list to the 30 best results to avoid weak accidental matches.
-- Removed false matches such as “mój / my” when searching for “spirit”.
-
-## 1.0.144
-
-### PL
-- Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.
-- Dodano najnowszą wersję do widocznej historii zmian.
-- Wyśrodkowano krzyżyk zamykania karty słownikowej.
-- Usunięto ramkę i tło ze statusów książek w katalogu.
-
-### EN
-- Synchronized the version number across the app, PWA files, and asset links.
-- Added the latest version to the visible changelog.
-- Centered the dictionary card close button.
-- Removed the border and background from catalogue book status labels.
-
-## 1.0.143
-
-### PL
-- Przebudowano strukturę danych na bibliotekę modułową w katalogu books/.
-- Przeniesiono Pistis Sophię do books/pistis-sophia/.
-- Dodano szkielet modułu Ewangelii Tomasza w books/gospel-of-thomas/ z miejscem na 114 logionów.
-- Zaktualizowano manifest biblioteki, ścieżki skryptów i cache PWA.
-
-### EN
-- Rebuilt the data structure as a modular library in the books/ directory.
-- Moved Pistis Sophia to books/pistis-sophia/.
-- Added a Gospel of Thomas module skeleton in books/gospel-of-thomas/ with space for 114 logia.
-- Updated the library manifest, script paths, and PWA cache.
-
-## 1.0.142
-
-### PL
-- Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.
-- Usunięto obramowanie logo po najechaniu kursorem.
-- Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.
-
-### EN
-- Updated the change history with the latest library catalogue versions.
-- Removed the hover outline from the Gnostyk logo.
-- Collapsed the Nag Hammadi codices by default and cleaned up book status markers.
-
-## 1.0.141
-
-### PL
-- Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.
-- Kliknięcie logo Gnostyk przenosi teraz do strony Home.
-- Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.
-
-### EN
-- Synchronized the version after the Home/Books structure update.
-- Clicking the Gnostyk logo now takes the user to the Home page.
-- The Pistis Sophia item in the Books catalogue is now clickable and opens the reader.
-
-## 1.0.140
-
-### PL
-- Dodano osobną stronę Home jako ekran startowy biblioteki.
-- Przeniesiono katalog tekstów do zakładki Księgi.
-- Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.
-
-### EN
-- Added a separate Home page as the library start screen.
-- Moved the text catalogue into the Books tab.
-- Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.
-
-## 1.0.139
-
-### PL
-- Naprawiono kartę słownikową po zmianie języka interfejsu.
-- Otwarta karta słownikowa odświeża teraz etykiety PL/EN, aby w trybie polskim nie zostawały angielskie napisy.
-
-### EN
-- Fixed the dictionary card after changing the interface language.
-- An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.
+## 1.3.8
 
-## 1.0.138
+PL:
+- Podbito numer wersji w całej aplikacji, plikach PWA, odnośnikach do zasobów i historii zmian.
+- Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zakładce Zmiany.
+- Uzupełniono angielskie wersje najnowszych wpisów changeloga, aby tryb EN nie pokazywał polskich punktów.
 
-### PL
-- Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.
-- Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.
-- Uporządkowano prezentację danych słownikowych bez zmiany działania interlinii.
+EN:
+- Synchronized the version number across the app, PWA files, asset links, and the change history.
+- Added the latest entry to the visible change history on Home and in the Changes tab.
+- Completed the English versions of the latest changelog entries so EN mode no longer shows Polish points.
 
-### EN
-- Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.
-- Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.
-- Improved dictionary data presentation without changing interlinear behavior.
+## 1.3.7
 
-## 1.0.137
+PL:
+- Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.
+- Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.
+- Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.
 
-### PL
-- Naprawiono historię zmian, aby w trybie EN nie pokazywała polskich punktów z wpisów oznaczonych jako PL.
-- Parser changeloga rozpoznaje teraz zarówno nagłówki PL / EN, jak i ### PL / ### EN.
-- Podbito wersję aplikacji po poprawce lokalizacji changeloga.
+EN:
+- Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114.
+- Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well.
+- Simplified the visual style of interlinear word blocks so they fit the continuous reader better.
 
-### EN
-- Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.
-- The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.
-- Bumped the application version after the changelog localization fix.
+## 1.3.6
 
-## 1.0.136
+PL:
+- Karta słownikowa jest teraz kontekstowa dla aktywnej księgi: w module Tomasza pokazuje wystąpienia Ewangelii Tomasza, logiony i bieżącą pozycję zamiast stron Pistis Sophii.
+- Usunięto teksty słownikowe odnoszące wspólny słownik wyłącznie do Pistis Sophii.
 
-PL
-- Znormalizowano układ strony Wsparcie między wersją polską i angielską.
-- Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.
-- Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.
+EN:
+- The dictionary card is now contextual to the active book: in the Thomas module it shows Gospel of Thomas occurrences, logia and current position instead of Pistis Sophia pages.
+- Removed dictionary wording that tied the shared dictionary specifically to Pistis Sophia.
 
-EN
-- Normalized the Support page layout between Polish and English.
-- Widened descriptive text blocks and unified section heights so switching language does not change the page proportions.
-- Aligned PL/EN copy so both versions share the same rhythm and structure.
+## 1.2.3
 
-## 1.0.135
+PL:
+- Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.
+- Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.
 
-PL
-- Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.
-- Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.
-- Ikona serca korzysta z kolorów aktywnego motywu, aby pasowała do trybów Dark, Light i Sepia.
+EN:
+- Aligned Home card action buttons so they sit consistently regardless of description length.
+- Cleaned up the start-card layout without changing the bottom navigation bar.
 
-EN
-- Added a Support tab with a project development description.
-- Added a PayPal button linking to paypal.me/dariuszkaniewski.
-- The heart icon now uses the active theme colors so it fits Dark, Light and Sepia modes.
+## 1.2.2
 
-## 1.0.133
+PL:
+- Usunięto dużą ikonę książki z kafelka na stronie Home.
+- Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.
+- Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.
 
-### PL
-- Znormalizowano układ przełączników widoku czytelnika między wersją polską i angielską.
-- Przełączniki tekstu mają teraz stałą siatkę czterech kolumn, więc nie zmieniają położenia po zmianie języka.
+EN:
+- Removed the large book icon from the Home card.
+- Added subtle, consistent Material Symbols icons to the Home cards.
+- Icons inherit their color from the current theme and are not colored emoji.
 
-### EN
-- Normalized the reader view switcher layout between Polish and English.
-- Text mode buttons now use a fixed four-column grid so their position stays consistent after changing the interface language.
+## 1.2.1
 
-## 1.0.132
+PL:
+- Poprawiono przycisk „Wróć do ostatniego tekstu”, aby otwierał ostatnio przeglądaną księgę i zapamiętaną pozycję zamiast katalogu.
+- Usunięto dublowanie funkcji „Przeglądaj bibliotekę” na karcie kontynuacji pracy.
+- Naprawiono parser changeloga: tryb EN rozpoznaje nagłówki „EN:” i nie pokazuje polskich punktów jako ostatnich zmian.
 
-### PL
-- Znormalizowano opis strony głównej w wersji polskiej względem wersji angielskiej.
-- Poszerzono blok opisu pod nagłówkiem biblioteki, aby dłuższy tekst PL nie łamał się niepotrzebnie.
-- Zmniejszono odstęp pod logo, dzięki czemu nagłówek strony głównej jest bardziej zwarty.
-
-### EN
-- Normalized the Polish home page description against the English version.
-- Widened the description block under the library heading so longer PL text does not wrap unnecessarily.
-- Reduced the spacing below the logo to make the home page header more compact.
-
-## 1.0.131
-
-### PL
-- Dostosowano pole wyszukiwania słownika do motywów Light, Sepia i Dark.
-- Zastąpiono sztywne kolory zmiennymi motywu dla tła, tekstu, obramowania i przycisku czyszczenia.
-- Poprawiono kontrast pola wyszukiwania bez zmiany działania słownika.
-
-### EN
-- Adapted the dictionary search field to the Light, Sepia, and Dark themes.
-- Replaced hard-coded colors with theme variables for the background, text, border, and clear button.
-- Improved search field contrast without changing dictionary behavior.
-
-## 1.0.129
-
-### PL
-- Poprawiono wygląd pola wyszukiwania słownika w ciemnych motywach.
-- Dodano przycisk × do szybkiego czyszczenia wyszukiwania.
-- Ujednolicono styl pola wyszukiwania z resztą interfejsu.
-
-### EN
-- Improved the dictionary search field appearance in dark themes.
-- Added an × button for quickly clearing the search.
-- Unified the search field styling with the rest of the interface.
-
-## 1.0.128
-
-### PL
-- Ujednolicono numer wersji w całej aplikacji po wydaniu 1.0.127.
-- Podbito odwołania wersji w plikach aplikacji, cache PWA, metadanych i linkach zasobów.
-- Uporządkowano historię zmian tak, aby pokazywała ostatnie 10 wersji z opisami PL/EN.
-
-### EN
-- Unified the version number across the application after the 1.0.127 release.
-- Updated version references in app files, PWA cache, metadata, and asset links.
-- Cleaned up the changelog so it shows the latest 10 versions with PL/EN descriptions.
-
-## 1.0.127
-
-### PL
-- Na telefonach karta słownikowa działa jako dolny panel zamiast zakrywać cały tekst.
-- Tekst pozostaje widoczny nad kartą słownikową podczas przeglądania wystąpień.
-- Panel ma własne przewijanie, a przycisk zamykania pozostaje dostępny.
-
-### EN
-- On mobile, the dictionary card now works as a bottom sheet instead of covering the whole text.
-- The text remains visible above the dictionary card while browsing occurrences.
-- The panel has its own scrolling area and the close button remains available.
-
-## 1.0.126
-
-### PL
-- Wystąpienia słownika są sortowane według bliskości aktualnej strony.
-- Dodano przyciski Poprzednie 20 / Następne 20 dla długich list wystąpień.
-- Karta słownikowa pozostaje otwarta podczas przeglądania kolejnych stron.
-
-### EN
-- Dictionary occurrences are sorted by proximity to the current page.
-- Added Previous 20 / Next 20 buttons for long occurrence lists.
-- The dictionary card stays open while browsing occurrence pages.
-
-## 1.0.125
-
-### PL
-- Przygotowano architekturę wystąpień słownika pod wiele tekstów koptyjskich.
-- Wystąpienia są teraz grupowane według tekstu; obecnie aktywna jest Pistis Sophia.
-- Moduł słownika jest gotowy na późniejsze dodanie kolejnych tekstów, np. Ewangelii Tomasza.
-
-### EN
-- Prepared the dictionary occurrence architecture for multiple Coptic texts.
-- Occurrences are now grouped by text; Pistis Sophia is currently active.
-- The dictionary module is ready for adding future texts, such as the Gospel of Thomas.
-
-## 1.0.124
-
-### PL
-- Naprawiono pozycję karty słownikowej przy długich listach wystąpień.
-- Karta mieści się teraz w ekranie i ma własne przewijanie.
-- Przycisk zamykania pozostaje zawsze dostępny.
-
-### EN
-- Fixed the dictionary card position with long occurrence lists.
-- The card now fits inside the viewport and has its own scrolling area.
-- The close button remains available at all times.
-
-## 1.0.123
-
-### PL
-- Karta słownikowa pozostaje otwarta po kliknięciu wystąpienia.
-- Kliknięcie wystąpienia przenosi do odpowiedniej strony w trybie interlinearnym.
-- Dopasowane słowo zostaje podświetlone, aby łatwiej odnaleźć je w tekście.
-
-### EN
-- The dictionary card stays open after clicking an occurrence.
-- Clicking an occurrence opens the matching page in interlinear mode.
-- The matching word is highlighted so it is easier to find in the text.
-
-## 1.0.122
-
-### PL
-- Dodano sekcję „Wystąpienia” w karcie słownikowej.
-- Karta pokazuje, na których stronach bieżącej warstwy koptyjskiej występuje dana forma lub jej forma bazowa.
-- Kliknięcie wystąpienia przenosi do odpowiedniej strony tekstu.
-
-### EN
-- Added an “Occurrences” section to the dictionary card.
-- The card shows which pages in the current Coptic layer contain the selected form or its base form.
-- Clicking an occurrence opens the corresponding text page.
-
-## 1.0.121
-
-### PL
-- Rozbudowano kartę słownikową bez dodawania nowych modułów.
-- Części mowy są teraz opisane normalnie, np. „rzeczownik (N)” albo „przyimek / partykuła (PREP)”.
-- Dla form rozpoznanych przez lematyzację karta pokazuje formę bazową oraz transliterację.
-- Oczyszczono listy znaczeń z części technicznych wpisów słownikowych.
-
-### EN
-- Expanded the dictionary card without adding new modules.
-- Parts of speech are now shown as readable labels, for example “noun (N)” or “preposition / particle (PREP)”.
-- For forms resolved by lemmatization, the card now shows the base form and transliteration.
-- Cleaned meaning lists from technical dictionary fragments.
-
-## 1.0.120
-
-### PL
-- Naprawiono pełną lokalizację karty słownikowej w trybie EN i PL.
-- Etykiety karty słownikowej przełączają się teraz zgodnie z językiem interfejsu.
-- Usunięto zdublowane pole „Część mowy” z karty słownikowej.
-
-### EN
-- Fixed full dictionary-card localization in EN and PL modes.
-- Dictionary-card labels now switch according to the interface language.
-- Removed the duplicated “Part of speech” field from the dictionary card.
-
-## 1.0.119
-
-### PL
-- Naprawiono przyciski widoku czytnika: Polski, Source EN, Coptic i Interlinear.
-- Dodano stabilne przełączanie trybu czytania przez atrybut \`data-reader-mode\`.
-- Uodporniono zapisany tryb czytnika na starsze lub błędne wartości z \`localStorage\`.
-
-### EN
-- Fixed reader mode buttons: Polish, Source EN, Coptic, and Interlinear.
-- Added stable reader-mode switching through the \`data-reader-mode\` attribute.
-- Made the saved reader mode robust against older or invalid \`localStorage\` values.
+EN:
+- Fixed the “Return to the last text” button so it opens the last viewed book and saved position instead of the catalogue.
+- Removed the duplicated “Browse library” behavior from the continue-work card.
+- Fixed the changelog parser: EN mode now recognizes “EN:” headings and no longer shows Polish points as the latest changes.
 `;
 function versionFromChangelog(text) {
   const match = text.match(/^#{1,3}\s+(?:(?:Gnostyk Biblioteka|Version)\s+)?([0-9]+\.[0-9]+\.[0-9]+)/m);
@@ -8723,7 +8928,7 @@ function renderLibraryUpdatesFromChangelog(text) {
       continue;
     }
 
-    const localeHeading = rawLine.match(/^\s*(?:#{2,4}\s*)?(PL|Polski|EN|English)\s*$/i);
+    const localeHeading = rawLine.match(/^\s*(?:#{2,4}\s*)?(PL|Polski|EN|English)\s*:?\s*$/i);
     if (currentGroup && localeHeading) {
       const label = localeHeading[1].toLowerCase();
       activeLocale = label === "en" || label === "english" ? "en" : "pl";
@@ -8810,6 +9015,7 @@ function setReaderPanel(panel) {
 }
 
 function polishPageText(page, chapter) {
+  if (page?.polish) return page.polish;
   if (polishTranslations[page.page]) {
     return polishTranslations[page.page];
   }
@@ -8829,6 +9035,10 @@ function polishPageText(page, chapter) {
 }
 
 function renderPolishGuide(page, chapter) {
+  if (activeBook?.type === "logion-reader") {
+    els.polishGuide.innerHTML = `<div class="guide-head"><strong>${escapeHtml(page?.title || "Logion")}</strong><span>${currentLanguage() === "pl" ? "Ewangelia Tomasza · pełny tekst PL/EN" : "Gospel of Thomas · full PL/EN text"}</span></div><p class="review-note done">${currentLanguage() === "pl" ? "Czytnik logionów w module Ewangelii Tomasza." : "Logion reader in the Gospel of Thomas module."}</p>`;
+    return;
+  }
   const hits = hitsForPage(page).slice(0, 5);
   const range = rangeForChapter(chapter);
   const translated = Boolean(polishTranslations[page.page]);
@@ -8923,6 +9133,13 @@ function closeReaderPanels() {
 }
 
 function scrollToReaderText() {
+  if (isThomasBook || activeBook?.type === "logion-reader") {
+    const target = document.querySelector(`#logion-${state.page}`);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+  }
   document.querySelector(".text-surface")?.scrollIntoView({
     behavior: "smooth",
     block: "start"
@@ -8960,44 +9177,59 @@ function renderReader() {
   const isSource = state.readerMode === "source";
   const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
   if (els.pageText) {
-    const body = isInterlinear
-      ? interlinearPageText(page)
-      : (isCoptic ? copticPageText(page) : `<div class="page-prose ${isSource ? "source-prose" : ""}">${highlight(text)}</div>`);
-    els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
+    let body = "";
+    if ((isThomasBook || activeBook?.type === "logion-reader") && !isInterlinear && !isCoptic) {
+      body = renderLogionContinuousText();
+      els.pageText.innerHTML = body;
+    } else if ((isThomasBook || activeBook?.type === "logion-reader") && isCoptic) {
+      body = renderThomasCopticContinuousText();
+      els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
+    } else if ((isThomasBook || activeBook?.type === "logion-reader") && isInterlinear) {
+      body = renderThomasInterlinearContinuousText();
+      els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
+    } else {
+      body = isInterlinear
+        ? interlinearPageText(page)
+        : (isCoptic ? copticPageText(page) : `<div class="page-prose ${isSource ? "source-prose" : ""}">${highlight(text)}</div>`);
+      els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
+    }
   }
   setValue(els.pageInput, state.page);
   setValue(els.focusPageInput, state.page);
-  setText(els.currentPage, `${t("page")} ${state.page}`);
-  setText(els.focusPageLabel, `${t("pageShort")} ${state.page}`);
+  setText(els.currentPage, (isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${state.page}` : `${t("page")} ${state.page}`);
+  setText(els.focusPageLabel, (isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${state.page}` : `${t("pageShort")} ${state.page}`);
   setText(els.currentChapter, readableChapter(chapter));
-  els.polishMode?.classList.toggle("is-active", state.readerMode === "pl");
-  els.sourceMode?.classList.toggle("is-active", state.readerMode === "source");
-  els.copticMode?.classList.toggle("is-active", state.readerMode === "coptic");
-  els.interlinearMode?.classList.toggle("is-active", state.readerMode === "interlinear");
+  const modes = supportedReaderModes();
   [
     [els.polishMode, "pl"],
     [els.sourceMode, "source"],
     [els.copticMode, "coptic"],
     [els.interlinearMode, "interlinear"]
-  ].forEach(([button, mode]) => button?.setAttribute("aria-pressed", String(state.readerMode === mode)));
+  ].forEach(([button, mode]) => {
+    if (!button) return;
+    button.hidden = !modes.includes(mode);
+    button.classList.toggle("is-active", state.readerMode === mode);
+    button.setAttribute("aria-pressed", String(state.readerMode === mode));
+  });
   setText(els.focusModeToggle, t("version"));
   els.focusModeItems?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.focusMode === state.readerMode);
   });
   els.bookmark?.classList.toggle("is-active", state.marks.includes(state.page));
   setValue(els.notes, state.notes[state.page] || "");
-  setText(els.mobileCurrentPage, `${t("pageShort")} ${state.page}`);
+  setText(els.mobileCurrentPage, (isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${state.page}` : `${t("pageShort")} ${state.page}`);
   setValue(els.citationFormat, state.citationFormat);
-  els.mobilePolishMode?.classList.toggle("is-active", state.readerMode === "pl");
-  els.mobileSourceMode?.classList.toggle("is-active", state.readerMode === "source");
-  els.mobileCopticMode?.classList.toggle("is-active", state.readerMode === "coptic");
-  els.mobileInterlinearMode?.classList.toggle("is-active", state.readerMode === "interlinear");
   [
     [els.mobilePolishMode, "pl"],
     [els.mobileSourceMode, "source"],
     [els.mobileCopticMode, "coptic"],
     [els.mobileInterlinearMode, "interlinear"]
-  ].forEach(([button, mode]) => button?.setAttribute("aria-pressed", String(state.readerMode === mode)));
+  ].forEach(([button, mode]) => {
+    if (!button) return;
+    button.hidden = !modes.includes(mode);
+    button.classList.toggle("is-active", state.readerMode === mode);
+    button.setAttribute("aria-pressed", String(state.readerMode === mode));
+  });
   els.mobileCitationFormats?.forEach(button => {
     button.classList.toggle("is-active", button.dataset.mobileCitation === state.citationFormat);
   });
@@ -9067,7 +9299,7 @@ function renderMobileNavigation() {
   if (els.mobileChapters) els.mobileChapters.innerHTML = renderMobileChapterGroups(chapterMatches);
   if (els.mobileSearchPanel) els.mobileSearchPanel.innerHTML = searchMatches.map(chapterButtonHtml).join("") || `<div class="empty">${t("noResults")}</div>`;
   if (els.mobileMarks) els.mobileMarks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">${t("noBookmarks")}</div>`;
-  setText(els.mobileCurrentPage, `${t("pageShort")} ${state.page}`);
+  setText(els.mobileCurrentPage, (isThomasBook || activeBook?.type === "logion-reader") ? `Logion ${state.page}` : `${t("pageShort")} ${state.page}`);
 }
 
 function setMobilePanel(panel) {
@@ -9253,11 +9485,33 @@ listen(els.continue, "click", () => goToPage(localStorage.getItem("ps.lastPage")
 listen(els.mobilePrev, "click", () => goToPage(state.page - 1, { scrollToText: true }));
 listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: true }));
 listen(els.mobileCurrentPage, "click", scrollToReaderText);
-listen(els.openWork, "click", scrollToReaderControls);
-listen(els.thomasDetailsToggle, "click", () => toggleThomasDetails());
+listen(els.openWork, "click", () => openLibraryWork("pistis-sophia"));
+listen(els.thomasDetailsToggle, "click", () => openLibraryWork("gospel-of-thomas"));
+
+function updateVisitCounter() {
+  const output = els.visitCounterValue || document.querySelector("#visitCounterValue");
+  if (!output) return;
+  const endpoint = window.GNOSTYK_VISIT_COUNTER_URL || document.documentElement.dataset.visitCounterUrl || "";
+  if (!endpoint) {
+    output.textContent = "—";
+    output.title = currentLanguage() === "pl" ? "Podłącz adres API licznika, aby pokazać globalne odwiedziny." : "Connect the counter API URL to show global visits.";
+    return;
+  }
+  fetch(endpoint, { cache: "no-store" })
+    .then(response => response.ok ? response.json() : Promise.reject(new Error("counter")))
+    .then(data => {
+      const value = data?.count ?? data?.visits ?? data?.total ?? data?.value;
+      const numeric = Number(value);
+      output.textContent = Number.isFinite(numeric) ? numeric.toLocaleString(currentLanguage() === "pl" ? "pl-PL" : "en-US") : String(value || "—");
+    })
+    .catch(() => {
+      output.textContent = "—";
+    });
+}
+
 listen(els.libraryHomeToggle, "click", () => setLibrarySection("home"));
 listen(els.browseBooksButton, "click", () => setLibrarySection("books"));
-listen(els.homeContinueButton, "click", scrollToReaderControls);
+listen(els.homeContinueButton, "click", continueLastWork);
 listen(els.homeSupportButton, "click", () => setLibrarySection("support"));
 listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
 listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
@@ -9300,22 +9554,31 @@ function goToHome() {
   closeReaderPanels();
   closeMobileSheet();
   setLibrarySection("home");
+  updateVisitCounter();
   document.querySelector(".library-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function openLibraryWork(workId = "pistis-sophia") {
-  const module = bookModules[workId];
-  if (workId !== "pistis-sophia") {
-    if (workId === "gospel-of-thomas") {
-      setLibrarySection("books");
-      setHidden(els.thomasDetailsPanel, false);
-      els.thomasDetailsToggle?.setAttribute("aria-expanded", "true");
-      els.thomasDetailsPanel?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+function openLibraryWork(workId = "pistis-sophia", options = {}) {
+  const module = bookModules[workId] || bookModules["pistis-sophia"];
+  const moduleId = module?.id || "pistis-sophia";
+  const targetPage = options.preservePage
+    ? (localStorage.getItem(`gnostyk.lastPage.${moduleId}`) || localStorage.getItem("ps.lastPage") || "1")
+    : "1";
+  localStorage.setItem("gnostyk.activeBook", moduleId);
+  localStorage.setItem("gnostyk.lastWork", moduleId);
+  localStorage.setItem("ps.lastPage", targetPage);
+  localStorage.setItem("ps.view", "reader");
+  if (moduleId !== activeBookId) {
+    window.location.reload();
     return;
   }
-  localStorage.setItem("gnostyk.activeBook", module?.id || "pistis-sophia");
-  scrollToReaderControls();
+  setAppView("reader");
+  goToPage(Number(targetPage) || 1, { scrollToText: true });
+}
+
+function continueLastWork() {
+  const lastWork = localStorage.getItem("gnostyk.lastWork") || localStorage.getItem("gnostyk.activeBook") || "pistis-sophia";
+  openLibraryWork(lastWork, { preservePage: true });
 }
 
 listen(els.backToLibrary, "click", returnToLibrary);
@@ -9343,10 +9606,24 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("click", event => {
+  const navLink = event.target.closest("[data-nav-section]");
+  if (!navLink) return;
+  setLibrarySection(navLink.dataset.navSection);
+});
+
+document.addEventListener("click", event => {
   const workLink = event.target.closest("[data-open-work]");
   if (!workLink) return;
   event.preventDefault();
   openLibraryWork(workLink.dataset.openWork || "pistis-sophia");
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const navLink = event.target.closest("[data-nav-section]");
+  if (!navLink) return;
+  event.preventDefault();
+  setLibrarySection(navLink.dataset.navSection);
 });
 
 document.addEventListener("keydown", event => {
@@ -9618,6 +9895,7 @@ loadLibraryVersion();
 state.page = Math.max(1, Math.min(data.pageCount, state.page));
 applySettings();
 applyLanguage();
+updateVisitCounter();
 setAppView(state.view);
 renderPanelState();
 updateOfflineNotice();

@@ -2,7 +2,7 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.0.150",
+    "version": "1.2.4",
     "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza.",
     "moduleIndex": "books/index.json"
   },
@@ -36,13 +36,13 @@
     {
       "id": "gospel-of-thomas",
       "title": "Ewangelia Tomasza",
-      "status": "Moduł przygotowany",
+      "status": "Pełny tekst PL/EN/COPT",
       "language": "pl",
       "sourceLanguageLayers": [
-        "cop"
+        "en"
       ],
-      "source": "Koptyjski tekst z Kodeksu II z Nag Hammadi; podstawa edytorska do ustalenia przed przek?adem.",
-      "sourceRights": "Tekst staro?ytny w domenie publicznej; opracowanie biblioteki w przygotowaniu.",
+      "source": "Nag Hammadi Codex II, Gospel of Thomas; polski przekład użytkownika; angielska warstwa Mark M. Mattison public domain do weryfikacji/importu.",
+      "sourceRights": "Tekst starożytny i angielskie tłumaczenie Mark M. Mattison w domenie publicznej; polski przekład jako warstwa użytkownika.",
       "citation": [
         "logia",
         "Nag Hammadi Codex II"
@@ -60,7 +60,13 @@
         "unitName": "logion",
         "unitCount": 114,
         "labelPattern": "Logion {number}"
-      }
+      },
+      "description": "Ewangelia Tomasza: 114 logionów w polskim przekładzie użytkownika oraz angielskiej warstwie public-domain Mark M. Mattison.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "unitCount": 114
     }
   ]
 }
