@@ -3,7 +3,7 @@ const copticData = window.PISTIS_SOPHIA_COPTIC || { meta: {}, pages: {} };
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.0.136",
+  version: "1.0.142",
   updated: "2026-07-02",
   currentWork: {
     id: "pistis-sophia",
@@ -43,7 +43,8 @@ const state = {
   marks: JSON.parse(localStorage.getItem("ps.marks") || "[]"),
   notes: JSON.parse(localStorage.getItem("ps.notes") || "{}"),
   customGlosses: JSON.parse(localStorage.getItem("ps.copticGlosses") || "{}"),
-  dictionaryOccurrenceOffsets: {}
+  dictionaryOccurrenceOffsets: {},
+  activeDictionaryToken: null
 };
 
 const uiText = {
@@ -56,6 +57,7 @@ const uiText = {
     bookmarks: "Zakładki",
     libraryTitle: "Biblioteka gnozy",
     libraryLead: "Cyfrowa biblioteka polskich przekładów, opracowań i narzędzi cytowania tekstów gnostyckich.",
+    home: "Home",
     books: "Księgi",
     info: "Info",
     privacy: "Prywatność",
@@ -265,6 +267,14 @@ const uiText = {
     dictionaryOccurrencesRange: "Pokazano {from}-{to} z {total} · aktualna strona: {page}",
     dictionaryOccurrencesPrev: "Poprzednie 20",
     dictionaryOccurrencesNext: "Następne 20",
+    dictionaryProfile: "Profil hasła",
+    dictionaryLemma: "Lemat / forma bazowa",
+    dictionaryMeaningStats: "Znaczenia",
+    dictionaryMeaningStatsValue: "PL: {pl} · EN: {en}",
+    dictionaryEntryScope: "Zakres słownika",
+    dictionaryEntryScopeValue: "Centralne hasło używane przez wszystkie teksty biblioteki",
+    dictionaryResearchNote: "Notatka słownikowa",
+    dictionaryResearchNoteValue: "To hasło jest przygotowane jako część wspólnego słownika dla Pistis Sophii i kolejnych tekstów koptyjskich.",
     noResults: "Brak wyników",
     noBookmarks: "Brak zakładek",
     mobileToc: "Spis treści",
@@ -297,6 +307,7 @@ const uiText = {
     bookmarks: "Bookmarks",
     libraryTitle: "Gnostic library",
     libraryLead: "A digital library of Polish translations, studies, and citation tools for Gnostic texts.",
+    home: "Home",
     books: "Books",
     info: "Info",
     privacy: "Privacy",
@@ -507,6 +518,14 @@ const uiText = {
     dictionaryOccurrencesRange: "Showing {from}-{to} of {total} · current page: {page}",
     dictionaryOccurrencesPrev: "Previous 20",
     dictionaryOccurrencesNext: "Next 20",
+    dictionaryProfile: "Entry profile",
+    dictionaryLemma: "Lemma / base form",
+    dictionaryMeaningStats: "Meanings",
+    dictionaryMeaningStatsValue: "PL: {pl} · EN: {en}",
+    dictionaryEntryScope: "Dictionary scope",
+    dictionaryEntryScopeValue: "Central entry shared by all library texts",
+    dictionaryResearchNote: "Dictionary note",
+    dictionaryResearchNoteValue: "This entry is prepared as part of the shared dictionary for Pistis Sophia and future Coptic texts.",
     noResults: "No results",
     noBookmarks: "No bookmarks",
     mobileToc: "Contents",
@@ -6120,6 +6139,10 @@ const els = {
   openWork: document.querySelector("#openWorkButton"),
   thomasDetailsToggle: document.querySelector("#thomasDetailsToggle"),
   thomasDetailsPanel: document.querySelector("#thomasDetailsPanel"),
+  libraryHomeToggle: document.querySelector("#libraryHomeToggle"),
+  browseBooksButton: document.querySelector("#browseBooksButton"),
+  homeContinueButton: document.querySelector("#homeContinueButton"),
+  homeSupportButton: document.querySelector("#homeSupportButton"),
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
   libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
@@ -6132,6 +6155,7 @@ const els = {
   footerPrivacy: document.querySelector("#footerPrivacyButton"),
   footerChanges: document.querySelector("#footerChangesButton"),
   footerSupport: document.querySelector("#footerSupportButton"),
+  libraryHomePanel: document.querySelector("#libraryHomePanel"),
   libraryBooksPanel: document.querySelector("#libraryBooksPanel"),
   libraryInfoPanel: document.querySelector("#libraryInfoPanel"),
   libraryPrivacyPanel: document.querySelector("#libraryPrivacyPanel"),
@@ -7291,6 +7315,37 @@ function splitDictionaryMeanings(text, shortValue = "") {
     .slice(0, 12);
 }
 
+function dictionaryMeaningCount(value, shortValue = "") {
+  const values = new Set();
+  const shortClean = String(shortValue || "").trim().toLowerCase();
+  if (shortClean) values.add(shortClean);
+  splitDictionaryMeanings(value, shortValue).forEach(item => values.add(item.toLowerCase()));
+  return values.size;
+}
+
+function dictionaryEntryProfileHtml(details) {
+  const lemma = details.base || details.token || "";
+  const lemmaText = lemma
+    ? `${lemma}${details.baseTranslit ? ` · ${details.baseTranslit}` : ""}`
+    : "";
+  const plCount = dictionaryMeaningCount(details.polish, details.shortPolish);
+  const enCount = dictionaryMeaningCount(details.english, details.shortEnglish);
+  const meaningStats = t("dictionaryMeaningStatsValue")
+    .replace("{pl}", String(plCount || 0))
+    .replace("{en}", String(enCount || 0));
+  return `
+    <section class="dictionary-profile" aria-label="${escapeHtml(t("dictionaryProfile"))}">
+      <h4>${escapeHtml(t("dictionaryProfile"))}</h4>
+      <dl>
+        ${lemmaText ? `<div><dt>${escapeHtml(t("dictionaryLemma"))}</dt><dd><bdi>${escapeHtml(lemmaText)}</bdi></dd></div>` : ""}
+        <div><dt>${escapeHtml(t("dictionaryMeaningStats"))}</dt><dd>${escapeHtml(meaningStats)}</dd></div>
+        <div><dt>${escapeHtml(t("dictionaryEntryScope"))}</dt><dd>${escapeHtml(t("dictionaryEntryScopeValue"))}</dd></div>
+      </dl>
+      <p>${escapeHtml(t("dictionaryResearchNoteValue"))}</p>
+    </section>
+  `;
+}
+
 
 const DICTIONARY_OCCURRENCE_SOURCES = [
   {
@@ -7526,6 +7581,7 @@ function dictionaryFieldHtml(label, value, className = "") {
 }
 
 function showInterlinearDictionaryCard(token) {
+  state.activeDictionaryToken = token;
   const details = dictionaryDetailsForToken(token);
   let popup = document.querySelector("#interlinearDictionaryPopup");
   if (!popup) {
@@ -7560,6 +7616,7 @@ function showInterlinearDictionaryCard(token) {
       <div class="dictionary-card-body">
         ${details.hasData ? "" : `<p class="dictionary-empty">${escapeHtml(t("dictionaryNoData"))}</p>`}
         ${primaryLanguageFields}
+        ${dictionaryEntryProfileHtml(details)}
         ${localizedMoreMeanings}
         ${dictionaryOccurrencesHtml(details.base || details.token || token)}
         ${dictionaryFullEntryDetailsHtml(localizedFullEntry)}
@@ -7574,8 +7631,15 @@ function showInterlinearDictionaryCard(token) {
 }
 
 function hideInterlinearDictionaryCard() {
+  state.activeDictionaryToken = null;
   const popup = document.querySelector("#interlinearDictionaryPopup");
   if (popup) popup.hidden = true;
+}
+
+function rerenderOpenDictionaryCard() {
+  const popup = document.querySelector("#interlinearDictionaryPopup");
+  if (!popup || popup.hidden || !state.activeDictionaryToken) return;
+  showInterlinearDictionaryCard(state.activeDictionaryToken);
 }
 
 function clearCopticOccurrenceHighlights() {
@@ -7860,6 +7924,15 @@ function rawDetectedLanguage() {
   return languages.filter(Boolean).map(lang => String(lang)).join(", ") || "pl";
 }
 
+
+function localizeDataText() {
+  const lang = currentLanguage() === "en" ? "en" : "pl";
+  document.querySelectorAll("[data-i18n-pl][data-i18n-en]").forEach((item) => {
+    const value = lang === "en" ? item.dataset.i18nEn : item.dataset.i18nPl;
+    if (typeof value === "string") setText(item, value);
+  });
+}
+
 function localizeLibraryInfo() {
   setTextForAll("#libraryInfoPanel .library-info-head span", "infoKicker");
   setTextForAll("#libraryInfoPanel .library-info-head h3", "infoTitle");
@@ -7956,6 +8029,7 @@ function localizeSupportInfo() {
 }
 
 function localizeStaticText() {
+  localizeDataText();
   [
     [".brand p", "librarySubtitle"],
     ["#backToLibraryButton", "backLibrary"],
@@ -7965,6 +8039,7 @@ function localizeStaticText() {
     ['[data-tab="marks"]', "bookmarks"],
     [".library-home-copy h2", "libraryTitle"],
     [".library-home-copy > p:not(.eyebrow)", "libraryLead"],
+    ["#libraryHomeToggle", "home"],
     ["#libraryBooksToggle", "books"],
     ["#libraryInfoToggle", "info"],
     ["#libraryPrivacyToggle", "privacy"],
@@ -8127,6 +8202,7 @@ function applyLanguage() {
   if (state.changelogText) renderLibraryUpdatesFromChangelog(state.changelogText);
   else localizeRenderedLibraryUpdates();
   renderPanelState();
+  rerenderOpenDictionaryCard();
 }
 
 function syncLanguageSwitches() {
@@ -8146,6 +8222,7 @@ function setInterfaceLanguage(language) {
   applyLanguage();
   renderReader();
   renderLists();
+  rerenderOpenDictionaryCard();
 }
 
 function updateOfflineNotice() {
@@ -8163,29 +8240,99 @@ function setLibraryVersion(version) {
 
 const FALLBACK_CHANGELOG = `# Changelog
 
-## 1.0.136
+## 1.0.142
 
 ### PL
+- Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.
+- Usunięto obramowanie logo po najechaniu kursorem.
+- Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.
+
+### EN
+- Updated the change history with the latest library catalogue versions.
+- Removed the hover outline from the Gnostyk logo.
+- Collapsed the Nag Hammadi codices by default and cleaned up book status markers.
+
+## 1.0.141
+
+### PL
+- Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.
+- Kliknięcie logo Gnostyk przenosi teraz do strony Home.
+- Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.
+
+### EN
+- Synchronized the version after the Home/Books structure update.
+- Clicking the Gnostyk logo now takes the user to the Home page.
+- The Pistis Sophia item in the Books catalogue is now clickable and opens the reader.
+
+## 1.0.140
+
+### PL
+- Dodano osobną stronę Home jako ekran startowy biblioteki.
+- Przeniesiono katalog tekstów do zakładki Księgi.
+- Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.
+
+### EN
+- Added a separate Home page as the library start screen.
+- Moved the text catalogue into the Books tab.
+- Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.
+
+## 1.0.139
+
+### PL
+- Naprawiono kartę słownikową po zmianie języka interfejsu.
+- Otwarta karta słownikowa odświeża teraz etykiety PL/EN, aby w trybie polskim nie zostawały angielskie napisy.
+
+### EN
+- Fixed the dictionary card after changing the interface language.
+- An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.
+
+## 1.0.138
+
+### PL
+- Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.
+- Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.
+- Uporządkowano prezentację danych słownikowych bez zmiany działania interlinii.
+
+### EN
+- Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.
+- Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.
+- Improved dictionary data presentation without changing interlinear behavior.
+
+## 1.0.137
+
+### PL
+- Naprawiono historię zmian, aby w trybie EN nie pokazywała polskich punktów z wpisów oznaczonych jako PL.
+- Parser changeloga rozpoznaje teraz zarówno nagłówki PL / EN, jak i ### PL / ### EN.
+- Podbito wersję aplikacji po poprawce lokalizacji changeloga.
+
+### EN
+- Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.
+- The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.
+- Bumped the application version after the changelog localization fix.
+
+## 1.0.136
+
+PL
 - Znormalizowano układ strony Wsparcie między wersją polską i angielską.
 - Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.
 - Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.
 
-### EN
+EN
 - Normalized the Support page layout between Polish and English.
 - Widened descriptive text blocks and unified section heights so switching language does not change the page proportions.
 - Aligned PL/EN copy so both versions share the same rhythm and structure.
 
 ## 1.0.135
 
-### PL
+PL
 - Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.
 - Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.
-- Ikona serca korzysta z kolorów aktywnego motywu zamiast czerwonego koloru stałego.
+- Ikona serca korzysta z kolorów aktywnego motywu, aby pasowała do trybów Dark, Light i Sepia.
 
-### EN
+EN
 - Added a Support tab with a project development description.
 - Added a PayPal button linking to paypal.me/dariuszkaniewski.
-- The heart icon now uses the active theme colors instead of a fixed red color.
+- The heart icon now uses the active theme colors so it fits Dark, Light and Sepia modes.
 
 ## 1.0.133
 
@@ -8356,11 +8503,14 @@ const FALLBACK_CHANGELOG = `# Changelog
 - Made the saved reader mode robust against older or invalid \`localStorage\` values.
 `;
 function versionFromChangelog(text) {
-  const match = text.match(/^#{1,3}\s+(?:Gnostyk Biblioteka\s+)?([0-9]+\.[0-9]+\.[0-9]+)/m);
+  const match = text.match(/^#{1,3}\s+(?:(?:Gnostyk Biblioteka|Version)\s+)?([0-9]+\.[0-9]+\.[0-9]+)/m);
   return match ? match[1] : null;
 }
 
 const changelogTranslations = {
+  "Dodano osobną stronę Home jako ekran startowy biblioteki.": "Added a separate Home page as the library start screen.",
+  "Przeniesiono katalog tekstów do zakładki Księgi.": "Moved the text catalogue into the Books tab.",
+  "Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.": "Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.",
   en: {
     "Dodano rozwijane szczegóły katalogowe Ewangelii Tomasza z informacją o statusie, podstawie i następnym etapie opracowania.": "Added expandable catalog details for the Gospel of Thomas with status, source basis, and next editorial step.",
     "Dodano Ewangelię Tomasza jako następną pozycję katalogu biblioteki ze statusem przygotowania.": "Added the Gospel of Thomas as the next item in the library catalog with an in-preparation status.",
@@ -8418,7 +8568,7 @@ function renderLibraryUpdatesFromChangelog(text) {
   };
 
   for (const rawLine of text.split(/\r?\n/)) {
-    const heading = rawLine.match(/^#{1,3}\s+(?:Gnostyk Biblioteka\s+)?([0-9]+\.[0-9]+\.[0-9]+)(?:\s+-\s+(.+))?\s*$/);
+    const heading = rawLine.match(/^#{1,3}\s+(?:(?:Gnostyk Biblioteka|Version)\s+)?([0-9]+\.[0-9]+\.[0-9]+)(?:\s+-\s+(.+))?\s*$/);
     if (heading) {
       currentGroup = { version: heading[1], title: heading[2] || "", points: { pl: [], en: [], all: [] } };
       groups.push(currentGroup);
@@ -8426,7 +8576,7 @@ function renderLibraryUpdatesFromChangelog(text) {
       continue;
     }
 
-    const localeHeading = rawLine.match(/^#{2,4}\s+(PL|Polski|EN|English)\s*$/i);
+    const localeHeading = rawLine.match(/^\s*(?:#{2,4}\s*)?(PL|Polski|EN|English)\s*$/i);
     if (currentGroup && localeHeading) {
       const label = localeHeading[1].toLowerCase();
       activeLocale = label === "en" || label === "english" ? "en" : "pl";
@@ -8568,6 +8718,7 @@ function setAppView(view) {
 }
 
 function setLibrarySection(section) {
+  const isHome = section === "home" || !section;
   const isBooks = section === "books";
   const isInfo = section === "info";
   const isPrivacy = section === "privacy";
@@ -8576,6 +8727,7 @@ function setLibrarySection(section) {
   const isTools = section === "tools";
   const isSettings = section === "settings";
   const isSupport = section === "support";
+  if (els.libraryHomePanel) els.libraryHomePanel.hidden = !isHome;
   if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
   if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
   if (els.libraryPrivacyPanel) els.libraryPrivacyPanel.hidden = !isPrivacy;
@@ -8585,6 +8737,7 @@ function setLibrarySection(section) {
   if (els.settingsPanel) els.settingsPanel.hidden = !isSettings;
   if (els.librarySupportPanel) els.librarySupportPanel.hidden = !isSupport;
   state.settingsOpen = isSettings;
+  els.libraryHomeToggle?.classList.toggle("is-active", isHome);
   els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
   els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
   els.libraryPrivacyToggle?.classList.toggle("is-active", isPrivacy);
@@ -8593,6 +8746,7 @@ function setLibrarySection(section) {
   els.libraryToolsToggle?.classList.toggle("is-active", isTools);
   els.librarySettingsToggle?.classList.toggle("is-active", isSettings);
   els.librarySupportToggle?.classList.toggle("is-active", isSupport);
+  els.libraryHomeToggle?.setAttribute("aria-expanded", String(isHome));
   els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
   els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
   els.libraryPrivacyToggle?.setAttribute("aria-expanded", String(isPrivacy));
@@ -8601,7 +8755,7 @@ function setLibrarySection(section) {
   els.libraryToolsToggle?.setAttribute("aria-expanded", String(isTools));
   els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
   els.librarySupportToggle?.setAttribute("aria-expanded", String(isSupport));
-  const target = isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
+  const target = isHome ? els.libraryHomePanel : isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
   requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
@@ -8954,6 +9108,10 @@ listen(els.mobileNext, "click", () => goToPage(state.page + 1, { scrollToText: t
 listen(els.mobileCurrentPage, "click", scrollToReaderText);
 listen(els.openWork, "click", scrollToReaderControls);
 listen(els.thomasDetailsToggle, "click", () => toggleThomasDetails());
+listen(els.libraryHomeToggle, "click", () => setLibrarySection("home"));
+listen(els.browseBooksButton, "click", () => setLibrarySection("books"));
+listen(els.homeContinueButton, "click", scrollToReaderControls);
+listen(els.homeSupportButton, "click", () => setLibrarySection("support"));
 listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
 listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
 listen(els.libraryPrivacyToggle, "click", () => setLibrarySection("privacy"));
@@ -8990,6 +9148,19 @@ function returnToLibrary() {
   document.querySelector(".library-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function goToHome() {
+  setAppView("library");
+  closeReaderPanels();
+  closeMobileSheet();
+  setLibrarySection("home");
+  document.querySelector(".library-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function openLibraryWork(workId = "pistis-sophia") {
+  if (workId !== "pistis-sophia") return;
+  scrollToReaderControls();
+}
+
 listen(els.backToLibrary, "click", returnToLibrary);
 listen(els.mobileBackToLibrary, "click", returnToLibrary);
 listen(els.mobileClose, "click", closeMobileSheet);
@@ -8998,6 +9169,36 @@ listen(els.polishMode, "click", () => setReaderMode("pl"));
 listen(els.sourceMode, "click", () => setReaderMode("source"));
 listen(els.copticMode, "click", () => setReaderMode("coptic"));
 listen(els.interlinearMode, "click", () => setReaderMode("interlinear"));
+
+document.addEventListener("click", event => {
+  const homeLink = event.target.closest("[data-go-home]");
+  if (!homeLink) return;
+  event.preventDefault();
+  goToHome();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const homeLink = event.target.closest("[data-go-home]");
+  if (!homeLink) return;
+  event.preventDefault();
+  goToHome();
+});
+
+document.addEventListener("click", event => {
+  const workLink = event.target.closest("[data-open-work]");
+  if (!workLink) return;
+  event.preventDefault();
+  openLibraryWork(workLink.dataset.openWork || "pistis-sophia");
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const workLink = event.target.closest("[data-open-work]");
+  if (!workLink) return;
+  event.preventDefault();
+  openLibraryWork(workLink.dataset.openWork || "pistis-sophia");
+});
 
 document.addEventListener("click", event => {
   const button = event.target.closest("[data-reader-mode]");

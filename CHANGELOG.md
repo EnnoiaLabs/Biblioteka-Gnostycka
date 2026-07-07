@@ -1,4 +1,74 @@
+## 1.0.142
+
+### PL
+- Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.
+- Usunięto obramowanie logo po najechaniu kursorem.
+- Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.
+
+### EN
+- Updated the change history with the latest library catalogue versions.
+- Removed the hover outline from the Gnostyk logo.
+- Collapsed the Nag Hammadi codices by default and cleaned up book status markers.
+
+## 1.0.141
+
+### PL
+- Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.
+- Kliknięcie logo Gnostyk przenosi teraz do strony Home.
+- Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.
+
+### EN
+- Synchronized the version after the Home/Books structure update.
+- Clicking the Gnostyk logo now takes the user to the Home page.
+- The Pistis Sophia item in the Books catalogue is now clickable and opens the reader.
+
+## 1.0.140
+
+### PL
+- Dodano osobną stronę Home jako ekran startowy biblioteki.
+- Przeniesiono katalog tekstów do zakładki Księgi.
+- Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.
+
+### EN
+- Added a separate Home page as the library start screen.
+- Moved the text catalogue into the Books tab.
+- Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.
+
 # Changelog
+
+## 1.0.139 - Dictionary card language refresh
+
+PL
+- Naprawiono kartę słownikową po zmianie języka interfejsu.
+- Otwarta karta słownikowa odświeża teraz etykiety PL/EN, aby w trybie polskim nie zostawały angielskie napisy.
+
+EN
+- Fixed the dictionary card after changing the interface language.
+- An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.
+
+## 1.0.138
+
+PL
+- Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.
+- Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.
+- Uporządkowano prezentację danych słownikowych bez zmiany działania interlinii.
+
+EN
+- Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.
+- Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.
+- Improved dictionary data presentation without changing interlinear behavior.
+
+## 1.0.137
+
+PL
+- Naprawiono historię zmian, aby w trybie EN nie pokazywała polskich punktów z wpisów oznaczonych jako PL.
+- Parser changeloga rozpoznaje teraz zarówno nagłówki PL / EN, jak i ### PL / ### EN.
+- Podbito wersję aplikacji po poprawce lokalizacji changeloga.
+
+EN
+- Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.
+- The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.
+- Bumped the application version after the changelog localization fix.
 
 ## 1.0.136
 

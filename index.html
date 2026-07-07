@@ -8,21 +8,21 @@
     <meta name="theme-color" content="#0d0b09">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.0.136">
+    <link rel="manifest" href="manifest.webmanifest?v=1.0.142">
     <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
     <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1.0.136">
+    <link rel="stylesheet" href="styles.css?v=1.0.142">
   </head>
   <body data-view="library">
     <div class="app-shell">
       <aside class="sidebar" aria-label="Nawigacja">
         <div class="brand">
           <div>
-            <span class="brand-wordmark" aria-label="Gnostyk">Gnostyk</span>
+            <span class="brand-wordmark brand-home-link" data-go-home role="button" tabindex="0" aria-label="Home">Gnostyk</span>
           </div>
           <div class="language-switch" aria-label="Język interfejsu">
             <button data-language-switch="pl" type="button">PL</button>
@@ -57,7 +57,7 @@
         <section class="library-home" aria-label="Ekran startowy biblioteki">
           <header class="library-topbar">
             <div>
-              <span class="brand-wordmark library-topbar-wordmark" aria-label="Gnostyk">Gnostyk</span>
+              <span class="brand-wordmark library-topbar-wordmark brand-home-link" data-go-home role="button" tabindex="0" aria-label="Home">Gnostyk</span>
             </div>
             <div class="language-switch" aria-label="Język interfejsu">
               <button data-language-switch="pl" type="button">PL</button>
@@ -69,7 +69,8 @@
             <h2>Biblioteka gnozy</h2>
             <p>Cyfrowa biblioteka polskich przekładów, opracowań i narzędzi cytowania tekstów gnostyckich.</p>
             <nav class="library-nav" aria-label="Nawigacja biblioteki">
-              <button id="libraryBooksToggle" class="text-button is-active" type="button" aria-expanded="true">Księgi</button>
+              <button id="libraryHomeToggle" class="text-button is-active" type="button" aria-expanded="true">Home</button>
+              <button id="libraryBooksToggle" class="text-button" type="button" aria-expanded="false">Księgi</button>
               <button id="libraryInfoToggle" class="text-button" type="button" aria-expanded="false">Info</button>
               <button id="libraryPrivacyToggle" class="text-button" type="button" aria-expanded="false">Prywatność</button>
               <button id="libraryChangesToggle" class="text-button" type="button" aria-expanded="false">Zmiany</button>
@@ -80,8 +81,102 @@
             </nav>
           </div>
 
-          <div id="libraryBooksPanel" class="library-shelf" aria-label="Księgi">
-            <article class="work-tile is-available">
+
+          <section id="libraryHomePanel" class="library-home-panel" aria-label="Home">
+            <div class="home-hero-card">
+              <span class="eyebrow" data-i18n-pl="Biblioteka Gnozy" data-i18n-en="Gnostyk Library">Biblioteka Gnozy</span>
+              <h3 data-i18n-pl="Cyfrowa biblioteka tekstów gnostyckich" data-i18n-en="A digital library of Gnostic texts">Cyfrowa biblioteka tekstów gnostyckich</h3>
+              <p data-i18n-pl="Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu." data-i18n-en="Translations, source texts, Coptic interlinear tools, a dictionary, and research features for studying Gnostic tradition in one place.">Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu.</p>
+              <button id="browseBooksButton" class="text-button library-read-button" type="button" data-i18n-pl="Przeglądaj księgi" data-i18n-en="Browse books">Przeglądaj księgi</button>
+            </div>
+
+            <div class="home-dashboard" aria-label="Stan biblioteki">
+              <article>
+                <strong>1</strong>
+                <span data-i18n-pl="księga dostępna" data-i18n-en="available book">księga dostępna</span>
+              </article>
+              <article>
+                <strong>2</strong>
+                <span data-i18n-pl="w przygotowaniu" data-i18n-en="in preparation">w przygotowaniu</span>
+              </article>
+              <article>
+                <strong>40+</strong>
+                <span data-i18n-pl="tekstów planowanych" data-i18n-en="planned texts">tekstów planowanych</span>
+              </article>
+              <article>
+                <strong>14k+</strong>
+                <span data-i18n-pl="form słownikowych" data-i18n-en="dictionary forms">form słownikowych</span>
+              </article>
+            </div>
+
+            <div class="home-cards">
+              <article class="home-card primary">
+                <span data-i18n-pl="Kontynuuj" data-i18n-en="Continue">Kontynuuj</span>
+                <h4>Pistis Sophia</h4>
+                <p data-i18n-pl="Wróć do ostatnio czytanej strony i kontynuuj pracę z tekstem, interlinią oraz słownikiem." data-i18n-en="Return to the last page you read and continue working with the text, interlinear layer, and dictionary.">Wróć do ostatnio czytanej strony i kontynuuj pracę z tekstem, interlinią oraz słownikiem.</p>
+                <button id="homeContinueButton" class="text-button library-read-button" type="button" data-i18n-pl="Czytaj dalej" data-i18n-en="Continue reading">Czytaj dalej</button>
+              </article>
+              <article class="home-card">
+                <span data-i18n-pl="Następna księga" data-i18n-en="Next text">Następna księga</span>
+                <h4 data-i18n-pl="Ewangelia Tomasza" data-i18n-en="Gospel of Thomas">Ewangelia Tomasza</h4>
+                <p data-i18n-pl="Planowana jako pierwsza nowa pozycja z Biblioteki Nag Hammadi." data-i18n-en="Planned as the first new text from the Nag Hammadi Library.">Planowana jako pierwsza nowa pozycja z Biblioteki Nag Hammadi.</p>
+              </article>
+              <article class="home-card">
+                <span data-i18n-pl="Wsparcie" data-i18n-en="Support">Wsparcie</span>
+                <h4 data-i18n-pl="Pomóż rozwijać projekt" data-i18n-en="Help develop the project">Pomóż rozwijać projekt</h4>
+                <p data-i18n-pl="Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie." data-i18n-en="Your support helps develop the dictionary, interlinear tools, and future Gnostic texts.">Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie.</p>
+                <button id="homeSupportButton" class="text-button library-read-button secondary support-nav-button" type="button"><span class="support-icon" aria-hidden="true">♡</span><span data-i18n-pl="Wesprzyj" data-i18n-en="Support">Wesprzyj</span></button>
+              </article>
+            </div>
+          </section>
+
+          <div id="libraryBooksPanel" class="library-shelf" aria-label="Księgi" hidden>
+
+            <header class="library-info-head library-books-head">
+              <span data-i18n-pl="Księgi" data-i18n-en="Books">Księgi</span>
+              <h3 data-i18n-pl="Katalog Biblioteki Gnozy" data-i18n-en="Gnostyk Library catalogue">Katalog Biblioteki Gnozy</h3>
+              <p data-i18n-pl="Księgi są pogrupowane według kolekcji i kodeksów. Pistis Sophia pozostaje w Kodeksie Askew, a Biblioteka Nag Hammadi jest przygotowana jako katalog kolejnych tekstów." data-i18n-en="Texts are grouped by collections and codices. Pistis Sophia remains under the Askew Codex, while the Nag Hammadi Library is prepared as a catalogue for future texts.">Księgi są pogrupowane według kolekcji i kodeksów. Pistis Sophia pozostaje w Kodeksie Askew, a Biblioteka Nag Hammadi jest przygotowana jako katalog kolejnych tekstów.</p>
+            </header>
+
+            <section class="library-collections" aria-label="Kolekcje tekstów gnostyckich">
+              <details class="collection-group" open>
+                <summary><span data-i18n-pl="Kodeks Askew" data-i18n-en="Askew Codex">Kodeks Askew</span><small data-i18n-pl="dostępne" data-i18n-en="available">dostępne</small></summary>
+                <ul class="collection-list">
+                  <li class="collection-item-link" data-open-work="pistis-sophia" role="button" tabindex="0"><div class="collection-item-main"><strong>Pistis Sophia</strong><em data-i18n-pl="pełny przekład i aparat czytelniczy" data-i18n-en="full translation and reader apparatus">pełny przekład i aparat czytelniczy</em></div><span class="status-badge available" data-i18n-pl="gotowe" data-i18n-en="ready">gotowe</span></li>
+                </ul>
+              </details>
+
+              <details class="collection-group" open>
+                <summary><span data-i18n-pl="Biblioteka Nag Hammadi (Codices I–XIII)" data-i18n-en="Nag Hammadi Library (Codices I–XIII)">Biblioteka Nag Hammadi (Codices I–XIII)</span><small data-i18n-pl="katalog planowany" data-i18n-en="planned catalogue">katalog planowany</small></summary>
+                <div class="codex-grid">
+                  <details><summary>Codex I <small>Jung Codex</small></summary><ul><li>Modlitwa Apostoła Pawła</li><li>Apokryf Jakuba</li><li>Ewangelia Prawdy</li><li>Traktat o Zmartwychwstaniu</li><li>Trójkształtna Protennoia</li></ul></details>
+                  <details><summary>Codex II <small data-i18n-pl="Tomasz i Filip" data-i18n-en="Thomas and Philip">Tomasz i Filip</small></summary><ul><li>Apokryf Jana</li><li class="codex-item-with-status"><span>Ewangelia Tomasza</span><span class="status-badge preparing" data-i18n-pl="w przygotowaniu" data-i18n-en="in preparation">w przygotowaniu</span></li><li class="codex-item-with-status"><span>Ewangelia Filipa</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li>Hipostaza Archontów</li><li>O początku świata</li><li>Egzegeza o duszy</li><li>Księga Tomasza Atlety</li></ul></details>
+                  <details><summary>Codex III</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li><li>Eugnostos Błogosławiony</li><li>Sophia Jezusa Chrystusa</li><li>Dialog Zbawiciela</li></ul></details>
+                  <details><summary>Codex IV</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li></ul></details>
+                  <details><summary>Codex V</summary><ul><li>Eugnostos</li><li>Apokalipsa Pawła</li><li>Pierwsza Apokalipsa Jakuba</li><li>Druga Apokalipsa Jakuba</li><li>Apokalipsa Adama</li></ul></details>
+                  <details><summary>Codex VI</summary><ul><li>Dzieje Piotra i Dwunastu Apostołów</li><li>Grom. Doskonały Umysł</li><li>Autorytatywne Nauczanie</li><li>Pojęcie Naszej Wielkiej Mocy</li><li>Państwo Platona</li><li>Rozprawa o Ósmej i Dziewiątej</li><li>Modlitwa Dziękczynna</li><li>Asklepios</li></ul></details>
+                  <details><summary>Codex VII</summary><ul><li>Parafraza Sema</li><li>Drugi Traktat Wielkiego Seta</li><li>Apokalipsa Piotra</li><li>Nauki Sylwana</li><li>Trzy Stele Seta</li></ul></details>
+                  <details><summary>Codex VIII</summary><ul><li>Zostrianos</li><li>List Piotra do Filipa</li></ul></details>
+                  <details><summary>Codex IX</summary><ul><li>Melchizedek</li><li>Myśl Norei</li><li>Świadectwo Prawdy</li></ul></details>
+                  <details><summary>Codex X</summary><ul><li>Marsanes</li></ul></details>
+                  <details><summary>Codex XI</summary><ul><li>Interpretacja Wiedzy</li><li>Walentyniańska Ekspozycja</li><li>Allogenes</li><li>Hypsiphrone</li></ul></details>
+                  <details><summary>Codex XII</summary><ul><li>Sentencje Sekstusa</li><li>Ewangelia Prawdy (fragment)</li><li>Fragmenty</li></ul></details>
+                  <details><summary>Codex XIII</summary><ul><li>Trimorficzna Protennoia</li><li>O pochodzeniu świata</li></ul></details>
+                </div>
+              </details>
+
+              <details class="collection-group">
+                <summary><span data-i18n-pl="Kodeks Bruce'a" data-i18n-en="Bruce Codex">Kodeks Bruce'a</span><small data-i18n-pl="planowane" data-i18n-en="planned">planowane</small></summary>
+                <ul class="collection-list"><li>Księgi Jeu</li><li>Nienazwany traktat</li></ul>
+              </details>
+
+              <details class="collection-group">
+                <summary><span data-i18n-pl="Inne teksty gnostyckie" data-i18n-en="Other Gnostic texts">Inne teksty gnostyckie</span><small data-i18n-pl="planowane" data-i18n-en="planned">planowane</small></summary>
+                <ul class="collection-list"><li>Ewangelia Marii</li><li>Ewangelia Judasza</li><li>Ody Salomona</li><li>Corpus Hermeticum</li></ul>
+              </details>
+            </section>
+
+            <article class="work-tile is-available" data-open-work="pistis-sophia" role="button" tabindex="0">
               <img src="assets/pwa-icon-192.png" alt="">
               <div>
                 <span>Pełny przekład</span>
@@ -139,7 +234,7 @@
               <h4>Czym jest Gnostyk Biblioteka</h4>
               <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
               <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.136</span></strong>.</p>
+              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.0.142</span></strong>.</p>
               <div class="library-info-strip" aria-label="Podstawowe informacje">
                 <span><strong>Zakres</strong>Teksty gnostyckie</span>
                 <span><strong>Forma</strong>Przekład i opracowanie</span>
@@ -173,15 +268,19 @@
               <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
             </header>
             <ol id="libraryUpdates" class="library-updates">
-              <li class="library-update-group"><strong>1.0.136</strong><ul><li>Znormalizowano układ strony Wsparcie między wersją polską i angielską.</li><li>Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.</li><li>Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.</li></ul></li><li class="library-update-group"><strong>1.0.135</strong><ul><li>Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.</li><li>Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.</li><li>Ikona serca korzysta z kolorów aktywnego motywu.</li></ul></li><li class="library-update-group"><strong>1.0.133</strong><ul><li>Znormalizowano układ przełączników widoku czytelnika między wersją polską i angielską.</li><li>Przełączniki tekstu mają teraz stałą siatkę czterech kolumn, więc nie zmieniają położenia po zmianie języka.</li></ul></li><li class="library-update-group"><strong>1.0.132</strong><ul><li>Znormalizowano opis strony głównej w wersji polskiej względem wersji angielskiej.</li><li>Poszerzono blok opisu pod nagłówkiem biblioteki, aby dłuższy tekst PL nie łamał się niepotrzebnie.</li><li>Zmniejszono odstęp pod logo, dzięki czemu nagłówek strony głównej jest bardziej zwarty.</li></ul></li><li class="library-update-group"><strong>1.0.132</strong><ul><li>Dostosowano pole wyszukiwania słownika do motywów Light, Sepia i Dark.</li><li>Zastąpiono sztywne kolory zmiennymi motywu dla tła, tekstu, obramowania i przycisku czyszczenia.</li><li>Poprawiono kontrast pola wyszukiwania bez zmiany działania słownika.</li></ul></li><li class="library-update-group"><strong>1.0.129</strong><ul><li>Poprawiono wygląd pola wyszukiwania słownika w ciemnych motywach.</li><li>Dodano przycisk × do szybkiego czyszczenia wyszukiwania.</li><li>Ujednolicono styl pola wyszukiwania z resztą interfejsu.</li></ul></li><li class="library-update-group"><strong>1.0.128</strong><ul><li>Ujednolicono numer wersji w całej aplikacji po wydaniu 1.0.127.</li><li>Podbito odwołania wersji w plikach aplikacji, cache PWA, metadanych i linkach zasobów.</li><li>Uporządkowano historię zmian tak, aby pokazywała ostatnie 10 wersji z opisami PL/EN.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.142</strong><ul><li>Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.</li><li>Usunięto obramowanie logo po najechaniu kursorem.</li><li>Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.141</strong><ul><li>Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.</li><li>Kliknięcie logo Gnostyk przenosi teraz do strony Home.</li><li>Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.140</strong><ul><li>Dodano osobną stronę Home jako ekran startowy biblioteki.</li><li>Przeniesiono katalog tekstów do zakładki Księgi.</li><li>Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.138</strong><ul><li>Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.</li><li>Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.</li><li>Uspójniono prezentację danych słownikowych bez zmiany działania interlinii.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.137</strong><ul><li>Naprawiono lokalizację historii zmian w trybie EN.</li><li>Historia zmian rozpoznaje teraz wpisy PL/EN zapisane jako zwykłe nagłówki lub nagłówki Markdown.</li><li>Podbito wersję aplikacji po poprawce lokalizacji changeloga.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.136</strong><ul><li>Znormalizowano układ strony Wsparcie między wersją polską i angielską.</li><li>Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.</li><li>Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.135</strong><ul><li>Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.</li><li>Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.</li><li>Ikona serca korzysta z kolorów aktywnego motywu.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.133</strong><ul><li>Znormalizowano układ przełączników widoku czytelnika między wersją polską i angielską.</li><li>Przełączniki tekstu mają teraz stałą siatkę czterech kolumn, więc nie zmieniają położenia po zmianie języka.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.132</strong><ul><li>Znormalizowano opis strony głównej w wersji polskiej względem wersji angielskiej.</li><li>Poszerzono blok opisu pod nagłówkiem biblioteki, aby dłuższy tekst PL nie łamał się niepotrzebnie.</li><li>Zmniejszono odstęp pod logo, dzięki czemu nagłówek strony głównej jest bardziej zwarty.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.131</strong><ul><li>Dostosowano pole wyszukiwania słownika do motywów Light, Sepia i Dark.</li><li>Zastąpiono sztywne kolory zmiennymi motywu dla tła, tekstu, obramowania i przycisku czyszczenia.</li><li>Poprawiono kontrast pola wyszukiwania bez zmiany działania słownika.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.129</strong><ul><li>Poprawiono wygląd pola wyszukiwania słownika w ciemnych motywach.</li><li>Dodano przycisk × do szybkiego czyszczenia wyszukiwania.</li><li>Ujednolicono styl pola wyszukiwania z resztą interfejsu.</li></ul></li>
+              <li class="library-update-group"><strong>1.0.128</strong><ul><li>Ujednolicono numer wersji w całej aplikacji po wydaniu 1.0.127.</li><li>Podbito odwołania wersji w plikach aplikacji, cache PWA, metadanych i linkach zasobów.</li><li>Uporządkowano historię zmian tak, aby pokazywała ostatnie 10 wersji z opisami PL/EN.</li></ul></li>
               <li class="library-update-group"><strong>1.0.127</strong><ul><li>Na telefonach karta słownikowa działa jako dolny panel zamiast zakrywać cały tekst.</li><li>Tekst pozostaje widoczny nad kartą słownikową podczas przeglądania wystąpień.</li><li>Panel ma własne przewijanie, a przycisk zamykania pozostaje dostępny.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.126</strong><ul><li>Wystąpienia słownika są sortowane według bliskości aktualnej strony.</li><li>Dodano przyciski Poprzednie 20 / Następne 20 dla długich list wystąpień.</li><li>Karta słownikowa pozostaje otwarta podczas przeglądania kolejnych stron.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.125</strong><ul><li>Przygotowano architekturę wystąpień słownika pod wiele tekstów koptyjskich.</li><li>Wystąpienia są teraz grupowane według tekstu; obecnie aktywna jest Pistis Sophia.</li><li>Moduł słownika jest gotowy na późniejsze dodanie kolejnych tekstów, np. Ewangelii Tomasza.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.124</strong><ul><li>Naprawiono pozycję karty słownikowej przy długich listach wystąpień.</li><li>Karta mieści się teraz w ekranie i ma własne przewijanie.</li><li>Przycisk zamykania pozostaje zawsze dostępny.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.123</strong><ul><li>Karta słownikowa pozostaje otwarta po kliknięciu wystąpienia.</li><li>Kliknięcie wystąpienia przenosi do odpowiedniej strony w trybie interlinearnym.</li><li>Dopasowane słowo zostaje podświetlone, aby łatwiej odnaleźć je w tekście.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.122</strong><ul><li>Dodano sekcję „Wystąpienia” w karcie słownikowej.</li><li>Karta pokazuje, na których stronach bieżącej warstwy koptyjskiej występuje dana forma lub jej forma bazowa.</li><li>Kliknięcie wystąpienia przenosi do odpowiedniej strony tekstu.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.121</strong><ul><li>Rozbudowano kartę słownikową bez dodawania nowych modułów.</li><li>Części mowy są teraz opisane normalnie, np. „rzeczownik (N)” albo „przyimek / partykuła (PREP)”.</li><li>Dla form rozpoznanych przez lematyzację karta pokazuje formę bazową oraz transliterację.</li><li>Oczyszczono listy znaczeń z części technicznych wpisów słownikowych.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.120</strong><ul><li>Naprawiono pełną lokalizację karty słownikowej w trybie EN i PL.</li><li>Etykiety karty słownikowej przełączają się teraz zgodnie z językiem interfejsu.</li><li>Usunięto zdublowane pole „Część mowy” z karty słownikowej.</li></ul></li>
             </ol>
           </section>
 
@@ -334,7 +433,7 @@
             <button id="footerPrivacyButton" class="footer-link" type="button">Prywatność</button>
             <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
             <button id="footerSupportButton" class="footer-link footer-support-link" type="button"><span class="support-icon" aria-hidden="true">♡</span><span>Wsparcie</span></button>
-            <span>v<span id="libraryVersionFooterHome">1.0.136</span></span>
+            <span>v<span id="libraryVersionFooterHome">1.0.142</span></span>
           </div>
         </footer>
 
@@ -348,7 +447,7 @@
           <div class="hero-stats">
             <span><strong id="pageCount">255</strong> stron</span>
             <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.0.136</strong> wersja biblioteki</span>
+            <span><strong id="libraryVersion">1.0.142</strong> wersja biblioteki</span>
           </div>
         </section>
 
@@ -428,7 +527,7 @@
                 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
               </dl>
               <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.136</span>.</strong></p>
+              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.0.142</span>.</strong></p>
               <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
             </section>
             <div id="pageText" class="page-text"></div>
@@ -457,7 +556,7 @@
           <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
           <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
           <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.136</span></p>
+          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.0.142</span></p>
         </footer>
       </main>
     </div>
@@ -545,10 +644,10 @@
       <button data-mobile-panel="more" type="button">Więcej</button>
     </nav>
 
-    <script src="data.js?v=1.0.136"></script>
-    <script src="coptic-data.js?v=1.0.136"></script>
-    <script src="coptic-dictionary.js?v=1.0.136"></script>
-    <script src="coptic-polish-overrides.js?v=1.0.136"></script>
-    <script src="app.js?v=1.0.136"></script>
+    <script src="data.js?v=1.0.142"></script>
+    <script src="coptic-data.js?v=1.0.142"></script>
+    <script src="coptic-dictionary.js?v=1.0.142"></script>
+    <script src="coptic-polish-overrides.js?v=1.0.142"></script>
+    <script src="app.js?v=1.0.142"></script>
   </body>
 </html>
