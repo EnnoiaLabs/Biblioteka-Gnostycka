@@ -1,0 +1,586 @@
+{
+  "generated": "2026-06-29",
+  "our_translation": {
+    "source_pages": 255,
+    "translated_pages": 255,
+    "intro_translated": 47,
+    "body_translated": 208,
+    "body_coverage_percent": 100.0,
+    "short_body_pages": []
+  },
+  "our_terms": {
+    "source_en": {
+      "First Mystery": 208,
+      "Light of lights": 19,
+      "Self-willed": 127,
+      "lion-faced power": 30,
+      "repentance": 184,
+      "aeon": 0,
+      "receivers": 67,
+      "Treasury of the Light": 57
+    },
+    "our_pl_exact": {
+      "Pierwsze Misterium": 80,
+      "Światłość Światłości": 2,
+      "Samowolny": 20,
+      "moc o lwim obliczu": 16,
+      "pokuta": 45,
+      "eon": 250,
+      "odbiorcy": 46,
+      "Skarbiec Światłości": 12
+    },
+    "our_pl_flexible": {
+      "Pierwsze Misterium": 239,
+      "Światłość Światłości": 23,
+      "Samowolny": 133,
+      "moc o lwim obliczu": 33,
+      "pokuta": 215,
+      "eon": 250,
+      "odbiorcy": 87,
+      "Skarbiec Światłości": 69
+    }
+  },
+  "control_pages": [
+    {
+      "page": 48,
+      "en_len": 2444,
+      "pl_len": 2503,
+      "ratio": 1.02,
+      "en_preview": "S. does not re-discuss the question of date of the P.S. by the light of this new find, but it is clearly of importance, seeing that with regard to the new document he concludes p. lxix [paragraph continues] (p. 402): \"The Epistola Apostolorum is written by a representative of the Catholic Church with the intention of attacking the Gnostic heresies, especiall",
+      "pl_preview": "Schmidt nie omawia ponownie kwestii daty Pistis Sophia w świetle tego nowego znaleziska, lecz jest ono wyraźnie ważne, skoro w odniesieniu do nowego dokumentu konkluduje, że Epistola Apostolorum została napisana przez przedstawiciela Kościoła katolickiego z zamiarem ataku na herezje gnostyckie, zwłaszcza doketyzm; krajem pochodzenia jest Azja Mniejsza, a dat"
+    },
+    {
+      "page": 50,
+      "en_len": 2596,
+      "pl_len": 2193,
+      "ratio": 0.84,
+      "en_preview": "surroundeth that universe of which I have spoken unto you from the day when I met with you even unto this day.\" For this cause then the disciples thought there is nothing within that mystery. CHAPTER 2 Jesus and his disciples are seated on the Mount of Olives. It came to pass then, when the disciples were sitting together on the Mount of Olives, speaking of ",
+      "pl_preview": "obejmuje ten wszechświat, o którym mówiłem wam od dnia, gdy spotkałem się z wami, aż do tego dnia”. Z tej przyczyny uczniowie myśleli więc, że nie ma nic wewnątrz owego Misterium. ROZDZIAŁ 2 Jezus i jego uczniowie siedzą na Górze Oliwnej. I stało się, gdy uczniowie siedzieli razem na Górze Oliwnej, rozmawiając o tych słowach i radując się wielką radością, i "
+    },
+    {
+      "page": 68,
+      "en_len": 2624,
+      "pl_len": 2371,
+      "ratio": 0.9,
+      "en_preview": "CHAPTER 29 Jesus entereth the thirteenth æon and findeth Pistis Sophia. \"It came to pass then thereafter that I ascended to the veils of the thirteenth æon. It came to pass then, when I had arrived at their veils, that they drew apart of their own accord and opened themselves for me. I entered in into the thirteenth æon and found Pistis Sophia below the thir",
+      "pl_preview": "ROZDZIAŁ 29 Jezus wchodzi w trzynasty eon i znajduje Pistis Sophię. I stało się potem, że wstąpiłem ku zasłonom trzynastego eonu. I stało się, gdy doszedłem do ich zasłon, że rozsunęły się same z siebie i otworzyły się dla mnie. Wszedłem do trzynastego eonu i znalazłem Pistis Sophię poniżej trzynastego eonu, samą jedną, i nikogo z nich przy niej. Siedziała w"
+    },
+    {
+      "page": 70,
+      "en_len": 2588,
+      "pl_len": 2348,
+      "ratio": 0.91,
+      "en_preview": "She descendeth to the twelve æons and thence into the chaos. \"This then thinking, she went forth from her own region, the thirteenth æon, and went down to the twelve æons. The rulers of the æons pursued her and were enraged against her, because she had thought of grandeur. And she p. 37 went forth also from the twelve æons, and came into the regions of the c",
+      "pl_preview": "Zstępuje do dwunastu eonów, a stamtąd do chaosu. Myśląc więc to, wyszła ze swojego własnego regionu, trzynastego eonu, i zeszła do dwunastu eonów. Władcy eonów ścigali ją i rozgniewali się na nią, ponieważ pomyślała o wielkości. Wyszła także z dwunastu eonów i przyszła do regionów chaosu, i zbliżyła się do owej mocy światłości o lwim obliczu, aby ją pożreć. "
+    },
+    {
+      "page": 76,
+      "en_len": 1966,
+      "pl_len": 1875,
+      "ratio": 0.95,
+      "en_preview": "It came to pass then, when Mary had finished speaking these words unto Jesus in the midst of the disciples, that she said unto him: \"My Lord, this is the solution of the mystery of the repentance of Pistis Sophia.\"|56. It came to pass then, when Jesus had heard Mary speak these words, that he said unto her: \"Well said, Mary, blessed one, the fulness, or all-",
+      "pl_preview": "I stało się, gdy Maria skończyła mówić te słowa do Jezusa pośród uczniów, że rzekła do niego: „Panie mój, to jest rozwiązanie Misterium pokuty Pistis Sophii”. |56. I stało się, gdy Jezus usłyszał, jak Maria mówi te słowa, że rzekł do niej: „Dobrze powiedziałaś, Mario, błogosławiona, Pełnio, albo najbłogosławieńsza Pełnio, ty, która będziesz opiewana jako bło"
+    },
+    {
+      "page": 102,
+      "en_len": 2705,
+      "pl_len": 2543,
+      "ratio": 0.94,
+      "en_preview": "\"'28. My tongue will exult over thy justification and over thy honour all the day long.'\" |98. CHAPTER 52 Jesus commendeth James and promiseth the first place unto the disciples. When James then had said this, Jesus said unto him: \"Well said, finely, James. This is the solution of the ninth repentance of Pistis Sophia. Amēn, amēn, I say unto you: Ye shall be",
+      "pl_preview": "28. Mój język będzie weselił się twoim usprawiedliwieniem i twoją czcią przez cały dzień”. |98. ROZDZIAŁ 52 Jezus pochwala Jakuba i obiecuje uczniom pierwsze miejsce. Gdy więc Jakub to powiedział, Jezus rzekł do niego: „Dobrze powiedziałeś, pięknie, Jakubie. To jest rozwiązanie dziewiątej pokuty Pistis Sophii. Amen, amen, mówię wam: będziecie pierwsi w króle"
+    },
+    {
+      "page": 187,
+      "en_len": 2712,
+      "pl_len": 2426,
+      "ratio": 0.89,
+      "en_preview": "matter is manifest: There is a multitude of limbs but one only body. Of this indeed have I spoken in a pattern and similitude and likeness, but not in a form in truth; nor have I revealed the word in truth, but the mystery [only] of the Ineffable. The Saviour is their treasury. \"And all the Limbs which are in it,--according to the word with which I have made",
+      "pl_preview": "rzecz jest jawna: jest wiele członków, lecz jedno tylko ciało. O tym zaprawdę mówiłem we wzorze, obrazie i podobieństwie, lecz nie w postaci w prawdzie; ani nie objawiłem słowa w prawdzie, lecz tylko Misterium Niewypowiadalnego. Zbawca jest ich skarbcem. A wszystkie Członki, które są w nim - według słowa, z którym uczyniłem porównanie - to jest te, które trw"
+    },
+    {
+      "page": 218,
+      "en_len": 2168,
+      "pl_len": 1844,
+      "ratio": 0.85,
+      "en_preview": "circuits of the changes of the body, and coming back into the world are some of those in this present time who have hearkened unto me, how I taught, who at the completion of the number of the perfect souls will find the mysteries of the Light and receive them and come to the gates of the Light and find that the number of the perfect souls is complete, which ",
+      "pl_preview": "i wracając na świat, będą wśród nich niektórzy z obecnego czasu, którzy słuchali mnie, jak nauczałem, którzy przy dopełnieniu liczby dusz doskonałych znajdą misteria Światłości, otrzymają je i przyjdą do bram Światłości, i znajdą, że liczba dusz doskonałych jest dopełniona, co jest dopełnieniem Pierwszego Misterium i gnozą wszechświata. I znajdą, że zamknąłe"
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "pistissofia.pdf",
+      "pages": 255,
+      "chars": 630663,
+      "kind": "angielska edycja/przekład źródłowy",
+      "anchors": {
+        "mead_opening": [
+          "Jesus hitherto instructeth his disciples",
+          "regions of the First Mystery",
+          "Mount of Olives"
+        ],
+        "sophia_fall": [
+          "thirteenth æon",
+          "lion-faced power",
+          "Self-willed"
+        ],
+        "repentances": [
+          "repentance of Sophia",
+          "Light of lights",
+          "solution of the repentance"
+        ],
+        "late_books": [
+          "A SIXTH BOOK",
+          "CHAPTER 148",
+          "LACUNA"
+        ],
+        "polish_opening": [],
+        "polish_terms": []
+      },
+      "terms_en": {
+        "First Mystery": 208,
+        "Light of lights": 19,
+        "Self-willed": 126,
+        "lion-faced power": 31,
+        "repentance": 184,
+        "aeon": 0,
+        "receivers": 67,
+        "Treasury of the Light": 57
+      },
+      "terms_pl": {
+        "Pierwsze Misterium": 0,
+        "Światłość Światłości": 0,
+        "Samowolny": 0,
+        "moc o lwim obliczu": 0,
+        "pokuta": 0,
+        "eon": 48,
+        "odbiorcy": 0,
+        "Skarbiec Światłości": 0
+      },
+      "sample_start": "PISTIS SOPHIA; A GNOSTIC MISCELLANY: BEING FOR THE MOST PART EXTRACTS FROM THE BOOKS OF THE SAVIOUR, TO WHICH ARE ADDED EXCERPTS FROM A COGNATE LITERATURE; ENGLISHED By G. R. S. Mead. London: J. M. Watkins [1921] Biographical data: G. R. S. (George Robert Stow) Mead [1863-1933] NOTICE OF ATTRIBUTION. {rem Scanned at sacred-texts.com, June 2005. Proofed and formatted by John Bruno Hare. This text is in the public domain in the United States because it was published prior to 1923. It also entered the public domain in the UK and EU in 2003. These files may be used for any non-commercial purpose, provided this notice of attribution is left intact in all copies. p. v CONTENTS PAGE PREFACE xvii INTRODUCTION The Askew Codex xxi The Scripts xxii The Contents xxiii The Title xxiv The Date of the MS. xxv Translated from the Greek xxvi Originals composed in Egypt xxviii Date: The 2nd-century Theory",
+      "sample_pistis": "PISTIS SOPHIA; A GNOSTIC MISCELLANY: BEING FOR THE MOST PART EXTRACTS FROM THE BOOKS OF THE SAVIOUR, TO WHICH ARE ADDED EXCERPTS FROM A COGNATE LITERATURE; ENGLISHED By G. R. S. Mead. London: J. M. Watkins [1921] Biographical data: G",
+      "common": [
+        [
+          "mystery",
+          727
+        ],
+        [
+          "mysteries",
+          500
+        ],
+        [
+          "sophia",
+          443
+        ],
+        [
+          "region",
+          319
+        ],
+        [
+          "pistis",
+          292
+        ],
+        [
+          "rulers",
+          290
+        ],
+        [
+          "therefore",
+          241
+        ],
+        [
+          "disciples",
+          227
+        ],
+        [
+          "through",
+          221
+        ],
+        [
+          "because",
+          220
+        ],
+        [
+          "regions",
+          213
+        ],
+        [
+          "saviour",
+          206
+        ]
+      ]
+    },
+    {
+      "file": "pistissofia ksiega2.pdf",
+      "pages": 44,
+      "chars": 108803,
+      "kind": "polski przekład cząstkowy / kontrola brzmienia",
+      "anchors": {
+        "mead_opening": [],
+        "sophia_fall": [],
+        "repentances": [],
+        "late_books": [],
+        "polish_opening": [
+          "Pierwszego Misterium",
+          "Góra Oliwna"
+        ],
+        "polish_terms": [
+          "Światłość Światłości"
+        ]
+      },
+      "terms_en": {
+        "First Mystery": 0,
+        "Light of lights": 0,
+        "Self-willed": 0,
+        "lion-faced power": 0,
+        "repentance": 0,
+        "aeon": 0,
+        "receivers": 0,
+        "Treasury of the Light": 0
+      },
+      "terms_pl": {
+        "Pierwsze Misterium": 7,
+        "Światłość Światłości": 2,
+        "Samowolny": 0,
+        "moc o lwim obliczu": 0,
+        "pokuta": 0,
+        "eon": 53,
+        "odbiorcy": 1,
+        "Skarbiec Światłości": 0
+      },
+      "sample_start": "1 PISTIS SOPHIA – KSIĘGA DRUGA Przełożył Paul Kieniewicz Wstęp Opowieść Pistis Sophia znaleziono w Kodeksie Askew w 1773, gdzie obejmuje pierwszą i połowę drugiej księgi kodeksu. Jest ona opowieść mitologiczna o podróży duszy, podobna do Pieśń o Perle i Ekzegeza o Duszy. Dusza spada od miejsca błogości (Pełnia) do światu materii. Jest uwięziona w Chaosie. Następuje budzi się w Duszy świadomość o swojej ciemnej sytuacji, wizja światu transcendentalnego. Prowadzi to do Poznania (Gnozy) i rozpoznania Światła. Sophia przechodzi wewnętrzne zjednoczenie i łączy się się z swoim niebieskim aniołem. Podróż Sophii kończy się w jej połączeniu w komnacie oblubieńców z Jezusem. W pierwszej księdze Jezus (także zwany Pierwsze Misterium) opowiada uczniom jak w trakcie Jego wędrowania poza światem spotkał Pistis Sophię w stanie upadłym. Najmłodsza z eonów Pełni, Sophia miała wizje Skarbnicy Światła poza",
+      "sample_pistis": "1 PISTIS SOPHIA – KSIĘGA DRUGA Przełożył Paul Kieniewicz Wstęp Opowieść Pistis Sophia znaleziono w Kodeksie Askew w 1773, gdzie obejmuje pierwszą i połowę drugiej księgi kodeksu. Jest ona opowieść mitologiczna o podróży duszy, podobna",
+      "common": [
+        [
+          "światła",
+          190
+        ],
+        [
+          "dlaczego",
+          136
+        ],
+        [
+          "misteria",
+          130
+        ],
+        [
+          "wszystkich",
+          121
+        ],
+        [
+          "pistis",
+          115
+        ],
+        [
+          "wypowiedziała",
+          102
+        ],
+        [
+          "sophia",
+          93
+        ],
+        [
+          "wszystkie",
+          88
+        ],
+        [
+          "którzy",
+          77
+        ],
+        [
+          "światło",
+          69
+        ],
+        [
+          "będzie",
+          61
+        ],
+        [
+          "misterii",
+          58
+        ]
+      ]
+    },
+    {
+      "file": "Pistis Sophia 1896.pdf",
+      "pages": 450,
+      "chars": 591454,
+      "kind": "angielska edycja/przekład źródłowy",
+      "anchors": {
+        "mead_opening": [
+          "Jesus hitherto instructeth his disciples",
+          "regions of the First Mystery",
+          "Mount of Olives"
+        ],
+        "sophia_fall": [
+          "thirteenth aeon",
+          "lion-faced power"
+        ],
+        "repentances": [
+          "repentance of Sophia",
+          "Light of lights"
+        ],
+        "late_books": [
+          "LACUNA"
+        ],
+        "polish_opening": [],
+        "polish_terms": []
+      },
+      "terms_en": {
+        "First Mystery": 160,
+        "Light of lights": 15,
+        "Self-willed": 0,
+        "lion-faced power": 24,
+        "repentance": 140,
+        "aeon": 165,
+        "receivers": 63,
+        "Treasury of the Light": 0
+      },
+      "terms_pl": {
+        "Pierwsze Misterium": 0,
+        "Światłość Światłości": 0,
+        "Samowolny": 0,
+        "moc o lwim obliczu": 0,
+        "pokuta": 0,
+        "eon": 262,
+        "odbiorcy": 0,
+        "Skarbiec Światłości": 0
+      },
+      "sample_start": "273.1 P6? 63-15989 fistis sophia ?istis sophia PISTIS SOPHIA A GNOSTIC GOSPEL (WITH EXTEACTS FEOM THE BOOKS OF THE SAVIOUE APPENDED) OEIGINALLY TEANSLATED FEOM GEEEK INTO COPTIC AND NOW FOE THE FIEST TIME ENGLISHED FEOM SCHWAETZE'S LATIN VEE- SION OF THE ONLY KNOWN COPTIC MS. AND CHECKED BY AMELINEAU'S FEENCH VEESION WITH AN INTBODUCTION BY G. E. S. MEAD B.A. M.E.A.8. London The Theosophical Publishing Society 26 Charing Cross, S.W. NEW YOBK: THE THEOSOPHICAL PUBLISHING SOCIETY, 65 FIFTH AVENUE BENARES: THE THEOSOPHICAL PUBLISHING SOCIETY MADRAS: \"THE THEOSOPHIST\" OFFICE, ADYAR 1896 ABERDEEN UNIVEBSITY PEE8S TABLE OF SUMMARIES. INTRODUCTION. The documents and general literature of G . nos . tic . ism . . P x A v G ii E The method of the best Gnostic doctors xxiii Description and criticism of the MS xxv General analysis of contents xxix The date and authorship of the Greek original . .",
+      "sample_pistis": "273.1 P6? 63-15989 fistis sophia ?istis sophia PISTIS SOPHIA A GNOSTIC GOSPEL (WITH EXTEACTS FEOM THE BOOKS OF THE SAVIOUE APPENDED) OEIGINALLY TEANSLATED FEOM GEEEK INTO COPTIC AND NOW FOE THE FIEST TIME ENGLISHED FEOM SCHWAETZE'S LATIN VEE- SION OF THE ONLY KNOWN COPTIC MS. AND",
+      "common": [
+        [
+          "mystery",
+          706
+        ],
+        [
+          "sophia",
+          615
+        ],
+        [
+          "pistis",
+          484
+        ],
+        [
+          "mysteries",
+          374
+        ],
+        [
+          "region",
+          332
+        ],
+        [
+          "therefore",
+          309
+        ],
+        [
+          "rulers",
+          268
+        ],
+        [
+          "second",
+          213
+        ],
+        [
+          "saviour",
+          211
+        ],
+        [
+          "master",
+          202
+        ],
+        [
+          "regions",
+          176
+        ],
+        [
+          "disciples",
+          165
+        ]
+      ]
+    },
+    {
+      "file": "Pistis Sophia R.Mcl.Wilson.pdf",
+      "pages": 826,
+      "chars": 1153275,
+      "kind": "nowoczesne opracowanie naukowe / kontrola terminologii",
+      "anchors": {
+        "mead_opening": [
+          "Mount of Olives"
+        ],
+        "sophia_fall": [
+          "thirteenth aeon",
+          "lion-faced power"
+        ],
+        "repentances": [
+          "Light of lights"
+        ],
+        "late_books": [
+          "CHAPTER 148",
+          "LACUNA"
+        ],
+        "polish_opening": [],
+        "polish_terms": []
+      },
+      "terms_en": {
+        "First Mystery": 183,
+        "Light of lights": 20,
+        "Self-willed": 0,
+        "lion-faced power": 24,
+        "repentance": 114,
+        "aeon": 252,
+        "receivers": 0,
+        "Treasury of the Light": 48
+      },
+      "terms_pl": {
+        "Pierwsze Misterium": 0,
+        "Światłość Światłości": 0,
+        "Samowolny": 0,
+        "moc o lwim obliczu": 0,
+        "pokuta": 0,
+        "eon": 281,
+        "odbiorcy": 0,
+        "Skarbiec Światłości": 0
+      },
+      "sample_start": "· NAG HAMMADI STUDIES EDITED BY MARTIN KRAUSE - JAMES M. ROBINSON FREDERIK WISSE IN CONJUNCTION WITH ALEXANDER Böuuo - JEAN DoRESSE - S0REN GIVERSEN HANS JoNAS - RoooLPHE KAssER - PAHOR LABIB GEORGE W. MAcRAE- JACQUEs-E. MENARD- ToRGNY SAvE-SöoERBERGH WILLEM CoRNELIS VAN UNNIK - R. McL. WILSON JAN ZANDEE IX VOLUME EDITOR R. McL. WILSON LEIDEN E. J. BRILL 1978 THE. COPTIC GNOSTIC LIBRARY EDITED WITH ENGLISH TRANSLATION, INTRODUCTION AND NOTES pub/ished under the auspices of THE INSTITUTE FOR ANTIQUITY AND CHRISTIANITY P I S T I S S O P H I A TEXT EDITED BY CARL SCHMIDT TRANSLATION AND NOTES BY VIOLET MACDERMOT LEIDEN E. J. BRILL 1978 ISBN 90 04 05635 I Copyright 1978 by E. J. Bri/1, Leiden, The Netherlands All rights reserved. No part of this book may be reproduced or translated in any form, by print, photoprint, micr~film, micr~fiche or any other means without written permission .from th",
+      "sample_pistis": "LA TlO N (Book I) 2 (Book II) 254 (Book 111) . 512 (Book IV) . 706 Bibliography 772 Key to Words of Greek Origin 776 Greek Words . 786 Selected Words of Coptic Origin 794 Proper N ames 798 References 802 V FOREWORD The Pistis Sophia text which forms the contents of the Askew Codex was made available to scholars over a century ago. However a modern English translation of this Coptic gnostic document has been lacking for some years, and it is advanta",
+      "common": [
+        [
+          "sophia",
+          720
+        ],
+        [
+          "pistis",
+          685
+        ],
+        [
+          "mystery",
+          680
+        ],
+        [
+          "mysteries",
+          451
+        ],
+        [
+          "chapter",
+          374
+        ],
+        [
+          "archons",
+          298
+        ],
+        [
+          "things",
+          281
+        ],
+        [
+          "because",
+          248
+        ],
+        [
+          "happened",
+          205
+        ],
+        [
+          "saviour",
+          192
+        ],
+        [
+          "places",
+          191
+        ],
+        [
+          "within",
+          179
+        ]
+      ]
+    },
+    {
+      "file": "Gnostyczne Misteria Pistis Sophii • Jan van Rijckenborgh.pdf",
+      "pages": 520,
+      "chars": 762612,
+      "kind": "komentarz ezoteryczny / materiał pomocniczy",
+      "anchors": {
+        "mead_opening": [],
+        "sophia_fall": [],
+        "repentances": [],
+        "late_books": [],
+        "polish_opening": [
+          "Pierwszego Misterium"
+        ],
+        "polish_terms": []
+      },
+      "terms_en": {
+        "First Mystery": 0,
+        "Light of lights": 0,
+        "Self-willed": 0,
+        "lion-faced power": 0,
+        "repentance": 0,
+        "aeon": 0,
+        "receivers": 0,
+        "Treasury of the Light": 0
+      },
+      "terms_pl": {
+        "Pierwsze Misterium": 24,
+        "Światłość Światłości": 0,
+        "Samowolny": 1,
+        "moc o lwim obliczu": 0,
+        "pokuta": 1,
+        "eon": 480,
+        "odbiorcy": 0,
+        "Skarbiec Światłości": 0
+      },
+      "sample_start": "Πίστις Σοφία G n o s t y c z n e M i s t e r i a P i s t i s S o p h i i Komentarze do Księgi Pierwszej Pistis Sophii Jan van Rijckenborgh Księga Pierwsza Pistis Sophii Gnostyczne Misteria Pistis Sophii Komentarze do Księgi Pierwszej Pistis Sophii Jan van Rijckenborgh Instytut Wydawniczy Rozekruis Pers Wieluń 2015 3 Gnostyczne Misteria Pistis Sophii Przekładu dokonano z języka niemieckiego: Die Gnostischen Mysterien der Pistis Sophia Rok pierwszego wydania: 1991 Tytuł oryginału: De gnotieke mysteriën van de Pistis Sophia ©Copyright for the original Dutch language edition by Stichting Rozekruis Pers, Bakenessergracht 11-15, Haarlem, Holandia ©Copyright by Stichting Rozekruis Pers, Bakenessergracht 11-15, Haarlem, Holandia ©Copyright for the Polish translation by Instytut Wydawniczy Rozekruis Pers ©Copyright for the Polish edition by Instytut Wydawniczy Rozekruis Pers All rights reserved W",
+      "sample_pistis": "omentarze do Księgi Pierwszej Pistis Sophii Jan van Rijckenborgh Instytut Wydawniczy Rozekruis Pers Wieluń 2015 3 Gnostyczne Misteria Pistis Sophii Przekładu dokonano z języka niemieckiego: Die Gnostischen Mysterien der Pistis Sophia Rok pierwszego wydania: 1991 Tytuł oryginału: De gnotieke mysteriën van de Pistis Sophia ©Copyright for the original Dutch language edition by Stichting Rozekruis Pers, Bakenessergracht 11-15, Haarlem, Holandia ©Copyrig",
+      "common": [
+        [
+          "pistis",
+          699
+        ],
+        [
+          "światła",
+          586
+        ],
+        [
+          "światło",
+          445
+        ],
+        [
+          "sophia",
+          411
+        ],
+        [
+          "misterium",
+          362
+        ],
+        [
+          "którzy",
+          297
+        ],
+        [
+          "jednak",
+          282
+        ],
+        [
+          "skruchy",
+          274
+        ],
+        [
+          "natury",
+          257
+        ],
+        [
+          "dlatego",
+          248
+        ],
+        [
+          "człowiek",
+          245
+        ],
+        [
+          "sophii",
+          238
+        ]
+      ]
+    }
+  ]
+}
