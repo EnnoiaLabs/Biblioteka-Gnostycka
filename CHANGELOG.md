@@ -1,4 +1,18 @@
-## 1.4.5
+# Changelog
+
+## 1.4.6
+
+### PL
+- Dodano nową sekcję Kontakt w nawigacji biblioteki i stopce.
+- Dodano klikalny adres e-mail `gnostyk950@gmail.com` do zgłaszania błędów, literówek, problemów z tłumaczeniem oraz opinii.
+- Dodano pełną lokalizację PL/EN dla panelu kontaktowego.
+
+### EN
+- Added a new Contact section to the library navigation and footer.
+- Added a clickable email address `gnostyk950@gmail.com` for bug reports, typos, translation issues, and feedback.
+- Added full PL/EN localization for the contact panel.
+
+## 1.4.6
 
 ### PL
 - Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.

@@ -10,7 +10,7 @@ if (isThomasBook && window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.4.5",
+  version: "1.4.6",
   updated: "2026-07-08",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
@@ -218,6 +218,7 @@ const uiText = {
     home: "Home",
     books: "Księgi",
     info: "Info",
+    contact: "Kontakt",
     privacy: "Prywatność",
     changes: "Zmiany",
     dictionary: "Słownik",
@@ -272,6 +273,12 @@ const uiText = {
     infoDataValue: "Lokalnie w przeglądarce",
     infoModeLabel: "Tryb",
     infoModeValue: "PWA i offline",
+    contactKicker: "Kontakt",
+    contactTitle: "Opinie i zgłaszanie błędów",
+    contactLead: "Masz uwagi, znalazłeś błąd lub chcesz zaproponować zmianę w Bibliotece Gnozy?",
+    contactP1: "Biblioteka Gnozy jest stale rozwijana. Jeśli zauważysz literówkę, błąd w tłumaczeniu, problem techniczny albo masz pomysł na nową funkcję lub kolejną księgę, napisz do mnie.",
+    contactEmailLabel: "E-mail:",
+    contactP3: "Dziękuję za każdą opinię, sugestię i zgłoszenie. Dzięki wiadomościom od użytkowników biblioteka może stawać się coraz dokładniejsza i wygodniejsza.",
     privacyKicker: "Prywatność",
     privacyTitle: "Polityka prywatności",
     privacyLead: "Gnostyk Biblioteka działa lokalnie w przeglądarce i nie wymaga konta użytkownika.",
@@ -476,6 +483,7 @@ const uiText = {
     home: "Home",
     books: "Books",
     info: "Info",
+    contact: "Contact",
     privacy: "Privacy",
     changes: "Changes",
     dictionary: "Dictionary",
@@ -531,6 +539,12 @@ const uiText = {
     infoDataValue: "Local in the browser",
     infoModeLabel: "Mode",
     infoModeValue: "PWA and offline",
+    contactKicker: "Contact",
+    contactTitle: "Feedback and bug reports",
+    contactLead: "Have comments, found a bug, or want to suggest an improvement to the Gnostyk Library?",
+    contactP1: "The Gnostyk Library is continually being developed. If you notice a typo, translation issue, technical problem, or have an idea for a new feature or another book, please write to me.",
+    contactEmailLabel: "Email:",
+    contactP3: "Thank you for every comment, suggestion, and report. Messages from users help make the library more accurate and easier to use.",
     privacyKicker: "Privacy",
     privacyTitle: "Privacy policy",
     privacyLead: "Gnostyk Library works locally in the browser and does not require a user account.",
@@ -6407,6 +6421,7 @@ const els = {
   visitCounterValue: document.querySelector("#visitCounterValue"),
   libraryBooksToggle: document.querySelector("#libraryBooksToggle"),
   libraryInfoToggle: document.querySelector("#libraryInfoToggle"),
+  libraryContactToggle: document.querySelector("#libraryContactToggle"),
   libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
   libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
   libraryDictionaryToggle: document.querySelector("#libraryDictionaryToggle"),
@@ -6414,12 +6429,14 @@ const els = {
   librarySettingsToggle: document.querySelector("#librarySettingsToggle"),
   librarySupportToggle: document.querySelector("#librarySupportToggle"),
   footerInfo: document.querySelector("#footerInfoButton"),
+  footerContact: document.querySelector("#footerContactButton"),
   footerPrivacy: document.querySelector("#footerPrivacyButton"),
   footerChanges: document.querySelector("#footerChangesButton"),
   footerSupport: document.querySelector("#footerSupportButton"),
   libraryHomePanel: document.querySelector("#libraryHomePanel"),
   libraryBooksPanel: document.querySelector("#libraryBooksPanel"),
   libraryInfoPanel: document.querySelector("#libraryInfoPanel"),
+  libraryContactPanel: document.querySelector("#libraryContactPanel"),
   libraryPrivacyPanel: document.querySelector("#libraryPrivacyPanel"),
   libraryChangesPanel: document.querySelector("#libraryChangesPanel"),
   libraryDictionaryPanel: document.querySelector("#libraryDictionaryPanel"),
@@ -8628,6 +8645,24 @@ function localizeLibraryInfo() {
   });
 }
 
+function localizeContactInfo() {
+  setTextForAll("#libraryContactPanel .library-info-head span", "contactKicker");
+  setTextForAll("#libraryContactPanel .library-info-head h3", "contactTitle");
+  setTextForAll("#libraryContactPanel .library-info-head p", "contactLead");
+  setTextForAll("#libraryContactPanel .library-prose > p:nth-of-type(1)", "contactP1");
+  const emailParagraph = document.querySelector("#libraryContactPanel .library-prose > p:nth-of-type(2)");
+  if (emailParagraph) {
+    const link = emailParagraph.querySelector("a");
+    emailParagraph.replaceChildren();
+    const strong = document.createElement("strong");
+    strong.textContent = t("contactEmailLabel");
+    emailParagraph.append(strong, " ");
+    if (link) emailParagraph.append(link);
+  }
+  setTextForAll("#libraryContactPanel .library-prose > p:nth-of-type(3)", "contactP3");
+  els.libraryContactPanel?.setAttribute("aria-label", t("contact"));
+}
+
 function localizePrivacyInfo() {
   setTextForAll("#libraryPrivacyPanel .library-info-head span", "privacyKicker");
   setTextForAll("#libraryPrivacyPanel .library-info-head h3", "privacyTitle");
@@ -8727,6 +8762,7 @@ function localizeStaticText() {
     ["#libraryHomeToggle", "home"],
     ["#libraryBooksToggle", "books"],
     ["#libraryInfoToggle", "info"],
+    ["#libraryContactToggle", "contact"],
     ["#libraryPrivacyToggle", "privacy"],
     ["#libraryChangesToggle", "changes"],
     ["#libraryDictionaryToggle", "dictionary"],
@@ -8796,12 +8832,14 @@ function localizeStaticText() {
     ["#focusExit", "exitFocus"],
     [".focus-page-field span", "page"],
     ["#footerInfoButton", "info"],
+    ["#footerContactButton", "contact"],
     ["#footerPrivacyButton", "privacy"],
     ["#footerChangesButton", "changes"],
     ["#footerSupportButton span:last-child", "support"]
   ].forEach(([selector, key]) => setTextForAll(selector, key));
   setTextForAll(".site-footer.library-only > div:first-child p:not(.site-copyright)", "footerLead");
   localizeLibraryInfo();
+  localizeContactInfo();
   localizePrivacyInfo();
   localizeChangesInfo();
   localizeDictionaryInfo();
@@ -8935,7 +8973,7 @@ function setLibraryVersion(version) {
 
 const FALLBACK_CHANGELOG = `# Changelog
 
-## 1.4.5
+## 1.4.6
 
 PL:
 - Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.
@@ -8945,7 +8983,7 @@ EN:
 - Replaced Settings and Tools separators with subtle lines matching the Library panel style.
 - Unified separator colors for dark, light, and sepia themes.
 
-## 1.4.5
+## 1.4.6
 
 PL:
 - Ujednolicono panele Ustawienia i Narzędzia ze stylem Słownika w motywie ciemnym, jasnym i sepia.
@@ -9273,6 +9311,7 @@ function setLibrarySection(section) {
   const isHome = section === "home" || !section;
   const isBooks = section === "books";
   const isInfo = section === "info";
+  const isContact = section === "contact";
   const isPrivacy = section === "privacy";
   const isChanges = section === "changes";
   const isDictionary = section === "dictionary";
@@ -9282,6 +9321,7 @@ function setLibrarySection(section) {
   if (els.libraryHomePanel) els.libraryHomePanel.hidden = !isHome;
   if (els.libraryBooksPanel) els.libraryBooksPanel.hidden = !isBooks;
   if (els.libraryInfoPanel) els.libraryInfoPanel.hidden = !isInfo;
+  if (els.libraryContactPanel) els.libraryContactPanel.hidden = !isContact;
   if (els.libraryPrivacyPanel) els.libraryPrivacyPanel.hidden = !isPrivacy;
   if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
   if (els.libraryDictionaryPanel) els.libraryDictionaryPanel.hidden = !isDictionary;
@@ -9292,6 +9332,7 @@ function setLibrarySection(section) {
   els.libraryHomeToggle?.classList.toggle("is-active", isHome);
   els.libraryBooksToggle?.classList.toggle("is-active", isBooks);
   els.libraryInfoToggle?.classList.toggle("is-active", isInfo);
+  els.libraryContactToggle?.classList.toggle("is-active", isContact);
   els.libraryPrivacyToggle?.classList.toggle("is-active", isPrivacy);
   els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
   els.libraryDictionaryToggle?.classList.toggle("is-active", isDictionary);
@@ -9301,13 +9342,14 @@ function setLibrarySection(section) {
   els.libraryHomeToggle?.setAttribute("aria-expanded", String(isHome));
   els.libraryBooksToggle?.setAttribute("aria-expanded", String(isBooks));
   els.libraryInfoToggle?.setAttribute("aria-expanded", String(isInfo));
+  els.libraryContactToggle?.setAttribute("aria-expanded", String(isContact));
   els.libraryPrivacyToggle?.setAttribute("aria-expanded", String(isPrivacy));
   els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
   els.libraryDictionaryToggle?.setAttribute("aria-expanded", String(isDictionary));
   els.libraryToolsToggle?.setAttribute("aria-expanded", String(isTools));
   els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
   els.librarySupportToggle?.setAttribute("aria-expanded", String(isSupport));
-  const target = isHome ? els.libraryHomePanel : isInfo ? els.libraryInfoPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
+  const target = isHome ? els.libraryHomePanel : isInfo ? els.libraryInfoPanel : isContact ? els.libraryContactPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
   requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
@@ -9710,6 +9752,7 @@ listen(els.homeContinueButton, "click", continueLastWork);
 listen(els.homeSupportButton, "click", () => setLibrarySection("support"));
 listen(els.libraryBooksToggle, "click", () => setLibrarySection("books"));
 listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
+listen(els.libraryContactToggle, "click", () => setLibrarySection("contact"));
 listen(els.libraryPrivacyToggle, "click", () => setLibrarySection("privacy"));
 listen(els.libraryChangesToggle, "click", () => setLibrarySection("changes"));
 listen(els.libraryDictionaryToggle, "click", () => {
@@ -9722,6 +9765,7 @@ listen(els.libraryToolsToggle, "click", () => {
 });
 listen(els.librarySupportToggle, "click", () => setLibrarySection("support"));
 listen(els.footerInfo, "click", () => setLibrarySection("info"));
+listen(els.footerContact, "click", () => setLibrarySection("contact"));
 listen(els.footerPrivacy, "click", () => setLibrarySection("privacy"));
 listen(els.footerChanges, "click", () => setLibrarySection("changes"));
 listen(els.footerSupport, "click", () => setLibrarySection("support"));
