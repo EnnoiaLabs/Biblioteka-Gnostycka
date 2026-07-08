@@ -10,8 +10,8 @@ if (isThomasBook && window.GNOSTYK_BOOK_MODULES?.["gospel-of-thomas"]?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.3.8",
-  updated: "2026-07-07",
+  version: "1.4.5",
+  updated: "2026-07-08",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
     title: activeBook.title || "Pistis Sophia",
@@ -105,7 +105,7 @@ const bookUiInfo = {
       aboutSourceLabel: "Podstawa",
       aboutSourceValue: "Nag Hammadi Codex II, <em>Gospel of Thomas</em>. Polski tekst jest opracowaniem Dariusza Kaniewskiego przygotowanym z wykorzystaniem narzędzi AI; angielska warstwa opiera się na public-domain translation Mark M. Mattison; koptyjska warstwa pochodzi z Coptic SCRIPTORIUM, ed. Paul Dilley, CC-BY 4.0.",
       aboutCopticLabel: "Koptyjski",
-      aboutCopticValue: "Warstwa koptyjska Ewangelii Tomasza jest podłączana z otwartej edycji Coptic SCRIPTORIUM (CC-BY 4.0) i synchronizowana z logionami 1–114. Interlinia słowo po słowie pozostaje etapem 2.",
+      aboutCopticValue: "Warstwa koptyjska Ewangelii Tomasza jest podłączana z otwartej edycji Coptic SCRIPTORIUM (CC-BY 4.0) i synchronizowana z logionami 1–114. Interlinia zachowuje formy, lematy i typy gramatyczne tokenów, gdy są dostępne w TEI/XML.",
       aboutMethodLabel: "Charakter opracowania",
       aboutMethodValue: "Tekst został ułożony jako ciągły czytnik logionów. Każdy logion ma własny numer, a boczny spis służy do skoku do wybranego miejsca w tekście.",
       aboutApparatusLabel: "Aparat cytowania",
@@ -117,7 +117,7 @@ const bookUiInfo = {
       legalTitle: "Prawa i podstawa tekstu",
       legalP1: "Podstawą księgi jest <em>Ewangelia Tomasza</em> z Kodeksu II z Nag Hammadi. Polski tekst jest opracowaniem Dariusza Kaniewskiego przygotowanym z wykorzystaniem narzędzi AI, angielska warstwa opiera się na public-domain translation Mark M. Mattison, a koptyjska warstwa na edycji Coptic SCRIPTORIUM CC-BY 4.0.",
       legalP2: "Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI, dobór terminologii, układ logionów, integracja modułowa i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą. Przy cytowaniu podawaj numer logionu oraz wersję biblioteki.",
-      legalP3: "Warstwa koptyjska jest ładowana z Coptic SCRIPTORIUM i grupowana według logionów. Interlinia słowo po słowie pozostaje etapem 2."
+      legalP3: "Warstwa koptyjska jest ładowana z Coptic SCRIPTORIUM i grupowana według logionów. Interlinia słowo po słowie używa form, lematów i typów gramatycznych z TEI/XML, gdy są dostępne."
     },
     en: {
       eyebrow: "Gospel of Thomas · library book",
@@ -136,7 +136,7 @@ const bookUiInfo = {
       aboutSourceLabel: "Source base",
       aboutSourceValue: "Nag Hammadi Codex II, <em>Gospel of Thomas</em>. The Polish text is an AI-assisted adaptation by Dariusz Kaniewski; the English layer is based on Mark M. Mattison’s public-domain translation; the Coptic layer uses the Coptic SCRIPTORIUM edition, ed. Paul Dilley, CC-BY 4.0.",
       aboutCopticLabel: "Coptic",
-      aboutCopticValue: "The Coptic layer for the Gospel of Thomas is connected through the open Coptic SCRIPTORIUM edition (CC-BY 4.0) and synchronized with logia 1–114. Word-by-word interlinear alignment remains stage 2.",
+      aboutCopticValue: "The Coptic layer for the Gospel of Thomas is connected through the open Coptic SCRIPTORIUM edition (CC-BY 4.0) and synchronized with logia 1–114. The interlinear view now preserves token forms, lemmas, and grammatical types where TEI/XML provides them.",
       aboutMethodLabel: "Adaptation character",
       aboutMethodValue: "The text is presented as a continuous logion reader. Each logion has its own number and the sidebar table of contents jumps to that place in the text.",
       aboutApparatusLabel: "Citation apparatus",
@@ -148,7 +148,7 @@ const bookUiInfo = {
       legalTitle: "Rights and text base",
       legalP1: "This book is based on the <em>Gospel of Thomas</em> from Nag Hammadi Codex II. The Polish text is an AI-assisted adaptation by Dariusz Kaniewski and the English layer is based on Mark M. Mattison’s public-domain translation.",
       legalP2: "The Polish AI-assisted adaptation by Dariusz Kaniewski, terminology choices, logion layout, modular integration and editorial layer of Gnostyk Biblioteka form a new creative layer. The English layer is public domain and the Coptic SCRIPTORIUM layer is CC-BY 4.0. Cite by logion number and library version.",
-      legalP3: "The Coptic layer is loaded from Coptic SCRIPTORIUM and grouped by logia. Word-by-word interlinear alignment remains stage 2."
+      legalP3: "The Coptic layer is loaded from Coptic SCRIPTORIUM and grouped by logia. The word-by-word interlinear layer uses forms, lemmas, and grammatical types from TEI/XML where available."
     }
   }
 };
@@ -186,12 +186,17 @@ const state = {
   citationFormat: localStorage.getItem("ps.citationFormat") || "simple",
   aboutOpen: false,
   settingsOpen: false,
+  sessionLanguage: null,
   settings: {
     language: savedSettings.language || "auto",
     theme: savedSettings.theme || "dark",
     fontSize: savedSettings.fontSize || "medium",
     lineHeight: savedSettings.lineHeight || "normal",
-    width: savedSettings.width || "standard"
+    width: savedSettings.width || "standard",
+    interlinearLayout: savedSettings.interlinearLayout || "classic",
+    interlinearShowLemma: savedSettings.interlinearShowLemma !== false,
+    interlinearShowType: savedSettings.interlinearShowType === true,
+    dictionaryScope: savedSettings.dictionaryScope || "current"
   },
   marks: JSON.parse(localStorage.getItem("ps.marks") || "[]"),
   notes: JSON.parse(localStorage.getItem("ps.notes") || "{}"),
@@ -249,7 +254,7 @@ const uiText = {
     supportHelpTitle: "Twoje wsparcie pomaga rozwijać:",
     supportHelpItems: ["nowe przekłady", "słownik koptyjski", "interlinię", "narzędzia badawcze", "kolejne teksty", "rozwój aplikacji PWA"],
     supportPaypal: "Wesprzyj przez PayPal",
-    autoLanguageHint: "Tryb Auto wykrywa język z przeglądarki lub systemu PWA. Obecnie wykryto: {language}.",
+    autoLanguageHint: "Tryb Auto wykrywa język z przeglądarki lub systemu PWA przy uruchomieniu. Obecnie wykryto: {language}.",
     infoKicker: "Info",
     infoTitle: "O bibliotece",
     infoLead: "Krótka nota redakcyjna o projekcie, zakresie tekstów i sposobie korzystania z wydań.",
@@ -310,7 +315,7 @@ const uiText = {
     language: "Język interfejsu",
     theme: "Motyw",
     fontSize: "Rozmiar tekstu",
-    lineHeight: "Interlinia",
+    lineHeight: "Odstępy w tekście",
     columnWidth: "Szerokość kolumny",
     auto: "Auto",
     polish: "Polski",
@@ -321,9 +326,9 @@ const uiText = {
     small: "Mały",
     medium: "Średni",
     large: "Duży",
-    compact: "Zwarta",
-    normal: "Normalna",
-    wide: "Szeroka",
+    compact: "Zwarte",
+    normal: "Normalne",
+    wide: "Luźne",
     narrow: "Wąska",
     standard: "Standardowa",
     continue: "Kontynuuj",
@@ -508,7 +513,7 @@ const uiText = {
     settingsKicker: "Settings",
     settingsTitle: "Reading settings",
     settingsLead: "These settings apply to the whole library and are saved locally in your browser.",
-    autoLanguageHint: "Auto detects the language from your browser or PWA system context. Currently detected: {language}.",
+    autoLanguageHint: "Auto detects the startup language from your browser or PWA system context. Currently detected: {language}.",
     infoKicker: "Info",
     infoTitle: "About the library",
     infoLead: "A short editorial note on the project, its textual scope, and how to use the editions.",
@@ -721,6 +726,7 @@ function detectedLanguage() {
 }
 
 function currentLanguage() {
+  if (["pl", "en"].includes(state.sessionLanguage)) return state.sessionLanguage;
   return state.settings.language === "auto" ? detectedLanguage() : state.settings.language;
 }
 
@@ -6355,6 +6361,13 @@ const els = {
   fontSizeSetting: document.querySelector("#fontSizeSetting"),
   lineHeightSetting: document.querySelector("#lineHeightSetting"),
   widthSetting: document.querySelector("#widthSetting"),
+  interlinearLayoutSetting: document.querySelector("#interlinearLayoutSetting"),
+  interlinearLemmaSetting: document.querySelector("#interlinearLemmaSetting"),
+  interlinearTypeSetting: document.querySelector("#interlinearTypeSetting"),
+  dictionaryScopeSetting: document.querySelector("#dictionaryScopeSetting"),
+  saveSettingsButton: document.querySelector("#saveSettingsButton"),
+  settingsSaveStatus: document.querySelector("#settingsSaveStatus"),
+  settingsToast: document.querySelector("#settingsToast"),
   notes: document.querySelector("#notesInput"),
   clearNote: document.querySelector("#clearNote"),
   saveStatus: document.querySelector("#saveStatus"),
@@ -6976,6 +6989,7 @@ function applyNotesBackup(payload) {
   state.marks = Array.isArray(payload.marks) ? payload.marks : state.marks;
   if (payload.settings && typeof payload.settings === "object") {
     state.settings = { ...state.settings, ...payload.settings };
+    if (event.target.id === "languageSetting") state.sessionLanguage = null;
     saveSettings();
     applySettings();
     applyLanguage();
@@ -7720,6 +7734,39 @@ function dictionarySearchScore(details, query) {
   return score;
 }
 
+function interlinearLemmaSearchRows(query) {
+  const plainQuery = String(query || "").trim();
+  const normalizedQuery = cleanCopticToken(plainQuery).toLowerCase();
+  if (plainQuery.length < 2 && normalizedQuery.length < 2) return [];
+  const seen = new Set();
+  const rows = [];
+  const source = dictionaryOccurrenceSources()[0];
+  const pages = typeof source?.getPages === "function" ? source.getPages() : [];
+  for (const page of pages) {
+    const entries = typeof source?.getEntriesForPage === "function" ? source.getEntriesForPage(page) : [];
+    for (const line of entries) {
+      for (const rawToken of lineTokensForOccurrenceMatch(line)) {
+        const info = normalizeInterlinearToken(rawToken);
+        const lemma = cleanCopticToken(info.lemma || "").toLowerCase();
+        const surface = cleanCopticToken(info.surface || "").toLowerCase();
+        const key = lemma || surface;
+        if (!key || seen.has(key)) continue;
+        const details = dictionaryDetailsForToken(key);
+        const haystack = [surface, lemma, transliterateCoptic(surface), transliterateCoptic(lemma), details.shortPolish, details.shortEnglish, details.polish, details.english, info.type].filter(Boolean).join(" ");
+        const copticMatch = normalizedQuery && (surface.includes(normalizedQuery) || lemma.includes(normalizedQuery));
+        const textMatch = dictionarySearchWordMatch(haystack, plainQuery) > 0;
+        if (!copticMatch && !textMatch) continue;
+        seen.add(key);
+        rows.push({
+          details: { ...details, token: key, pos: details.pos || localizedPartOfSpeech(info.type || "") },
+          score: copticMatch ? 190 : 75
+        });
+      }
+    }
+  }
+  return rows;
+}
+
 function dictionarySearchRows(query) {
   const normalizedQuery = cleanCopticToken(query || "").toLowerCase();
   const plainQuery = String(query || "").trim().toLowerCase();
@@ -7731,7 +7778,15 @@ function dictionarySearchRows(query) {
     const score = dictionarySearchScore(details, query);
     if (score > 0) scoredRows.push({ details, score });
   }
-  return scoredRows
+  interlinearLemmaSearchRows(query).forEach(row => scoredRows.push(row));
+  const unique = new Map();
+  for (const row of scoredRows) {
+    const key = cleanCopticToken(row.details?.token || "").toLowerCase();
+    if (!key) continue;
+    const existing = unique.get(key);
+    if (!existing || row.score > existing.score) unique.set(key, row);
+  }
+  return [...unique.values()]
     .sort((a, b) => b.score - a.score || a.details.token.length - b.details.token.length || a.details.token.localeCompare(b.details.token))
     .slice(0, 30)
     .map(item => item.details);
@@ -7830,6 +7885,10 @@ const DICTIONARY_OCCURRENCE_SOURCES = [
 function dictionaryOccurrenceSources() {
   const activeId = activeBook?.id || "pistis-sophia";
   const activeSource = DICTIONARY_OCCURRENCE_SOURCES.find(source => source.bookId === activeId);
+  if (state.settings.dictionaryScope === "library") {
+    const sorted = [...DICTIONARY_OCCURRENCE_SOURCES];
+    return activeSource ? sorted.sort((a, b) => (a.bookId === activeId ? -1 : b.bookId === activeId ? 1 : 0)) : sorted;
+  }
   return activeSource ? [activeSource] : [DICTIONARY_OCCURRENCE_SOURCES[0]];
 }
 
@@ -7850,6 +7909,23 @@ function copticTokenFormsForMatch(token) {
   return [...forms];
 }
 
+function tokenCandidatesForOccurrenceMatch(rawToken) {
+  const info = normalizeInterlinearToken(rawToken);
+  const surface = cleanCopticToken(info.surface || rawToken || "").toLowerCase();
+  const lemma = cleanCopticToken(info.lemma || "").toLowerCase();
+  const candidates = new Set([surface, lemma].filter(Boolean));
+  [surface, lemma].filter(Boolean).forEach(value => {
+    const lookup = copticDictionaryLookup(value);
+    if (lookup?.key) candidates.add(lookup.key);
+  });
+  return candidates;
+}
+
+function lineTokensForOccurrenceMatch(line) {
+  if (Array.isArray(line?.tokens) && line.tokens.length) return line.tokens;
+  return String(line?.text || "").split(/\s+/).filter(Boolean);
+}
+
 function copticOccurrencesInSourceForToken(source, token) {
   const forms = copticTokenFormsForMatch(token);
   if (!forms.length) return { source, total: 0, items: [] };
@@ -7859,15 +7935,11 @@ function copticOccurrencesInSourceForToken(source, token) {
   for (const page of pages) {
     const entries = typeof source.getEntriesForPage === "function" ? source.getEntriesForPage(page) : [];
     for (const line of entries) {
-      const tokens = String(line.text || "").split(/\s+/).filter(Boolean);
+      const tokens = lineTokensForOccurrenceMatch(line);
       let lineHits = 0;
       for (const rawToken of tokens) {
-        const cleaned = cleanCopticToken(rawToken).toLowerCase();
-        if (!cleaned) continue;
-        const lookup = copticDictionaryLookup(cleaned);
-        const candidates = new Set([cleaned]);
-        if (lookup?.key) candidates.add(lookup.key);
-        if (forms.some(form => candidates.has(form))) lineHits += 1;
+        const candidates = tokenCandidatesForOccurrenceMatch(rawToken);
+        if ([...forms].some(form => candidates.has(form))) lineHits += 1;
       }
       if (!lineHits) continue;
       const key = `${source.id}|${page.page}|${line.ref}|${line.text}`;
@@ -7969,7 +8041,7 @@ function dictionaryOccurrencesHtml(token) {
             <ul>
               ${pageItems.map(item => `
                 <li>
-                  <button type="button" data-occurrence-source="${escapeHtml(item.sourceId)}" data-occurrence-page="${escapeHtml(String(item.page))}" data-occurrence-token="${escapeHtml(token)}">
+                  <button type="button" data-occurrence-source="${escapeHtml(item.sourceId)}" data-occurrence-page="${escapeHtml(String(item.page))}" data-occurrence-ref="${escapeHtml(item.ref || "")}" data-occurrence-token="${escapeHtml(token)}">
                     <strong>${escapeHtml(item.pageLabel)}</strong>
                     <span>${escapeHtml(item.ref)}${item.count > 1 ? ` · ×${item.count}` : ""}</span>
                     <small><bdi>${escapeHtml(compactText(item.text, 110))}</bdi></small>
@@ -8137,45 +8209,85 @@ function clearCopticOccurrenceHighlights() {
   });
 }
 
-function highlightCopticOccurrenceToken(token) {
+function highlightCopticOccurrenceToken(token, preferredPage = null) {
   const forms = new Set(copticTokenFormsForMatch(token));
   if (!forms.size) return;
   clearCopticOccurrenceHighlights();
   let firstMatch = null;
+  let preferredMatch = null;
   document.querySelectorAll(".interlinear-token[data-coptic-token]").forEach(item => {
     const cleaned = cleanCopticToken(item.dataset.copticToken || "").toLowerCase();
-    if (!cleaned) return;
-    const lookup = copticDictionaryLookup(cleaned);
-    const candidates = new Set([cleaned]);
-    if (lookup?.key) candidates.add(lookup.key);
+    const lemma = cleanCopticToken(item.dataset.copticLemma || "").toLowerCase();
+    if (!cleaned && !lemma) return;
+    const candidates = tokenCandidatesForOccurrenceMatch({ surface: cleaned, lemma });
     const matched = [...forms].some(form => candidates.has(form));
     if (!matched) return;
     item.classList.add("occurrence-highlight");
     if (!firstMatch) firstMatch = item;
+    const logion = item.closest("[data-logion]")?.dataset.logion;
+    if (preferredPage && String(logion) === String(preferredPage) && !preferredMatch) preferredMatch = item;
   });
-  if (firstMatch) {
-    firstMatch.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+  const target = preferredMatch || firstMatch;
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
   }
 }
 
+function normalizeInterlinearToken(token) {
+  if (token && typeof token === "object") {
+    const surface = token.surface || token.text || token.form || "";
+    const lemma = token.lemma || "";
+    return {
+      surface,
+      lemma,
+      type: token.type || token.pos || "",
+      lang: token.lang || ""
+    };
+  }
+  return { surface: String(token || ""), lemma: "", type: "", lang: "" };
+}
+
+function interlinearTokenLookupKey(tokenInfo) {
+  const lemma = cleanCopticToken(tokenInfo.lemma || "").toLowerCase();
+  const surface = cleanCopticToken(tokenInfo.surface || "").toLowerCase();
+  if (lemma && lemma !== "·") return lemma;
+  return surface;
+}
+
 function interlinearTokenHtml(token) {
-  const cleaned = cleanCopticToken(token);
-  const fullGloss = fullGlossForToken(token);
-  const gloss = glossCopticToken(token);
+  const info = normalizeInterlinearToken(token);
+  const cleaned = cleanCopticToken(info.surface).toLowerCase();
+  const lemma = cleanCopticToken(info.lemma).toLowerCase();
+  const lookupKey = interlinearTokenLookupKey(info);
+  const fullGloss = fullGlossForToken(lookupKey || info.surface) || fullGlossForToken(info.surface);
+  const gloss = lookupKey ? (displayGlossText(fullGlossForToken(lookupKey)) || glossCopticToken(info.surface)) : glossCopticToken(info.surface);
   const unresolved = gloss === t("interlinearNeedsGloss");
   const titleParts = [cleaned];
+  if (lemma && lemma !== cleaned) titleParts.push(`${currentLanguage() === "pl" ? "lemat" : "lemma"}: ${lemma}`);
+  if (info.type) titleParts.push(info.type);
   if (fullGloss) titleParts.push(fullGloss);
+  const layout = state.settings.interlinearLayout || "classic";
+  const grammaticalLayout = layout === "grammatical" || layout === "expanded";
+  const showTranslit = layout !== "compact";
+  const showLemma = (state.settings.interlinearShowLemma !== false || grammaticalLayout) && lemma && lemma !== cleaned;
+  const showType = (state.settings.interlinearShowType === true || grammaticalLayout) && info.type;
+  const lemmaLabel = currentLanguage() === "pl" ? "lemat" : "lemma";
+  const typeLabel = currentLanguage() === "pl" ? "typ" : "type";
+  const lemmaLine = showLemma ? `<span class="interlinear-lemma"><em>${escapeHtml(lemmaLabel)}</em>${escapeHtml(lemma)}</span>` : "";
+  const typeLine = showType ? `<span class="interlinear-type"><em>${escapeHtml(typeLabel)}</em>${escapeHtml(info.type)}</span>` : "";
   return `
-    <span class="interlinear-token ${unresolved ? "needs-gloss" : ""}" data-coptic-token="${escapeHtml(cleaned)}" data-full-gloss="${escapeHtml(fullGloss)}" title="${escapeHtml(titleParts.join(" — "))}">
-      <bdi class="interlinear-coptic">${escapeHtml(token)}</bdi>
-      <span class="interlinear-translit">${escapeHtml(transliterateCoptic(token))}</span>
+    <span class="interlinear-token ${unresolved ? "needs-gloss" : ""} layout-${escapeHtml(layout)}" data-coptic-token="${escapeHtml(cleaned)}" data-coptic-lemma="${escapeHtml(lemma)}" data-coptic-type="${escapeHtml(info.type || "")}" data-full-gloss="${escapeHtml(fullGloss)}" title="${escapeHtml(titleParts.join(" — "))}">
+      <bdi class="interlinear-coptic">${escapeHtml(info.surface)}</bdi>
+      ${showTranslit ? `<span class="interlinear-translit">${escapeHtml(transliterateCoptic(info.surface))}</span>` : ""}
+      ${lemmaLine}
+      ${typeLine}
       <span class="interlinear-gloss">${escapeHtml(gloss)}</span>
     </span>
   `;
 }
 
 function interlinearLineHtml(line) {
-  const tokens = line.text.split(/\s+/).filter(Boolean);
+  const tokens = Array.isArray(line.tokens) && line.tokens.length ? line.tokens : line.text.split(/\s+/).filter(Boolean);
   return `
     <article class="interlinear-line">
       <header>
@@ -8401,17 +8513,47 @@ function saveSettings() {
   localStorage.setItem("ps.settings", JSON.stringify(state.settings));
 }
 
+let settingsToastTimer = null;
+function showSettingsSavedMessage() {
+  const message = currentLanguage() === "pl" ? "Ustawienia zapisane" : "Settings saved";
+  if (els.settingsSaveStatus) els.settingsSaveStatus.textContent = message;
+  if (els.settingsToast) {
+    els.settingsToast.textContent = message;
+    els.settingsToast.hidden = false;
+    clearTimeout(settingsToastTimer);
+    settingsToastTimer = setTimeout(() => {
+      if (els.settingsToast) els.settingsToast.hidden = true;
+      if (els.settingsSaveStatus) els.settingsSaveStatus.textContent = "";
+    }, 1600);
+  }
+}
+
+function commitSettingsChange(options = {}) {
+  saveSettings();
+  applySettings();
+  applyLanguage();
+  renderReader();
+  renderLists();
+  rerenderOpenDictionaryCard();
+  if (options.feedback) showSettingsSavedMessage();
+}
+
 function applySettings() {
   document.documentElement.lang = currentLanguage();
   document.body.dataset.theme = state.settings.theme;
   document.body.dataset.fontSize = state.settings.fontSize;
   document.body.dataset.lineHeight = state.settings.lineHeight;
   document.body.dataset.width = state.settings.width;
+  document.body.dataset.interlinearLayout = state.settings.interlinearLayout || "classic";
   setValue(els.languageSetting, state.settings.language);
   setValue(els.themeSetting, state.settings.theme);
   setValue(els.fontSizeSetting, state.settings.fontSize);
   setValue(els.lineHeightSetting, state.settings.lineHeight);
   setValue(els.widthSetting, state.settings.width);
+  setValue(els.interlinearLayoutSetting, state.settings.interlinearLayout || "classic");
+  if (els.interlinearLemmaSetting) els.interlinearLemmaSetting.checked = state.settings.interlinearShowLemma !== false;
+  if (els.interlinearTypeSetting) els.interlinearTypeSetting.checked = state.settings.interlinearShowType === true;
+  setValue(els.dictionaryScopeSetting, state.settings.dictionaryScope || "current");
 }
 
 function setSelectLabels(select, labels) {
@@ -8723,6 +8865,12 @@ function localizeSettingsControls() {
   setFieldLabel(els.fontSizeSetting, t("fontSize"));
   setFieldLabel(els.lineHeightSetting, t("lineHeight"));
   setFieldLabel(els.widthSetting, t("columnWidth"));
+  setFieldLabel(els.interlinearLayoutSetting, currentLanguage() === "pl" ? "Tryb interlinii" : "Interlinear mode");
+  setFieldLabel(els.dictionaryScopeSetting, currentLanguage() === "pl" ? "Wystąpienia w słowniku" : "Dictionary occurrences");
+  const lemmaLabel = els.interlinearLemmaSetting?.closest("label")?.querySelector("span");
+  const typeLabel = els.interlinearTypeSetting?.closest("label")?.querySelector("span");
+  setText(lemmaLabel, currentLanguage() === "pl" ? "Pokazuj lemat" : "Show lemma");
+  setText(typeLabel, currentLanguage() === "pl" ? "Pokazuj typ gramatyczny" : "Show grammatical type");
   setFieldLabel(els.glossaryTokenInput, t("glossaryToken"));
   setFieldLabel(els.glossaryGlossInput, t("glossaryGloss"));
   setSelectLabels(els.languageSetting, { auto: t("auto"), pl: t("polish"), en: t("english") });
@@ -8730,6 +8878,8 @@ function localizeSettingsControls() {
   setSelectLabels(els.fontSizeSetting, { small: t("small"), medium: t("medium"), large: t("large") });
   setSelectLabels(els.lineHeightSetting, { compact: t("compact"), normal: t("normal"), wide: t("wide") });
   setSelectLabels(els.widthSetting, { standard: t("standard"), narrow: t("narrow"), wide: t("wide") });
+  setSelectLabels(els.interlinearLayoutSetting, { compact: currentLanguage() === "pl" ? "Kompaktowa" : "Compact", classic: currentLanguage() === "pl" ? "Klasyczna" : "Classic", grammatical: currentLanguage() === "pl" ? "Gramatyczna" : "Grammatical", expanded: currentLanguage() === "pl" ? "Rozszerzona" : "Expanded" });
+  setSelectLabels(els.dictionaryScopeSetting, { current: currentLanguage() === "pl" ? "Tylko aktywna księga" : "Active book only", library: currentLanguage() === "pl" ? "Cała biblioteka" : "Whole library" });
   setText(els.languageAutoHint, t("autoLanguageHint").replace("{language}", rawDetectedLanguage()));
   setBackupStatus(backupStatusKey);
   renderGlossaryPanel();
@@ -8762,8 +8912,7 @@ function syncLanguageSwitches() {
 
 function setInterfaceLanguage(language) {
   if (!["pl", "en"].includes(language)) return;
-  state.settings.language = language;
-  saveSettings();
+  state.sessionLanguage = language;
   applySettings();
   applyLanguage();
   renderReader();
@@ -8786,17 +8935,63 @@ function setLibraryVersion(version) {
 
 const FALLBACK_CHANGELOG = `# Changelog
 
-## 1.3.8
+## 1.4.5
 
 PL:
-- Podbito numer wersji w całej aplikacji, plikach PWA, odnośnikach do zasobów i historii zmian.
-- Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zakładce Zmiany.
-- Uzupełniono angielskie wersje najnowszych wpisów changeloga, aby tryb EN nie pokazywał polskich punktów.
+- Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.
+- Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.
 
 EN:
-- Synchronized the version number across the app, PWA files, asset links, and the change history.
-- Added the latest entry to the visible change history on Home and in the Changes tab.
-- Completed the English versions of the latest changelog entries so EN mode no longer shows Polish points.
+- Replaced Settings and Tools separators with subtle lines matching the Library panel style.
+- Unified separator colors for dark, light, and sepia themes.
+
+## 1.4.5
+
+PL:
+- Ujednolicono panele Ustawienia i Narzędzia ze stylem Słownika w motywie ciemnym, jasnym i sepia.
+- Dodano tryb gramatyczny interlinii z wyświetlaniem lematów i typów gramatycznych tokenów koptyjskich.
+- Zestandaryzowano checkboxy i kontrolki formularzy do koloru aktywnego motywu.
+
+EN:
+- Unified Settings and Tools with the Dictionary-panel style in dark, light, and sepia themes.
+- Added a grammatical interlinear mode with lemma and grammatical-type display for Coptic tokens.
+- Standardized checkboxes and form controls to the active theme color.
+
+## 1.4.2
+
+PL:
+- Przebudowano panel Ustawień tak, aby wizualnie pasował do reszty Biblioteki Gnozy.
+- Ustawienie języka działa jako domyślny język uruchamiania, a przełącznik PL/EN zmienia tylko bieżącą sesję.
+- Zastąpiono niebieskie checkboxy kontrolkami dopasowanymi do motywu.
+- Ustawienia rozmiaru tekstu, odstępów i szerokości kolumny obejmują widoki koptyjski oraz interlinearny.
+
+EN:
+- Reworked the Settings panel so it visually matches the rest of Gnostyk Library.
+- The language setting controls the default startup language, while the PL/EN switch changes only the current session.
+- Replaced blue checkboxes with theme-matched controls.
+- Text size, spacing, and column width settings now cover Coptic and interlinear views.
+
+## 1.4.0
+
+PL:
+- Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.
+- Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.
+
+EN:
+- Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text.
+- Dictionary-card occurrences now use token forms and lemmas, not only raw line text.
+
+## 1.3.9
+
+PL:
+- Dodano etap 2 interlinii Tomasza: tokeny zachowują formę koptyjską, lemat i typ gramatyczny z warstwy Coptic SCRIPTORIUM.
+- Kliknięcie słowa w interlinii otwiera kartę słownikową po lemacie, gdy jest dostępny, a nie tylko po formie powierzchniowej.
+- Dodano subtelną linię lematu pod tokenem interlinearnym i ujednolicono podświetlanie wystąpień dla form oraz lematów.
+
+EN:
+- Added Thomas interlinear stage 2: tokens preserve the Coptic surface form, lemma, and grammatical type from the Coptic SCRIPTORIUM layer.
+- Clicking an interlinear word opens the dictionary card by lemma when available, not only by surface form.
+- Added a subtle lemma line below interlinear tokens and normalized occurrence highlighting for forms and lemmas.
 
 ## 1.3.7
 
@@ -9673,22 +9868,35 @@ listen(els.settingsToggle, "click", () => {
   setLibrarySection("settings");
 });
 
-[els.languageSetting, els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting].filter(Boolean).forEach(control => {
+[els.languageSetting, els.themeSetting, els.fontSizeSetting, els.lineHeightSetting, els.widthSetting, els.interlinearLayoutSetting, els.dictionaryScopeSetting].filter(Boolean).forEach(control => {
   listen(control, "change", event => {
     const map = {
       languageSetting: "language",
       themeSetting: "theme",
       fontSizeSetting: "fontSize",
       lineHeightSetting: "lineHeight",
-      widthSetting: "width"
+      widthSetting: "width",
+      interlinearLayoutSetting: "interlinearLayout",
+      dictionaryScopeSetting: "dictionaryScope"
     };
     state.settings[map[event.target.id]] = event.target.value;
-    saveSettings();
-    applySettings();
-    applyLanguage();
-    renderReader();
-    renderLists();
+    if (event.target.id === "languageSetting") state.sessionLanguage = null;
+    commitSettingsChange({ feedback: true });
   });
+});
+[els.interlinearLemmaSetting, els.interlinearTypeSetting].filter(Boolean).forEach(control => {
+  listen(control, "change", event => {
+    const map = {
+      interlinearLemmaSetting: "interlinearShowLemma",
+      interlinearTypeSetting: "interlinearShowType"
+    };
+    state.settings[map[event.target.id]] = Boolean(event.target.checked);
+    commitSettingsChange({ feedback: true });
+  });
+});
+
+listen(els.saveSettingsButton, "click", () => {
+  commitSettingsChange({ feedback: true });
 });
 
 listen(els.chooseBackupFolder, "click", chooseBackupFolder);
@@ -9722,7 +9930,7 @@ listen(els.customGlossaryList, "click", event => {
 listen(els.pageText, "click", event => {
   const target = event.target instanceof Element ? event.target : event.target?.parentElement;
   const item = target?.closest(".interlinear-token");
-  const token = item?.dataset.copticToken;
+  const token = item?.dataset.copticLemma || item?.dataset.copticToken;
   if (!token) return;
   showInterlinearDictionaryCard(token);
   if (!els.glossaryTokenInput) return;
@@ -9751,7 +9959,7 @@ listen(document, "click", event => {
     if (Number.isFinite(page)) {
       state.readerMode = "interlinear";
       goToPage(page, { scrollToText: true });
-      requestAnimationFrame(() => requestAnimationFrame(() => highlightCopticOccurrenceToken(token)));
+      requestAnimationFrame(() => requestAnimationFrame(() => highlightCopticOccurrenceToken(token, page)));
     }
     return;
   }

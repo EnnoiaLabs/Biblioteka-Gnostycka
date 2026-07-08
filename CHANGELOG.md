@@ -1,3 +1,68 @@
+## 1.4.5
+
+### PL
+- Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.
+- Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.
+
+### EN
+- Replaced Settings and Tools separators with subtle lines matching the Library panel style.
+- Unified separator colors for dark, light, and sepia themes.
+
+## 1.4.4
+- Ujednolicono Ustawienia i Narzędzia ze stylem Słownika we wszystkich motywach.
+- Dodano tryb gramatyczny interlinii i jawne etykiety lemat/typ przy tokenach koptyjskich.
+- Zestandaryzowano checkboxy i kontrolki formularzy do koloru aktywnego motywu.
+
+## 1.4.3
+
+### PL
+- Przebudowano panel Ustawień tak, aby wizualnie pasował do reszty Biblioteki Gnozy: sekcje są oddzielone separatorami zamiast ciężkich ramek.
+- Ustawienie języka działa teraz jako domyślny język uruchamiania aplikacji, a przełącznik PL/EN pozostaje szybką zmianą bieżącej sesji.
+- Zastąpiono niebieskie checkboxy kontrolkami dopasowanymi do aktualnego motywu.
+- Ustawienia rozmiaru tekstu, odstępów, szerokości kolumny i interlinii są stosowane także w widokach koptyjskim i interlinearnym.
+
+### EN
+- Reworked the Settings panel so it visually matches the rest of Gnostyk Library, using separators instead of heavy nested boxes.
+- The language setting now controls the default startup language, while the PL/EN switch remains a quick change for the current session.
+- Replaced blue checkboxes with theme-matched controls.
+- Text size, spacing, column width, and interlinear settings now also apply to the Coptic and interlinear views.
+
+## 1.4.1
+
+### PL
+- Dodano ustawienia interlinii Tomasza: tryb kompaktowy, klasyczny i rozszerzony.
+- Dodano przełączniki pokazywania lematu i typu gramatycznego w tokenach interlinearnych.
+- Dodano wybór zakresu wystąpień w karcie słownikowej: aktywna księga albo cała biblioteka.
+- Na stronie Home sekcja „Ostatnie zmiany” pokazuje teraz tylko trzy najnowsze wpisy; pełna historia pozostaje pod przyciskiem.
+
+### EN
+- Added Thomas interlinear settings: compact, classic, and expanded modes.
+- Added toggles for showing lemma and grammatical type in interlinear tokens.
+- Added dictionary occurrence scope: active book or whole library.
+- On Home, “Recent changes” now shows only the three latest entries; full history remains available through the button.
+
+## 1.4.0
+
+### PL
+- Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym ciągłym tekście.
+- Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.
+
+### EN
+- Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text.
+- Dictionary-card occurrences now use token forms and lemmas, not only raw line text.
+
+## 1.3.9
+
+### PL
+- Dodano etap 2 interlinii Tomasza: tokeny zachowują teraz formę koptyjską, lemat i typ gramatyczny z warstwy Coptic SCRIPTORIUM.
+- Kliknięcie słowa w interlinii otwiera kartę słownikową po lemacie, gdy jest dostępny, a nie tylko po formie powierzchniowej.
+- Dodano subtelną linię lematu pod tokenem interlinearnym i ujednolicono podświetlanie wystąpień dla form oraz lematów.
+
+### EN
+- Added Thomas interlinear stage 2: tokens now preserve the Coptic surface form, lemma, and grammatical type from the Coptic SCRIPTORIUM layer.
+- Clicking an interlinear word opens the dictionary card by lemma when available, not only by surface form.
+- Added a subtle lemma line below interlinear tokens and normalized occurrence highlighting for forms and lemmas.
+
 ## 1.3.8
 
 ### PL
@@ -44,8 +109,6 @@
 - The Gospel of Thomas Coptic view now shows the continuous text of all 114 logia.
 - Clicking a logion in the sidebar scrolls to the matching place in the continuous Coptic text.
 - Thomas citation now uses logion numbers and Nag Hammadi Codex II instead of Mead / Schwartze-Petermann pagination.
-
-# Changelog
 
 ## 1.3.4
 - Naprawiono podłączenie zmiennej warstwy koptyjskiej Ewangelii Tomasza po przełączeniu księgi.

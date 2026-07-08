@@ -8,9 +8,9 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
   const copticLayer = (hasUsableLocalLayer || hasLoaderLayer) ? existingLayer : {
     meta: {
       title: "Ewangelia Tomasza — tekst koptyjski",
-      status: "Etap 1: warstwa koptyjska zsynchronizowana z logionami 1–114",
+      status: "Etap 2: warstwa koptyjska i tokeny interlinearne zsynchronizowane z logionami 1–114",
       source: "Coptic SCRIPTORIUM, Gospel of Thomas, Nag Hammadi Codex II, edited from the manuscript by Paul Dilley; data released under CC-BY 4.0.",
-      note: "Warstwa koptyjska jest pobierana z otwartej edycji Coptic SCRIPTORIUM i grupowana według numerów logionów. Interlinia słowo po słowie pozostaje etapem 2.",
+      note: "Warstwa koptyjska jest pobierana z otwartej edycji Coptic SCRIPTORIUM i grupowana według numerów logionów. Interlinia zachowuje formę, lemat i typ gramatyczny tokenów, gdy są dostępne w TEI/XML.",
       license: "CC-BY 4.0",
       citation: "Coptic SCRIPTORIUM, Gospel of Thomas, urn:cts:copticLit:nh.thomas.NHAM02:0-114, version 6.2.0."
     },
@@ -46,9 +46,30 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
       .trim();
   }
 
-  function paragraphText(paragraph) {
+  function tokenFromWord(element, index) {
+    const surface = cleanToken(element);
+    if (!surface) return null;
+    const lemma = (element.getAttribute("lemma") || "").trim();
+    const type = (element.getAttribute("type") || "").trim();
+    const lang = (element.getAttribute("xml:lang") || element.getAttribute("lang") || "").trim();
+    return {
+      id: `${index + 1}`,
+      surface,
+      lemma,
+      type,
+      lang
+    };
+  }
+
+  function paragraphTokens(paragraph) {
     return byLocalName(paragraph, "w")
-      .map(cleanToken)
+      .map(tokenFromWord)
+      .filter(Boolean);
+  }
+
+  function paragraphText(paragraph) {
+    return paragraphTokens(paragraph)
+      .map(token => token.surface)
       .filter(Boolean)
       .join(" ")
       .replace(/\s+([·.,;:?!])/g, " $1")
@@ -59,7 +80,12 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
     const paragraphs = byLocalName(section, "p");
     const entries = [];
     paragraphs.forEach((paragraph, index) => {
-      const text = paragraphText(paragraph);
+      const tokens = paragraphTokens(paragraph);
+      const text = tokens
+        .map(token => token.surface)
+        .join(" ")
+        .replace(/\s+([·.,;:?!])/g, " $1")
+        .trim();
       if (!text) return;
       const paragraphNo = paragraph.getAttribute("n") || String(index + 1);
       const isPrologue = n === "0";
@@ -67,6 +93,7 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
         page: isPrologue ? "1" : String(n),
         ref: isPrologue ? `Prolog ${paragraphNo}` : `Logion ${n}.${paragraphNo}`,
         text,
+        tokens,
         bookTitle: "Ewangelia Tomasza · Nag Hammadi Codex II"
       });
     });
@@ -88,6 +115,7 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
         page,
         ref: index === 0 ? "Prolog" : `Logion ${page}`,
         text,
+        tokens: text.split(/\s+/).filter(Boolean).map((surface, tokenIndex) => ({ id: `${tokenIndex + 1}`, surface, lemma: "", type: "", lang: "" })),
         bookTitle: "Ewangelia Tomasza · Nag Hammadi Codex II"
       });
     });
