@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.4.10 - Coptic active selection styling
+
+### PL
+- Ujednolicono wyróżnienie aktywnego logionu w widoku koptyjskim z widokami polskim i angielskim.
+- Usunięto ciemne wypełnienie przypominające motyw Dark w motywach Light i Sepia.
+- Podbito numer wersji aplikacji i cache PWA.
+
+### EN
+- Matched the active-logion highlight in the Coptic view to the Polish and English views.
+- Removed the dark fill that resembled the Dark theme in Light and Sepia.
+- Bumped the application version and PWA cache.
+
+## 1.4.9 - Theme-aware text selection
+
+### PL
+- Znormalizowano kolory zaznaczania tekstu osobno dla motywów Dark, Light i Sepia.
+- W jasnym motywie zastosowano delikatne niebieskie zaznaczenie, w Sepia ciepłe bursztynowe, a w Dark złote o odpowiednim kontraście.
+- Podbito numer wersji aplikacji i cache PWA.
+
+### EN
+- Normalized text-selection colors separately for the Dark, Light, and Sepia themes.
+- The Light theme now uses a subtle blue selection, Sepia a warm amber selection, and Dark a gold selection with suitable contrast.
+- Bumped the application version and PWA cache.
+
 ## 1.4.8 - Changelog and navigation cleanup
 
 ### PL

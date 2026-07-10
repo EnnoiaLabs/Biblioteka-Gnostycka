@@ -2,7 +2,7 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.4.8",
+    "version": "1.4.10",
     "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza.",
     "moduleIndex": "books/index.json",
     "updated": "2026-07-10"

@@ -4111,8 +4111,11 @@ body[data-theme="dark"] .dictionary-status-basic {
 }
 
 .thomas-coptic-continuous .coptic-page.is-active {
-  border-color: var(--accent-strong);
-  background: color-mix(in srgb, var(--panel-2) 86%, var(--accent) 14%);
+  border-color: transparent;
+  background: linear-gradient(90deg, rgba(185, 137, 53, 0.12), transparent 62%);
+  margin-left: -12px;
+  padding-left: 12px;
+  border-radius: 14px;
 }
 
 
@@ -4761,3 +4764,45 @@ body[data-theme="light"] {
 .library-tools-panel {
   --line: var(--library-separator);
 }
+
+/* Theme-aware native text selection. */
+::selection {
+  background: rgba(216, 160, 82, 0.42);
+  color: #fff7ea;
+}
+
+::-moz-selection {
+  background: rgba(216, 160, 82, 0.42);
+  color: #fff7ea;
+}
+
+body[data-theme="light"] ::selection {
+  background: rgba(105, 147, 184, 0.30);
+  color: #17212a;
+}
+
+body[data-theme="light"] ::-moz-selection {
+  background: rgba(105, 147, 184, 0.30);
+  color: #17212a;
+}
+
+body[data-theme="sepia"] ::selection {
+  background: rgba(177, 132, 73, 0.34);
+  color: #2f2318;
+}
+
+body[data-theme="sepia"] ::-moz-selection {
+  background: rgba(177, 132, 73, 0.34);
+  color: #2f2318;
+}
+
+body[data-theme="dark"] ::selection {
+  background: rgba(216, 160, 82, 0.42);
+  color: #fff7ea;
+}
+
+body[data-theme="dark"] ::-moz-selection {
+  background: rgba(216, 160, 82, 0.42);
+  color: #fff7ea;
+}
+
