@@ -944,14 +944,14 @@ body[data-view="reader"] .library-only {
 }
 
 .mode-switch {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
   gap: 0;
   border: 1px solid var(--line);
   background: var(--white);
 }
 
 .mode-switch .text-button {
+  flex: 1 1 0;
   width: 100%;
   min-width: 0;
   border: 0;
@@ -2418,14 +2418,14 @@ body.focus .focus-bar {
   }
 
   .mobile-segmented {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     overflow: hidden;
     border: 1px solid rgba(216, 160, 82, 0.28);
     background: rgba(255, 247, 234, 0.055);
   }
 
   .mobile-segmented button {
+    flex: 1 1 0;
     min-height: 44px;
     border: 0;
     background: transparent;

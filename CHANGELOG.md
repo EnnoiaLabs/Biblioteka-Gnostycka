@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.4.8 - Changelog and navigation cleanup
+
+### PL
+- Uporządkowano historię zmian: drugi wpis 1.4.6 oznaczono jako 1.4.5, a lista scala duplikaty wersji.
+- Sekcja Ostatnie zmiany na stronie Home korzysta teraz z changeloga, zachowuje kolejność i pokazuje najnowszą wersję.
+- Przełożono pasek nawigacji strony głównej do układu Home, Księgi, Słownik, Narzędzia, Prywatność, Zmiany, Kontakt, Info, Ustawienia, Wsparcie.
+- Ukryty tryb interlinearny nie zostawia już pustego segmentu w przełączniku wersji tekstu.
+
+### EN
+- Cleaned up the change history: the second 1.4.6 entry is now marked as 1.4.5, and duplicate versions are merged.
+- The Recent changes section on Home now uses the changelog, preserves order, and shows the latest version.
+- Reordered the home navigation bar to Home, Books, Dictionary, Tools, Privacy, Changes, Contact, Info, Settings, Support.
+- The hidden interlinear mode no longer leaves an empty segment in the text-version switcher.
+
+## 1.4.7 - Experimental interlinear toggle
+
+### PL
+- Przywrócono pracę do stabilnej bazy 1.4.6 i rozpoczęto dalszą numerację od wersji 1.4.7.
+- Ukryto interlinię z głównych przełączników czytania.
+- Dodano w Ustawieniach opcję pokazania interlinii jako trybu eksperymentalnego; po wyłączeniu zapisany tryb interlinearny wraca automatycznie do tekstu polskiego.
+
+### EN
+- Restored the work to the stable 1.4.6 base and continued numbering from version 1.4.7.
+- Hid the interlinear mode from the main reading switches.
+- Added a Settings option to show interlinear as an experimental mode; when disabled, a saved interlinear mode automatically falls back to the Polish text.
+
 ## 1.4.6
 
 ### PL
@@ -12,7 +38,7 @@
 - Added a clickable email address `gnostyk950@gmail.com` for bug reports, typos, translation issues, and feedback.
 - Added full PL/EN localization for the contact panel.
 
-## 1.4.6
+## 1.4.5
 
 ### PL
 - Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.
