@@ -1,5 +1,67 @@
 # Changelog
 
+## 1.4.15 - Version and changelog cleanup
+
+### PL
+- Ujednolicono podbijanie wersji w plikach aplikacji, PWA, metadanych i linkach zasobów.
+- Wyczyszczono historię zmian z głębokich duplikatów starszych wpisów i zachowano kolejność wersji.
+- Oznaczono Ewangelię Tomasza jako gotową w warstwach PL/EN/COPT.
+
+### EN
+- Synchronized version bumping across app files, PWA metadata, library metadata, and asset links.
+- Cleaned deeper duplicate entries from the change history while preserving version order.
+- Marked the Gospel of Thomas as ready in PL/EN/COPT layers.
+
+## 1.4.14 - Gospel of Philip library connection
+
+### PL
+- Podłączono Ewangelię Filipa jako dostępną pozycję na stronie Home i w katalogu Ksiąg.
+- Zmieniono status Filipa z roboczego szkieletu na pełny tekst PL/EN i ukryto pusty widok koptyjski do czasu importu warstwy COPT.
+- Dopasowano sidebar, opis księgi, aparat cytowania i przeskakiwanie po sekcjach 1–18 do logiki Ewangelii Filipa.
+
+### EN
+- Connected the Gospel of Philip as an available item on Home and in the Books catalogue.
+- Changed Philip's status from a working stub to full PL/EN text and hid the empty Coptic view until the COPT layer is imported.
+- Adjusted the sidebar, book description, citation apparatus, and section navigation for Gospel of Philip sections 1–18.
+
+## 1.4.13 - Gospel of Philip text layers
+
+### PL
+- Dodano pełny tekst angielski Ewangelii Filipa z public-domain przekładu Marka M. Mattisona.
+- Dodano polski tekst Ewangelii Filipa z gnostyk.pl jako warstwę opartą na wersji Mattisona.
+- Przebudowano moduł Filipa z 12 roboczych bloków na 18 naturalnych sekcji; warstwa koptyjska pozostaje oznaczona jako do importu po wskazaniu pewnego źródła Unicode/TEI.
+
+### EN
+- Added the full English Gospel of Philip text from Mark M. Mattison's public-domain translation.
+- Added the Polish Gospel of Philip text from gnostyk.pl as a layer based on Mattison's version.
+- Rebuilt the Philip module from 12 working blocks into 18 natural sections; the Coptic layer remains marked for import once a reliable Unicode/TEI source is provided.
+
+## 1.4.12 - Changelog order and Philip source
+
+### PL
+- Naprawiono skrót Ostatnie zmiany na stronie Home: pokazuje dokładnie trzy najnowsze wpisy w kolejności wersji.
+- Naprawiono pełną historię zmian: wpisy są scalane po wersji, sortowane semantycznie i nie gubią najnowszych pozycji.
+- Doprecyzowano podstawę Ewangelii Filipa: angielska warstwa Marka M. Mattisona z Gospels.net jest oznaczona jako public-domain, a polski przekład jako oparty na tej wersji.
+
+### EN
+- Fixed the Recent changes summary on Home: it now shows exactly the three latest entries in version order.
+- Fixed the full change history: entries are merged by version, sorted semantically, and no longer miss the newest releases.
+- Clarified the Gospel of Philip source: Mark M. Mattison's English layer from Gospels.net is marked as public domain, and the Polish translation is described as based on that version.
+
+## 1.4.11 - Gospel of Philip module
+
+### PL
+- Dodano moduł Ewangelii Filipa jako trzecią pozycję Biblioteki Gnozy.
+- Przygotowano opis, podstawę źródłową, aparat cytowania i strukturę 12 jednostek według Nag Hammadi Codex II,3.
+- Dodano miejsca na warstwy PL/EN/COPT bez wstawiania niezweryfikowanego tekstu ani materiału o niejasnych prawach.
+- Uogólniono część czytnika logionów/sekcji, aby nie była zależna wyłącznie od Ewangelii Tomasza.
+
+### EN
+- Added the Gospel of Philip module as the third item in Gnostyk Library.
+- Prepared the description, source base, citation apparatus, and a 12-unit structure following Nag Hammadi Codex II,3.
+- Added PL/EN/COPT layer slots without inserting unverified text or material with unclear rights.
+- Generalized part of the logion/section reader so it is no longer tied only to the Gospel of Thomas.
+
 ## 1.4.10 - Coptic active selection styling
 
 ### PL
@@ -73,6 +135,7 @@
 - Unified separator colors for dark, light, and sepia themes.
 
 ## 1.4.4
+
 - Ujednolicono Ustawienia i Narzędzia ze stylem Słownika we wszystkich motywach.
 - Dodano tryb gramatyczny interlinii i jawne etykiety lemat/typ przy tokenach koptyjskich.
 - Zestandaryzowano checkboxy i kontrolki formularzy do koloru aktywnego motywu.
@@ -161,7 +224,6 @@
 - The dictionary card now follows the active book. In the Gospel of Thomas module it shows Thomas occurrences, logia and the current logion instead of Pistis Sophia positions.
 - Generalized the shared Gnostyk Library dictionary note.
 
-
 ## 1.3.5
 
 ### PL
@@ -173,10 +235,6 @@
 - The Gospel of Thomas Coptic view now shows the continuous text of all 114 logia.
 - Clicking a logion in the sidebar scrolls to the matching place in the continuous Coptic text.
 - Thomas citation now uses logion numbers and Nag Hammadi Codex II instead of Mead / Schwartze-Petermann pagination.
-
-## 1.3.4
-- Naprawiono podłączenie zmiennej warstwy koptyjskiej Ewangelii Tomasza po przełączeniu księgi.
-- Wymuszono użycie modułu `books/gospel-of-thomas/coptic-data.js` dla widoku Koptyjski.
 
 ## 1.3.4
 
@@ -202,79 +260,79 @@
 - Prepared the technical source for the Coptic layer of Thomas logia.
 - Updated Thomas metadata, rights, sources and citation apparatus with Coptic SCRIPTORIUM / CC-BY 4.0.
 
-
 ## 1.2.4
 
-PL:
+### PL
 - Uporządkowano listę Codex II: każda pozycja jest osobnym wierszem bez kropek listy.
 - Dodano statusy po prawej stronie pozycji oraz efekt hover dla dostępnej Ewangelii Tomasza.
 - Zachowano zwykły kursor zamiast kursora-rączki.
 
-EN:
+### EN
 - Organized the Codex II list: each entry is now a separate row without list bullets.
 - Added right-aligned statuses and hover feedback for the available Gospel of Thomas entry.
 - Kept the default cursor instead of the hand pointer.
 
 ## 1.2.3
 
-PL:
+### PL
 - Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.
 - Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.
 
-EN:
+### EN
 - Aligned Home card action buttons so they sit consistently regardless of description length.
 - Cleaned up the start-card layout without changing the bottom navigation bar.
 
 ## 1.2.2
 
-PL:
+### PL
 - Usunięto dużą ikonę książki z kafelka na stronie Home.
 - Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.
 - Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.
 
-EN:
+### EN
 - Removed the large book icon from the Home card.
 - Added subtle, consistent Material Symbols icons to the Home cards.
 - Icons inherit their color from the current theme and are not colored emoji.
 
 ## 1.2.1
 
-PL:
+### PL
 - Poprawiono przycisk „Wróć do ostatniego tekstu”, aby otwierał ostatnio przeglądaną księgę i zapamiętaną pozycję zamiast katalogu.
 - Usunięto dublowanie funkcji „Przeglądaj bibliotekę” na karcie kontynuacji pracy.
 - Naprawiono parser changeloga: tryb EN rozpoznaje nagłówki „EN:” i nie pokazuje polskich punktów jako ostatnich zmian.
 
-EN:
+### EN
 - Fixed the “Return to the last text” button so it opens the last viewed book and saved position instead of the catalogue.
 - Removed the duplicated “Browse library” behavior from the continue-work card.
 - Fixed the changelog parser: EN mode now recognizes “EN:” headings and no longer shows Polish points as the latest changes.
 
 ## 1.2.0
 
-PL:
+### PL
 - Przebudowano stronę Home: nie jest już drugim katalogiem ksiąg, tylko ekranem startowym ze statystykami, ostatnio dodanym tekstem, wsparciem i ostatnimi zmianami.
 - Usunięto zdublowane kafelki ksiąg z zakładki Księgi; katalog kodeksów pozostaje głównym miejscem otwierania tekstów.
 - Ujednolicono przyciski na „Otwórz” i przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.
 
-EN:
+### EN
 - Reworked the Home page: it is no longer a second book catalogue, but a start screen with stats, recently added text, support and recent changes.
 - Removed duplicated book tiles from the Books tab; the codex catalogue remains the main place for opening texts.
 - Standardized buttons to “Open” and prepared a visible visit counter for a privacy-friendly external counter API.
 
 ## 1.1.5
+
 - Rozdzielono motywy tematyczne ksiąg: Ewangelia Tomasza nie korzysta już z motywów Pistis Sophii.
 - Dodano osobne zestawy motywów dla Pistis Sophii i Ewangelii Tomasza.
 - Przygotowano pliki `themes.json` w modułach ksiąg jako fundament pod pełną niezależność metadanych kolejnych tekstów.
 
 ## 1.1.4
 
-PL:
+### PL
 - Dostosowano aparat cytowania Ewangelii Tomasza: opcje Meada i Schwartze-Petermanna nie są już pokazywane jako właściwe dla Tomasza; zastępują je logion i źródła.
 - Zmieniono nazwę polskiej warstwy na „Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI”.
 - Poprawiono stronę Home: kafelek Pistis Sophia prowadzi do Pistis Sophii, kafelek Tomasza prowadzi do Ewangelii Tomasza.
 - Ujednolicono ikonę przy Ewangelii Tomasza z ikoną używaną przy Pistis Sophii.
 
-EN:
+### EN
 - Adjusted the Gospel of Thomas citation apparatus: Mead and Schwartze-Petermann are no longer presented as Thomas-specific options; they are replaced by logion and sources.
 - Renamed the Polish layer as “Dariusz Kaniewski’s Polish AI-assisted adaptation”.
 - Fixed the Home page: the Pistis Sophia card opens Pistis Sophia and the Thomas card opens the Gospel of Thomas.
@@ -282,69 +340,69 @@ EN:
 
 ## 1.1.3
 
-PL:
+### PL
 - Znormalizowano informacje czytnika dla Ewangelii Tomasza: aktualna pozycja biblioteki, podstawa tekstu, prawa, opis przekładu, stopka prawna i cytowanie nie pokazują już danych Pistis Sophii.
 - Dostosowano metadane widoku księgi do aktywnego modułu: Pistis Sophia używa stron i paginacji Meada, a Ewangelia Tomasza używa logionów 1–114.
 - Poprawiono cytowanie Ewangelii Tomasza tak, aby odwoływało się do numeru logionu i warstwy PL/EN.
 
-EN:
+### EN
 - Normalized the reader information for the Gospel of Thomas: current library item, source base, rights, translation notes, legal footer and citation no longer show Pistis Sophia data.
 - Adjusted book-view metadata to the active module: Pistis Sophia uses Mead pages, while the Gospel of Thomas uses logia 1–114.
 - Fixed Gospel of Thomas citation so it refers to logion numbers and the PL/EN layer.
 
 ## 1.1.2
 
-PL:
+### PL
 - Dodano angielską warstwę Ewangelii Tomasza wg public-domain Mark M. Mattison.
 - Podłączono Ewangelię Tomasza w statystykach biblioteki jako drugą dostępną księgę.
 - Uzupełniono metadane modułu PL/EN oraz opis źródeł.
 
-EN:
+### EN
 - Added the English Gospel of Thomas layer based on Mark M. Mattison’s public-domain translation.
 - Connected the Gospel of Thomas in library statistics as the second available book.
 - Updated PL/EN module metadata and source descriptions.
 
 ## 1.1.1
 
-PL:
+### PL
 - Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.
 - Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.
 
-EN:
+### EN
 - The Gospel of Thomas now uses a continuous scrollable text with visible logion numbers.
 - Clicking a logion in the sidebar scrolls the reader to that exact place in the text.
 
-# 1.1.0
+## 1.1.0
 
-## PL
+### PL
 - Dodano Ewangelię Tomasza jako pełną księgę modułową.
 - Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.
 - Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.
 - Zaktualizowano wersję aplikacji do numeracji 1.1.0, bo to pierwsza większa rozbudowa biblioteki.
 
-## EN
+### EN
 - Added the Gospel of Thomas as a full modular book.
 - Added all 114 logia in Dariusz Kaniewski’s Polish AI-assisted adaptation.
 - Clicking the book now switches the reader to the Thomas module.
 - Updated the app version to 1.1.0 because this is the first larger library expansion.
 
-# 1.0.149
+## 1.0.149
 
-## PL
+### PL
 - Poprawiono widok słownika w trybie PL: wyniki i karta nie podstawiają już angielskich glos jako głównego tekstu, gdy brakuje polskiej glosy.
 - Wyśrodkowano krzyżyk zamykania karty słownikowej.
 - Poprawiono wyszukiwanie w słowniku: wyniki są teraz sortowane według trafności.
 - Ograniczono listę do 30 najlepszych wyników, żeby nie pokazywać przypadkowych dopasowań.
 - Usunięto fałszywe trafienia typu „mój / my” przy wyszukiwaniu słowa „spirit”.
 
-## EN
+### EN
 - Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.
 - Centered the dictionary card close button.
 - Improved dictionary search: results are now ranked by relevance.
 - Limited the list to the 30 best results to avoid weak accidental matches.
 - Removed false matches such as “mój / my” when searching for “spirit”.
 
-# 1.0.144
+## 1.0.144
 
 ### PL
 - Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.
@@ -358,7 +416,7 @@ EN:
 - Centered the dictionary card close button.
 - Removed the border and background from catalogue book status labels.
 
-# 1.0.143
+## 1.0.143
 
 - Przebudowano strukturę danych na bibliotekę modułową w katalogu `books/`.
 - Przeniesiono Pistis Sophię do `books/pistis-sophia/`.
@@ -401,95 +459,60 @@ EN:
 - Moved the text catalogue into the Books tab.
 - Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.
 
-# Changelog
-
-## 1.3.4
-- Naprawiono podłączenie zmiennej warstwy koptyjskiej Ewangelii Tomasza po przełączeniu księgi.
-- Wymuszono użycie modułu `books/gospel-of-thomas/coptic-data.js` dla widoku Koptyjski.
-
-## 1.3.4
-
-### PL
-- Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.
-- Zsynchronizowano widok Koptyjski z logionami 1–114.
-- Wyłączono tryb Interlinia dla Tomasza do czasu etapu 2, aby aplikacja nie sugerowała gotowej interlinii słowo po słowie.
-
-### EN
-- Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM.
-- Synchronized Coptic mode with logia 1–114.
-- Disabled the Thomas interlinear mode until stage 2 so the app does not imply a completed word-by-word interlinear layer.
-
-## 1.2.4
-
-PL:
-- Uporządkowano listę Codex II: każda pozycja jest osobnym wierszem bez kropek listy.
-- Dodano statusy po prawej stronie pozycji oraz efekt hover dla dostępnej Ewangelii Tomasza.
-- Zachowano zwykły kursor zamiast kursora-rączki.
-
-EN:
-- Organized the Codex II list: each entry is now a separate row without list bullets.
-- Added right-aligned statuses and hover feedback for the available Gospel of Thomas entry.
-- Kept the default cursor instead of the hand pointer.
-
-## 1.1.5
-- Rozdzielono motywy tematyczne ksiąg: Ewangelia Tomasza nie korzysta już z motywów Pistis Sophii.
-- Dodano osobne zestawy motywów dla Pistis Sophii i Ewangelii Tomasza.
-- Przygotowano pliki `themes.json` w modułach ksiąg jako fundament pod pełną niezależność metadanych kolejnych tekstów.
-
 ## 1.0.139 - Dictionary card language refresh
 
-PL
+### PL
 - Naprawiono kartę słownikową po zmianie języka interfejsu.
 - Otwarta karta słownikowa odświeża teraz etykiety PL/EN, aby w trybie polskim nie zostawały angielskie napisy.
 
-EN
+### EN
 - Fixed the dictionary card after changing the interface language.
 - An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.
 
 ## 1.0.138
 
-PL
+### PL
 - Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.
 - Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.
 - Uporządkowano prezentację danych słownikowych bez zmiany działania interlinii.
 
-EN
+### EN
 - Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.
 - Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.
 - Improved dictionary data presentation without changing interlinear behavior.
 
 ## 1.0.137
 
-PL
+### PL
 - Naprawiono historię zmian, aby w trybie EN nie pokazywała polskich punktów z wpisów oznaczonych jako PL.
 - Parser changeloga rozpoznaje teraz zarówno nagłówki PL / EN, jak i ### PL / ### EN.
 - Podbito wersję aplikacji po poprawce lokalizacji changeloga.
 
-EN
+### EN
 - Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.
 - The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.
 - Bumped the application version after the changelog localization fix.
 
 ## 1.0.136
 
-PL
+### PL
 - Znormalizowano układ strony Wsparcie między wersją polską i angielską.
 - Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.
 - Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.
 
-EN
+### EN
 - Normalized the Support page layout between Polish and English.
 - Widened descriptive text blocks and unified section heights so switching language does not change the page proportions.
 - Aligned PL/EN copy so both versions share the same rhythm and structure.
 
 ## 1.0.135
 
-PL
+### PL
 - Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.
 - Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.
 - Ikona serca korzysta z kolorów aktywnego motywu, aby pasowała do trybów Dark, Light i Sepia.
 
-EN
+### EN
 - Added a Support tab with a project development description.
 - Added a PayPal button linking to paypal.me/dariuszkaniewski.
 - The heart icon now uses the active theme colors so it fits Dark, Light and Sepia modes.

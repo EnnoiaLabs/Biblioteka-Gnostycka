@@ -2,10 +2,10 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.4.10",
-    "rightsNote": "Teksty ?r?d?owe w domenie publicznej; polski przek?ad, opracowanie, terminologia, uk?ad czytelniczy i aparat biblioteki jako nowa warstwa tw?rcza.",
+    "version": "1.4.15",
+    "rightsNote": "Teksty źródłowe w domenie publicznej lub według wskazanych licencji; polski przekład, opracowanie, terminologia, układ czytelniczy i aparat biblioteki jako nowa warstwa twórcza.",
     "moduleIndex": "books/index.json",
-    "updated": "2026-07-10"
+    "updated": "2026-07-11"
   },
   "works": [
     {
@@ -27,7 +27,7 @@
         "gnostycyzm",
         "Sophia",
         "misteria",
-        "?wiat?o??"
+        "światłość"
       ],
       "module": "books/pistis-sophia/book.json",
       "entry": "books/pistis-sophia/data.js",
@@ -68,6 +68,44 @@
         "en"
       ],
       "unitCount": 114
+    },
+    {
+      "id": "gospel-of-philip",
+      "title": "Ewangelia Filipa",
+      "status": "Pełny tekst PL/EN",
+      "language": "pl",
+      "sourceLanguageLayers": [
+        "en"
+      ],
+      "source": "Nag Hammadi Codex II,3; Mark M. Mattison, Gospels.net / The Other Gospels, public domain; polski przekład z gnostyk.pl oparty na wersji Mattisona.",
+      "sourceRights": "Tekst starożytny i angielski przekład Mark M. Mattison w domenie publicznej; polski przekład i opracowanie biblioteki jako nowa warstwa twórcza.",
+      "citation": [
+        "sekcje",
+        "Nag Hammadi Codex II,3"
+      ],
+      "tags": [
+        "gnostycyzm",
+        "Filip",
+        "sakramenty",
+        "Nag Hammadi"
+      ],
+      "module": "books/gospel-of-philip/book.json",
+      "entry": "books/gospel-of-philip/data.js",
+      "coptic": "books/gospel-of-philip/coptic-data.js",
+      "type": "logion-reader",
+      "structure": {
+        "unitName": "section",
+        "unitCount": 18,
+        "labelPattern": "Sekcja {number}"
+      },
+      "description": "Ewangelia Filipa: pełny tekst polski i angielski w 18 sekcjach; warstwa koptyjska pozostaje przygotowana do osobnego importu.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "unitCount": 18
     }
-  ]
+  ],
+  "version": "1.4.13",
+  "updated": "2026-07-11"
 }
