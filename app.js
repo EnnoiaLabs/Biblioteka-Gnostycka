@@ -23,7 +23,7 @@ if (isLogionBook && activeBookModule?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Gnostyk Biblioteka",
-  version: "1.4.27",
+  version: "1.4.55",
   updated: "2026-07-14",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
@@ -34,6 +34,46 @@ const libraryMeta = {
     creativeLayer: activeBook.id === "gospel-of-thomas" ? "Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI, układ logionów i moduł biblioteki" : "Polski przekład, dobór terminologii, układ czytelniczy, noty i aparat cytowania"
   }
 };
+
+const PISTIS_TEXT_START_PAGE = 48;
+const PISTIS_PAGE_48_SOURCE_MARKER = "[THE FIRST BOOK OF]";
+const PISTIS_PAGE_48_POLISH_MARKER = "[KSIĘGA PIERWSZA]";
+
+function splitPistisPage48Text(text, language = currentLanguage()) {
+  const source = String(text || "");
+  const marker = language === "pl" ? PISTIS_PAGE_48_POLISH_MARKER : PISTIS_PAGE_48_SOURCE_MARKER;
+  const markerIndex = source.indexOf(marker);
+  if (markerIndex < 0) return { introduction: "", main: source };
+  return {
+    introduction: source.slice(0, markerIndex).trim(),
+    main: source.slice(markerIndex).trim()
+  };
+}
+
+function pistisPage48Introduction(page) {
+  if (!page || Number(page.page) !== PISTIS_TEXT_START_PAGE) return "";
+  const language = currentLanguage() === "pl" ? "pl" : "en";
+  const text = language === "pl"
+    ? (page.polish || polishTranslations[PISTIS_TEXT_START_PAGE] || page.text || "")
+    : (page.text || "");
+  return splitPistisPage48Text(text, language).introduction;
+}
+
+function pistisPage48MainText(text, language = currentLanguage()) {
+  return splitPistisPage48Text(text, language === "pl" ? "pl" : "en").main;
+}
+
+function isPistisBook() {
+  return (activeBook?.id || activeBookId) === "pistis-sophia";
+}
+
+function isPistisAddendaPage(pageNumber = state?.page) {
+  return isPistisBook() && Number(pageNumber) < PISTIS_TEXT_START_PAGE;
+}
+
+function defaultStartPageForBook(bookId = activeBookId) {
+  return bookId === "pistis-sophia" ? PISTIS_TEXT_START_PAGE : 1;
+}
 
 const bookUiInfo = {
   "pistis-sophia": {
@@ -266,18 +306,22 @@ const state = {
   mobileChapterQuery: "",
   tab: "chapters",
   mobilePanel: "toc",
+  sidebarMode: "chapters",
   changelogText: "",
   readerMode: normalizeReaderMode(localStorage.getItem("ps.readerMode") || "pl"),
   citationFormat: localStorage.getItem("ps.citationFormat") || "simple",
   aboutOpen: false,
   settingsOpen: false,
-  sessionLanguage: null,
+  sessionLanguage: ["pl", "en"].includes(localStorage.getItem("ps.interfaceLanguage"))
+    ? localStorage.getItem("ps.interfaceLanguage")
+    : null,
   settings: {
     language: savedSettings.language || "auto",
     theme: savedSettings.theme || "dark",
     fontSize: savedSettings.fontSize || "medium",
     lineHeight: savedSettings.lineHeight || "normal",
     width: savedSettings.width || "standard",
+    bookJustify: savedSettings.bookJustify === true,
     interlinearExperimental: savedSettings.interlinearExperimental === true,
     interlinearLayout: savedSettings.interlinearLayout || "classic",
     interlinearShowLemma: savedSettings.interlinearShowLemma !== false,
@@ -291,6 +335,10 @@ const state = {
   activeDictionaryToken: null
 };
 
+if (isPistisBook() && !startupParams.has("page") && state.page < PISTIS_TEXT_START_PAGE) {
+  state.page = PISTIS_TEXT_START_PAGE;
+}
+
 const uiText = {
   pl: {
     librarySubtitle: "Biblioteka gnozy",
@@ -299,6 +347,13 @@ const uiText = {
     chapters: "Rozdziały",
     themes: "Motywy",
     bookmarks: "Zakładki",
+    textSection: "Tekst",
+    addendaSection: "Dodatki",
+    addendaMaterials: "Materiały dodatkowe",
+    addendaLead: "Materiały wprowadzające i historyczne G. R. S. Meada",
+    addendaPageFallback: "Dodatek Meada",
+    showAddenda: "Dodatki",
+    showPistis: "Pistis Sophia",
     libraryTitle: "Biblioteka gnozy",
     libraryLead: "Cyfrowa biblioteka polskich przekładów, opracowań i narzędzi cytowania tekstów gnostyckich.",
     home: "Home",
@@ -307,6 +362,7 @@ const uiText = {
     contact: "Kontakt",
     privacy: "Prywatność",
     changes: "Zmiany",
+    help: "Pomoc",
     dictionary: "Słownik",
     tools: "Narzędzia",
     settings: "Ustawienia",
@@ -564,6 +620,13 @@ const uiText = {
     chapters: "Chapters",
     themes: "Themes",
     bookmarks: "Bookmarks",
+    textSection: "Text",
+    addendaSection: "Addenda",
+    addendaMaterials: "Additional materials",
+    addendaLead: "G. R. S. Mead's introductory and historical material",
+    addendaPageFallback: "Mead addendum",
+    showAddenda: "Addenda",
+    showPistis: "Pistis Sophia",
     libraryTitle: "Gnostic library",
     libraryLead: "A digital library of Polish translations, studies, and citation tools for Gnostic texts.",
     home: "Home",
@@ -572,6 +635,7 @@ const uiText = {
     contact: "Contact",
     privacy: "Privacy",
     changes: "Changes",
+    help: "Help",
     dictionary: "Dictionary",
     tools: "Tools",
     settings: "Settings",
@@ -6435,6 +6499,11 @@ const els = {
   chapters: document.querySelector("#chaptersPanel"),
   themes: document.querySelector("#themesPanel"),
   marks: document.querySelector("#marksPanel"),
+  addenda: document.querySelector("#addendaPanel"),
+  addendaTab: document.querySelector('[data-tab="addenda"]'),
+  pistisSectionSwitch: document.querySelector("#pistisSectionSwitch"),
+  pistisTextButton: document.querySelector("#pistisTextButton"),
+  pistisAddendaButton: document.querySelector("#pistisAddendaButton"),
   pageText: document.querySelector("#pageText"),
   polishGuide: document.querySelector("#polishGuide"),
   pageInput: document.querySelector("#pageInput"),
@@ -6450,6 +6519,9 @@ const els = {
   bookmark: document.querySelector("#bookmarkButton"),
   citationFormat: document.querySelector("#citationFormat"),
   copy: document.querySelector("#copyButton"),
+  addendaSidebarToggle: document.querySelector("#addendaSidebarToggle"),
+  readerSidebar: document.querySelector("#readerSidebar"),
+  sidebarTabs: document.querySelector(".tabs.book-nav"),
   aboutToggle: document.querySelector("#aboutToggle"),
   aboutPanel: document.querySelector("#aboutPanel"),
   settingsToggle: document.querySelector("#librarySettingsToggle"),
@@ -6461,6 +6533,7 @@ const els = {
   fontSizeSetting: document.querySelector("#fontSizeSetting"),
   lineHeightSetting: document.querySelector("#lineHeightSetting"),
   widthSetting: document.querySelector("#widthSetting"),
+  bookJustifySetting: document.querySelector("#bookJustifySetting"),
   interlinearExperimentalSetting: document.querySelector("#interlinearExperimentalSetting"),
   interlinearLayoutSetting: document.querySelector("#interlinearLayoutSetting"),
   interlinearLemmaSetting: document.querySelector("#interlinearLemmaSetting"),
@@ -6512,6 +6585,7 @@ const els = {
   libraryContactToggle: document.querySelector("#libraryContactToggle"),
   libraryPrivacyToggle: document.querySelector("#libraryPrivacyToggle"),
   libraryChangesToggle: document.querySelector("#libraryChangesToggle"),
+  libraryHelpToggle: document.querySelector("#libraryHelpToggle"),
   libraryDictionaryToggle: document.querySelector("#libraryDictionaryToggle"),
   libraryToolsToggle: document.querySelector("#libraryToolsToggle"),
   librarySettingsToggle: document.querySelector("#librarySettingsToggle"),
@@ -6527,6 +6601,7 @@ const els = {
   libraryContactPanel: document.querySelector("#libraryContactPanel"),
   libraryPrivacyPanel: document.querySelector("#libraryPrivacyPanel"),
   libraryChangesPanel: document.querySelector("#libraryChangesPanel"),
+  libraryHelpPanel: document.querySelector("#libraryHelpPanel"),
   libraryDictionaryPanel: document.querySelector("#libraryDictionaryPanel"),
   libraryToolsPanel: document.querySelector("#libraryToolsPanel"),
   librarySupportPanel: document.querySelector("#librarySupportPanel"),
@@ -7276,13 +7351,85 @@ function chapterMatchesQuery(chapter, query) {
 }
 
 function chapterButtonHtml(chapter) {
-  const active = chapterForPage(state.page)?.number === chapter.number;
+  const currentChapterNumber = isPistisBook() && Number.isFinite(Number(state.pistisChapter))
+    ? Number(state.pistisChapter)
+    : chapterForPage(state.page)?.number;
+  const active = currentChapterNumber === chapter.number;
+  const chapterData = isPistisBook() ? ` data-pistis-chapter="${chapter.number}"` : "";
   return `
-    <button class="nav-item ${active ? "is-active" : ""}" data-page="${chapter.page}" type="button">
+    <button class="nav-item ${active ? "is-active" : ""}" data-page="${chapter.page}"${chapterData} type="button">
       <strong>${escapeHtml(readableChapter(chapter))}</strong>
       <span>${activeBook?.type === "logion-reader" ? `${logionUnitLabel()} ${chapter.page}` : `${currentLanguage() === "pl" ? "str." : t("page")} ${chapter.page}`} · ${escapeHtml(chapterNavExcerpt(chapter))}</span>
     </button>
   `;
+}
+
+function pistisAddendaPages() {
+  if (!isPistisBook()) return [];
+  return data.pages.filter(page => Number(page.page) <= PISTIS_TEXT_START_PAGE);
+}
+
+function addendaLocalizedText(page) {
+  const pageNumber = Number(page.page);
+  return currentLanguage() === "pl"
+    ? (page.polish || polishTranslations[pageNumber] || page.text || "")
+    : (page.text || page.preview || "");
+}
+
+function completeSentenceExcerpt(text, max = 150) {
+  const clean = String(text || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  const sentences = clean.match(/[^.!?…]+(?:[.!?…]+[”’'"]?|$)/g)?.map(item => item.trim()).filter(Boolean) || [clean];
+  let excerpt = "";
+  for (const sentence of sentences) {
+    const candidate = excerpt ? `${excerpt} ${sentence}` : sentence;
+    if (excerpt && candidate.length > max) break;
+    excerpt = candidate;
+    if (excerpt.length >= Math.min(90, max)) break;
+  }
+  return excerpt || sentences[0];
+}
+
+function addendaTitleForPage(page) {
+  const pageNumber = Number(page.page);
+  if (pageNumber === 1) return currentLanguage() === "pl" ? "Karta tytułowa i nota edytorska" : "Title page and editorial note";
+  if (pageNumber === 2) return currentLanguage() === "pl" ? "Wstęp, spis treści i opracowanie historyczne" : "Introduction, contents, and historical study";
+  if (pageNumber === PISTIS_TEXT_START_PAGE) return currentLanguage() === "pl" ? "Zakończenie wprowadzenia" : "Conclusion of the introduction";
+  return compactText(addendaLocalizedText(page), 105) || t("addendaPageFallback");
+}
+
+function addendaButtonHtml(page) {
+  const pageNumber = Number(page.page);
+  const active = state.page === pageNumber;
+  const localizedText = pageNumber === PISTIS_TEXT_START_PAGE ? pistisPage48Introduction(page) : addendaLocalizedText(page);
+  const preview = compactText(localizedText, 165);
+  return `
+    <button class="nav-item ${active ? "is-active" : ""}" data-page="${pageNumber}" data-addenda-page="${pageNumber}" type="button">
+      <strong>${escapeHtml(addendaTitleForPage(page))}</strong>
+      <span>${t("page")} ${pageNumber}${preview ? ` · ${escapeHtml(preview)}` : ""}</span>
+    </button>
+  `;
+}
+
+function renderPistisAddendaContinuousText() {
+  const pages = pistisAddendaPages();
+  const isSource = state.readerMode === "source";
+  const modeClass = isSource ? " source-prose" : "";
+  return pages.map(page => {
+    const pageNumber = Number(page.page);
+    const text = pageNumber === PISTIS_TEXT_START_PAGE
+      ? pistisPage48Introduction(page)
+      : (isSource ? (page.text || "") : polishPageText(page, null));
+    return `
+      <section class="addenda-text-section" id="addenda-page-${pageNumber}" data-addenda-text-page="${pageNumber}">
+        <div class="addenda-text-heading">
+          <span>${escapeHtml(t("page"))} ${pageNumber}</span>
+          <strong>${escapeHtml(addendaTitleForPage(page))}</strong>
+        </div>
+        <div class="page-prose${modeClass}">${isSource ? structuredSourceProseHtml(text) : highlight(text)}</div>
+      </section>
+    `;
+  }).join("");
 }
 
 function markButtonHtml(page) {
@@ -7326,6 +7473,178 @@ function localizedThemeNote(theme) {
   return currentLanguage() === "pl" ? theme.note : (theme.enNote || theme.note);
 }
 
+function sourceLineStartsNewParagraph(line, currentText) {
+  if (!currentText || !/[.!?][”’'\"]?$/.test(currentText.trim())) return false;
+  if (/^["“‘]/.test(line)) return true;
+  if (/^(?:It came to pass|And it came to pass|Then\b|Thereupon\b|From this\b|After this\b|When\b|Now\b)/i.test(line)) return true;
+  // Short editorial rubrics in Mead's edition, e.g. "He promiseth to tell them all things. Then ..."
+  return /^[A-Z][^.!?]{1,72}[.!?]\s+(?:Then|And|But|It|The|Jesus|Mary|Peter|Philip|Sophia|He|She|They|When|From|Thereupon)\b/.test(line);
+}
+
+function structuredSourceProseHtml(text) {
+  const lines = String(text || "").replace(/\r\n?/g, "\n").split("\n");
+  const blocks = [];
+  let paragraph = [];
+
+  const normalizeText = value => String(value || "").replace(/\s+/g, " ").trim();
+
+  const pushSourceParagraph = value => {
+    let content = normalizeText(value).replace(/^\[paragraph continues\]\s*/i, "");
+    if (!content) return;
+
+    // Mead often prints a short editorial rubric at the start of the same line as the paragraph.
+    // Split it into its own heading so the English layer mirrors the structured Polish layer.
+    const rubricMatch = content.match(/^(.{3,118}?[.!?])\s+(?=(?:["“‘]|It\b|And\b|Then\b|When\b|Now\b|But\b|Jesus\b|Mary\b|Peter\b|Philip\b|Thomas\b|John\b|The\b|He\b|She\b|They\b|Thereafter\b|From\b))/);
+    if (rubricMatch) {
+      const candidate = rubricMatch[1].trim();
+      const rubricLike = /^(?:Of\b|The\b|Jesus\b|Mary\b|Peter\b|Philip\b|Thomas\b|John\b|Sophia\b|He\b|She\b|A\b|An\b)/i.test(candidate)
+        && (/(?:eth|est|th)\b/i.test(candidate) || /^(?:Of|The (?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth)|A sinner|Even the|Jesus|Mary|Peter|Philip|Thomas|John|Sophia)\b/i.test(candidate));
+      if (rubricLike) {
+        blocks.push({ type: "rubric", text: candidate });
+        content = content.slice(rubricMatch[0].length).trim();
+      }
+    }
+
+    if (content) blocks.push({ type: "paragraph", text: content });
+  };
+
+  const flushParagraph = () => {
+    const joined = paragraph.join(" ");
+    if (normalizeText(joined)) pushSourceParagraph(joined);
+    paragraph = [];
+  };
+
+  lines.forEach(rawLine => {
+    const line = rawLine.trim();
+    if (!line) {
+      flushParagraph();
+      return;
+    }
+    if (/^CHAPTER\s+[IVXLCDM\d]+\.?$/i.test(line)) {
+      flushParagraph();
+      blocks.push({ type: "chapter", text: line });
+      return;
+    }
+    if (/^p\.\s*[ivxlcdm\d]+\.?$/i.test(line)) {
+      flushParagraph();
+      blocks.push({ type: "page", text: line });
+      return;
+    }
+    if (/^\[[^\]]+\]$/.test(line)
+      || /^(?:DIVISION\s+[IVXLCDM\d]+\.?|THE\s+(?:FIRST|SECOND|THIRD|FOURTH)\s+BOOK\b.*|THE\s+STORY\s+OF\b.*|PREFACE|INTRODUCTION|CONTENTS|TRANSLATION|ANNOTATED BIBLIOGRAPHY|FOOTNOTES|THE END\.?)$/i.test(line)
+      || (/^[A-Z0-9ÆŒ .,:;’'()\-]+$/.test(line) && line.length <= 115 && /[A-Z]/.test(line))) {
+      flushParagraph();
+      blocks.push({ type: "book-heading", text: line });
+      return;
+    }
+    const currentText = paragraph.join(" ");
+    if (sourceLineStartsNewParagraph(line, currentText)) flushParagraph();
+    paragraph.push(line);
+  });
+  flushParagraph();
+
+  return blocks.map(block => {
+    if (block.type === "chapter") return `<h3 class="source-chapter-heading">${highlight(block.text)}</h3>`;
+    if (block.type === "book-heading") return `<h2 class="source-book-heading">${highlight(block.text)}</h2>`;
+    if (block.type === "page") return `<div class="source-page-marker">${highlight(block.text)}</div>`;
+    if (block.type === "rubric") return `<h4 class="source-rubric">${highlight(block.text)}</h4>`;
+    return `<p class="source-paragraph">${highlight(block.text)}</p>`;
+  }).join("");
+}
+function sourceProseHtml(text) {
+  return state.settings.bookJustify === true ? structuredSourceProseHtml(text) : highlight(text);
+}
+
+function structuredPolishProseHtml(text) {
+  const normalized = String(text || "").replace(/\r\n?/g, "\n");
+  const rawBlocks = normalized.split(/\n\s*\n+/).map(block => block.trim()).filter(Boolean);
+  const blocks = [];
+
+  const pushParagraphWithMarkers = value => {
+    const parts = String(value || "").split(/\s*\|(\d+)\.\s*/g);
+    const lead = (parts.shift() || "").replace(/\s*\n\s*/g, " ").replace(/\s+/g, " ").trim();
+    if (lead) blocks.push({ type: "paragraph", text: lead });
+    for (let index = 0; index < parts.length; index += 2) {
+      const number = parts[index];
+      const following = (parts[index + 1] || "").replace(/\s*\n\s*/g, " ").replace(/\s+/g, " ").trim();
+      if (number) blocks.push({ type: "page", text: `p. ${number}` });
+      if (following) blocks.push({ type: "paragraph", text: following });
+    }
+  };
+
+  rawBlocks.forEach(rawBlock => {
+    const compact = rawBlock.replace(/\s*\n\s*/g, " ").replace(/\s+/g, " ").trim();
+    if (!compact) return;
+    if (/^ROZDZIAŁ\s+\d+\.?$/i.test(compact)) {
+      blocks.push({ type: "chapter", text: compact });
+      return;
+    }
+    if (/^\[[^\]]+\]$/.test(compact) || (/^[A-ZĄĆĘŁŃÓŚŹŻ0-9 .,:;„”'’()-]+$/.test(compact) && compact.length <= 72)) {
+      blocks.push({ type: "book-heading", text: compact });
+      return;
+    }
+    if (/^p\.\s*\d+\.?$/i.test(compact)) {
+      blocks.push({ type: "page", text: compact });
+      return;
+    }
+    const isRubric = !/[„"”]$/.test(compact)
+      && compact.length <= 115
+      && /[.!?]$/.test(compact)
+      && !/^(I|A|Ale|Wtedy|Gdy|Albowiem|Ponieważ|Jezus|Maria|Piotr|Filip|Tomasz|Jan)\b/i.test(compact);
+    if (isRubric && !compact.includes("|")) {
+      blocks.push({ type: "rubric", text: compact });
+      return;
+    }
+    pushParagraphWithMarkers(rawBlock);
+  });
+
+  return blocks.map(block => {
+    if (block.type === "chapter") return `<h3 class="source-chapter-heading polish-chapter-heading">${highlight(block.text)}</h3>`;
+    if (block.type === "book-heading") return `<h2 class="polish-book-heading">${highlight(block.text)}</h2>`;
+    if (block.type === "page") return `<div class="source-page-marker polish-page-marker">${highlight(block.text)}</div>`;
+    if (block.type === "rubric") return `<h4 class="polish-rubric">${highlight(block.text)}</h4>`;
+    return `<p class="source-paragraph polish-paragraph">${highlight(block.text)}</p>`;
+  }).join("");
+}
+
+function polishProseHtml(text) {
+  return structuredPolishProseHtml(text);
+}
+
+function addPistisChapterAnchors(html) {
+  const used = new Set();
+  return String(html || "").replace(/\b(?:CHAPTER|ROZDZIAŁ)\s+(\d+)\.?/gi, match => {
+    const number = Number((match.match(/\d+/) || [])[0]);
+    if (!Number.isFinite(number) || used.has(number)) return match;
+    used.add(number);
+    return `<span class="pistis-chapter-anchor" id="pistis-chapter-${number}" data-pistis-text-chapter="${number}" aria-hidden="true"></span>${match}`;
+  });
+}
+
+function renderPistisContinuousText() {
+  const isSource = state.readerMode === "source";
+  const pages = (Array.isArray(data.pages) ? data.pages : []).filter(item => Number(item.page) >= PISTIS_TEXT_START_PAGE);
+  return `
+    <div class="pistis-continuous page-prose${isSource ? " source-prose" : ""}">
+      ${pages.map(item => {
+        const pageNumber = Number(item.page);
+        const chapter = chapterForPage(pageNumber);
+        let text = isSource ? (item.text || "") : polishPageText(item, chapter);
+        if (pageNumber === PISTIS_TEXT_START_PAGE) {
+          text = pistisPage48MainText(text, isSource ? "en" : "pl");
+        }
+        const rendered = isSource ? structuredSourceProseHtml(text) : polishProseHtml(text);
+        return `
+          <section id="pistis-page-${pageNumber}" class="pistis-page-section" data-pistis-text-page="${pageNumber}">
+            <div class="pistis-page-number">${escapeHtml(t("page"))} ${pageNumber}</div>
+            <div class="pistis-page-content">${addPistisChapterAnchors(rendered)}</div>
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
 function highlight(text) {
   if (!state.query.trim()) return escapeHtml(text);
   const pattern = state.query.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -7359,7 +7678,7 @@ function renderLogionContinuousText() {
           <section id="logion-${escapeHtml(String(item.page))}" class="logion-block ${isActive ? "is-active" : ""}" data-logion="${escapeHtml(String(item.page))}">
             <h2>${escapeHtml(logionUnitLabel())} ${escapeHtml(String(item.page))}</h2>
             <p class="logion-layer-label">${escapeHtml(modeLabel)}</p>
-            <div>${highlight(text)}</div>
+            <div>${state.readerMode === "source" ? sourceProseHtml(text) : highlight(text)}</div>
           </section>
         `;
       }).join("")}
@@ -8684,12 +9003,14 @@ function applySettings() {
   document.body.dataset.fontSize = state.settings.fontSize;
   document.body.dataset.lineHeight = state.settings.lineHeight;
   document.body.dataset.width = state.settings.width;
+  document.body.dataset.bookJustify = state.settings.bookJustify === true ? "true" : "false";
   document.body.dataset.interlinearLayout = state.settings.interlinearLayout || "classic";
   setValue(els.languageSetting, state.settings.language);
   setValue(els.themeSetting, state.settings.theme);
   setValue(els.fontSizeSetting, state.settings.fontSize);
   setValue(els.lineHeightSetting, state.settings.lineHeight);
   setValue(els.widthSetting, state.settings.width);
+  if (els.bookJustifySetting) els.bookJustifySetting.checked = state.settings.bookJustify === true;
   if (els.interlinearExperimentalSetting) els.interlinearExperimentalSetting.checked = state.settings.interlinearExperimental === true;
   setValue(els.interlinearLayoutSetting, state.settings.interlinearLayout || "classic");
   const interlinearEnabled = interlinearExperimentalEnabled();
@@ -8896,6 +9217,7 @@ function localizeStaticText() {
     ['[data-tab="chapters"]', "chapters"],
     ['[data-tab="themes"]', "themes"],
     ['[data-tab="marks"]', "bookmarks"],
+    ['[data-tab="addenda"]', "addendaSection"],
     [".library-home-copy h2", "libraryTitle"],
     [".library-home-copy > p:not(.eyebrow)", "libraryLead"],
     ["#libraryHomeToggle", "home"],
@@ -8904,6 +9226,7 @@ function localizeStaticText() {
     ["#libraryContactToggle", "contact"],
     ["#libraryPrivacyToggle", "privacy"],
     ["#libraryChangesToggle", "changes"],
+    ["#libraryHelpToggle", "help"],
     ["#libraryDictionaryToggle", "dictionary"],
     ["#libraryToolsToggle", "tools"],
     ["#librarySettingsToggle", "settings"],
@@ -8947,6 +9270,7 @@ function localizeStaticText() {
     ["#copticMode", "coptic"],
     ["#interlinearMode", "interlinear"],
     ["#copyButton", "copyFragment"],
+    ["#addendaSidebarToggle", "showAddenda"],
     ["#aboutToggle", "aboutTranslation"],
     ["#bookmarkButton", "bookmarks"],
     [".reader-focus-toggle span", "focusMode"],
@@ -9090,6 +9414,7 @@ function syncLanguageSwitches() {
 function setInterfaceLanguage(language) {
   if (!["pl", "en"].includes(language)) return;
   state.sessionLanguage = language;
+  localStorage.setItem("ps.interfaceLanguage", language);
   applySettings();
   applyLanguage();
   renderReader();
@@ -9110,7 +9435,7 @@ function setLibraryVersion(version) {
   document.querySelectorAll(".inline-library-version").forEach(item => setText(item, version));
 }
 
-const FALLBACK_CHANGELOG = "# Changelog\n\n## 1.4.27 - Rozdzia\u0142y Pistis Sophia i pasek cytowania\n\n### PL\n- Naprawiono czytnik Pistis Sophia, aby nie uruchamia\u0142 trybu logionowego przeznaczonego dla Ewangelii Tomasza i Ewangelii Filipa.\n- Klikni\u0119cie rozdzia\u0142u w spisie Pistis Sophia ponownie przewija do w\u0142a\u015bciwej strony i rozdzia\u0142u.\n- Przeniesiono wyb\u00f3r formatu cytowania i przycisk kopiowania do tej samej linii co Kontynuuj, numer strony i strza\u0142ki.\n\n### EN\n- Fixed the Pistis Sophia reader so it no longer enters the logion mode used by the Gospel of Thomas and Gospel of Philip.\n- Clicking a Pistis Sophia chapter in the table of contents again scrolls to the correct page and chapter.\n- Moved the citation-format selector and copy button into the same line as Continue, the page field, and page arrows.\n\n## 1.4.26 - Statusy ksi\u0105g i kompletna historia\n\n### PL\n- Ujednolicono etykiet\u0119 warstw Pistis Sophia z katalogiem Ewangelii Tomasza i Ewangelii Filipa.\n- Przeniesiono status PL/EN/COPT Pistis Sophia bezpo\u015brednio przy nazwie ksi\u0119gi.\n- Uzupe\u0142niono brakuj\u0105cy wpis 1.4.22 w pe\u0142nej historii zmian, aby numeracja sz\u0142a po kolei.\n\n### EN\n- Unified the Pistis Sophia layer label with the Gospel of Thomas and Gospel of Philip catalogue entries.\n- Moved the PL/EN/COPT Pistis Sophia status directly next to the book name.\n- Restored the missing 1.4.22 entry in the full change history so version order remains continuous.\n\n## 1.4.25 - Changelog i etykiety warstw\n\n### PL\n- Poprawiono najnowsze wpisy changeloga, aby w Ostatnich zmianach i Pe\u0142nej historii nie pojawia\u0142y si\u0119 znaki zapytania zamiast polskich liter.\n- Przeniesiono etykiety PL/EN/COPT i PL/EN bli\u017cej nazw ksi\u0105g w katalogu.\n- Dodano etykiet\u0119 dost\u0119pnych warstw bezpo\u015brednio przy tytule ksi\u0119gi w widoku czytnika.\n\n### EN\n- Fixed the latest changelog entries so Recent changes and Full history no longer show question marks instead of Polish characters.\n- Moved PL/EN/COPT and PL/EN labels closer to book names in the catalogue.\n- Added an available-layers label directly next to the book title in the reader view.\n\n## 1.4.24 - Naprawa pustego czytnika logion\u00f3w\n\n### PL\n- Przywr\u00f3cono brakuj\u0105c\u0105 funkcj\u0119 parsera changeloga, kt\u00f3ra zatrzymywa\u0142a start aplikacji przed wyrenderowaniem tekstu.\n- Czytnik Ewangelii Tomasza ponownie pokazuje ci\u0105g\u0142y tekst logion\u00f3w w warstwach PL/EN.\n- Podbito wersj\u0119 biblioteki, metadane PWA i odno\u015bniki do zasob\u00f3w.\n\n### EN\n- Restored the missing changelog-parser helper that stopped the app before the reader text was rendered.\n- The Gospel of Thomas reader again shows the continuous logion text in PL/EN layers.\n- Bumped the library version, PWA metadata, and asset links.\n\n## 1.4.23 - Naprawa kodowania i wej\u015bcia do ksi\u0119gi\n\n### PL\n- Odtworzono paczk\u0119 z poprawnej bazy UTF-8, aby polskie znaki nie zamienia\u0142y si\u0119 w mojibake.\n- Zachowano wczesne prze\u0142\u0105czanie adres\u00f3w `book`, `view` i `page` bez przepisywania ca\u0142ego interfejsu.\n- Usuni\u0119to zdublowan\u0105 obs\u0142ug\u0119 klikni\u0119cia gotowych ksi\u0105g w katalogu.\n\n### EN\n- Rebuilt the package from a clean UTF-8 base so Polish labels no longer turn into mojibake.\n- Kept the early `book`, `view`, and `page` reader switch without rewriting the whole interface.\n- Removed duplicated click handling for available catalogue books.\n\n## 1.4.22 - Naprawa wej\u015bcia do ksi\u0105g\n\n### PL\n- Poprawiono wej\u015bcie do ksi\u0105g z katalogu, aby klikni\u0119cie gotowej pozycji prowadzi\u0142o do czytnika, a nie do Home.\n- Utrzymano bezpo\u015brednie adresy `book`, `view` i `page` jako stabilny spos\u00f3b otwierania konkretnej ksi\u0119gi.\n- Przygotowano kolejn\u0105 kontrol\u0119 kodowania po poprawkach nawigacji.\n\n### EN\n- Fixed catalogue book entry so clicking an available work opens the reader instead of returning to Home.\n- Kept direct `book`, `view`, and `page` addresses as stable links to a selected book.\n- Prepared the next encoding check after the navigation fixes.\n\n## 1.4.21 - Stabilna nawigacja ksi\u0105g\n\n### PL\n- Wzmocniono obs\u0142ug\u0119 klikni\u0119cia gotowej ksi\u0119gi w katalogu, aby nie wraca\u0142o do strony g\u0142\u00f3wnej.\n- Klikni\u0119cie ksi\u0119gi jest teraz przechwytywane przed innymi akcjami strony i zawsze uruchamia czytnik wybranej pozycji.\n- Zachowano adresy z parametrami book, view i page jako stabilne linki do ksi\u0105g.\n\n### EN\n- Hardened catalogue book-click handling so available books no longer fall back to the home page.\n- Book clicks are now captured before other page actions and always open the selected reader module.\n- Kept book, view, and page URL parameters as stable links to works.\n\n## 1.4.20 - Poprawione linkowanie ksi\u0105g\n\n### PL\n- Naprawiono otwieranie ksi\u0105g z katalogu: klikni\u0119cie prowadzi teraz bezpo\u015brednio do wybranej ksi\u0119gi.\n- Dodano obs\u0142ug\u0119 adres\u00f3w z parametrem book, view i page, aby wyb\u00f3r ksi\u0119gi nie gin\u0105\u0142 po prze\u0142adowaniu lokalnego pliku.\n- Utrzymano zapami\u0119tywanie ostatniej ksi\u0119gi i strony jako warstw\u0119 pomocnicz\u0105.\n\n### EN\n- Fixed catalogue book opening: clicking a book now goes directly to the selected work.\n- Added support for book, view, and page URL parameters so the selected book survives local-file reloads.\n- Kept last-book and last-page storage as a secondary convenience layer.\n\n## 1.4.19 - Czysty manifest PWA\n\n### PL\n- Usuni\u0119to konflikt merge z pliku manifest.webmanifest w paczce wydania.\n- Poprawiono kodowanie polskich znak\u00f3w w opisie manifestu PWA.\n- Podbito wersj\u0119 biblioteki po naprawie manifestu.\n\n### EN\n- Removed the merge-conflict state from the release manifest.webmanifest file.\n- Fixed Polish character encoding in the PWA manifest description.\n- Bumped the library version after the manifest cleanup.\n\n## 1.4.18 - Subtelne etykiety statusu ksi\u0105g\n\n### PL\n- Usuni\u0119to ramki i t\u0142a z etykiet statusu w katalogu ksi\u0105g.\n- Statusy PL/EN/COPT, PL/EN i planowane s\u0105 teraz subtelnym tekstem zgodnym z motywem.\n- Zachowano znak wej\u015bcia przy dost\u0119pnych pozycjach katalogu.\n\n### EN\n- Removed borders and fills from catalogue status labels.\n- PL/EN/COPT, PL/EN, and planned status labels now render as subtle theme-aware text.\n- Kept the entry mark on available catalogue items.\n\n## 1.4.17 - Title color and book status clarity\n\n### PL\n- Dostosowano kolor tytu\u0142u Biblioteki Gnozy osobno dla motywu ciemnego, jasnego i sepii.\n- Ujednolicono statusy ksi\u0105g jako informacje o dost\u0119pnych warstwach: PL / EN / COPT albo PL / EN.\n- Dodano znak wej\u015bcia ? i kursor klikni\u0119cia dla dost\u0119pnych pozycji katalogu.\n\n### EN\n- Adjusted the Gnostic Library title color separately for Dark, Light, and Sepia themes.\n- Normalized book status labels as available text layers: PL / EN / COPT or PL / EN.\n- Added an entry mark ? and pointer behavior for available catalogue items.\n\n## 1.4.16 - Library title typography\n\n### PL\n- Dodano czcionk\u0119 Cormorant Garamond do g\u0142\u00f3wnego tytu\u0142u Biblioteki Gnozy.\n- Logo Gnostyk pozostaje w Caesar Dressing, a tekst ksi\u0105g i interfejs czytnika nie zosta\u0142y zmienione.\n- Podbito wersj\u0119 aplikacji, cache PWA i odno\u015bniki do zasob\u00f3w.\n\n### EN\n- Added Cormorant Garamond to the main Gnostic Library title.\n- Kept the Gnostyk wordmark in Caesar Dressing and left book text and reader UI unchanged.\n- Bumped the application version, PWA cache, and asset links.\n\n## 1.4.15 - Version and changelog cleanup\n\n### PL\n- Ujednolicono podbijanie wersji w plikach aplikacji, PWA, metadanych i linkach zasob\u00f3w.\n- Wyczyszczono histori\u0119 zmian z g\u0142\u0119bokich duplikat\u00f3w starszych wpis\u00f3w i zachowano kolejno\u015b\u0107 wersji.\n- Oznaczono Ewangeli\u0119 Tomasza jako gotow\u0105 w warstwach PL/EN/COPT.\n\n### EN\n- Synchronized version bumping across app files, PWA metadata, library metadata, and asset links.\n- Cleaned deeper duplicate entries from the change history while preserving version order.\n- Marked the Gospel of Thomas as ready in PL/EN/COPT layers.\n\n## 1.4.14 - Gospel of Philip library connection\n\n### PL\n- Pod\u0142\u0105czono Ewangeli\u0119 Filipa jako dost\u0119pn\u0105 pozycj\u0119 na stronie Home i w katalogu Ksi\u0105g.\n- Zmieniono status Filipa z roboczego szkieletu na pe\u0142ny tekst PL/EN i ukryto pusty widok koptyjski do czasu importu warstwy COPT.\n- Dopasowano sidebar, opis ksi\u0119gi, aparat cytowania i przeskakiwanie po sekcjach 1\u201318 do logiki Ewangelii Filipa.\n\n### EN\n- Connected the Gospel of Philip as an available item on Home and in the Books catalogue.\n- Changed Philip's status from a working stub to full PL/EN text and hid the empty Coptic view until the COPT layer is imported.\n- Adjusted the sidebar, book description, citation apparatus, and section navigation for Gospel of Philip sections 1\u201318.\n\n## 1.4.13 - Gospel of Philip text layers\n\n### PL\n- Dodano pe\u0142ny tekst angielski Ewangelii Filipa z public-domain przek\u0142adu Marka M. Mattisona.\n- Dodano polski tekst Ewangelii Filipa z gnostyk.pl jako warstw\u0119 opart\u0105 na wersji Mattisona.\n- Przebudowano modu\u0142 Filipa z 12 roboczych blok\u00f3w na 18 naturalnych sekcji; warstwa koptyjska pozostaje oznaczona jako do importu po wskazaniu pewnego \u017ar\u00f3d\u0142a Unicode/TEI.\n\n### EN\n- Added the full English Gospel of Philip text from Mark M. Mattison's public-domain translation.\n- Added the Polish Gospel of Philip text from gnostyk.pl as a layer based on Mattison's version.\n- Rebuilt the Philip module from 12 working blocks into 18 natural sections; the Coptic layer remains marked for import once a reliable Unicode/TEI source is provided.\n\n## 1.4.12 - Changelog order and Philip source\n\n### PL\n- Naprawiono skr\u00f3t Ostatnie zmiany na stronie Home: pokazuje dok\u0142adnie trzy najnowsze wpisy w kolejno\u015bci wersji.\n- Naprawiono pe\u0142n\u0105 histori\u0119 zmian: wpisy s\u0105 scalane po wersji, sortowane semantycznie i nie gubi\u0105 najnowszych pozycji.\n- Doprecyzowano podstaw\u0119 Ewangelii Filipa: angielska warstwa Marka M. Mattisona z Gospels.net jest oznaczona jako public-domain, a polski przek\u0142ad jako oparty na tej wersji.\n\n### EN\n- Fixed the Recent changes summary on Home: it now shows exactly the three latest entries in version order.\n- Fixed the full change history: entries are merged by version, sorted semantically, and no longer miss the newest releases.\n- Clarified the Gospel of Philip source: Mark M. Mattison's English layer from Gospels.net is marked as public domain, and the Polish translation is described as based on that version.\n\n## 1.4.11 - Gospel of Philip module\n\n### PL\n- Dodano modu\u0142 Ewangelii Filipa jako trzeci\u0105 pozycj\u0119 Biblioteki Gnozy.\n- Przygotowano opis, podstaw\u0119 \u017ar\u00f3d\u0142ow\u0105, aparat cytowania i struktur\u0119 12 jednostek wed\u0142ug Nag Hammadi Codex II,3.\n- Dodano miejsca na warstwy PL/EN/COPT bez wstawiania niezweryfikowanego tekstu ani materia\u0142u o niejasnych prawach.\n- Uog\u00f3lniono cz\u0119\u015b\u0107 czytnika logion\u00f3w/sekcji, aby nie by\u0142a zale\u017cna wy\u0142\u0105cznie od Ewangelii Tomasza.\n\n### EN\n- Added the Gospel of Philip module as the third item in Gnostyk Library.\n- Prepared the description, source base, citation apparatus, and a 12-unit structure following Nag Hammadi Codex II,3.\n- Added PL/EN/COPT layer slots without inserting unverified text or material with unclear rights.\n- Generalized part of the logion/section reader so it is no longer tied only to the Gospel of Thomas.\n\n## 1.4.10 - Coptic active selection styling\n\n### PL\n- Ujednolicono wyr\u00f3\u017cnienie aktywnego logionu w widoku koptyjskim z widokami polskim i angielskim.\n- Usuni\u0119to ciemne wype\u0142nienie przypominaj\u0105ce motyw Dark w motywach Light i Sepia.\n- Podbito numer wersji aplikacji i cache PWA.\n\n### EN\n- Matched the active-logion highlight in the Coptic view to the Polish and English views.\n- Removed the dark fill that resembled the Dark theme in Light and Sepia.\n- Bumped the application version and PWA cache.\n\n## 1.4.9 - Theme-aware text selection\n\n### PL\n- Znormalizowano kolory zaznaczania tekstu osobno dla motyw\u00f3w Dark, Light i Sepia.\n- W jasnym motywie zastosowano delikatne niebieskie zaznaczenie, w Sepia ciep\u0142e bursztynowe, a w Dark z\u0142ote o odpowiednim kontra\u015bcie.\n- Podbito numer wersji aplikacji i cache PWA.\n\n### EN\n- Normalized text-selection colors separately for the Dark, Light, and Sepia themes.\n- The Light theme now uses a subtle blue selection, Sepia a warm amber selection, and Dark a gold selection with suitable contrast.\n- Bumped the application version and PWA cache.\n\n## 1.4.8 - Changelog and navigation cleanup\n\n### PL\n- Uporz\u0105dkowano histori\u0119 zmian: drugi wpis 1.4.6 oznaczono jako 1.4.5, a lista scala duplikaty wersji.\n- Sekcja Ostatnie zmiany na stronie Home korzysta teraz z changeloga, zachowuje kolejno\u015b\u0107 i pokazuje najnowsz\u0105 wersj\u0119.\n- Prze\u0142o\u017cono pasek nawigacji strony g\u0142\u00f3wnej do uk\u0142adu Home, Ksi\u0119gi, S\u0142ownik, Narz\u0119dzia, Prywatno\u015b\u0107, Zmiany, Kontakt, Info, Ustawienia, Wsparcie.\n- Ukryty tryb interlinearny nie zostawia ju\u017c pustego segmentu w prze\u0142\u0105czniku wersji tekstu.\n\n### EN\n- Cleaned up the change history: the second 1.4.6 entry is now marked as 1.4.5, and duplicate versions are merged.\n- The Recent changes section on Home now uses the changelog, preserves order, and shows the latest version.\n- Reordered the home navigation bar to Home, Books, Dictionary, Tools, Privacy, Changes, Contact, Info, Settings, Support.\n- The hidden interlinear mode no longer leaves an empty segment in the text-version switcher.\n\n## 1.4.7 - Experimental interlinear toggle\n\n### PL\n- Przywr\u00f3cono prac\u0119 do stabilnej bazy 1.4.6 i rozpocz\u0119to dalsz\u0105 numeracj\u0119 od wersji 1.4.7.\n- Ukryto interlini\u0119 z g\u0142\u00f3wnych prze\u0142\u0105cznik\u00f3w czytania.\n- Dodano w Ustawieniach opcj\u0119 pokazania interlinii jako trybu eksperymentalnego; po wy\u0142\u0105czeniu zapisany tryb interlinearny wraca automatycznie do tekstu polskiego.\n\n### EN\n- Restored the work to the stable 1.4.6 base and continued numbering from version 1.4.7.\n- Hid the interlinear mode from the main reading switches.\n- Added a Settings option to show interlinear as an experimental mode; when disabled, a saved interlinear mode automatically falls back to the Polish text.\n\n## 1.4.6\n\n### PL\n- Dodano now\u0105 sekcj\u0119 Kontakt w nawigacji biblioteki i stopce.\n- Dodano klikalny adres e-mail `gnostyk950@gmail.com` do zg\u0142aszania b\u0142\u0119d\u00f3w, liter\u00f3wek, problem\u00f3w z t\u0142umaczeniem oraz opinii.\n- Dodano pe\u0142n\u0105 lokalizacj\u0119 PL/EN dla panelu kontaktowego.\n\n### EN\n- Added a new Contact section to the library navigation and footer.\n- Added a clickable email address `gnostyk950@gmail.com` for bug reports, typos, translation issues, and feedback.\n- Added full PL/EN localization for the contact panel.\n\n## 1.4.5\n\n### PL\n- Zmieniono separatory w Ustawieniach i Narz\u0119dziach na subtelne linie zgodne ze stylem paneli Biblioteki.\n- Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.\n\n### EN\n- Replaced Settings and Tools separators with subtle lines matching the Library panel style.\n- Unified separator colors for dark, light, and sepia themes.\n\n## 1.4.4\n\n- Ujednolicono Ustawienia i Narz\u0119dzia ze stylem S\u0142ownika we wszystkich motywach.\n- Dodano tryb gramatyczny interlinii i jawne etykiety lemat/typ przy tokenach koptyjskich.\n- Zestandaryzowano checkboxy i kontrolki formularzy do koloru aktywnego motywu.\n\n## 1.4.3\n\n### PL\n- Przebudowano panel Ustawie\u0144 tak, aby wizualnie pasowa\u0142 do reszty Biblioteki Gnozy: sekcje s\u0105 oddzielone separatorami zamiast ci\u0119\u017ckich ramek.\n- Ustawienie j\u0119zyka dzia\u0142a teraz jako domy\u015blny j\u0119zyk uruchamiania aplikacji, a prze\u0142\u0105cznik PL/EN pozostaje szybk\u0105 zmian\u0105 bie\u017c\u0105cej sesji.\n- Zast\u0105piono niebieskie checkboxy kontrolkami dopasowanymi do aktualnego motywu.\n- Ustawienia rozmiaru tekstu, odst\u0119p\u00f3w, szeroko\u015bci kolumny i interlinii s\u0105 stosowane tak\u017ce w widokach koptyjskim i interlinearnym.\n\n### EN\n- Reworked the Settings panel so it visually matches the rest of Gnostyk Library, using separators instead of heavy nested boxes.\n- The language setting now controls the default startup language, while the PL/EN switch remains a quick change for the current session.\n- Replaced blue checkboxes with theme-matched controls.\n- Text size, spacing, column width, and interlinear settings now also apply to the Coptic and interlinear views.\n\n## 1.4.1\n\n### PL\n- Dodano ustawienia interlinii Tomasza: tryb kompaktowy, klasyczny i rozszerzony.\n- Dodano prze\u0142\u0105czniki pokazywania lematu i typu gramatycznego w tokenach interlinearnych.\n- Dodano wyb\u00f3r zakresu wyst\u0105pie\u0144 w karcie s\u0142ownikowej: aktywna ksi\u0119ga albo ca\u0142a biblioteka.\n- Na stronie Home sekcja \u201eOstatnie zmiany\u201d pokazuje teraz tylko trzy najnowsze wpisy; pe\u0142na historia pozostaje pod przyciskiem.\n\n### EN\n- Added Thomas interlinear settings: compact, classic, and expanded modes.\n- Added toggles for showing lemma and grammatical type in interlinear tokens.\n- Added dictionary occurrence scope: active book or whole library.\n- On Home, \u201cRecent changes\u201d now shows only the three latest entries; full history remains available through the button.\n\n## 1.4.0\n\n### PL\n- Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wyst\u0105pie\u0144 i wyr\u00f3\u017cnianie tego samego s\u0142owa w ca\u0142ym ci\u0105g\u0142ym tek\u015bcie.\n- Wyst\u0105pienia w karcie s\u0142ownikowej korzystaj\u0105 teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.\n\n### EN\n- Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text.\n- Dictionary-card occurrences now use token forms and lemmas, not only raw line text.\n\n## 1.3.9\n\n### PL\n- Dodano etap 2 interlinii Tomasza: tokeny zachowuj\u0105 teraz form\u0119 koptyjsk\u0105, lemat i typ gramatyczny z warstwy Coptic SCRIPTORIUM.\n- Klikni\u0119cie s\u0142owa w interlinii otwiera kart\u0119 s\u0142ownikow\u0105 po lemacie, gdy jest dost\u0119pny, a nie tylko po formie powierzchniowej.\n- Dodano subteln\u0105 lini\u0119 lematu pod tokenem interlinearnym i ujednolicono pod\u015bwietlanie wyst\u0105pie\u0144 dla form oraz lemat\u00f3w.\n\n### EN\n- Added Thomas interlinear stage 2: tokens now preserve the Coptic surface form, lemma, and grammatical type from the Coptic SCRIPTORIUM layer.\n- Clicking an interlinear word opens the dictionary card by lemma when available, not only by surface form.\n- Added a subtle lemma line below interlinear tokens and normalized occurrence highlighting for forms and lemmas.\n\n## 1.3.8\n\n### PL\n- Podbito numer wersji w ca\u0142ej aplikacji, plikach PWA, odno\u015bnikach do zasob\u00f3w i historii zmian.\n- Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zak\u0142adce Zmiany.\n- Uzupe\u0142niono angielskie wersje najnowszych wpis\u00f3w changeloga, aby tryb EN nie pokazywa\u0142 polskich punkt\u00f3w.\n\n### EN\n- Synchronized the version number across the app, PWA files, asset links, and the change history.\n- Added the latest entry to the visible change history on Home and in the Changes tab.\n- Completed the English versions of the latest changelog entries so EN mode no longer shows Polish points.\n\n## 1.3.7\n\n### PL\n- Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ci\u0105g\u0142y tekst logion\u00f3w 1\u2013114.\n- Klikni\u0119cie logionu w sidebarze przewija do odpowiedniego miejsca r\u00f3wnie\u017c w interlinii.\n- Uproszczono wizualnie bloki s\u0142\u00f3w interlinearnych, aby lepiej pasowa\u0142y do ci\u0105g\u0142ego czytnika.\n\n### EN\n- Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1\u2013114.\n- Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well.\n- Simplified the visual style of interlinear word blocks so they fit the continuous reader better.\n\n## 1.3.6\n\n### PL\n- Karta s\u0142ownikowa dzia\u0142a kontekstowo dla aktywnej ksi\u0119gi. W module Ewangelii Tomasza pokazuje wyst\u0105pienia z Tomasza, logiony i bie\u017c\u0105cy logion zamiast pozycji z Pistis Sophii.\n- Uog\u00f3lniono opis wsp\u00f3lnego s\u0142ownika Biblioteki Gnozy.\n\n### EN\n- The dictionary card now follows the active book. In the Gospel of Thomas module it shows Thomas occurrences, logia and the current logion instead of Pistis Sophia positions.\n- Generalized the shared Gnostyk Library dictionary note.\n\n## 1.3.5\n\n### PL\n- Widok koptyjski Ewangelii Tomasza pokazuje teraz ci\u0105g\u0142y tekst wszystkich 114 logion\u00f3w.\n- Klikni\u0119cie logionu w sidebarze przewija do odpowiedniego miejsca w ci\u0105g\u0142ym tek\u015bcie koptyjskim.\n- Aparat cytowania Tomasza u\u017cywa logion\u00f3w i Nag Hammadi Codex II zamiast paginacji Meada / Schwartze-Petermanna.\n\n### EN\n- The Gospel of Thomas Coptic view now shows the continuous text of all 114 logia.\n- Clicking a logion in the sidebar scrolls to the matching place in the continuous Coptic text.\n- Thomas citation now uses logion numbers and Nag Hammadi Codex II instead of Mead / Schwartze-Petermann pagination.\n\n## 1.3.4\n\n### PL\n- Naprawiono pod\u0142\u0105czenie koptyjskiej warstwy Ewangelii Tomasza: parser obs\u0142uguje przestrze\u0144 nazw TEI/XML z Coptic SCRIPTORIUM.\n- Zsynchronizowano widok Koptyjski z logionami 1\u2013114.\n- Wy\u0142\u0105czono tryb Interlinia dla Tomasza do czasu etapu 2, aby aplikacja nie sugerowa\u0142a gotowej interlinii s\u0142owo po s\u0142owie.\n\n### EN\n- Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM.\n- Synchronized Coptic mode with logia 1\u2013114.\n- Disabled the Thomas interlinear mode until stage 2 so the app does not imply a completed word-by-word interlinear layer.\n\n## 1.3.0\n\n### PL\n- Dodano warstw\u0119 koptyjsk\u0105 Ewangelii Tomasza z otwartej edycji Coptic SCRIPTORIUM.\n- Przygotowano techniczne \u017ar\u00f3d\u0142o warstwy koptyjskiej dla logion\u00f3w Tomasza.\n- Zaktualizowano metadane, prawa, \u017ar\u00f3d\u0142a i aparat cytowania Tomasza o Coptic SCRIPTORIUM / CC-BY 4.0.\n\n### EN\n- Added the Coptic layer for the Gospel of Thomas from the open Coptic SCRIPTORIUM edition.\n- Prepared the technical source for the Coptic layer of Thomas logia.\n- Updated Thomas metadata, rights, sources and citation apparatus with Coptic SCRIPTORIUM / CC-BY 4.0.\n\n## 1.2.4\n\n### PL\n- Uporz\u0105dkowano list\u0119 Codex II: ka\u017cda pozycja jest osobnym wierszem bez kropek listy.\n- Dodano statusy po prawej stronie pozycji oraz efekt hover dla dost\u0119pnej Ewangelii Tomasza.\n- Zachowano zwyk\u0142y kursor zamiast kursora-r\u0105czki.\n\n### EN\n- Organized the Codex II list: each entry is now a separate row without list bullets.\n- Added right-aligned statuses and hover feedback for the available Gospel of Thomas entry.\n- Kept the default cursor instead of the hand pointer.\n\n## 1.2.3\n\n### PL\n- Wyr\u00f3wnano po\u0142o\u017cenie przycisk\u00f3w w kafelkach Home, aby akcje by\u0142y w jednej linii niezale\u017cnie od d\u0142ugo\u015bci opisu.\n- Uporz\u0105dkowano uk\u0142ad kart startowych bez zmiany dolnego paska nawigacji.\n\n### EN\n- Aligned Home card action buttons so they sit consistently regardless of description length.\n- Cleaned up the start-card layout without changing the bottom navigation bar.\n\n## 1.2.2\n\n### PL\n- Usuni\u0119to du\u017c\u0105 ikon\u0119 ksi\u0105\u017cki z kafelka na stronie Home.\n- Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.\n- Ikony dziedzicz\u0105 kolor z aktualnego motywu strony i nie s\u0105 kolorowymi emoji.\n\n### EN\n- Removed the large book icon from the Home card.\n- Added subtle, consistent Material Symbols icons to the Home cards.\n- Icons inherit their color from the current theme and are not colored emoji.\n\n## 1.2.1\n\n### PL\n- Poprawiono przycisk \u201eWr\u00f3\u0107 do ostatniego tekstu\u201d, aby otwiera\u0142 ostatnio przegl\u0105dan\u0105 ksi\u0119g\u0119 i zapami\u0119tan\u0105 pozycj\u0119 zamiast katalogu.\n- Usuni\u0119to dublowanie funkcji \u201ePrzegl\u0105daj bibliotek\u0119\u201d na karcie kontynuacji pracy.\n- Naprawiono parser changeloga: tryb EN rozpoznaje nag\u0142\u00f3wki \u201eEN:\u201d i nie pokazuje polskich punkt\u00f3w jako ostatnich zmian.\n\n### EN\n- Fixed the \u201cReturn to the last text\u201d button so it opens the last viewed book and saved position instead of the catalogue.\n- Removed the duplicated \u201cBrowse library\u201d behavior from the continue-work card.\n- Fixed the changelog parser: EN mode now recognizes \u201cEN:\u201d headings and no longer shows Polish points as the latest changes.\n\n## 1.2.0\n\n### PL\n- Przebudowano stron\u0119 Home: nie jest ju\u017c drugim katalogiem ksi\u0105g, tylko ekranem startowym ze statystykami, ostatnio dodanym tekstem, wsparciem i ostatnimi zmianami.\n- Usuni\u0119to zdublowane kafelki ksi\u0105g z zak\u0142adki Ksi\u0119gi; katalog kodeks\u00f3w pozostaje g\u0142\u00f3wnym miejscem otwierania tekst\u00f3w.\n- Ujednolicono przyciski na \u201eOtw\u00f3rz\u201d i przygotowano widoczny licznik odwiedzin pod zewn\u0119trzne API licznika prywatno\u015bciowego.\n\n### EN\n- Reworked the Home page: it is no longer a second book catalogue, but a start screen with stats, recently added text, support and recent changes.\n- Removed duplicated book tiles from the Books tab; the codex catalogue remains the main place for opening texts.\n- Standardized buttons to \u201cOpen\u201d and prepared a visible visit counter for a privacy-friendly external counter API.\n\n## 1.1.5\n\n- Rozdzielono motywy tematyczne ksi\u0105g: Ewangelia Tomasza nie korzysta ju\u017c z motyw\u00f3w Pistis Sophii.\n- Dodano osobne zestawy motyw\u00f3w dla Pistis Sophii i Ewangelii Tomasza.\n- Przygotowano pliki `themes.json` w modu\u0142ach ksi\u0105g jako fundament pod pe\u0142n\u0105 niezale\u017cno\u015b\u0107 metadanych kolejnych tekst\u00f3w.\n\n## 1.1.4\n\n### PL\n- Dostosowano aparat cytowania Ewangelii Tomasza: opcje Meada i Schwartze-Petermanna nie s\u0105 ju\u017c pokazywane jako w\u0142a\u015bciwe dla Tomasza; zast\u0119puj\u0105 je logion i \u017ar\u00f3d\u0142a.\n- Zmieniono nazw\u0119 polskiej warstwy na \u201ePolskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narz\u0119dzi AI\u201d.\n- Poprawiono stron\u0119 Home: kafelek Pistis Sophia prowadzi do Pistis Sophii, kafelek Tomasza prowadzi do Ewangelii Tomasza.\n- Ujednolicono ikon\u0119 przy Ewangelii Tomasza z ikon\u0105 u\u017cywan\u0105 przy Pistis Sophii.\n\n### EN\n- Adjusted the Gospel of Thomas citation apparatus: Mead and Schwartze-Petermann are no longer presented as Thomas-specific options; they are replaced by logion and sources.\n- Renamed the Polish layer as \u201cDariusz Kaniewski\u2019s Polish AI-assisted adaptation\u201d.\n- Fixed the Home page: the Pistis Sophia card opens Pistis Sophia and the Thomas card opens the Gospel of Thomas.\n- Unified the Gospel of Thomas icon with the Pistis Sophia icon.\n\n## 1.1.3\n\n### PL\n- Znormalizowano informacje czytnika dla Ewangelii Tomasza: aktualna pozycja biblioteki, podstawa tekstu, prawa, opis przek\u0142adu, stopka prawna i cytowanie nie pokazuj\u0105 ju\u017c danych Pistis Sophii.\n- Dostosowano metadane widoku ksi\u0119gi do aktywnego modu\u0142u: Pistis Sophia u\u017cywa stron i paginacji Meada, a Ewangelia Tomasza u\u017cywa logion\u00f3w 1\u2013114.\n- Poprawiono cytowanie Ewangelii Tomasza tak, aby odwo\u0142ywa\u0142o si\u0119 do numeru logionu i warstwy PL/EN.\n\n### EN\n- Normalized the reader information for the Gospel of Thomas: current library item, source base, rights, translation notes, legal footer and citation no longer show Pistis Sophia data.\n- Adjusted book-view metadata to the active module: Pistis Sophia uses Mead pages, while the Gospel of Thomas uses logia 1\u2013114.\n- Fixed Gospel of Thomas citation so it refers to logion numbers and the PL/EN layer.\n\n## 1.1.2\n\n### PL\n- Dodano angielsk\u0105 warstw\u0119 Ewangelii Tomasza wg public-domain Mark M. Mattison.\n- Pod\u0142\u0105czono Ewangeli\u0119 Tomasza w statystykach biblioteki jako drug\u0105 dost\u0119pn\u0105 ksi\u0119g\u0119.\n- Uzupe\u0142niono metadane modu\u0142u PL/EN oraz opis \u017ar\u00f3de\u0142.\n\n### EN\n- Added the English Gospel of Thomas layer based on Mark M. Mattison\u2019s public-domain translation.\n- Connected the Gospel of Thomas in library statistics as the second available book.\n- Updated PL/EN module metadata and source descriptions.\n\n## 1.1.1\n\n### PL\n- Ewangelia Tomasza ma teraz ci\u0105g\u0142y, przewijany tekst z numerami logion\u00f3w.\n- Klikni\u0119cie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tek\u015bcie.\n\n### EN\n- The Gospel of Thomas now uses a continuous scrollable text with visible logion numbers.\n- Clicking a logion in the sidebar scrolls the reader to that exact place in the text.\n\n## 1.1.0\n\n### PL\n- Dodano Ewangeli\u0119 Tomasza jako pe\u0142n\u0105 ksi\u0119g\u0119 modu\u0142ow\u0105.\n- Wprowadzono 114 logion\u00f3w w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narz\u0119dzi AI.\n- Po klikni\u0119ciu ksi\u0119gi biblioteka prze\u0142\u0105cza czytnik na modu\u0142 Tomasza.\n- Zaktualizowano wersj\u0119 aplikacji do numeracji 1.1.0, bo to pierwsza wi\u0119ksza rozbudowa biblioteki.\n\n### EN\n- Added the Gospel of Thomas as a full modular book.\n- Added all 114 logia in Dariusz Kaniewski\u2019s Polish AI-assisted adaptation.\n- Clicking the book now switches the reader to the Thomas module.\n- Updated the app version to 1.1.0 because this is the first larger library expansion.\n\n## 1.0.149\n\n### PL\n- Poprawiono widok s\u0142ownika w trybie PL: wyniki i karta nie podstawiaj\u0105 ju\u017c angielskich glos jako g\u0142\u00f3wnego tekstu, gdy brakuje polskiej glosy.\n- Wy\u015brodkowano krzy\u017cyk zamykania karty s\u0142ownikowej.\n- Poprawiono wyszukiwanie w s\u0142owniku: wyniki s\u0105 teraz sortowane wed\u0142ug trafno\u015bci.\n- Ograniczono list\u0119 do 30 najlepszych wynik\u00f3w, \u017ceby nie pokazywa\u0107 przypadkowych dopasowa\u0144.\n- Usuni\u0119to fa\u0142szywe trafienia typu \u201em\u00f3j / my\u201d przy wyszukiwaniu s\u0142owa \u201espirit\u201d.\n\n### EN\n- Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.\n- Centered the dictionary card close button.\n- Improved dictionary search: results are now ranked by relevance.\n- Limited the list to the 30 best results to avoid weak accidental matches.\n- Removed false matches such as \u201cm\u00f3j / my\u201d when searching for \u201cspirit\u201d.\n\n## 1.0.144\n\n### PL\n- Ujednolicono numer wersji w ca\u0142ej aplikacji, plikach PWA i odno\u015bnikach do zasob\u00f3w.\n- Dodano najnowsz\u0105 wersj\u0119 do widocznej historii zmian.\n- Wy\u015brodkowano krzy\u017cyk zamykania karty s\u0142ownikowej.\n- Usuni\u0119to ramk\u0119 i t\u0142o ze status\u00f3w ksi\u0105\u017cek w katalogu.\n\n### EN\n- Synchronized the version number across the app, PWA files, and asset links.\n- Added the latest version to the visible changelog.\n- Centered the dictionary card close button.\n- Removed the border and background from catalogue book status labels.\n\n## 1.0.143\n\n- Przebudowano struktur\u0119 danych na bibliotek\u0119 modu\u0142ow\u0105 w katalogu `books/`.\n- Przeniesiono Pistis Sophi\u0119 do `books/pistis-sophia/`.\n- Dodano szkielet modu\u0142u Ewangelii Tomasza w `books/gospel-of-thomas/` z miejscem na 114 logion\u00f3w.\n- Zaktualizowano manifest biblioteki, \u015bcie\u017cki skrypt\u00f3w i cache PWA.\n\n## 1.0.142\n\n### PL\n- Uzupe\u0142niono histori\u0119 zmian o najnowsze wersje katalogu biblioteki.\n- Usuni\u0119to obramowanie logo po najechaniu kursorem.\n- Domy\u015blnie zwini\u0119to kodeksy Nag Hammadi i uporz\u0105dkowano oznaczenia status\u00f3w ksi\u0105\u017cek.\n\n### EN\n- Updated the change history with the latest library catalogue versions.\n- Removed the hover outline from the Gnostyk logo.\n- Collapsed the Nag Hammadi codices by default and cleaned up book status markers.\n\n## 1.0.141\n\n### PL\n- Ujednolicono podbicie wersji po zmianach w strukturze Home/Ksi\u0119gi.\n- Klikni\u0119cie logo Gnostyk przenosi teraz do strony Home.\n- Pozycja Pistis Sophia w katalogu Ksi\u0105g jest teraz klikalna i otwiera czytnik.\n\n### EN\n- Synchronized the version after the Home/Books structure update.\n- Clicking the Gnostyk logo now takes the user to the Home page.\n- The Pistis Sophia item in the Books catalogue is now clickable and opens the reader.\n\n## 1.0.140\n\n### PL\n- Dodano osobn\u0105 stron\u0119 Home jako ekran startowy biblioteki.\n- Przeniesiono katalog tekst\u00f3w do zak\u0142adki Ksi\u0119gi.\n- Dodano struktur\u0119 kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.\n\n### EN\n- Added a separate Home page as the library start screen.\n- Moved the text catalogue into the Books tab.\n- Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.\n\n## 1.0.139 - Dictionary card language refresh\n\n### PL\n- Naprawiono kart\u0119 s\u0142ownikow\u0105 po zmianie j\u0119zyka interfejsu.\n- Otwarta karta s\u0142ownikowa od\u015bwie\u017ca teraz etykiety PL/EN, aby w trybie polskim nie zostawa\u0142y angielskie napisy.\n\n### EN\n- Fixed the dictionary card after changing the interface language.\n- An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.\n\n## 1.0.138\n\n### PL\n- Rozbudowano kart\u0119 s\u0142ownikow\u0105 o profil has\u0142a jako fundament S\u0142ownika 2.0.\n- Dodano informacje o lemacie, liczbie znacze\u0144 PL/EN i gotowo\u015bci has\u0142a do u\u017cycia w wielu tekstach.\n- Uporz\u0105dkowano prezentacj\u0119 danych s\u0142ownikowych bez zmiany dzia\u0142ania interlinii.\n\n### EN\n- Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.\n- Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.\n- Improved dictionary data presentation without changing interlinear behavior.\n\n## 1.0.137\n\n### PL\n- Naprawiono histori\u0119 zmian, aby w trybie EN nie pokazywa\u0142a polskich punkt\u00f3w z wpis\u00f3w oznaczonych jako PL.\n- Parser changeloga rozpoznaje teraz zar\u00f3wno nag\u0142\u00f3wki PL / EN, jak i ### PL / ### EN.\n- Podbito wersj\u0119 aplikacji po poprawce lokalizacji changeloga.\n\n### EN\n- Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.\n- The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.\n- Bumped the application version after the changelog localization fix.\n\n## 1.0.136\n\n### PL\n- Znormalizowano uk\u0142ad strony Wsparcie mi\u0119dzy wersj\u0105 polsk\u0105 i angielsk\u0105.\n- Poszerzono teksty opisowe i ujednolicono wysoko\u015bci blok\u00f3w, aby prze\u0142\u0105czanie j\u0119zyka nie zmienia\u0142o proporcji strony.\n- Dopasowano tre\u015b\u0107 PL/EN tak, aby obie wersje mia\u0142y ten sam rytm i struktur\u0119.\n\n### EN\n- Normalized the Support page layout between Polish and English.\n- Widened descriptive text blocks and unified section heights so switching language does not change the page proportions.\n- Aligned PL/EN copy so both versions share the same rhythm and structure.\n\n## 1.0.135\n\n### PL\n- Dodano zak\u0142adk\u0119 Wsparcie / Support z opisem rozwoju projektu.\n- Dodano przycisk PayPal prowadz\u0105cy do paypal.me/dariuszkaniewski.\n- Ikona serca korzysta z kolor\u00f3w aktywnego motywu, aby pasowa\u0142a do tryb\u00f3w Dark, Light i Sepia.\n\n### EN\n- Added a Support tab with a project development description.\n- Added a PayPal button linking to paypal.me/dariuszkaniewski.\n- The heart icon now uses the active theme colors so it fits Dark, Light and Sepia modes.\n\n## 1.0.133\n\n### PL\n- Znormalizowano uk\u0142ad prze\u0142\u0105cznik\u00f3w widoku czytelnika mi\u0119dzy wersj\u0105 polsk\u0105 i angielsk\u0105.\n- Prze\u0142\u0105czniki tekstu maj\u0105 teraz sta\u0142\u0105 siatk\u0119 czterech kolumn, wi\u0119c nie zmieniaj\u0105 po\u0142o\u017cenia po zmianie j\u0119zyka.\n\n### EN\n- Normalized the reader view switcher layout between Polish and English.\n- Text mode buttons now use a fixed four-column grid so their position stays consistent after changing the interface language.\n\n## 1.0.132\n\n### PL\n- Znormalizowano opis strony g\u0142\u00f3wnej w wersji polskiej wzgl\u0119dem wersji angielskiej.\n- Poszerzono blok opisu pod nag\u0142\u00f3wkiem biblioteki, aby d\u0142u\u017cszy tekst PL nie \u0142ama\u0142 si\u0119 niepotrzebnie.\n- Zmniejszono odst\u0119p pod logo, dzi\u0119ki czemu nag\u0142\u00f3wek strony g\u0142\u00f3wnej jest bardziej zwarty.\n\n### EN\n- Normalized the Polish home page description against the English version.\n- Widened the description block under the library heading so longer PL text does not wrap unnecessarily.\n- Reduced the spacing below the logo to make the home page header more compact.\n\n## 1.0.131\n\n### PL\n- Dostosowano pole wyszukiwania s\u0142ownika do motyw\u00f3w Light, Sepia i Dark.\n- Zast\u0105piono sztywne kolory zmiennymi motywu dla t\u0142a, tekstu, obramowania i przycisku czyszczenia.\n- Poprawiono kontrast pola wyszukiwania bez zmiany dzia\u0142ania s\u0142ownika.\n\n### EN\n- Adapted the dictionary search field to the Light, Sepia, and Dark themes.\n- Replaced hard-coded colors with theme variables for the background, text, border, and clear button.\n- Improved search field contrast without changing dictionary behavior.\n\n## 1.0.129\n\n### PL\n- Poprawiono wygl\u0105d pola wyszukiwania s\u0142ownika w ciemnych motywach.\n- Dodano przycisk \u00d7 do szybkiego czyszczenia wyszukiwania.\n- Ujednolicono styl pola wyszukiwania z reszt\u0105 interfejsu.\n\n### EN\n- Improved the dictionary search field appearance in dark themes.\n- Added an \u00d7 button for quickly clearing the search.\n- Unified the search field styling with the rest of the interface.\n\n## 1.0.128\n\n### PL\n- Ujednolicono numer wersji w ca\u0142ej aplikacji po wydaniu 1.0.127.\n- Podbito odwo\u0142ania wersji w plikach aplikacji, cache PWA, metadanych i linkach zasob\u00f3w.\n- Uporz\u0105dkowano histori\u0119 zmian tak, aby pokazywa\u0142a ostatnie 10 wersji z opisami PL/EN.\n\n### EN\n- Unified the version number across the application after the 1.0.127 release.\n- Updated version references in app files, PWA cache, metadata, and asset links.\n- Cleaned up the changelog so it shows the latest 10 versions with PL/EN descriptions.\n\n## 1.0.127\n\n### PL\n- Na telefonach karta s\u0142ownikowa dzia\u0142a jako dolny panel zamiast zakrywa\u0107 ca\u0142y tekst.\n- Tekst pozostaje widoczny nad kart\u0105 s\u0142ownikow\u0105 podczas przegl\u0105dania wyst\u0105pie\u0144.\n- Panel ma w\u0142asne przewijanie, a przycisk zamykania pozostaje dost\u0119pny.\n\n### EN\n- On mobile, the dictionary card now works as a bottom sheet instead of covering the whole text.\n- The text remains visible above the dictionary card while browsing occurrences.\n- The panel has its own scrolling area and the close button remains available.\n\n## 1.0.126\n\n### PL\n- Wyst\u0105pienia s\u0142ownika s\u0105 sortowane wed\u0142ug blisko\u015bci aktualnej strony.\n- Dodano przyciski Poprzednie 20 / Nast\u0119pne 20 dla d\u0142ugich list wyst\u0105pie\u0144.\n- Karta s\u0142ownikowa pozostaje otwarta podczas przegl\u0105dania kolejnych stron.\n\n### EN\n- Dictionary occurrences are sorted by proximity to the current page.\n- Added Previous 20 / Next 20 buttons for long occurrence lists.\n- The dictionary card stays open while browsing occurrence pages.\n\n## 1.0.125\n\n### PL\n- Przygotowano architektur\u0119 wyst\u0105pie\u0144 s\u0142ownika pod wiele tekst\u00f3w koptyjskich.\n- Wyst\u0105pienia s\u0105 teraz grupowane wed\u0142ug tekstu; obecnie aktywna jest Pistis Sophia.\n- Modu\u0142 s\u0142ownika jest gotowy na p\u00f3\u017aniejsze dodanie kolejnych tekst\u00f3w, np. Ewangelii Tomasza.\n\n### EN\n- Prepared the dictionary occurrence architecture for multiple Coptic texts.\n- Occurrences are now grouped by text; Pistis Sophia is currently active.\n- The dictionary module is ready for adding future texts, such as the Gospel of Thomas.\n\n## 1.0.124\n\n### PL\n- Naprawiono pozycj\u0119 karty s\u0142ownikowej przy d\u0142ugich listach wyst\u0105pie\u0144.\n- Karta mie\u015bci si\u0119 teraz w ekranie i ma w\u0142asne przewijanie.\n- Przycisk zamykania pozostaje zawsze dost\u0119pny.\n\n### EN\n- Fixed the dictionary card position with long occurrence lists.\n- The card now fits inside the viewport and has its own scrolling area.\n- The close button remains available at all times.\n\n## 1.0.123\n\n### PL\n- Karta s\u0142ownikowa pozostaje otwarta po klikni\u0119ciu wyst\u0105pienia.\n- Klikni\u0119cie wyst\u0105pienia przenosi do odpowiedniej strony w trybie interlinearnym.\n- Dopasowane s\u0142owo zostaje pod\u015bwietlone, aby \u0142atwiej odnale\u017a\u0107 je w tek\u015bcie.\n\n### EN\n- The dictionary card stays open after clicking an occurrence.\n- Clicking an occurrence opens the matching page in interlinear mode.\n- The matching word is highlighted so it is easier to find in the text.\n\n## 1.0.122\n\n### PL\n- Dodano sekcj\u0119 \u201eWyst\u0105pienia\u201d w karcie s\u0142ownikowej.\n- Karta pokazuje, na kt\u00f3rych stronach bie\u017c\u0105cej warstwy koptyjskiej wyst\u0119puje dana forma lub jej forma bazowa.\n- Klikni\u0119cie wyst\u0105pienia przenosi do odpowiedniej strony tekstu.\n\n### EN\n- Added an \u201cOccurrences\u201d section to the dictionary card.\n- The card shows which pages in the current Coptic layer contain the selected form or its base form.\n- Clicking an occurrence opens the corresponding text page.\n\n## 1.0.121\n\n### PL\n- Rozbudowano kart\u0119 s\u0142ownikow\u0105 bez dodawania nowych modu\u0142\u00f3w.\n- Cz\u0119\u015bci mowy s\u0105 teraz opisane normalnie, np. \u201erzeczownik (N)\u201d albo \u201eprzyimek / partyku\u0142a (PREP)\u201d.\n- Dla form rozpoznanych przez lematyzacj\u0119 karta pokazuje form\u0119 bazow\u0105 oraz transliteracj\u0119.\n- Oczyszczono listy znacze\u0144 z cz\u0119\u015bci technicznych wpis\u00f3w s\u0142ownikowych.\n\n### EN\n- Expanded the dictionary card without adding new modules.\n- Parts of speech are now shown as readable labels, for example \u201cnoun (N)\u201d or \u201cpreposition / particle (PREP)\u201d.\n- For forms resolved by lemmatization, the card now shows the base form and transliteration.\n- Cleaned meaning lists from technical dictionary fragments.\n\n## 1.0.120\n\n### PL\n- Naprawiono pe\u0142n\u0105 lokalizacj\u0119 karty s\u0142ownikowej w trybie EN i PL.\n- Etykiety karty s\u0142ownikowej prze\u0142\u0105czaj\u0105 si\u0119 teraz zgodnie z j\u0119zykiem interfejsu.\n- Usuni\u0119to zdublowane pole \u201eCz\u0119\u015b\u0107 mowy\u201d z karty s\u0142ownikowej.\n\n### EN\n- Fixed full dictionary-card localization in EN and PL modes.\n- Dictionary-card labels now switch according to the interface language.\n- Removed the duplicated \u201cPart of speech\u201d field from the dictionary card.\n\n## 1.0.119\n\n### PL\n- Naprawiono przyciski widoku czytnika: Polski, Source EN, Coptic i Interlinear.\n- Dodano stabilne prze\u0142\u0105czanie trybu czytania przez atrybut `data-reader-mode`.\n- Uodporniono zapisany tryb czytnika na starsze lub b\u0142\u0119dne warto\u015bci z `localStorage`.\n\n### EN\n- Fixed reader mode buttons: Polish, Source EN, Coptic, and Interlinear.\n- Added stable reader-mode switching through the `data-reader-mode` attribute.\n- Made the saved reader mode robust against older or invalid `localStorage` values.\n";
+const FALLBACK_CHANGELOG = "# Changelog\n\n## 1.4.55 - Kolory nagłówków zgodne z aktywnym motywem\n\n### PL\n- Ujednolicono kolory wszystkich nagłówków w polskim i angielskim tekście Pistis Sophii oraz w Materiałach dodatkowych.\n- Nagłówki rozdziałów, tytuły ksiąg, śródtytuły redakcyjne i oznaczenia `p.` korzystają teraz z koloru odpowiadającego aktywnemu motywowi.\n- W motywie Dark zastosowano złoty akcent zgodny z głównymi nagłówkami aplikacji, a w motywach Sepia i Light odpowiednio ciemne kolory zapewniające właściwy kontrast.\n- Usunięto pozostałe białe nagłówki bez zmiany struktury tekstu, akapitów ani nawigacji.\n- Zachowano ciągłość numeracji 1.4.54 → 1.4.55.\n\n### EN\n- Unified the colors of all headings in the Polish and English Pistis Sophia text and its addenda.\n- Chapter headings, book titles, editorial rubrics, and `p.` markers now use the accent color of the active theme.\n- Dark mode uses the same gold accent as the application's main headings, while Sepia and Light use appropriately dark, high-contrast colors.\n- Removed remaining white headings without changing text structure, paragraphs, or navigation.\n- Preserved consecutive version numbering from 1.4.54 to 1.4.55.\n\n## 1.4.54 - Ujednolicona struktura angielskiego tekstu Pistis Sophii i Dodatków\n\n### PL\n- Angielski tekst Pistis Sophii korzysta teraz z tego samego uporządkowanego układu co polska warstwa: wyraźnych nagłówków rozdziałów, tytułów ksiąg, śródtytułów redakcyjnych, oznaczeń `p.` i osobnych akapitów.\n- Taki sam mechanizm zastosowano do angielskich Materiałów dodatkowych Pistis Sophii.\n- Struktura angielskiego tekstu jest zachowana niezależnie od ustawienia justowania; justowanie zmienia wyłącznie wyrównanie wewnątrz akapitów.\n- Zachowano ciągłość numeracji 1.4.53 → 1.4.54.\n\n### EN\n- The English Pistis Sophia text now uses the same structured layout as the Polish layer: clear chapter headings, book titles, editorial rubrics, `p.` markers, and separate paragraphs.\n- The same mechanism is now applied to the English Pistis Sophia addenda.\n- English structure is preserved regardless of the justification setting; justification only changes alignment inside paragraphs.\n- Preserved consecutive version numbering from 1.4.53 to 1.4.54.\n\n## 1.4.53 - Ujednolicona typografia nagłówków Pistis Sophii\n\n### PL\n- Znormalizowano wielkość, kolor, grubość i odstępy nagłówków w polskim i angielskim tekście Pistis Sophii.\n- Nagłówki rozdziałów korzystają teraz z jednego, wyraźnego stylu w obu językach.\n- Ujednolicono wygląd tytułów ksiąg, śródtytułów redakcyjnych oraz oznaczeń `p.`.\n- Kolory nagłówków korzystają z akcentu aktywnego motywu, dzięki czemu pozostają czytelne w trybach Dark, Light i Sepia.\n- Zachowano ciągłość numeracji 1.4.52 → 1.4.53.\n\n### EN\n- Normalized heading size, color, weight, and spacing in the Polish and English Pistis Sophia text.\n- Chapter headings now share one clear visual style in both languages.\n- Unified book titles, editorial rubrics, and `p.` markers.\n- Heading colors use the active theme accent for readability in Dark, Light, and Sepia modes.\n- Preserved consecutive version numbering from 1.4.52 to 1.4.53.\n\n## 1.4.52 - Polska struktura Pistis Sophii zgodna z angielskim wydaniem\n\n### PL\n- Zachowano angielski tekst Pistis Sophii dokładnie w układzie znanym z wersji 1.4.51.\n- Polski tekst otrzymał wyraźne nagłówki rozdziałów, śródtytuły redakcyjne, osobne akapity oraz oznaczenia p. odpowiadające numerom w tekście źródłowym.\n- Znaczniki `|1.`, `|2.` itd. są renderowane jako osobne oznaczenia `p. 1`, `p. 2` w dokładnym miejscu ich występowania.\n- Justowanie działa wyłącznie wewnątrz akapitów i nie usuwa podziałów tekstu.\n- Zachowano ciągłość numeracji 1.4.51 → 1.4.52.\n\n### EN\n- Kept the English Pistis Sophia text exactly in the layout used by version 1.4.51.\n- Added a matching structured layout to the Polish text, including clear chapter headings, editorial rubrics, separate paragraphs, and source p. markers.\n- Markers such as `|1.` and `|2.` are rendered as separate `p. 1` and `p. 2` labels at their exact positions.\n- Justification applies only inside paragraphs and no longer removes text divisions.\n- Preserved consecutive version numbering from 1.4.51 to 1.4.52.\n\n## 1.4.51 - Ciągła lektura Pistis Sophii i nawigacja po tekście\n\n### PL\n- Przywrócono ciągły widok całego właściwego tekstu Pistis Sophii od strony 48 do końca księgi.\n- Kliknięcie rozdziału w sidebarze nie przełącza już pojedynczej sekcji, lecz przewija do dokładnego miejsca danego rozdziału w ciągłym tekście.\n- Zachowano strukturę rozdziałów, stron i akapitów oraz działanie opcjonalnego justowania.\n- Materiały dodatkowe nadal działają jako osobny ciągły tekst.\n- Zachowano ciągłość numeracji 1.4.50 → 1.4.51.\n\n### EN\n- Restored a continuous view of the complete main Pistis Sophia text from page 48 through the end of the book.\n- Clicking a chapter in the sidebar now scrolls to that exact chapter in the continuous text instead of replacing the reader with a single section.\n- Preserved chapter, page, and paragraph structure together with optional justification.\n- The addenda remain available as their own continuous text.\n- Preserved consecutive version numbering from 1.4.50 to 1.4.51.\n\n## 1.4.50 - Zachowanie akapitów w justowanym tekście źródłowym\n\n### PL\n- Przywrócono czytelną strukturę angielskiego tekstu źródłowego podczas justowania.\n- Twarde łamania wierszy odziedziczone z wydania drukowanego są łączone wewnątrz akapitów, ale rozdziały, oznaczenia stron i logiczne początki akapitów pozostają oddzielone.\n- Dodano wyraźne odstępy przed nagłówkami rozdziałów i pomiędzy akapitami, dzięki czemu tekst nie zlewa się w jeden blok.\n- Zachowano ciągłość numeracji 1.4.49 → 1.4.50.\n\n### EN\n- Restored readable source-text structure when book justification is enabled.\n- Hard print/OCR line wraps are joined inside paragraphs, while chapter headings, page markers, and logical paragraph starts remain separate.\n- Added clear spacing before chapter headings and between paragraphs so the source no longer appears as one continuous block.\n- Preserved consecutive version numbering from 1.4.49 to 1.4.50.\n\n## 1.4.49 - Dopracowane justowanie tekstu książek\n\n### PL\n- Odsunięto ustawienie „Wyjustuj tekst książek” od krawędzi panelu Narzędzia i poprawiono odstępy całej sekcji.\n- Uogólniono opis ustawienia: justowanie jest przeznaczone dla wszystkich książek obecnych i przyszłych w bibliotece.\n- Poprawiono skład angielskiego tekstu źródłowego: twarde końce wierszy nie są już justowane osobno, ostatnia linia pozostaje wyrównana do lewej, a odstępy między słowami są bardziej naturalne.\n- Zachowano automatyczne dzielenie wyrazów zależne od języka oraz ciągłość numeracji 1.4.48 → 1.4.49.\n\n### EN\n- Added comfortable inner spacing around the “Justify book text” setting in the Tools panel.\n- Generalized the setting description so it applies to all current and future books in the library.\n- Refined English source-text layout: hard source line endings are no longer justified independently, the final line remains left-aligned, and word spacing is more natural.\n- Preserved language-aware automatic hyphenation and consecutive version numbering from 1.4.48 to 1.4.49.\n\n## 1.4.48 - Opcjonalne justowanie tekstu książek\n\n### PL\n- Dodano w panelu Narzędzia ustawienie „Wyjustuj tekst książek”, domyślnie wyłączone i zapamiętywane lokalnie.\n- Po włączeniu justowanie obejmuje Pistis Sophię oraz Ewangelie Tomasza i Filipa, bez wpływu na tekst koptyjski i interlinię.\n- Włączono automatyczne dzielenie wyrazów zgodne z aktywnym językiem tekstu, aby ograniczyć nadmierne odstępy między słowami.\n- Naprawiono ciągłość historii wersji: 1.4.45 → 1.4.46 → 1.4.47 → 1.4.48.\n\n### EN\n- Added a locally remembered, opt-in “Justify book text” setting to the Tools panel; it is disabled by default.\n- When enabled, justification applies to Pistis Sophia and the Gospels of Thomas and Philip without affecting Coptic or interlinear text.\n- Enabled automatic language-aware hyphenation to reduce excessive spacing between words.\n- Restored changelog continuity: 1.4.45 → 1.4.46 → 1.4.47 → 1.4.48.\n\n## 1.4.47 - Justowanie i dzielenie wyrazów w Pomocy\n\n### PL\n- Wyjustowano treść rozwijanych odpowiedzi w panelu Pomoc.\n- Włączono automatyczne dzielenie wyrazów zgodnie z aktywnym językiem PL lub EN, aby ograniczyć nadmierne odstępy między słowami.\n- Dopracowano szerokość akapitów i zachowano wygodną interlinię dla dłuższych opisów.\n- Podbito wersję kolejno z 1.4.46 do 1.4.47.\n\n### EN\n- Justified the expanded answer text in the Help panel.\n- Enabled automatic language-aware hyphenation for PL and EN to reduce excessive spacing between words.\n- Refined paragraph width while preserving comfortable line spacing for longer descriptions.\n- Bumped the version consecutively from 1.4.46 to 1.4.47.\n\n## 1.4.46 - Złote nagłówki paneli Słownika i Narzędzi\n\n### PL\n- Nagłówki „Słownik koptyjski” i „Glosownik interlinearny” korzystają teraz z tego samego koloru akcentu co główne etykiety „Słownik” i „Narzędzia”.\n- W motywie Dark zastosowano złoty kolor, a w motywach Light i Sepia odpowiadający mu ciemniejszy kolor akcentu.\n- Zachowano czytelne, dopasowane do motywu kolory opisów, etykiet pól i komunikatów.\n- Podbito wersję kolejno z 1.4.45 do 1.4.46.\n\n### EN\n- The “Coptic dictionary” and “Interlinear glossary” headings now use the same accent color as the main “Dictionary” and “Tools” section labels.\n- Dark mode uses the gold accent, while Light and Sepia use the corresponding darker theme accent.\n- Preserved readable theme-aware colors for descriptions, field labels, and status messages.\n- Bumped the version consecutively from 1.4.45 to 1.4.46.\n\n## 1.4.45 - Czytelne etykiety Słownika i Narzędzi\n\n### PL\n- Dostosowano kolory nagłówków, opisów, etykiet pól i komunikatów w sekcjach Słownik oraz Narzędzia do motywów Dark, Light i Sepia.\n- W motywie Dark zastosowano jasne, kontrastowe kolory tekstu, a w motywach Light i Sepia ciemne kolory zgodne z tłem.\n- Zachowano dotychczasowy układ i działanie słownika oraz glosownika interlinearnego.\n- Podbito wersję kolejno z 1.4.44 do 1.4.45.\n\n### EN\n- Adapted headings, descriptions, field labels, and status-message colors in the Dictionary and Tools sections to the Dark, Light, and Sepia themes.\n- Applied bright, high-contrast text in Dark mode and dark theme-appropriate text in Light and Sepia modes.\n- Preserved the existing layout and behavior of the dictionary and interlinear glossary.\n- Bumped the version consecutively from 1.4.44 to 1.4.45.\n\n## 1.4.44 - Niezależne kolumny kodeksów\n\n### PL\n- Przebudowano dwukolumnowy katalog kodeksów Nag Hammadi na dwie niezależne pionowe listy.\n- Rozwinięcie kodeksu w jednej kolumnie nie zwiększa już wysokości wiersza po drugiej stronie i nie tworzy pustego pola.\n- Zachowano układ jednej kolumny na mniejszych ekranach oraz dotychczasową kolejność kodeksów.\n- Podbito wersję kolejno z 1.4.43 do 1.4.44.\n\n### EN\n- Rebuilt the two-column Nag Hammadi codex catalogue as two independent vertical lists.\n- Expanding a codex in one column no longer increases a shared row height or creates an empty gap on the other side.\n- Preserved the single-column mobile layout and the existing codex order.\n- Bumped the version consecutively from 1.4.43 to 1.4.44.\n\n## 1.4.43 - Niezależne kolumny panelu Pomoc\n\n### PL\n- Przebudowano dwukolumnowy panel Pomoc na dwie niezależne pionowe listy.\n- Rozwinięcie odpowiedzi w jednej kolumnie nie zwiększa już wysokości wiersza po drugiej stronie i nie tworzy pustego pola.\n- Zachowano jedną kolumnę na mniejszych ekranach oraz mechanizm jednej otwartej sekcji.\n- Podbito wersję kolejno z 1.4.42 do 1.4.43.\n\n### EN\n- Rebuilt the two-column Help panel as two independent vertical lists.\n- Expanding an answer in one column no longer increases a shared row height or creates an empty gap on the other side.\n- Preserved the single-column mobile layout and the one-open-section behavior.\n- Bumped the version consecutively from 1.4.42 to 1.4.43.\n\n## 1.4.42 - Dwukolumnowy panel Pomoc i wyrównane znaki\n\n### PL\n- Ułożono tematy panelu Pomoc w dwóch kolumnach na szerokich ekranach, wykorzystując wolne miejsce po prawej stronie.\n- Na mniejszych ekranach panel automatycznie wraca do jednej kolumny.\n- Wyrównano znaki plus i minus do tej samej linii bazowej co tytuły sekcji.\n- Podbito wersję kolejno z 1.4.41 do 1.4.42.\n\n### EN\n- Arranged Help topics in two columns on wide screens, using the previously empty space on the right.\n- On smaller screens, the panel automatically returns to a single column.\n- Aligned the plus and minus signs to the same text baseline as section titles.\n- Bumped the version consecutively from 1.4.41 to 1.4.42.\n\n## 1.4.41 - Stabilna pozycja znaków w panelu Pomoc\n\n### PL\n- Ujednolicono układ znaków plus i minus w rozwijanych sekcjach panelu Pomoc.\n- Znak minus pojawia się teraz dokładnie w miejscu znaku plus, bez przesunięcia w dół po rozwinięciu sekcji.\n- Zastosowano stałą kolumnę i identyczne wymiary dla obu znaków we wszystkich motywach.\n- Podbito wersję kolejno z 1.4.40 do 1.4.41.\n\n### EN\n- Standardized the plus and minus sign layout in the Help panel accordion.\n- The minus sign now appears in exactly the same position as the plus sign, without shifting downward when a section opens.\n- Applied a fixed sign column and identical dimensions for both states across all themes.\n- Bumped the version consecutively from 1.4.40 to 1.4.41.\n\n## 1.4.40 - Czytelniejszy panel Pomoc\n\n### PL\n- Dostosowano kolory nagłówków i opisów panelu Pomoc do motywów Dark, Light i Sepia.\n- Usunięto poziome separatory między sekcjami, dzięki czemu lista nie przypomina już drabiny.\n- Dodano delikatne odstępy i subtelne podświetlenie wiersza po najechaniu bez zmiany działania akordeonu.\n- Podbito wersję kolejno z 1.4.39 do 1.4.40.\n\n### EN\n- Adapted Help-panel heading and description colors to the Dark, Light, and Sepia themes.\n- Removed horizontal separators between sections so the list no longer resembles a ladder.\n- Added gentle spacing and subtle row highlighting on hover without changing accordion behavior.\n- Bumped the version consecutively from 1.4.39 to 1.4.40.\n\n## 1.4.39 - Panel Pomoc i przewodnik użytkownika\n\n### PL\n- Dodano etykietę „Pomoc” na górnym pasku strony głównej.\n- Dodano obszerny, dwujęzyczny przewodnik w formie profesjonalnego akordeonu ze zwykłymi znakami plus i minus.\n- Opisano pierwsze kroki, czytanie, języki, dodatki, interlinię, słownik, wyszukiwanie, zakładki, motywy, tryb offline i kontakt.\n- Zachowano stopkę bez zmian i podbito wersję kolejno z 1.4.38 do 1.4.39.\n\n### EN\n- Added a “Help” label to the home-page top bar.\n- Added an extensive bilingual user guide in a professional accordion with regular plus and minus signs.\n- Documented getting started, reading, languages, addenda, interlinear mode, dictionary, search, bookmarks, themes, offline mode, and contact.\n- Kept the footer unchanged and bumped the version consecutively from 1.4.38 to 1.4.39.\n\n## 1.4.38 - Typografia etykiet górnej belki\n\n### PL\n- Ujednolicono czcionkę i wielkość etykiet „Prywatność”, „Zmiany”, „Kontakt” i „Info” na górnej belce strony głównej z etykietami używanymi w stopce.\n- Zachowano tekstową formę nawigacji, kolory motywów oraz stopkę bez zmian.\n- Podbito wersję kolejno z 1.4.37 do 1.4.38.\n\n### EN\n- Matched the font and size of the “Privacy”, “Changes”, “Contact”, and “Info” labels in the home-page top bar to the labels used in the footer.\n- Preserved the text-only navigation, theme-aware colors, and the footer without changes.\n- Bumped the version consecutively from 1.4.37 to 1.4.38.\n\n## 1.4.37 - Nawigacja pomocnicza na górnej belce strony głównej\n\n### PL\n- Przeniesiono etykiety „Prywatność”, „Zmiany”, „Kontakt” i „Info” z głównego paska roboczego na górną belkę strony głównej.\n- Etykiety są wyświetlane jako lekka nawigacja tekstowa bez tła i obramowania, z kolorami dopasowanymi do motywów Dark, Light i Sepia.\n- Zachowano stopkę bez zmian oraz pełne działanie paneli i lokalizacji PL/EN.\n- Podbito wersję kolejno z 1.4.36 do 1.4.37.\n\n### EN\n- Moved the “Privacy”, “Changes”, “Contact”, and “Info” labels from the main work bar to the home-page top bar.\n- The labels are displayed as lightweight text navigation without backgrounds or borders, with colors adapted to Dark, Light, and Sepia themes.\n- Kept the footer unchanged and preserved full panel behavior and PL/EN localization.\n- Bumped the version consecutively from 1.4.36 to 1.4.37.\n\n## 1.4.36 - Rozdzielenie strony 48 między wprowadzenie i tekst księgi\n\n### PL\n- Końcowa część opracowania ze strony 48 została dołączona do ciągłych Materiałów dodatkowych.\n- Widok Pistis Sophii rozpoczyna się teraz dokładnie od nagłówka „KSIĘGA PIERWSZA” i Rozdziału 1, bez powtarzania wprowadzenia.\n- Kliknięcie ostatniej pozycji w sidebarze dodatków przewija do wprowadzającej części strony 48.\n- Podbito wersję kolejno z 1.4.35 do 1.4.36.\n\n### EN\n- The concluding introductory material from page 48 is now included in the continuous Addenda document.\n- The Pistis Sophia reader now begins precisely at “THE FIRST BOOK OF” and Chapter 1, without repeating the introduction.\n- Clicking the final addenda sidebar item scrolls to the introductory portion of page 48.\n- Bumped the version consecutively from 1.4.35 to 1.4.36.\n\n## 1.4.35 - Zapamiętywanie języka interfejsu\n\n### PL\n- Przełącznik PL/EN w prawym górnym rogu zapamiętuje teraz wybrany język przy przechodzeniu między księgami.\n- Wybrany język pozostaje aktywny także po odświeżeniu strony lub ponownym otwarciu aplikacji.\n- Zmiana ustawienia języka uruchamiania usuwa szybki wybór i ponownie przejmuje kontrolę nad językiem.\n- Podbito wersję kolejno z 1.4.34 do 1.4.35.\n\n### EN\n- The PL/EN switch in the top-right corner now remembers the selected language when moving between books.\n- The selected language also remains active after refreshing or reopening the app.\n- Changing the startup-language setting clears the quick selection and takes control of the language again.\n- Bumped the version consecutively from 1.4.34 to 1.4.35.\n\n## 1.4.34 - Ciągły tekst dodatków i nawigacja po sekcjach\n\n### PL\n- Materiały dodatkowe Pistis Sophii są teraz wyświetlane jako jeden ciągły tekst zamiast pojedynczych stron.\n- Kliknięcie pozycji w sidebarze przewija czytnik bezpośrednio do odpowiadającej jej sekcji tekstu.\n- Zachowano aktywne podświetlenie pozycji i podbito wersję kolejno z 1.4.33 do 1.4.34.\n\n### EN\n- Pistis Sophia addenda are now displayed as one continuous text instead of separate pages.\n- Clicking an item in the sidebar scrolls the reader directly to the corresponding text section.\n- Preserved the active highlight and bumped the version consecutively from 1.4.33 to 1.4.34.\n\n## 1.4.33 - Nawigacja dodatków po tekście\n\n### PL\n- Kliknięcie pozycji w sidebarze dodatków przechodzi teraz bezpośrednio do odpowiadającego jej miejsca w tekście.\n- Sidebar pozostaje w trybie Dodatki, a aktywna pozycja jest podświetlana i utrzymywana w widocznym obszarze listy.\n- Podbito wersję kolejno z 1.4.32 do 1.4.33 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.\n\n### EN\n- Clicking an item in the addenda sidebar now moves directly to the corresponding place in the text.\n- The sidebar remains in Addenda mode, while the active item stays highlighted and visible in the list.\n- Bumped the version consecutively from 1.4.32 to 1.4.33 across metadata, assets, and the PWA cache.\n\n## 1.4.32 - Ujednolicone podglądy dodatków\n\n### PL\n- Ujednolicono sposób wyświetlania polskich i angielskich podglądów materiałów dodatkowych.\n- Obie wersje językowe korzystają teraz z tego samego limitu znaków.\n- Dłuższy fragment jest skracany i kończony trzema kropkami zamiast wymuszania pełnego zdania.\n- Podbito wersję kolejno z 1.4.31 do 1.4.32 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.\n\n### EN\n- Standardized the display of Polish and English additional-material previews.\n- Both language versions now use the same character limit.\n- Longer excerpts are shortened and end with three dots instead of being forced to a complete sentence.\n- Bumped the version consecutively from 1.4.31 to 1.4.32 across metadata, assets, and the PWA cache.\n\n## 1.4.31 - Polskie opisy dodatków i stały przełącznik\n\n### PL\n- Podłączono polskie fragmenty materiałów dodatkowych w polskiej wersji interfejsu.\n- Opisy w sidebarze są wybierane wyłącznie jako pełne zdania i nie kończą się już w połowie wypowiedzi.\n- Przycisk „Dodatki” / „Pistis Sophia” zachowuje ten sam rozmiar podczas przełączania; zmienia się wyłącznie jego tekst.\n- Podbito wersję kolejno z 1.4.30 do 1.4.31 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.\n\n### EN\n- Connected Polish additional-material excerpts in the Polish interface.\n- Sidebar descriptions are now selected only as complete sentences and no longer end mid-sentence.\n- The “Addenda” / “Pistis Sophia” button keeps the same size while switching; only its label changes.\n- Bumped the version consecutively from 1.4.30 to 1.4.31 across metadata, assets, and the PWA cache.\n\n## 1.4.30 - Przełączany sidebar dodatków\n\n### PL\n- Dodano przycisk „Dodatki” obok „Kopiuj fragment” w pasku czytnika Pistis Sophia.\n- Przycisk przełącza sidebar z rozdziałów na materiały dodatkowe, a następnie zmienia nazwę na „Pistis Sophia”, umożliwiając szybki powrót.\n- Usunięto długą listę dodatków z głównego spisu rozdziałów.\n- Naprawiono historię wersji: wcześniejszy drugi wpis 1.4.29 otrzymał właściwy numer 1.4.28, zachowując ciągłość 1.4.28 → 1.4.29 → 1.4.30.\n\n### EN\n- Added an “Addenda” button next to “Copy excerpt” in the Pistis Sophia reader toolbar.\n- The button switches the sidebar from chapters to additional materials, then changes to “Pistis Sophia” for a quick return.\n- Removed the long addenda list from the main chapter table of contents.\n- Fixed version history: the earlier duplicate 1.4.29 entry now has its correct 1.4.28 number, preserving the 1.4.28 → 1.4.29 → 1.4.30 sequence.\n\n## 1.4.29 - Materiały dodatkowe w spisie treści\n\n### PL\n- Usunięto przycisk i przełącznik „Dodatki” z panelu książki Pistis Sophia.\n- Przeniesiono materiały wprowadzające na dół spisu rozdziałów jako osobną, subtelnie oddzieloną sekcję „Materiały dodatkowe”.\n- Zachowano bezpośrednie otwieranie stron 1–47 oraz wyszukiwanie w materiałach dodatkowych.\n\n### EN\n- Removed the Addenda button and section switch from the Pistis Sophia book panel.\n- Moved the introductory pages to the bottom of the chapter list as a separate, subtly divided “Additional materials” section.\n- Preserved direct access to pages 1–47 and search within the additional materials.\n\n## 1.4.28 - Tekst i dodatki Pistis Sophia\n\n### PL\n- Oddzielono właściwy tekst Pistis Sophia od materiałów wprowadzających G. R. S. Meada.\n- Dodano przełącznik Tekst / Dodatki w panelu księgi, aby strony 1–47 były dostępne jako osobne dodatki.\n- Kliknięcie Pistis Sophia z katalogu otwiera teraz początek księgi na stronie 48, bez wrzucania czytelnika w przedmowę.\n\n### EN\n- Separated the main Pistis Sophia text from G. R. S. Mead's introductory material.\n- Added a Text / Addenda switch in the book panel so pages 1–47 are available as separate addenda.\n- Opening Pistis Sophia from the catalogue now starts the book on page 48 instead of dropping the reader into the preface.\n\n## 1.4.27 - Rozdziały Pistis Sophia i pasek cytowania\n\n### PL\n- Naprawiono czytnik Pistis Sophia, aby nie uruchamiał trybu logionowego przeznaczonego dla Ewangelii Tomasza i Ewangelii Filipa.\n- Kliknięcie rozdziału w spisie Pistis Sophia ponownie przewija do właściwej strony i rozdziału.\n- Przeniesiono wybór formatu cytowania i przycisk kopiowania do tej samej linii co Kontynuuj, numer strony i strzałki.\n\n### EN\n- Fixed the Pistis Sophia reader so it no longer enters the logion mode used by the Gospel of Thomas and Gospel of Philip.\n- Clicking a Pistis Sophia chapter in the table of contents again scrolls to the correct page and chapter.\n- Moved the citation-format selector and copy button into the same line as Continue, the page field, and page arrows.\n\n## 1.4.26 - Statusy ksiąg i kompletna historia\n\n### PL\n- Ujednolicono etykietę warstw Pistis Sophia z katalogiem Ewangelii Tomasza i Ewangelii Filipa.\n- Przeniesiono status PL/EN/COPT Pistis Sophia bezpośrednio przy nazwie księgi.\n- Uzupełniono brakujący wpis 1.4.22 w pełnej historii zmian, aby numeracja szła po kolei.\n\n### EN\n- Unified the Pistis Sophia layer label with the Gospel of Thomas and Gospel of Philip catalogue entries.\n- Moved the PL/EN/COPT Pistis Sophia status directly next to the book name.\n- Restored the missing 1.4.22 entry in the full change history so version order remains continuous.\n\n## 1.4.25 - Changelog i etykiety warstw\n\n### PL\n- Poprawiono najnowsze wpisy changeloga, aby w Ostatnich zmianach i Pełnej historii nie pojawiały się znaki zapytania zamiast polskich liter.\n- Przeniesiono etykiety PL/EN/COPT i PL/EN bliżej nazw ksiąg w katalogu.\n- Dodano etykietę dostępnych warstw bezpośrednio przy tytule księgi w widoku czytnika.\n\n### EN\n- Fixed the latest changelog entries so Recent changes and Full history no longer show question marks instead of Polish characters.\n- Moved PL/EN/COPT and PL/EN labels closer to book names in the catalogue.\n- Added an available-layers label directly next to the book title in the reader view.\n\n## 1.4.24 - Naprawa pustego czytnika logionów\n\n### PL\n- Przywrócono brakującą funkcję parsera changeloga, która zatrzymywała start aplikacji przed wyrenderowaniem tekstu.\n- Czytnik Ewangelii Tomasza ponownie pokazuje ciągły tekst logionów w warstwach PL/EN.\n- Podbito wersję biblioteki, metadane PWA i odnośniki do zasobów.\n\n### EN\n- Restored the missing changelog-parser helper that stopped the app before the reader text was rendered.\n- The Gospel of Thomas reader again shows the continuous logion text in PL/EN layers.\n- Bumped the library version, PWA metadata, and asset links.\n\n## 1.4.23 - Naprawa kodowania i wejścia do księgi\n\n### PL\n- Odtworzono paczkę z poprawnej bazy UTF-8, aby polskie znaki nie zamieniały się w mojibake.\n- Zachowano wczesne przełączanie adresów `book`, `view` i `page` bez przepisywania całego interfejsu.\n- Usunięto zdublowaną obsługę kliknięcia gotowych ksiąg w katalogu.\n\n### EN\n- Rebuilt the package from a clean UTF-8 base so Polish labels no longer turn into mojibake.\n- Kept the early `book`, `view`, and `page` reader switch without rewriting the whole interface.\n- Removed duplicated click handling for available catalogue books.\n\n## 1.4.22 - Naprawa wejścia do ksiąg\n\n### PL\n- Poprawiono wejście do ksiąg z katalogu, aby kliknięcie gotowej pozycji prowadziło do czytnika, a nie do Home.\n- Utrzymano bezpośrednie adresy `book`, `view` i `page` jako stabilny sposób otwierania konkretnej księgi.\n- Przygotowano kolejną kontrolę kodowania po poprawkach nawigacji.\n\n### EN\n- Fixed catalogue book entry so clicking an available work opens the reader instead of returning to Home.\n- Kept direct `book`, `view`, and `page` addresses as stable links to a selected book.\n- Prepared the next encoding check after the navigation fixes.\n\n## 1.4.21 - Stabilna nawigacja ksiąg\n\n### PL\n- Wzmocniono obsługę kliknięcia gotowej księgi w katalogu, aby nie wracało do strony głównej.\n- Kliknięcie księgi jest teraz przechwytywane przed innymi akcjami strony i zawsze uruchamia czytnik wybranej pozycji.\n- Zachowano adresy z parametrami book, view i page jako stabilne linki do ksiąg.\n\n### EN\n- Hardened catalogue book-click handling so available books no longer fall back to the home page.\n- Book clicks are now captured before other page actions and always open the selected reader module.\n- Kept book, view, and page URL parameters as stable links to works.\n\n## 1.4.20 - Poprawione linkowanie ksiąg\n\n### PL\n- Naprawiono otwieranie ksiąg z katalogu: kliknięcie prowadzi teraz bezpośrednio do wybranej księgi.\n- Dodano obsługę adresów z parametrem book, view i page, aby wybór księgi nie ginął po przeładowaniu lokalnego pliku.\n- Utrzymano zapamiętywanie ostatniej księgi i strony jako warstwę pomocniczą.\n\n### EN\n- Fixed catalogue book opening: clicking a book now goes directly to the selected work.\n- Added support for book, view, and page URL parameters so the selected book survives local-file reloads.\n- Kept last-book and last-page storage as a secondary convenience layer.\n\n## 1.4.19 - Czysty manifest PWA\n\n### PL\n- Usunięto konflikt merge z pliku manifest.webmanifest w paczce wydania.\n- Poprawiono kodowanie polskich znaków w opisie manifestu PWA.\n- Podbito wersję biblioteki po naprawie manifestu.\n\n### EN\n- Removed the merge-conflict state from the release manifest.webmanifest file.\n- Fixed Polish character encoding in the PWA manifest description.\n- Bumped the library version after the manifest cleanup.\n\n## 1.4.18 - Subtelne etykiety statusu ksiąg\n\n### PL\n- Usunięto ramki i tła z etykiet statusu w katalogu ksiąg.\n- Statusy PL/EN/COPT, PL/EN i planowane są teraz subtelnym tekstem zgodnym z motywem.\n- Zachowano znak wejścia przy dostępnych pozycjach katalogu.\n\n### EN\n- Removed borders and fills from catalogue status labels.\n- PL/EN/COPT, PL/EN, and planned status labels now render as subtle theme-aware text.\n- Kept the entry mark on available catalogue items.\n\n## 1.4.17 - Title color and book status clarity\n\n### PL\n- Dostosowano kolor tytułu Biblioteki Gnozy osobno dla motywu ciemnego, jasnego i sepii.\n- Ujednolicono statusy ksiąg jako informacje o dostępnych warstwach: PL / EN / COPT albo PL / EN.\n- Dodano znak wejścia ? i kursor kliknięcia dla dostępnych pozycji katalogu.\n\n### EN\n- Adjusted the Gnostic Library title color separately for Dark, Light, and Sepia themes.\n- Normalized book status labels as available text layers: PL / EN / COPT or PL / EN.\n- Added an entry mark ? and pointer behavior for available catalogue items.\n\n## 1.4.16 - Library title typography\n\n### PL\n- Dodano czcionkę Cormorant Garamond do głównego tytułu Biblioteki Gnozy.\n- Logo Gnostyk pozostaje w Caesar Dressing, a tekst ksiąg i interfejs czytnika nie zostały zmienione.\n- Podbito wersję aplikacji, cache PWA i odnośniki do zasobów.\n\n### EN\n- Added Cormorant Garamond to the main Gnostic Library title.\n- Kept the Gnostyk wordmark in Caesar Dressing and left book text and reader UI unchanged.\n- Bumped the application version, PWA cache, and asset links.\n\n## 1.4.15 - Version and changelog cleanup\n\n### PL\n- Ujednolicono podbijanie wersji w plikach aplikacji, PWA, metadanych i linkach zasobów.\n- Wyczyszczono historię zmian z głębokich duplikatów starszych wpisów i zachowano kolejność wersji.\n- Oznaczono Ewangelię Tomasza jako gotową w warstwach PL/EN/COPT.\n\n### EN\n- Synchronized version bumping across app files, PWA metadata, library metadata, and asset links.\n- Cleaned deeper duplicate entries from the change history while preserving version order.\n- Marked the Gospel of Thomas as ready in PL/EN/COPT layers.\n\n## 1.4.14 - Gospel of Philip library connection\n\n### PL\n- Podłączono Ewangelię Filipa jako dostępną pozycję na stronie Home i w katalogu Ksiąg.\n- Zmieniono status Filipa z roboczego szkieletu na pełny tekst PL/EN i ukryto pusty widok koptyjski do czasu importu warstwy COPT.\n- Dopasowano sidebar, opis księgi, aparat cytowania i przeskakiwanie po sekcjach 1–18 do logiki Ewangelii Filipa.\n\n### EN\n- Connected the Gospel of Philip as an available item on Home and in the Books catalogue.\n- Changed Philip's status from a working stub to full PL/EN text and hid the empty Coptic view until the COPT layer is imported.\n- Adjusted the sidebar, book description, citation apparatus, and section navigation for Gospel of Philip sections 1–18.\n\n## 1.4.13 - Gospel of Philip text layers\n\n### PL\n- Dodano pełny tekst angielski Ewangelii Filipa z public-domain przekładu Marka M. Mattisona.\n- Dodano polski tekst Ewangelii Filipa z gnostyk.pl jako warstwę opartą na wersji Mattisona.\n- Przebudowano moduł Filipa z 12 roboczych bloków na 18 naturalnych sekcji; warstwa koptyjska pozostaje oznaczona jako do importu po wskazaniu pewnego źródła Unicode/TEI.\n\n### EN\n- Added the full English Gospel of Philip text from Mark M. Mattison's public-domain translation.\n- Added the Polish Gospel of Philip text from gnostyk.pl as a layer based on Mattison's version.\n- Rebuilt the Philip module from 12 working blocks into 18 natural sections; the Coptic layer remains marked for import once a reliable Unicode/TEI source is provided.\n\n## 1.4.12 - Changelog order and Philip source\n\n### PL\n- Naprawiono skrót Ostatnie zmiany na stronie Home: pokazuje dokładnie trzy najnowsze wpisy w kolejności wersji.\n- Naprawiono pełną historię zmian: wpisy są scalane po wersji, sortowane semantycznie i nie gubią najnowszych pozycji.\n- Doprecyzowano podstawę Ewangelii Filipa: angielska warstwa Marka M. Mattisona z Gospels.net jest oznaczona jako public-domain, a polski przekład jako oparty na tej wersji.\n\n### EN\n- Fixed the Recent changes summary on Home: it now shows exactly the three latest entries in version order.\n- Fixed the full change history: entries are merged by version, sorted semantically, and no longer miss the newest releases.\n- Clarified the Gospel of Philip source: Mark M. Mattison's English layer from Gospels.net is marked as public domain, and the Polish translation is described as based on that version.\n\n## 1.4.11 - Gospel of Philip module\n\n### PL\n- Dodano moduł Ewangelii Filipa jako trzecią pozycję Biblioteki Gnozy.\n- Przygotowano opis, podstawę źródłową, aparat cytowania i strukturę 12 jednostek według Nag Hammadi Codex II,3.\n- Dodano miejsca na warstwy PL/EN/COPT bez wstawiania niezweryfikowanego tekstu ani materiału o niejasnych prawach.\n- Uogólniono część czytnika logionów/sekcji, aby nie była zależna wyłącznie od Ewangelii Tomasza.\n\n### EN\n- Added the Gospel of Philip module as the third item in Gnostyk Library.\n- Prepared the description, source base, citation apparatus, and a 12-unit structure following Nag Hammadi Codex II,3.\n- Added PL/EN/COPT layer slots without inserting unverified text or material with unclear rights.\n- Generalized part of the logion/section reader so it is no longer tied only to the Gospel of Thomas.\n\n## 1.4.10 - Coptic active selection styling\n\n### PL\n- Ujednolicono wyróżnienie aktywnego logionu w widoku koptyjskim z widokami polskim i angielskim.\n- Usunięto ciemne wypełnienie przypominające motyw Dark w motywach Light i Sepia.\n- Podbito numer wersji aplikacji i cache PWA.\n\n### EN\n- Matched the active-logion highlight in the Coptic view to the Polish and English views.\n- Removed the dark fill that resembled the Dark theme in Light and Sepia.\n- Bumped the application version and PWA cache.\n\n## 1.4.9 - Theme-aware text selection\n\n### PL\n- Znormalizowano kolory zaznaczania tekstu osobno dla motywów Dark, Light i Sepia.\n- W jasnym motywie zastosowano delikatne niebieskie zaznaczenie, w Sepia ciepłe bursztynowe, a w Dark złote o odpowiednim kontraście.\n- Podbito numer wersji aplikacji i cache PWA.\n\n### EN\n- Normalized text-selection colors separately for the Dark, Light, and Sepia themes.\n- The Light theme now uses a subtle blue selection, Sepia a warm amber selection, and Dark a gold selection with suitable contrast.\n- Bumped the application version and PWA cache.\n\n## 1.4.8 - Changelog and navigation cleanup\n\n### PL\n- Uporządkowano historię zmian: drugi wpis 1.4.6 oznaczono jako 1.4.5, a lista scala duplikaty wersji.\n- Sekcja Ostatnie zmiany na stronie Home korzysta teraz z changeloga, zachowuje kolejność i pokazuje najnowszą wersję.\n- Przełożono pasek nawigacji strony głównej do układu Home, Księgi, Słownik, Narzędzia, Prywatność, Zmiany, Kontakt, Info, Ustawienia, Wsparcie.\n- Ukryty tryb interlinearny nie zostawia już pustego segmentu w przełączniku wersji tekstu.\n\n### EN\n- Cleaned up the change history: the second 1.4.6 entry is now marked as 1.4.5, and duplicate versions are merged.\n- The Recent changes section on Home now uses the changelog, preserves order, and shows the latest version.\n- Reordered the home navigation bar to Home, Books, Dictionary, Tools, Privacy, Changes, Contact, Info, Settings, Support.\n- The hidden interlinear mode no longer leaves an empty segment in the text-version switcher.\n\n## 1.4.7 - Experimental interlinear toggle\n\n### PL\n- Przywrócono pracę do stabilnej bazy 1.4.6 i rozpoczęto dalszą numerację od wersji 1.4.7.\n- Ukryto interlinię z głównych przełączników czytania.\n- Dodano w Ustawieniach opcję pokazania interlinii jako trybu eksperymentalnego; po wyłączeniu zapisany tryb interlinearny wraca automatycznie do tekstu polskiego.\n\n### EN\n- Restored the work to the stable 1.4.6 base and continued numbering from version 1.4.7.\n- Hid the interlinear mode from the main reading switches.\n- Added a Settings option to show interlinear as an experimental mode; when disabled, a saved interlinear mode automatically falls back to the Polish text.\n\n## 1.4.6\n\n### PL\n- Dodano nową sekcję Kontakt w nawigacji biblioteki i stopce.\n- Dodano klikalny adres e-mail `gnostyk950@gmail.com` do zgłaszania błędów, literówek, problemów z tłumaczeniem oraz opinii.\n- Dodano pełną lokalizację PL/EN dla panelu kontaktowego.\n\n### EN\n- Added a new Contact section to the library navigation and footer.\n- Added a clickable email address `gnostyk950@gmail.com` for bug reports, typos, translation issues, and feedback.\n- Added full PL/EN localization for the contact panel.\n\n## 1.4.5\n\n### PL\n- Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.\n- Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.\n\n### EN\n- Replaced Settings and Tools separators with subtle lines matching the Library panel style.\n- Unified separator colors for dark, light, and sepia themes.\n\n## 1.4.4\n\n- Ujednolicono Ustawienia i Narzędzia ze stylem Słownika we wszystkich motywach.\n- Dodano tryb gramatyczny interlinii i jawne etykiety lemat/typ przy tokenach koptyjskich.\n- Zestandaryzowano checkboxy i kontrolki formularzy do koloru aktywnego motywu.\n\n## 1.4.3\n\n### PL\n- Przebudowano panel Ustawień tak, aby wizualnie pasował do reszty Biblioteki Gnozy: sekcje są oddzielone separatorami zamiast ciężkich ramek.\n- Ustawienie języka działa teraz jako domyślny język uruchamiania aplikacji, a przełącznik PL/EN pozostaje szybką zmianą bieżącej sesji.\n- Zastąpiono niebieskie checkboxy kontrolkami dopasowanymi do aktualnego motywu.\n- Ustawienia rozmiaru tekstu, odstępów, szerokości kolumny i interlinii są stosowane także w widokach koptyjskim i interlinearnym.\n\n### EN\n- Reworked the Settings panel so it visually matches the rest of Gnostyk Library, using separators instead of heavy nested boxes.\n- The language setting now controls the default startup language, while the PL/EN switch remains a quick change for the current session.\n- Replaced blue checkboxes with theme-matched controls.\n- Text size, spacing, column width, and interlinear settings now also apply to the Coptic and interlinear views.\n\n## 1.4.1\n\n### PL\n- Dodano ustawienia interlinii Tomasza: tryb kompaktowy, klasyczny i rozszerzony.\n- Dodano przełączniki pokazywania lematu i typu gramatycznego w tokenach interlinearnych.\n- Dodano wybór zakresu wystąpień w karcie słownikowej: aktywna księga albo cała biblioteka.\n- Na stronie Home sekcja „Ostatnie zmiany” pokazuje teraz tylko trzy najnowsze wpisy; pełna historia pozostaje pod przyciskiem.\n\n### EN\n- Added Thomas interlinear settings: compact, classic, and expanded modes.\n- Added toggles for showing lemma and grammatical type in interlinear tokens.\n- Added dictionary occurrence scope: active book or whole library.\n- On Home, “Recent changes” now shows only the three latest entries; full history remains available through the button.\n\n## 1.4.0\n\n### PL\n- Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym ciągłym tekście.\n- Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.\n\n### EN\n- Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text.\n- Dictionary-card occurrences now use token forms and lemmas, not only raw line text.\n\n## 1.3.9\n\n### PL\n- Dodano etap 2 interlinii Tomasza: tokeny zachowują teraz formę koptyjską, lemat i typ gramatyczny z warstwy Coptic SCRIPTORIUM.\n- Kliknięcie słowa w interlinii otwiera kartę słownikową po lemacie, gdy jest dostępny, a nie tylko po formie powierzchniowej.\n- Dodano subtelną linię lematu pod tokenem interlinearnym i ujednolicono podświetlanie wystąpień dla form oraz lematów.\n\n### EN\n- Added Thomas interlinear stage 2: tokens now preserve the Coptic surface form, lemma, and grammatical type from the Coptic SCRIPTORIUM layer.\n- Clicking an interlinear word opens the dictionary card by lemma when available, not only by surface form.\n- Added a subtle lemma line below interlinear tokens and normalized occurrence highlighting for forms and lemmas.\n\n## 1.3.8\n\n### PL\n- Podbito numer wersji w całej aplikacji, plikach PWA, odnośnikach do zasobów i historii zmian.\n- Dodano najnowszy wpis do widocznej historii zmian na stronie Home oraz w zakładce Zmiany.\n- Uzupełniono angielskie wersje najnowszych wpisów changeloga, aby tryb EN nie pokazywał polskich punktów.\n\n### EN\n- Synchronized the version number across the app, PWA files, asset links, and the change history.\n- Added the latest entry to the visible change history on Home and in the Changes tab.\n- Completed the English versions of the latest changelog entries so EN mode no longer shows Polish points.\n\n## 1.3.7\n\n### PL\n- Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.\n- Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.\n- Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.\n\n### EN\n- Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114.\n- Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well.\n- Simplified the visual style of interlinear word blocks so they fit the continuous reader better.\n\n## 1.3.6\n\n### PL\n- Karta słownikowa działa kontekstowo dla aktywnej księgi. W module Ewangelii Tomasza pokazuje wystąpienia z Tomasza, logiony i bieżący logion zamiast pozycji z Pistis Sophii.\n- Uogólniono opis wspólnego słownika Biblioteki Gnozy.\n\n### EN\n- The dictionary card now follows the active book. In the Gospel of Thomas module it shows Thomas occurrences, logia and the current logion instead of Pistis Sophia positions.\n- Generalized the shared Gnostyk Library dictionary note.\n\n## 1.3.5\n\n### PL\n- Widok koptyjski Ewangelii Tomasza pokazuje teraz ciągły tekst wszystkich 114 logionów.\n- Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca w ciągłym tekście koptyjskim.\n- Aparat cytowania Tomasza używa logionów i Nag Hammadi Codex II zamiast paginacji Meada / Schwartze-Petermanna.\n\n### EN\n- The Gospel of Thomas Coptic view now shows the continuous text of all 114 logia.\n- Clicking a logion in the sidebar scrolls to the matching place in the continuous Coptic text.\n- Thomas citation now uses logion numbers and Nag Hammadi Codex II instead of Mead / Schwartze-Petermann pagination.\n\n## 1.3.4\n\n### PL\n- Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.\n- Zsynchronizowano widok Koptyjski z logionami 1–114.\n- Wyłączono tryb Interlinia dla Tomasza do czasu etapu 2, aby aplikacja nie sugerowała gotowej interlinii słowo po słowie.\n\n### EN\n- Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM.\n- Synchronized Coptic mode with logia 1–114.\n- Disabled the Thomas interlinear mode until stage 2 so the app does not imply a completed word-by-word interlinear layer.\n\n## 1.3.0\n\n### PL\n- Dodano warstwę koptyjską Ewangelii Tomasza z otwartej edycji Coptic SCRIPTORIUM.\n- Przygotowano techniczne źródło warstwy koptyjskiej dla logionów Tomasza.\n- Zaktualizowano metadane, prawa, źródła i aparat cytowania Tomasza o Coptic SCRIPTORIUM / CC-BY 4.0.\n\n### EN\n- Added the Coptic layer for the Gospel of Thomas from the open Coptic SCRIPTORIUM edition.\n- Prepared the technical source for the Coptic layer of Thomas logia.\n- Updated Thomas metadata, rights, sources and citation apparatus with Coptic SCRIPTORIUM / CC-BY 4.0.\n\n## 1.2.4\n\n### PL\n- Uporządkowano listę Codex II: każda pozycja jest osobnym wierszem bez kropek listy.\n- Dodano statusy po prawej stronie pozycji oraz efekt hover dla dostępnej Ewangelii Tomasza.\n- Zachowano zwykły kursor zamiast kursora-rączki.\n\n### EN\n- Organized the Codex II list: each entry is now a separate row without list bullets.\n- Added right-aligned statuses and hover feedback for the available Gospel of Thomas entry.\n- Kept the default cursor instead of the hand pointer.\n\n## 1.2.3\n\n### PL\n- Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.\n- Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.\n\n### EN\n- Aligned Home card action buttons so they sit consistently regardless of description length.\n- Cleaned up the start-card layout without changing the bottom navigation bar.\n\n## 1.2.2\n\n### PL\n- Usunięto dużą ikonę książki z kafelka na stronie Home.\n- Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.\n- Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.\n\n### EN\n- Removed the large book icon from the Home card.\n- Added subtle, consistent Material Symbols icons to the Home cards.\n- Icons inherit their color from the current theme and are not colored emoji.\n\n## 1.2.1\n\n### PL\n- Poprawiono przycisk „Wróć do ostatniego tekstu”, aby otwierał ostatnio przeglądaną księgę i zapamiętaną pozycję zamiast katalogu.\n- Usunięto dublowanie funkcji „Przeglądaj bibliotekę” na karcie kontynuacji pracy.\n- Naprawiono parser changeloga: tryb EN rozpoznaje nagłówki „EN:” i nie pokazuje polskich punktów jako ostatnich zmian.\n\n### EN\n- Fixed the “Return to the last text” button so it opens the last viewed book and saved position instead of the catalogue.\n- Removed the duplicated “Browse library” behavior from the continue-work card.\n- Fixed the changelog parser: EN mode now recognizes “EN:” headings and no longer shows Polish points as the latest changes.\n\n## 1.2.0\n\n### PL\n- Przebudowano stronę Home: nie jest już drugim katalogiem ksiąg, tylko ekranem startowym ze statystykami, ostatnio dodanym tekstem, wsparciem i ostatnimi zmianami.\n- Usunięto zdublowane kafelki ksiąg z zakładki Księgi; katalog kodeksów pozostaje głównym miejscem otwierania tekstów.\n- Ujednolicono przyciski na „Otwórz” i przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.\n\n### EN\n- Reworked the Home page: it is no longer a second book catalogue, but a start screen with stats, recently added text, support and recent changes.\n- Removed duplicated book tiles from the Books tab; the codex catalogue remains the main place for opening texts.\n- Standardized buttons to “Open” and prepared a visible visit counter for a privacy-friendly external counter API.\n\n## 1.1.5\n\n- Rozdzielono motywy tematyczne ksiąg: Ewangelia Tomasza nie korzysta już z motywów Pistis Sophii.\n- Dodano osobne zestawy motywów dla Pistis Sophii i Ewangelii Tomasza.\n- Przygotowano pliki `themes.json` w modułach ksiąg jako fundament pod pełną niezależność metadanych kolejnych tekstów.\n\n## 1.1.4\n\n### PL\n- Dostosowano aparat cytowania Ewangelii Tomasza: opcje Meada i Schwartze-Petermanna nie są już pokazywane jako właściwe dla Tomasza; zastępują je logion i źródła.\n- Zmieniono nazwę polskiej warstwy na „Polskie opracowanie Dariusza Kaniewskiego z wykorzystaniem narzędzi AI”.\n- Poprawiono stronę Home: kafelek Pistis Sophia prowadzi do Pistis Sophii, kafelek Tomasza prowadzi do Ewangelii Tomasza.\n- Ujednolicono ikonę przy Ewangelii Tomasza z ikoną używaną przy Pistis Sophii.\n\n### EN\n- Adjusted the Gospel of Thomas citation apparatus: Mead and Schwartze-Petermann are no longer presented as Thomas-specific options; they are replaced by logion and sources.\n- Renamed the Polish layer as “Dariusz Kaniewski’s Polish AI-assisted adaptation”.\n- Fixed the Home page: the Pistis Sophia card opens Pistis Sophia and the Thomas card opens the Gospel of Thomas.\n- Unified the Gospel of Thomas icon with the Pistis Sophia icon.\n\n## 1.1.3\n\n### PL\n- Znormalizowano informacje czytnika dla Ewangelii Tomasza: aktualna pozycja biblioteki, podstawa tekstu, prawa, opis przekładu, stopka prawna i cytowanie nie pokazują już danych Pistis Sophii.\n- Dostosowano metadane widoku księgi do aktywnego modułu: Pistis Sophia używa stron i paginacji Meada, a Ewangelia Tomasza używa logionów 1–114.\n- Poprawiono cytowanie Ewangelii Tomasza tak, aby odwoływało się do numeru logionu i warstwy PL/EN.\n\n### EN\n- Normalized the reader information for the Gospel of Thomas: current library item, source base, rights, translation notes, legal footer and citation no longer show Pistis Sophia data.\n- Adjusted book-view metadata to the active module: Pistis Sophia uses Mead pages, while the Gospel of Thomas uses logia 1–114.\n- Fixed Gospel of Thomas citation so it refers to logion numbers and the PL/EN layer.\n\n## 1.1.2\n\n### PL\n- Dodano angielską warstwę Ewangelii Tomasza wg public-domain Mark M. Mattison.\n- Podłączono Ewangelię Tomasza w statystykach biblioteki jako drugą dostępną księgę.\n- Uzupełniono metadane modułu PL/EN oraz opis źródeł.\n\n### EN\n- Added the English Gospel of Thomas layer based on Mark M. Mattison’s public-domain translation.\n- Connected the Gospel of Thomas in library statistics as the second available book.\n- Updated PL/EN module metadata and source descriptions.\n\n## 1.1.1\n\n### PL\n- Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.\n- Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.\n\n### EN\n- The Gospel of Thomas now uses a continuous scrollable text with visible logion numbers.\n- Clicking a logion in the sidebar scrolls the reader to that exact place in the text.\n\n## 1.1.0\n\n### PL\n- Dodano Ewangelię Tomasza jako pełną księgę modułową.\n- Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.\n- Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.\n- Zaktualizowano wersję aplikacji do numeracji 1.1.0, bo to pierwsza większa rozbudowa biblioteki.\n\n### EN\n- Added the Gospel of Thomas as a full modular book.\n- Added all 114 logia in Dariusz Kaniewski’s Polish AI-assisted adaptation.\n- Clicking the book now switches the reader to the Thomas module.\n- Updated the app version to 1.1.0 because this is the first larger library expansion.\n\n## 1.0.149\n\n### PL\n- Poprawiono widok słownika w trybie PL: wyniki i karta nie podstawiają już angielskich glos jako głównego tekstu, gdy brakuje polskiej glosy.\n- Wyśrodkowano krzyżyk zamykania karty słownikowej.\n- Poprawiono wyszukiwanie w słowniku: wyniki są teraz sortowane według trafności.\n- Ograniczono listę do 30 najlepszych wyników, żeby nie pokazywać przypadkowych dopasowań.\n- Usunięto fałszywe trafienia typu „mój / my” przy wyszukiwaniu słowa „spirit”.\n\n### EN\n- Fixed the dictionary view in Polish mode: results and cards no longer use English glosses as the main text when a Polish gloss is missing.\n- Centered the dictionary card close button.\n- Improved dictionary search: results are now ranked by relevance.\n- Limited the list to the 30 best results to avoid weak accidental matches.\n- Removed false matches such as “mój / my” when searching for “spirit”.\n\n## 1.0.144\n\n### PL\n- Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.\n- Dodano najnowszą wersję do widocznej historii zmian.\n- Wyśrodkowano krzyżyk zamykania karty słownikowej.\n- Usunięto ramkę i tło ze statusów książek w katalogu.\n\n### EN\n- Synchronized the version number across the app, PWA files, and asset links.\n- Added the latest version to the visible changelog.\n- Centered the dictionary card close button.\n- Removed the border and background from catalogue book status labels.\n\n## 1.0.143\n\n- Przebudowano strukturę danych na bibliotekę modułową w katalogu `books/`.\n- Przeniesiono Pistis Sophię do `books/pistis-sophia/`.\n- Dodano szkielet modułu Ewangelii Tomasza w `books/gospel-of-thomas/` z miejscem na 114 logionów.\n- Zaktualizowano manifest biblioteki, ścieżki skryptów i cache PWA.\n\n## 1.0.142\n\n### PL\n- Uzupełniono historię zmian o najnowsze wersje katalogu biblioteki.\n- Usunięto obramowanie logo po najechaniu kursorem.\n- Domyślnie zwinięto kodeksy Nag Hammadi i uporządkowano oznaczenia statusów książek.\n\n### EN\n- Updated the change history with the latest library catalogue versions.\n- Removed the hover outline from the Gnostyk logo.\n- Collapsed the Nag Hammadi codices by default and cleaned up book status markers.\n\n## 1.0.141\n\n### PL\n- Ujednolicono podbicie wersji po zmianach w strukturze Home/Księgi.\n- Kliknięcie logo Gnostyk przenosi teraz do strony Home.\n- Pozycja Pistis Sophia w katalogu Ksiąg jest teraz klikalna i otwiera czytnik.\n\n### EN\n- Synchronized the version after the Home/Books structure update.\n- Clicking the Gnostyk logo now takes the user to the Home page.\n- The Pistis Sophia item in the Books catalogue is now clickable and opens the reader.\n\n## 1.0.140\n\n### PL\n- Dodano osobną stronę Home jako ekran startowy biblioteki.\n- Przeniesiono katalog tekstów do zakładki Księgi.\n- Dodano strukturę kolekcji: Biblioteka Nag Hammadi, Kodeks Askew, Kodeks Bruce'a i inne teksty gnostyckie.\n\n### EN\n- Added a separate Home page as the library start screen.\n- Moved the text catalogue into the Books tab.\n- Added a collection structure: Nag Hammadi Library, Askew Codex, Bruce Codex, and other Gnostic texts.\n\n## 1.0.139 - Dictionary card language refresh\n\n### PL\n- Naprawiono kartę słownikową po zmianie języka interfejsu.\n- Otwarta karta słownikowa odświeża teraz etykiety PL/EN, aby w trybie polskim nie zostawały angielskie napisy.\n\n### EN\n- Fixed the dictionary card after changing the interface language.\n- An open dictionary card now refreshes PL/EN labels instead of keeping English labels in Polish mode.\n\n## 1.0.138\n\n### PL\n- Rozbudowano kartę słownikową o profil hasła jako fundament Słownika 2.0.\n- Dodano informacje o lemacie, liczbie znaczeń PL/EN i gotowości hasła do użycia w wielu tekstach.\n- Uporządkowano prezentację danych słownikowych bez zmiany działania interlinii.\n\n### EN\n- Expanded the dictionary card with an entry profile as the foundation for Dictionary 2.0.\n- Added lemma information, PL/EN meaning counts, and multi-text dictionary readiness.\n- Improved dictionary data presentation without changing interlinear behavior.\n\n## 1.0.137\n\n### PL\n- Naprawiono historię zmian, aby w trybie EN nie pokazywała polskich punktów z wpisów oznaczonych jako PL.\n- Parser changeloga rozpoznaje teraz zarówno nagłówki PL / EN, jak i ### PL / ### EN.\n- Podbito wersję aplikacji po poprawce lokalizacji changeloga.\n\n### EN\n- Fixed the change history so EN mode no longer shows Polish points from entries marked as PL.\n- The changelog parser now recognizes both PL / EN headings and ### PL / ### EN headings.\n- Bumped the application version after the changelog localization fix.\n\n## 1.0.136\n\n### PL\n- Znormalizowano układ strony Wsparcie między wersją polską i angielską.\n- Poszerzono teksty opisowe i ujednolicono wysokości bloków, aby przełączanie języka nie zmieniało proporcji strony.\n- Dopasowano treść PL/EN tak, aby obie wersje miały ten sam rytm i strukturę.\n\n### EN\n- Normalized the Support page layout between Polish and English.\n- Widened descriptive text blocks and unified section heights so switching language does not change the page proportions.\n- Aligned PL/EN copy so both versions share the same rhythm and structure.\n\n## 1.0.135\n\n### PL\n- Dodano zakładkę Wsparcie / Support z opisem rozwoju projektu.\n- Dodano przycisk PayPal prowadzący do paypal.me/dariuszkaniewski.\n- Ikona serca korzysta z kolorów aktywnego motywu, aby pasowała do trybów Dark, Light i Sepia.\n\n### EN\n- Added a Support tab with a project development description.\n- Added a PayPal button linking to paypal.me/dariuszkaniewski.\n- The heart icon now uses the active theme colors so it fits Dark, Light and Sepia modes.\n\n## 1.0.133\n\n### PL\n- Znormalizowano układ przełączników widoku czytelnika między wersją polską i angielską.\n- Przełączniki tekstu mają teraz stałą siatkę czterech kolumn, więc nie zmieniają położenia po zmianie języka.\n\n### EN\n- Normalized the reader view switcher layout between Polish and English.\n- Text mode buttons now use a fixed four-column grid so their position stays consistent after changing the interface language.\n\n## 1.0.132\n\n### PL\n- Znormalizowano opis strony głównej w wersji polskiej względem wersji angielskiej.\n- Poszerzono blok opisu pod nagłówkiem biblioteki, aby dłuższy tekst PL nie łamał się niepotrzebnie.\n- Zmniejszono odstęp pod logo, dzięki czemu nagłówek strony głównej jest bardziej zwarty.\n\n### EN\n- Normalized the Polish home page description against the English version.\n- Widened the description block under the library heading so longer PL text does not wrap unnecessarily.\n- Reduced the spacing below the logo to make the home page header more compact.\n\n## 1.0.131\n\n### PL\n- Dostosowano pole wyszukiwania słownika do motywów Light, Sepia i Dark.\n- Zastąpiono sztywne kolory zmiennymi motywu dla tła, tekstu, obramowania i przycisku czyszczenia.\n- Poprawiono kontrast pola wyszukiwania bez zmiany działania słownika.\n\n### EN\n- Adapted the dictionary search field to the Light, Sepia, and Dark themes.\n- Replaced hard-coded colors with theme variables for the background, text, border, and clear button.\n- Improved search field contrast without changing dictionary behavior.\n\n## 1.0.129\n\n### PL\n- Poprawiono wygląd pola wyszukiwania słownika w ciemnych motywach.\n- Dodano przycisk × do szybkiego czyszczenia wyszukiwania.\n- Ujednolicono styl pola wyszukiwania z resztą interfejsu.\n\n### EN\n- Improved the dictionary search field appearance in dark themes.\n- Added an × button for quickly clearing the search.\n- Unified the search field styling with the rest of the interface.\n\n## 1.0.128\n\n### PL\n- Ujednolicono numer wersji w całej aplikacji po wydaniu 1.0.127.\n- Podbito odwołania wersji w plikach aplikacji, cache PWA, metadanych i linkach zasobów.\n- Uporządkowano historię zmian tak, aby pokazywała ostatnie 10 wersji z opisami PL/EN.\n\n### EN\n- Unified the version number across the application after the 1.0.127 release.\n- Updated version references in app files, PWA cache, metadata, and asset links.\n- Cleaned up the changelog so it shows the latest 10 versions with PL/EN descriptions.\n\n## 1.0.127\n\n### PL\n- Na telefonach karta słownikowa działa jako dolny panel zamiast zakrywać cały tekst.\n- Tekst pozostaje widoczny nad kartą słownikową podczas przeglądania wystąpień.\n- Panel ma własne przewijanie, a przycisk zamykania pozostaje dostępny.\n\n### EN\n- On mobile, the dictionary card now works as a bottom sheet instead of covering the whole text.\n- The text remains visible above the dictionary card while browsing occurrences.\n- The panel has its own scrolling area and the close button remains available.\n\n## 1.0.126\n\n### PL\n- Wystąpienia słownika są sortowane według bliskości aktualnej strony.\n- Dodano przyciski Poprzednie 20 / Następne 20 dla długich list wystąpień.\n- Karta słownikowa pozostaje otwarta podczas przeglądania kolejnych stron.\n\n### EN\n- Dictionary occurrences are sorted by proximity to the current page.\n- Added Previous 20 / Next 20 buttons for long occurrence lists.\n- The dictionary card stays open while browsing occurrence pages.\n\n## 1.0.125\n\n### PL\n- Przygotowano architekturę wystąpień słownika pod wiele tekstów koptyjskich.\n- Wystąpienia są teraz grupowane według tekstu; obecnie aktywna jest Pistis Sophia.\n- Moduł słownika jest gotowy na późniejsze dodanie kolejnych tekstów, np. Ewangelii Tomasza.\n\n### EN\n- Prepared the dictionary occurrence architecture for multiple Coptic texts.\n- Occurrences are now grouped by text; Pistis Sophia is currently active.\n- The dictionary module is ready for adding future texts, such as the Gospel of Thomas.\n\n## 1.0.124\n\n### PL\n- Naprawiono pozycję karty słownikowej przy długich listach wystąpień.\n- Karta mieści się teraz w ekranie i ma własne przewijanie.\n- Przycisk zamykania pozostaje zawsze dostępny.\n\n### EN\n- Fixed the dictionary card position with long occurrence lists.\n- The card now fits inside the viewport and has its own scrolling area.\n- The close button remains available at all times.\n\n## 1.0.123\n\n### PL\n- Karta słownikowa pozostaje otwarta po kliknięciu wystąpienia.\n- Kliknięcie wystąpienia przenosi do odpowiedniej strony w trybie interlinearnym.\n- Dopasowane słowo zostaje podświetlone, aby łatwiej odnaleźć je w tekście.\n\n### EN\n- The dictionary card stays open after clicking an occurrence.\n- Clicking an occurrence opens the matching page in interlinear mode.\n- The matching word is highlighted so it is easier to find in the text.\n\n## 1.0.122\n\n### PL\n- Dodano sekcję „Wystąpienia” w karcie słownikowej.\n- Karta pokazuje, na których stronach bieżącej warstwy koptyjskiej występuje dana forma lub jej forma bazowa.\n- Kliknięcie wystąpienia przenosi do odpowiedniej strony tekstu.\n\n### EN\n- Added an “Occurrences” section to the dictionary card.\n- The card shows which pages in the current Coptic layer contain the selected form or its base form.\n- Clicking an occurrence opens the corresponding text page.\n\n## 1.0.121\n\n### PL\n- Rozbudowano kartę słownikową bez dodawania nowych modułów.\n- Części mowy są teraz opisane normalnie, np. „rzeczownik (N)” albo „przyimek / partykuła (PREP)”.\n- Dla form rozpoznanych przez lematyzację karta pokazuje formę bazową oraz transliterację.\n- Oczyszczono listy znaczeń z części technicznych wpisów słownikowych.\n\n### EN\n- Expanded the dictionary card without adding new modules.\n- Parts of speech are now shown as readable labels, for example “noun (N)” or “preposition / particle (PREP)”.\n- For forms resolved by lemmatization, the card now shows the base form and transliteration.\n- Cleaned meaning lists from technical dictionary fragments.\n\n## 1.0.120\n\n### PL\n- Naprawiono pełną lokalizację karty słownikowej w trybie EN i PL.\n- Etykiety karty słownikowej przełączają się teraz zgodnie z językiem interfejsu.\n- Usunięto zdublowane pole „Część mowy” z karty słownikowej.\n\n### EN\n- Fixed full dictionary-card localization in EN and PL modes.\n- Dictionary-card labels now switch according to the interface language.\n- Removed the duplicated “Part of speech” field from the dictionary card.\n\n## 1.0.119\n\n### PL\n- Naprawiono przyciski widoku czytnika: Polski, Source EN, Coptic i Interlinear.\n- Dodano stabilne przełączanie trybu czytania przez atrybut `data-reader-mode`.\n- Uodporniono zapisany tryb czytnika na starsze lub błędne wartości z `localStorage`.\n\n### EN\n- Fixed reader mode buttons: Polish, Source EN, Coptic, and Interlinear.\n- Added stable reader-mode switching through the `data-reader-mode` attribute.\n- Made the saved reader mode robust against older or invalid `localStorage` values.\n";
 
 function pushUniquePoint(list, point) {
   const normalized = String(point || "").trim();
@@ -9361,6 +9686,7 @@ function setLibrarySection(section) {
   const isContact = section === "contact";
   const isPrivacy = section === "privacy";
   const isChanges = section === "changes";
+  const isHelp = section === "help";
   const isDictionary = section === "dictionary";
   const isTools = section === "tools";
   const isSettings = section === "settings";
@@ -9371,6 +9697,7 @@ function setLibrarySection(section) {
   if (els.libraryContactPanel) els.libraryContactPanel.hidden = !isContact;
   if (els.libraryPrivacyPanel) els.libraryPrivacyPanel.hidden = !isPrivacy;
   if (els.libraryChangesPanel) els.libraryChangesPanel.hidden = !isChanges;
+  if (els.libraryHelpPanel) els.libraryHelpPanel.hidden = !isHelp;
   if (els.libraryDictionaryPanel) els.libraryDictionaryPanel.hidden = !isDictionary;
   if (els.libraryToolsPanel) els.libraryToolsPanel.hidden = !isTools;
   if (els.settingsPanel) els.settingsPanel.hidden = !isSettings;
@@ -9382,6 +9709,7 @@ function setLibrarySection(section) {
   els.libraryContactToggle?.classList.toggle("is-active", isContact);
   els.libraryPrivacyToggle?.classList.toggle("is-active", isPrivacy);
   els.libraryChangesToggle?.classList.toggle("is-active", isChanges);
+  els.libraryHelpToggle?.classList.toggle("is-active", isHelp);
   els.libraryDictionaryToggle?.classList.toggle("is-active", isDictionary);
   els.libraryToolsToggle?.classList.toggle("is-active", isTools);
   els.librarySettingsToggle?.classList.toggle("is-active", isSettings);
@@ -9392,11 +9720,12 @@ function setLibrarySection(section) {
   els.libraryContactToggle?.setAttribute("aria-expanded", String(isContact));
   els.libraryPrivacyToggle?.setAttribute("aria-expanded", String(isPrivacy));
   els.libraryChangesToggle?.setAttribute("aria-expanded", String(isChanges));
+  els.libraryHelpToggle?.setAttribute("aria-expanded", String(isHelp));
   els.libraryDictionaryToggle?.setAttribute("aria-expanded", String(isDictionary));
   els.libraryToolsToggle?.setAttribute("aria-expanded", String(isTools));
   els.librarySettingsToggle?.setAttribute("aria-expanded", String(isSettings));
   els.librarySupportToggle?.setAttribute("aria-expanded", String(isSupport));
-  const target = isHome ? els.libraryHomePanel : isInfo ? els.libraryInfoPanel : isContact ? els.libraryContactPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
+  const target = isHome ? els.libraryHomePanel : isInfo ? els.libraryInfoPanel : isContact ? els.libraryContactPanel : isPrivacy ? els.libraryPrivacyPanel : isChanges ? els.libraryChangesPanel : isHelp ? els.libraryHelpPanel : isDictionary ? els.libraryDictionaryPanel : isTools ? els.libraryToolsPanel : isSettings ? els.settingsPanel : isSupport ? els.librarySupportPanel : els.libraryBooksPanel;
   if (state.view !== "reader") {
     requestAnimationFrame(() => target?.scrollIntoView({ behavior: "smooth", block: "nearest" }));
   }
@@ -9419,6 +9748,13 @@ function closeReaderPanels() {
 }
 
 function scrollToReaderText() {
+  if (isPistisBook() && state.sidebarMode !== "addenda" && !["coptic", "interlinear"].includes(state.readerMode)) {
+    const target = document.querySelector(`#pistis-page-${state.page}`);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+  }
   if (isThomasBook || activeBook?.type === "logion-reader") {
     const target = document.querySelector(`#logion-${state.page}`);
     if (target) {
@@ -9429,6 +9765,54 @@ function scrollToReaderText() {
   document.querySelector(".text-surface")?.scrollIntoView({
     behavior: "smooth",
     block: "start"
+  });
+}
+
+function keepActiveSidebarItemVisible(pageNumber) {
+  const selector = state.sidebarMode === "addenda"
+    ? `[data-addenda-page="${pageNumber}"]`
+    : `.nav-item[data-page="${pageNumber}"]`;
+  const activeItem = els.chapters?.querySelector(selector);
+  if (!activeItem) return;
+  requestAnimationFrame(() => {
+    activeItem.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
+
+function navigateFromAddendaSidebar(pageNumber) {
+  const targetPage = Math.max(1, Math.min(PISTIS_TEXT_START_PAGE, Number(pageNumber) || 1));
+  state.sidebarMode = "addenda";
+  state.tab = "chapters";
+  state.page = targetPage;
+  saveReadingState();
+  renderReader();
+  renderLists();
+  setTab(state.tab);
+  requestAnimationFrame(() => {
+    document.querySelector(`#addenda-page-${targetPage}`)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    keepActiveSidebarItemVisible(targetPage);
+  });
+}
+
+function navigateFromPistisChapterSidebar(chapterNumber, pageNumber) {
+  const chapter = data.chapters.find(item => Number(item.number) === Number(chapterNumber));
+  const targetPage = Number(chapter?.page || pageNumber || PISTIS_TEXT_START_PAGE);
+  state.sidebarMode = "chapters";
+  state.tab = "chapters";
+  state.page = targetPage;
+  state.pistisChapter = Number(chapterNumber);
+  saveReadingState();
+  renderReader();
+  renderLists();
+  setTab(state.tab);
+  requestAnimationFrame(() => {
+    const target = document.querySelector(`#pistis-chapter-${Number(chapterNumber)}`)
+      || document.querySelector(`#pistis-page-${targetPage}`);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    keepActiveSidebarItemVisible(targetPage);
   });
 }
 
@@ -9445,15 +9829,25 @@ function goToPage(page, options = {}) {
   setAppView("reader");
   if (isMobileLayout()) closeReaderPanels();
   state.page = Math.max(1, Math.min(data.pageCount, Number(page) || 1));
+  if (isPistisBook() && !options.keepChapterSelection) state.pistisChapter = null;
+  if (isPistisAddendaPage(state.page)) {
+    state.tab = "addenda";
+  } else if (isPistisBook() && state.tab === "addenda") {
+    state.tab = "chapters";
+  }
   saveReadingState();
   renderReader();
   renderLists();
+  setTab(state.tab);
   if (options.scrollToText || isMobileLayout()) {
     requestAnimationFrame(scrollToReaderText);
   }
 }
 
 function renderReader() {
+  if (isPistisBook()) {
+    state.tab = isPistisAddendaPage(state.page) ? "addenda" : (state.tab === "addenda" ? "chapters" : state.tab);
+  }
   state.readerMode = normalizeReaderMode(state.readerMode);
   const page = pageByNumber(state.page);
   const chapter = chapterForPage(state.page);
@@ -9461,11 +9855,23 @@ function renderReader() {
   const isCoptic = state.readerMode === "coptic";
   const isInterlinear = state.readerMode === "interlinear";
   const isSource = state.readerMode === "source";
-  const text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
+  let text = state.readerMode === "pl" ? polishPageText(page, chapter) : page.text;
+  if (isPistisBook() && Number(page?.page) === PISTIS_TEXT_START_PAGE && state.sidebarMode !== "addenda") {
+    text = pistisPage48MainText(text, state.readerMode === "pl" ? "pl" : "en");
+  }
   if (els.pageText) {
+    els.pageText.lang = isSource ? "en" : "pl";
     let body = "";
     const useLogionReader = activeBook?.type === "logion-reader";
-    if (useLogionReader && !isInterlinear && !isCoptic) {
+    const useContinuousAddenda = isPistisBook() && state.sidebarMode === "addenda" && !isInterlinear && !isCoptic;
+    const useContinuousPistis = isPistisBook() && state.sidebarMode !== "addenda" && !isInterlinear && !isCoptic;
+    if (useContinuousAddenda) {
+      body = renderPistisAddendaContinuousText();
+      els.pageText.innerHTML = body;
+    } else if (useContinuousPistis) {
+      body = renderPistisContinuousText();
+      els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
+    } else if (useLogionReader && !isInterlinear && !isCoptic) {
       body = renderLogionContinuousText();
       els.pageText.innerHTML = body;
     } else if (useLogionReader && isCoptic) {
@@ -9477,7 +9883,7 @@ function renderReader() {
     } else {
       body = isInterlinear
         ? interlinearPageText(page)
-        : (isCoptic ? copticPageText(page) : `<div class="page-prose ${isSource ? "source-prose" : ""}">${highlight(text)}</div>`);
+        : (isCoptic ? copticPageText(page) : `<div class="page-prose ${isSource ? "source-prose" : ""}">${isSource ? structuredSourceProseHtml(text) : highlight(text)}</div>`);
       els.pageText.innerHTML = `${renderReferenceStrip(page, chapter)}${body}`;
     }
   }
@@ -9526,15 +9932,32 @@ function renderReader() {
 }
 
 function renderLists() {
+  updatePistisSectionUi();
   renderChapters();
   renderThemes();
   renderMarks();
+  renderAddenda();
   renderMobileNavigation();
 }
 
 function renderChapters() {
-  const matches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
   if (!els.chapters) return;
+
+  if (isPistisBook() && state.sidebarMode === "addenda") {
+    const normalizedQuery = state.query.trim().toLowerCase();
+    const pages = pistisAddendaPages().filter(page => {
+      if (!normalizedQuery) return true;
+      const pageNumber = Number(page.page);
+      const text = `${addendaTitleForPage(page)} ${page.preview || ""} ${page.polish || polishTranslations[pageNumber] || ""} ${page.text || ""}`.toLowerCase();
+      return text.includes(normalizedQuery);
+    });
+    els.chapters.innerHTML = pages.length
+      ? `<div class="addenda-sidebar-heading"><strong>${escapeHtml(t("addendaMaterials"))}</strong><span>${escapeHtml(t("addendaLead"))}</span></div>${pages.map(addendaButtonHtml).join("")}`
+      : `<div class="empty">${t("noResults")}</div>`;
+    return;
+  }
+
+  const matches = data.chapters.filter(chapter => chapterMatchesQuery(chapter, state.query));
   els.chapters.innerHTML = matches.map(chapterButtonHtml).join("") || `<div class="empty">${t("noResults")}</div>`;
 }
 
@@ -9558,6 +9981,30 @@ function renderMarks() {
   const marks = [...state.marks].sort((a, b) => a - b);
   if (!els.marks) return;
   els.marks.innerHTML = marks.map(markButtonHtml).join("") || `<div class="empty">${t("noBookmarks")}</div>`;
+}
+
+function renderAddenda() {
+  if (!els.addenda) return;
+  const pages = pistisAddendaPages();
+  els.addenda.innerHTML = pages.length
+    ? `<div class="empty addenda-lead">${escapeHtml(t("addendaLead"))}</div>${pages.map(addendaButtonHtml).join("")}`
+    : `<div class="empty">${t("noResults")}</div>`;
+}
+
+function updatePistisSectionUi() {
+  if (state.tab === "addenda") state.tab = "chapters";
+  const available = isPistisBook();
+  if (!available) state.sidebarMode = "chapters";
+  if (els.addendaSidebarToggle) {
+    els.addendaSidebarToggle.hidden = !available;
+    const showingAddenda = available && state.sidebarMode === "addenda";
+    setText(els.addendaSidebarToggle, showingAddenda ? t("showPistis") : t("showAddenda"));
+    els.addendaSidebarToggle.classList.toggle("is-active", showingAddenda);
+    els.addendaSidebarToggle.setAttribute("aria-pressed", String(showingAddenda));
+    els.addendaSidebarToggle.setAttribute("title", showingAddenda ? t("showPistis") : t("showAddenda"));
+  }
+  els.readerSidebar?.classList.toggle("is-addenda-mode", available && state.sidebarMode === "addenda");
+  if (els.sidebarTabs) els.sidebarTabs.hidden = available && state.sidebarMode === "addenda";
 }
 
 function chaptersByRange(chapters) {
@@ -9730,7 +10177,15 @@ document.addEventListener("click", event => {
 
   const pageButton = target.closest("[data-page]");
   if (pageButton) {
-    goToPage(pageButton.dataset.page, { scrollToText: true });
+    if (pageButton.matches("[data-addenda-page]")) {
+      navigateFromAddendaSidebar(pageButton.dataset.addendaPage);
+    } else if (pageButton.matches("[data-pistis-chapter]") && isPistisBook()) {
+      navigateFromPistisChapterSidebar(pageButton.dataset.pistisChapter, pageButton.dataset.page);
+    } else {
+      if (isPistisBook()) state.pistisChapter = null;
+      goToPage(pageButton.dataset.page, { scrollToText: true });
+      keepActiveSidebarItemVisible(Number(pageButton.dataset.page));
+    }
     if (pageButton.closest(".mobile-sheet")) closeMobileSheet();
   }
 
@@ -9823,6 +10278,17 @@ listen(els.libraryInfoToggle, "click", () => setLibrarySection("info"));
 listen(els.libraryContactToggle, "click", () => setLibrarySection("contact"));
 listen(els.libraryPrivacyToggle, "click", () => setLibrarySection("privacy"));
 listen(els.libraryChangesToggle, "click", () => setLibrarySection("changes"));
+listen(els.libraryHelpToggle, "click", () => setLibrarySection("help"));
+
+document.querySelectorAll("#libraryHelpPanel details").forEach((item) => {
+  item.addEventListener("toggle", () => {
+    if (!item.open) return;
+    document.querySelectorAll("#libraryHelpPanel details[open]").forEach((other) => {
+      if (other !== item) other.open = false;
+    });
+  });
+});
+
 listen(els.libraryDictionaryToggle, "click", () => {
   setLibrarySection("dictionary");
   renderDictionarySearch();
@@ -9870,7 +10336,7 @@ function openLibraryWork(workId = "pistis-sophia", options = {}) {
   const moduleId = module?.id || "pistis-sophia";
   const targetPage = options.preservePage
     ? (localStorage.getItem(`gnostyk.lastPage.${moduleId}`) || localStorage.getItem("ps.lastPage") || "1")
-    : "1";
+    : String(defaultStartPageForBook(moduleId));
   localStorage.setItem("gnostyk.activeBook", moduleId);
   localStorage.setItem("gnostyk.lastWork", moduleId);
   localStorage.setItem("ps.lastPage", targetPage);
@@ -10007,13 +10473,17 @@ listen(els.settingsToggle, "click", () => {
       dictionaryScopeSetting: "dictionaryScope"
     };
     state.settings[map[event.target.id]] = event.target.value;
-    if (event.target.id === "languageSetting") state.sessionLanguage = null;
+    if (event.target.id === "languageSetting") {
+      state.sessionLanguage = null;
+      localStorage.removeItem("ps.interfaceLanguage");
+    }
     commitSettingsChange({ feedback: true });
   });
 });
-[els.interlinearExperimentalSetting, els.interlinearLemmaSetting, els.interlinearTypeSetting].filter(Boolean).forEach(control => {
+[els.bookJustifySetting, els.interlinearExperimentalSetting, els.interlinearLemmaSetting, els.interlinearTypeSetting].filter(Boolean).forEach(control => {
   listen(control, "change", event => {
     const map = {
+      bookJustifySetting: "bookJustify",
       interlinearExperimentalSetting: "interlinearExperimental",
       interlinearLemmaSetting: "interlinearShowLemma",
       interlinearTypeSetting: "interlinearShowType"
@@ -10114,6 +10584,16 @@ listen(els.copy, "click", async () => {
   setTimeout(() => {
     setText(els.copy, t("copyFragment"));
   }, 1100);
+});
+
+listen(els.addendaSidebarToggle, "click", () => {
+  if (!isPistisBook()) return;
+  state.sidebarMode = state.sidebarMode === "addenda" ? "chapters" : "addenda";
+  state.tab = "chapters";
+  state.query = "";
+  setValue(els.search, "");
+  renderLists();
+  els.chapters?.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 listen(els.mobileBookmark, "click", () => {
@@ -10243,6 +10723,7 @@ window.addEventListener("online", updateOfflineNotice);
 window.addEventListener("offline", updateOfflineNotice);
 renderReader();
 renderLists();
+setTab(state.tab);
 restoreNotesFromStoredBackup();
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {

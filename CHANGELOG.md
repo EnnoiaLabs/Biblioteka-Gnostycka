@@ -1,5 +1,395 @@
 # Changelog
 
+## 1.4.55 - Kolory nagłówków zgodne z aktywnym motywem
+
+### PL
+- Ujednolicono kolory wszystkich nagłówków w polskim i angielskim tekście Pistis Sophii oraz w Materiałach dodatkowych.
+- Nagłówki rozdziałów, tytuły ksiąg, śródtytuły redakcyjne i oznaczenia `p.` korzystają teraz z koloru odpowiadającego aktywnemu motywowi.
+- W motywie Dark zastosowano złoty akcent zgodny z głównymi nagłówkami aplikacji, a w motywach Sepia i Light odpowiednio ciemne kolory zapewniające właściwy kontrast.
+- Usunięto pozostałe białe nagłówki bez zmiany struktury tekstu, akapitów ani nawigacji.
+- Zachowano ciągłość numeracji 1.4.54 → 1.4.55.
+
+### EN
+- Unified the colors of all headings in the Polish and English Pistis Sophia text and its addenda.
+- Chapter headings, book titles, editorial rubrics, and `p.` markers now use the accent color of the active theme.
+- Dark mode uses the same gold accent as the application's main headings, while Sepia and Light use appropriately dark, high-contrast colors.
+- Removed remaining white headings without changing text structure, paragraphs, or navigation.
+- Preserved consecutive version numbering from 1.4.54 to 1.4.55.
+
+## 1.4.54 - Ujednolicona struktura angielskiego tekstu Pistis Sophii i Dodatków
+
+### PL
+- Angielski tekst Pistis Sophii korzysta teraz z tego samego uporządkowanego układu co polska warstwa: wyraźnych nagłówków rozdziałów, tytułów ksiąg, śródtytułów redakcyjnych, oznaczeń `p.` i osobnych akapitów.
+- Taki sam mechanizm zastosowano do angielskich Materiałów dodatkowych Pistis Sophii.
+- Struktura angielskiego tekstu jest zachowana niezależnie od ustawienia justowania; justowanie zmienia wyłącznie wyrównanie wewnątrz akapitów.
+- Zachowano ciągłość numeracji 1.4.53 → 1.4.54.
+
+### EN
+- The English Pistis Sophia text now uses the same structured layout as the Polish layer: clear chapter headings, book titles, editorial rubrics, `p.` markers, and separate paragraphs.
+- The same mechanism is now applied to the English Pistis Sophia addenda.
+- English structure is preserved regardless of the justification setting; justification only changes alignment inside paragraphs.
+- Preserved consecutive version numbering from 1.4.53 to 1.4.54.
+
+## 1.4.53 - Ujednolicona typografia nagłówków Pistis Sophii
+
+### PL
+- Znormalizowano wielkość, kolor, grubość i odstępy nagłówków w polskim i angielskim tekście Pistis Sophii.
+- Nagłówki rozdziałów korzystają teraz z jednego, wyraźnego stylu w obu językach.
+- Ujednolicono wygląd tytułów ksiąg, śródtytułów redakcyjnych oraz oznaczeń `p.`.
+- Kolory nagłówków korzystają z akcentu aktywnego motywu, dzięki czemu pozostają czytelne w trybach Dark, Light i Sepia.
+- Zachowano ciągłość numeracji 1.4.52 → 1.4.53.
+
+### EN
+- Normalized heading size, color, weight, and spacing in the Polish and English Pistis Sophia text.
+- Chapter headings now share one clear visual style in both languages.
+- Unified book titles, editorial rubrics, and `p.` markers.
+- Heading colors use the active theme accent for readability in Dark, Light, and Sepia modes.
+- Preserved consecutive version numbering from 1.4.52 to 1.4.53.
+
+## 1.4.52 - Polska struktura Pistis Sophii zgodna z angielskim wydaniem
+
+### PL
+- Zachowano angielski tekst Pistis Sophii dokładnie w układzie znanym z wersji 1.4.51.
+- Polski tekst otrzymał wyraźne nagłówki rozdziałów, śródtytuły redakcyjne, osobne akapity oraz oznaczenia p. odpowiadające numerom w tekście źródłowym.
+- Znaczniki `|1.`, `|2.` itd. są renderowane jako osobne oznaczenia `p. 1`, `p. 2` w dokładnym miejscu ich występowania.
+- Justowanie działa wyłącznie wewnątrz akapitów i nie usuwa podziałów tekstu.
+- Zachowano ciągłość numeracji 1.4.51 → 1.4.52.
+
+### EN
+- Kept the English Pistis Sophia text exactly in the layout used by version 1.4.51.
+- Added a matching structured layout to the Polish text, including clear chapter headings, editorial rubrics, separate paragraphs, and source p. markers.
+- Markers such as `|1.` and `|2.` are rendered as separate `p. 1` and `p. 2` labels at their exact positions.
+- Justification applies only inside paragraphs and no longer removes text divisions.
+- Preserved consecutive version numbering from 1.4.51 to 1.4.52.
+
+## 1.4.51 - Ciągła lektura Pistis Sophii i nawigacja po tekście
+
+### PL
+- Przywrócono ciągły widok całego właściwego tekstu Pistis Sophii od strony 48 do końca księgi.
+- Kliknięcie rozdziału w sidebarze nie przełącza już pojedynczej sekcji, lecz przewija do dokładnego miejsca danego rozdziału w ciągłym tekście.
+- Zachowano strukturę rozdziałów, stron i akapitów oraz działanie opcjonalnego justowania.
+- Materiały dodatkowe nadal działają jako osobny ciągły tekst.
+- Zachowano ciągłość numeracji 1.4.50 → 1.4.51.
+
+### EN
+- Restored a continuous view of the complete main Pistis Sophia text from page 48 through the end of the book.
+- Clicking a chapter in the sidebar now scrolls to that exact chapter in the continuous text instead of replacing the reader with a single section.
+- Preserved chapter, page, and paragraph structure together with optional justification.
+- The addenda remain available as their own continuous text.
+- Preserved consecutive version numbering from 1.4.50 to 1.4.51.
+
+## 1.4.50 - Zachowanie akapitów w justowanym tekście źródłowym
+
+### PL
+- Przywrócono czytelną strukturę angielskiego tekstu źródłowego podczas justowania.
+- Twarde łamania wierszy odziedziczone z wydania drukowanego są łączone wewnątrz akapitów, ale rozdziały, oznaczenia stron i logiczne początki akapitów pozostają oddzielone.
+- Dodano wyraźne odstępy przed nagłówkami rozdziałów i pomiędzy akapitami, dzięki czemu tekst nie zlewa się w jeden blok.
+- Zachowano ciągłość numeracji 1.4.49 → 1.4.50.
+
+### EN
+- Restored readable source-text structure when book justification is enabled.
+- Hard print/OCR line wraps are joined inside paragraphs, while chapter headings, page markers, and logical paragraph starts remain separate.
+- Added clear spacing before chapter headings and between paragraphs so the source no longer appears as one continuous block.
+- Preserved consecutive version numbering from 1.4.49 to 1.4.50.
+
+## 1.4.49 - Dopracowane justowanie tekstu książek
+
+### PL
+- Odsunięto ustawienie „Wyjustuj tekst książek” od krawędzi panelu Narzędzia i poprawiono odstępy całej sekcji.
+- Uogólniono opis ustawienia: justowanie jest przeznaczone dla wszystkich książek obecnych i przyszłych w bibliotece.
+- Poprawiono skład angielskiego tekstu źródłowego: twarde końce wierszy nie są już justowane osobno, ostatnia linia pozostaje wyrównana do lewej, a odstępy między słowami są bardziej naturalne.
+- Zachowano automatyczne dzielenie wyrazów zależne od języka oraz ciągłość numeracji 1.4.48 → 1.4.49.
+
+### EN
+- Added comfortable inner spacing around the “Justify book text” setting in the Tools panel.
+- Generalized the setting description so it applies to all current and future books in the library.
+- Refined English source-text layout: hard source line endings are no longer justified independently, the final line remains left-aligned, and word spacing is more natural.
+- Preserved language-aware automatic hyphenation and consecutive version numbering from 1.4.48 to 1.4.49.
+
+## 1.4.48 - Opcjonalne justowanie tekstu książek
+
+### PL
+- Dodano w panelu Narzędzia ustawienie „Wyjustuj tekst książek”, domyślnie wyłączone i zapamiętywane lokalnie.
+- Po włączeniu justowanie obejmuje Pistis Sophię oraz Ewangelie Tomasza i Filipa, bez wpływu na tekst koptyjski i interlinię.
+- Włączono automatyczne dzielenie wyrazów zgodne z aktywnym językiem tekstu, aby ograniczyć nadmierne odstępy między słowami.
+- Naprawiono ciągłość historii wersji: 1.4.45 → 1.4.46 → 1.4.47 → 1.4.48.
+
+### EN
+- Added a locally remembered, opt-in “Justify book text” setting to the Tools panel; it is disabled by default.
+- When enabled, justification applies to Pistis Sophia and the Gospels of Thomas and Philip without affecting Coptic or interlinear text.
+- Enabled automatic language-aware hyphenation to reduce excessive spacing between words.
+- Restored changelog continuity: 1.4.45 → 1.4.46 → 1.4.47 → 1.4.48.
+
+## 1.4.47 - Justowanie i dzielenie wyrazów w Pomocy
+
+### PL
+- Wyjustowano treść rozwijanych odpowiedzi w panelu Pomoc.
+- Włączono automatyczne dzielenie wyrazów zgodnie z aktywnym językiem PL lub EN, aby ograniczyć nadmierne odstępy między słowami.
+- Dopracowano szerokość akapitów i zachowano wygodną interlinię dla dłuższych opisów.
+- Podbito wersję kolejno z 1.4.46 do 1.4.47.
+
+### EN
+- Justified the expanded answer text in the Help panel.
+- Enabled automatic language-aware hyphenation for PL and EN to reduce excessive spacing between words.
+- Refined paragraph width while preserving comfortable line spacing for longer descriptions.
+- Bumped the version consecutively from 1.4.46 to 1.4.47.
+
+## 1.4.46 - Złote nagłówki paneli Słownika i Narzędzi
+
+### PL
+- Nagłówki „Słownik koptyjski” i „Glosownik interlinearny” korzystają teraz z tego samego koloru akcentu co główne etykiety „Słownik” i „Narzędzia”.
+- W motywie Dark zastosowano złoty kolor, a w motywach Light i Sepia odpowiadający mu ciemniejszy kolor akcentu.
+- Zachowano czytelne, dopasowane do motywu kolory opisów, etykiet pól i komunikatów.
+- Podbito wersję kolejno z 1.4.45 do 1.4.46.
+
+### EN
+- The “Coptic dictionary” and “Interlinear glossary” headings now use the same accent color as the main “Dictionary” and “Tools” section labels.
+- Dark mode uses the gold accent, while Light and Sepia use the corresponding darker theme accent.
+- Preserved readable theme-aware colors for descriptions, field labels, and status messages.
+- Bumped the version consecutively from 1.4.45 to 1.4.46.
+
+## 1.4.45 - Czytelne etykiety Słownika i Narzędzi
+
+### PL
+- Dostosowano kolory nagłówków, opisów, etykiet pól i komunikatów w sekcjach Słownik oraz Narzędzia do motywów Dark, Light i Sepia.
+- W motywie Dark zastosowano jasne, kontrastowe kolory tekstu, a w motywach Light i Sepia ciemne kolory zgodne z tłem.
+- Zachowano dotychczasowy układ i działanie słownika oraz glosownika interlinearnego.
+- Podbito wersję kolejno z 1.4.44 do 1.4.45.
+
+### EN
+- Adapted headings, descriptions, field labels, and status-message colors in the Dictionary and Tools sections to the Dark, Light, and Sepia themes.
+- Applied bright, high-contrast text in Dark mode and dark theme-appropriate text in Light and Sepia modes.
+- Preserved the existing layout and behavior of the dictionary and interlinear glossary.
+- Bumped the version consecutively from 1.4.44 to 1.4.45.
+
+## 1.4.44 - Niezależne kolumny kodeksów
+
+### PL
+- Przebudowano dwukolumnowy katalog kodeksów Nag Hammadi na dwie niezależne pionowe listy.
+- Rozwinięcie kodeksu w jednej kolumnie nie zwiększa już wysokości wiersza po drugiej stronie i nie tworzy pustego pola.
+- Zachowano układ jednej kolumny na mniejszych ekranach oraz dotychczasową kolejność kodeksów.
+- Podbito wersję kolejno z 1.4.43 do 1.4.44.
+
+### EN
+- Rebuilt the two-column Nag Hammadi codex catalogue as two independent vertical lists.
+- Expanding a codex in one column no longer increases a shared row height or creates an empty gap on the other side.
+- Preserved the single-column mobile layout and the existing codex order.
+- Bumped the version consecutively from 1.4.43 to 1.4.44.
+
+## 1.4.43 - Niezależne kolumny panelu Pomoc
+
+### PL
+- Przebudowano dwukolumnowy panel Pomoc na dwie niezależne pionowe listy.
+- Rozwinięcie odpowiedzi w jednej kolumnie nie zwiększa już wysokości wiersza po drugiej stronie i nie tworzy pustego pola.
+- Zachowano jedną kolumnę na mniejszych ekranach oraz mechanizm jednej otwartej sekcji.
+- Podbito wersję kolejno z 1.4.42 do 1.4.43.
+
+### EN
+- Rebuilt the two-column Help panel as two independent vertical lists.
+- Expanding an answer in one column no longer increases a shared row height or creates an empty gap on the other side.
+- Preserved the single-column mobile layout and the one-open-section behavior.
+- Bumped the version consecutively from 1.4.42 to 1.4.43.
+
+## 1.4.42 - Dwukolumnowy panel Pomoc i wyrównane znaki
+
+### PL
+- Ułożono tematy panelu Pomoc w dwóch kolumnach na szerokich ekranach, wykorzystując wolne miejsce po prawej stronie.
+- Na mniejszych ekranach panel automatycznie wraca do jednej kolumny.
+- Wyrównano znaki plus i minus do tej samej linii bazowej co tytuły sekcji.
+- Podbito wersję kolejno z 1.4.41 do 1.4.42.
+
+### EN
+- Arranged Help topics in two columns on wide screens, using the previously empty space on the right.
+- On smaller screens, the panel automatically returns to a single column.
+- Aligned the plus and minus signs to the same text baseline as section titles.
+- Bumped the version consecutively from 1.4.41 to 1.4.42.
+
+## 1.4.41 - Stabilna pozycja znaków w panelu Pomoc
+
+### PL
+- Ujednolicono układ znaków plus i minus w rozwijanych sekcjach panelu Pomoc.
+- Znak minus pojawia się teraz dokładnie w miejscu znaku plus, bez przesunięcia w dół po rozwinięciu sekcji.
+- Zastosowano stałą kolumnę i identyczne wymiary dla obu znaków we wszystkich motywach.
+- Podbito wersję kolejno z 1.4.40 do 1.4.41.
+
+### EN
+- Standardized the plus and minus sign layout in the Help panel accordion.
+- The minus sign now appears in exactly the same position as the plus sign, without shifting downward when a section opens.
+- Applied a fixed sign column and identical dimensions for both states across all themes.
+- Bumped the version consecutively from 1.4.40 to 1.4.41.
+
+## 1.4.40 - Czytelniejszy panel Pomoc
+
+### PL
+- Dostosowano kolory nagłówków i opisów panelu Pomoc do motywów Dark, Light i Sepia.
+- Usunięto poziome separatory między sekcjami, dzięki czemu lista nie przypomina już drabiny.
+- Dodano delikatne odstępy i subtelne podświetlenie wiersza po najechaniu bez zmiany działania akordeonu.
+- Podbito wersję kolejno z 1.4.39 do 1.4.40.
+
+### EN
+- Adapted Help-panel heading and description colors to the Dark, Light, and Sepia themes.
+- Removed horizontal separators between sections so the list no longer resembles a ladder.
+- Added gentle spacing and subtle row highlighting on hover without changing accordion behavior.
+- Bumped the version consecutively from 1.4.39 to 1.4.40.
+
+## 1.4.39 - Panel Pomoc i przewodnik użytkownika
+
+### PL
+- Dodano etykietę „Pomoc” na górnym pasku strony głównej.
+- Dodano obszerny, dwujęzyczny przewodnik w formie profesjonalnego akordeonu ze zwykłymi znakami plus i minus.
+- Opisano pierwsze kroki, czytanie, języki, dodatki, interlinię, słownik, wyszukiwanie, zakładki, motywy, tryb offline i kontakt.
+- Zachowano stopkę bez zmian i podbito wersję kolejno z 1.4.38 do 1.4.39.
+
+### EN
+- Added a “Help” label to the home-page top bar.
+- Added an extensive bilingual user guide in a professional accordion with regular plus and minus signs.
+- Documented getting started, reading, languages, addenda, interlinear mode, dictionary, search, bookmarks, themes, offline mode, and contact.
+- Kept the footer unchanged and bumped the version consecutively from 1.4.38 to 1.4.39.
+
+## 1.4.38 - Typografia etykiet górnej belki
+
+### PL
+- Ujednolicono czcionkę i wielkość etykiet „Prywatność”, „Zmiany”, „Kontakt” i „Info” na górnej belce strony głównej z etykietami używanymi w stopce.
+- Zachowano tekstową formę nawigacji, kolory motywów oraz stopkę bez zmian.
+- Podbito wersję kolejno z 1.4.37 do 1.4.38.
+
+### EN
+- Matched the font and size of the “Privacy”, “Changes”, “Contact”, and “Info” labels in the home-page top bar to the labels used in the footer.
+- Preserved the text-only navigation, theme-aware colors, and the footer without changes.
+- Bumped the version consecutively from 1.4.37 to 1.4.38.
+
+## 1.4.37 - Nawigacja pomocnicza na górnej belce strony głównej
+
+### PL
+- Przeniesiono etykiety „Prywatność”, „Zmiany”, „Kontakt” i „Info” z głównego paska roboczego na górną belkę strony głównej.
+- Etykiety są wyświetlane jako lekka nawigacja tekstowa bez tła i obramowania, z kolorami dopasowanymi do motywów Dark, Light i Sepia.
+- Zachowano stopkę bez zmian oraz pełne działanie paneli i lokalizacji PL/EN.
+- Podbito wersję kolejno z 1.4.36 do 1.4.37.
+
+### EN
+- Moved the “Privacy”, “Changes”, “Contact”, and “Info” labels from the main work bar to the home-page top bar.
+- The labels are displayed as lightweight text navigation without backgrounds or borders, with colors adapted to Dark, Light, and Sepia themes.
+- Kept the footer unchanged and preserved full panel behavior and PL/EN localization.
+- Bumped the version consecutively from 1.4.36 to 1.4.37.
+
+## 1.4.36 - Rozdzielenie strony 48 między wprowadzenie i tekst księgi
+
+### PL
+- Końcowa część opracowania ze strony 48 została dołączona do ciągłych Materiałów dodatkowych.
+- Widok Pistis Sophii rozpoczyna się teraz dokładnie od nagłówka „KSIĘGA PIERWSZA” i Rozdziału 1, bez powtarzania wprowadzenia.
+- Kliknięcie ostatniej pozycji w sidebarze dodatków przewija do wprowadzającej części strony 48.
+- Podbito wersję kolejno z 1.4.35 do 1.4.36.
+
+### EN
+- The concluding introductory material from page 48 is now included in the continuous Addenda document.
+- The Pistis Sophia reader now begins precisely at “THE FIRST BOOK OF” and Chapter 1, without repeating the introduction.
+- Clicking the final addenda sidebar item scrolls to the introductory portion of page 48.
+- Bumped the version consecutively from 1.4.35 to 1.4.36.
+
+## 1.4.35 - Zapamiętywanie języka interfejsu
+
+### PL
+- Przełącznik PL/EN w prawym górnym rogu zapamiętuje teraz wybrany język przy przechodzeniu między księgami.
+- Wybrany język pozostaje aktywny także po odświeżeniu strony lub ponownym otwarciu aplikacji.
+- Zmiana ustawienia języka uruchamiania usuwa szybki wybór i ponownie przejmuje kontrolę nad językiem.
+- Podbito wersję kolejno z 1.4.34 do 1.4.35.
+
+### EN
+- The PL/EN switch in the top-right corner now remembers the selected language when moving between books.
+- The selected language also remains active after refreshing or reopening the app.
+- Changing the startup-language setting clears the quick selection and takes control of the language again.
+- Bumped the version consecutively from 1.4.34 to 1.4.35.
+
+## 1.4.34 - Ciągły tekst dodatków i nawigacja po sekcjach
+
+### PL
+- Materiały dodatkowe Pistis Sophii są teraz wyświetlane jako jeden ciągły tekst zamiast pojedynczych stron.
+- Kliknięcie pozycji w sidebarze przewija czytnik bezpośrednio do odpowiadającej jej sekcji tekstu.
+- Zachowano aktywne podświetlenie pozycji i podbito wersję kolejno z 1.4.33 do 1.4.34.
+
+### EN
+- Pistis Sophia addenda are now displayed as one continuous text instead of separate pages.
+- Clicking an item in the sidebar scrolls the reader directly to the corresponding text section.
+- Preserved the active highlight and bumped the version consecutively from 1.4.33 to 1.4.34.
+
+## 1.4.33 - Nawigacja dodatków po tekście
+
+### PL
+- Kliknięcie pozycji w sidebarze dodatków przechodzi teraz bezpośrednio do odpowiadającego jej miejsca w tekście.
+- Sidebar pozostaje w trybie Dodatki, a aktywna pozycja jest podświetlana i utrzymywana w widocznym obszarze listy.
+- Podbito wersję kolejno z 1.4.32 do 1.4.33 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.
+
+### EN
+- Clicking an item in the addenda sidebar now moves directly to the corresponding place in the text.
+- The sidebar remains in Addenda mode, while the active item stays highlighted and visible in the list.
+- Bumped the version consecutively from 1.4.32 to 1.4.33 across metadata, assets, and the PWA cache.
+
+## 1.4.32 - Ujednolicone podglądy dodatków
+
+### PL
+- Ujednolicono sposób wyświetlania polskich i angielskich podglądów materiałów dodatkowych.
+- Obie wersje językowe korzystają teraz z tego samego limitu znaków.
+- Dłuższy fragment jest skracany i kończony trzema kropkami zamiast wymuszania pełnego zdania.
+- Podbito wersję kolejno z 1.4.31 do 1.4.32 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.
+
+### EN
+- Standardized the display of Polish and English additional-material previews.
+- Both language versions now use the same character limit.
+- Longer excerpts are shortened and end with three dots instead of being forced to a complete sentence.
+- Bumped the version consecutively from 1.4.31 to 1.4.32 across metadata, assets, and the PWA cache.
+
+## 1.4.31 - Polskie opisy dodatków i stały przełącznik
+
+### PL
+- Podłączono polskie fragmenty materiałów dodatkowych w polskiej wersji interfejsu.
+- Opisy w sidebarze są wybierane wyłącznie jako pełne zdania i nie kończą się już w połowie wypowiedzi.
+- Przycisk „Dodatki” / „Pistis Sophia” zachowuje ten sam rozmiar podczas przełączania; zmienia się wyłącznie jego tekst.
+- Podbito wersję kolejno z 1.4.30 do 1.4.31 we wszystkich metadanych, zasobach i pamięci podręcznej PWA.
+
+### EN
+- Connected Polish additional-material excerpts in the Polish interface.
+- Sidebar descriptions are now selected only as complete sentences and no longer end mid-sentence.
+- The “Addenda” / “Pistis Sophia” button keeps the same size while switching; only its label changes.
+- Bumped the version consecutively from 1.4.30 to 1.4.31 across metadata, assets, and the PWA cache.
+
+## 1.4.30 - Przełączany sidebar dodatków
+
+### PL
+- Dodano przycisk „Dodatki” obok „Kopiuj fragment” w pasku czytnika Pistis Sophia.
+- Przycisk przełącza sidebar z rozdziałów na materiały dodatkowe, a następnie zmienia nazwę na „Pistis Sophia”, umożliwiając szybki powrót.
+- Usunięto długą listę dodatków z głównego spisu rozdziałów.
+- Naprawiono historię wersji: wcześniejszy drugi wpis 1.4.29 otrzymał właściwy numer 1.4.28, zachowując ciągłość 1.4.28 → 1.4.29 → 1.4.30.
+
+### EN
+- Added an “Addenda” button next to “Copy excerpt” in the Pistis Sophia reader toolbar.
+- The button switches the sidebar from chapters to additional materials, then changes to “Pistis Sophia” for a quick return.
+- Removed the long addenda list from the main chapter table of contents.
+- Fixed version history: the earlier duplicate 1.4.29 entry now has its correct 1.4.28 number, preserving the 1.4.28 → 1.4.29 → 1.4.30 sequence.
+
+## 1.4.29 - Materiały dodatkowe w spisie treści
+
+### PL
+- Usunięto przycisk i przełącznik „Dodatki” z panelu książki Pistis Sophia.
+- Przeniesiono materiały wprowadzające na dół spisu rozdziałów jako osobną, subtelnie oddzieloną sekcję „Materiały dodatkowe”.
+- Zachowano bezpośrednie otwieranie stron 1–47 oraz wyszukiwanie w materiałach dodatkowych.
+
+### EN
+- Removed the Addenda button and section switch from the Pistis Sophia book panel.
+- Moved the introductory pages to the bottom of the chapter list as a separate, subtly divided “Additional materials” section.
+- Preserved direct access to pages 1–47 and search within the additional materials.
+
+## 1.4.28 - Tekst i dodatki Pistis Sophia
+
+### PL
+- Oddzielono właściwy tekst Pistis Sophia od materiałów wprowadzających G. R. S. Meada.
+- Dodano przełącznik Tekst / Dodatki w panelu księgi, aby strony 1–47 były dostępne jako osobne dodatki.
+- Kliknięcie Pistis Sophia z katalogu otwiera teraz początek księgi na stronie 48, bez wrzucania czytelnika w przedmowę.
+
+### EN
+- Separated the main Pistis Sophia text from G. R. S. Mead's introductory material.
+- Added a Text / Addenda switch in the book panel so pages 1–47 are available as separate addenda.
+- Opening Pistis Sophia from the catalogue now starts the book on page 48 instead of dropping the reader into the preface.
+
 ## 1.4.27 - Rozdziały Pistis Sophia i pasek cytowania
 
 ### PL

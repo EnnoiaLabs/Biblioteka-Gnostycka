@@ -1,25 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="pl">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gnostyk - Biblioteka gnozy</title>
-    <meta name="description" content="Gnostyk Biblioteka: polskie opracowania tekstów gnostyckich, aparat cytowania, notatki i tryb PWA.">
-    <meta name="theme-color" content="#0d0b09">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Gnostyk">
-    <link rel="manifest" href="manifest.webmanifest?v=1.4.27">
-    <link rel="icon" sizes="32x32" href="assets/pwa-icon-32.png">
-    <link rel="icon" sizes="192x192" href="assets/pwa-icon-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/pwa-icon-180.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1.4.27">
-  </head>
-  <body data-view="library">
-    <script>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Gnostyk - Biblioteka gnozy</title>
+<meta content="Gnostyk Biblioteka: polskie opracowania tekstów gnostyckich, aparat cytowania, notatki i tryb PWA." name="description"/>
+<meta content="#0d0b09" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="Gnostyk" name="apple-mobile-web-app-title"/>
+<link href="manifest.webmanifest?v=1.4.55" rel="manifest"/>
+<link href="assets/pwa-icon-32.png" rel="icon" sizes="32x32"/>
+<link href="assets/pwa-icon-192.png" rel="icon" sizes="192x192"/>
+<link href="assets/pwa-icon-180.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&amp;family=Cormorant+Garamond:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css?v=1.4.55" rel="stylesheet"/>
+</head>
+<body data-view="library">
+<script>
       (function () {
         try {
           var params = new URLSearchParams(window.location.search || "");
@@ -29,687 +30,685 @@
         } catch (error) {}
       }());
     </script>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Nawigacja">
-        <div class="brand">
-          <div>
-            <span class="brand-wordmark brand-home-link" data-go-home role="button" tabindex="0" aria-label="Home">Gnostyk</span>
-          </div>
-          <div class="language-switch" aria-label="Język interfejsu">
-            <button data-language-switch="pl" type="button">PL</button>
-            <button data-language-switch="en" type="button">EN</button>
-          </div>
-        </div>
-        <button id="backToLibraryButton" class="text-button subtle sidebar-back book-nav" type="button">← Biblioteka</button>
-
-        <section class="library-card book-nav" aria-label="Panel książki">
-          <span class="eyebrow">Aktualna pozycja biblioteki</span>
-          <div class="book-title-line"><h2>Pistis Sophia</h2><span class="book-layer-label">PL/EN/COPT</span></div>
-          <p>Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
-        </section>
-
-        <label class="search book-nav">
-          <span>Szukaj</span>
-          <input id="searchInput" type="search" autocomplete="off" placeholder="światło, Sophia, mystery">
-        </label>
-
-        <div class="tabs book-nav" role="tablist" aria-label="Widoki książki">
-          <button class="tab is-active" data-tab="chapters" type="button">Rozdziały</button>
-          <button class="tab" data-tab="themes" type="button">Motywy</button>
-          <button class="tab" data-tab="marks" type="button">Zakładki</button>
-        </div>
-
-        <div class="panel book-nav is-active" id="chaptersPanel"></div>
-        <div class="panel book-nav" id="themesPanel"></div>
-        <div class="panel book-nav" id="marksPanel"></div>
-      </aside>
-
-      <main class="reader">
-        <section class="library-home" aria-label="Ekran startowy biblioteki">
-          <header class="library-topbar">
-            <div>
-              <span class="brand-wordmark library-topbar-wordmark brand-home-link" data-go-home role="button" tabindex="0" aria-label="Home">Gnostyk</span>
-            </div>
-            <div class="language-switch" aria-label="Język interfejsu">
-              <button data-language-switch="pl" type="button">PL</button>
-              <button data-language-switch="en" type="button">EN</button>
-            </div>
-          </header>
-
-          <div class="library-home-copy">
-            <h2>Biblioteka gnozy</h2>
-            <p>Cyfrowa biblioteka polskich przekładów, opracowań i narzędzi cytowania tekstów gnostyckich.</p>
-            <nav class="library-nav" aria-label="Nawigacja biblioteki">
-              <button id="libraryHomeToggle" class="text-button is-active" type="button" aria-expanded="true">Home</button>
-              <button id="libraryBooksToggle" class="text-button" type="button" aria-expanded="false">Księgi</button>
-              <button id="libraryDictionaryToggle" class="text-button" type="button" aria-expanded="false">Słownik</button>
-              <button id="libraryToolsToggle" class="text-button" type="button" aria-expanded="false">Narzędzia</button>
-              <button id="libraryPrivacyToggle" class="text-button" type="button" aria-expanded="false">Prywatność</button>
-              <button id="libraryChangesToggle" class="text-button" type="button" aria-expanded="false">Zmiany</button>
-              <button id="libraryContactToggle" class="text-button" type="button" aria-expanded="false">Kontakt</button>
-              <button id="libraryInfoToggle" class="text-button" type="button" aria-expanded="false">Info</button>
-              <button id="librarySettingsToggle" class="text-button" type="button" aria-expanded="false">Ustawienia</button>
-              <button id="librarySupportToggle" class="text-button support-nav-button" type="button" aria-expanded="false"><span class="support-icon" aria-hidden="true">♡</span><span>Wsparcie</span></button>
-            </nav>
-          </div>
-
-
-          <section id="libraryHomePanel" class="library-home-panel" aria-label="Home">
-            <div class="home-hero-card">
-              <span class="eyebrow" data-i18n-pl="Biblioteka Gnozy" data-i18n-en="Gnostyk Library">Biblioteka Gnozy</span>
-              <h3 data-i18n-pl="Cyfrowa biblioteka tekstów gnostyckich" data-i18n-en="A digital library of Gnostic texts">Cyfrowa biblioteka tekstów gnostyckich</h3>
-              <p data-i18n-pl="Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu." data-i18n-en="Translations, source texts, Coptic interlinear tools, a dictionary, and research features for studying Gnostic tradition in one place.">Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu.</p>
-              <button id="browseBooksButton" class="text-button library-read-button" type="button" data-i18n-pl="Przeglądaj bibliotekę" data-i18n-en="Browse library">Przeglądaj bibliotekę</button>
-            </div>
-
-            <div class="home-dashboard" aria-label="Stan biblioteki">
-              <article>
-                <strong>3</strong>
-                <span data-i18n-pl="księgi dostępne" data-i18n-en="available books">księgi dostępne</span>
-              </article>
-              <article>
-                <strong>1</strong>
-                <span data-i18n-pl="w przygotowaniu" data-i18n-en="in preparation">w przygotowaniu</span>
-              </article>
-              <article>
-                <strong>40+</strong>
-                <span data-i18n-pl="tekstów planowanych" data-i18n-en="planned texts">tekstów planowanych</span>
-              </article>
-              <article>
-                <strong>14k+</strong>
-                <span data-i18n-pl="form słownikowych" data-i18n-en="dictionary forms">form słownikowych</span>
-              </article>
-              <article id="visitCounterCard" class="visit-counter-card">
-                <strong id="visitCounterValue">—</strong>
-                <span data-i18n-pl="odwiedzin biblioteki" data-i18n-en="library visits">odwiedzin biblioteki</span>
-              </article>
-            </div>
-
-            <div class="home-cards home-start-cards">
-              <article class="home-card primary">
-                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">history_edu</span><span data-i18n-pl="Kontynuuj pracę" data-i18n-en="Continue work">Kontynuuj pracę</span></div>
-                <h4 data-i18n-pl="Wróć do ostatniego tekstu" data-i18n-en="Return to the last text">Wróć do ostatniego tekstu</h4>
-                <p data-i18n-pl="Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę." data-i18n-en="Open the last viewed book exactly where you stopped working.">Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę.</p>
-                <button id="homeContinueButton" class="text-button library-read-button" type="button" data-i18n-pl="Wróć do tekstu" data-i18n-en="Return to text">Wróć do tekstu</button>
-              </article>
-              <article class="home-card" data-open-work="gospel-of-philip" role="button" tabindex="0">
-                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">auto_stories</span><span data-i18n-pl="Ostatnio dodane" data-i18n-en="Recently added">Ostatnio dodane</span></div>
-                <h4 data-i18n-pl="Ewangelia Filipa" data-i18n-en="Gospel of Philip">Ewangelia Filipa</h4>
-                <p data-i18n-pl="Pełny tekst w warstwach PL/EN; koptyjski przygotowany do importu." data-i18n-en="Full text in PL/EN layers; Coptic prepared for import.">Pełny tekst w warstwach PL/EN; koptyjski przygotowany do importu.</p>
-                <button class="text-button library-read-button" type="button" data-open-work="gospel-of-philip" data-i18n-pl="Otwórz" data-i18n-en="Open">Otwórz</button>
-              </article>
-              <article class="home-card">
-                <div class="home-card-kicker"><span class="material-symbols-rounded home-symbol" aria-hidden="true">volunteer_activism</span><span data-i18n-pl="Wsparcie" data-i18n-en="Support">Wsparcie</span></div>
-                <h4 data-i18n-pl="Pomóż rozwijać projekt" data-i18n-en="Help develop the project">Pomóż rozwijać projekt</h4>
-                <p data-i18n-pl="Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie." data-i18n-en="Your support helps develop the dictionary, interlinear tools, and future Gnostic texts.">Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie.</p>
-                <button id="homeSupportButton" class="text-button library-read-button secondary support-nav-button" type="button"><span class="support-icon" aria-hidden="true">♡</span><span data-i18n-pl="Wesprzyj" data-i18n-en="Support">Wesprzyj</span></button>
-              </article>
-            </div>
-
-            <section class="home-recent-updates" aria-label="Ostatnie zmiany">
-              <header>
-                <span data-i18n-pl="Ostatnie zmiany" data-i18n-en="Recent changes">Ostatnie zmiany</span>
-                <button class="text-button" type="button" data-nav-section="changes" data-i18n-pl="Pełna historia" data-i18n-en="Full history">Pełna historia</button>
-              </header>
-              <ul id="homeRecentUpdates">
-                <li><strong>1.4.27</strong><span data-i18n-pl="Dostosowano kolor tytułu Biblioteki Gnozy osobno dla motywu ciemnego, jasnego i sepii." data-i18n-en="Adjusted the Gnostic Library title color and normalized book status labels.">Dostosowano kolor tytułu Biblioteki Gnozy osobno dla motywu ciemnego, jasnego i sepii.</span></li>
-                <li><strong>1.4.16</strong><span data-i18n-pl="Dodano czcionkę Cormorant Garamond do tytułu Biblioteki Gnozy." data-i18n-en="Added Cormorant Garamond to the Gnostic Library title.">Dodano czcionkę Cormorant Garamond do tytułu Biblioteki Gnozy.</span></li>
-                <li><strong>1.4.15</strong><span data-i18n-pl="Ujednolicono podbijanie wersji i wyczyszczono duplikaty w historii zmian." data-i18n-en="Synchronized version bumping and cleaned duplicate change-history entries.">Ujednolicono podbijanie wersji i wyczyszczono duplikaty w historii zmian.</span></li>
-              </ul>
-            </section>
-          </section>
-
-          <div id="libraryBooksPanel" class="library-shelf" aria-label="Księgi" hidden>
-
-            <header class="library-info-head library-books-head">
-              <span data-i18n-pl="Księgi" data-i18n-en="Books">Księgi</span>
-              <h3 data-i18n-pl="Katalog Biblioteki Gnozy" data-i18n-en="Gnostyk Library catalogue">Katalog Biblioteki Gnozy</h3>
-              <p data-i18n-pl="Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych." data-i18n-en="Texts are grouped by collections and codices. This catalogue is the main place for opening available texts and checking planned entries.">Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych.</p>
-            </header>
-
-            <section class="library-collections" aria-label="Kolekcje tekstów gnostyckich">
-              <details class="collection-group" open>
-                <summary><span data-i18n-pl="Kodeks Askew" data-i18n-en="Askew Codex">Kodeks Askew</span><small data-i18n-pl="dostępne" data-i18n-en="available">dostępne</small></summary>
-                <ul class="collection-list">
-                  <li class="collection-item-link" data-open-work="pistis-sophia" role="button" tabindex="0"><div class="collection-item-main"><strong>Pistis Sophia <span class="status-badge inline available" data-i18n-pl="PL/EN/COPT" data-i18n-en="PL/EN/COPT">PL/EN/COPT</span></strong><em data-i18n-pl="pełny przekład i aparat czytelniczy" data-i18n-en="full translation and reader apparatus">pełny przekład i aparat czytelniczy</em></div></li>
-                </ul>
-              </details>
-
-              <details class="collection-group" open>
-                <summary><span data-i18n-pl="Biblioteka Nag Hammadi (Codices I–XIII)" data-i18n-en="Nag Hammadi Library (Codices I–XIII)">Biblioteka Nag Hammadi (Codices I–XIII)</span><small data-i18n-pl="katalog planowany" data-i18n-en="planned catalogue">katalog planowany</small></summary>
-                <div class="codex-grid">
-                  <details><summary>Codex I <small>Jung Codex</small></summary><ul><li>Modlitwa Apostoła Pawła</li><li>Apokryf Jakuba</li><li>Ewangelia Prawdy</li><li>Traktat o Zmartwychwstaniu</li><li>Trójkształtna Protennoia</li></ul></details>
-                  <details><summary>Codex II <small data-i18n-pl="Tomasz i Filip" data-i18n-en="Thomas and Philip">Tomasz i Filip</small></summary><ul class="codex-work-list"><li class="codex-work-row planned"><span>Apokryf Jana</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row available" data-open-work="gospel-of-thomas" role="button" tabindex="0"><span>Ewangelia Tomasza <span class="status-badge inline available" data-i18n-pl="PL/EN/COPT" data-i18n-en="PL/EN/COPT">PL/EN/COPT</span></span></li><li class="codex-work-row available" data-open-work="gospel-of-philip" role="button" tabindex="0"><span>Ewangelia Filipa <span class="status-badge inline available" data-i18n-pl="PL/EN" data-i18n-en="PL/EN">PL/EN</span></span></li><li class="codex-work-row planned"><span>Hipostaza Archontów</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>O początku świata</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>Egzegeza o duszy</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li><li class="codex-work-row planned"><span>Księga Tomasza Atlety</span><span class="status-badge planned" data-i18n-pl="planowane" data-i18n-en="planned">planowane</span></li></ul></details>
-                  <details><summary>Codex III</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li><li>Eugnostos Błogosławiony</li><li>Sophia Jezusa Chrystusa</li><li>Dialog Zbawiciela</li></ul></details>
-                  <details><summary>Codex IV</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li></ul></details>
-                  <details><summary>Codex V</summary><ul><li>Eugnostos</li><li>Apokalipsa Pawła</li><li>Pierwsza Apokalipsa Jakuba</li><li>Druga Apokalipsa Jakuba</li><li>Apokalipsa Adama</li></ul></details>
-                  <details><summary>Codex VI</summary><ul><li>Dzieje Piotra i Dwunastu Apostołów</li><li>Grom. Doskonały Umysł</li><li>Autorytatywne Nauczanie</li><li>Pojęcie Naszej Wielkiej Mocy</li><li>Państwo Platona</li><li>Rozprawa o Ósmej i Dziewiątej</li><li>Modlitwa Dziękczynna</li><li>Asklepios</li></ul></details>
-                  <details><summary>Codex VII</summary><ul><li>Parafraza Sema</li><li>Drugi Traktat Wielkiego Seta</li><li>Apokalipsa Piotra</li><li>Nauki Sylwana</li><li>Trzy Stele Seta</li></ul></details>
-                  <details><summary>Codex VIII</summary><ul><li>Zostrianos</li><li>List Piotra do Filipa</li></ul></details>
-                  <details><summary>Codex IX</summary><ul><li>Melchizedek</li><li>Myśl Norei</li><li>Świadectwo Prawdy</li></ul></details>
-                  <details><summary>Codex X</summary><ul><li>Marsanes</li></ul></details>
-                  <details><summary>Codex XI</summary><ul><li>Interpretacja Wiedzy</li><li>Walentyniańska Ekspozycja</li><li>Allogenes</li><li>Hypsiphrone</li></ul></details>
-                  <details><summary>Codex XII</summary><ul><li>Sentencje Sekstusa</li><li>Ewangelia Prawdy (fragment)</li><li>Fragmenty</li></ul></details>
-                  <details><summary>Codex XIII</summary><ul><li>Trimorficzna Protennoia</li><li>O pochodzeniu świata</li></ul></details>
-                </div>
-              </details>
-
-              <details class="collection-group">
-                <summary><span data-i18n-pl="Kodeks Bruce'a" data-i18n-en="Bruce Codex">Kodeks Bruce'a</span><small data-i18n-pl="planowane" data-i18n-en="planned">planowane</small></summary>
-                <ul class="collection-list"><li>Księgi Jeu</li><li>Nienazwany traktat</li></ul>
-              </details>
-
-              <details class="collection-group">
-                <summary><span data-i18n-pl="Inne teksty gnostyckie" data-i18n-en="Other Gnostic texts">Inne teksty gnostyckie</span><small data-i18n-pl="planowane" data-i18n-en="planned">planowane</small></summary>
-                <ul class="collection-list"><li>Ewangelia Marii</li><li>Ewangelia Judasza</li><li>Ody Salomona</li><li>Corpus Hermeticum</li></ul>
-              </details>
-            </section>
-
-          </div>
-
-          <section id="libraryInfoPanel" class="library-about" aria-label="Informacje o bibliotece" hidden>
-            <header class="library-info-head">
-              <span>Info</span>
-              <h3>O bibliotece</h3>
-              <p>Krótka nota redakcyjna o projekcie, zakresie tekstów i sposobie korzystania z wydań.</p>
-            </header>
-
-            <article class="library-prose">
-              <h4>Czym jest Gnostyk Biblioteka</h4>
-              <p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
-              <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
-              <p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.4.27</span></strong>.</p>
-              <div class="library-info-strip" aria-label="Podstawowe informacje">
-                <span><strong>Zakres</strong>Teksty gnostyckie</span>
-                <span><strong>Forma</strong>Przekład i opracowanie</span>
-                <span><strong>Aparat</strong>Cytowanie i paginacja</span>
-                <span><strong>Dane czytelnicze</strong>Lokalnie w przeglądarce</span>
-                <span><strong>Tryb</strong>PWA i offline</span>
-              </div>
-            </article>
-          </section>
-
-          <section id="libraryContactPanel" class="library-about library-contact-panel" aria-label="Kontakt" hidden>
-            <header class="library-info-head">
-              <span>Kontakt</span>
-              <h3>Opinie i zgłaszanie błędów</h3>
-              <p>Masz uwagi, znalazłeś błąd lub chcesz zaproponować zmianę w Bibliotece Gnozy?</p>
-            </header>
-
-            <article class="library-prose">
-              <p>Biblioteka Gnozy jest stale rozwijana. Jeśli zauważysz literówkę, błąd w tłumaczeniu, problem techniczny albo masz pomysł na nową funkcję lub kolejną księgę, napisz do mnie.</p>
-              <p><strong>E-mail:</strong> <a href="mailto:gnostyk950@gmail.com">gnostyk950@gmail.com</a></p>
-              <p>Dziękuję za każdą opinię, sugestię i zgłoszenie. Dzięki wiadomościom od użytkowników biblioteka może stawać się coraz dokładniejsza i wygodniejsza.</p>
-            </article>
-          </section>
-
-          <section id="libraryPrivacyPanel" class="library-about library-privacy-panel" aria-label="Polityka prywatności" hidden>
-            <header class="library-info-head">
-              <span>Prywatność</span>
-              <h3>Polityka prywatności</h3>
-              <p>Gnostyk Biblioteka działa lokalnie w przeglądarce i nie wymaga konta użytkownika.</p>
-            </header>
-
-            <article class="library-prose">
-              <p><strong>Dane lokalne.</strong> Zakładki, notatki, ostatnia czytana strona oraz ustawienia czytania są zapisywane lokalnie w przeglądarce użytkownika.</p>
-              <p><strong>Brak wysyłania danych.</strong> Aplikacja nie wysyła notatek, zakładek ani ustawień na zewnętrzny serwer. Dane pozostają na urządzeniu, dopóki użytkownik ich nie usunie albo nie wyczyści danych przeglądarki.</p>
-              <p><strong>Tryb offline.</strong> Jako aplikacja PWA biblioteka może zapisywać pliki tekstów w pamięci podręcznej przeglądarki, aby działały również bez połączenia z internetem.</p>
-              <p><strong>Licznik odwiedzin.</strong> Widoczny licznik odwiedzin jest przygotowany pod lekki, zewnętrzny licznik prywatnościowy. Jeśli nie zostanie skonfigurowany adres API, aplikacja pokaże jedynie znak „—”.</p>
-              <p><strong>Zmiany w przyszłości.</strong> Jeśli biblioteka otrzyma synchronizację, konto użytkownika, newsletter lub analitykę, polityka prywatności powinna zostać zaktualizowana przed publikacją takiej funkcji.</p>
-            </article>
-          </section>
-
-          <section id="libraryChangesPanel" class="library-changes-panel" aria-label="Zmiany biblioteki" hidden>
-            <header class="library-info-head">
-              <span>Zmiany</span>
-              <h3>Historia zmian</h3>
-              <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
-            </header>
-            <ol id="libraryUpdates" class="library-updates">
-              
-              <li class="library-update-group"><strong>1.4.7</strong><ul><li data-i18n-pl="Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego." data-i18n-en="Hid interlinear and added a Settings option to enable it as an experimental mode.">Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego.</li></ul></li>
-              <li class="library-update-group"><strong>1.4.6</strong><ul><li data-i18n-pl="Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki." data-i18n-en="Replaced Settings and Tools separators with subtle lines matching the Library panel style.">Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.</li><li data-i18n-pl="Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia." data-i18n-en="Unified separator colors for dark, light, and sepia themes.">Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.</li></ul></li>
-              <li class="library-update-group"><strong>1.4.0</strong><ul><li data-i18n-pl="Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście." data-i18n-en="Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text.">Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.</li><li data-i18n-pl="Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii." data-i18n-en="Dictionary-card occurrences now use token forms and lemmas, not only raw line text.">Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.</li></ul></li>
-              <li class="library-update-group"><strong>1.3.7</strong><ul><li data-i18n-pl="Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114." data-i18n-en="Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114.">Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.</li><li data-i18n-pl="Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii." data-i18n-en="Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well.">Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.</li><li data-i18n-pl="Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika." data-i18n-en="Simplified the visual style of interlinear word blocks so they fit the continuous reader better.">Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.</li></ul></li>
-              <li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-pl="Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii." data-i18n-en="The dictionary card now follows the active book: in Thomas it shows logia and Gospel of Thomas occurrences instead of Pistis Sophia pages.">Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.</li><li data-i18n-pl="Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię." data-i18n-en="Generalized the shared Gnostyk Library dictionary note so it no longer points only to Pistis Sophia.">Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.</li></ul></li>
-              <li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-pl="Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM." data-i18n-en="Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM.">Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.</li><li data-i18n-pl="Zsynchronizowano widok Koptyjski z logionami 1–114." data-i18n-en="Synchronized Coptic mode with logia 1–114.">Zsynchronizowano widok Koptyjski z logionami 1–114.</li><li data-i18n-pl="Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu." data-i18n-en="Restored the Thomas Interlinear button as a technical preview based on the Coptic text layer.">Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.</li></ul></li>
-              <li class="library-update-group"><strong>1.2.3</strong><ul><li>Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.</li><li>Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.</li></ul></li>
-              <li class="library-update-group"><strong>1.2.2</strong><ul><li>Usunięto dużą ikonę książki z kafelka na stronie Home.</li><li>Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.</li><li>Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.</li></ul></li>
-              <li class="library-update-group"><strong>1.2.0</strong><ul><li>Przebudowano stronę Home, aby nie dublowała katalogu ksiąg.</li><li>Usunięto zdublowane kafelki z zakładki Księgi.</li><li>Przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.</li></ul></li>
-              <li class="library-update-group"><strong>1.1.1</strong><ul><li>Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.</li><li>Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.</li></ul></li>
-              <li class="library-update-group"><strong>1.1.0</strong><ul><li>Dodano Ewangelię Tomasza jako pełną księgę modułową.</li><li>Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.</li><li>Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.150</strong><ul><li>Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.</li><li>Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.147</strong><ul><li>Wycofano pasek postępu słownika i automatyczne procenty, aby uniknąć błędnych statystyk.</li><li>Zostawiono prostszy, stabilniejszy widok słownika ze statusami haseł.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.145</strong><ul><li>Usunięto kreskowy zapis brakujących glos w interlinii i zastąpiono go statusem „w przygotowaniu”.</li><li>Dodano statusy haseł słownikowych: Gotowe, Podstawowe i W przygotowaniu.</li><li>Przygotowano słownik jako wspólną warstwę dla kolejnych modułów ksiąg.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.144</strong><ul><li>Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.</li><li>Dodano najnowszą wersję do widocznej historii zmian.</li><li>Wyśrodkowano krzyżyk zamykania karty słownikowej.</li><li>Usunięto ramkę i tło ze statusów książek w katalogu.</li></ul></li>
-              <li class="library-update-group"><strong>1.0.143</strong><ul><li>Przebudowano dane ksiąg na strukturę modułową w katalogu <code>books/</code>.</li><li>Przeniesiono Pistis Sophię do modułu <code>books/pistis-sophia/</code>.</li><li>Dodano szkielet modułu Ewangelii Tomasza z miejscem na 114 logionów.</li></ul></li>
-            </ol>
-          </section>
-
-          <section id="libraryDictionaryPanel" class="library-about library-dictionary-panel" aria-label="Słownik koptyjski" hidden>
-            <header class="library-info-head">
-              <span id="dictionaryKicker">Słownik</span>
-              <h3 id="dictionaryPanelTitle">Słownik koptyjski</h3>
-              <p id="dictionaryPanelLead">Szukaj po formie koptyjskiej, polskiej glosie albo angielskim znaczeniu. Kliknięcie wyniku otwiera kartę słownikową.</p>
-            </header>
-
-            <div class="dictionary-browser" aria-label="Przeglądarka słownika koptyjskiego">
-              <div>
-                <strong id="dictionaryBrowserTitle">Słownik koptyjski</strong>
-                <p id="dictionaryBrowserLead">Szukaj po formie koptyjskiej, polskiej glosie albo angielskim znaczeniu. Wyniki korzystają z tej samej bazy co interlinia.</p>
-              </div>
-              <label id="dictionarySearchLabel">Szukaj w słowniku
+<div class="app-shell">
+<aside aria-label="Nawigacja" class="sidebar" id="readerSidebar">
+<div class="brand">
+<div>
+<span aria-label="Home" class="brand-wordmark brand-home-link" data-go-home="" role="button" tabindex="0">Gnostyk</span>
+</div>
+<div aria-label="Język interfejsu" class="language-switch">
+<button data-language-switch="pl" type="button">PL</button>
+<button data-language-switch="en" type="button">EN</button>
+</div>
+</div>
+<button class="text-button subtle sidebar-back book-nav" id="backToLibraryButton" type="button">← Biblioteka</button>
+<section aria-label="Panel książki" class="library-card book-nav">
+<span class="eyebrow">Aktualna pozycja biblioteki</span>
+<div class="book-title-line"><h2>Pistis Sophia</h2><span class="book-layer-label">PL/EN/COPT</span></div>
+<p>Polski przekład i opracowanie całości tekstu na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
+</section>
+<label class="search book-nav">
+<span>Szukaj</span>
+<input autocomplete="off" id="searchInput" placeholder="światło, Sophia, mystery" type="search"/>
+</label>
+<div aria-label="Widoki książki" class="tabs book-nav" role="tablist">
+<button class="tab is-active" data-tab="chapters" type="button">Rozdziały</button>
+<button class="tab" data-tab="themes" type="button">Motywy</button>
+<button class="tab" data-tab="marks" type="button">Zakładki</button>
+</div>
+<div class="panel book-nav is-active" id="chaptersPanel"></div>
+<div class="panel book-nav" id="themesPanel"></div>
+<div class="panel book-nav" id="marksPanel"></div>
+</aside>
+<main class="reader">
+<section aria-label="Ekran startowy biblioteki" class="library-home">
+<header class="library-topbar">
+<div>
+<span aria-label="Home" class="brand-wordmark library-topbar-wordmark brand-home-link" data-go-home="" role="button" tabindex="0">Gnostyk</span>
+</div>
+<div class="library-topbar-actions">
+<nav aria-label="Nawigacja pomocnicza biblioteki" class="library-topbar-links">
+<button aria-expanded="false" class="library-topbar-link" id="libraryPrivacyToggle" type="button">Prywatność</button>
+<button aria-expanded="false" class="library-topbar-link" id="libraryChangesToggle" type="button">Zmiany</button>
+<button aria-expanded="false" class="library-topbar-link" id="libraryHelpToggle" type="button">Pomoc</button>
+<button aria-expanded="false" class="library-topbar-link" id="libraryContactToggle" type="button">Kontakt</button>
+<button aria-expanded="false" class="library-topbar-link" id="libraryInfoToggle" type="button">Info</button>
+</nav>
+<div aria-label="Język interfejsu" class="language-switch">
+<button data-language-switch="pl" type="button">PL</button>
+<button data-language-switch="en" type="button">EN</button>
+</div>
+</div>
+</header>
+<div class="library-home-copy">
+<h2>Biblioteka gnozy</h2>
+<p>Cyfrowa biblioteka polskich przekładów, opracowań i narzędzi cytowania tekstów gnostyckich.</p>
+<nav aria-label="Nawigacja biblioteki" class="library-nav">
+<button aria-expanded="true" class="text-button is-active" id="libraryHomeToggle" type="button">Home</button>
+<button aria-expanded="false" class="text-button" id="libraryBooksToggle" type="button">Księgi</button>
+<button aria-expanded="false" class="text-button" id="libraryDictionaryToggle" type="button">Słownik</button>
+<button aria-expanded="false" class="text-button" id="libraryToolsToggle" type="button">Narzędzia</button>
+<button aria-expanded="false" class="text-button" id="librarySettingsToggle" type="button">Ustawienia</button>
+<button aria-expanded="false" class="text-button support-nav-button" id="librarySupportToggle" type="button"><span aria-hidden="true" class="support-icon">♡</span><span>Wsparcie</span></button>
+</nav>
+</div>
+<section aria-label="Home" class="library-home-panel" id="libraryHomePanel">
+<div class="home-hero-card">
+<span class="eyebrow" data-i18n-en="Gnostyk Library" data-i18n-pl="Biblioteka Gnozy">Biblioteka Gnozy</span>
+<h3 data-i18n-en="A digital library of Gnostic texts" data-i18n-pl="Cyfrowa biblioteka tekstów gnostyckich">Cyfrowa biblioteka tekstów gnostyckich</h3>
+<p data-i18n-en="Translations, source texts, Coptic interlinear tools, a dictionary, and research features for studying Gnostic tradition in one place." data-i18n-pl="Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu.">Przekłady, teksty źródłowe, interlinia koptyjska, słownik i narzędzia do pracy z tradycją gnostycką w jednym miejscu.</p>
+<button class="text-button library-read-button" data-i18n-en="Browse library" data-i18n-pl="Przeglądaj bibliotekę" id="browseBooksButton" type="button">Przeglądaj bibliotekę</button>
+</div>
+<div aria-label="Stan biblioteki" class="home-dashboard">
+<article>
+<strong>3</strong>
+<span data-i18n-en="available books" data-i18n-pl="księgi dostępne">księgi dostępne</span>
+</article>
+<article>
+<strong>1</strong>
+<span data-i18n-en="in preparation" data-i18n-pl="w przygotowaniu">w przygotowaniu</span>
+</article>
+<article>
+<strong>40+</strong>
+<span data-i18n-en="planned texts" data-i18n-pl="tekstów planowanych">tekstów planowanych</span>
+</article>
+<article>
+<strong>14k+</strong>
+<span data-i18n-en="dictionary forms" data-i18n-pl="form słownikowych">form słownikowych</span>
+</article>
+<article class="visit-counter-card" id="visitCounterCard">
+<strong id="visitCounterValue">—</strong>
+<span data-i18n-en="library visits" data-i18n-pl="odwiedzin biblioteki">odwiedzin biblioteki</span>
+</article>
+</div>
+<div class="home-cards home-start-cards">
+<article class="home-card primary">
+<div class="home-card-kicker"><span aria-hidden="true" class="material-symbols-rounded home-symbol">history_edu</span><span data-i18n-en="Continue work" data-i18n-pl="Kontynuuj pracę">Kontynuuj pracę</span></div>
+<h4 data-i18n-en="Return to the last text" data-i18n-pl="Wróć do ostatniego tekstu">Wróć do ostatniego tekstu</h4>
+<p data-i18n-en="Open the last viewed book exactly where you stopped working." data-i18n-pl="Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę.">Otwórz ostatnio przeglądaną księgę dokładnie w miejscu, w którym przerwano pracę.</p>
+<button class="text-button library-read-button" data-i18n-en="Return to text" data-i18n-pl="Wróć do tekstu" id="homeContinueButton" type="button">Wróć do tekstu</button>
+</article>
+<article class="home-card" data-open-work="gospel-of-philip" role="button" tabindex="0">
+<div class="home-card-kicker"><span aria-hidden="true" class="material-symbols-rounded home-symbol">auto_stories</span><span data-i18n-en="Recently added" data-i18n-pl="Ostatnio dodane">Ostatnio dodane</span></div>
+<h4 data-i18n-en="Gospel of Philip" data-i18n-pl="Ewangelia Filipa">Ewangelia Filipa</h4>
+<p data-i18n-en="Full text in PL/EN layers; Coptic prepared for import." data-i18n-pl="Pełny tekst w warstwach PL/EN; koptyjski przygotowany do importu.">Pełny tekst w warstwach PL/EN; koptyjski przygotowany do importu.</p>
+<button class="text-button library-read-button" data-i18n-en="Open" data-i18n-pl="Otwórz" data-open-work="gospel-of-philip" type="button">Otwórz</button>
+</article>
+<article class="home-card">
+<div class="home-card-kicker"><span aria-hidden="true" class="material-symbols-rounded home-symbol">volunteer_activism</span><span data-i18n-en="Support" data-i18n-pl="Wsparcie">Wsparcie</span></div>
+<h4 data-i18n-en="Help develop the project" data-i18n-pl="Pomóż rozwijać projekt">Pomóż rozwijać projekt</h4>
+<p data-i18n-en="Your support helps develop the dictionary, interlinear tools, and future Gnostic texts." data-i18n-pl="Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie.">Wsparcie pomaga rozwijać słownik, interlinię i kolejne teksty gnostyckie.</p>
+<button class="text-button library-read-button secondary support-nav-button" id="homeSupportButton" type="button"><span aria-hidden="true" class="support-icon">♡</span><span data-i18n-en="Support" data-i18n-pl="Wesprzyj">Wesprzyj</span></button>
+</article>
+</div>
+<section aria-label="Ostatnie zmiany" class="home-recent-updates">
+<header>
+<span data-i18n-en="Recent changes" data-i18n-pl="Ostatnie zmiany">Ostatnie zmiany</span>
+<button class="text-button" data-i18n-en="Full history" data-i18n-pl="Pełna historia" data-nav-section="changes" type="button">Pełna historia</button>
+</header>
+<ul id="homeRecentUpdates"><li><strong>1.4.55</strong><span data-i18n-en="Made every Pistis Sophia and addenda heading use the active theme accent, removing remaining white headings." data-i18n-pl="Dostosowano kolory wszystkich nagłówków Pistis Sophii i Dodatków do aktywnego motywu oraz usunięto pozostałe białe nagłówki.">Dostosowano kolory wszystkich nagłówków Pistis Sophii i Dodatków do aktywnego motywu oraz usunięto pozostałe białe nagłówki.</span></li><li><strong>1.4.54</strong><span data-i18n-en="Structured the English Pistis Sophia text and addenda with chapter headings, rubrics, p. markers, and separate paragraphs matching the Polish layer." data-i18n-pl="Uporządkowano angielski tekst Pistis Sophii i Dodatków: nagłówki, śródtytuły, oznaczenia p. oraz osobne akapity zgodne z polską warstwą.">Uporządkowano angielski tekst Pistis Sophii i Dodatków: nagłówki, śródtytuły, oznaczenia p. oraz osobne akapity zgodne z polską warstwą.</span></li><li><strong>1.4.53</strong><span data-i18n-en="Normalized heading sizes, colors, spacing, and p. markers across the Polish and English Pistis Sophia text." data-i18n-pl="Ujednolicono wielkość, kolory i odstępy nagłówków oraz oznaczeń p. w polskim i angielskim tekście Pistis Sophii.">Ujednolicono wielkość, kolory i odstępy nagłówków oraz oznaczeń p. w polskim i angielskim tekście Pistis Sophii.</span></li></ul>
+</section>
+</section>
+<div aria-label="Księgi" class="library-shelf" hidden="" id="libraryBooksPanel">
+<header class="library-info-head library-books-head">
+<span data-i18n-en="Books" data-i18n-pl="Księgi">Księgi</span>
+<h3 data-i18n-en="Gnostyk Library catalogue" data-i18n-pl="Katalog Biblioteki Gnozy">Katalog Biblioteki Gnozy</h3>
+<p data-i18n-en="Texts are grouped by collections and codices. This catalogue is the main place for opening available texts and checking planned entries." data-i18n-pl="Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych.">Księgi są pogrupowane według kolekcji i kodeksów. Ten katalog jest głównym miejscem otwierania dostępnych tekstów i sprawdzania pozycji planowanych.</p>
+</header>
+<section aria-label="Kolekcje tekstów gnostyckich" class="library-collections">
+<details class="collection-group" open="">
+<summary><span data-i18n-en="Askew Codex" data-i18n-pl="Kodeks Askew">Kodeks Askew</span><small data-i18n-en="available" data-i18n-pl="dostępne">dostępne</small></summary>
+<ul class="collection-list">
+<li class="collection-item-link" data-open-work="pistis-sophia" role="button" tabindex="0"><div class="collection-item-main"><strong>Pistis Sophia <span class="status-badge inline available" data-i18n-en="PL/EN/COPT" data-i18n-pl="PL/EN/COPT">PL/EN/COPT</span></strong><em data-i18n-en="full translation and reader apparatus" data-i18n-pl="pełny przekład i aparat czytelniczy">pełny przekład i aparat czytelniczy</em></div></li>
+</ul>
+</details>
+<details class="collection-group" open="">
+<summary><span data-i18n-en="Nag Hammadi Library (Codices I–XIII)" data-i18n-pl="Biblioteka Nag Hammadi (Codices I–XIII)">Biblioteka Nag Hammadi (Codices I–XIII)</span><small data-i18n-en="planned catalogue" data-i18n-pl="katalog planowany">katalog planowany</small></summary>
+<div class="codex-grid">
+<div class="codex-column">
+<details><summary>Codex I <small>Jung Codex</small></summary><ul><li>Modlitwa Apostoła Pawła</li><li>Apokryf Jakuba</li><li>Ewangelia Prawdy</li><li>Traktat o Zmartwychwstaniu</li><li>Trójkształtna Protennoia</li></ul></details>
+<details><summary>Codex III</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li><li>Eugnostos Błogosławiony</li><li>Sophia Jezusa Chrystusa</li><li>Dialog Zbawiciela</li></ul></details>
+<details><summary>Codex V</summary><ul><li>Eugnostos</li><li>Apokalipsa Pawła</li><li>Pierwsza Apokalipsa Jakuba</li><li>Druga Apokalipsa Jakuba</li><li>Apokalipsa Adama</li></ul></details>
+<details><summary>Codex VII</summary><ul><li>Parafraza Sema</li><li>Drugi Traktat Wielkiego Seta</li><li>Apokalipsa Piotra</li><li>Nauki Sylwana</li><li>Trzy Stele Seta</li></ul></details>
+<details><summary>Codex IX</summary><ul><li>Melchizedek</li><li>Myśl Norei</li><li>Świadectwo Prawdy</li></ul></details>
+<details><summary>Codex XI</summary><ul><li>Interpretacja Wiedzy</li><li>Walentyniańska Ekspozycja</li><li>Allogenes</li><li>Hypsiphrone</li></ul></details>
+<details><summary>Codex XIII</summary><ul><li>Trimorficzna Protennoia</li><li>O pochodzeniu świata</li></ul></details>
+</div>
+<div class="codex-column">
+<details><summary>Codex II <small data-i18n-en="Thomas and Philip" data-i18n-pl="Tomasz i Filip">Tomasz i Filip</small></summary><ul class="codex-work-list"><li class="codex-work-row planned"><span>Apokryf Jana</span><span class="status-badge planned" data-i18n-en="planned" data-i18n-pl="planowane">planowane</span></li><li class="codex-work-row available" data-open-work="gospel-of-thomas" role="button" tabindex="0"><span>Ewangelia Tomasza <span class="status-badge inline available" data-i18n-en="PL/EN/COPT" data-i18n-pl="PL/EN/COPT">PL/EN/COPT</span></span></li><li class="codex-work-row available" data-open-work="gospel-of-philip" role="button" tabindex="0"><span>Ewangelia Filipa <span class="status-badge inline available" data-i18n-en="PL/EN" data-i18n-pl="PL/EN">PL/EN</span></span></li><li class="codex-work-row planned"><span>Hipostaza Archontów</span><span class="status-badge planned" data-i18n-en="planned" data-i18n-pl="planowane">planowane</span></li><li class="codex-work-row planned"><span>O początku świata</span><span class="status-badge planned" data-i18n-en="planned" data-i18n-pl="planowane">planowane</span></li><li class="codex-work-row planned"><span>Egzegeza o duszy</span><span class="status-badge planned" data-i18n-en="planned" data-i18n-pl="planowane">planowane</span></li><li class="codex-work-row planned"><span>Księga Tomasza Atlety</span><span class="status-badge planned" data-i18n-en="planned" data-i18n-pl="planowane">planowane</span></li></ul></details>
+<details><summary>Codex IV</summary><ul><li>Apokryf Jana</li><li>Ewangelia Egipcjan</li></ul></details>
+<details><summary>Codex VI</summary><ul><li>Dzieje Piotra i Dwunastu Apostołów</li><li>Grom. Doskonały Umysł</li><li>Autorytatywne Nauczanie</li><li>Pojęcie Naszej Wielkiej Mocy</li><li>Państwo Platona</li><li>Rozprawa o Ósmej i Dziewiątej</li><li>Modlitwa Dziękczynna</li><li>Asklepios</li></ul></details>
+<details><summary>Codex VIII</summary><ul><li>Zostrianos</li><li>List Piotra do Filipa</li></ul></details>
+<details><summary>Codex X</summary><ul><li>Marsanes</li></ul></details>
+<details><summary>Codex XII</summary><ul><li>Sentencje Sekstusa</li><li>Ewangelia Prawdy (fragment)</li><li>Fragmenty</li></ul></details>
+</div>
+</div>
+</details>
+<details class="collection-group">
+<summary><span data-i18n-en="Bruce Codex" data-i18n-pl="Kodeks Bruce'a">Kodeks Bruce'a</span><small data-i18n-en="planned" data-i18n-pl="planowane">planowane</small></summary>
+<ul class="collection-list"><li>Księgi Jeu</li><li>Nienazwany traktat</li></ul>
+</details>
+<details class="collection-group">
+<summary><span data-i18n-en="Other Gnostic texts" data-i18n-pl="Inne teksty gnostyckie">Inne teksty gnostyckie</span><small data-i18n-en="planned" data-i18n-pl="planowane">planowane</small></summary>
+<ul class="collection-list"><li>Ewangelia Marii</li><li>Ewangelia Judasza</li><li>Ody Salomona</li><li>Corpus Hermeticum</li></ul>
+</details>
+</section>
+</div>
+<section aria-label="Pomoc" class="library-about library-help-panel" hidden="" id="libraryHelpPanel">
+<header class="library-info-head">
+<span data-i18n-en="Help" data-i18n-pl="Pomoc">Pomoc</span>
+<h3 data-i18n-en="How to use the library" data-i18n-pl="Jak korzystać z biblioteki">Jak korzystać z biblioteki</h3>
+<p data-i18n-en="Expand a topic to learn how the reader, tools, and library settings work." data-i18n-pl="Rozwiń wybrany temat, aby poznać działanie czytnika, narzędzi i ustawień biblioteki.">Rozwiń wybrany temat, aby poznać działanie czytnika, narzędzi i ustawień biblioteki.</p>
+</header>
+<div class="help-accordion"><div class="help-column"><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Getting started" data-i18n-pl="Pierwsze kroki">Pierwsze kroki</span></summary>
+<div class="help-answer"><p data-i18n-en="On the home page, open Books and select a title. Available books open directly in the reader, while planned titles show preparation status. The Gnostyk logo returns you to the home page." data-i18n-pl="Na stronie głównej wybierz zakładkę Księgi, a następnie kliknij wybraną pozycję. Dostępne książki otwierają się bezpośrednio w czytniku, natomiast pozycje planowane pokazują informacje o stanie przygotowania. Logo Gnostyk prowadzi z powrotem na stronę główną.">Na stronie głównej wybierz zakładkę Księgi, a następnie kliknij wybraną pozycję. Dostępne książki otwierają się bezpośrednio w czytniku, natomiast pozycje planowane pokazują informacje o stanie przygotowania. Logo Gnostyk prowadzi z powrotem na stronę główną.</p><p data-i18n-en="The library stores key settings locally, including language, theme, last reading position, bookmarks, and notes. This lets you continue after reopening without creating an account." data-i18n-pl="Biblioteka zapisuje lokalnie najważniejsze ustawienia, takie jak język, motyw, ostatnio czytane miejsce, zakładki i notatki. Dzięki temu po ponownym otwarciu możesz kontynuować pracę bez tworzenia konta.">Biblioteka zapisuje lokalnie najważniejsze ustawienia, takie jak język, motyw, ostatnio czytane miejsce, zakładki i notatki. Dzięki temu po ponownym otwarciu możesz kontynuować pracę bez tworzenia konta.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="PL / EN language" data-i18n-pl="Język PL / EN">Język PL / EN</span></summary>
+<div class="help-answer"><p data-i18n-en="The PL / EN switch in the top-right corner changes the interface language and available text layers. Your choice is remembered when moving between books, refreshing the page, and reopening the app." data-i18n-pl="Przełącznik PL / EN w prawym górnym rogu zmienia język interfejsu oraz dostępnych warstw tekstu. Wybrany język jest zapamiętywany podczas przechodzenia między księgami, po odświeżeniu strony i po ponownym uruchomieniu aplikacji.">Przełącznik PL / EN w prawym górnym rogu zmienia język interfejsu oraz dostępnych warstw tekstu. Wybrany język jest zapamiętywany podczas przechodzenia między księgami, po odświeżeniu strony i po ponownym uruchomieniu aplikacji.</p><p data-i18n-en="Not every book has the same set of language layers. If a layer is not yet available, the app keeps only the modes prepared for that particular text." data-i18n-pl="Nie każda księga musi mieć identyczny zestaw warstw językowych. Jeżeli dana warstwa nie jest jeszcze dostępna, aplikacja pozostawia dostępne tylko te tryby, które zostały przygotowane dla konkretnego tekstu.">Nie każda księga musi mieć identyczny zestaw warstw językowych. Jeżeli dana warstwa nie jest jeszcze dostępna, aplikacja pozostawia dostępne tylko te tryby, które zostały przygotowane dla konkretnego tekstu.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Coptic text and interlinear" data-i18n-pl="Tekst koptyjski i interlinia">Tekst koptyjski i interlinia</span></summary>
+<div class="help-answer"><p data-i18n-en="Coptic mode shows the source-text layer when it is available for a book. Interlinear mode pairs Coptic words with short working glosses. A gloss is not a complete sentence translation; it indicates a basic meaning and supports structural analysis." data-i18n-pl="Tryb koptyjski pokazuje warstwę tekstu źródłowego, jeżeli została przygotowana dla danej księgi. Interlinia zestawia słowa koptyjskie z krótkimi glosami pomocniczymi. Nie należy traktować glosy jako pełnego przekładu zdania: jej zadaniem jest pokazanie podstawowego znaczenia i ułatwienie analizy konstrukcji.">Tryb koptyjski pokazuje warstwę tekstu źródłowego, jeżeli została przygotowana dla danej księgi. Interlinia zestawia słowa koptyjskie z krótkimi glosami pomocniczymi. Nie należy traktować glosy jako pełnego przekładu zdania: jej zadaniem jest pokazanie podstawowego znaczenia i ułatwienie analizy konstrukcji.</p><p data-i18n-en="Clicking a Coptic word may open a dictionary card with the lemma, transliteration, part of speech, meanings, and occurrences. The interlinear layer is expanded gradually, so some entries may remain basic or marked as in preparation." data-i18n-pl="Kliknięcie słowa koptyjskiego może otworzyć kartę słownikową z formą bazową, transliteracją, częścią mowy, znaczeniami i wystąpieniami. Interlinia jest rozwijana stopniowo, dlatego niektóre hasła mogą mieć status podstawowy lub być jeszcze w przygotowaniu.">Kliknięcie słowa koptyjskiego może otworzyć kartę słownikową z formą bazową, transliteracją, częścią mowy, znaczeniami i wystąpieniami. Interlinia jest rozwijana stopniowo, dlatego niektóre hasła mogą mieć status podstawowy lub być jeszcze w przygotowaniu.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Search" data-i18n-pl="Wyszukiwanie">Wyszukiwanie</span></summary>
+<div class="help-answer"><p data-i18n-en="The reader search field searches the currently available text layer. Results lead to matching places in the book. A distinctive word or short phrase usually works better than a very long quotation." data-i18n-pl="Pole wyszukiwania w czytniku przeszukuje aktualnie dostępną warstwę tekstu. Wyniki prowadzą do odpowiadających miejsc w księdze. Najlepsze rezultaty daje wpisanie charakterystycznego słowa lub krótkiej frazy zamiast bardzo długiego cytatu.">Pole wyszukiwania w czytniku przeszukuje aktualnie dostępną warstwę tekstu. Wyniki prowadzą do odpowiadających miejsc w księdze. Najlepsze rezultaty daje wpisanie charakterystycznego słowa lub krótkiej frazy zamiast bardzo długiego cytatu.</p><p data-i18n-en="Dictionary search works independently and covers Coptic forms, transliteration, and meanings. Results depend on the current level of database preparation." data-i18n-pl="W słowniku wyszukiwanie działa niezależnie i obejmuje formy koptyjskie, transliterację oraz znaczenia. Wyniki zależą od aktualnego stopnia opracowania bazy.">W słowniku wyszukiwanie działa niezależnie i obejmuje formy koptyjskie, transliterację oraz znaczenia. Wyniki zależą od aktualnego stopnia opracowania bazy.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Themes and reading settings" data-i18n-pl="Motywy i ustawienia czytania">Motywy i ustawienia czytania</span></summary>
+<div class="help-answer"><p data-i18n-en="Light, Sepia, and Dark themes change the background, contrast, panel colors, and selections. Light suits bright surroundings, Sepia provides a calmer paper-like feel, and Dark reduces brightness for evening reading." data-i18n-pl="Motywy Light, Sepia i Dark zmieniają tło, kontrast, kolory paneli i zaznaczenia. Light sprawdza się w jasnym otoczeniu, Sepia daje spokojniejsze, papierowe wrażenie, a Dark ogranicza jasność podczas czytania wieczorem.">Motywy Light, Sepia i Dark zmieniają tło, kontrast, kolory paneli i zaznaczenia. Light sprawdza się w jasnym otoczeniu, Sepia daje spokojniejsze, papierowe wrażenie, a Dark ogranicza jasność podczas czytania wieczorem.</p><p data-i18n-en="Reading settings let you adjust options such as text size, column width, and layer presentation. Changes apply immediately and are saved locally so the selected layout remains available next time." data-i18n-pl="Ustawienia czytania pozwalają dopasować między innymi wielkość tekstu, szerokość kolumny i sposób prezentacji warstw. Zmiany są stosowane od razu i zapisywane lokalnie, aby zachować wybrany układ przy kolejnym uruchomieniu.">Ustawienia czytania pozwalają dopasować między innymi wielkość tekstu, szerokość kolumny i sposób prezentacji warstw. Zmiany są stosowane od razu i zapisywane lokalnie, aby zachować wybrany układ przy kolejnym uruchomieniu.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Contact, errors, and suggestions" data-i18n-pl="Kontakt, błędy i sugestie">Kontakt, błędy i sugestie</span></summary>
+<div class="help-answer"><p data-i18n-en="Use Contact to report a typo, translation issue, missing dictionary entry, technical problem, or development idea. A useful report includes the book title, chapter, logion or page number, and a short description of the expected and actual behavior." data-i18n-pl="W sekcji Kontakt możesz zgłosić literówkę, problem z tłumaczeniem, brakujące hasło słownikowe, błąd techniczny lub pomysł na rozwój biblioteki. W zgłoszeniu najlepiej podać nazwę księgi, numer rozdziału, logionu lub strony oraz krótko opisać oczekiwane i rzeczywiste zachowanie.">W sekcji Kontakt możesz zgłosić literówkę, problem z tłumaczeniem, brakujące hasło słownikowe, błąd techniczny lub pomysł na rozwój biblioteki. W zgłoszeniu najlepiej podać nazwę księgi, numer rozdziału, logionu lub strony oraz krótko opisać oczekiwane i rzeczywiste zachowanie.</p><p data-i18n-en="Did not find the answer in this guide? Use Contact in the home-page top bar. User feedback helps improve the texts, tools, and reading experience." data-i18n-pl="Nie znalazłeś odpowiedzi w tym przewodniku? Skorzystaj z etykiety Kontakt na górnym pasku strony głównej. Uwagi użytkowników pomagają poprawiać teksty, narzędzia i wygodę czytania.">Nie znalazłeś odpowiedzi w tym przewodniku? Skorzystaj z etykiety Kontakt na górnym pasku strony głównej. Uwagi użytkowników pomagają poprawiać teksty, narzędzia i wygodę czytania.</p></div>
+</details></div><div class="help-column"><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Reading and navigation" data-i18n-pl="Czytanie i nawigacja">Czytanie i nawigacja</span></summary>
+<div class="help-answer"><p data-i18n-en="The left sidebar is used to move between chapters, logia, or other units of the selected book. In continuous texts, clicking an item scrolls to the matching place and highlights the active entry. You can also use search and the reader navigation controls." data-i18n-pl="Lewy sidebar służy do przechodzenia między rozdziałami, logionami lub innymi jednostkami wybranej księgi. W tekstach ciągłych kliknięcie pozycji przewija czytnik do odpowiedniego miejsca, a aktywna pozycja jest podświetlana. Możesz też korzystać z wyszukiwarki oraz przycisków nawigacyjnych czytnika.">Lewy sidebar służy do przechodzenia między rozdziałami, logionami lub innymi jednostkami wybranej księgi. W tekstach ciągłych kliknięcie pozycji przewija czytnik do odpowiedniego miejsca, a aktywna pozycja jest podświetlana. Możesz też korzystać z wyszukiwarki oraz przycisków nawigacyjnych czytnika.</p><p data-i18n-en="Reading position is remembered separately for each book. Copy excerpt uses the currently selected text and lets you quickly move a quotation into notes, messages, or research work." data-i18n-pl="Położenie w tekście jest zapamiętywane osobno dla każdej księgi. Kopiowanie fragmentu obejmuje aktualnie wybrany tekst i pozwala szybko przenieść cytat do notatek, wiadomości lub opracowania.">Położenie w tekście jest zapamiętywane osobno dla każdej księgi. Kopiowanie fragmentu obejmuje aktualnie wybrany tekst i pozwala szybko przenieść cytat do notatek, wiadomości lub opracowania.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Pistis Sophia addenda" data-i18n-pl="Materiały dodatkowe Pistis Sophii">Materiały dodatkowe Pistis Sophii</span></summary>
+<div class="help-answer"><p data-i18n-en="In the Pistis Sophia reader, the Addenda button switches the sidebar and text to the edition’s introductory material. The addenda are displayed as one continuous document. Clicking a sidebar item scrolls directly to the matching section instead of opening a separate page." data-i18n-pl="W czytniku Pistis Sophii przycisk Dodatki przełącza sidebar i tekst na materiały wprowadzające do wydania. Dodatki są wyświetlane jako jeden ciągły dokument. Kliknięcie pozycji w sidebarze nie otwiera osobnej strony, lecz przewija bezpośrednio do właściwej sekcji.">W czytniku Pistis Sophii przycisk Dodatki przełącza sidebar i tekst na materiały wprowadzające do wydania. Dodatki są wyświetlane jako jeden ciągły dokument. Kliknięcie pozycji w sidebarze nie otwiera osobnej strony, lecz przewija bezpośrednio do właściwej sekcji.</p><p data-i18n-en="The same button then changes its label to Pistis Sophia. Click it again to return to the main book text and the standard chapter list." data-i18n-pl="Ten sam przycisk zmienia wtedy nazwę na Pistis Sophia. Kliknij go ponownie, aby wrócić do właściwego tekstu księgi i standardowego spisu rozdziałów.">Ten sam przycisk zmienia wtedy nazwę na Pistis Sophia. Kliknij go ponownie, aby wrócić do właściwego tekstu księgi i standardowego spisu rozdziałów.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Coptic dictionary" data-i18n-pl="Słownik koptyjski">Słownik koptyjski</span></summary>
+<div class="help-answer"><p data-i18n-en="The dictionary searches Coptic forms, Polish glosses, and English meanings. It uses the same database as the interlinear layer, so entries can be opened from the home page or directly from the text." data-i18n-pl="Słownik pozwala wyszukiwać formy koptyjskie, polskie glosy i angielskie znaczenia. Wyniki korzystają z tej samej bazy co interlinia, dzięki czemu hasła można otwierać zarówno ze strony głównej, jak i bezpośrednio z tekstu.">Słownik pozwala wyszukiwać formy koptyjskie, polskie glosy i angielskie znaczenia. Wyniki korzystają z tej samej bazy co interlinia, dzięki czemu hasła można otwierać zarówno ze strony głównej, jak i bezpośrednio z tekstu.</p><p data-i18n-en="A form may have several context-dependent meanings, and a manuscript spelling may differ from the dictionary form. The card therefore shows both the selected word and the recognized lemma when available." data-i18n-pl="Jedna forma może mieć kilka znaczeń zależnych od kontekstu, a zapis występujący w rękopisie może różnić się od formy słownikowej. Dlatego karta pokazuje zarówno wybrane słowo, jak i rozpoznany lemat, o ile jest dostępny.">Jedna forma może mieć kilka znaczeń zależnych od kontekstu, a zapis występujący w rękopisie może różnić się od formy słownikowej. Dlatego karta pokazuje zarówno wybrane słowo, jak i rozpoznany lemat, o ile jest dostępny.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Bookmarks and notes" data-i18n-pl="Zakładki i notatki">Zakładki i notatki</span></summary>
+<div class="help-answer"><p data-i18n-en="Bookmarks save important places in the text and let you return to them from the Bookmarks panel. Notes are associated with the place or page where they were created. This data remains in the browser on the current device." data-i18n-pl="Zakładki zapisują ważne miejsca w tekście i pozwalają szybko do nich wracać z panelu Zakładki. Notatki są powiązane z miejscem lub stroną, przy której zostały utworzone. Dane te pozostają w przeglądarce na danym urządzeniu.">Zakładki zapisują ważne miejsca w tekście i pozwalają szybko do nich wracać z panelu Zakładki. Notatki są powiązane z miejscem lub stroną, przy której zostały utworzone. Dane te pozostają w przeglądarce na danym urządzeniu.</p><p data-i18n-en="Clearing browser data, private-mode storage, or app storage may remove bookmarks and notes. If export or backup is available, use it before changing devices or performing a major browser cleanup." data-i18n-pl="Wyczyszczenie danych przeglądarki, trybu prywatnego lub pamięci aplikacji może usunąć zakładki i notatki. Jeżeli korzystasz z funkcji eksportu lub kopii zapasowej, warto wykonywać ją przed zmianą urządzenia albo większym czyszczeniem przeglądarki.">Wyczyszczenie danych przeglądarki, trybu prywatnego lub pamięci aplikacji może usunąć zakładki i notatki. Jeżeli korzystasz z funkcji eksportu lub kopii zapasowej, warto wykonywać ją przed zmianą urządzenia albo większym czyszczeniem przeglądarki.</p></div>
+</details><details>
+<summary><span aria-hidden="true" class="help-sign">+</span><span data-i18n-en="Offline mode and updates" data-i18n-pl="Tryb offline i aktualizacje">Tryb offline i aktualizacje</span></summary>
+<div class="help-answer"><p data-i18n-en="The library works as a PWA and can cache files for use without an internet connection. The first opening of a new book or a new release may require a connection to download updated resources." data-i18n-pl="Biblioteka działa jako aplikacja PWA i może zapisywać pliki w pamięci podręcznej, aby udostępniać je bez połączenia z internetem. Przy pierwszym otwarciu nowej księgi lub po aktualizacji może być potrzebne połączenie, aby pobrać najnowsze zasoby.">Biblioteka działa jako aplikacja PWA i może zapisywać pliki w pamięci podręcznej, aby udostępniać je bez połączenia z internetem. Przy pierwszym otwarciu nowej księgi lub po aktualizacji może być potrzebne połączenie, aby pobrać najnowsze zasoby.</p><p data-i18n-en="The Changes section shows recent releases and the complete development history. The visible version number helps identify whether you are using the current package. After a major update, refreshing the page may be needed so the browser downloads new files instead of an older cached copy." data-i18n-pl="Sekcja Zmiany pokazuje ostatnie wydania i pełną historię rozwoju. Numer wersji widoczny w aplikacji pomaga rozpoznać, czy używasz aktualnej paczki. Po dużej aktualizacji czasem warto odświeżyć stronę, aby przeglądarka pobrała nowe pliki zamiast starszej kopii z cache.">Sekcja Zmiany pokazuje ostatnie wydania i pełną historię rozwoju. Numer wersji widoczny w aplikacji pomaga rozpoznać, czy używasz aktualnej paczki. Po dużej aktualizacji czasem warto odświeżyć stronę, aby przeglądarka pobrała nowe pliki zamiast starszej kopii z cache.</p></div>
+</details></div></div>
+</section>
+<section aria-label="Informacje o bibliotece" class="library-about" hidden="" id="libraryInfoPanel">
+<header class="library-info-head">
+<span>Info</span>
+<h3>O bibliotece</h3>
+<p>Krótka nota redakcyjna o projekcie, zakresie tekstów i sposobie korzystania z wydań.</p>
+</header>
+<article class="library-prose">
+<h4>Czym jest Gnostyk Biblioteka</h4>
+<p><strong>Gnostyk Biblioteka</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
+<p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
+<p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Gnostyk Biblioteka v<span class="inline-library-version">1.4.43</span></strong>.</p>
+<div aria-label="Podstawowe informacje" class="library-info-strip">
+<span><strong>Zakres</strong>Teksty gnostyckie</span>
+<span><strong>Forma</strong>Przekład i opracowanie</span>
+<span><strong>Aparat</strong>Cytowanie i paginacja</span>
+<span><strong>Dane czytelnicze</strong>Lokalnie w przeglądarce</span>
+<span><strong>Tryb</strong>PWA i offline</span>
+</div>
+</article>
+</section>
+<section aria-label="Kontakt" class="library-about library-contact-panel" hidden="" id="libraryContactPanel">
+<header class="library-info-head">
+<span>Kontakt</span>
+<h3>Opinie i zgłaszanie błędów</h3>
+<p>Masz uwagi, znalazłeś błąd lub chcesz zaproponować zmianę w Bibliotece Gnozy?</p>
+</header>
+<article class="library-prose">
+<p>Biblioteka Gnozy jest stale rozwijana. Jeśli zauważysz literówkę, błąd w tłumaczeniu, problem techniczny albo masz pomysł na nową funkcję lub kolejną księgę, napisz do mnie.</p>
+<p><strong>E-mail:</strong> <a href="mailto:gnostyk950@gmail.com">gnostyk950@gmail.com</a></p>
+<p>Dziękuję za każdą opinię, sugestię i zgłoszenie. Dzięki wiadomościom od użytkowników biblioteka może stawać się coraz dokładniejsza i wygodniejsza.</p>
+</article>
+</section>
+<section aria-label="Polityka prywatności" class="library-about library-privacy-panel" hidden="" id="libraryPrivacyPanel">
+<header class="library-info-head">
+<span>Prywatność</span>
+<h3>Polityka prywatności</h3>
+<p>Gnostyk Biblioteka działa lokalnie w przeglądarce i nie wymaga konta użytkownika.</p>
+</header>
+<article class="library-prose">
+<p><strong>Dane lokalne.</strong> Zakładki, notatki, ostatnia czytana strona oraz ustawienia czytania są zapisywane lokalnie w przeglądarce użytkownika.</p>
+<p><strong>Brak wysyłania danych.</strong> Aplikacja nie wysyła notatek, zakładek ani ustawień na zewnętrzny serwer. Dane pozostają na urządzeniu, dopóki użytkownik ich nie usunie albo nie wyczyści danych przeglądarki.</p>
+<p><strong>Tryb offline.</strong> Jako aplikacja PWA biblioteka może zapisywać pliki tekstów w pamięci podręcznej przeglądarki, aby działały również bez połączenia z internetem.</p>
+<p><strong>Licznik odwiedzin.</strong> Widoczny licznik odwiedzin jest przygotowany pod lekki, zewnętrzny licznik prywatnościowy. Jeśli nie zostanie skonfigurowany adres API, aplikacja pokaże jedynie znak „—”.</p>
+<p><strong>Zmiany w przyszłości.</strong> Jeśli biblioteka otrzyma synchronizację, konto użytkownika, newsletter lub analitykę, polityka prywatności powinna zostać zaktualizowana przed publikacją takiej funkcji.</p>
+</article>
+</section>
+<section aria-label="Zmiany biblioteki" class="library-changes-panel" hidden="" id="libraryChangesPanel">
+<header class="library-info-head">
+<span>Zmiany</span>
+<h3>Historia zmian</h3>
+<p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
+</header>
+<ol class="library-updates" id="libraryUpdates">
+<li class="library-update-group"><strong>1.4.43</strong><ul><li data-i18n-en="Rebuilt the Help panel as two independent columns, so an expanded answer no longer creates an empty gap in the neighboring column." data-i18n-pl="Przebudowano panel Pomoc na dwie niezależne kolumny, dzięki czemu rozwinięta odpowiedź nie tworzy pustego pola w sąsiedniej kolumnie.">Przebudowano panel Pomoc na dwie niezależne kolumny, dzięki czemu rozwinięta odpowiedź nie tworzy pustego pola w sąsiedniej kolumnie.</li></ul></li><li class="library-update-group"><strong>1.4.7</strong><ul><li data-i18n-en="Hid interlinear and added a Settings option to enable it as an experimental mode." data-i18n-pl="Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego.">Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego.</li></ul></li>
+<li class="library-update-group"><strong>1.4.6</strong><ul><li data-i18n-en="Replaced Settings and Tools separators with subtle lines matching the Library panel style." data-i18n-pl="Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.">Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.</li><li data-i18n-en="Unified separator colors for dark, light, and sepia themes." data-i18n-pl="Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.">Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.</li></ul></li>
+<li class="library-update-group"><strong>1.4.0</strong><ul><li data-i18n-en="Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text." data-i18n-pl="Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.">Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.</li><li data-i18n-en="Dictionary-card occurrences now use token forms and lemmas, not only raw line text." data-i18n-pl="Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.">Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.</li></ul></li>
+<li class="library-update-group"><strong>1.3.7</strong><ul><li data-i18n-en="Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114." data-i18n-pl="Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.">Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.</li><li data-i18n-en="Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well." data-i18n-pl="Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.">Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.</li><li data-i18n-en="Simplified the visual style of interlinear word blocks so they fit the continuous reader better." data-i18n-pl="Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.">Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.</li></ul></li>
+<li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-en="The dictionary card now follows the active book: in Thomas it shows logia and Gospel of Thomas occurrences instead of Pistis Sophia pages." data-i18n-pl="Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.">Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.</li><li data-i18n-en="Generalized the shared Gnostyk Library dictionary note so it no longer points only to Pistis Sophia." data-i18n-pl="Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.">Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.</li></ul></li>
+<li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-en="Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM." data-i18n-pl="Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.">Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.</li><li data-i18n-en="Synchronized Coptic mode with logia 1–114." data-i18n-pl="Zsynchronizowano widok Koptyjski z logionami 1–114.">Zsynchronizowano widok Koptyjski z logionami 1–114.</li><li data-i18n-en="Restored the Thomas Interlinear button as a technical preview based on the Coptic text layer." data-i18n-pl="Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.">Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.</li></ul></li>
+<li class="library-update-group"><strong>1.2.3</strong><ul><li>Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.</li><li>Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.</li></ul></li>
+<li class="library-update-group"><strong>1.2.2</strong><ul><li>Usunięto dużą ikonę książki z kafelka na stronie Home.</li><li>Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.</li><li>Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.</li></ul></li>
+<li class="library-update-group"><strong>1.2.0</strong><ul><li>Przebudowano stronę Home, aby nie dublowała katalogu ksiąg.</li><li>Usunięto zdublowane kafelki z zakładki Księgi.</li><li>Przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.</li></ul></li>
+<li class="library-update-group"><strong>1.1.1</strong><ul><li>Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.</li><li>Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.</li></ul></li>
+<li class="library-update-group"><strong>1.1.0</strong><ul><li>Dodano Ewangelię Tomasza jako pełną księgę modułową.</li><li>Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.</li><li>Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.</li></ul></li>
+<li class="library-update-group"><strong>1.0.150</strong><ul><li>Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.</li><li>Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
+<li class="library-update-group"><strong>1.0.147</strong><ul><li>Wycofano pasek postępu słownika i automatyczne procenty, aby uniknąć błędnych statystyk.</li><li>Zostawiono prostszy, stabilniejszy widok słownika ze statusami haseł.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
+<li class="library-update-group"><strong>1.0.145</strong><ul><li>Usunięto kreskowy zapis brakujących glos w interlinii i zastąpiono go statusem „w przygotowaniu”.</li><li>Dodano statusy haseł słownikowych: Gotowe, Podstawowe i W przygotowaniu.</li><li>Przygotowano słownik jako wspólną warstwę dla kolejnych modułów ksiąg.</li></ul></li>
+<li class="library-update-group"><strong>1.0.144</strong><ul><li>Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.</li><li>Dodano najnowszą wersję do widocznej historii zmian.</li><li>Wyśrodkowano krzyżyk zamykania karty słownikowej.</li><li>Usunięto ramkę i tło ze statusów książek w katalogu.</li></ul></li>
+<li class="library-update-group"><strong>1.0.143</strong><ul><li>Przebudowano dane ksiąg na strukturę modułową w katalogu <code>books/</code>.</li><li>Przeniesiono Pistis Sophię do modułu <code>books/pistis-sophia/</code>.</li><li>Dodano szkielet modułu Ewangelii Tomasza z miejscem na 114 logionów.</li></ul></li>
+</ol>
+</section>
+<section aria-label="Słownik koptyjski" class="library-about library-dictionary-panel" hidden="" id="libraryDictionaryPanel">
+<header class="library-info-head">
+<span id="dictionaryKicker">Słownik</span>
+<h3 id="dictionaryPanelTitle">Słownik koptyjski</h3>
+<p id="dictionaryPanelLead">Szukaj po formie koptyjskiej, polskiej glosie albo angielskim znaczeniu. Kliknięcie wyniku otwiera kartę słownikową.</p>
+</header>
+<div aria-label="Przeglądarka słownika koptyjskiego" class="dictionary-browser">
+<div>
+<strong id="dictionaryBrowserTitle">Słownik koptyjski</strong>
+<p id="dictionaryBrowserLead">Szukaj po formie koptyjskiej, polskiej glosie albo angielskim znaczeniu. Wyniki korzystają z tej samej bazy co interlinia.</p>
+</div>
+<label id="dictionarySearchLabel">Szukaj w słowniku
                 <span class="dictionary-search-control">
-                  <input id="dictionarySearchInput" type="search" autocomplete="off" placeholder="ⲡⲛⲉⲩⲙⲁ, duch, spirit">
-                  <button id="dictionarySearchClear" class="dictionary-search-clear" type="button" aria-label="Wyczyść wyszukiwanie" title="Wyczyść wyszukiwanie" hidden>×</button>
-                </span>
-              </label>
-              <div id="dictionarySearchMeta" class="dictionary-search-meta"></div>
-              <div id="dictionarySearchResults" class="dictionary-search-results"></div>
-            </div>
-
-
-          </section>
-
-          <section id="libraryToolsPanel" class="library-about library-tools-panel" aria-label="Narzędzia biblioteki" hidden>
-            <header class="library-info-head">
-              <span>Narzędzia</span>
-              <h3>Warsztat filologiczny</h3>
-              <p>Robocze narzędzia wspierające pracę z tekstem źródłowym, transliteracją i aparatem interlinearnym.</p>
-            </header>
-
-            <div class="glossary-settings">
-              <div>
-                <strong>Glosownik interlinearny</strong>
-                <p id="glossaryStatus">Słownik bazowy jest wbudowany w bibliotekę, a własne glosy są zapisywane lokalnie i mają pierwszeństwo.</p>
-              </div>
-              <div class="glossary-editor" aria-label="Edycja glosy interlinearnej">
-                <label>Token koptyjski
-                  <input id="glossaryTokenInput" type="text" autocomplete="off" placeholder="ⲟⲩⲟⲉⲓⲛ">
-                </label>
-                <label>Glosa
-                  <input id="glossaryGlossInput" type="text" autocomplete="off" placeholder="światłość">
-                </label>
-                <div class="glossary-actions">
-                  <button id="saveGlossButton" class="text-button" type="button">Zapisz glosę</button>
-                  <button id="clearGlossButton" class="text-button" type="button">Wyczyść własne glosy</button>
-                  <button id="exportGlossaryButton" class="text-button" type="button">Eksportuj glosownik</button>
-                  <button id="importGlossaryButton" class="text-button" type="button">Importuj glosownik</button>
-                  <input id="restoreGlossaryInput" type="file" accept="application/json,.json" hidden>
-                </div>
-              </div>
-              <div id="customGlossaryList" class="custom-glossary-list"></div>
-            </div>
-          </section>
-
-          <section id="librarySupportPanel" class="library-about library-support-panel" aria-label="Wsparcie projektu" hidden>
-            <header class="library-info-head">
-              <span>Wsparcie</span>
-              <h3>Wesprzyj rozwój Biblioteki Gnozy</h3>
-              <p>Biblioteka Gnozy jest niezależnym projektem tworzonym z pasji do tekstów gnostyckich i języka koptyjskiego.</p>
-            </header>
-
-            <article class="library-prose support-prose">
-              <p>Każde tłumaczenie, opracowanie, interlinia, wpis słownikowy i nowa funkcja aplikacji wymagają setek godzin pracy.</p>
-              <p>Jeżeli projekt pomaga Ci w lekturze lub badaniu tekstów gnostyckich, możesz wesprzeć jego dalszy rozwój dobrowolną darowizną przez PayPal.</p>
-              <div class="support-help-box">
-                <strong>Twoje wsparcie pomaga rozwijać:</strong>
-                <ul>
-                  <li>nowe przekłady</li>
-                  <li>słownik koptyjski</li>
-                  <li>interlinię</li>
-                  <li>narzędzia badawcze</li>
-                  <li>kolejne teksty</li>
-                  <li>rozwój aplikacji PWA</li>
-                </ul>
-              </div>
-              <a id="supportPaypalButton" class="support-paypal-button" href="https://paypal.me/dariuszkaniewski" target="_blank" rel="noopener noreferrer"><span class="support-icon" aria-hidden="true">♡</span><span>Wesprzyj przez PayPal</span></a>
-            </article>
-          </section>
-
-          <section id="settingsPanel" class="library-about library-settings settings-panel" aria-label="Ustawienia biblioteki" hidden>
-            <header class="library-info-head">
-              <span>Ustawienia</span>
-              <h3>Ustawienia czytania</h3>
-              <p>Te ustawienia dotyczą całej biblioteki i zostają zapamiętane lokalnie w przeglądarce.</p>
-            </header>
-
-            <div class="settings-section settings-section-language">
-              <div class="settings-section-head">
-                <strong data-i18n-pl="Język uruchamiania" data-i18n-en="Startup language">Język uruchamiania</strong>
-                <p data-i18n-pl="Wybierz język, w którym strona ma otwierać się domyślnie. Przełącznik PL/EN u góry nadal działa jako szybka zmiana w bieżącej sesji." data-i18n-en="Choose the language used when the site opens. The PL/EN switch at the top still works as a quick change for the current session.">Wybierz język, w którym strona ma otwierać się domyślnie. Przełącznik PL/EN u góry nadal działa jako szybka zmiana w bieżącej sesji.</p>
-              </div>
-              <label>Język interfejsu
+<input autocomplete="off" id="dictionarySearchInput" placeholder="ⲡⲛⲉⲩⲙⲁ, duch, spirit" type="search"/>
+<button aria-label="Wyczyść wyszukiwanie" class="dictionary-search-clear" hidden="" id="dictionarySearchClear" title="Wyczyść wyszukiwanie" type="button">×</button>
+</span>
+</label>
+<div class="dictionary-search-meta" id="dictionarySearchMeta"></div>
+<div class="dictionary-search-results" id="dictionarySearchResults"></div>
+</div>
+</section>
+<section aria-label="Narzędzia biblioteki" class="library-about library-tools-panel" hidden="" id="libraryToolsPanel">
+<header class="library-info-head">
+<span>Narzędzia</span>
+<h3>Warsztat filologiczny</h3>
+<p>Robocze narzędzia wspierające pracę z tekstem źródłowym, transliteracją i aparatem interlinearnym.</p>
+</header>
+<div class="tools-reading-layout">
+<div class="settings-section-head">
+<strong data-i18n-en="Book text layout" data-i18n-pl="Układ tekstu książek">Układ tekstu książek</strong>
+<p data-i18n-en="Enable a book-like justified layout for all books in the library. Automatic hyphenation follows the active text language." data-i18n-pl="Włącz książkowe justowanie tekstu we wszystkich książkach biblioteki. Automatyczne dzielenie wyrazów jest zgodne z językiem aktualnego tekstu.">Włącz książkowe justowanie tekstu we wszystkich książkach biblioteki. Automatyczne dzielenie wyrazów jest zgodne z językiem aktualnego tekstu.</p>
+</div>
+<label class="inline-setting-check book-justify-setting"><input id="bookJustifySetting" type="checkbox"/> <span data-i18n-en="Justify book text" data-i18n-pl="Wyjustuj tekst książek">Wyjustuj tekst książek</span></label>
+</div>
+<div class="glossary-settings">
+<div>
+<strong>Glosownik interlinearny</strong>
+<p id="glossaryStatus">Słownik bazowy jest wbudowany w bibliotekę, a własne glosy są zapisywane lokalnie i mają pierwszeństwo.</p>
+</div>
+<div aria-label="Edycja glosy interlinearnej" class="glossary-editor">
+<label>Token koptyjski
+                  <input autocomplete="off" id="glossaryTokenInput" placeholder="ⲟⲩⲟⲉⲓⲛ" type="text"/>
+</label>
+<label>Glosa
+                  <input autocomplete="off" id="glossaryGlossInput" placeholder="światłość" type="text"/>
+</label>
+<div class="glossary-actions">
+<button class="text-button" id="saveGlossButton" type="button">Zapisz glosę</button>
+<button class="text-button" id="clearGlossButton" type="button">Wyczyść własne glosy</button>
+<button class="text-button" id="exportGlossaryButton" type="button">Eksportuj glosownik</button>
+<button class="text-button" id="importGlossaryButton" type="button">Importuj glosownik</button>
+<input accept="application/json,.json" hidden="" id="restoreGlossaryInput" type="file"/>
+</div>
+</div>
+<div class="custom-glossary-list" id="customGlossaryList"></div>
+</div>
+</section>
+<section aria-label="Wsparcie projektu" class="library-about library-support-panel" hidden="" id="librarySupportPanel">
+<header class="library-info-head">
+<span>Wsparcie</span>
+<h3>Wesprzyj rozwój Biblioteki Gnozy</h3>
+<p>Biblioteka Gnozy jest niezależnym projektem tworzonym z pasji do tekstów gnostyckich i języka koptyjskiego.</p>
+</header>
+<article class="library-prose support-prose">
+<p>Każde tłumaczenie, opracowanie, interlinia, wpis słownikowy i nowa funkcja aplikacji wymagają setek godzin pracy.</p>
+<p>Jeżeli projekt pomaga Ci w lekturze lub badaniu tekstów gnostyckich, możesz wesprzeć jego dalszy rozwój dobrowolną darowizną przez PayPal.</p>
+<div class="support-help-box">
+<strong>Twoje wsparcie pomaga rozwijać:</strong>
+<ul>
+<li>nowe przekłady</li>
+<li>słownik koptyjski</li>
+<li>interlinię</li>
+<li>narzędzia badawcze</li>
+<li>kolejne teksty</li>
+<li>rozwój aplikacji PWA</li>
+</ul>
+</div>
+<a class="support-paypal-button" href="https://paypal.me/dariuszkaniewski" id="supportPaypalButton" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="support-icon">♡</span><span>Wesprzyj przez PayPal</span></a>
+</article>
+</section>
+<section aria-label="Ustawienia biblioteki" class="library-about library-settings settings-panel" hidden="" id="settingsPanel">
+<header class="library-info-head">
+<span>Ustawienia</span>
+<h3>Ustawienia czytania</h3>
+<p>Te ustawienia dotyczą całej biblioteki i zostają zapamiętane lokalnie w przeglądarce.</p>
+</header>
+<div class="settings-section settings-section-language">
+<div class="settings-section-head">
+<strong data-i18n-en="Startup language" data-i18n-pl="Język uruchamiania">Język uruchamiania</strong>
+<p data-i18n-en="Choose the language used when the site opens. The PL/EN switch at the top remembers the selection when moving between books." data-i18n-pl="Wybierz język, w którym strona ma otwierać się domyślnie. Przełącznik PL/EN u góry zapamiętuje wybór także przy przechodzeniu między księgami.">Wybierz język, w którym strona ma otwierać się domyślnie. Przełącznik PL/EN u góry zapamiętuje wybór także przy przechodzeniu między księgami.</p>
+</div>
+<label>Język interfejsu
                 <select id="languageSetting">
-                  <option value="auto">Auto</option>
-                  <option value="pl">Polski</option>
-                  <option value="en">English</option>
-                </select>
-              </label>
-              <p id="languageAutoHint" class="setting-hint"></p>
-            </div>
-
-            <div class="settings-section">
-              <div class="settings-section-head">
-                <strong data-i18n-pl="Wygląd czytnika" data-i18n-en="Reader appearance">Wygląd czytnika</strong>
-                <p data-i18n-pl="Zmiany są stosowane od razu w widoku tekstu, koptyjskim i interlinearnym." data-i18n-en="Changes apply immediately in the text, Coptic, and interlinear views.">Zmiany są stosowane od razu w widoku tekstu, koptyjskim i interlinearnym.</p>
-              </div>
-              <div class="settings-grid">
-                <label>Motyw
+<option value="auto">Auto</option>
+<option value="pl">Polski</option>
+<option value="en">English</option>
+</select>
+</label>
+<p class="setting-hint" id="languageAutoHint"></p>
+</div>
+<div class="settings-section">
+<div class="settings-section-head">
+<strong data-i18n-en="Reader appearance" data-i18n-pl="Wygląd czytnika">Wygląd czytnika</strong>
+<p data-i18n-en="Changes apply immediately in the text, Coptic, and interlinear views." data-i18n-pl="Zmiany są stosowane od razu w widoku tekstu, koptyjskim i interlinearnym.">Zmiany są stosowane od razu w widoku tekstu, koptyjskim i interlinearnym.</p>
+</div>
+<div class="settings-grid">
+<label>Motyw
                   <select id="themeSetting">
-                    <option value="sepia">Sepia</option>
-                    <option value="light">Jasny</option>
-                    <option value="dark">Ciemny</option>
-                  </select>
-                </label>
-                <label>Rozmiar tekstu
+<option value="sepia">Sepia</option>
+<option value="light">Jasny</option>
+<option value="dark">Ciemny</option>
+</select>
+</label>
+<label>Rozmiar tekstu
                   <select id="fontSizeSetting">
-                    <option value="small">Mały</option>
-                    <option value="medium">Średni</option>
-                    <option value="large">Duży</option>
-                  </select>
-                </label>
-                <label>Odstępy w tekście
+<option value="small">Mały</option>
+<option value="medium">Średni</option>
+<option value="large">Duży</option>
+</select>
+</label>
+<label>Odstępy w tekście
                   <select id="lineHeightSetting">
-                    <option value="compact">Zwarte</option>
-                    <option value="normal">Normalne</option>
-                    <option value="wide">Luźne</option>
-                  </select>
-                </label>
-                <label>Szerokość kolumny
+<option value="compact">Zwarte</option>
+<option value="normal">Normalne</option>
+<option value="wide">Luźne</option>
+</select>
+</label>
+<label>Szerokość kolumny
                   <select id="widthSetting">
-                    <option value="standard">Standardowa</option>
-                    <option value="narrow">Wąska</option>
-                    <option value="wide">Szeroka</option>
-                  </select>
-                </label>
-              </div>
-            </div>
-
-            <div class="settings-section interlinear-settings-group" aria-label="Ustawienia interlinii">
-              <div class="settings-section-head">
-                <strong data-i18n-pl="Interlinia" data-i18n-en="Interlinear">Interlinia</strong>
-                <p data-i18n-pl="Interlinia jest trybem eksperymentalnym. Włącz ją tylko wtedy, gdy chcesz pracować z roboczym aparatem koptyjskim." data-i18n-en="Interlinear is an experimental mode. Enable it only when you want to work with the provisional Coptic apparatus.">Interlinia jest trybem eksperymentalnym. Włącz ją tylko wtedy, gdy chcesz pracować z roboczym aparatem koptyjskim.</p>
-              </div>
-              <div class="settings-check-row">
-                <label class="inline-setting-check"><input id="interlinearExperimentalSetting" type="checkbox"> <span data-i18n-pl="Pokaż interlinię jako tryb eksperymentalny" data-i18n-en="Show interlinear as an experimental mode">Pokaż interlinię jako tryb eksperymentalny</span></label>
-              </div>
-              <label>Tryb interlinii
+<option value="standard">Standardowa</option>
+<option value="narrow">Wąska</option>
+<option value="wide">Szeroka</option>
+</select>
+</label>
+</div>
+</div>
+<div aria-label="Ustawienia interlinii" class="settings-section interlinear-settings-group">
+<div class="settings-section-head">
+<strong data-i18n-en="Interlinear" data-i18n-pl="Interlinia">Interlinia</strong>
+<p data-i18n-en="Interlinear is an experimental mode. Enable it only when you want to work with the provisional Coptic apparatus." data-i18n-pl="Interlinia jest trybem eksperymentalnym. Włącz ją tylko wtedy, gdy chcesz pracować z roboczym aparatem koptyjskim.">Interlinia jest trybem eksperymentalnym. Włącz ją tylko wtedy, gdy chcesz pracować z roboczym aparatem koptyjskim.</p>
+</div>
+<div class="settings-check-row">
+<label class="inline-setting-check"><input id="interlinearExperimentalSetting" type="checkbox"/> <span data-i18n-en="Show interlinear as an experimental mode" data-i18n-pl="Pokaż interlinię jako tryb eksperymentalny">Pokaż interlinię jako tryb eksperymentalny</span></label>
+</div>
+<label>Tryb interlinii
                 <select id="interlinearLayoutSetting">
-                  <option value="compact">Kompaktowa</option>
-                  <option value="classic">Klasyczna</option>
-                  <option value="grammatical">Gramatyczna</option>
-                  <option value="expanded">Rozszerzona</option>
-                </select>
-              </label>
-              <div class="settings-check-row">
-                <label class="inline-setting-check"><input id="interlinearLemmaSetting" type="checkbox"> <span>Pokazuj lemat</span></label>
-                <label class="inline-setting-check"><input id="interlinearTypeSetting" type="checkbox"> <span>Pokazuj typ gramatyczny</span></label>
-              </div>
-            </div>
-
-            <div class="settings-section">
-              <div class="settings-section-head">
-                <strong data-i18n-pl="Słownik" data-i18n-en="Dictionary">Słownik</strong>
-                <p data-i18n-pl="Określ zakres wystąpień pokazywanych w karcie słownikowej." data-i18n-en="Choose the occurrence scope shown in the dictionary card.">Określ zakres wystąpień pokazywanych w karcie słownikowej.</p>
-              </div>
-              <label>Wystąpienia w słowniku
+<option value="compact">Kompaktowa</option>
+<option value="classic">Klasyczna</option>
+<option value="grammatical">Gramatyczna</option>
+<option value="expanded">Rozszerzona</option>
+</select>
+</label>
+<div class="settings-check-row">
+<label class="inline-setting-check"><input id="interlinearLemmaSetting" type="checkbox"/> <span>Pokazuj lemat</span></label>
+<label class="inline-setting-check"><input id="interlinearTypeSetting" type="checkbox"/> <span>Pokazuj typ gramatyczny</span></label>
+</div>
+</div>
+<div class="settings-section">
+<div class="settings-section-head">
+<strong data-i18n-en="Dictionary" data-i18n-pl="Słownik">Słownik</strong>
+<p data-i18n-en="Choose the occurrence scope shown in the dictionary card." data-i18n-pl="Określ zakres wystąpień pokazywanych w karcie słownikowej.">Określ zakres wystąpień pokazywanych w karcie słownikowej.</p>
+</div>
+<label>Wystąpienia w słowniku
                 <select id="dictionaryScopeSetting">
-                  <option value="current">Tylko aktywna księga</option>
-                  <option value="library">Cała biblioteka</option>
-                </select>
-              </label>
-              <div class="settings-actions">
-                <button id="saveSettingsButton" class="text-button" type="button" data-i18n-pl="Zapisz ustawienia" data-i18n-en="Save settings">Zapisz ustawienia</button>
-                <span id="settingsSaveStatus" class="settings-save-status" aria-live="polite"></span>
-              </div>
-            </div>
-
-            <div class="backup-settings settings-section">
-              <div>
-                <strong>Backup notatek</strong>
-                <p id="backupStatus">Zapis lokalny w przeglądarce. Na desktopie możesz wybrać folder kopii.</p>
-              </div>
-              <div class="backup-actions">
-                <button id="chooseBackupFolder" class="text-button" type="button">Wybierz folder</button>
-                <button id="exportNotesButton" class="text-button" type="button">Eksportuj kopię</button>
-                <button id="importNotesButton" class="text-button" type="button">Odzyskaj z pliku</button>
-                <input id="restoreNotesInput" type="file" accept="application/json,.json" hidden>
-              </div>
-            </div>
-          </section>
-        </section>
-
-        <footer class="site-footer library-only" aria-label="Stopka biblioteki">
-          <div>
-            <strong>Gnostyk Biblioteka</strong>
-            <p>Cyfrowa biblioteka polskich opracowań tekstów gnostyckich.</p>
-            <p class="site-copyright">© 2026 <a href="https://github.com/EnnoiaLabs" rel="noopener noreferrer">EnnoiaLabs</a></p>
-          </div>
-          <div class="site-footer-links">
-            <button id="footerInfoButton" class="footer-link" type="button">Info</button>
-            <button id="footerContactButton" class="footer-link" type="button">Kontakt</button>
-            <button id="footerPrivacyButton" class="footer-link" type="button">Prywatność</button>
-            <button id="footerChangesButton" class="footer-link" type="button">Zmiany</button>
-            <button id="footerSupportButton" class="footer-link footer-support-link" type="button"><span class="support-icon" aria-hidden="true">♡</span><span>Wsparcie</span></button>
-            <span>v<span id="libraryVersionFooterHome">1.4.27</span></span>
-          </div>
-        </footer>
-
-        <section class="reader-hero book-view">
-          <img src="assets/gnostyk-slit-bg.png" alt="">
-          <div class="hero-copy">
-            <p class="eyebrow">Pistis Sophia · księga biblioteki</p>
-            <div class="book-title-line"><h2>Pistis Sophia</h2><span class="book-layer-label">PL/EN/COPT</span></div>
-            <p class="hero-subtitle">Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.</p>
-          </div>
-          <div class="hero-stats">
-            <span><strong id="pageCount">255</strong> stron</span>
-            <span><strong id="chapterCount">148</strong> rozdziałów</span>
-            <span><strong id="libraryVersion">1.4.27</strong> wersja biblioteki</span>
-          </div>
-        </section>
-
-        <section class="mobile-book-head book-view" aria-label="Aktualna książka">
-          <button id="mobileBackToLibraryButton" class="text-button subtle" type="button">← Biblioteka</button>
-          <div>
-            <span>Pistis Sophia</span>
-            <strong>Pełny przekład · Mead 1921</strong>
-          </div>
-          <div class="language-switch mobile-language-switch" aria-label="Język interfejsu">
-            <button data-language-switch="pl" type="button">PL</button>
-            <button data-language-switch="en" type="button">EN</button>
-          </div>
-        </section>
-
-        <section class="work-meta book-view" aria-label="Metadane tekstu">
-          <article>
-            <span>Status</span>
-            <strong>Pełny tekst</strong>
-          </article>
-          <article>
-            <span>Podstawa</span>
-            <strong>Mead 1921</strong>
-          </article>
-          <article>
-            <span>Paginacja</span>
-            <strong>Mead / Schw.-Pet.</strong>
-          </article>
-          <article>
-            <span>Prawa</span>
-            <strong>Domena publiczna + nowa warstwa twórcza</strong>
-          </article>
-        </section>
-
-        <section id="readerControls" class="toolbar book-view" aria-label="Narzędzia czytania">
-          <div class="toolbar-primary" aria-label="Nawigacja lektury">
-            <button id="prevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
-            <button id="continueButton" class="text-button" type="button">Kontynuuj</button>
-            <div class="page-jump">
-              <span>Strona</span>
-              <input id="pageInput" type="number" min="1" value="1">
-            </div>
-            <button id="nextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
-            <select id="citationFormat" class="select-button citation-format-inline" aria-label="Format cytowania">
-              <option value="simple">Cytat prosty</option>
-              <option value="scholarly">Cytat naukowy</option>
-              <option value="mead">Mead</option>
-              <option value="schwpet">Schw.-Pet.</option>
-            </select>
-            <button id="copyButton" class="text-button copy-button-inline" type="button">Kopiuj fragment</button>
-            <div class="mode-switch" aria-label="Tryb tekstu">
-              <button id="polishMode" class="text-button is-active" type="button" data-reader-mode="pl">Wersja</button>
-              <button id="sourceMode" class="text-button" type="button" data-reader-mode="source">Oryginał EN</button>
-              <button id="copticMode" class="text-button" type="button" data-reader-mode="coptic">Koptyjski</button>
-              <button id="interlinearMode" class="text-button" type="button" data-reader-mode="interlinear">Interlinearny</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="content-layout book-view">
-          <article class="text-surface" aria-live="polite">
-            <div class="reading-meta">
-              <span id="currentPageLabel">Strona 1</span>
-              <span id="currentChapterLabel">Wstęp</span>
-            </div>
-            <div id="polishGuide" class="polish-guide"></div>
-            <section id="aboutPanel" class="reader-panel" hidden>
-              <h3>O przekładzie</h3>
-              <p><strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
-              <dl>
-                <div><dt>Podstawa</dt><dd>G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921. Wydanie Meada oraz tekst starożytny pozostają w domenie publicznej.</dd></div>
-                <div><dt>Koptyjski</dt><dd>Warstwa koptyjska jest roboczym widokiem Unicode według numeracji Schwartze-Petermanna. Została przygotowana z cyfrowej transkrypcji Marcion na podstawie edycji Schwartze/Petermann i wymaga dalszej kolacji z wydaniami publiczno-domenowymi.</dd></div>
-                <div><dt>Charakter przekładu</dt><dd>Przekład zachowuje misteryjne formuły, powtórzenia, nazwy własne i rytm objawieniowego dialogu. Terminologia została dobrana tak, aby tekst brzmiał po polsku, ale nie tracił swojej gnostyckiej obcości.</dd></div>
-                <div><dt>Aparat cytowania</dt><dd>Zachowano paginację wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym. Numery te pozwalają odwoływać się zarówno do strony wydania angielskiego, jak i do tradycyjnej numeracji rękopiśmiennej.</dd></div>
-                <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
-              </dl>
-              <h3>Jak cytować</h3>
-              <p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.4.27</span>.</strong></p>
-              <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
-            </section>
-            <div id="pageText" class="page-text"></div>
-          </article>
-
-          <aside class="notes" aria-label="Notatki">
-            <h3>Notatki</h3>
-            <textarea id="notesInput" placeholder="Twoje notatki do tej strony"></textarea>
-            <div class="note-actions">
-              <button id="clearNote" class="text-button subtle" type="button">Wyczyść</button>
-              <span id="saveStatus">Zapis lokalny</span>
-            </div>
-            <div class="reader-side-actions" aria-label="Dodatkowe narzędzia czytania">
-              <button id="bookmarkButton" class="text-button" type="button">Zakładka</button>
-              <button id="aboutToggle" class="text-button" type="button" aria-expanded="false">O przekładzie</button>
-              <label class="toggle reader-focus-toggle">
-                <input id="focusToggle" type="checkbox">
-                <span>Tryb skupienia</span>
-              </label>
-            </div>
-          </aside>
-        </section>
-
-        <footer class="legal-footer book-view">
-          <strong>Domena publiczna i prawa do opracowania</strong>
-          <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
-          <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
-          <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-          <p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.4.27</span></p>
-        </footer>
-      </main>
-    </div>
-
-    <div id="offlineNotice" class="offline-notice" hidden>Aplikacja jest offline. Biblioteka korzysta z zapisanej wersji PWA.</div>
-    <section class="focus-bar" aria-label="Pasek trybu skupienia">
-      <button id="focusExit" class="text-button subtle" type="button">Wyjdź</button>
-      <button id="focusPrevPage" class="icon-button" type="button" title="Poprzednia strona" aria-label="Poprzednia strona">‹</button>
-      <label class="focus-page-jump">
-        <span>Strona</span>
-        <input id="focusPageInput" type="number" min="1" value="1">
-      </label>
-      <button id="focusNextPage" class="icon-button" type="button" title="Następna strona" aria-label="Następna strona">›</button>
-      <div class="focus-mode-field">
-        <button id="focusModeToggle" class="focus-mode-toggle" type="button" aria-expanded="false">Wersja</button>
-        <div id="focusModeMenu" class="focus-mode-menu" hidden>
-          <button data-focus-mode="pl" type="button">Po polsku</button>
-          <button data-focus-mode="source" type="button">Oryginał EN</button>
-          <button data-focus-mode="coptic" type="button">Koptyjski</button>
-          <button data-focus-mode="interlinear" type="button">Interlinearny</button>
-        </div>
-      </div>
-    </section>
-
-    <div id="mobileOverlay" class="mobile-overlay" hidden></div>
-    <section id="mobileSheet" class="mobile-sheet" aria-hidden="true" aria-label="Mobilna nawigacja">
-      <div class="mobile-sheet-head">
-        <strong id="mobileSheetTitle">Spis treści</strong>
-        <button id="mobileClose" class="text-button subtle" type="button">Zamknij</button>
-      </div>
-
-      <div class="mobile-panel is-active" data-mobile-content="toc">
-        <label class="mobile-search">
-          <span>Szukaj w rozdziałach</span>
-          <input id="mobileChapterSearch" type="search" autocomplete="off" placeholder="Sophia, światłość, misterium">
-        </label>
-        <div id="mobileChaptersPanel" class="mobile-list"></div>
-      </div>
-
-      <div class="mobile-panel" data-mobile-content="search">
-        <label class="mobile-search">
-          <span>Szukaj w całym tekście</span>
-          <input id="mobileSearchInput" type="search" autocomplete="off" placeholder="Wpisz motyw lub słowo">
-        </label>
-        <div id="mobileSearchPanel" class="mobile-list"></div>
-      </div>
-
-      <div class="mobile-panel" data-mobile-content="marks">
-        <div id="mobileMarksPanel" class="mobile-list"></div>
-      </div>
-
-      <div class="mobile-panel" data-mobile-content="more">
-        <div class="mobile-tools">
-          <button id="mobileBookmarkButton" class="text-button" type="button">Dodaj zakładkę</button>
-          <button id="mobileCopyButton" class="text-button" type="button">Kopiuj cytat</button>
-          <button id="mobileFocusButton" class="text-button" type="button">Tryb skupienia</button>
-          <button id="mobileAboutButton" class="text-button" type="button">O tekście</button>
-        </div>
-        <div class="mobile-field">
-          <span>Tryb tekstu</span>
-          <div class="mobile-segmented" aria-label="Tryb tekstu">
-            <button id="mobilePolishMode" class="is-active" type="button" data-reader-mode="pl">Po polsku</button>
-            <button id="mobileSourceMode" type="button" data-reader-mode="source">Oryginał EN</button>
-            <button id="mobileCopticMode" type="button" data-reader-mode="coptic">Koptyjski</button>
-            <button id="mobileInterlinearMode" type="button" data-reader-mode="interlinear">Interlinearny</button>
-          </div>
-        </div>
-        <div class="mobile-field">
-          <span>Format cytowania</span>
-          <div class="mobile-citation-options" aria-label="Format cytowania">
-            <button class="is-active" data-mobile-citation="simple" type="button">Cytat prosty</button>
-            <button data-mobile-citation="scholarly" type="button">Cytat naukowy</button>
-            <button data-mobile-citation="mead" type="button">Mead</button>
-            <button data-mobile-citation="schwpet" type="button">Schw.-Pet.</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <nav class="mobile-bottom-nav" aria-label="Szybka nawigacja">
-      <button data-mobile-panel="toc" type="button">Spis treści</button>
-      <button id="mobilePrevPage" type="button">‹</button>
-      <button id="mobileCurrentPage" type="button">Str. 1</button>
-      <button id="mobileNextPage" type="button">›</button>
-      <button data-mobile-panel="more" type="button">Więcej</button>
-    </nav>
-
-    <div id="settingsToast" class="settings-toast" role="status" aria-live="polite" hidden></div>
-    <script src="books/pistis-sophia/data.js?v=1.4.27"></script>
-    <script src="books/pistis-sophia/coptic-data.js?v=1.4.27"></script>
-    <script src="books/gospel-of-thomas/data.js?v=1.4.27"></script>
-    <script src="books/gospel-of-thomas/coptic-data.js?v=1.4.27"></script>
-    <script src="books/gospel-of-philip/data.js?v=1.4.27"></script>
-    <script src="books/gospel-of-philip/coptic-data.js?v=1.4.27"></script>
-    <script src="coptic-dictionary.js?v=1.4.27"></script>
-    <script src="coptic-polish-overrides.js?v=1.4.27"></script>
-    <script src="app.js?v=1.4.27"></script>
-  </body>
+<option value="current">Tylko aktywna księga</option>
+<option value="library">Cała biblioteka</option>
+</select>
+</label>
+<div class="settings-actions">
+<button class="text-button" data-i18n-en="Save settings" data-i18n-pl="Zapisz ustawienia" id="saveSettingsButton" type="button">Zapisz ustawienia</button>
+<span aria-live="polite" class="settings-save-status" id="settingsSaveStatus"></span>
+</div>
+</div>
+<div class="backup-settings settings-section">
+<div>
+<strong>Backup notatek</strong>
+<p id="backupStatus">Zapis lokalny w przeglądarce. Na desktopie możesz wybrać folder kopii.</p>
+</div>
+<div class="backup-actions">
+<button class="text-button" id="chooseBackupFolder" type="button">Wybierz folder</button>
+<button class="text-button" id="exportNotesButton" type="button">Eksportuj kopię</button>
+<button class="text-button" id="importNotesButton" type="button">Odzyskaj z pliku</button>
+<input accept="application/json,.json" hidden="" id="restoreNotesInput" type="file"/>
+</div>
+</div>
+</section>
+</section>
+<footer aria-label="Stopka biblioteki" class="site-footer library-only">
+<div>
+<strong>Gnostyk Biblioteka</strong>
+<p>Cyfrowa biblioteka polskich opracowań tekstów gnostyckich.</p>
+<p class="site-copyright">© 2026 <a href="https://github.com/EnnoiaLabs" rel="noopener noreferrer">EnnoiaLabs</a></p>
+</div>
+<div class="site-footer-links">
+<button class="footer-link" id="footerInfoButton" type="button">Info</button>
+<button class="footer-link" id="footerContactButton" type="button">Kontakt</button>
+<button class="footer-link" id="footerPrivacyButton" type="button">Prywatność</button>
+<button class="footer-link" id="footerChangesButton" type="button">Zmiany</button>
+<button class="footer-link footer-support-link" id="footerSupportButton" type="button"><span aria-hidden="true" class="support-icon">♡</span><span>Wsparcie</span></button>
+<span>v<span id="libraryVersionFooterHome">1.4.55</span></span>
+</div>
+</footer>
+<section class="reader-hero book-view">
+<img alt="" src="assets/gnostyk-slit-bg.png"/>
+<div class="hero-copy">
+<p class="eyebrow">Pistis Sophia · księga biblioteki</p>
+<div class="book-title-line"><h2>Pistis Sophia</h2><span class="book-layer-label">PL/EN/COPT</span></div>
+<p class="hero-subtitle">Pełny polski przekład, tekst źródłowy, aparat cytowania i notatki czytelnicze.</p>
+</div>
+<div class="hero-stats">
+<span><strong id="pageCount">255</strong> stron</span>
+<span><strong id="chapterCount">148</strong> rozdziałów</span>
+<span><strong id="libraryVersion">1.4.55</strong> wersja biblioteki</span>
+</div>
+</section>
+<section aria-label="Aktualna książka" class="mobile-book-head book-view">
+<button class="text-button subtle" id="mobileBackToLibraryButton" type="button">← Biblioteka</button>
+<div>
+<span>Pistis Sophia</span>
+<strong>Pełny przekład · Mead 1921</strong>
+</div>
+<div aria-label="Język interfejsu" class="language-switch mobile-language-switch">
+<button data-language-switch="pl" type="button">PL</button>
+<button data-language-switch="en" type="button">EN</button>
+</div>
+</section>
+<section aria-label="Metadane tekstu" class="work-meta book-view">
+<article>
+<span>Status</span>
+<strong>Pełny tekst</strong>
+</article>
+<article>
+<span>Podstawa</span>
+<strong>Mead 1921</strong>
+</article>
+<article>
+<span>Paginacja</span>
+<strong>Mead / Schw.-Pet.</strong>
+</article>
+<article>
+<span>Prawa</span>
+<strong>Domena publiczna + nowa warstwa twórcza</strong>
+</article>
+</section>
+<section aria-label="Narzędzia czytania" class="toolbar book-view" id="readerControls">
+<div aria-label="Nawigacja lektury" class="toolbar-primary">
+<button aria-label="Poprzednia strona" class="icon-button" id="prevPage" title="Poprzednia strona" type="button">‹</button>
+<button class="text-button" id="continueButton" type="button">Kontynuuj</button>
+<div class="page-jump">
+<span>Strona</span>
+<input id="pageInput" min="1" type="number" value="1"/>
+</div>
+<button aria-label="Następna strona" class="icon-button" id="nextPage" title="Następna strona" type="button">›</button>
+<select aria-label="Format cytowania" class="select-button citation-format-inline" id="citationFormat">
+<option value="simple">Cytat prosty</option>
+<option value="scholarly">Cytat naukowy</option>
+<option value="mead">Mead</option>
+<option value="schwpet">Schw.-Pet.</option>
+</select>
+<button class="text-button copy-button-inline" id="copyButton" type="button">Kopiuj fragment</button>
+<button aria-pressed="false" class="text-button addenda-sidebar-toggle" hidden="" id="addendaSidebarToggle" type="button">Dodatki</button>
+<div aria-label="Tryb tekstu" class="mode-switch">
+<button class="text-button is-active" data-reader-mode="pl" id="polishMode" type="button">Wersja</button>
+<button class="text-button" data-reader-mode="source" id="sourceMode" type="button">Oryginał EN</button>
+<button class="text-button" data-reader-mode="coptic" id="copticMode" type="button">Koptyjski</button>
+<button class="text-button" data-reader-mode="interlinear" id="interlinearMode" type="button">Interlinearny</button>
+</div>
+</div>
+</section>
+<section class="content-layout book-view">
+<article aria-live="polite" class="text-surface">
+<div class="reading-meta">
+<span id="currentPageLabel">Strona 1</span>
+<span id="currentChapterLabel">Wstęp</span>
+</div>
+<div class="polish-guide" id="polishGuide"></div>
+<section class="reader-panel" hidden="" id="aboutPanel">
+<h3>O przekładzie</h3>
+<p><strong>Pistis Sophia</strong> jest gnostyckim dialogiem objawieniowym zachowanym w koptyjskim Kodeksie Askew. Ta biblioteka prezentuje polski przekład i opracowanie na podstawie publiczno-domenowego wydania G. R. S. Meada z 1921 roku.</p>
+<dl>
+<div><dt>Podstawa</dt><dd>G. R. S. Mead, <em>Pistis Sophia: A Gnostic Miscellany</em>, London: J. M. Watkins, 1921. Wydanie Meada oraz tekst starożytny pozostają w domenie publicznej.</dd></div>
+<div><dt>Koptyjski</dt><dd>Warstwa koptyjska jest roboczym widokiem Unicode według numeracji Schwartze-Petermanna. Została przygotowana z cyfrowej transkrypcji Marcion na podstawie edycji Schwartze/Petermann i wymaga dalszej kolacji z wydaniami publiczno-domenowymi.</dd></div>
+<div><dt>Charakter przekładu</dt><dd>Przekład zachowuje misteryjne formuły, powtórzenia, nazwy własne i rytm objawieniowego dialogu. Terminologia została dobrana tak, aby tekst brzmiał po polsku, ale nie tracił swojej gnostyckiej obcości.</dd></div>
+<div><dt>Aparat cytowania</dt><dd>Zachowano paginację wydania Meada oraz marginalną numerację Schwartze-Petermanna, gdy występuje w tekście źródłowym. Numery te pozwalają odwoływać się zarówno do strony wydania angielskiego, jak i do tradycyjnej numeracji rękopiśmiennej.</dd></div>
+<div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Gnostyk Biblioteka stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
+</dl>
+<h3>Jak cytować</h3>
+<p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Gnostyk Biblioteka v<span class="inline-library-version">1.4.43</span>.</strong></p>
+<p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Gnostyk Biblioteka na podstawie wydania G. R. S. Meada z 1921 roku.</p>
+</section>
+<div class="page-text" id="pageText"></div>
+</article>
+<aside aria-label="Notatki" class="notes">
+<h3>Notatki</h3>
+<textarea id="notesInput" placeholder="Twoje notatki do tej strony"></textarea>
+<div class="note-actions">
+<button class="text-button subtle" id="clearNote" type="button">Wyczyść</button>
+<span id="saveStatus">Zapis lokalny</span>
+</div>
+<div aria-label="Dodatkowe narzędzia czytania" class="reader-side-actions">
+<button class="text-button" id="bookmarkButton" type="button">Zakładka</button>
+<button aria-expanded="false" class="text-button" id="aboutToggle" type="button">O przekładzie</button>
+<label class="toggle reader-focus-toggle">
+<input id="focusToggle" type="checkbox"/>
+<span>Tryb skupienia</span>
+</label>
+</div>
+</aside>
+</section>
+<footer class="legal-footer book-view">
+<strong>Domena publiczna i prawa do opracowania</strong>
+<p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
+<p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
+<p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
+<p class="library-version">Gnostyk Biblioteka v<span id="libraryVersionFooter">1.4.43</span></p>
+</footer>
+</main>
+</div>
+<div class="offline-notice" hidden="" id="offlineNotice">Aplikacja jest offline. Biblioteka korzysta z zapisanej wersji PWA.</div>
+<section aria-label="Pasek trybu skupienia" class="focus-bar">
+<button class="text-button subtle" id="focusExit" type="button">Wyjdź</button>
+<button aria-label="Poprzednia strona" class="icon-button" id="focusPrevPage" title="Poprzednia strona" type="button">‹</button>
+<label class="focus-page-jump">
+<span>Strona</span>
+<input id="focusPageInput" min="1" type="number" value="1"/>
+</label>
+<button aria-label="Następna strona" class="icon-button" id="focusNextPage" title="Następna strona" type="button">›</button>
+<div class="focus-mode-field">
+<button aria-expanded="false" class="focus-mode-toggle" id="focusModeToggle" type="button">Wersja</button>
+<div class="focus-mode-menu" hidden="" id="focusModeMenu">
+<button data-focus-mode="pl" type="button">Po polsku</button>
+<button data-focus-mode="source" type="button">Oryginał EN</button>
+<button data-focus-mode="coptic" type="button">Koptyjski</button>
+<button data-focus-mode="interlinear" type="button">Interlinearny</button>
+</div>
+</div>
+</section>
+<div class="mobile-overlay" hidden="" id="mobileOverlay"></div>
+<section aria-hidden="true" aria-label="Mobilna nawigacja" class="mobile-sheet" id="mobileSheet">
+<div class="mobile-sheet-head">
+<strong id="mobileSheetTitle">Spis treści</strong>
+<button class="text-button subtle" id="mobileClose" type="button">Zamknij</button>
+</div>
+<div class="mobile-panel is-active" data-mobile-content="toc">
+<label class="mobile-search">
+<span>Szukaj w rozdziałach</span>
+<input autocomplete="off" id="mobileChapterSearch" placeholder="Sophia, światłość, misterium" type="search"/>
+</label>
+<div class="mobile-list" id="mobileChaptersPanel"></div>
+</div>
+<div class="mobile-panel" data-mobile-content="search">
+<label class="mobile-search">
+<span>Szukaj w całym tekście</span>
+<input autocomplete="off" id="mobileSearchInput" placeholder="Wpisz motyw lub słowo" type="search"/>
+</label>
+<div class="mobile-list" id="mobileSearchPanel"></div>
+</div>
+<div class="mobile-panel" data-mobile-content="marks">
+<div class="mobile-list" id="mobileMarksPanel"></div>
+</div>
+<div class="mobile-panel" data-mobile-content="more">
+<div class="mobile-tools">
+<button class="text-button" id="mobileBookmarkButton" type="button">Dodaj zakładkę</button>
+<button class="text-button" id="mobileCopyButton" type="button">Kopiuj cytat</button>
+<button class="text-button" id="mobileFocusButton" type="button">Tryb skupienia</button>
+<button class="text-button" id="mobileAboutButton" type="button">O tekście</button>
+</div>
+<div class="mobile-field">
+<span>Tryb tekstu</span>
+<div aria-label="Tryb tekstu" class="mobile-segmented">
+<button class="is-active" data-reader-mode="pl" id="mobilePolishMode" type="button">Po polsku</button>
+<button data-reader-mode="source" id="mobileSourceMode" type="button">Oryginał EN</button>
+<button data-reader-mode="coptic" id="mobileCopticMode" type="button">Koptyjski</button>
+<button data-reader-mode="interlinear" id="mobileInterlinearMode" type="button">Interlinearny</button>
+</div>
+</div>
+<div class="mobile-field">
+<span>Format cytowania</span>
+<div aria-label="Format cytowania" class="mobile-citation-options">
+<button class="is-active" data-mobile-citation="simple" type="button">Cytat prosty</button>
+<button data-mobile-citation="scholarly" type="button">Cytat naukowy</button>
+<button data-mobile-citation="mead" type="button">Mead</button>
+<button data-mobile-citation="schwpet" type="button">Schw.-Pet.</button>
+</div>
+</div>
+</div>
+</section>
+<nav aria-label="Szybka nawigacja" class="mobile-bottom-nav">
+<button data-mobile-panel="toc" type="button">Spis treści</button>
+<button id="mobilePrevPage" type="button">‹</button>
+<button id="mobileCurrentPage" type="button">Str. 1</button>
+<button id="mobileNextPage" type="button">›</button>
+<button data-mobile-panel="more" type="button">Więcej</button>
+</nav>
+<div aria-live="polite" class="settings-toast" hidden="" id="settingsToast" role="status"></div>
+<script src="books/pistis-sophia/data.js?v=1.4.55"></script>
+<script src="books/pistis-sophia/coptic-data.js?v=1.4.55"></script>
+<script src="books/gospel-of-thomas/data.js?v=1.4.55"></script>
+<script src="books/gospel-of-thomas/coptic-data.js?v=1.4.55"></script>
+<script src="books/gospel-of-philip/data.js?v=1.4.55"></script>
+<script src="books/gospel-of-philip/coptic-data.js?v=1.4.55"></script>
+<script src="coptic-dictionary.js?v=1.4.55"></script>
+<script src="coptic-polish-overrides.js?v=1.4.55"></script>
+<script src="app.js?v=1.4.55"></script>
+</body>
 </html>
