@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.4.19 - Czysty manifest PWA
+
+### PL
+- Usuni?to konflikt merge z pliku manifest.webmanifest w paczce wydania.
+- Poprawiono kodowanie polskich znak?w w opisie manifestu PWA.
+- Podbito wersj? biblioteki po naprawie manifestu.
+
+### EN
+- Removed the merge-conflict state from the release manifest.webmanifest file.
+- Fixed Polish character encoding in the PWA manifest description.
+- Bumped the library version after the manifest cleanup.
+
 ## 1.4.18 - Subtelne etykiety statusu ksi?g
 
 ### PL
