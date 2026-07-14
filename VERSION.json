@@ -1,7 +1,8 @@
 {
-  "name": "Gnostyk Biblioteka",
-  "version": "1.4.19",
+  "name": "pistis-chapter-toolbar",
+  "version": "1.4.27",
   "updated": "2026-07-14",
   "currentWork": "philip-connected",
-  "structure": "modular-books"
+  "structure": "modular-books",
+  "date": "2026-07-14"
 }

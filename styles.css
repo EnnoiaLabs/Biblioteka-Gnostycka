@@ -857,10 +857,28 @@ body[data-view="reader"] .library-only {
 }
 
 .hero-copy h2 {
-  margin-top: 6px;
+  margin: 0;
   max-width: 680px;
   font-size: clamp(2rem, 5vw, 4.6rem);
   line-height: 0.98;
+}
+
+.book-title-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 6px;
+}
+
+.book-title-line .book-layer-label {
+  color: #d8a052;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: clamp(0.78rem, 1.4vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -913,7 +931,7 @@ body[data-view="reader"] .library-only {
 .toolbar {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 10px 14px;
   margin: 18px 0;
@@ -929,11 +947,17 @@ body[data-view="reader"] .library-only {
 
 .toolbar-primary {
   min-width: 0;
+  width: 100%;
 }
 
 .toolbar-primary .mode-switch {
   flex: 0 0 100%;
   width: min(100%, 520px);
+}
+
+.toolbar-primary .citation-format-inline,
+.toolbar-primary .copy-button-inline {
+  min-width: 150px;
 }
 
 .toolbar-secondary {
@@ -3847,6 +3871,13 @@ body[data-theme="sepia"] .codex-grid details {
 .collection-item-main {
   min-width: 0;
 }
+.collection-item-main strong,
+.codex-work-row > span:first-child {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
 .status-dot { display: none; }
 .status-badge {
   flex: 0 0 auto;
@@ -3863,6 +3894,11 @@ body[data-theme="sepia"] .codex-grid details {
   color: rgba(216, 160, 82, 0.76);
   background: transparent;
   white-space: nowrap;
+}
+.status-badge.inline {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  transform: translateY(-0.04em);
 }
 .status-badge.available {
   color: #d8a052;

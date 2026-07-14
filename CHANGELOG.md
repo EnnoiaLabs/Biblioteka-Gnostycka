@@ -1,28 +1,124 @@
 # Changelog
 
+## 1.4.27 - Rozdziały Pistis Sophia i pasek cytowania
+
+### PL
+- Naprawiono czytnik Pistis Sophia, aby nie uruchamiał trybu logionowego przeznaczonego dla Ewangelii Tomasza i Ewangelii Filipa.
+- Kliknięcie rozdziału w spisie Pistis Sophia ponownie przewija do właściwej strony i rozdziału.
+- Przeniesiono wybór formatu cytowania i przycisk kopiowania do tej samej linii co Kontynuuj, numer strony i strzałki.
+
+### EN
+- Fixed the Pistis Sophia reader so it no longer enters the logion mode used by the Gospel of Thomas and Gospel of Philip.
+- Clicking a Pistis Sophia chapter in the table of contents again scrolls to the correct page and chapter.
+- Moved the citation-format selector and copy button into the same line as Continue, the page field, and page arrows.
+
+## 1.4.26 - Statusy ksiąg i kompletna historia
+
+### PL
+- Ujednolicono etykietę warstw Pistis Sophia z katalogiem Ewangelii Tomasza i Ewangelii Filipa.
+- Przeniesiono status PL/EN/COPT Pistis Sophia bezpośrednio przy nazwie księgi.
+- Uzupełniono brakujący wpis 1.4.22 w pełnej historii zmian, aby numeracja szła po kolei.
+
+### EN
+- Unified the Pistis Sophia layer label with the Gospel of Thomas and Gospel of Philip catalogue entries.
+- Moved the PL/EN/COPT Pistis Sophia status directly next to the book name.
+- Restored the missing 1.4.22 entry in the full change history so version order remains continuous.
+
+## 1.4.25 - Changelog i etykiety warstw
+
+### PL
+- Poprawiono najnowsze wpisy changeloga, aby w Ostatnich zmianach i Pełnej historii nie pojawiały się znaki zapytania zamiast polskich liter.
+- Przeniesiono etykiety PL/EN/COPT i PL/EN bliżej nazw ksiąg w katalogu.
+- Dodano etykietę dostępnych warstw bezpośrednio przy tytule księgi w widoku czytnika.
+
+### EN
+- Fixed the latest changelog entries so Recent changes and Full history no longer show question marks instead of Polish characters.
+- Moved PL/EN/COPT and PL/EN labels closer to book names in the catalogue.
+- Added an available-layers label directly next to the book title in the reader view.
+
+## 1.4.24 - Naprawa pustego czytnika logionów
+
+### PL
+- Przywrócono brakującą funkcję parsera changeloga, która zatrzymywała start aplikacji przed wyrenderowaniem tekstu.
+- Czytnik Ewangelii Tomasza ponownie pokazuje ciągły tekst logionów w warstwach PL/EN.
+- Podbito wersję biblioteki, metadane PWA i odnośniki do zasobów.
+
+### EN
+- Restored the missing changelog-parser helper that stopped the app before the reader text was rendered.
+- The Gospel of Thomas reader again shows the continuous logion text in PL/EN layers.
+- Bumped the library version, PWA metadata, and asset links.
+
+## 1.4.23 - Naprawa kodowania i wejścia do księgi
+
+### PL
+- Odtworzono paczkę z poprawnej bazy UTF-8, aby polskie znaki nie zamieniały się w mojibake.
+- Zachowano wczesne przełączanie adresów `book`, `view` i `page` bez przepisywania całego interfejsu.
+- Usunięto zdublowaną obsługę kliknięcia gotowych ksiąg w katalogu.
+
+### EN
+- Rebuilt the package from a clean UTF-8 base so Polish labels no longer turn into mojibake.
+- Kept the early `book`, `view`, and `page` reader switch without rewriting the whole interface.
+- Removed duplicated click handling for available catalogue books.
+
+## 1.4.22 - Naprawa wejścia do ksiąg
+
+### PL
+- Poprawiono wejście do ksiąg z katalogu, aby kliknięcie gotowej pozycji prowadziło do czytnika, a nie do Home.
+- Utrzymano bezpośrednie adresy `book`, `view` i `page` jako stabilny sposób otwierania konkretnej księgi.
+- Przygotowano kolejną kontrolę kodowania po poprawkach nawigacji.
+
+### EN
+- Fixed catalogue book entry so clicking an available work opens the reader instead of returning to Home.
+- Kept direct `book`, `view`, and `page` addresses as stable links to a selected book.
+- Prepared the next encoding check after the navigation fixes.
+
+## 1.4.21 - Stabilna nawigacja ksiąg
+
+### PL
+- Wzmocniono obsługę kliknięcia gotowej księgi w katalogu, aby nie wracało do strony głównej.
+- Kliknięcie księgi jest teraz przechwytywane przed innymi akcjami strony i zawsze uruchamia czytnik wybranej pozycji.
+- Zachowano adresy z parametrami book, view i page jako stabilne linki do ksiąg.
+
+### EN
+- Hardened catalogue book-click handling so available books no longer fall back to the home page.
+- Book clicks are now captured before other page actions and always open the selected reader module.
+- Kept book, view, and page URL parameters as stable links to works.
+
+## 1.4.20 - Poprawione linkowanie ksiąg
+
+### PL
+- Naprawiono otwieranie ksiąg z katalogu: kliknięcie prowadzi teraz bezpośrednio do wybranej księgi.
+- Dodano obsługę adresów z parametrem book, view i page, aby wybór księgi nie ginął po przeładowaniu lokalnego pliku.
+- Utrzymano zapamiętywanie ostatniej księgi i strony jako warstwę pomocniczą.
+
+### EN
+- Fixed catalogue book opening: clicking a book now goes directly to the selected work.
+- Added support for book, view, and page URL parameters so the selected book survives local-file reloads.
+- Kept last-book and last-page storage as a secondary convenience layer.
+
 ## 1.4.19 - Czysty manifest PWA
 
 ### PL
-- Usuni?to konflikt merge z pliku manifest.webmanifest w paczce wydania.
-- Poprawiono kodowanie polskich znak?w w opisie manifestu PWA.
-- Podbito wersj? biblioteki po naprawie manifestu.
+- Usunięto konflikt merge z pliku manifest.webmanifest w paczce wydania.
+- Poprawiono kodowanie polskich znaków w opisie manifestu PWA.
+- Podbito wersję biblioteki po naprawie manifestu.
 
 ### EN
 - Removed the merge-conflict state from the release manifest.webmanifest file.
 - Fixed Polish character encoding in the PWA manifest description.
 - Bumped the library version after the manifest cleanup.
 
-## 1.4.18 - Subtelne etykiety statusu ksi?g
+## 1.4.18 - Subtelne etykiety statusu ksiąg
 
 ### PL
-- Usuni?to ramki i t?a z etykiet statusu w katalogu ksi?g.
-- Statusy PL / EN / COPT, PL / EN i planowane s? teraz subtelnym tekstem zgodnym z motywem.
-- Zachowano znak wej?cia ? przy dost?pnych pozycjach katalogu.
+- Usunięto ramki i tła z etykiet statusu w katalogu ksiąg.
+- Statusy PL/EN/COPT, PL/EN i planowane są teraz subtelnym tekstem zgodnym z motywem.
+- Zachowano znak wejścia przy dostępnych pozycjach katalogu.
 
 ### EN
 - Removed borders and fills from catalogue status labels.
-- PL / EN / COPT, PL / EN, and planned status labels now render as subtle theme-aware text.
-- Kept the entry mark ? on available catalogue items.
+- PL/EN/COPT, PL/EN, and planned status labels now render as subtle theme-aware text.
+- Kept the entry mark on available catalogue items.
 
 ## 1.4.17 - Title color and book status clarity
 

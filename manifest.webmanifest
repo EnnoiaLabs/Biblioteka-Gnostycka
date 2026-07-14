@@ -1,7 +1,7 @@
 {
   "name": "Gnostyk Biblioteka",
   "short_name": "Gnostyk",
-  "description": "Biblioteka gnostycka z tekstami ?r?d?owymi, przek?adami, notatkami i aparatem cytowania.",
+  "description": "Biblioteka gnozy z tekstami źródłowymi, przekładami, notatkami i aparatem cytowania.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
