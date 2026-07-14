@@ -318,7 +318,7 @@ h1 {
   background: transparent;
   color: var(--ink);
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 .nav-item:hover,
@@ -1325,7 +1325,7 @@ body[data-view="reader"] .library-only {
   background: rgba(216, 160, 82, 0.08);
   color: var(--ink);
   padding: 8px 10px;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -5282,7 +5282,7 @@ body[data-book-justify="true"] .page-text .source-prose .source-paragraph {
 }
 
 body[data-book-justify="true"] .page-text .source-prose .source-paragraph:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0.35rem;
 }
 
 body[data-book-justify="true"] .page-text .source-prose .source-chapter-heading {
@@ -5297,8 +5297,8 @@ body[data-book-justify="true"] .page-text .source-prose .source-chapter-heading:
 }
 
 body[data-book-justify="true"] .page-text .source-prose .source-page-marker {
-  margin: 1.1em 0 0.65em;
-  text-align: left;
+  margin: 0.25rem 0 0.55rem;
+  text-align: center;
   font-size: 0.88em;
   opacity: 0.78;
 }
@@ -5311,8 +5311,8 @@ body[data-book-justify="true"] .page-text .source-prose .source-page-marker {
 .pistis-page-section {
   position: relative;
   scroll-margin-top: 1.25rem;
-  padding: 0 0 1.35rem;
-  margin: 0 0 1.35rem;
+  padding: 0 0 0.8rem;
+  margin: 0 0 0.8rem;
 }
 
 .pistis-page-section:last-child {
@@ -5376,8 +5376,9 @@ body[data-book-justify="true"] .page-text .pistis-page-content {
 }
 
 .polish-page-marker {
-  margin-top: 1rem;
+  margin-top: 0.25rem;
   margin-bottom: 0.55rem;
+  text-align:center;
 }
 
 body[data-book-justify="true"] .page-text .polish-paragraph {
@@ -5432,7 +5433,7 @@ body[data-book-justify="true"] .page-text .polish-paragraph {
 }
 .page-text .source-page-marker,
 .page-text .polish-page-marker {
-  margin: 1.05rem 0 0.58rem;
+  margin: 0.55rem 0 0.95rem;
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.92rem;
   line-height: 1.3;
