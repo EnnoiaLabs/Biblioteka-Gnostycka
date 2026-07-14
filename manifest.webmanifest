@@ -1,7 +1,7 @@
 {
-  "name": "Gnostyk Biblioteka",
-  "short_name": "Gnostyk",
-  "description": "Biblioteka gnozy z tekstami źródłowymi, przekładami, notatkami i aparatem cytowania.",
+  "name": "Gnostic Library",
+  "short_name": "Gnostic Library",
+  "description": "Library of Gnostic texts with source texts, translations, notes, and citation tools.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -14,7 +14,7 @@
       "sizes": "1640x922",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Gnostyk Biblioteka"
+      "label": "Gnostic Library"
     }
   ],
   "icons": [

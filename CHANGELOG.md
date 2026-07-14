@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.4.57 - Stała marka Gnostic Library i lokalizowany podtytuł
+
+### PL
+- Ustawiono **Gnostic Library** jako stałą nazwę projektu zarówno w polskiej, jak i angielskiej wersji interfejsu.
+- Dodano pod nazwą zmienny podtytuł: **Biblioteka tekstów gnostyckich** w PL oraz **Library of Gnostic Texts** w EN.
+- Zachowano dotychczasową czcionkę, układ strony głównej i działanie przełącznika języka.
+- Zachowano ciągłość numeracji 1.4.56 → 1.4.57.
+
+### EN
+- Set **Gnostic Library** as the fixed project name in both the Polish and English interface.
+- Added a localized subtitle below the name: **Biblioteka tekstów gnostyckich** in PL and **Library of Gnostic Texts** in EN.
+- Preserved the existing typeface, home-page layout, and language-switch behavior.
+- Preserved consecutive version numbering from 1.4.56 to 1.4.57.
+
+## 1.4.56 - Domyślne justowanie tekstów książek
+
+### PL
+- Justowanie tekstów jest teraz domyślnie włączone dla wszystkich książek w bibliotece, także przy pierwszym uruchomieniu.
+- W panelu Narzędzia użytkownik może odznaczyć opcję „Wyjustuj tekst książek”, aby przywrócić wyrównanie do lewej.
+- Wybór pozostaje zapamiętywany lokalnie i obejmuje również przyszłe książki korzystające ze wspólnego czytnika.
+- Zachowano ciągłość numeracji 1.4.55 → 1.4.56.
+
+### EN
+- Book-text justification is now enabled by default for every book in the library, including on first launch.
+- Users can clear the “Justify book text” option in Tools to restore left alignment.
+- The choice remains stored locally and also applies to future books using the shared reader.
+- Preserved consecutive version numbering from 1.4.55 to 1.4.56.
+
 ## 1.4.55 - Kolory nagłówków zgodne z aktywnym motywem
 
 ### PL
