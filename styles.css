@@ -411,8 +411,14 @@ body[data-view="reader"] .library-home {
 
 .library-home-copy h2 {
   max-width: 620px;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: #f6d79f;
+  text-shadow: 0 1px 0 rgba(255, 247, 234, 0.12), 0 12px 30px rgba(0, 0, 0, 0.34);
 }
 
 .library-home-copy p:not(.eyebrow) {
@@ -2159,6 +2165,7 @@ body.focus .focus-bar {
 
   .library-home-copy h2 {
     font-size: 2.1rem;
+    line-height: 0.98;
   }
 
   .work-tile {
@@ -2642,6 +2649,21 @@ body[data-theme="light"] .planned-work-grid div,
 body[data-theme="light"] .mobile-sheet-head,
 body[data-theme="light"] .chapter-group-list {
   border-color: rgba(141, 107, 79, 0.2);
+}
+
+body[data-theme="dark"] .library-home-copy h2 {
+  color: #f6d79f;
+  text-shadow: 0 1px 0 rgba(255, 247, 234, 0.12), 0 12px 30px rgba(0, 0, 0, 0.34);
+}
+
+body[data-theme="sepia"] .library-home-copy h2 {
+  color: #4b311e;
+  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.58);
+}
+
+body[data-theme="light"] .library-home-copy h2 {
+  color: #211812;
+  text-shadow: none;
 }
 
 body[data-theme="sepia"] .library-home-copy p:not(.eyebrow),
@@ -3836,14 +3858,16 @@ body[data-theme="sepia"] .codex-grid details {
   padding: 0;
   font-size: 0.68rem;
   line-height: 1.2;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(216, 160, 82, 0.76);
   background: transparent;
+  white-space: nowrap;
 }
 .status-badge.available {
-  color: var(--accent);
+  color: #d8a052;
   border-color: transparent;
+  background: transparent;
 }
 .status-badge.preparing {
   color: var(--accent);
@@ -3856,6 +3880,14 @@ body[data-theme="sepia"] .codex-grid details {
 }
 body[data-theme="light"] .status-badge,
 body[data-theme="sepia"] .status-badge {
+  color: rgba(91, 69, 45, 0.72);
+  background: transparent;
+  border-color: transparent;
+}
+
+body[data-theme="light"] .status-badge.available,
+body[data-theme="sepia"] .status-badge.available {
+  color: #6a451f;
   background: transparent;
   border-color: transparent;
 }
@@ -4090,7 +4122,7 @@ body[data-theme="dark"] .dictionary-status-basic {
   color: var(--muted);
 }
 .codex-work-row[data-open-work] {
-  cursor: default;
+  cursor: pointer;
 }
 .codex-work-row[data-open-work]:hover,
 .codex-work-row[data-open-work]:focus-visible {
@@ -4100,10 +4132,30 @@ body[data-theme="dark"] .dictionary-status-basic {
 }
 .collection-item-link,
 .work-tile[data-open-work] {
-  cursor: default;
+  cursor: pointer;
 }
 .codex-item-with-status {
   cursor: default;
+}
+
+.collection-item-link[data-open-work]::after,
+.codex-work-row[data-open-work]::after {
+  content: "›";
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0.86;
+  transform: translateX(0);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.collection-item-link[data-open-work]:hover::after,
+.collection-item-link[data-open-work]:focus-visible::after,
+.codex-work-row[data-open-work]:hover::after,
+.codex-work-row[data-open-work]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 .thomas-coptic-continuous .coptic-page {
@@ -4805,4 +4857,3 @@ body[data-theme="dark"] ::-moz-selection {
   background: rgba(216, 160, 82, 0.42);
   color: #fff7ea;
 }
-

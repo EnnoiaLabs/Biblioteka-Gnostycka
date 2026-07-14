@@ -1,7 +1,7 @@
 {
   "id": "gospel-of-thomas",
   "title": "Ewangelia Tomasza",
-  "status": "Pełny tekst PL/EN/COPT",
+  "status": "Warstwy PL / EN / COPT",
   "type": "logion-reader",
   "language": "pl/en/cop",
   "sourceLanguageLayers": [

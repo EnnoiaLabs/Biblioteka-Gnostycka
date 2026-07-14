@@ -2,16 +2,16 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostyk Biblioteka",
-    "version": "1.4.15",
+    "version": "1.4.18",
     "rightsNote": "Teksty źródłowe w domenie publicznej lub według wskazanych licencji; polski przekład, opracowanie, terminologia, układ czytelniczy i aparat biblioteki jako nowa warstwa twórcza.",
     "moduleIndex": "books/index.json",
-    "updated": "2026-07-11"
+    "updated": "2026-07-14"
   },
   "works": [
     {
       "id": "pistis-sophia",
       "title": "Pistis Sophia",
-      "status": "Pe?na ksi?ga",
+      "status": "Warstwy PL / EN / COPT",
       "language": "pl",
       "sourceLanguageLayers": [
         "en",
@@ -32,12 +32,17 @@
       "module": "books/pistis-sophia/book.json",
       "entry": "books/pistis-sophia/data.js",
       "coptic": "books/pistis-sophia/coptic-data.js",
-      "type": "page-reader"
+      "type": "page-reader",
+      "languages": [
+        "pl",
+        "en",
+        "copt"
+      ]
     },
     {
       "id": "gospel-of-thomas",
       "title": "Ewangelia Tomasza",
-      "status": "Pełny tekst PL/EN/COPT",
+      "status": "Warstwy PL / EN / COPT",
       "language": "pl",
       "sourceLanguageLayers": [
         "en"
@@ -65,14 +70,15 @@
       "description": "Ewangelia Tomasza: 114 logionów w polskim przekładzie użytkownika oraz angielskiej warstwie public-domain Mark M. Mattison.",
       "languages": [
         "pl",
-        "en"
+        "en",
+        "copt"
       ],
       "unitCount": 114
     },
     {
       "id": "gospel-of-philip",
       "title": "Ewangelia Filipa",
-      "status": "Pełny tekst PL/EN",
+      "status": "Warstwy PL / EN",
       "language": "pl",
       "sourceLanguageLayers": [
         "en"
@@ -106,6 +112,6 @@
       "unitCount": 18
     }
   ],
-  "version": "1.4.13",
-  "updated": "2026-07-11"
+  "version": "1.4.18",
+  "updated": "2026-07-14"
 }

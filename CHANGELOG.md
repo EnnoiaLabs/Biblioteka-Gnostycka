@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.4.18 - Subtelne etykiety statusu ksi?g
+
+### PL
+- Usuni?to ramki i t?a z etykiet statusu w katalogu ksi?g.
+- Statusy PL / EN / COPT, PL / EN i planowane s? teraz subtelnym tekstem zgodnym z motywem.
+- Zachowano znak wej?cia ? przy dost?pnych pozycjach katalogu.
+
+### EN
+- Removed borders and fills from catalogue status labels.
+- PL / EN / COPT, PL / EN, and planned status labels now render as subtle theme-aware text.
+- Kept the entry mark ? on available catalogue items.
+
+## 1.4.17 - Title color and book status clarity
+
+### PL
+- Dostosowano kolor tytułu Biblioteki Gnozy osobno dla motywu ciemnego, jasnego i sepii.
+- Ujednolicono statusy ksiąg jako informacje o dostępnych warstwach: PL / EN / COPT albo PL / EN.
+- Dodano znak wejścia ? i kursor kliknięcia dla dostępnych pozycji katalogu.
+
+### EN
+- Adjusted the Gnostic Library title color separately for Dark, Light, and Sepia themes.
+- Normalized book status labels as available text layers: PL / EN / COPT or PL / EN.
+- Added an entry mark ? and pointer behavior for available catalogue items.
+
+## 1.4.16 - Library title typography
+
+### PL
+- Dodano czcionkę Cormorant Garamond do głównego tytułu Biblioteki Gnozy.
+- Logo Gnostyk pozostaje w Caesar Dressing, a tekst ksiąg i interfejs czytnika nie zostały zmienione.
+- Podbito wersję aplikacji, cache PWA i odnośniki do zasobów.
+
+### EN
+- Added Cormorant Garamond to the main Gnostic Library title.
+- Kept the Gnostyk wordmark in Caesar Dressing and left book text and reader UI unchanged.
+- Bumped the application version, PWA cache, and asset links.
+
 ## 1.4.15 - Version and changelog cleanup
 
 ### PL
