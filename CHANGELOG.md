@@ -1,16 +1,48 @@
 # Changelog
 
+## 1.4.84 - Sidebar połączony z warstwą koptyjską Pistis Sophii
+
+### PL
+- Automatycznie przypisano wszystkie 148 rozdziałów Pistis Sophii do oznaczeń stron `P` Schwartzego–Petermanna odczytanych z warstwy angielskiej.
+- Kliknięcie rozdziału w sidebarze w trybie koptyjskim lub interlinearnym przewija teraz bezpośrednio do odpowiadającej strony `P`.
+- Aktywny rozdział i odpowiadająca mu strona koptyjska pozostają zaznaczone po nawigacji.
+- Przy rozdziałach w sidebarze pokazano odpowiadające oznaczenie `P`.
+- Zachowano ciągłość tekstu, wygląd, kolory, CSS i motywy bez zmian.
+
+### EN
+- Automatically mapped all 148 Pistis Sophia chapters to Schwartze–Petermann `P` page markers read from the English layer.
+- Clicking a sidebar chapter in Coptic or interlinear mode now scrolls directly to the corresponding `P` manuscript page.
+- The selected chapter and its corresponding Coptic page remain highlighted after navigation.
+- Added the corresponding `P` marker to each Pistis Sophia chapter item in the sidebar.
+- Preserved continuous reading, layout, colors, CSS, and themes unchanged.
+
+## 1.4.83 - Ciągła warstwa koptyjska Pistis Sophii
+
+### PL
+- Przebudowano widok koptyjski Pistis Sophii tak, aby wyświetlał pełny tekst w nieprzerwanej kolejności stron rękopisu Schwartzego–Petermanna.
+- Usunięto zależność ciągłości tekstu koptyjskiego od niepełnych znaczników stron `|…` w angielskim przekładzie Meada.
+- Ten sam ciągły mechanizm zastosowano w widoku interlinearnym Pistis Sophii.
+- Zachowano kolory, CSS, motywy i układ interfejsu bez zmian.
+- Zachowano ciągłość numeracji 1.4.82 → 1.4.83.
+
+### EN
+- Rebuilt the Pistis Sophia Coptic view to display the complete text in uninterrupted Schwartze–Petermann manuscript-page order.
+- Removed the dependency of Coptic-text continuity on incomplete `|…` page markers in Mead's English translation.
+- Applied the same continuous mechanism to the Pistis Sophia interlinear view.
+- Preserved all colors, CSS, themes, and interface layout.
+- Preserved consecutive version numbering from 1.4.82 to 1.4.83.
+
 ## 1.4.82 - Pełna synchronizacja wersji i historii zmian
 
 ### PL
-- Podbito numer biblioteki do 1.4.82 we wszystkich wymaganych plikach aplikacji, zasobach i pamięci podręcznej PWA.
-- Uzupełniono brakujące wpisy 1.4.80 i 1.4.81, przywracając ciągłość numeracji 1.4.79 → 1.4.80 → 1.4.81 → 1.4.82.
+- Podbito numer biblioteki do 1.4.83 we wszystkich wymaganych plikach aplikacji, zasobach i pamięci podręcznej PWA.
+- Uzupełniono brakujące wpisy 1.4.80 i 1.4.81, przywracając ciągłość numeracji 1.4.79 → 1.4.80 → 1.4.81 → 1.4.83.
 - Sekcja „Ostatnie zmiany” pokazuje dokładnie 3 najnowsze wersje, a pełna historia dokładnie 25 najnowszych wersji.
 - Nie zmieniono kolorów, CSS, motywów ani układu interfejsu.
 
 ### EN
-- Updated the library version to 1.4.82 across all required application files, assets, and the PWA cache.
-- Added the missing 1.4.80 and 1.4.81 entries, restoring continuity from 1.4.79 through 1.4.82.
+- Updated the library version to 1.4.83 across all required application files, assets, and the PWA cache.
+- Added the missing 1.4.80 and 1.4.81 entries, restoring continuity from 1.4.79 through 1.4.83.
 - Recent changes displays exactly the 3 newest releases, while Full history displays exactly the 25 newest releases.
 - Preserved all colors, CSS, themes, and interface layout.
 

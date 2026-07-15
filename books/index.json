@@ -1,5 +1,5 @@
 {
-  "version": "1.4.82",
+  "version": "1.4.84",
   "defaultWork": "pistis-sophia",
   "books": [
     "books/pistis-sophia/book.json",
