@@ -1016,12 +1016,25 @@ body[data-view="reader"] .library-only {
 }
 
 .toolbar {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 40;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 10px 14px;
   margin: 18px 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(216, 160, 82, 0.28);
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+@supports not (background: color-mix(in srgb, black 50%, white)) {
+  .toolbar {
+    background: var(--paper);
+  }
 }
 
 .toolbar-primary,
@@ -5390,6 +5403,17 @@ body[data-book-justify="true"] .page-text .polish-paragraph {
 }
 
 
+
+/* v1.4.66: numbered verses/lists are body text, not headings */
+.page-text .polish-numbered-paragraph {
+  margin: 0 0 0.9rem;
+  font: inherit;
+  font-weight: inherit;
+  color: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
 /* v1.4.53: normalized Pistis Sophia heading hierarchy in Polish and English */
 .page-text .source-chapter-heading,
 .page-text .polish-chapter-heading {
@@ -5511,4 +5535,672 @@ body[data-theme="light"] { --reader-heading-color: #211812; }
 .addenda-text-heading span {
   color: var(--reader-heading-color);
   opacity: 0.78;
+}
+
+
+/* Sticky reader toolbar shared by all books */
+@media (max-width: 720px) {
+  .toolbar {
+    top: 0;
+    padding: 8px;
+    gap: 7px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .toolbar-primary {
+    gap: 6px;
+  }
+
+  .toolbar-primary .citation-format-inline,
+  .toolbar-primary .copy-button-inline {
+    min-width: 0;
+  }
+}
+
+
+/* v1.4.67 — reader text alignment controls */
+.text-align-controls {
+  display: inline-flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.text-align-controls .text-align-button {
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  min-height: 38px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  padding: 8px;
+  color: var(--muted);
+  background: transparent;
+}
+
+.text-align-controls .text-align-button:last-child { border-right: 0; }
+.text-align-controls .text-align-button svg { width: 20px; height: 20px; fill: currentColor; display: block; }
+.text-align-controls .text-align-button:hover { color: var(--ink); background: var(--soft); }
+.text-align-controls .text-align-button.is-active {
+  color: var(--button-active-text, #fff4dc);
+  background: var(--gold-dark, #6e4a1e);
+  box-shadow: inset 0 0 0 1px var(--gold, #b98935);
+}
+
+body[data-text-align="left"] .page-text .page-prose,
+body[data-text-align="left"] .page-text .logion-continuous,
+body[data-text-align="left"] .page-text .logion-block > div,
+body[data-text-align="left"] .page-text .addenda-text-section .page-prose,
+body[data-text-align="left"] .page-text .source-prose,
+body[data-text-align="left"] .page-text .source-paragraph,
+body[data-text-align="left"] .page-text .polish-paragraph,
+body[data-text-align="left"] .page-text .pistis-page-content {
+  text-align: left !important;
+  text-justify: auto !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+body[data-text-align="center"] .page-text .page-prose,
+body[data-text-align="center"] .page-text .logion-continuous,
+body[data-text-align="center"] .page-text .logion-block > div,
+body[data-text-align="center"] .page-text .addenda-text-section .page-prose,
+body[data-text-align="center"] .page-text .source-prose,
+body[data-text-align="center"] .page-text .source-paragraph,
+body[data-text-align="center"] .page-text .polish-paragraph,
+body[data-text-align="center"] .page-text .pistis-page-content {
+  text-align: center !important;
+  text-justify: auto !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+}
+
+@media (max-width: 760px) {
+  .text-align-controls .text-align-button {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+    padding: 7px;
+  }
+}
+
+
+/* v1.4.72 — theme-aware alignment controls without native white focus outline */
+.text-align-controls .text-align-button,
+.text-align-controls .text-align-button:focus,
+.text-align-controls .text-align-button:focus-visible {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.text-align-controls .text-align-button:focus-visible {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-theme="dark"] .text-align-controls {
+  border-color: rgba(216, 160, 82, 0.34);
+  background: #1d1711;
+}
+body[data-theme="dark"] .text-align-controls .text-align-button {
+  border-right-color: rgba(216, 160, 82, 0.28);
+  color: #bda891;
+  background: #1d1711;
+}
+body[data-theme="dark"] .text-align-controls .text-align-button:hover {
+  color: #fff1d5;
+  background: #2a2118;
+}
+body[data-theme="dark"] .text-align-controls .text-align-button.is-active {
+  color: #fff5df;
+  background: #6e4a1e;
+  box-shadow: inset 0 0 0 1px rgba(231, 174, 91, 0.88);
+}
+body[data-theme="dark"] .text-align-controls .text-align-button:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(231, 174, 91, 0.78);
+}
+body[data-theme="dark"] .text-align-controls .text-align-button.is-active:focus-visible {
+  box-shadow: inset 0 0 0 2px #e7ae5b;
+}
+
+body[data-theme="light"] .text-align-controls {
+  border-color: rgba(141, 107, 79, 0.34);
+  background: #fffdf8;
+}
+body[data-theme="light"] .text-align-controls .text-align-button {
+  border-right-color: rgba(141, 107, 79, 0.26);
+  color: #6d5f53;
+  background: #fffdf8;
+}
+body[data-theme="light"] .text-align-controls .text-align-button:hover {
+  color: #241b14;
+  background: #f1e8da;
+}
+body[data-theme="light"] .text-align-controls .text-align-button.is-active {
+  color: #fff8e8;
+  background: #6f4d22;
+  box-shadow: inset 0 0 0 1px #8d6b4f;
+}
+body[data-theme="light"] .text-align-controls .text-align-button:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(111, 77, 34, 0.72);
+}
+body[data-theme="light"] .text-align-controls .text-align-button.is-active:focus-visible {
+  box-shadow: inset 0 0 0 2px #3f2a17;
+}
+
+body[data-theme="sepia"] .text-align-controls {
+  border-color: rgba(126, 88, 48, 0.40);
+  background: #f4ead5;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button {
+  border-right-color: rgba(126, 88, 48, 0.30);
+  color: #73583c;
+  background: #f4ead5;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button:hover {
+  color: #2f2318;
+  background: #e7d7b9;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button.is-active {
+  color: #fff8e8;
+  background: #774a20;
+  box-shadow: inset 0 0 0 1px #9a6a35;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(119, 74, 32, 0.72);
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button.is-active:focus-visible {
+  box-shadow: inset 0 0 0 2px #4e3019;
+}
+
+
+/* v1.4.72 — alignment controls use the standard toolbar button states */
+.text-align-controls {
+  gap: 8px;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.text-align-controls .text-align-button,
+.text-align-controls .text-align-button:last-child {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: none !important;
+}
+
+.text-align-controls .text-align-button:hover {
+  border-color: var(--teal);
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.text-align-controls .text-align-button.is-active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #fff;
+  box-shadow: none !important;
+}
+
+.text-align-controls .text-align-button:focus-visible {
+  outline: none !important;
+  border-color: var(--teal);
+  box-shadow: none !important;
+}
+
+body[data-theme="dark"] .text-align-controls .text-align-button {
+  border-color: transparent;
+  background: #1d1711;
+  color: #f6ead7;
+}
+body[data-theme="dark"] .text-align-controls .text-align-button:hover,
+body[data-theme="dark"] .text-align-controls .text-align-button:focus-visible {
+  border-color: rgba(231, 174, 91, 0.82);
+  background: #2a2118;
+  color: #fff1d5;
+}
+body[data-theme="dark"] .text-align-controls .text-align-button.is-active,
+body[data-theme="dark"] .text-align-controls .text-align-button.is-active:focus-visible {
+  border-color: rgba(231, 174, 91, 0.9);
+  background: #3a2a17;
+  color: #fff5df;
+}
+
+body[data-theme="light"] .text-align-controls .text-align-button {
+  border-color: var(--line);
+  background: #fffdf8;
+  color: #241b14;
+}
+body[data-theme="light"] .text-align-controls .text-align-button:hover,
+body[data-theme="light"] .text-align-controls .text-align-button:focus-visible {
+  border-color: #8d6b4f;
+  background: #f1e8da;
+  color: #241b14;
+}
+body[data-theme="light"] .text-align-controls .text-align-button.is-active,
+body[data-theme="light"] .text-align-controls .text-align-button.is-active:focus-visible {
+  border-color: #8d6b4f;
+  background: #3a2a17;
+  color: #fff8e8;
+}
+
+body[data-theme="sepia"] .text-align-controls .text-align-button {
+  border-color: rgba(126, 88, 48, 0.30);
+  background: #f4ead5;
+  color: #73583c;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button:hover,
+body[data-theme="sepia"] .text-align-controls .text-align-button:focus-visible {
+  border-color: #9a6a35;
+  background: #e7d7b9;
+  color: #2f2318;
+}
+body[data-theme="sepia"] .text-align-controls .text-align-button.is-active,
+body[data-theme="sepia"] .text-align-controls .text-align-button.is-active:focus-visible {
+  border-color: #9a6a35;
+  background: #774a20;
+  color: #fff8e8;
+}
+
+/* v1.4.72 — sticky reader toolbar follows Light and Sepia themes */
+body[data-theme="light"] .toolbar {
+  border-color: rgba(141, 107, 79, 0.28);
+  background: rgba(255, 253, 248, 0.96);
+  color: #241b14;
+  box-shadow: 0 8px 20px rgba(75, 54, 34, 0.10);
+}
+
+body[data-theme="sepia"] .toolbar {
+  border-color: rgba(126, 88, 48, 0.32);
+  background: rgba(244, 234, 213, 0.96);
+  color: #2f2318;
+  box-shadow: 0 8px 20px rgba(79, 55, 31, 0.12);
+}
+
+body[data-theme="light"] .toolbar-primary,
+body[data-theme="light"] .toolbar-secondary,
+body[data-theme="sepia"] .toolbar-primary,
+body[data-theme="sepia"] .toolbar-secondary {
+  color: inherit;
+}
+
+
+/* v1.4.72: support action uses the shared button interaction system in every theme. */
+#homeSupportButton.library-read-button.secondary {
+  border-color: var(--line);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: none;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+#homeSupportButton.library-read-button.secondary:hover,
+#homeSupportButton.library-read-button.secondary:focus-visible {
+  border-color: var(--teal);
+  background: var(--white);
+  color: var(--ink);
+  outline: none;
+}
+
+#homeSupportButton.library-read-button.secondary:active,
+#homeSupportButton.library-read-button.secondary.is-active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #fff;
+}
+
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary {
+  border-color: transparent;
+  background: #1d1711;
+  color: #f6ead7;
+}
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary:hover,
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary:focus-visible {
+  border-color: rgba(231, 174, 91, 0.82);
+  background: #2a2118;
+  color: #fff5df;
+}
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary:active,
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary.is-active {
+  border-color: rgba(231, 174, 91, 0.9);
+  background: #3a2a17;
+  color: #fff5df;
+}
+
+body[data-theme="light"] #homeSupportButton.library-read-button.secondary,
+body[data-theme="sepia"] #homeSupportButton.library-read-button.secondary {
+  border-color: rgba(141, 107, 79, 0.28);
+  background: rgba(255, 255, 255, 0.42);
+  color: #241b14;
+}
+body[data-theme="light"] #homeSupportButton.library-read-button.secondary:hover,
+body[data-theme="light"] #homeSupportButton.library-read-button.secondary:focus-visible,
+body[data-theme="sepia"] #homeSupportButton.library-read-button.secondary:hover,
+body[data-theme="sepia"] #homeSupportButton.library-read-button.secondary:focus-visible {
+  border-color: rgba(111, 77, 34, 0.72);
+  background: rgba(255, 255, 255, 0.72);
+  color: #241b14;
+}
+body[data-theme="light"] #homeSupportButton.library-read-button.secondary:active,
+body[data-theme="light"] #homeSupportButton.library-read-button.secondary.is-active,
+body[data-theme="sepia"] #homeSupportButton.library-read-button.secondary:active,
+body[data-theme="sepia"] #homeSupportButton.library-read-button.secondary.is-active {
+  border-color: rgba(111, 77, 34, 0.56);
+  background: #3a2a17;
+  color: #fff8e8;
+}
+
+
+/* v1.4.72 — przywrócone wyrównanie sidebara znane z wcześniejszych wersji */
+.sidebar .nav-item,
+.sidebar .theme-item,
+.sidebar .mark-item {
+  text-align: left;
+}
+
+.sidebar .nav-item strong,
+.sidebar .theme-item strong,
+.sidebar .mark-item strong,
+.sidebar .nav-item span,
+.sidebar .theme-item span,
+.sidebar .mark-item span {
+  text-align: left;
+}
+
+
+/* v1.4.73 — softer Dark-theme text hierarchy */
+body[data-theme="dark"] {
+  --dark-text-primary: #e4d8c7;
+  --dark-text-control: #cbbda9;
+  --dark-text-secondary: #aa9b88;
+  --dark-text-subtle: #8f8274;
+}
+
+/* Main reading text remains highly readable, but no longer appears pure white. */
+body[data-theme="dark"] .reader,
+body[data-theme="dark"] .page-text,
+body[data-theme="dark"] .text-surface,
+body[data-theme="dark"] .notes,
+body[data-theme="dark"] .reading-meta,
+body[data-theme="dark"] .note-actions {
+  color: var(--dark-text-primary);
+}
+
+/* Standard controls and navigation use a calmer neutral tone. */
+body[data-theme="dark"] .text-button:not(.is-active),
+body[data-theme="dark"] .icon-button:not(.is-active),
+body[data-theme="dark"] .select-button,
+body[data-theme="dark"] .page-jump,
+body[data-theme="dark"] .mode-switch .text-button:not(.is-active),
+body[data-theme="dark"] .reader-toolbar button:not(.is-active),
+body[data-theme="dark"] .reader-toolbar select,
+body[data-theme="dark"] .sidebar button:not(.is-active),
+body[data-theme="dark"] .library-home button:not(.is-active),
+body[data-theme="dark"] .site-header button:not(.is-active) {
+  color: var(--dark-text-control);
+}
+
+/* Supporting labels, excerpts and descriptive copy are intentionally quieter. */
+body[data-theme="dark"] .sidebar p,
+body[data-theme="dark"] .sidebar small,
+body[data-theme="dark"] .chapter-preview,
+body[data-theme="dark"] .theme-preview,
+body[data-theme="dark"] .bookmark-preview,
+body[data-theme="dark"] .library-card p,
+body[data-theme="dark"] .home-card p,
+body[data-theme="dark"] .home-stat-label,
+body[data-theme="dark"] .reader-panel dt,
+body[data-theme="dark"] .settings-panel label,
+body[data-theme="dark"] .glossary-editor label,
+body[data-theme="dark"] .page-jump span,
+body[data-theme="dark"] .site-footer,
+body[data-theme="dark"] .site-footer p {
+  color: var(--dark-text-secondary);
+}
+
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder,
+body[data-theme="dark"] .muted,
+body[data-theme="dark"] .eyebrow,
+body[data-theme="dark"] .meta-label {
+  color: var(--dark-text-subtle);
+}
+
+/* Active controls and semantic headings retain the established theme accents. */
+body[data-theme="dark"] .text-button.is-active,
+body[data-theme="dark"] .mode-switch .text-button.is-active,
+body[data-theme="dark"] .alignment-button.is-active {
+  color: #f0dfc4;
+}
+
+
+/* v1.4.74 — globally softened H1–H6 hierarchy in the Dark theme */
+body[data-theme="dark"] h1 { color: #ded5c9; }
+body[data-theme="dark"] h2 { color: #d8cec1; }
+body[data-theme="dark"] h3 { color: #d2c7ba; }
+body[data-theme="dark"] h4 { color: #ccc0b3; }
+body[data-theme="dark"] h5 { color: #c5b9ac; }
+body[data-theme="dark"] h6 { color: #beb2a5; }
+
+
+/* v1.4.75 — complete Dark-theme text luminance normalization */
+body[data-theme="dark"] {
+  --dark-text-primary: #d2c7b8;
+  --dark-text-heading: #d7ccbd;
+  --dark-text-control: #bdb1a1;
+  --dark-text-secondary: #9f927f;
+  --dark-text-subtle: #84786b;
+}
+
+/* Main application surfaces and reading text. */
+body[data-theme="dark"] .reader,
+body[data-theme="dark"] .page-text,
+body[data-theme="dark"] .text-surface,
+body[data-theme="dark"] .notes,
+body[data-theme="dark"] .library-home,
+body[data-theme="dark"] .library-about,
+body[data-theme="dark"] .library-changes-panel,
+body[data-theme="dark"] .library-shelf,
+body[data-theme="dark"] .sidebar,
+body[data-theme="dark"] .toolbar {
+  color: var(--dark-text-primary);
+}
+
+/* Titles that previously used almost-pure white across Library, Books and panels. */
+body[data-theme="dark"] .library-info-head h3,
+body[data-theme="dark"] .work-tile h3,
+body[data-theme="dark"] .planned-work-panel h3,
+body[data-theme="dark"] .library-card h2,
+body[data-theme="dark"] .library-info-strip strong,
+body[data-theme="dark"] .planned-work-grid span,
+body[data-theme="dark"] .book-title-line h2,
+body[data-theme="dark"] .mobile-book-head h2,
+body[data-theme="dark"] .library-collections h3,
+body[data-theme="dark"] .library-collections summary,
+body[data-theme="dark"] .codex-work-row,
+body[data-theme="dark"] .codex-work-row > span,
+body[data-theme="dark"] .home-card h3,
+body[data-theme="dark"] .reader-panel h3,
+body[data-theme="dark"] .backup-settings strong,
+body[data-theme="dark"] .glossary-settings strong,
+body[data-theme="dark"] .work-meta strong,
+body[data-theme="dark"] .coptic-page header strong,
+body[data-theme="dark"] .interlinear-page > header strong,
+body[data-theme="dark"] .interlinear-line > header strong {
+  color: var(--dark-text-heading) !important;
+}
+
+/* Ordinary copy, lists and descriptive text in every Library tab. */
+body[data-theme="dark"] .library-about p,
+body[data-theme="dark"] .library-about li,
+body[data-theme="dark"] .library-updates,
+body[data-theme="dark"] .library-updates > li,
+body[data-theme="dark"] .work-tile p,
+body[data-theme="dark"] .planned-work-panel,
+body[data-theme="dark"] .codex-work-list,
+body[data-theme="dark"] .codex-work-row.planned,
+body[data-theme="dark"] .library-prose,
+body[data-theme="dark"] .help-answer,
+body[data-theme="dark"] .settings-panel,
+body[data-theme="dark"] .glossary-settings,
+body[data-theme="dark"] .backup-settings {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Buttons, tabs, navigation labels and form values use the same calmer tone. */
+body[data-theme="dark"] .text-button:not(.is-active),
+body[data-theme="dark"] .icon-button:not(.is-active),
+body[data-theme="dark"] .select-button,
+body[data-theme="dark"] .library-topbar-link,
+body[data-theme="dark"] .library-nav .text-button:not(.is-active),
+body[data-theme="dark"] .language-switch button:not(.is-active),
+body[data-theme="dark"] .tabs button:not(.is-active),
+body[data-theme="dark"] .sidebar-back,
+body[data-theme="dark"] .library-read-button.secondary,
+body[data-theme="dark"] .book-back-button,
+body[data-theme="dark"] .text-align-controls .text-align-button:not(.is-active),
+body[data-theme="dark"] input,
+body[data-theme="dark"] textarea,
+body[data-theme="dark"] select {
+  color: var(--dark-text-control) !important;
+}
+
+/* Active controls stay distinct without returning to pure white. */
+body[data-theme="dark"] .text-button.is-active,
+body[data-theme="dark"] .mode-switch .text-button.is-active,
+body[data-theme="dark"] .language-switch button.is-active,
+body[data-theme="dark"] .tabs button.is-active,
+body[data-theme="dark"] .library-nav .text-button.is-active,
+body[data-theme="dark"] .library-read-button:not(.secondary),
+body[data-theme="dark"] .text-align-controls .text-align-button.is-active,
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary:active,
+body[data-theme="dark"] #homeSupportButton.library-read-button.secondary.is-active {
+  color: #dccdb7 !important;
+}
+
+/* Secondary labels and placeholders are intentionally quieter. */
+body[data-theme="dark"] .library-info-head p,
+body[data-theme="dark"] .library-home-copy p:not(.eyebrow),
+body[data-theme="dark"] .library-card p,
+body[data-theme="dark"] .library-info-strip span,
+body[data-theme="dark"] .work-meta span,
+body[data-theme="dark"] .status-badge,
+body[data-theme="dark"] .chapter-preview,
+body[data-theme="dark"] .theme-preview,
+body[data-theme="dark"] .bookmark-preview,
+body[data-theme="dark"] .reading-meta,
+body[data-theme="dark"] .note-actions,
+body[data-theme="dark"] .site-footer,
+body[data-theme="dark"] .site-footer p,
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder {
+  color: var(--dark-text-subtle) !important;
+}
+
+/* Standard heading hierarchy: softened everywhere, not only in the reader. */
+body[data-theme="dark"] h1 { color: #d9cfc2; }
+body[data-theme="dark"] h2 { color: #d5cabc; }
+body[data-theme="dark"] h3 { color: #d0c5b7; }
+body[data-theme="dark"] h4 { color: #cabfaf; }
+body[data-theme="dark"] h5 { color: #c4b8a8; }
+body[data-theme="dark"] h6 { color: #bdb1a1; }
+
+/* Keep established semantic gold accents intact. */
+body[data-theme="dark"] .library-home-copy h2,
+body[data-theme="dark"] .library-info-head > span,
+body[data-theme="dark"] .library-about h4,
+body[data-theme="dark"] .work-tile > div > span,
+body[data-theme="dark"] .planned-work-panel header > span,
+body[data-theme="dark"] .planned-work-grid strong,
+body[data-theme="dark"] .reader-heading,
+body[data-theme="dark"] .source-chapter-heading,
+body[data-theme="dark"] .polish-chapter-heading,
+body[data-theme="dark"] .source-book-heading,
+body[data-theme="dark"] .polish-book-heading,
+body[data-theme="dark"] .source-rubric,
+body[data-theme="dark"] .polish-rubric {
+  color: var(--reader-heading-color, #d8a052) !important;
+}
+
+
+/* v1.4.81 — standardized Home action buttons and Full history typography */
+.home-start-cards .library-read-button,
+.home-recent-updates > header .text-button {
+  min-height: 38px;
+  padding: 0 13px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+/* Dark: all Home action buttons use the same calm surface and label color as Support. */
+body[data-theme="dark"] .home-start-cards .library-read-button,
+body[data-theme="dark"] .home-recent-updates > header .text-button {
+  border-color: transparent;
+  background: #1d1711;
+  color: var(--dark-text-control, #bdb1a1) !important;
+}
+body[data-theme="dark"] .home-start-cards .library-read-button:hover,
+body[data-theme="dark"] .home-start-cards .library-read-button:focus-visible,
+body[data-theme="dark"] .home-recent-updates > header .text-button:hover,
+body[data-theme="dark"] .home-recent-updates > header .text-button:focus-visible {
+  border-color: rgba(231, 174, 91, 0.82);
+  background: #2a2118;
+  color: #d7c9b4 !important;
+  outline: none;
+}
+body[data-theme="dark"] .home-start-cards .library-read-button:active,
+body[data-theme="dark"] .home-start-cards .library-read-button.is-active,
+body[data-theme="dark"] .home-recent-updates > header .text-button:active,
+body[data-theme="dark"] .home-recent-updates > header .text-button.is-active {
+  border-color: rgba(231, 174, 91, 0.9);
+  background: #3a2a17;
+  color: #dccdb7 !important;
+}
+
+/* Light and Sepia: keep the same shared geometry and theme-aware surfaces. */
+body[data-theme="light"] .home-start-cards .library-read-button,
+body[data-theme="light"] .home-recent-updates > header .text-button,
+body[data-theme="sepia"] .home-start-cards .library-read-button,
+body[data-theme="sepia"] .home-recent-updates > header .text-button {
+  border-color: rgba(141, 107, 79, 0.28);
+  background: rgba(255, 255, 255, 0.42);
+  color: #241b14;
+}
+body[data-theme="light"] .home-start-cards .library-read-button:hover,
+body[data-theme="light"] .home-start-cards .library-read-button:focus-visible,
+body[data-theme="light"] .home-recent-updates > header .text-button:hover,
+body[data-theme="light"] .home-recent-updates > header .text-button:focus-visible,
+body[data-theme="sepia"] .home-start-cards .library-read-button:hover,
+body[data-theme="sepia"] .home-start-cards .library-read-button:focus-visible,
+body[data-theme="sepia"] .home-recent-updates > header .text-button:hover,
+body[data-theme="sepia"] .home-recent-updates > header .text-button:focus-visible {
+  border-color: rgba(111, 77, 34, 0.72);
+  background: rgba(255, 255, 255, 0.72);
+  color: #241b14;
+  outline: none;
+}
+body[data-theme="light"] .home-start-cards .library-read-button:active,
+body[data-theme="light"] .home-start-cards .library-read-button.is-active,
+body[data-theme="light"] .home-recent-updates > header .text-button:active,
+body[data-theme="light"] .home-recent-updates > header .text-button.is-active,
+body[data-theme="sepia"] .home-start-cards .library-read-button:active,
+body[data-theme="sepia"] .home-start-cards .library-read-button.is-active,
+body[data-theme="sepia"] .home-recent-updates > header .text-button:active,
+body[data-theme="sepia"] .home-recent-updates > header .text-button.is-active {
+  border-color: rgba(111, 77, 34, 0.56);
+  background: #3a2a17;
+  color: #fff8e8;
 }

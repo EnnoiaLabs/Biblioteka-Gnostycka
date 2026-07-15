@@ -6,8 +6,8 @@ window.GNOSTYK_BOOK_MODULES = window.GNOSTYK_BOOK_MODULES || {};
     meta: {
       title: "Ewangelia Filipa - tekst koptyjski",
       status: "Do importu",
-      source: "Nag Hammadi Codex II,3. Pe?na transkrypcja koptyjska Unicode/TEI nie zosta?a jeszcze pod??czona do pakietu.",
-      note: "Warstwa koptyjska jest przygotowana technicznie, ale nie zosta?a wype?niona niezweryfikowanym tekstem. Po wskazaniu pewnej edycji cyfrowej zostanie dodana tak jak w module Ewangelii Tomasza.",
+      source: "Nag Hammadi Codex II,3. Pełna transkrypcja koptyjska Unicode/TEI nie została jeszcze podłączona do pakietu.",
+      note: "Warstwa koptyjska jest przygotowana technicznie, ale nie została wypełniona niezweryfikowanym tekstem. Po wskazaniu pewnej edycji cyfrowej zostanie dodana tak jak w module Ewangelii Tomasza.",
       license: "do weryfikacji dla wybranej edycji cyfrowej",
       citation: "Nag Hammadi Codex II,3, Gospel of Philip."
     },
