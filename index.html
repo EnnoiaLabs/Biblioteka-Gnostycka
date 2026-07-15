@@ -7,9 +7,22 @@
 <title>Gnostic Library</title>
 <meta content="Biblioteka Gnozy: polskie opracowania tekstów gnostyckich, aparat cytowania, notatki i tryb PWA." name="description"/>
 <meta content="#0d0b09" name="theme-color"/>
+<script>
+(function () {
+  var theme = "dark";
+  try {
+    var saved = JSON.parse(localStorage.getItem("ps.settings") || "{}");
+    if (["light", "sepia", "dark"].indexOf(saved.theme) !== -1) theme = saved.theme;
+  } catch (error) {}
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.backgroundColor = theme === "light" ? "#f8f5ee" : (theme === "sepia" ? "#e8dcc5" : "#090806");
+  document.documentElement.style.colorScheme = theme === "dark" ? "dark" : "light";
+  window.__GNOSTYK_BOOT_THEME__ = theme;
+}());
+</script>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="Gnostyk" name="apple-mobile-web-app-title"/>
-<link href="manifest.webmanifest?v=1.4.84" rel="manifest"/>
+<link href="manifest.webmanifest?v=1.4.87" rel="manifest"/>
 <link href="assets/pwa-icon-32.png" rel="icon" sizes="32x32"/>
 <link href="assets/pwa-icon-192.png" rel="icon" sizes="192x192"/>
 <link href="assets/pwa-icon-180.png" rel="apple-touch-icon" sizes="180x180"/>
@@ -17,11 +30,12 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&amp;family=Cormorant+Garamond:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css?v=1.4.84" rel="stylesheet"/>
+<link href="styles.css?v=1.4.87" rel="stylesheet"/>
 </head>
-<body data-view="library">
+<body data-theme="dark" data-view="library">
 <script>
       (function () {
+        document.body.dataset.theme = window.__GNOSTYK_BOOT_THEME__ || document.documentElement.dataset.theme || "dark";
         try {
           var params = new URLSearchParams(window.location.search || "");
           if (params.get("view") === "reader" || params.get("book")) {
@@ -146,7 +160,7 @@
 <span data-i18n-en="Recent changes" data-i18n-pl="Ostatnie zmiany">Ostatnie zmiany</span>
 <button class="text-button" data-i18n-en="Full history" data-i18n-pl="Pełna historia" data-nav-section="changes" type="button">Pełna historia</button>
 </header>
-<ul id="homeRecentUpdates"><li><strong>1.4.84</strong><span data-i18n-en="Restored uninterrupted Coptic and interlinear reading for Pistis Sophia in manuscript order." data-i18n-pl="Przywrócono nieprzerwaną ciągłość tekstu koptyjskiego i interlinii Pistis Sophii według kolejności rękopisu.">Przywrócono nieprzerwaną ciągłość tekstu koptyjskiego i interlinii Pistis Sophii według kolejności rękopisu.</span></li><li><strong>1.4.82</strong><span data-i18n-en="Synchronized the version across the application and restored continuous history, with 3 recent and 25 full-history entries." data-i18n-pl="Zsynchronizowano numer wersji w całej aplikacji i przywrócono ciągłość historii: 3 ostatnie oraz 25 wpisów pełnej historii.">Zsynchronizowano numer wersji w całej aplikacji i przywrócono ciągłość historii: 3 ostatnie oraz 25 wpisów pełnej historii.</span></li><li><strong>1.4.81</strong><span data-i18n-en="Changed the simple citation separator to a comma." data-i18n-pl="Zmieniono separator prostego cytowania na przecinek.">Zmieniono separator prostego cytowania na przecinek.</span></li></ul>
+<ul id="homeRecentUpdates"><li><strong>1.4.87</strong><span data-i18n-en="Corrected version continuity and synchronized all version sources." data-i18n-pl="Naprawiono ciągłość historii i zsynchronizowano wszystkie źródła numeru wersji.">Naprawiono ciągłość historii i zsynchronizowano wszystkie źródła numeru wersji.</span></li><li><strong>1.4.86</strong><span data-i18n-en="Enabled alignment controls for the actual Coptic text lines." data-i18n-pl="Podłączono wyrównanie do właściwych linii tekstu koptyjskiego.">Podłączono wyrównanie do właściwych linii tekstu koptyjskiego.</span></li><li><strong>1.4.85</strong><span data-i18n-en="Applied the saved theme before the first render to remove the bright flash when switching books." data-i18n-pl="Zastosowano zapisany motyw przed pierwszym renderem, usuwając jasne mignięcie przy przełączaniu ksiąg.">Zastosowano zapisany motyw przed pierwszym renderem, usuwając jasne mignięcie przy przełączaniu ksiąg.</span></li></ul>
 </section>
 </section>
 <div aria-label="Księgi" class="library-shelf" hidden="" id="libraryBooksPanel">
@@ -245,7 +259,7 @@
 <h4>Czym jest Biblioteka Gnozy</h4>
 <p><strong>Biblioteka Gnozy</strong> jest cyfrową biblioteką polskich wydań tekstów gnostyckich. Nie jest tylko czytnikiem: każda księga ma własną podstawę źródłową, status opracowania, aparat cytowania, paginację, notatki oraz ustawienia czytania zapisane lokalnie w przeglądarce.</p>
 <p>Projekt ma charakter redakcyjny i czytelniczy. Teksty źródłowe oraz wykorzystane wydania publiczno-domenowe pozostają wolne, natomiast polskie przekłady, dobór terminologii, noty, układ aplikacji i aparat czytelniczy tworzą nową warstwę twórczą. Biblioteka ma zachowywać język misteryjny, rytm tekstów objawieniowych, nazwy własne i gnostycką terminologię, a jednocześnie prowadzić je w stronę czytelnego polskiego brzmienia.</p>
-<p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Biblioteka Gnozy v<span class="inline-library-version">1.4.43</span></strong>.</p>
+<p>Biblioteka jest rozwijana modułowo: traktaty, ewangelie, hymny i pisma pokrewne będą dodawane jako osobne księgi. Przy cytowaniu warto podawać tytuł księgi, stronę wydania źródłowego, ewentualną paginację rękopiśmienną lub edytorską oraz wersję biblioteki, np. <strong>Biblioteka Gnozy v<span class="inline-library-version">1.4.87</span></strong>.</p>
 <div aria-label="Podstawowe informacje" class="library-info-strip">
 <span><strong>Zakres</strong>Teksty gnostyckie</span>
 <span><strong>Forma</strong>Przekład i opracowanie</span>
@@ -288,22 +302,9 @@
 <p>Ostatnie aktualizacje biblioteki i aplikacji. Pełna historia znajduje się w pliku changeloga.</p>
 </header>
 <ol class="library-updates" id="libraryUpdates">
-<li class="library-update-group"><strong>1.4.43</strong><ul><li data-i18n-en="Rebuilt the Help panel as two independent columns, so an expanded answer no longer creates an empty gap in the neighboring column." data-i18n-pl="Przebudowano panel Pomoc na dwie niezależne kolumny, dzięki czemu rozwinięta odpowiedź nie tworzy pustego pola w sąsiedniej kolumnie.">Przebudowano panel Pomoc na dwie niezależne kolumny, dzięki czemu rozwinięta odpowiedź nie tworzy pustego pola w sąsiedniej kolumnie.</li></ul></li><li class="library-update-group"><strong>1.4.7</strong><ul><li data-i18n-en="Hid interlinear and added a Settings option to enable it as an experimental mode." data-i18n-pl="Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego.">Ukryto interlinię i dodano możliwość włączenia jej w Ustawieniach jako trybu eksperymentalnego.</li></ul></li>
-<li class="library-update-group"><strong>1.4.6</strong><ul><li data-i18n-en="Replaced Settings and Tools separators with subtle lines matching the Library panel style." data-i18n-pl="Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.">Zmieniono separatory w Ustawieniach i Narzędziach na subtelne linie zgodne ze stylem paneli Biblioteki.</li><li data-i18n-en="Unified separator colors for dark, light, and sepia themes." data-i18n-pl="Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.">Ujednolicono kolor linii dla motywu ciemnego, jasnego i sepia.</li></ul></li>
-<li class="library-update-group"><strong>1.4.0</strong><ul><li data-i18n-en="Added Thomas interlinear stage 3: lemma search, occurrence links, and highlighting of the same word across the continuous text." data-i18n-pl="Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.">Dodano etap 3 interlinii Tomasza: wyszukiwanie po lemacie, linki do wystąpień i wyróżnianie tego samego słowa w całym tekście.</li><li data-i18n-en="Dictionary-card occurrences now use token forms and lemmas, not only raw line text." data-i18n-pl="Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.">Wystąpienia w karcie słownikowej korzystają teraz z formy i lematu tokenu, a nie tylko z surowego tekstu w linii.</li></ul></li>
-<li class="library-update-group"><strong>1.3.7</strong><ul><li data-i18n-en="Rebuilt the Gospel of Thomas interlinear mode as one continuous text covering logia 1–114." data-i18n-pl="Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.">Przebudowano tryb interlinearny Ewangelii Tomasza na jeden ciągły tekst logionów 1–114.</li><li data-i18n-en="Clicking a logion in the sidebar now scrolls to the matching place in the interlinear view as well." data-i18n-pl="Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.">Kliknięcie logionu w sidebarze przewija do odpowiedniego miejsca również w interlinii.</li><li data-i18n-en="Simplified the visual style of interlinear word blocks so they fit the continuous reader better." data-i18n-pl="Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.">Uproszczono wizualnie bloki słów interlinearnych, aby lepiej pasowały do ciągłego czytnika.</li></ul></li>
-<li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-en="The dictionary card now follows the active book: in Thomas it shows logia and Gospel of Thomas occurrences instead of Pistis Sophia pages." data-i18n-pl="Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.">Karta słownikowa działa kontekstowo dla aktywnej księgi: w Tomaszu pokazuje logiony i wystąpienia Ewangelii Tomasza zamiast stron Pistis Sophii.</li><li data-i18n-en="Generalized the shared Gnostic Library dictionary note so it no longer points only to Pistis Sophia." data-i18n-pl="Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.">Uogólniono opis wspólnego słownika Biblioteki Gnozy, aby nie wskazywał wyłącznie na Pistis Sophię.</li></ul></li>
-<li class="library-update-group"><strong>1.3.6</strong><ul><li data-i18n-en="Fixed the Gospel of Thomas Coptic layer connection: the parser now handles the TEI/XML namespace used by Coptic SCRIPTORIUM." data-i18n-pl="Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.">Naprawiono podłączenie koptyjskiej warstwy Ewangelii Tomasza: parser obsługuje przestrzeń nazw TEI/XML z Coptic SCRIPTORIUM.</li><li data-i18n-en="Synchronized Coptic mode with logia 1–114." data-i18n-pl="Zsynchronizowano widok Koptyjski z logionami 1–114.">Zsynchronizowano widok Koptyjski z logionami 1–114.</li><li data-i18n-en="Restored the Thomas Interlinear button as a technical preview based on the Coptic text layer." data-i18n-pl="Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.">Przywrócono przycisk Interlinia dla Tomasza jako podgląd techniczny oparty na koptyjskiej warstwie tekstu.</li></ul></li>
-<li class="library-update-group"><strong>1.2.3</strong><ul><li>Wyrównano położenie przycisków w kafelkach Home, aby akcje były w jednej linii niezależnie od długości opisu.</li><li>Uporządkowano układ kart startowych bez zmiany dolnego paska nawigacji.</li></ul></li>
-<li class="library-update-group"><strong>1.2.2</strong><ul><li>Usunięto dużą ikonę książki z kafelka na stronie Home.</li><li>Dodano subtelne, jednolite ikony Material Symbols w kafelkach Home.</li><li>Ikony dziedziczą kolor z aktualnego motywu strony i nie są kolorowymi emoji.</li></ul></li>
-<li class="library-update-group"><strong>1.2.0</strong><ul><li>Przebudowano stronę Home, aby nie dublowała katalogu ksiąg.</li><li>Usunięto zdublowane kafelki z zakładki Księgi.</li><li>Przygotowano widoczny licznik odwiedzin pod zewnętrzne API licznika prywatnościowego.</li></ul></li>
-<li class="library-update-group"><strong>1.1.1</strong><ul><li>Ewangelia Tomasza ma teraz ciągły, przewijany tekst z numerami logionów.</li><li>Kliknięcie logionu w sidebarze przewija czytnik do odpowiedniego miejsca w tekście.</li></ul></li>
-<li class="library-update-group"><strong>1.1.0</strong><ul><li>Dodano Ewangelię Tomasza jako pełną księgę modułową.</li><li>Wprowadzono 114 logionów w polskim opracowaniu Dariusza Kaniewskiego z wykorzystaniem narzędzi AI.</li><li>Po kliknięciu księgi biblioteka przełącza czytnik na moduł Tomasza.</li></ul></li>
-<li class="library-update-group"><strong>1.0.150</strong><ul><li>Uzupełniono kartę słownikową w trybie PL o angielskie znaczenie pod polską glosą.</li><li>Uporządkowano historię zmian, aby tryb EN nie pokazywał polskich punktów jako ostatniej aktualizacji.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
-<li class="library-update-group"><strong>1.0.147</strong><ul><li>Wycofano pasek postępu słownika i automatyczne procenty, aby uniknąć błędnych statystyk.</li><li>Zostawiono prostszy, stabilniejszy widok słownika ze statusami haseł.</li><li>Ujednolicono numer wersji w aplikacji, plikach PWA i historii zmian.</li></ul></li>
-<li class="library-update-group"><strong>1.0.145</strong><ul><li>Usunięto kreskowy zapis brakujących glos w interlinii i zastąpiono go statusem „w przygotowaniu”.</li><li>Dodano statusy haseł słownikowych: Gotowe, Podstawowe i W przygotowaniu.</li><li>Przygotowano słownik jako wspólną warstwę dla kolejnych modułów ksiąg.</li></ul></li>
-<li class="library-update-group"><strong>1.0.144</strong><ul><li>Ujednolicono numer wersji w całej aplikacji, plikach PWA i odnośnikach do zasobów.</li><li>Dodano najnowszą wersję do widocznej historii zmian.</li><li>Wyśrodkowano krzyżyk zamykania karty słownikowej.</li><li>Usunięto ramkę i tło ze statusów książek w katalogu.</li></ul></li>
-<li class="library-update-group"><strong>1.0.143</strong><ul><li>Przebudowano dane ksiąg na strukturę modułową w katalogu <code>books/</code>.</li><li>Przeniesiono Pistis Sophię do modułu <code>books/pistis-sophia/</code>.</li><li>Dodano szkielet modułu Ewangelii Tomasza z miejscem na 114 logionów.</li></ul></li>
+<li class="library-update-group"><strong>1.4.87</strong><ul><li>Naprawiono ciągłość wersji i zsynchronizowano historię zmian.</li></ul></li>
+<li class="library-update-group"><strong>1.4.86</strong><ul><li>Podłączono wyrównanie do tekstu koptyjskiego.</li></ul></li>
+<li class="library-update-group"><strong>1.4.85</strong><ul><li>Usunięto jasne mignięcie przy przełączaniu ksiąg.</li></ul></li>
 </ol>
 </section>
 <section aria-label="Słownik koptyjski" class="library-about library-dictionary-panel" hidden="" id="libraryDictionaryPanel">
@@ -505,7 +506,7 @@
 <button class="footer-link" id="footerPrivacyButton" type="button">Prywatność</button>
 <button class="footer-link" id="footerChangesButton" type="button">Zmiany</button>
 <button class="footer-link footer-support-link" id="footerSupportButton" type="button"><span aria-hidden="true" class="support-icon">♡</span><span>Wsparcie</span></button>
-<span>v<span id="libraryVersionFooterHome">1.4.84</span></span>
+<span>v<span id="libraryVersionFooterHome">1.4.87</span></span>
 </div>
 </footer>
 <section class="reader-hero book-view">
@@ -518,7 +519,7 @@
 <div class="hero-stats">
 <span><strong id="pageCount">255</strong> stron</span>
 <span><strong id="chapterCount">148</strong> rozdziałów</span>
-<span><strong id="libraryVersion">1.4.84</strong> wersja biblioteki</span>
+<span><strong id="libraryVersion">1.4.87</strong> wersja biblioteki</span>
 </div>
 </section>
 <section aria-label="Aktualna książka" class="mobile-book-head book-view">
@@ -604,7 +605,7 @@
 <div><dt>Prawa</dt><dd>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna Biblioteka Gnozy stanowią nową warstwę twórczą objętą prawami autorskimi.</dd></div>
 </dl>
 <h3>Jak cytować</h3>
-<p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Biblioteka Gnozy v<span class="inline-library-version">1.4.43</span>.</strong></p>
+<p>Najprostszy zapis: <strong>Pistis Sophia, Mead s. 218, Schw.-Pet. |319, Biblioteka Gnozy v<span class="inline-library-version">1.4.87</span>.</strong></p>
 <p>Przy cytowaniu naukowym dodaj informację: polski przekład i opracowanie Biblioteka Gnozy na podstawie wydania G. R. S. Meada z 1921 roku.</p>
 </section>
 <div class="page-text" id="pageText"></div>
@@ -631,7 +632,7 @@
 <p>Podstawą przekładu jest publiczno-domenowe wydanie G. R. S. Meada, <em>Pistis Sophia: A Gnostic Miscellany</em>, Londyn 1921. Starożytny tekst oraz to wydanie źródłowe pozostają w domenie publicznej.</p>
 <p>Polski przekład, dobór terminologii, układ czytelniczy, noty, aparat cytowania i warstwa redakcyjna biblioteki Gnostyk stanowią nową warstwę twórczą i są objęte prawami autorskimi. Przy cytowaniu podawaj numer strony Meada, ewentualny numer Schwartze-Petermanna oraz wersję biblioteki.</p>
 <p>Warstwa koptyjska Unicode jest oznaczona jako robocza: opiera się na cyfrowej transkrypcji Marcion według edycji Schwartze/Petermann i służy do kontroli źródłowej przy numeracji rękopiśmiennej.</p>
-<p class="library-version"><span data-i18n-en="Gnostic Library" data-i18n-pl="Biblioteka Gnozy">Biblioteka Gnozy</span> v<span id="libraryVersionFooter">1.4.84</span></p>
+<p class="library-version"><span data-i18n-en="Gnostic Library" data-i18n-pl="Biblioteka Gnozy">Biblioteka Gnozy</span> v<span id="libraryVersionFooter">1.4.87</span></p>
 </footer>
 </main>
 </div>
@@ -712,14 +713,14 @@
 <button data-mobile-panel="more" type="button">Więcej</button>
 </nav>
 <div aria-live="polite" class="settings-toast" hidden="" id="settingsToast" role="status"></div>
-<script src="books/pistis-sophia/data.js?v=1.4.84"></script>
-<script src="books/pistis-sophia/coptic-data.js?v=1.4.84"></script>
-<script src="books/gospel-of-thomas/data.js?v=1.4.84"></script>
-<script src="books/gospel-of-thomas/coptic-data.js?v=1.4.84"></script>
-<script src="books/gospel-of-philip/data.js?v=1.4.84"></script>
-<script src="books/gospel-of-philip/coptic-data.js?v=1.4.84"></script>
-<script src="coptic-dictionary.js?v=1.4.84"></script>
-<script src="coptic-polish-overrides.js?v=1.4.84"></script>
-<script src="app.js?v=1.4.84"></script>
+<script src="books/pistis-sophia/data.js?v=1.4.87"></script>
+<script src="books/pistis-sophia/coptic-data.js?v=1.4.87"></script>
+<script src="books/gospel-of-thomas/data.js?v=1.4.87"></script>
+<script src="books/gospel-of-thomas/coptic-data.js?v=1.4.87"></script>
+<script src="books/gospel-of-philip/data.js?v=1.4.87"></script>
+<script src="books/gospel-of-philip/coptic-data.js?v=1.4.87"></script>
+<script src="coptic-dictionary.js?v=1.4.87"></script>
+<script src="coptic-polish-overrides.js?v=1.4.87"></script>
+<script src="app.js?v=1.4.87"></script>
 </body>
 </html>

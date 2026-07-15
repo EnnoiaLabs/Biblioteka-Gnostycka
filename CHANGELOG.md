@@ -1,5 +1,45 @@
 # Changelog
 
+## 1.4.87 - Naprawiona ciągłość wersji i historii zmian
+
+### PL
+- Podbito numer biblioteki do 1.4.87 we wszystkich wymaganych plikach aplikacji i pamięci podręcznej PWA.
+- Naprawiono błędny opis wersji 1.4.82, który wskazywał numer 1.4.83 i tworzył pozorny przeskok w historii.
+- Poprawiono awaryjną historię zmian w `app.js`: przywrócono osobne wpisy 1.4.85 i 1.4.86 oraz prawidłowy opis wersji 1.4.83.
+- Zachowano ciągłość numeracji 1.4.82 → 1.4.83 → 1.4.84 → 1.4.85 → 1.4.86 → 1.4.87.
+- Nie zmieniono wyglądu, kolorów, motywów ani działania czytnika.
+
+### EN
+- Updated the library version to 1.4.87 across all required application files and the PWA cache.
+- Corrected the erroneous 1.4.82 description that referred to 1.4.83 and created an apparent version gap.
+- Repaired the fallback changelog in `app.js`: restored separate 1.4.85 and 1.4.86 entries and the correct 1.4.83 description.
+- Preserved consecutive numbering from 1.4.82 through 1.4.87.
+- Preserved the interface, colors, themes, and reader behavior unchanged.
+
+## 1.4.86 - Wyrównanie tekstu koptyjskiego
+
+### PL
+- Podłączono wyrównanie do lewej, justowanie i wyśrodkowanie do właściwych linii tekstu koptyjskiego.
+- Element zawierający tekst koptyjski zajmuje teraz pełną szerokość kolumny, dzięki czemu wyśrodkowanie jest widoczne.
+- Zachowano numerację linii, układ interfejsu, kolory i motywy bez zmian.
+
+### EN
+- Connected left alignment, justification, and centering to the actual Coptic text lines.
+- The element containing Coptic text now spans the full text column, making centering visible.
+- Preserved line numbering, interface layout, colors, and themes.
+
+## 1.4.85 - Motyw stosowany przed pierwszym renderem
+
+### PL
+- Zapisany motyw jest odczytywany i ustawiany w sekcji `head`, zanim przeglądarka narysuje interfejs.
+- Usunięto jasne mignięcie widoczne podczas pełnego przeładowania przy przełączaniu ksiąg.
+- Zsynchronizowano atrybut motywu elementów `html` i `body` bez zmiany palety kolorów ani wyglądu.
+
+### EN
+- The saved theme is read and applied in the `head` before the browser paints the interface.
+- Removed the bright flash visible during full page reloads when switching books.
+- Synchronized the `html` and `body` theme attributes without changing the color palette or layout.
+
 ## 1.4.84 - Sidebar połączony z warstwą koptyjską Pistis Sophii
 
 ### PL
@@ -35,14 +75,14 @@
 ## 1.4.82 - Pełna synchronizacja wersji i historii zmian
 
 ### PL
-- Podbito numer biblioteki do 1.4.83 we wszystkich wymaganych plikach aplikacji, zasobach i pamięci podręcznej PWA.
-- Uzupełniono brakujące wpisy 1.4.80 i 1.4.81, przywracając ciągłość numeracji 1.4.79 → 1.4.80 → 1.4.81 → 1.4.83.
+- Podbito numer biblioteki do 1.4.82 we wszystkich wymaganych plikach aplikacji, zasobach i pamięci podręcznej PWA.
+- Uzupełniono brakujące wpisy 1.4.80 i 1.4.81, przywracając ciągłość numeracji 1.4.79 → 1.4.80 → 1.4.81 → 1.4.82.
 - Sekcja „Ostatnie zmiany” pokazuje dokładnie 3 najnowsze wersje, a pełna historia dokładnie 25 najnowszych wersji.
 - Nie zmieniono kolorów, CSS, motywów ani układu interfejsu.
 
 ### EN
-- Updated the library version to 1.4.83 across all required application files, assets, and the PWA cache.
-- Added the missing 1.4.80 and 1.4.81 entries, restoring continuity from 1.4.79 through 1.4.83.
+- Updated the library version to 1.4.82 across all required application files, assets, and the PWA cache.
+- Added the missing 1.4.80 and 1.4.81 entries, restoring continuity from 1.4.79 through 1.4.82.
 - Recent changes displays exactly the 3 newest releases, while Full history displays exactly the 25 newest releases.
 - Preserved all colors, CSS, themes, and interface layout.
 

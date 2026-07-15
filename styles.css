@@ -5617,6 +5617,32 @@ body[data-text-align="center"] .page-text .pistis-page-content {
   -webkit-hyphens: none !important;
 }
 
+
+/* v1.4.87 — alignment controls for Coptic line text */
+.page-text .coptic-line bdi {
+  display: block;
+  width: 100%;
+}
+
+body[data-text-align="left"] .page-text .coptic-line bdi {
+  text-align: left !important;
+  text-align-last: auto !important;
+  text-justify: auto !important;
+}
+
+body[data-text-align="justify"] .page-text .coptic-line bdi,
+body[data-book-justify="true"] .page-text .coptic-line bdi {
+  text-align: justify !important;
+  text-align-last: left !important;
+  text-justify: inter-word !important;
+}
+
+body[data-text-align="center"] .page-text .coptic-line bdi {
+  text-align: center !important;
+  text-align-last: auto !important;
+  text-justify: auto !important;
+}
+
 @media (max-width: 760px) {
   .text-align-controls .text-align-button {
     width: 34px;
