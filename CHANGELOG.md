@@ -1,5 +1,579 @@
 # Changelog
 
+## 1.4.124 - Końcowy audyt potwierdza gotowość wydania
+
+### PL
+- Dodano polecenie release.py audit do końcowej kontroli kandydata.
+- Audyt dwukrotnie buduje deterministyczny ZIP i porównuje sumy SHA-256.
+- Kontrola potwierdza komplet wymaganych plików oraz brak wyłączonych zasobów w paczce.
+- Workflow i checklista prowadzą teraz przez audyt przed testem Chromium i publikacją.
+
+### EN
+- Added release.py audit for final release-candidate validation.
+- The audit builds the deterministic ZIP twice and compares SHA-256 digests.
+- It verifies all required files and confirms excluded assets are absent from the package.
+- The workflow and checklist now require the audit before Chromium testing and publication.
+
+## 1.4.123 - Nieużywane zasoby nie obciążają paczki
+
+### PL
+- Audyt wykrył cztery nieużywane grafiki źródłowe o łącznym rozmiarze 5,76 MiB.
+- Materiały pozostają w projekcie, ale nie są dodawane do publikacyjnego ZIP.
+- Nowy strażnik potwierdza brak odwołań przed zastosowaniem każdego wyłączenia.
+- Manifest wydania zapisuje jawną listę plików pominiętych podczas pakowania.
+
+### EN
+- The audit found four unused source images totaling 5.76 MiB.
+- The source materials remain in the project but are omitted from the published ZIP.
+- A new guard verifies that every excluded asset has no runtime references.
+- The release manifest records the explicit list of files omitted during packaging.
+
+## 1.4.122 - Budżety wydajności pilnują zasobów startowych
+
+### PL
+- Dodano automatyczny pomiar rozmiaru lokalnych zasobów ładowanych przy starcie.
+- Budżety kontrolują rozmiar raw, gzip, największy zasób, app.js i styles.css.
+- Przekroczenie limitów z performance-budgets.json zatrzymuje wydanie.
+- Pomiar bazowy wynosi 6,37 MiB raw i 1,90 MiB gzip dla 27 zasobów.
+
+### EN
+- Added automated size measurement for local assets loaded at startup.
+- Budgets cover raw size, gzip size, the largest asset, app.js, and styles.css.
+- Exceeding performance-budgets.json limits now blocks a release.
+- The baseline is 6.37 MiB raw and 1.90 MiB gzip across 27 assets.
+
+## 1.4.121 - Test Chromium czeka na zmianę księgi
+
+### PL
+- Test przeglądarkowy czeka teraz na pełne wyrenderowanie strony 48 po przejściu do Pistis Sophia.
+- Usunięto wyścig, w którym asercja odczytywała początkową etykietę Strona 1.
+
+### EN
+- The browser test now waits for page 48 to finish rendering after switching to Pistis Sophia.
+- Removed a race condition where the assertion read the initial Page 1 label.
+
+## 1.4.120 - Poprawiono selektor testu Chromium
+
+### PL
+- Test przeglądarkowy korzysta teraz z aktualnego elementu currentPageLabel.
+- Dodano kontrolę regresyjną zatrzymującą powrót nieaktualnego selektora currentPage.
+
+### EN
+- The browser test now uses the current currentPageLabel element.
+- Added a regression check preventing the obsolete currentPage selector from returning.
+
+## 1.4.119 - Kontrola PWA i trybu offline włączona do wydania
+
+### PL
+- Dodano samodzielny strażnik tools/check-pwa.js uruchamiany przez release.py check.
+- Kontrola sprawdza manifest, rzeczywiste rozmiary obrazów, rejestrację service workera, wersję cache i kompletność APP_SHELL.
+- Dodano brakujące pliki themes.json wszystkich trzech ksiąg do cache offline.
+- Poprawiono zadeklarowany w manifeście rozmiar zrzutu aplikacji.
+- Dodano test regresyjny strażnika PWA i polecenie npm run test:pwa.
+
+### EN
+- Added a standalone tools/check-pwa.js guard executed by release.py check.
+- The guard validates the manifest, actual image dimensions, service worker registration, cache version, and APP_SHELL completeness.
+- Added the missing themes.json files for all three books to the offline cache.
+- Corrected the application screenshot dimensions declared in the manifest.
+- Added a PWA guard regression test and the npm run test:pwa command.
+
+## 1.4.118 - Test uruchomieniowy Chromium dodany do workflow
+
+### PL
+- Dodano test Playwright uruchamiający aplikację przez lokalny serwer HTTP w prawdziwym Chromium.
+- Scenariusz obejmuje start czytnika, tryby PL, EN, COPT i interlinearny, nawigację oraz zmianę księgi.
+- Test zbiera błędy JavaScript z pageerror i konsoli oraz ma lekki wariant dla środowisk o ograniczonej pamięci.
+- Playwright został przypięty w package-lock.json, a test przeglądarkowy dodano do checklisty publikacji jako osobny krok.
+- Naprawiono również synchronizację numeru wersji w package-lock.json; pełne uruchomienie browser smoke wymaga zwykłego lokalnego Chromium.
+
+### EN
+- Added a Playwright test that serves and starts the application in a real Chromium browser.
+- The scenario covers reader startup, PL, EN, COPT, and interlinear modes, navigation, and book switching.
+- The test collects JavaScript pageerror and console failures and provides a lightweight mode for memory-constrained environments.
+- Playwright is pinned in package-lock.json, and the browser test is an explicit publication-checklist step.
+- Also fixed package-lock.json version synchronization; completing the browser smoke run requires a standard local Chromium installation.
+
+## 1.4.117 - Manifest wydania opisuje każdą paczkę
+
+### PL
+- Polecenie package tworzy teraz maszynowo czytelny plik .release.json obok ZIP-a.
+- Manifest zawiera wersję, datę, zakres zmiany, nazwę archiwum i jego sumę SHA-256.
+- Zapisywana jest liczba plików oraz pełna lista elementów wymaganych przez bramkę wydania.
+- Raport korzysta bezpośrednio z VERSION.json i wyniku zweryfikowanego pakowania.
+- Dodano trzydziesty czwarty test pilnujący kompletności pól manifestu.
+
+### EN
+- The package command now creates a machine-readable .release.json file beside the ZIP.
+- The manifest contains the version, date, change scope, archive name, and SHA-256 checksum.
+- It records the file count and the complete list of items required by the release gate.
+- The report uses VERSION.json and the verified packaging result directly.
+- Added the thirty-fourth test enforcing manifest field completeness.
+
+## 1.4.116 - Paczki wydania są deterministyczne
+
+### PL
+- ZIP zapisuje pliki w stałej, alfabetycznej kolejności niezależnej od systemu plików.
+- Każdy wpis archiwum otrzymuje ujednolicony znacznik czasu i uprawnienia.
+- Ponowne pakowanie niezmienionej wersji generuje identyczne bajty i tę samą sumę SHA-256.
+- Zachowano wcześniejszą kontrolę integralności, kompletności i atomową publikację paczki.
+- Dodano trzydziesty trzeci test pilnujący deterministycznych parametrów archiwum.
+
+### EN
+- The ZIP stores files in a fixed alphabetical order independent of filesystem ordering.
+- Every archive entry receives a normalized timestamp and permissions.
+- Repackaging an unchanged version produces identical bytes and the same SHA-256 checksum.
+- Preserved the existing integrity, completeness, and atomic-publication checks.
+- Added the thirty-third test enforcing deterministic archive parameters.
+
+## 1.4.115 - Pakiet jest weryfikowany przed publikacją
+
+### PL
+- ZIP jest teraz tworzony jako plik tymczasowy i publikowany dopiero po pomyślnej weryfikacji.
+- Skrypt sprawdza integralność wszystkich skompresowanych danych przed zapisaniem finalnej paczki.
+- Kontrolowana jest obecność każdego pliku wymaganego przez workflow wydania.
+- Nieudane pakowanie usuwa plik tymczasowy i nie nadpisuje ostatniego poprawnego archiwum.
+- Dodano trzydziesty drugi test pilnujący kolejności: budowa, weryfikacja, publikacja.
+
+### EN
+- The ZIP is now built as a temporary file and published only after successful verification.
+- The script checks the integrity of all compressed data before writing the final package.
+- Every file required by the release workflow is checked for presence.
+- Failed packaging removes the temporary file and does not overwrite the last valid archive.
+- Added the thirty-second test enforcing the build, verify, publish order.
+
+## 1.4.114 - Pakowanie wydania zautomatyzowane
+
+### PL
+- Dodano polecenie release.py package, które przed pakowaniem uruchamia pełną bramkę jakości.
+- Pakiet otrzymuje automatyczną nazwę z numerem wersji i technicznym zakresem zmian.
+- Obok ZIP-a generowany jest plik kontrolny z sumą SHA-256.
+- Z archiwum wykluczane są node_modules, cache Pythona, Git, katalog dist i pliki systemowe.
+- Dodano trzydziesty pierwszy test oraz zaktualizowano workflow, skrypty npm i instrukcję Windows.
+
+### EN
+- Added release.py package, which runs the full quality gate before packaging.
+- The package receives an automatic name containing the version and technical change scope.
+- A SHA-256 checksum file is generated next to the ZIP.
+- node_modules, Python caches, Git, the dist directory, and system files are excluded.
+- Added the thirty-first test and updated the workflow, npm scripts, and Windows instructions.
+
+## 1.4.113 - Pełne testy stały się bramką wydania
+
+### PL
+- Włączono pełny zestaw testów JavaScript bezpośrednio do polecenia release.py check.
+- Przygotowanie wersji zostaje zatrzymane, gdy brakuje testów, Node jest niedostępny albo choć jeden test nie przechodzi.
+- Plik tests/smoke.test.js został dodany do wymaganych elementów pakietu wydania.
+- Kontrola danych książek, składni, wersji, PWA i testów działa teraz w jednym powtarzalnym poleceniu.
+- Dodano trzydziesty test pilnujący trwałego podłączenia zestawu testów do workflow.
+
+### EN
+- Integrated the full JavaScript test suite directly into release.py check.
+- Release preparation stops when tests are missing, Node is unavailable, or any test fails.
+- The tests/smoke.test.js file is now a required release-package component.
+- Book-data, syntax, version, PWA, and test checks now run through one repeatable command.
+- Added the thirtieth test ensuring the suite remains connected to the workflow.
+
+## 1.4.112 - Kontrola danych książek włączona do wydania
+
+### PL
+- Dodano samodzielny kontroler tools/check-book-data.js uruchamiany przez release.py check.
+- Wydanie jest blokowane przez duplikaty stron lub rozdziałów, złą kolejność, błędne liczniki i zerwane odwołania.
+- Kontrolowane są również identyfikatory książek, pliki wejściowe, tryby czytnika i domyślna warstwa.
+- Usunięto niepoprawną deklarację notes z listy warstw tekstowych Ewangelii Tomasza.
+- Dodano dwudziesty dziewiąty test potwierdzający działanie strażnika dla wszystkich trzech modułów.
+
+### EN
+- Added the standalone tools/check-book-data.js validator, executed by release.py check.
+- Releases are blocked by duplicate pages or chapters, invalid ordering, incorrect counts, and broken references.
+- Book identifiers, entry files, reader modes, and default layers are also validated.
+- Removed the invalid notes declaration from the Gospel of Thomas text-layer list.
+- Added the twenty-ninth test confirming the guard across all three modules.
+
+## 1.4.111 - Przyciski nawigacji znają granice książki
+
+### PL
+- Dodano wspólny stan nawigacji z poprzednią i następną dostępną stroną.
+- Przycisk wstecz jest wyłączany na pierwszej stronie, a przycisk dalej na ostatniej.
+- Reguła obejmuje widok główny, tryb skupienia i kontrolki mobilne.
+- Dodano atrybut aria-disabled, aby stan graniczny był czytelny również dla technologii asystujących.
+- Dodano dwudziesty ósmy test dla pierwszej, środkowej i ostatniej strony.
+
+### EN
+- Added shared navigation state with the previous and next available page.
+- The previous control is disabled on the first page and the next control on the last page.
+- The rule covers the main view, focus mode, and mobile controls.
+- Added aria-disabled so boundary state is also exposed to assistive technologies.
+- Added the twenty-eighth test covering the first, middle, and last page.
+
+## 1.4.110 - Nawigacja respektuje rzeczywiste numery stron
+
+### PL
+- Stan czytnika jest teraz synchronizowany z numerem rzeczywiście istniejącej strony.
+- Przyciski poprzedniej i następnej strony przechodzą między dostępnymi numerami, także przy lukach.
+- Numery stron są porządkowane i deduplikowane przed użyciem w nawigacji.
+- Niepoprawny numer wraca do pierwszej dostępnej strony, a granice książki pozostają nieprzekraczalne.
+- Dodano dwudziesty siódmy test dla nawigacji po stronach 10, 20 i 40.
+
+### EN
+- Reader state is now synchronized with an actually available page number.
+- Previous and next controls move between available numbers even when gaps exist.
+- Page numbers are sorted and deduplicated before navigation.
+- Invalid input returns to the first available page, and book boundaries remain enforced.
+- Added the twenty-seventh test covering navigation across pages 10, 20, and 40.
+
+## 1.4.109 - Czytnik odporny na nieciągłe dane stron
+
+### PL
+- Wybór strony korzysta teraz z jej rzeczywistego numeru zamiast pozycji w tablicy danych.
+- Przy brakującym numerze wybierana jest najbliższa dostępna strona z przewidywalnym rozstrzyganiem remisów.
+- Przypisywanie rozdziału działa również dla nieuporządkowanej listy rozdziałów.
+- Zachowano awaryjną obsługę starszych danych stron bez jawnych numerów.
+- Dodano dwudziesty szósty test dla nieciągłych, przemieszanych i niepełnych danych.
+
+### EN
+- Page selection now uses the actual page number instead of its array position.
+- When a number is missing, the nearest available page is selected with predictable tie-breaking.
+- Chapter assignment now also works with an unordered chapter list.
+- Preserved fallback support for legacy page data without explicit numbers.
+- Added the twenty-sixth test covering sparse, shuffled, and incomplete data.
+
+## 1.4.108 - Podział strony 48 zabezpieczony w silniku
+
+### PL
+- Przeniesiono dzielenie strony 48 na wprowadzenie i tekst główny do reader-engine.js.
+- Zachowano osobne znaczniki graniczne dla polskiej i angielskiej warstwy Pistis Sophii.
+- Dodano bezpieczne zachowanie dla brakującego lub pustego znacznika: cały tekst pozostaje widoczny.
+- Ta sama reguła zasila widok dodatków, tekst ciągły oraz aktywną stronę czytnika.
+- Dodano dwudziesty piąty test chroniący obie części strony w obu językach.
+
+### EN
+- Moved page 48 splitting between introduction and main text to reader-engine.js.
+- Preserved separate boundary markers for the Polish and English Pistis Sophia layers.
+- Added safe behavior for missing or empty markers: the complete text remains visible.
+- The same rule now feeds the addenda view, continuous text, and active reader page.
+- Added the twenty-fifth test protecting both page halves in both languages.
+
+## 1.4.107 - Granica dodatków i tekstu pilnowana przez silnik
+
+### PL
+- Przeniesiono rozpoznawanie stron dodatków Pistis Sophii do reader-engine.js.
+- Ujednolicono wybór zakładki czytnika podczas nawigacji i renderowania.
+- Strony 1–47 otwierają dodatki, a strona 48 i dalsze bezpiecznie wracają do rozdziałów.
+- Pozostałe zakładki i inne księgi zachowują swój aktualny stan.
+- Dodano dwudziesty czwarty test obejmujący granicę 47/48, własny próg i inne księgi.
+
+### EN
+- Moved Pistis Sophia addenda-page detection to reader-engine.js.
+- Unified reader-tab selection during navigation and rendering.
+- Pages 1–47 open the addenda, while page 48 and later safely return to chapters.
+- Other tabs and other books preserve their current state.
+- Added the twenty-fourth test covering the 47/48 boundary, a custom threshold, and other books.
+
+## 1.4.106 - Plan renderowania czytnika wydzielony do silnika
+
+### PL
+- Przeniesiono wybór zakresu renderowania z app.js do testowalnej funkcji reader-engine.js.
+- Tryb interlinearny otrzymuje zawsze plan aktywnej strony, niezależnie od księgi i panelu czytnika.
+- Zachowano ciągłe widoki dla lekkich warstw polskich, źródłowych i koptyjskich tam, gdzie były dotychczas dostępne.
+- Uproszczono rozgałęzienia renderReader i usunięto zbędne lokalne flagi trybów.
+- Dodano dwudziesty trzeci test obejmujący plany renderowania wszystkich typów ksiąg i warstw.
+
+### EN
+- Moved rendering-scope selection from app.js to a testable reader-engine.js function.
+- Interlinear mode always receives an active-page plan, regardless of book or reader panel.
+- Preserved continuous views for lightweight Polish, source, and Coptic layers where previously available.
+- Simplified renderReader branching and removed redundant local mode flags.
+- Added the twenty-third test covering rendering plans for all book and layer types.
+
+## 1.4.105 - Usunięto starą ścieżkę ciężkiej interlinii
+
+### PL
+- Usunięto nieużywany renderer ciągłej interlinii całej Ewangelii Tomasza.
+- Uproszczono ciągły renderer koptyjski Pistis Sophii tak, aby nie mógł przełączyć się na interlinię całej księgi.
+- Usunięto martwe style przeznaczone wyłącznie dla dawnego widoku ciągłego.
+- Rozszerzono test regresji o kontrolę braku starej funkcji, parametru i selektorów CSS.
+- Sposób renderowania aktywnej strony interlinearnej pozostaje zgodny z poprawką 1.4.104.
+
+### EN
+- Removed the unused continuous whole-book interlinear renderer for the Gospel of Thomas.
+- Simplified the Pistis Sophia continuous Coptic renderer so it cannot switch into whole-book interlinear mode.
+- Removed dead styles used only by the former continuous view.
+- Extended the regression test to verify the legacy function, parameter, and CSS selectors are absent.
+- Active-page interlinear rendering remains consistent with the 1.4.104 fix.
+
+## 1.4.104 - Interlinia nie blokuje już interfejsu
+
+### PL
+- Naprawiono zawieszanie aplikacji po włączeniu trybu interlinearnego.
+- Interlinia renderuje teraz wyłącznie aktywną stronę lub logion zamiast całej księgi jednocześnie.
+- Ograniczono koszt przetwarzania dużej warstwy koptyjskiej Pistis Sophii i liczbę tworzonych elementów interfejsu.
+- Pozostałe funkcje oraz przełączanie trybów pozostają dostępne bez oczekiwania na wygenerowanie pełnej księgi.
+- Dodano dwudziesty drugi test chroniący przed ponownym włączeniem ciągłego renderowania interlinii.
+
+### EN
+- Fixed the application freeze after enabling interlinear mode.
+- The interlinear view now renders only the active page or logion instead of the entire book at once.
+- Reduced the processing cost of the large Pistis Sophia Coptic layer and the number of generated interface elements.
+- Other functions and mode switching remain available without waiting for the full book to render.
+- Added the twenty-second test preventing continuous whole-book interlinear rendering from returning.
+
+## 1.4.103 - Tryby czytania uporządkowane w silniku
+
+### PL
+- Przeniesiono listę poprawnych trybów, wykrywanie dostępnych warstw i normalizację wyboru do reader-engine.js.
+- Uwzględniono konfigurację każdej księgi oraz stan eksperymentalnego trybu interlinearnego.
+- Nieznane tryby i duplikaty są odrzucane, a niedostępny wybór otrzymuje bezpieczną warstwę zastępczą.
+- Ujednolicono także etykietę dostępnych warstw książki z regułami silnika.
+- Dodano dwudziesty pierwszy test dla konfiguracji ksiąg, nieznanych trybów i interlinii.
+
+### EN
+- Moved the valid-mode list, available-layer detection, and mode normalization to reader-engine.js.
+- Accounted for each book configuration and the experimental interlinear-mode state.
+- Unknown modes and duplicates are rejected, while unavailable choices receive a safe fallback layer.
+- Also aligned the book layer label with the engine rules.
+- Added the twenty-first test covering book configuration, unknown modes, and interlinear availability.
+
+## 1.4.102 - Nawigacja czytnika objęta wspólnym silnikiem
+
+### PL
+- Przeniesiono ograniczanie numeru strony i wybór strony sąsiedniej do reader-engine.js.
+- Ujednolicono nawigację przyciskami głównymi, w trybie skupienia, na urządzeniach mobilnych i z klawiatury.
+- Zabezpieczono czytnik przed wyjściem poza pierwszą i ostatnią stronę oraz przed niepoprawnymi numerami.
+- Dodano dwudziesty test obejmujący granice książki, błędne dane i oba kierunki nawigacji.
+- Nie zmieniono treści, układu ani sposobu zapisywania bieżącej strony.
+
+### EN
+- Moved page-number clamping and adjacent-page selection to reader-engine.js.
+- Unified navigation across the main controls, focus mode, mobile controls, and keyboard.
+- Protected the reader from moving beyond the first or last page and from invalid page values.
+- Added the twentieth test covering book boundaries, invalid input, and both navigation directions.
+- Reader content, layout, and current-page persistence remain unchanged.
+
+## 1.4.101 - Struktura czytnika wydzielona do modułu
+
+### PL
+- Przeniesiono wybór strony, przypisywanie rozdziału, zakresy tematyczne i referencje rękopisu z app.js do reader-engine.js.
+- Ujednolicono strony startowe: 48 dla Pistis Sophii oraz 1 dla pozostałych ksiąg.
+- Zachowano obsługę paginacji Schwartze-Petermanna i specjalnego początku warstwy koptyjskiej Pistis Sophii.
+- Dodano dziewiętnasty test obejmujący granice stron, rozdziały, zakresy i referencje.
+- Nie zmieniono renderowania, nawigacji ani treści czytnika.
+
+### EN
+- Moved page selection, chapter assignment, thematic ranges, and manuscript references from app.js to reader-engine.js.
+- Standardized start pages: 48 for Pistis Sophia and 1 for the remaining books.
+- Preserved Schwartze-Petermann pagination and the special beginning of the Pistis Sophia Coptic layer.
+- Added the nineteenth test covering page bounds, chapters, ranges, and references.
+- Reader rendering, navigation, and content remain unchanged.
+
+## 1.4.100 - Silnik cytowania wydzielony z czytnika
+
+### PL
+- Przeniesiono składanie etykiet referencyjnych i czterech formatów cytowania z app.js do citation-engine.js.
+- Objęto jednym silnikiem Pistis Sophię, Ewangelię Tomasza i Ewangelię Filipa w języku polskim i angielskim.
+- Zachowano obsługę paginacji Meada, oznaczeń Schwartze-Petermanna, logionów, sekcji, kodeksów i wersji biblioteki.
+- Dodano osiemnasty test porównujący pełne wyniki cytowania dla wszystkich trzech ksiąg.
+- Nie zmieniono treści ani wyglądu cytatów.
+
+### EN
+- Moved reference-label construction and all four citation formats from app.js to citation-engine.js.
+- Unified Pistis Sophia, the Gospel of Thomas, and the Gospel of Philip in Polish and English under one engine.
+- Preserved Mead pagination, Schwartze-Petermann markers, logia, sections, codices, and library version handling.
+- Added an eighteenth test comparing complete citation output for all three books.
+- Preserved citation content and appearance unchanged.
+
+## 1.4.99 - Model tokenów interlinearnych wydzielony do modułu
+
+### PL
+- Przeniesiono normalizowanie tokenów interlinearnych, wybór klucza słownikowego i pobieranie tokenów z linii do interlinear-engine.js.
+- Ujednolicono obsługę tokenów zapisanych jako tekst oraz jako obiekty z formą, lematem, typem gramatycznym i językiem.
+- Zachowano pierwszeństwo lematu przy wyszukiwaniu i bezpieczny powrót do formy powierzchniowej.
+- Dodano siedemnasty test dla tokenów, lematów, znaków diakrytycznych i dwóch sposobów tokenizacji linii.
+- Nie zmieniono renderowania ani glos interlinii.
+
+### EN
+- Moved interlinear token normalization, dictionary-key selection, and line token extraction to interlinear-engine.js.
+- Unified handling of plain-text tokens and objects containing surface form, lemma, grammatical type, and language.
+- Preserved lemma-first lookup with a safe fallback to the surface form.
+- Added a seventeenth test covering tokens, lemmas, diacritics, and both line-tokenization paths.
+- Preserved interlinear rendering and glosses unchanged.
+
+## 1.4.98 - Silnik wyszukiwania słownika wydzielony z interfejsu
+
+### PL
+- Przeniesiono ocenianie wyników słownikowych, analizę znaczeń i klasyfikację kompletności haseł z app.js do dictionary-engine.js.
+- Oddzielono czystą logikę słownika od renderowania kart, tłumaczeń interfejsu i stanu czytnika.
+- Zachowano dotychczasowe wagi wyszukiwania dla tokenu, transliteracji oraz krótkich znaczeń PL i EN.
+- Dodano szesnasty test obejmujący ranking, czyszczenie oznaczeń DDGLC/CD, duplikaty znaczeń i statusy ready/basic/pending.
+- Nie zmieniono wyglądu kart ani wyników wyszukiwania.
+
+### EN
+- Moved dictionary-result scoring, meaning analysis, and entry-completeness classification from app.js to dictionary-engine.js.
+- Separated pure dictionary logic from card rendering, interface translations, and reader state.
+- Preserved the existing search weights for tokens, transliteration, and short Polish and English meanings.
+- Added a sixteenth test covering ranking, DDGLC/CD cleanup, duplicate meanings, and ready/basic/pending statuses.
+- Preserved card appearance and search results unchanged.
+
+## 1.4.97 - Rozpoznawanie form koptyjskich wydzielone do modułu
+
+### PL
+- Przeniesiono generowanie kandydatów słownikowych i rozpoznawanie rdzeni z app.js do coptic-lookup.js.
+- Moduł obsługuje formy bezpośrednie, prefiksy, sufiksy oraz jednoczesne odcięcie prefiksu i sufiksu.
+- Oddzielono dobór hasła od interfejsu, języka wyświetlania i stanu czytnika.
+- Dodano piętnasty test wykorzystujący rzeczywiste formy koptyjskie i kontrolujący brak powtórzonych kandydatów.
+- Nie zmieniono wyników słownika ani działania interlinii.
+
+### EN
+- Moved dictionary-candidate generation and root-form recognition from app.js to coptic-lookup.js.
+- The module supports direct forms, prefixes, suffixes, and combined prefix-suffix removal.
+- Separated entry selection from the interface, display language, and reader state.
+- Added a fifteenth test using real Coptic forms and checking candidate deduplication.
+- Preserved dictionary results and interlinear behaviour unchanged.
+
+## 1.4.96 - Narzędzia tekstu koptyjskiego wydzielone do modułu
+
+### PL
+- Przeniesiono normalizowanie tokenów koptyjskich, transliterację, normalizowanie zapytań i ranking dopasowań z app.js do coptic-text-tools.js.
+- Powiązano moduł z wcześniej wydzieloną konfiguracją alfabetu bez zależności od interfejsu czy stanu czytnika.
+- Dodano testy konkretnych słów koptyjskich, znaków diakrytycznych, interpunkcji i różnych poziomów dopasowania wyszukiwania.
+- Zwiększono zestaw zabezpieczeń do czternastu testów automatycznych.
+- Nie zmieniono wyników słownika, transliteracji ani działania interlinii.
+
+### EN
+- Moved Coptic token normalization, transliteration, query normalization, and match ranking from app.js to coptic-text-tools.js.
+- Connected the module to the previously extracted alphabet configuration without depending on the interface or reader state.
+- Added tests for specific Coptic words, diacritics, punctuation, and multiple search-match levels.
+- Expanded the regression suite to fourteen automated tests.
+- Preserved dictionary results, transliteration, and interlinear behaviour unchanged.
+
+## 1.4.95 - Parser historii zmian wydzielony do modułu
+
+### PL
+- Przeniesiono rozpoznawanie wersji, sekcji PL/EN, sortowanie i usuwanie duplikatów z app.js do changelog-tools.js.
+- Pozostawiono renderowanie historii na stronie głównej i w pełnym widoku bez zmian.
+- Dodano niezależny test parsera obejmujący kolejność wersji, treści dwujęzyczne, wpisy wspólne i duplikaty.
+- Zwiększono zestaw zabezpieczeń do trzynastu testów automatycznych.
+- Nie zmieniono wyglądu ani zawartości historii zmian.
+
+### EN
+- Moved version parsing, Polish/English sections, sorting, and deduplication from app.js to changelog-tools.js.
+- Kept Home and full-history rendering unchanged.
+- Added an independent parser test covering version order, bilingual content, shared entries, and duplicates.
+- Expanded the regression suite to thirteen automated tests.
+- Preserved the interface and change-history content unchanged.
+
+## 1.4.94 - Wspólna warstwa bezpiecznego zapisu ustawień
+
+### PL
+- Dodano storage.js jako jedno miejsce obsługi ustawień, postępu czytania, notatek, zakładek i glos użytkownika.
+- Przełączono 34 bezpośrednie operacje localStorage w app.js na wspólną warstwę zapisu bez zmiany nazw istniejących kluczy.
+- Dodano pamięć awaryjną dla sesji, dzięki której aplikacja nie przerywa działania, gdy przeglądarka blokuje dostęp do localStorage.
+- Dodano dwunasty test sprawdzający zapis, odczyt, usuwanie, zgodność kluczy i tryb awaryjny.
+- Nie zmieniono zachowanych ustawień, wyglądu ani funkcji czytnika.
+
+### EN
+- Added storage.js as the single storage layer for settings, reading progress, notes, bookmarks, and user glosses.
+- Routed 34 direct localStorage operations in app.js through the shared layer without renaming existing keys.
+- Added an in-memory session fallback so the app continues working when browser storage access is blocked.
+- Added a twelfth regression test covering reads, writes, removal, key compatibility, and fallback behaviour.
+- Preserved saved settings, interface, and reader functionality unchanged.
+
+## 1.4.93 - Awaryjny changelog wydzielony z logiki
+
+### PL
+- Przeniesiono pełną awaryjną kopię historii zmian z app.js do generowanego pliku changelog-fallback.js.
+- Zmniejszono app.js z około 219 KB do około 189 KB bez zmiany wyświetlania historii online i offline.
+- Zmieniono skrypt wydania tak, aby automatycznie odtwarzał plik awaryjny bezpośrednio z CHANGELOG.md.
+- Dodano jedenasty test sprawdzający identyczność głównego i awaryjnego changelogu oraz kolejność ładowania.
+- Nie zmieniono wyglądu ani funkcji czytnika.
+
+### EN
+- Moved the complete fallback change history from app.js to the generated changelog-fallback.js file.
+- Reduced app.js from about 219 KB to about 189 KB without changing online or offline history rendering.
+- Updated the release script to regenerate the fallback file directly from CHANGELOG.md.
+- Added an eleventh regression test checking exact changelog equality and load order.
+- Preserved the interface and reader functionality unchanged.
+
+## 1.4.92 - Konfiguracja słownika koptyjskiego wydzielona z logiki
+
+### PL
+- Przeniesiono mapę transliteracji, ręczne glosy oraz reguły prefiksów i sufiksów z app.js do coptic-config.js.
+- Pozostawiono funkcje słownika i interlinii bez zmian, ograniczając ryzyko regresji.
+- Zmniejszono app.js z około 227 KB do około 219 KB i dodano nowy zasób do cache PWA.
+- Dodano dziesiąty test zabezpieczający kompletność podstawowej konfiguracji koptyjskiej i kolejność jej ładowania.
+- Nie zmieniono tłumaczeń, wyglądu, wyszukiwania słownikowego ani działania czytnika.
+
+### EN
+- Moved the transliteration map, manual glosses, and prefix/suffix rules from app.js to coptic-config.js.
+- Kept dictionary and interlinear functions unchanged to minimize regression risk.
+- Reduced app.js from about 227 KB to about 219 KB and added the new resource to the PWA cache.
+- Added a tenth regression test covering core Coptic configuration completeness and load order.
+- Preserved translations, interface, dictionary search, and reader behaviour unchanged.
+
+## 1.4.91 - Treści konfiguracyjne oddzielone od logiki
+
+### PL
+- Przeniesiono teksty interfejsu PL/EN, opisy ksiąg, motywy, zakresy rozdziałów i zasady przekładu z app.js do app-content.js.
+- Zmniejszono app.js z około 288 KB do około 227 KB, pozostawiając w nim głównie logikę działania.
+- Dodano app-content.js do kolejności ładowania i cache PWA.
+- Dodano dziewiąty test zabezpieczający kompletność konfiguracji i jej załadowanie przed app.js.
+- Nie zmieniono wyglądu, tekstów, motywów ani funkcji czytnika.
+
+### EN
+- Moved Polish and English UI text, book descriptions, themes, chapter ranges, and translation principles from app.js to app-content.js.
+- Reduced app.js from about 288 KB to about 227 KB, leaving it focused primarily on application logic.
+- Added app-content.js to the load order and PWA cache.
+- Added a ninth regression test covering configuration completeness and loading before app.js.
+- Preserved the interface, text, themes, and reader functionality unchanged.
+
+## 1.4.90 - Polskie tłumaczenia wydzielone z logiki aplikacji
+
+### PL
+- Przeniesiono kompletną polską warstwę Pistis Sophii z app.js do osobnego pliku books/pistis-sophia/polish-translations.js.
+- Zmniejszono app.js z około 900 KB do około 288 KB bez zmiany treści tłumaczeń ani działania czytnika.
+- Dodano ładowanie nowego pliku przed logiką aplikacji oraz obsługę tego zasobu w cache PWA.
+- Dodano ósmy test zabezpieczający kompletność tłumaczeń, kolejność ładowania oraz dostępność wybranych stron.
+- Nie zmieniono wyglądu, kolorów, motywów, cytowania ani nawigacji.
+
+### EN
+- Moved the complete Polish Pistis Sophia layer from app.js into books/pistis-sophia/polish-translations.js.
+- Reduced app.js from about 900 KB to about 288 KB without changing translation content or reader behaviour.
+- Added loading of the new file before application logic and included it in the PWA cache.
+- Added an eighth regression test covering translation completeness, load order, and selected pages.
+- Preserved the interface, colors, themes, citations, and navigation unchanged.
+
+## 1.4.89 - Testy zabezpieczające i kontrola metadanych
+
+### PL
+- Dodano siedem automatycznych testów zabezpieczających składnię JavaScript, rejestr ksiąg, kluczowe elementy czytnika, tryby tekstu, motywy i historię zmian.
+- Rozszerzono workflow o kontrolę wersji w library.json, books/index.json i package.json.
+- Naprawiono niespójne numery 1.4.87 pozostawione w metadanych biblioteki i indeksie ksiąg.
+- Usunięto z cache PWA odwołanie do nieistniejącego pliku, które mogło blokować instalację zasobów offline.
+- Nie zmieniono wyglądu, kolorów, motywów ani działania czytnika.
+
+### EN
+- Added seven automated regression tests covering JavaScript syntax, the book registry, critical reader controls, reader modes, themes, and changelog continuity.
+- Extended the release workflow to validate versions in library.json, books/index.json, and package.json.
+- Fixed stale 1.4.87 version numbers left in the library metadata and book index.
+- Removed a missing file reference from the PWA cache that could prevent offline shell installation.
+- Preserved the reader interface, colors, themes, and behaviour unchanged.
+
+## 1.4.88 - Automatyczny workflow wydań
+
+### PL
+- Dodano skrypt kontroli jakości, który sprawdza spójność numeru wersji, cache PWA, wymagane pliki i kodowanie UTF-8.
+- Dodano automatyczne wykrywanie luk i powtórzeń w historii 25 najnowszych wersji.
+- Dodano powtarzalne przygotowanie kolejnej wersji wraz z aktualizacją VERSION.json, changelogu i jego kopii awaryjnej.
+- Dodano checklistę testów ręcznych przed publikacją oraz prosty plik kontrolny dla Windows.
+- Nie zmieniono wyglądu, kolorów, motywów ani działania czytnika.
+
+### EN
+- Added a quality-check script that validates version consistency, the PWA cache, required files, and UTF-8 encoding.
+- Added automatic detection of gaps and duplicates across the 25 latest changelog entries.
+- Added repeatable preparation of the next release, including VERSION.json, changelog, and fallback changelog updates.
+- Added a manual pre-publication checklist and a simple Windows check launcher.
+- Preserved the reader interface, colors, themes, and behaviour unchanged.
+
 ## 1.4.87 - Naprawiona ciągłość wersji i historii zmian
 
 ### PL

@@ -1,24 +1,38 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.4.87";
+const CACHE_NAME = "gnostyk-biblioteka-v1.4.124";
 
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
+  "./app-content.js",
+  "./coptic-config.js",
+  "./coptic-text-tools.js",
+  "./interlinear-engine.js",
+  "./coptic-lookup.js",
+  "./dictionary-engine.js",
+  "./citation-engine.js",
+  "./reader-engine.js",
+  "./changelog-fallback.js",
+  "./storage.js",
+  "./changelog-tools.js",
   "./app.js",
   "./books/index.json",
   "./books/pistis-sophia/book.json",
   "./books/pistis-sophia/data.js",
   "./books/pistis-sophia/coptic-data.js",
+  "./books/pistis-sophia/themes.json",
+  "./books/pistis-sophia/polish-translations.js",
   "./books/gospel-of-thomas/book.json",
   "./books/gospel-of-thomas/data.js",
   "./books/gospel-of-thomas/coptic-data.js",
+  "./books/gospel-of-thomas/themes.json",
   "./books/gospel-of-philip/book.json",
   "./books/gospel-of-philip/data.js",
   "./books/gospel-of-philip/coptic-data.js",
+  "./books/gospel-of-philip/themes.json",
   "./coptic-dictionary.js",
   "./coptic-polish-overrides.js",
   "./coptic-missing-dictionary-map.json",
-  "./COPTIC_DICTIONARY_FALLBACK_AUDIT.md",
   "./manifest.webmanifest",
   "./VERSION.json",
   "./library.json",
@@ -56,6 +70,17 @@ self.addEventListener("fetch", event => {
     "/",
     "index.html",
     "styles.css",
+    "app-content.js",
+    "coptic-config.js",
+    "coptic-text-tools.js",
+    "interlinear-engine.js",
+    "coptic-lookup.js",
+    "dictionary-engine.js",
+    "citation-engine.js",
+    "reader-engine.js",
+    "changelog-fallback.js",
+    "storage.js",
+    "changelog-tools.js",
     "app.js",
     "sw.js",
     "manifest.webmanifest",
@@ -66,6 +91,7 @@ self.addEventListener("fetch", event => {
     "books/pistis-sophia/book.json",
     "books/pistis-sophia/data.js",
     "books/pistis-sophia/coptic-data.js",
+    "books/pistis-sophia/polish-translations.js",
     "books/gospel-of-thomas/book.json",
     "books/gospel-of-thomas/data.js",
     "books/gospel-of-thomas/coptic-data.js",
@@ -96,20 +122,6 @@ self.addEventListener("fetch", event => {
     })
   );
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

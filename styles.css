@@ -4317,42 +4317,6 @@ body[data-theme="dark"] .dictionary-status-basic {
 }
 
 
-.thomas-interlinear-continuous {
-  gap: 28px;
-}
-
-.thomas-interlinear-continuous .interlinear-page {
-  scroll-margin-top: 24px;
-}
-
-.thomas-interlinear-continuous .interlinear-line {
-  border: 0;
-  border-top: 1px solid rgba(141, 107, 79, 0.2);
-  background: transparent;
-  padding: 12px 0 16px;
-}
-
-.thomas-interlinear-continuous .interlinear-line > header {
-  margin-bottom: 2px;
-}
-
-.thomas-interlinear-continuous .interlinear-token {
-  min-width: 66px;
-  max-width: 150px;
-  border: 0;
-  background: transparent;
-  border-radius: 0;
-  padding: 4px 6px 6px 0;
-}
-
-.thomas-interlinear-continuous .interlinear-token:hover {
-  background: rgba(216, 160, 82, 0.08);
-}
-
-.thomas-interlinear-continuous .interlinear-source {
-  margin-bottom: 2px;
-}
-
 .interlinear-lemma {
   display: block;
   font-size: 0.68rem;
@@ -4397,23 +4361,6 @@ body[data-theme="dark"] .interlinear-lemma {
   letter-spacing: 0.04em;
   opacity: 0.78;
   text-transform: uppercase;
-}
-
-body[data-interlinear-layout="compact"] .thomas-interlinear-continuous .interlinear-token {
-  min-width: 52px;
-  max-width: 120px;
-  gap: 2px;
-}
-
-body[data-interlinear-layout="compact"] .thomas-interlinear-continuous .interlinear-gloss {
-  font-size: 0.74rem;
-}
-
-body[data-interlinear-layout="expanded"] .thomas-interlinear-continuous .interlinear-token {
-  min-width: 82px;
-  max-width: 190px;
-  padding-top: 6px;
-  padding-bottom: 8px;
 }
 
 /* v1.4.3 settings polish */
