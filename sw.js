@@ -1,4 +1,4 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.6.0";
+const CACHE_NAME = "gnostyk-biblioteka-v1.6.5";
 
 const APP_SHELL = [
   "./",

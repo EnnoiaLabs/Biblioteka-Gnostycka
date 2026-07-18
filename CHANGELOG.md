@@ -1,5 +1,65 @@
 # Changelog
 
+## 1.6.5 - Redakcja przekładu stron 211–255
+
+### PL
+- Poprawiono potwierdzone błędy językowe, fleksyjne i interpunkcyjne na stronach 211–255 Pistis Sophii.
+- Ujednolicono terminologię ostatniego zakresu przekładu i zachowano oznaczoną w źródle lukę rękopisu.
+- Dodano testy regresji dla skorygowanych fragmentów.
+
+### EN
+- Corrected confirmed linguistic, inflectional and punctuation errors on pages 211–255 of Pistis Sophia.
+- Standardized terminology in the final translation range and preserved the manuscript lacuna marked in the source.
+- Added regression tests for the corrected passages.
+
+## 1.6.4 - Redakcja przekładu stron 161–210
+
+### PL
+- Poprawiono potwierdzone błędy językowe, fleksyjne i interpunkcyjne na stronach 161–210 Pistis Sophii.
+- Ujednolicono terminologię, w tym formę „Bliźniaczy Zbawiciele”, oraz usunięto powtarzające się kalki językowe.
+- Dodano testy regresji dla skorygowanych fragmentów.
+
+### EN
+- Corrected confirmed linguistic, inflectional and punctuation errors on pages 161–210 of Pistis Sophia.
+- Standardized terminology, including ‘Twin Saviours’, and removed recurring literal calques.
+- Added regression tests for the corrected passages.
+
+## 1.6.3 - Redakcja przekładu stron 111–160
+
+### PL
+- Poprawiono potwierdzone błędy językowe i typograficzne na stronach 111–160 Pistis Sophii.
+- Ujednolicono terminy „zamieszkująca mnie moc światłości” oraz „Bliźniaczy Zbawiciele”.
+- Dodano testy regresji dla skorygowanych fragmentów.
+
+### EN
+- Corrected confirmed linguistic and typographical errors on pages 111–160 of Pistis Sophia.
+- Standardized the terms ‘the light-power dwelling in me’ and ‘Twin Saviours’.
+- Added regression tests for the corrected passages.
+
+## 1.6.2 - Redakcja przekładu stron 61–110
+
+### PL
+- Poprawiono potwierdzone kalki i błędy językowe na stronach 61–110 Pistis Sophii.
+- Termin indweller of light ujednolicono jako zamieszkująca mnie moc światłości.
+- Dodano testy regresji dla najważniejszych skorygowanych fragmentów.
+
+### EN
+- Corrected confirmed calques and language errors on Pistis Sophia pages 61–110.
+- Standardized indweller of light as zamieszkująca mnie moc światłości.
+- Added regression checks for the most important corrected passages.
+
+## 1.6.1 - Korekta przekładu Pistis Sophii
+
+### PL
+- Przywrócono pominięty fragment o uczniach obserwujących wstąpienie Jezusa.
+- Ujednolicono termin Impressions jako Znamiona i poprawiono pewne błędy językowe na stronach 48–60.
+- Dodano testy chroniące skorygowane fragmenty przed regresją.
+
+### EN
+- Restored the omitted passage about the disciples watching Jesus ascend.
+- Standardized Impressions as Znamiona and corrected confirmed language errors on pages 48–60.
+- Added regression checks for the corrected passages.
+
 ## 1.6.0 - Księgi ładują się dopiero po otwarciu
 
 ### PL
