@@ -3,6 +3,9 @@
 `VERSION.json` jest jedynym źródłem prawdy o aktualnym numerze. Skrypt
 `tools/release.py` pilnuje pozostałych miejsc i zatrzymuje wydanie, jeśli
 wykryje rozjazd, lukę w historii lub uszkodzone kodowanie.
+Projekt ma jedną numerację wersji i dwie warstwy historii. `CHANGELOG.md`
+zachowuje każde wydanie techniczne, a `PUBLIC_CHANGELOG.md` zawiera wyłącznie
+kamienie milowe istotne dla czytelników i jest wyświetlany w aplikacji.
 Kontrola uruchamia też `tools/check-pwa.js`, który sprawdza manifest, ikony,
 rejestrację service workera, numer cache oraz kompletność `APP_SHELL`.
 `tools/check-performance.js` mierzy lokalne zasoby ładowane na starcie i
@@ -31,15 +34,35 @@ python tools/release.py prepare \
   --title-pl "Krótki tytuł wydania" \
   --title-en "Short release title" \
   --slug "krotka-nazwa-zmiany" \
+  --release-type technical \
   --pl "Opis pierwszej zmiany." \
   --pl "Opis drugiej zmiany." \
   --en "Description of the first change." \
   --en "Description of the second change."
 ```
 
+`technical` jest wartością domyślną: wpis trafia tylko do pełnego archiwum.
+Gdy wydanie dodaje księgę, funkcję albo inną zmianę zauważalną dla czytelnika,
+użyj `--release-type public`. Taki wpis trafia również do historii w aplikacji:
+
+```bash
+python tools/release.py prepare \
+  --version 1.5.0 \
+  --release-type public \
+  --title-pl "Nowa funkcja dla czytelników" \
+  --title-en "New reader-facing feature" \
+  --slug "reader-feature" \
+  --pl "Opis widocznej zmiany." \
+  --en "Description of the visible change."
+```
+
+Numer pozostaje wspólny. Zwykłe poprawki techniczne zwiększają patch, a większe
+publiczne funkcje mogą zwiększać minor, np. `1.4.124` → `1.5.0`.
+
 Bez `--version` skrypt zwiększa ostatni człon numeru, np. `1.4.87` → `1.4.88`.
-Skrypt aktualizuje `VERSION.json`, bieżący numer w aplikacji, cache PWA,
-`CHANGELOG.md` i jego kopię awaryjną, po czym ponownie uruchamia kontrolę.
+Skrypt aktualizuje `VERSION.json`, bieżący numer w aplikacji, cache PWA i
+`CHANGELOG.md`. Dla wydania publicznego aktualizuje też `PUBLIC_CHANGELOG.md`
+oraz jego kopię awaryjną, po czym ponownie uruchamia kontrolę.
 
 Po krótkim teście ręcznym utwórz gotowy pakiet:
 

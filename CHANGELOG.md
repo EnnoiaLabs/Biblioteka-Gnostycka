@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.0 - Czytelna historia najważniejszych zmian
+
+### PL
+- Historia w aplikacji pokazuje teraz najważniejsze etapy rozwoju zamiast wewnętrznych prac technicznych.
+- Uporządkowano dotychczasowe zmiany w kamienie milowe dotyczące ksiąg, czytnika, interlinii, warstwy koptyjskiej, cytowania i stabilności.
+- Dokładny numer aplikacji pozostaje widoczny, a pełne archiwum techniczne nadal jest zachowane w projekcie.
+
+### EN
+- The in-app history now presents major development milestones instead of internal technical work.
+- Previous changes were curated into milestones covering books, the reader, interlinear and Coptic layers, citation, and stability.
+- The exact application version remains visible, while the complete technical archive is preserved in the project.
+
 ## 1.4.124 - Końcowy audyt potwierdza gotowość wydania
 
 ### PL

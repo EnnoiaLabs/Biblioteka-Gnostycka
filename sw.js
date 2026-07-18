@@ -1,4 +1,4 @@
-const CACHE_NAME = "gnostyk-biblioteka-v1.4.124";
+const CACHE_NAME = "gnostyk-biblioteka-v1.5.0";
 
 const APP_SHELL = [
   "./",
@@ -37,6 +37,7 @@ const APP_SHELL = [
   "./VERSION.json",
   "./library.json",
   "./CHANGELOG.md",
+  "./PUBLIC_CHANGELOG.md",
   "./assets/gnostyk-icon.png",
   "./assets/gnostyk-slit-bg.png",
   "./assets/pwa-icon-32.png",
@@ -85,6 +86,7 @@ self.addEventListener("fetch", event => {
     "sw.js",
     "manifest.webmanifest",
     "CHANGELOG.md",
+    "PUBLIC_CHANGELOG.md",
     "VERSION.json",
     "library.json",
     "books/index.json",
@@ -122,7 +124,6 @@ self.addEventListener("fetch", event => {
     })
   );
 });
-
 
 
 

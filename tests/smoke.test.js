@@ -313,7 +313,7 @@ test("Coptic lookup configuration is separated and complete", () => {
   assert.match(read("app.js"), /window\.GNOSTYK_COPTIC_CONFIG \|\| \{\}/);
 });
 
-test("fallback changelog is generated outside app.js and matches CHANGELOG.md", () => {
+test("fallback changelog is generated outside app.js and matches the public history", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("changelog-fallback.js") > 0);
   assert.ok(html.indexOf("changelog-fallback.js") < html.indexOf('src="app.js'));
@@ -321,9 +321,11 @@ test("fallback changelog is generated outside app.js and matches CHANGELOG.md", 
   const context = { window: {} };
   vm.createContext(context);
   vm.runInContext(read("changelog-fallback.js"), context, { filename: "changelog-fallback.js" });
-  assert.equal(context.window.GNOSTYK_FALLBACK_CHANGELOG, read("CHANGELOG.md"));
+  assert.equal(context.window.GNOSTYK_FALLBACK_CHANGELOG, read("PUBLIC_CHANGELOG.md"));
   const app = read("app.js");
   assert.match(app, /window\.GNOSTYK_FALLBACK_CHANGELOG/);
+  assert.match(app, /fetch\("\.\/PUBLIC_CHANGELOG\.md"/);
+  assert.doesNotMatch(app, /fetch\("\.\/CHANGELOG\.md"/);
   assert.doesNotMatch(app, /const FALLBACK_CHANGELOG = "# Changelog\\n\\n##/);
 });
 
@@ -393,6 +395,9 @@ test("changelog parser is independent, bilingual, ordered, and deduplicated", ()
   const actual = tools.parseChangelogGroups(read("CHANGELOG.md"));
   assert.equal(actual[0].version, json("VERSION.json").version);
   assert.ok(actual.length >= 25);
+  const publicHistory = tools.parseChangelogGroups(read("PUBLIC_CHANGELOG.md"));
+  assert.equal(publicHistory[0].version, json("VERSION.json").latestPublicVersion);
+  assert.ok(publicHistory.length >= 8);
   assert.match(read("app.js"), /window\.GNOSTYK_CHANGELOG_TOOLS/);
 });
 
@@ -798,4 +803,17 @@ test("changelog starts at the current version and has no recent gaps", () => {
       assert.equal(newer[2], older[2] + 1, `gap between ${versions[i]} and ${versions[i + 1]}`);
     }
   }
+});
+
+test("release workflow separates public milestones from the technical archive", () => {
+  const release = read("tools/release.py");
+  assert.match(release, /--release-type/);
+  assert.match(release, /choices=\("public", "technical"\)/);
+  assert.match(release, /if args\.release_type == "public"/);
+  assert.match(release, /latestPublicVersion/);
+  assert.match(release, /PUBLIC_CHANGELOG\.md/);
+  assert.match(read("RELEASE_WORKFLOW.md"), /--release-type public/);
+  const metadata = json("VERSION.json");
+  assert.ok(["public", "technical"].includes(metadata.releaseType));
+  assert.match(metadata.latestPublicVersion, /^\d+\.\d+\.\d+$/);
 });

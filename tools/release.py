@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION_FILE = ROOT / "VERSION.json"
 REQUIRED = [
-    "VERSION.json", "CHANGELOG.md", "index.html", "app.js", "styles.css",
+    "VERSION.json", "CHANGELOG.md", "PUBLIC_CHANGELOG.md", "index.html", "app.js", "styles.css",
     "manifest.webmanifest", "sw.js", "library.json", "books/index.json", "package.json", "package-lock.json",
     "books/pistis-sophia/polish-translations.js",
     "app-content.js",
@@ -118,6 +118,7 @@ def check() -> None:
     index = read(ROOT / "index.html")
     sw = read(ROOT / "sw.js")
     changelog = read(ROOT / "CHANGELOG.md")
+    public_changelog = read(ROOT / "PUBLIC_CHANGELOG.md")
     library = read(ROOT / "library.json")
     books_index = read(ROOT / "books/index.json")
     package = read(ROOT / "package.json")
@@ -142,6 +143,16 @@ def check() -> None:
     if not versions or versions[0] != version:
         errors.append("Pierwszy wpis CHANGELOG.md nie odpowiada VERSION.json")
     errors.extend(validate_continuity(versions))
+    public_versions = VERSION_RE.findall(public_changelog)
+    if not public_versions:
+        errors.append("PUBLIC_CHANGELOG.md nie zawiera żadnej wersji publicznej")
+    elif data.get("latestPublicVersion") != public_versions[0]:
+        errors.append("VERSION.json / latestPublicVersion nie odpowiada pierwszej wersji publicznej")
+    if data.get("releaseType") not in {"public", "technical"}:
+        errors.append("VERSION.json / releaseType musi mieć wartość public albo technical")
+    missing_public_versions = sorted(set(public_versions) - set(versions))
+    if missing_public_versions:
+        errors.append("Historia publiczna wskazuje wersje spoza archiwum technicznego: " + ", ".join(missing_public_versions))
 
     shell_match = re.search(r"const APP_SHELL = \[(.*?)\];", sw, re.DOTALL)
     if not shell_match:
@@ -233,6 +244,7 @@ def check() -> None:
     print(f"[OK] UTF-8 i brak znaków zastępczych")
     print(f"[OK] numer wersji i cache PWA")
     print(f"[OK] ciągłość CHANGELOG ({min(25, len(versions))} najnowszych wpisów)")
+    print(f"[OK] publiczna historia zmian ({len(public_versions)} kamieni milowych)")
     print(f"[OK] struktura danych książek")
     print(f"[OK] manifest PWA i kompletność cache offline")
     print(f"[OK] budżety rozmiaru zasobów startowych")
@@ -328,9 +340,30 @@ def prepare(args: argparse.Namespace) -> None:
     changelog = replace_once(changelog, r"\A# Changelog\s*\n", "# Changelog\n\n" + entry, "CHANGELOG")
     write(changelog_path, changelog)
 
+    if args.release_type == "public":
+        public_path = ROOT / "PUBLIC_CHANGELOG.md"
+        public_changelog = read(public_path)
+        public_entry = (
+            f"## {new} - {args.title_pl}\n\n### PL\n"
+            + "\n".join(f"- {point}" for point in pl_points)
+            + "\n\n### EN\n"
+            + "\n".join(f"- {point}" for point in en_points)
+            + "\n\n"
+        )
+        public_changelog = replace_once(
+            public_changelog,
+            r"\A# Publiczna historia zmian / Public change history\s*\n",
+            "# Publiczna historia zmian / Public change history\n\n" + public_entry,
+            "PUBLIC_CHANGELOG",
+        )
+        write(public_path, public_changelog)
+
     data["version"] = new
     data["date"] = date.today().isoformat()
     data["currentWork"] = args.slug
+    data["releaseType"] = args.release_type
+    if args.release_type == "public":
+        data["latestPublicVersion"] = new
     write(VERSION_FILE, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
 
     for relative in ("library.json", "books/index.json", "package.json", "package-lock.json"):
@@ -355,15 +388,14 @@ def prepare(args: argparse.Namespace) -> None:
     index = index.replace(f"?v={old}", f"?v={new}")
     index = re.sub(r'(<span class="inline-library-version">)' + re.escape(old) + r'(</span>)', rf"\g<1>{new}\g<2>", index)
     index = re.sub(r'(<span id="libraryVersion(?:FooterHome|Footer)?">)' + re.escape(old) + r'(</span>)', rf"\g<1>{new}\g<2>", index)
-    recent_li = (
-        f'<li><strong>{new}</strong><span data-i18n-en="{args.title_en}" '
-        f'data-i18n-pl="{args.title_pl}">{args.title_pl}</span></li>'
-    )
-    index = replace_once(index, r'(<ul id="homeRecentUpdates">)', rf"\1{recent_li}", "Ostatnie zmiany")
-    # Keep exactly the three newest static fallback items.
-    index = re.sub(r'(<ul id="homeRecentUpdates">)((?:<li>.*?</li>){3})<li>.*?</li>', r"\1\2", index, count=1)
-    full_li = f'<li class="library-update-group"><strong>{new}</strong><ul><li>{pl_points[0]}</li></ul></li>'
-    index = replace_once(index, r'(<ul id="fullVersionHistoryList">)', rf"\1{full_li}", "Pełna historia") if 'id="fullVersionHistoryList"' in index else index
+    if args.release_type == "public":
+        recent_li = (
+            f'<li><strong>{new}</strong><span data-i18n-en="{args.title_en}" '
+            f'data-i18n-pl="{args.title_pl}">{args.title_pl}</span></li>'
+        )
+        index = replace_once(index, r'(<ul id="homeRecentUpdates">)', rf"\1{recent_li}", "Ostatnie zmiany")
+        # Keep exactly the three newest public fallback items.
+        index = re.sub(r'(<ul id="homeRecentUpdates">)((?:<li>.*?</li>){3})<li>.*?</li>', r"\1\2", index, count=1)
     write(index_path, index)
 
     app_path = ROOT / "app.js"
@@ -372,7 +404,8 @@ def prepare(args: argparse.Namespace) -> None:
     write(app_path, app)
 
     fallback_path = ROOT / "changelog-fallback.js"
-    write(fallback_path, f"window.GNOSTYK_FALLBACK_CHANGELOG = {json.dumps(changelog, ensure_ascii=False)};\n")
+    public_changelog = read(ROOT / "PUBLIC_CHANGELOG.md")
+    write(fallback_path, f"window.GNOSTYK_FALLBACK_CHANGELOG = {json.dumps(public_changelog, ensure_ascii=False)};\n")
 
     sw_path = ROOT / "sw.js"
     sw = read(sw_path)
@@ -418,6 +451,8 @@ def package(args: argparse.Namespace) -> None:
         "version": version,
         "date": data.get("date"),
         "currentWork": data.get("currentWork"),
+        "releaseType": data.get("releaseType"),
+        "latestPublicVersion": data.get("latestPublicVersion"),
         "archive": archive.name,
         "sha256": digest,
         "fileCount": len(files),
@@ -445,6 +480,7 @@ def main() -> None:
     release.add_argument("--title-pl", required=True, help="krótki polski tytuł wydania")
     release.add_argument("--title-en", required=True, help="krótki angielski tytuł wydania")
     release.add_argument("--slug", default="release-workflow", help="techniczna nazwa zakresu prac")
+    release.add_argument("--release-type", choices=("public", "technical"), default="technical", help="czy wpis ma być widoczny w aplikacji")
     release.add_argument("--pl", action="append", help="punkt changelogu PL; można powtórzyć")
     release.add_argument("--en", action="append", help="punkt changelogu EN; można powtórzyć")
     args = parser.parse_args()

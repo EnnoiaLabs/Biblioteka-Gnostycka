@@ -24,7 +24,7 @@ if (isLogionBook && activeBookModule?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Biblioteka Gnozy",
-  version: "1.4.124",
+  version: "1.5.0",
   updated: "2026-07-15",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
@@ -2857,12 +2857,10 @@ async function loadLibraryVersion() {
     return;
   }
   try {
-    const response = await fetch("./CHANGELOG.md", { cache: "no-store" });
+    const response = await fetch("./PUBLIC_CHANGELOG.md", { cache: "no-store" });
     if (!response.ok) return;
     const changelogText = await response.text();
     state.changelogText = changelogText;
-    const version = versionFromChangelog(changelogText);
-    if (version) setLibraryVersion(version);
     renderLibraryUpdatesFromChangelog(changelogText);
   } catch {
     setLibraryVersion(libraryMeta.version);

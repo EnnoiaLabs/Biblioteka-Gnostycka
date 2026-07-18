@@ -12,6 +12,7 @@ Wydanie można opublikować dopiero po zaznaczeniu wszystkich punktów.
 - [ ] `npm run test:browser` uruchamia aplikację bez błędów w Chromium.
 - [ ] Numer w `VERSION.json`, aplikacji, cache PWA i changelogu jest zgodny.
 - [ ] Historia wersji nie ma luk ani powtórzeń.
+- [ ] Typ `public` lub `technical` odpowiada znaczeniu zmiany dla czytelnika.
 - [ ] Wszystkie pliki tekstowe są poprawnym UTF-8.
 
 ## Test ręczny aplikacji
