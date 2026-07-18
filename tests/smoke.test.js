@@ -108,6 +108,8 @@ test("standalone PWA guard validates the manifest and complete offline shell", (
   for (const book of ["pistis-sophia", "gospel-of-thomas", "gospel-of-philip"]) {
     assert.ok(read("sw.js").includes(`./books/${book}/themes.json`), `${book}: themes missing from offline cache`);
   }
+  assert.match(read("tools/check-pwa.js"), /loader ksiąg/);
+  assert.match(read("tools/check-pwa.js"), /requiredOffline\.add\("app\.js"\)/);
 });
 
 test("performance guard enforces explicit startup asset budgets", () => {
@@ -116,6 +118,9 @@ test("performance guard enforces explicit startup asset budgets", () => {
     encoding: "utf8"
   });
   assert.match(output, /\[OK\] Wydajność: \d+ zasobów startowych/);
+  assert.match(output, /Najcięższy wariant księgi: pistis-sophia/);
+  assert.match(output, /Start gospel-of-thomas:/);
+  assert.match(output, /Start gospel-of-philip:/);
   const budgets = json("performance-budgets.json");
   for (const field of ["startupLocalRawBytes", "startupLocalGzipBytes", "largestStartupFileBytes", "appJavaScriptBytes", "stylesheetBytes"]) {
     assert.ok(Number.isInteger(budgets[field]) && budgets[field] > 0, `missing performance budget: ${field}`);
@@ -248,11 +253,11 @@ test("reader modes and all three themes remain available", () => {
   }
 });
 
-test("extracted Polish translations load before app.js and preserve the complete layer", () => {
-  const html = read("index.html");
+test("extracted Polish translations are lazy-loaded with Pistis Sophia and preserve the complete layer", () => {
+  const loader = read("book-loader.js");
   const translationsScript = "books/pistis-sophia/polish-translations.js";
-  assert.ok(html.indexOf(translationsScript) > 0, "translation script must be loaded");
-  assert.ok(html.indexOf(translationsScript) < html.indexOf('src="app.js'), "translations must load before app.js");
+  assert.ok(loader.indexOf(translationsScript) > 0, "translation script must be in the Pistis asset group");
+  assert.ok(loader.indexOf(translationsScript) < loader.indexOf('loadScript("app.js")'), "translations must load before app.js");
 
   const context = { window: {} };
   vm.createContext(context);
@@ -269,7 +274,8 @@ test("extracted Polish translations load before app.js and preserve the complete
 test("application content is separated from logic and loads before app.js", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("app-content.js") > 0);
-  assert.ok(html.indexOf("app-content.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("app-content.js") < html.indexOf("book-loader.js"));
+  assert.match(read("book-loader.js"), /loadScript\("app\.js"\)/);
 
   const context = { window: {} };
   vm.createContext(context);
@@ -292,10 +298,23 @@ test("application content is separated from logic and loads before app.js", () =
   assert.doesNotMatch(app, /const uiText = \{\s*pl:/);
 });
 
+test("book loader starts only the selected book before the application", () => {
+  const html = read("index.html");
+  const loader = read("book-loader.js");
+  assert.match(html, /src="book-loader\.js\?v=/);
+  assert.doesNotMatch(html, /src="books\/(?:pistis-sophia|gospel-of-thomas|gospel-of-philip)\/(?:data|coptic-data)\.js/);
+  assert.doesNotMatch(html, /src="app\.js/);
+  for (const bookId of ["pistis-sophia", "gospel-of-thomas", "gospel-of-philip"]) {
+    assert.match(loader, new RegExp(`"${bookId}"\\s*:`));
+  }
+  assert.match(loader, /BOOK_ASSETS\[bookId\][\s\S]*loadScript\("app\.js"\)/);
+  assert.match(read("app.js"), /availableBookIds\.has\(workId\)/);
+});
+
 test("Coptic lookup configuration is separated and complete", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("coptic-config.js") > 0);
-  assert.ok(html.indexOf("coptic-config.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("coptic-config.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -316,7 +335,7 @@ test("Coptic lookup configuration is separated and complete", () => {
 test("fallback changelog is generated outside app.js and matches the public history", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("changelog-fallback.js") > 0);
-  assert.ok(html.indexOf("changelog-fallback.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("changelog-fallback.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -332,7 +351,7 @@ test("fallback changelog is generated outside app.js and matches the public hist
 test("storage facade preserves keys and survives blocked browser storage", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("storage.js") > 0);
-  assert.ok(html.indexOf("storage.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("storage.js") < html.indexOf("book-loader.js"));
 
   const values = new Map();
   const nativeStorage = {
@@ -367,7 +386,7 @@ test("storage facade preserves keys and survives blocked browser storage", () =>
 test("changelog parser is independent, bilingual, ordered, and deduplicated", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("changelog-tools.js") > 0);
-  assert.ok(html.indexOf("changelog-tools.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("changelog-tools.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -404,7 +423,7 @@ test("changelog parser is independent, bilingual, ordered, and deduplicated", ()
 test("Coptic text tools normalize, transliterate, and rank searches independently", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("coptic-config.js") < html.indexOf("coptic-text-tools.js"));
-  assert.ok(html.indexOf("coptic-text-tools.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("coptic-text-tools.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -426,7 +445,7 @@ test("Coptic text tools normalize, transliterate, and rank searches independentl
 test("Coptic lookup resolves direct, prefixed, suffixed, and combined forms", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("coptic-config.js") < html.indexOf("coptic-lookup.js"));
-  assert.ok(html.indexOf("coptic-lookup.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("coptic-lookup.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -460,7 +479,7 @@ test("Coptic lookup resolves direct, prefixed, suffixed, and combined forms", ()
 test("dictionary engine scores entries, cleans meanings, and classifies completeness", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("coptic-text-tools.js") < html.indexOf("dictionary-engine.js"));
-  assert.ok(html.indexOf("dictionary-engine.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("dictionary-engine.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -494,7 +513,7 @@ test("dictionary engine scores entries, cleans meanings, and classifies complete
 test("interlinear engine normalizes token variants and selects stable lookup keys", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("coptic-text-tools.js") < html.indexOf("interlinear-engine.js"));
-  assert.ok(html.indexOf("interlinear-engine.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("interlinear-engine.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -522,7 +541,7 @@ test("interlinear engine normalizes token variants and selects stable lookup key
 test("citation engine preserves labels and formats for all three books", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("citation-engine.js") > 0);
-  assert.ok(html.indexOf("citation-engine.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("citation-engine.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);
@@ -555,7 +574,7 @@ test("citation engine preserves labels and formats for all three books", () => {
 test("reader engine resolves page bounds, chapters, ranges, and manuscript references", () => {
   const html = read("index.html");
   assert.ok(html.indexOf("reader-engine.js") > 0);
-  assert.ok(html.indexOf("reader-engine.js") < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf("reader-engine.js") < html.indexOf("book-loader.js"));
 
   const context = { window: {} };
   vm.createContext(context);

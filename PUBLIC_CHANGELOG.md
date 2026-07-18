@@ -1,5 +1,17 @@
 # Publiczna historia zmian / Public change history
 
+## 1.6.0 - Księgi ładują się dopiero po otwarciu
+
+### PL
+- Aplikacja uruchamia tylko dane aktualnie wybranej księgi zamiast wszystkich trzech naraz.
+- Start Ewangelii Tomasza i Ewangelii Filipa zmniejszono do około 2,9 MiB zasobów lokalnych, a najcięższy wariant Pistis Sophii do 5,95 MiB.
+- Przełączanie ksiąg, cztery tryby czytania i działanie offline pozostają objęte automatycznymi kontrolami.
+
+### EN
+- The application now starts only the currently selected book data instead of loading all three books at once.
+- The startup footprint for the Gospels of Thomas and Philip is now about 2.9 MiB of local assets, while the heaviest Pistis Sophia variant is 5.95 MiB.
+- Book switching, four reading modes, and offline operation remain protected by automated checks.
+
 ## 1.5.0 - Czytelna historia najważniejszych zmian
 
 ### PL

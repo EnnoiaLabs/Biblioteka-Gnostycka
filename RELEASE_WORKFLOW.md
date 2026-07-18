@@ -12,6 +12,9 @@ rejestrację service workera, numer cache oraz kompletność `APP_SHELL`.
 zatrzymuje wydanie po przekroczeniu limitów z `performance-budgets.json`.
 Materiały źródłowe wymienione w `release-exclusions.json` pozostają w projekcie,
 ale trafiają poza ZIP wyłącznie wtedy, gdy strażnik potwierdzi brak odwołań.
+`book-loader.js` uruchamia tylko dane aktualnie wybranej księgi. Strażniki PWA
+i wydajności odczytują jego mapę zasobów, dzięki czemu kontrolują każdy wariant
+startu oraz kompletność cache offline.
 
 ## 1. Przed rozpoczęciem zmiany
 

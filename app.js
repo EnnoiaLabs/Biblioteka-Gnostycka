@@ -24,7 +24,7 @@ if (isLogionBook && activeBookModule?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Biblioteka Gnozy",
-  version: "1.5.0",
+  version: "1.6.0",
   updated: "2026-07-15",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
@@ -3606,8 +3606,8 @@ function goToHome() {
 }
 
 function openLibraryWork(workId = "pistis-sophia", options = {}) {
-  const module = bookModules[workId] || bookModules["pistis-sophia"];
-  const moduleId = module?.id || "pistis-sophia";
+  const availableBookIds = new Set(["pistis-sophia", "gospel-of-thomas", "gospel-of-philip"]);
+  const moduleId = availableBookIds.has(workId) ? workId : "pistis-sophia";
   const targetPage = options.preservePage
     ? (appStorage.getItem(`gnostyk.lastPage.${moduleId}`) || appStorage.getItem("ps.lastPage") || "1")
     : String(defaultStartPageForBook(moduleId));

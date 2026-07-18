@@ -85,6 +85,20 @@ for (const image of images) {
 }
 
 try {
+  const loader = read("book-loader.js");
+  const assetMap = loader.match(/\/\* BOOK_ASSETS_START \*\/\s*({[\s\S]*?})\s*\/\* BOOK_ASSETS_END \*\//);
+  if (!assetMap) throw new Error("brak mapy BOOK_ASSETS");
+  const bookAssets = JSON.parse(assetMap[1]);
+  requiredOffline.add("book-loader.js");
+  requiredOffline.add("app.js");
+  for (const files of Object.values(bookAssets)) {
+    for (const relative of files) requiredOffline.add(clean(relative));
+  }
+} catch (error) {
+  fail(`loader ksiąg: ${error.message}`);
+}
+
+try {
   const registry = JSON.parse(read("books/index.json"));
   requiredOffline.add("books/index.json");
   for (const metadataPath of registry.books || []) {
