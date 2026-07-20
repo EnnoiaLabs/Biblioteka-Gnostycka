@@ -10,6 +10,8 @@ Wydanie można opublikować dopiero po zaznaczeniu wszystkich punktów.
 - [ ] Budżety rozmiaru zasobów startowych nie zostały przekroczone.
 - [ ] Nieużywane materiały źródłowe nie powiększają paczki publikacyjnej.
 - [ ] `npm run test:browser` uruchamia aplikację bez błędów w Chromium.
+- [ ] Strażnik kompletności potwierdza 255/255 polskich stron.
+- [ ] Test Chromium potwierdza wyrenderowanie 255/255 polskich stron.
 - [ ] Numer w `VERSION.json`, aplikacji, cache PWA i changelogu jest zgodny.
 - [ ] Historia wersji nie ma luk ani powtórzeń.
 - [ ] Typ `public` lub `technical` odpowiada znaczeniu zmiany dla czytelnika.

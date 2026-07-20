@@ -973,3 +973,13 @@ test("Pistis Sophia explains the Polish translation method to readers", () => {
   assert.match(app, /aboutTerminologyLabel/);
   assert.match(read("URUCHOM_1.7.3_WINDOWS.cmd"), /%~dp0index\.html/);
 });
+
+test("release guard runs the complete Pistis Sophia translation checker", () => {
+  const guard = read("tools/check-pistis-translation.js");
+  const release = read("tools/release.py");
+  assert.match(guard, /source\.pageCount/);
+  assert.match(guard, /polish-translations\.js/);
+  assert.match(guard, /data-pistis-text-page/);
+  assert.match(release, /check-pistis-translation\.js/);
+  assert.match(read("package.json"), /test:translation/);
+});

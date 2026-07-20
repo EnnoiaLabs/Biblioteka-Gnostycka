@@ -155,6 +155,56 @@ async function main() {
     assert.ok((await page.locator("#pageText").innerText()).trim().length > 20);
     await page.locator("#nextPage").click();
     await page.waitForFunction(() => document.querySelector("#pageInput")?.value === "49", null, { timeout: 5000 });
+
+    if (process.env.GNOSTYK_LIGHT_BROWSER_TEST !== "1") {
+      trace("pistis-translation-255-pages");
+      await page.locator("#polishMode").click();
+      await page.waitForFunction(() => localStorage.getItem("ps.readerMode") === "pl", null, { timeout: 5000 });
+      await page.goto(`http://127.0.0.1:${port}/?book=pistis-sophia&view=reader&page=48`, {
+        waitUntil: "commit", timeout: 20000
+      });
+      await page.waitForSelector('[data-pistis-text-page="255"]', { timeout: 60000 });
+      const textLayerResult = await page.evaluate(() => {
+        const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
+        const samplesPresent = (rendered, expected) => {
+          const words = normalize(expected).split(" ").filter(word => word.length > 2);
+          const positions = [0, Math.floor(words.length / 3), Math.floor(words.length * 2 / 3), Math.max(0, words.length - 10)];
+          return positions.every(position => normalize(rendered).includes(words.slice(position, position + 8).join(" ")));
+        };
+        const missing = [];
+        for (let number = 49; number <= 255; number += 1) {
+          const rendered = document.querySelector(`[data-pistis-text-page="${number}"]`)?.textContent || "";
+          if (!samplesPresent(rendered, window.GNOSTYK_POLISH_TRANSLATIONS[number])) missing.push(number);
+        }
+        const page48Main = document.querySelector('[data-pistis-text-page="48"]')?.textContent || "";
+        return { missing, page48Main };
+      });
+      assert.deepEqual(textLayerResult.missing, [], `pages not rendered from Polish source: ${textLayerResult.missing.join(", ")}`);
+
+      await page.goto(`http://127.0.0.1:${port}/?book=pistis-sophia&view=reader&page=1`, {
+        waitUntil: "commit", timeout: 20000
+      });
+      await page.waitForSelector('[data-addenda-text-page="48"]', { timeout: 60000 });
+      const addendaResult = await page.evaluate(page48Main => {
+        const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
+        const samplesPresent = (rendered, expected) => {
+          const words = normalize(expected).split(" ").filter(word => word.length > 2);
+          const positions = [0, Math.floor(words.length / 3), Math.floor(words.length * 2 / 3), Math.max(0, words.length - 10)];
+          return positions.every(position => normalize(rendered).includes(words.slice(position, position + 8).join(" ")));
+        };
+        const missing = [];
+        for (let number = 1; number <= 47; number += 1) {
+          const rendered = document.querySelector(`[data-addenda-text-page="${number}"]`)?.textContent || "";
+          if (!samplesPresent(rendered, window.GNOSTYK_POLISH_TRANSLATIONS[number])) missing.push(number);
+        }
+        const page48Intro = document.querySelector('[data-addenda-text-page="48"]')?.textContent || "";
+        const page48Complete = samplesPresent(`${page48Intro} ${page48Main}`, window.GNOSTYK_POLISH_TRANSLATIONS[48]);
+        return { missing, page48Complete };
+      }, textLayerResult.page48Main);
+      assert.deepEqual(addendaResult.missing, [], `addenda pages not rendered from Polish source: ${addendaResult.missing.join(", ")}`);
+      assert.equal(addendaResult.page48Complete, true, "page 48 split is not fully represented in the reader");
+      console.log("[OK] Strażnik widoczności: 255/255 polskich stron wyrenderowanych z właściwego źródła");
+    }
     assert.deepEqual(runtimeErrors, [], runtimeErrors.join("\n"));
     console.log("[OK] Chromium: start aplikacji, cztery tryby, nawigacja i zmiana księgi");
   } finally {

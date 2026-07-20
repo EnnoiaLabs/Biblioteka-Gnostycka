@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.6 - Strażnik kompletności tłumaczenia Pistis Sophii
+
+### PL
+- Dodano obowiązkową kontrolę kompletności wszystkich 255 stron polskiego tłumaczenia.
+- Strażnik sprawdza kolejność, puste i ucięte strony, ścieżkę renderowania oraz dostępność offline.
+- Test Chromium porównuje wszystkie 255 stron z treścią rzeczywiście widoczną w czytniku.
+
+### EN
+- Added a mandatory completeness check for all 255 pages of the Polish translation.
+- The guard checks ordering, empty or truncated pages, the rendering path and offline availability.
+- The Chromium test compares all 255 pages with the content actually visible in the reader.
+
 ## 1.7.5 - Udokumentowana metoda polskiego przekładu
 
 ### PL

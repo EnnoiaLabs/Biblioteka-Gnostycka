@@ -24,7 +24,7 @@ if (isLogionBook && activeBookModule?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Biblioteka Gnozy",
-  version: "1.7.5",
+  version: "1.7.6",
   updated: "2026-07-15",
   currentWork: {
     id: activeBook.id || "pistis-sophia",

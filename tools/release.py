@@ -41,6 +41,7 @@ REQUIRED = [
     "tools/check-performance.js",
     "performance-budgets.json",
     "tools/check-release-assets.js",
+    "tools/check-pistis-translation.js",
     "tools/release.py",
     "release-exclusions.json",
     "tests/smoke.test.js",
@@ -217,6 +218,18 @@ def check() -> None:
         except OSError as exc:
             errors.append(f"Nie można uruchomić kontroli zasobów paczki: {exc}")
 
+    translation_checker = ROOT / "tools/check-pistis-translation.js"
+    if translation_checker.is_file():
+        try:
+            result = subprocess.run(
+                ["node", str(translation_checker)], cwd=ROOT,
+                capture_output=True, text=True, check=False,
+            )
+            if result.returncode != 0:
+                errors.append("Kompletność tłumaczenia Pistis Sophii:\n" + (result.stderr or result.stdout).strip())
+        except OSError as exc:
+            errors.append(f"Nie można uruchomić Strażnika kompletności tłumaczenia: {exc}")
+
     test_files = sorted((ROOT / "tests").glob("*.test.js"))
     if not test_files:
         errors.append("Brak testów JavaScript w katalogu tests")
@@ -243,6 +256,7 @@ def check() -> None:
     print(f"KONTROLA WYDANIA: OK — wersja {version}")
     print(f"[OK] wymagane pliki: {len(REQUIRED)}")
     print(f"[OK] UTF-8 i brak znaków zastępczych")
+    print("[OK] Strażnik kompletności tłumaczenia: 255/255 stron")
     print(f"[OK] numer wersji i cache PWA")
     print(f"[OK] ciągłość CHANGELOG ({min(25, len(versions))} najnowszych wpisów)")
     print(f"[OK] publiczna historia zmian ({len(public_versions)} kamieni milowych)")
