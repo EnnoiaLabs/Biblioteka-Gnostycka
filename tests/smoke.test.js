@@ -269,6 +269,9 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
     assert.ok(typeof translations[page] === "string" && translations[page].length > 20, `missing Polish page ${page}`);
   }
   assert.match(translations[48], /pięć Znamion/);
+  assert.match(translations[48], /Po zmartwychwstaniu Jezus przez jedenaście lat rozmawiał ze swoimi uczniami/);
+  assert.match(translations[48], /dwudziestego czwartego Misterium na zewnątrz i poniżej/);
+  assert.doesNotMatch(translations[48], /dwudziestego czwartego Misterium od wewnątrz ku zewnętrzu/);
   assert.match(translations[49], /pięciu Znamionach/);
   assert.match(translations[50], /wszyscy trwali w głębokim milczeniu/);
   assert.match(translations[52], /wszystkie trzęsienia ziemi\?/);
@@ -276,7 +279,7 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[56], /Misterium pięciu Znamion/);
   assert.match(translations[64], /w jaki sposób zostaną szybko oczyszczone/);
   assert.match(translations[73], /zamieszkująca mnie moc światłości/);
-  assert.match(translations[85], /Filip wystąpił naprzód/);
+  assert.match(translations[85], /Filip wystąpił/);
   assert.match(translations[86], /Zamieszkująca mnie moc światłości/);
   assert.match(translations[94], /jej pokuta zostanie przyjęta/);
   assert.match(translations[102], /mam dla niej zrozumienie/);
@@ -287,7 +290,7 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[126], /mówię do was\?/);
   assert.match(translations[130], /zamieszkująca mnie moc światłości/);
   assert.match(translations[145], /zbawiła mnie od was\?/);
-  assert.match(translations[154], /w królestwie Światłości\?/);
+  assert.match(translations[154], /w Królestwie Światłości\?/);
   assert.match(translations[155], /Bliźniaczy Zbawiciele/);
   assert.match(translations[157], /ochrzczą je/);
   assert.match(translations[158], /zamieszkująca mnie moc światłości/);
@@ -301,21 +304,81 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[193], /misteriów drugiej przestrzeni\?/);
   assert.match(translations[196], /z dokładnością i pewnością/);
   assert.match(translations[201], /I stopniowo moc i dusza/);
-  assert.match(translations[205], /Maryja ponownie wystąpiła naprzód/);
+  assert.match(translations[205], /Maryja ponownie wystąpiła/);
   assert.match(translations[209], /naprawdę badam dokładnie/);
-  assert.match(translations[210], /miej dla mnie cierpliwość/);
+  assert.match(translations[210], /miej cierpliwość, gdy cię pytam/);
   assert.match(translations[216], /misteriów Niewypowiadalnego/);
   assert.match(translations[217], /otrzyma wiele ciosów/);
-  assert.match(translations[218], /Maryja ponownie wystąpiła naprzód/);
+  assert.match(translations[218], /Maryja ponownie wystąpiła/);
   assert.match(translations[221], /miej dla mnie cierpliwość/);
-  assert.match(translations[222], /odziedziczyło królestwo Światłości\?/);
+  assert.match(translations[222], /odziedziczyło Królestwo Światłości\?/);
   assert.match(translations[225], /zmiłuj się nade mną/);
   assert.match(translations[228], /dzikich zwierząt, i gadów/);
-  assert.match(translations[229], /Salome wystąpiła naprzód/);
+  assert.match(translations[229], /Salome wystąpiła/);
   assert.match(translations[231], /czy dzikich zwierząt, czy gadów/);
   assert.match(translations[233], /kto szuka prawdziwie/);
   assert.match(translations[235], /czy żadna dusza nie weszła do Światłości\?/);
   assert.match(translations[247], /jest prawdziwe Misterium chrztu/);
+  const completePolishTranslation = Object.values(translations).join("\n");
+  assert.doesNotMatch(completePolishTranslation, /wystąpił naprzód|wystąpiła naprzód/);
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /w jakim typie (?:będą|ustanowieni|więc \|298\. chrzty|Misterium chrztu|odpuszczają|jest zewnętrzna)/
+  );
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /przyszła czynić pokutę|nie zawrócił ku pokucie|miłosiernie usposobione|otrzyma cierpienie w karaniach sądów/
+  );
+  assert.match(translations[219], /Jaka jest natura zewnętrznej ciemności/);
+  assert.match(translations[214], /przyszła, aby pokutować/);
+  assert.match(translations[216], /dozna w karach sądowych/);
+  assert.match(translations[210], /Poznaliśmy już sposób, w jaki chrzty odpuszczają grzechy/);
+  assert.match(translations[216], /lecz później zgrzeszył i nie zwrócił się ku pokucie/);
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /Oto jawnie poznaliśmy typ, w którym|miej dla mnie cierpliwość, gdy cię pytam|jako przekraczający/
+  );
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /aż do krainy, aż do której otrzymał misteria|w prawdzie tęskni za Bogiem|prawdziwie tęskni za Bogiem|przepuśćcie (?:go|także)|w typie (?:\|303\. )?chrztów/
+  );
+  assert.match(translations[177], /krainy odpowiadającej otrzymanym misteriom/);
+  assert.match(translations[194], /dopuśćcie go dalej/);
+  assert.match(translations[210], /na sposób \|303\. chrztów/);
+  assert.match(translations[215], /pozwól jej odziedziczyć Królestwo Światłości/);
+  assert.match(translations[215], /znaczenie tego, co spotkało tę kobietę/);
+  assert.match(translations[215], /zapowiedziałeś nam wcześniej w przypowieści/);
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /czyni swoje ciało bezpożytecznym|pozwoliłeś jej odziedziczyć|misteria rzeczy, które przypadły w udziale tej kobiecie/
+  );
+  assert.doesNotMatch(completePolishTranslation, /\bNiewysłowion(?:y|ego|ym)\b/);
+  assert.match(translations[171], /dwanaście porządków Niewysłowionych/);
+  assert.match(translations[64], /Maryja odpowiedziała i rzekła do Jezusa/);
+  assert.doesNotMatch(completePolishTranslation, /\bkrólestw(?:o|a|ie|em|u) Światłości/);
+  assert.match(translations[190], /ponownie posłani ku światu/);
+  assert.match(translations[190], /Miłujcie ludzi/);
+  assert.match(translations[193], /zachowa przy Życiu i zbawi choćby jedną duszę/);
+  assert.match(translations[195], /nie oszukuje, nie udaje ani nie kieruje nim ciekawość/);
+  assert.match(translations[194], /ponownie posłana ku światu ludzi/);
+  assert.match(translations[196], /prowadził życie w wielkiej prawości oraz trwał w głębokiej pokucie/);
+  assert.match(translations[216], /To wyższe Misterium przyjmie jego pokutę i odpuści mu grzechy/);
+  assert.match(translations[255], /Wyszli po trzech ku czterem strefom nieba/);
+  assert.doesNotMatch(completePolishTranslation, /odgrywani(?:e|a) roli|odgrywaj(?:ą|ąc)|odgrywali przed nami rolę/);
+  assert.doesNotMatch(completePolishTranslation, /wielkim obywatelstwie|świat powyżej|to ostatnie dlatego/);
+  assert.doesNotMatch(
+    completePolishTranslation,
+    /przekładu przekładu|prawdziwie w prawdzie|pośpieszą szybko|będzie nieistniejąca|jakichś takich misteriów/
+  );
+  assert.doesNotMatch(completePolishTranslation, /(?:kontynuowała|kontynuował) i rzekł[ae]?/);
+  assert.match(translations[17], /przekładu dokonanego z innego przekładu/);
+  assert.match(translations[196], /przestanie istnieć na wieki/);
+  assert.match(translations[199], /dokonamy jednego z takich misteriów/);
+  assert.match(translations[216], /dwa lub trzy misteria \|315\. drugiej albo trzeciej przestrzeni/);
+  assert.match(translations[242], /Jezus mówił dalej: „Czwarty porządek/);
+  assert.doesNotMatch(completePolishTranslation, /(^|\s)'(?=\S)|(\S)'(?=$|\s)/m);
+  assert.doesNotMatch(completePolishTranslation, / - /);
+  assert.match(translations[190], /„Mówcie im: Miłujcie ludzi/);
   assert.match(read("app.js"), /const polishTranslations = window\.GNOSTYK_POLISH_TRANSLATIONS \|\| \{\};/);
 });
 

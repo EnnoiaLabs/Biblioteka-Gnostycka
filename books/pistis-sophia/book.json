@@ -18,6 +18,8 @@
   ],
   "defaultReaderMode": "pl",
   "source": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, London: J. M. Watkins, 1921",
+  "translationBasis": "Polski przekład na podstawie G. R. S. Meada (1921), poddany porównawczej kontroli z przekładem Violet MacDermot (1978) oraz koptyjską transkrypcją tekstu według tradycji Schwartze-Petermann/Schmidt.",
+  "translationMethod": "Mead stanowi podstawę ciągłego przekładu. MacDermot i warstwa koptyjska służą do kontroli kontekstu, znaczenia i terminologii; zatwierdzone wybory są dokumentowane i automatycznie sprawdzane.",
   "sourceRights": "Domena publiczna",
   "themes": "themes.json"
 }

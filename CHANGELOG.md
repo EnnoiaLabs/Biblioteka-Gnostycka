@@ -1,5 +1,243 @@
 # Changelog
 
+## 1.7.1 - Czytelniejszy opis kontroli terminologii
+
+### PL
+- W opisach dla czytelników zastąpiono techniczną nazwę «Strażnik» jasnym określeniem automatycznej kontroli terminologii.
+- Historia publiczna wyjaśnia teraz, że decyzje są dokumentowane wraz z uzasadnieniem i sprawdzane w kolejnych wersjach.
+
+### EN
+- Replaced the technical ‘Guardian’ name in reader-facing descriptions with a clear explanation of automated terminology checks.
+- The public history now states that decisions are documented with rationale and checked in subsequent releases.
+
+## 1.7.0 - Pełny audyt polskiego przekładu Pistis Sophii
+
+### PL
+- Zakończono porównawczy audyt całego polskiego tekstu Pistis Sophii na stronach 48–255.
+- Opisano metodę przekładu: podstawą jest Mead (1921), a MacDermot (1978) i koptyjski służą do kontroli sensu i terminologii.
+- Najważniejsze decyzje terminologiczne są dokumentowane wraz z uzasadnieniem i automatycznie sprawdzane w kolejnych wersjach.
+
+### EN
+- Completed a comparative audit of the entire Polish Pistis Sophia text on pages 48–255.
+- Documented the translation method: Mead (1921) is the continuous base, while MacDermot (1978) and Coptic provide contextual and terminological control.
+- Key terminology decisions are documented with their rationale and automatically checked in subsequent releases.
+
+## 1.6.23 - Końcowy audyt przekładu stron 231–255
+
+### PL
+- Porównano końcowe strony 231–255 z Meadem, terminologią MacDermot i transkrypcją koptyjską.
+- Zmieniono mylącą «plazmę» na «uformowane ciało» i zapisano źródłową regułę Strażnika.
+- Poprawiono wszystkie przypadki «porwania w zachwyceniu» na zgodne z kontekstem «uprowadzenie przemocą».
+
+### EN
+- Compared the final pages 231–255 with Mead, MacDermot terminology, and the bundled Coptic transcription.
+- Replaced the misleading ‘plasma’ calque with ‘formed body’ and recorded a sourced Guardian rule.
+- Corrected every false ‘rapture’ rendering to contextually accurate violent seizure.
+
+## 1.6.22 - Audyt przekładu stron 201–230
+
+### PL
+- Porównano strony 201–230 z przekładem Meada, terminologią MacDermot i transkrypcją koptyjską.
+- Zapisano w Strażniku źródłowe decyzje dla «ducha naśladowczego» i «Pierwszej Emanacji».
+- Usunięto fałszywego przyjaciela «Pierwsze Wydanie» oraz poprawiono dwie kalki redakcyjne.
+
+### EN
+- Compared pages 201–230 with Mead, MacDermot terminology, and the bundled Coptic transcription.
+- Recorded sourced Guardian decisions for the counterfeiting spirit and the First Emanation.
+- Removed the false friend ‘First Edition’ and corrected two editorial calques.
+
+## 1.6.21 - Audyt przekładu stron 171–200
+
+### PL
+- Porównano strony 171–200 z przekładem Meada, terminologią MacDermot i transkrypcją koptyjską.
+- Ujednolicono nazwę «Misterium naczelne» i zapisano decyzję źródłową w Strażniku tłumaczenia.
+- Poprawiono kontekstowe «objaśnienie wszystkich słów» oraz trzy usterki redakcyjne bez zmiany terminów doktrynalnych.
+
+### EN
+- Compared pages 171–200 with Mead, MacDermot terminology, and the bundled Coptic transcription.
+- Standardized the name ‘Master Mystery’ as «Misterium naczelne» and recorded the sourced decision in the translation guardian.
+- Corrected the contextual wording for explaining all words and three editorial defects without altering doctrinal terminology.
+
+## 1.6.20 - Audyt przekładu stron 141–170
+
+### PL
+- Przeprowadzono porównawczy audyt stron 141–170 Pistis Sophii i udokumentowano wynik w raporcie.
+- Ujednolicono systemową nazwę Pierwsze Przykazanie i rozszerzono jej automatyczną ochronę.
+- Ujednolicono termin Potrójnie Duchowy oraz zapisano jego podstawę źródłową i koptyjską w Strażniku Tłumaczenia.
+
+### EN
+- Completed a comparative audit of Pistis Sophia pages 141–170 and documented the findings.
+- Standardized the system name First Commandment and extended its automated protection.
+- Standardized the term Thrice-spiritual and recorded its source and Coptic basis in the Translation Guardian.
+
+## 1.6.19 - Audyt przekładu stron 111–140
+
+### PL
+- Porównano strony 111–140 z Meadem, MacDermot oraz dołączoną warstwą koptyjską.
+- Ujednolicono nazwy własne jako Jeu, Jabraoth i Jaldabaoth zgodnie z polską transliteracją.
+- Poprawiono dwie bezpieczne usterki językowe i zabezpieczono transliterację w Strażniku.
+
+### EN
+- Compared pages 111–140 with Mead, MacDermot, and the bundled Coptic layer.
+- Standardized the proper names as Jeu, Jabraoth, and Jaldabaoth for Polish transliteration.
+- Corrected two safe language issues and protected the transliteration in the guardian.
+
+## 1.6.18 - Audyt przekładu stron 81–110
+
+### PL
+- Porównano strony 81–110 z Meadem, MacDermot oraz dołączoną warstwą koptyjską.
+- Zastąpiono kalkę rozwiązanie pokuty lub słów naturalnym terminem objaśnienie.
+- Strażnik rozróżnia interpretację tekstu od rzeczywistego rozwiązania więzów, pieczęci, Mieszaniny lub świata.
+
+### EN
+- Compared pages 81–110 with Mead, MacDermot, and the bundled Coptic layer.
+- Replaced the literal solution of the repentance or words with the natural Polish term for explanation.
+- The guardian distinguishes textual interpretation from the actual dissolution of bonds, seals, the Mixture, or the world.
+
+## 1.6.17 - Audyt przekładu stron 48–80
+
+### PL
+- Porównano strony 48–80 z przekładem Meada, przekładem MacDermot oraz dołączoną warstwą koptyjską.
+- Przyjęto nazwę własną Authades z objaśnieniem jej znaczenia przy pierwszym wystąpieniu.
+- Strażnik chroni formę Authades i zapisuje dokładne koptyjskie świadectwo ⲁⲩⲑⲁⲇⲏⲥ.
+
+### EN
+- Compared pages 48–80 with Mead, MacDermot, and the bundled Coptic layer.
+- Adopted the proper name Authades with its meaning explained at first occurrence.
+- The guardian now protects Authades and records the exact Coptic evidence ⲁⲩⲑⲁⲇⲏⲥ.
+
+## 1.6.16 - Strażnik decyzji tłumaczeniowych
+
+### PL
+- Dodano maszynowy rejestr wiążących decyzji tłumaczeniowych wraz ze źródłami i uzasadnieniem.
+- Strażnik wymaga wariantów Meada i MacDermot, informacji o podstawie koptyjskiej oraz gotowego przypisu.
+- Zabezpieczono terminy Przykazania i zapis głowa wszechświata (Całości) przed przypadkową zmianą.
+
+### EN
+- Added a machine-readable registry of binding translation decisions with sources and rationale.
+- The guardian requires Mead and MacDermot variants, Coptic-basis evidence, and a reader footnote.
+- Protected the Commandment terminology and the wording head of the universe (the All) from accidental changes.
+
+## 1.6.15 - Początek porównawczego audytu Pistis Sophii
+
+### PL
+- Rozpoczęto ponowny audyt od pierwszego rozdziału tekstu właściwego.
+- Porównano polski przekład z wydaniem Meada oraz przekładem MacDermot opartym na koptyjskim tekście Schmidta.
+- Skorygowano kierunek położenia dwudziestego czwartego Misterium i zapisano nierozstrzygnięty termin Pierwszego Przykazania.
+
+### EN
+- Restarted the audit from the first chapter of the main text.
+- Compared the Polish translation with Mead and MacDermot's translation based on Schmidt's Coptic text.
+- Corrected the location of the twenty-fourth Mystery and documented the unresolved First Ordinance terminology.
+
+## 1.6.14 - Piąta korekta językowa Pistis Sophii
+
+### PL
+- Poprawiono spójność językową sceny próby Piotra i pokutującej kobiety.
+- Skorygowano błędne formy czasu oraz niezrozumiałe kalki dotyczące znaczenia przypowieści.
+- Dodano testy chroniące poprawione brzmienie stron 214–215.
+
+### EN
+- Improved linguistic consistency in the scene of Peter's test and the penitent woman.
+- Corrected faulty tense forms and unclear calques concerning the meaning of the parable.
+- Added tests protecting the revised wording on pages 214–215.
+
+## 1.6.13 - Czwarta korekta językowa Pistis Sophii
+
+### PL
+- Usunięto kolejne kalki składniowe dotyczące dziedziczenia krain i szczerego pragnienia Boga.
+- Doprecyzowano, że przepuszczenie pokutującego oznacza dopuszczenie go do kolejnych misteriów.
+- Ujednolicono opis sposobu odpuszczania grzechów przez chrzty i wyższe misteria.
+
+### EN
+- Removed further syntactic calques concerning inherited regions and sincere longing for God.
+- Clarified that allowing a penitent through means admitting them to subsequent mysteries.
+- Standardized descriptions of how baptisms and higher mysteries forgive sins.
+
+## 1.6.12 - Trzecia korekta językowa Pistis Sophii
+
+### PL
+- Skrócono wybrane przeciążone konstrukcje składniowe w polskim przekładzie.
+- Uproszczono pytania o działanie chrztów oraz formuły wprowadzające wypowiedzi uczniów.
+- Zachowano rytualne powtórzenia tam, gdzie należą do stylu i struktury tekstu.
+
+### EN
+- Shortened selected overloaded syntactic constructions in the Polish translation.
+- Simplified questions about baptisms and formulas introducing disciples' speeches.
+- Preserved ritual repetitions where they belong to the style and structure of the text.
+
+## 1.6.11 - Druga korekta językowa Pistis Sophii
+
+### PL
+- Usunięto kolejną partię dosłownych kalk składniowych z polskiego przekładu.
+- Uproszczono zwroty dotyczące występowania mówców, sposobu działania misteriów i opisu pokuty.
+- Doprecyzowano zdanie o karach sądowych bez zmiany jego znaczenia.
+
+### EN
+- Removed another group of literal syntactic calques from the Polish translation.
+- Simplified phrases describing speakers stepping forward, the operation of mysteries, and repentance.
+- Clarified the sentence about judicial punishments without changing its meaning.
+
+## 1.6.10 - Pierwsza korekta językowa Pistis Sophii
+
+### PL
+- Usunięto jednoznaczne pleonazmy i kalki składniowe w polskim przekładzie Pistis Sophii.
+- Uproszczono mechaniczne formuły mówienia oraz wskazano podmiot w miejscach, gdzie był niejasny.
+- Zachowano celowe powtórzenia rytualne, hierarchiczne i imienne.
+
+### EN
+- Clear pleonasms and syntactic calques were removed from the Polish Pistis Sophia translation.
+- Mechanical speech formulas were simplified and unclear speakers were made explicit.
+- Intentional ritual, hierarchical, and name repetitions were preserved.
+
+## 1.6.9 - Ujednolicenie typografii Pistis Sophii
+
+### PL
+- Ujednolicono typografię wszystkich 255 stron polskiej warstwy Pistis Sophii.
+- Dialogi otrzymały polskie cudzysłowy, a pauzy zastąpiono półpauzami bez naruszania apostrofów w nazwach.
+- Dodano testy chroniące spójność typograficzną pełnego tekstu.
+
+### EN
+- Typography was standardized across all 255 pages of the Polish Pistis Sophia layer.
+- Dialogue now uses Polish quotation marks and parenthetical pauses use en dashes without altering apostrophes in names.
+- Regression tests now protect the typography of the complete text.
+
+## 1.6.8 - Kontekstowe korekty przekładu Pistis Sophii
+
+### PL
+- Poprawiono trzy niejednoznaczne fragmenty po porównaniu z przekładami Hornera i Schmidta.
+- Termin politeia oddano jako sposób prawego życia, a powrót duszy wyjaśniono jako ponowne posłanie ku światu ludzi.
+- Niejasne zaimki w nauce o wyższych misteriach zastąpiono jednoznacznym opisem hierarchii.
+
+### EN
+- Three ambiguous passages were corrected after comparison with the translations by Horner and Schmidt.
+- Politeia is now rendered as a righteous way of life, while the soul's return is clarified as being sent again toward the human world.
+- Ambiguous pronouns in the teaching on higher mysteries were replaced with an explicit description of the hierarchy.
+
+## 1.6.7 - Korekty zgodności przekładu Pistis Sophii
+
+### PL
+- Poprawiono sześć potwierdzonych problemów zgodności polskiego przekładu z angielską podstawą Meada.
+- Usunięto mylące kalki dotyczące udawania, powrotu do świata, zachowania duszy przy Życiu i grup apostołów.
+- Dodano testy regresyjne chroniące poprawione znaczenia.
+
+### EN
+- Six confirmed accuracy issues in the Polish translation were corrected against Mead's English source.
+- Misleading calques concerning pretence, return to the world, keeping a soul in Life, and groups of apostles were removed.
+- Regression tests now protect the corrected meanings.
+
+## 1.6.6 - Ujednolicenie terminologii Pistis Sophii
+
+### PL
+- Ujednolicono kanoniczne terminy w całym polskim przekładzie Pistis Sophii.
+- Zestandaryzowano formy „Niewypowiadalny”, „Maryja” oraz „Królestwo Światłości”.
+- Dodano test słownika kanonicznego chroniący zatwierdzone warianty terminologiczne.
+
+### EN
+- Canonical terminology was unified throughout the Polish translation of Pistis Sophia.
+- The forms ‘Niewypowiadalny’, ‘Maryja’, and ‘Królestwo Światłości’ were standardized.
+- A canonical vocabulary regression test now protects the approved terminology.
+
 ## 1.6.5 - Redakcja przekładu stron 211–255
 
 ### PL

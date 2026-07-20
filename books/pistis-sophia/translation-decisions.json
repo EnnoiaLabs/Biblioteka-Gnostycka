@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "description": "Wiążący rejestr decyzji tłumaczeniowych Pistis Sophii.",
+  "decisions": [
+    {
+      "id": "numbered-commandments",
+      "status": "approved",
+      "selectedPolish": "Pierwsze Przykazanie; Drugie Przykazanie; analogiczne nazwy numerowane",
+      "scope": "Wszystkie numerowane Przykazania jako terminy systemowe.",
+      "rationale": "Nazwy Przykazania są ważnym elementem wewnętrznego systemu pojęciowego polskiego przekładu i pozostają rozpoznawalne dla czytelnika.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+          "rendering": "First Commandment",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "first ordinance",
+          "basis": "Przekład angielski sporządzony bezpośrednio na podstawie koptyjskiego tekstu Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "indirectly-attested",
+        "evidence": "Edycja MacDermot oparta na koptyjskim tekście Schmidta oddaje termin jako first ordinance.",
+        "exactForm": null,
+        "uncertaintyNote": "Dokładna forma koptyjska i jej transliteracja wymagają osobnej weryfikacji specjalistycznej; nie wolno ich zgadywać."
+      },
+      "footnote": "W przekładzie Violet MacDermot (1978), opartym na koptyjskim tekście wydanym przez Carla Schmidta, termin oddano jako „first ordinance” („Pierwsze Ustanowienie”). W niniejszym przekładzie zachowano tradycyjną nazwę „Pierwsze Przykazanie”.",
+      "enforcement": {
+        "minOccurrences": 5,
+        "requiredPatterns": ["Pierwsze Przykazanie"],
+        "forbiddenPatterns": ["Pierwsze Ustanowienie", "Pierwsze Zarządzenie", "pierwsze Przykazanie", "pierwszego Przykazania", "pierwszym Przykazaniu", "pierwszym Przykazaniem"]
+      }
+    },
+    {
+      "id": "head-of-the-all",
+      "status": "approved",
+      "selectedPolish": "głowa wszechświata (Całości)",
+      "scope": "Pierwsze pełne przedstawienie hierarchii w rozdziale 1, strony aplikacji 48–49.",
+      "rationale": "Wyrażenie „głowa wszechświata” brzmi naturalnie po polsku, a nawias „Całości” zachowuje techniczne znaczenie poświadczone przez nowszy przekład.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+          "rendering": "head of the universe",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "head of the All",
+          "basis": "Przekład z koptyjskiego tekstu Schmidta; przypis MacDermot wskazuje greckie τὸ πᾶν."
+        }
+      ],
+      "coptic": {
+        "status": "source-note",
+        "evidence": "MacDermot tłumaczy koptyjski tekst jako the All i w uwadze identyfikuje greckie τὸ πᾶν.",
+        "exactForm": null,
+        "uncertaintyNote": "Raport zachowuje świadectwo edycji MacDermot; dokładnej formy koptyjskiej nie deklaruje bez osobnej kontroli rękopisu."
+      },
+      "footnote": "Violet MacDermot (1978), przekładając koptyjski tekst Schmidta, używa „the All” i wskazuje greckie τὸ πᾶν. Nawias „Całości” sygnalizuje tutaj techniczne znaczenie terminu.",
+      "enforcement": {
+        "minOccurrences": 2,
+        "requiredPatterns": ["głową wszechświata (Całości)"],
+        "forbiddenPatterns": ["głową Całości i głową"]
+      }
+    },
+    {
+      "id": "authades-proper-name",
+      "status": "approved",
+      "selectedPolish": "Authades; przy pierwszym wystąpieniu: Authades (dosł. „Samowolny”)",
+      "scope": "Nazwa własna w opowieści o Pistis Sophii; pierwsze wystąpienie na stronie 69 i wszystkie dalsze wystąpienia w tekście.",
+      "rationale": "Mead przełożył znaczenie imienia jako Self-willed, lecz MacDermot zachowuje nazwę Authades. Koptyjska warstwa aplikacji poświadcza grecką nazwę własną zapisaną alfabetem koptyjskim, dlatego polski przekład zachowuje imię, a jego znaczenie objaśnia tylko przy pierwszym wystąpieniu.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 29–31",
+          "rendering": "Self-willed",
+          "basis": "Mead tłumaczy znaczenie imienia i używa go jak nazwy własnej."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "Authades",
+          "basis": "MacDermot zachowuje nazwę własną występującą w koptyjskim tekście Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Forma ⲁⲩⲑⲁⲇⲏⲥ jest wielokrotnie poświadczona w koptyjskiej warstwie tekstowej, m.in. w wierszach rękopisu 42/24, 44/22 i 45/5.",
+        "exactForm": "ⲁⲩⲑⲁⲇⲏⲥ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) przekłada imię jako „Self-willed” („Samowolny”), natomiast Violet MacDermot (1978), opierając się na koptyjskim tekście Schmidta, zachowuje formę „Authades”. W koptyjskim tekście występuje zapis ⲁⲩⲑⲁⲇⲏⲥ.",
+      "enforcement": {
+        "minOccurrences": 120,
+        "requiredPatterns": ["Authades"],
+        "forbiddenPatterns": ["emanacje Samowolnego", "boga Samowolnego", "moc Samowolnego"]
+      }
+    },
+    {
+      "id": "interpretive-explanation-not-solution",
+      "status": "approved",
+      "selectedPolish": "objaśnienie pokuty, słów albo pieśni",
+      "scope": "Formuły, w których uczeń objaśnia sens pokuty Sophii, psalmu, pieśni lub wypowiedzi; szczególnie strony 81–110 i analogiczne miejsca w całym tekście.",
+      "rationale": "W tych scenach mówca przedstawia interpretację proroctwa i odnosi jego wersety do doświadczeń Sophii. Polskie „rozwiązanie” sugerowało zagadkę albo proces rozwiązywania, natomiast „objaśnienie” jasno oddaje funkcję wypowiedzi i pozostaje naturalne w różnych konstrukcjach gramatycznych.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 33–57",
+          "rendering": "solution of the repentance / solution of the words",
+          "basis": "Angielska podstawa aplikacji używa dosłownego terminu solution."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "interpretation of the repentance / interpretation of the words",
+          "basis": "MacDermot oddaje funkcję wypowiedzi jako interpretację tekstu."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "W odpowiednim kontekście koptyjskim występuje rzeczownik ⲡⲃⲱⲗ, m.in. w wierszu 58/3: ⲡⲃⲱⲗ ⲙ̅ ⲡⲙⲩⲥⲧⲏⲣⲓⲟⲛ ⲛ̅ ⲧⲙⲉⲧⲁⲛⲟⲓⲁ. Sam rdzeń może też oznaczać rozwiązanie lub uwolnienie, dlatego znaczenie ustala kontekst interpretacji pokuty.",
+        "exactForm": "ⲡⲃⲱⲗ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) używa formuły „solution of the repentance/words”, natomiast Violet MacDermot (1978), przekładając koptyjski tekst Schmidta, oddaje ją jako „interpretation”. Koptyjskie ⲡⲃⲱⲗ ma szersze pole znaczeniowe; w scenach zestawiających pokuty Sophii z psalmami chodzi o ich objaśnienie.",
+      "enforcement": {
+        "minOccurrences": 80,
+        "requiredPatterns": ["objaśnienie"],
+        "forbiddenPatterns": ["rozwiązanie pokuty", "rozwiązanie słów", "rozwiązania wszystkich słów", "rozwiązanie pieśni", "rozwiązanie Misterium pokuty"]
+      }
+    },
+    {
+      "id": "polish-j-transliteration-of-iota-names",
+      "status": "approved",
+      "selectedPolish": "Jeu, Jabraoth i Jaldabaoth",
+      "scope": "Nazwy własne rozpoczynające się w źródle koptyjskim od litery ⲓ; wszystkie wystąpienia w polskiej warstwie Pistis Sophii.",
+      "rationale": "Polski tekst mieszał angielskie warianty z Y oraz polskie formy z J. Zapis z J odpowiada polskiej transliteracji początkowego dźwięku i jest już dominującą konwencją w aplikacji. Ujednolicenie zapobiega błędnemu odczytaniu wariantów jako różnych postaci.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+          "rendering": "Yew, Yabraoth, Yaldabaoth",
+          "basis": "Mead stosuje angielską konwencję transliteracyjną z początkowym Y."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "Jeu, Jabraoth, Jaldabaoth",
+          "basis": "Nowszy przekład zachowuje formy nazw zgodne z zapisem źródłowym i konwencją używaną w polskiej warstwie."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja poświadcza formy ⲓⲉⲟⲩ (Jeu), ⲓⲁⲃⲣⲁⲱⲑ (Jabraoth) oraz ⲓⲁⲗⲇⲁⲃⲁⲱⲑ (Jaldabaoth), m.in. w wierszach 360/6, 356/6 i 382/3.",
+        "exactForm": "ⲓⲉⲟⲩ; ⲓⲁⲃⲣⲁⲱⲑ; ⲓⲁⲗⲇⲁⲃⲁⲱⲑ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) stosuje angielskie formy „Yew”, „Yabraoth” i „Yaldabaoth”. MacDermot (1978), opierając się na koptyjskim tekście Schmidta, używa form z J. W polskim przekładzie przyjęto konsekwentnie: Jeu, Jabraoth i Jaldabaoth; tekst koptyjski poświadcza odpowiednio ⲓⲉⲟⲩ, ⲓⲁⲃⲣⲁⲱⲑ i ⲓⲁⲗⲇⲁⲃⲁⲱⲑ.",
+      "enforcement": {
+        "minOccurrences": 5,
+        "requiredPatterns": ["Jeu", "Jabraoth", "Jaldabaoth"],
+        "forbiddenPatterns": ["Yew", "Yabraoth", "Yaldabaoth"]
+      }
+    },
+    {
+      "id": "thrice-spiritual-terminology",
+      "status": "approved",
+      "selectedPolish": "Potrójnie Duchowy; w liczbie mnogiej: Potrójnie Duchowi",
+      "scope": "Nazwa klas istot i porządków określanych w źródle jako Thrice-spiritual; wszystkie wystąpienia w polskiej warstwie Pistis Sophii.",
+      "rationale": "Forma «Potrójnie Duchowy» jest czytelna po polsku, zachowuje złożenie poświadczone w koptyjskim zapisie i dominuje w tekście. Wariant «Trzykroć-duchowy» w streszczeniu tworzył niepotrzebną drugą nazwę tej samej klasy.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdział 91",
+          "rendering": "Thrice-spiritual",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "triple-spiritual",
+          "basis": "Przekład angielski sporządzony bezpośrednio na podstawie koptyjskiego tekstu Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja poświadcza greckie złożenie zapisane alfabetem koptyjskim jako ⲧⲣⲓⲡⲛⲉⲩⲙⲁⲧⲟⲥ, m.in. w wierszach 204/18, 204/24 oraz 205/4–6.",
+        "exactForm": "ⲧⲣⲓⲡⲛⲉⲩⲙⲁⲧⲟⲥ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) używa formy «Thrice-spiritual», a MacDermot (1978) — «triple-spiritual». Koptyjski zapis ⲧⲣⲓⲡⲛⲉⲩⲙⲁⲧⲟⲥ zachowuje greckie złożenie; w polskim przekładzie przyjęto jednolicie nazwę «Potrójnie Duchowy».",
+      "enforcement": {
+        "minOccurrences": 10,
+        "requiredPatterns": ["Potrójnie Duchow"],
+        "forbiddenPatterns": ["Trzykroć-duchow", "Trzykroć Duchow"]
+      }
+    },
+    {
+      "id": "master-mystery-terminology",
+      "status": "approved",
+      "selectedPolish": "Misterium naczelne / naczelne Misterium",
+      "scope": "Nazwa nadrzędnego Misterium Pierwszego Misterium oraz odpowiadające jej nagłówki i streszczenia.",
+      "rationale": "Forma «Misterium naczelne» jasno opisuje nadrzędną rangę tego Misterium i jest już stosowana w tekście głównym. Hybrydowa forma «Misterium-Mistrz» w streszczeniach niepotrzebnie tworzyła drugą nazwę tego samego pojęcia.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 91 i 97–105",
+          "rendering": "master-mystery",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "master mystery",
+          "basis": "Przekład angielski sporządzony bezpośrednio na podstawie koptyjskiego tekstu Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja zawiera połączenie ⲡⲁⲩⲑⲉⲛⲧⲏⲥ ⲙ̅ ⲙⲩⲥⲧⲏⲣⲓⲟⲛ w wierszach 205/11–12; pierwszy człon jest greckim zapożyczeniem oznaczającym pana lub zwierzchnika.",
+        "exactForm": "ⲡⲁⲩⲑⲉⲛⲧⲏⲥ ⲙ̅ ⲙⲩⲥⲧⲏⲣⲓⲟⲛ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) używa formy «master-mystery». Koptyjska transkrypcja poświadcza ⲡⲁⲩⲑⲉⲛⲧⲏⲥ ⲙ̅ ⲙⲩⲥⲧⲏⲣⲓⲟⲛ; w polskim przekładzie przyjęto jednolitą nazwę «Misterium naczelne».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["naczelne Misterium", "Misterium naczelnego"],
+        "forbiddenPatterns": ["Misterium-Mistrz", "Misterium Mistrz"]
+      }
+    },
+    {
+      "id": "counterfeiting-spirit-terminology",
+      "status": "approved",
+      "selectedPolish": "duch naśladowczy (termin doktrynalny)",
+      "scope": "Nazwa składnika związanego z duszą przez władców Losu, występująca szczególnie w rozdziałach 112–132.",
+      "rationale": "Forma «duch naśladowczy» zachowuje ideę bytu, który przybiera podobieństwo duszy, a zarazem pozostaje zgodna z utrwalonym słownictwem polskiej warstwy. Nie należy zastępować jej zależnie od zdania przypadkowymi wariantami typu «duch imitujący» lub «fałszywy duch».",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 112–132",
+          "rendering": "counterfeiting spirit",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978",
+          "rendering": "counterfeit spirit",
+          "basis": "Przekład angielski sporządzony bezpośrednio na podstawie koptyjskiego tekstu Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja wielokrotnie poświadcza formę ⲡⲁⲛⲧⲓⲙⲓⲙⲟⲛ ⲙ̅ ⲡⲛ̅ⲁ̅, między innymi w wierszach 282/3, 282/11, 284/12 i 341/1. Pierwszy człon jest greckim zapożyczeniem wskazującym na przeciwieństwo lub imitację, a drugi jest skróconym zapisem słowa «duch».",
+        "exactForm": "ⲡⲁⲛⲧⲓⲙⲓⲙⲟⲛ ⲙ̅ ⲡⲛ̅ⲁ̅",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) używa formy «counterfeiting spirit», a MacDermot (1978) — «counterfeit spirit». Koptyjski zapis ⲡⲁⲛⲧⲓⲙⲓⲙⲟⲛ ⲙ̅ ⲡⲛ̅ⲁ̅ zachowuje greckie zapożyczenie; w polskim przekładzie przyjęto jednolicie «duch naśladowczy».",
+      "enforcement": {
+        "minOccurrences": 20,
+        "requiredPatterns": ["duch naśladowcz"],
+        "forbiddenPatterns": ["duch imitujący", "fałszywy duch"]
+      }
+    },
+    {
+      "id": "first-emanation-not-first-edition",
+      "status": "approved",
+      "selectedPolish": "Pierwsza Emanacja / Pierwszej Emanacji",
+      "scope": "Nazwa pierwszego wyjścia lub emanacji związanego z Pierwszym Misterium w rozdziale 131.",
+      "rationale": "Meadowskie «Issue» oznacza tutaj wyjście lub emanację, a nie wydanie publikacji. Forma «Pierwsze Wydanie» była fałszywym przyjacielem angielskiego słowa i zaciemniała kosmologiczny sens zdania.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdział 131, strona 282",
+          "rendering": "the first Issue",
+          "basis": "Angielskie «issue» w kontekście pochodzenia i wyłonienia, nie publikacji."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, Księga III",
+          "rendering": "the first emanation",
+          "basis": "Przekład angielski oparty bezpośrednio na koptyjskim tekście Schmidta."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Transkrypcja w wierszu 341/20 zawiera ⲡⲓ ϣⲟⲣⲡ̅ ⲛ̅ ⲉⲓ̅ bezpośrednio przed nazwą Pierwszego Misterium; konstrukcja wskazuje na pierwsze wyjście lub wyłonienie.",
+        "exactForm": "ⲡⲓ ϣⲟⲣⲡ̅ ⲛ̅ ⲉⲓ̅",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) ma «the first Issue», a MacDermot (1978) — «the first emanation». Koptyjski zapis ⲡⲓ ϣⲟⲣⲡ̅ ⲛ̅ ⲉⲓ̅ wskazuje na pierwsze wyjście; dlatego przyjęto «Pierwsza Emanacja», nie «Pierwsze Wydanie».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["Pierwszej Emanacji"],
+        "forbiddenPatterns": ["Pierwszego Wydania", "Pierwsze Wydanie"]
+      }
+    },
+    {
+      "id": "plasma-formed-body-terminology",
+      "status": "approved",
+      "selectedPolish": "uformowane ciało (koptyjskie plasma)",
+      "scope": "Opis ukształtowanego ciała przed narodzeniem i rozmieszczenia na nim pieczęci w rozdziale 132.",
+      "rationale": "Greckie zapożyczenie «plasma» oznacza rzecz uformowaną lub twór. Polska «plazma» kojarzy się z materią w stanie zjonizowanym albo składnikiem krwi i jest w tym miejscu fałszywym przyjacielem; «uformowane ciało» przekazuje funkcję terminu w zdaniu.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdział 132, strony 287–288",
+          "rendering": "the plasm",
+          "basis": "Mead zachowuje uczoną transliterację greckiego zapożyczenia."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, Księga III",
+          "rendering": "the formed body / plasma",
+          "basis": "Przekład bezpośrednio oparty na koptyjskim tekście Schmidta pozwala rozpoznać techniczny sens uformowanego tworu."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Transkrypcja wielokrotnie poświadcza połączenie ⲡⲉ ⲡⲗⲁⲥⲙⲁ na stronie rękopisu 348, między innymi w wierszach 348/1, 348/5, 348/8 i 348/13.",
+        "exactForm": "ⲡⲉ ⲡⲗⲁⲥⲙⲁ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) zachowuje formę «the plasm», a MacDermot (1978) wiąże termin z uformowanym ciałem. Koptyjskie ⲡⲉ ⲡⲗⲁⲥⲙⲁ jest greckim zapożyczeniem oznaczającym twór; w polskim tekście przyjęto «uformowane ciało».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["uformowanego ciała"],
+        "forbiddenPatterns": ["pieczętowaniu plazmy", "ciała plazmy", "głowy plazmy"]
+      }
+    },
+    {
+      "id": "violent-seizure-not-rapture",
+      "status": "approved",
+      "selectedPolish": "uprowadzenie przemocą, nie zachwycenie",
+      "scope": "Gwałtowne porywanie dusz przez demonicznych władców dróg Pośrodka w rozdziałach 139–143.",
+      "rationale": "Archaiczne angielskie «in ravishment» oznacza w tym kontekście porwanie lub uprowadzenie siłą. Polski «zachwyt» błędnie sugerował ekstazę duchową, sprzeczną z opisem przemocy, uwięzienia i karania dusz.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 139–143, strony 302–307",
+          "rendering": "carry off / snatch away in ravishment",
+          "basis": "Archaiczne użycie «ravishment» w znaczeniu gwałtownego uprowadzenia."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, Księga V",
+          "rendering": "carry off by force",
+          "basis": "Nowocześniejsze oddanie tego samego aktu przemocy wobec duszy."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Transkrypcja używa formuły ⲛ̅ ⲥⲧⲉⲣⲉⲥⲓⲙⲟⲛ między innymi w wierszach 366/8–9, 367/17–18, 368/16–17, 369/20–21 i 371/2–4. Greckie zapożyczenie wiąże się z pozbawieniem lub zabraniem, nie z ekstazą.",
+        "exactForm": "ⲛ̅ ⲥⲧⲉⲣⲉⲥⲓⲙⲟⲛ",
+        "uncertaintyNote": null
+      },
+      "footnote": "Mead (1921) ma archaiczne «in ravishment», a MacDermot (1978) oddaje sens jako uprowadzenie siłą. Koptyjskie ⲛ̅ ⲥⲧⲉⲣⲉⲥⲓⲙⲟⲛ wskazuje na pozbawienie lub zabranie; dlatego przyjęto «uprowadzić przemocą».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["uprowadzi przemocą", "uprowadzeni przemocą"],
+        "forbiddenPatterns": ["porwie w zachwyceniu", "porwać w zachwyceniu", "porwani w zachwyceniu"]
+      }
+    }
+  ]
+}

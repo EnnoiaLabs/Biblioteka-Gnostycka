@@ -27,10 +27,9 @@ if (new Set(excluded).size !== excluded.length) errors.push("lista wyłączeń z
 
 for (const relative of excluded) {
   const target = path.join(root, relative);
-  if (!fs.existsSync(target) || !fs.statSync(target).isFile()) {
-    errors.push(`nie istnieje: ${relative}`);
-    continue;
-  }
+  // Paczka wydaniowa celowo nie zawiera tych źródeł. Kontrola musi działać
+  // zarówno w pełnym katalogu roboczym, jak i po rozpakowaniu gotowego ZIP-a.
+  if (fs.existsSync(target) && !fs.statSync(target).isFile()) errors.push(`nie jest plikiem: ${relative}`);
   const basename = path.basename(relative);
   const references = runtimeFiles.filter(file => fs.readFileSync(file, "utf8").includes(basename));
   if (references.length) {
@@ -43,5 +42,8 @@ if (errors.length) {
   process.exit(1);
 }
 
-const bytes = excluded.reduce((sum, relative) => sum + fs.statSync(path.join(root, relative)).size, 0);
+const bytes = excluded.reduce((sum, relative) => {
+  const target = path.join(root, relative);
+  return sum + (fs.existsSync(target) && fs.statSync(target).isFile() ? fs.statSync(target).size : 0);
+}, 0);
 console.log(`[OK] Zasoby wydania: ${excluded.length} nieużywane pliki źródłowe poza ZIP (${(bytes / 1024 / 1024).toFixed(2)} MiB)`);

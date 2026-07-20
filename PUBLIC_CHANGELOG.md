@@ -1,5 +1,17 @@
 # Publiczna historia zmian / Public change history
 
+## 1.7.0 - Pełny audyt polskiego przekładu Pistis Sophii
+
+### PL
+- Zakończono porównawczy audyt całego polskiego tekstu Pistis Sophii na stronach 48–255.
+- Opisano metodę przekładu: podstawą jest Mead (1921), a MacDermot (1978) i koptyjski służą do kontroli sensu i terminologii.
+- Najważniejsze decyzje terminologiczne są dokumentowane wraz z uzasadnieniem i automatycznie sprawdzane w kolejnych wersjach.
+
+### EN
+- Completed a comparative audit of the entire Polish Pistis Sophia text on pages 48–255.
+- Documented the translation method: Mead (1921) is the continuous base, while MacDermot (1978) and Coptic provide contextual and terminological control.
+- Key terminology decisions are documented with their rationale and automatically checked in subsequent releases.
+
 ## 1.6.0 - Księgi ładują się dopiero po otwarciu
 
 ### PL
