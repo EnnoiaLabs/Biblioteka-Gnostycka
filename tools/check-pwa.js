@@ -60,7 +60,9 @@ const app = read("app.js");
 const sw = read("sw.js");
 if (!index.includes(`manifest.webmanifest?v=${version}`)) fail(`index.html: manifest nie ma wersji ${version}`);
 if (!/<meta[^>]+name="theme-color"/i.test(index)) fail("index.html: brak meta theme-color");
-if (!/serviceWorker\.register\(["']\.\/sw\.js["']\)/.test(app)) fail("app.js: brak rejestracji ./sw.js");
+if (!/serviceWorker\.register\(/.test(app) || !app.includes("./sw.js")) {
+  fail("app.js: brak rejestracji ./sw.js");
+}
 if (!new RegExp(`CACHE_NAME\\s*=\\s*["'][^"']*v${version.replaceAll(".", "\\.")}["']`).test(sw)) {
   fail(`sw.js: nazwa cache nie odpowiada wersji ${version}`);
 }

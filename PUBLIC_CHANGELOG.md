@@ -1,5 +1,17 @@
 # Publiczna historia zmian / Public change history
 
+## 1.7.5 - Udokumentowana metoda polskiego przekładu
+
+### PL
+- Rozszerzono panel O przekładzie o podstawę, porównanie źródeł i metodę pracy.
+- Opisano kontrolę terminologii z użyciem Meada, MacDermot i warstwy koptyjskiej.
+- Dodano automatyczną ochronę pełnego opisu przed cofnięciem do starszej treści.
+
+### EN
+- Expanded the About panel with the source base, source comparison and working method.
+- Documented terminology control using Mead, MacDermot and the Coptic layer.
+- Added automated protection against reverting to the older shortened description.
+
 ## 1.7.0 - Pełny audyt polskiego przekładu Pistis Sophii
 
 ### PL

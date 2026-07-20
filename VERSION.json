@@ -1,10 +1,10 @@
 {
   "name": "pistis-text-addenda",
-  "version": "1.7.1",
+  "version": "1.7.5",
   "updated": "2026-07-15",
-  "currentWork": "translation-terminology-wording",
+  "currentWork": "documented-polish-translation-method",
   "structure": "modular-books",
   "date": "2026-07-20",
-  "releaseType": "technical",
-  "latestPublicVersion": "1.7.0"
+  "releaseType": "public",
+  "latestPublicVersion": "1.7.5"
 }

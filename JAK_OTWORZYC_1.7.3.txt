@@ -1,0 +1,16 @@
+PISTIS SOPHIA 1.7.3 — URUCHOMIENIE LOKALNE
+
+1. Rozpakuj cały ZIP do nowego, pustego katalogu.
+2. Nie otwieraj starego skrótu ani pozycji z historii Firefoksa.
+3. Kliknij dwukrotnie plik URUCHOM_1.7.3_WINDOWS.cmd znajdujący się w tym katalogu.
+4. W aplikacji otwórz Pistis Sophię i kliknij „O przekładzie”.
+
+Poprawny panel ma nagłówek:
+O przekładzie · pełny opis źródeł
+
+Pod nim znajdują się sekcje:
+Podstawa, Porównanie, Metoda, Koptyjski, Charakter przekładu,
+Kontrola terminologii, Aparat cytowania i Prawa.
+
+Jeżeli tych sekcji nie widać, sprawdź pasek adresu Firefoksa. Ścieżka po
+file:/// musi wskazywać dokładnie katalog, w którym znajduje się ten plik.

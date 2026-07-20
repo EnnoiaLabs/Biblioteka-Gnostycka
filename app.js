@@ -24,7 +24,7 @@ if (isLogionBook && activeBookModule?.coptic) {
 const libraryMeta = {
   id: "gnostyk-biblioteka",
   name: "Biblioteka Gnozy",
-  version: "1.7.1",
+  version: "1.7.5",
   updated: "2026-07-15",
   currentWork: {
     id: activeBook.id || "pistis-sophia",
@@ -2514,11 +2514,30 @@ function localizeBookInfo() {
   setTextForAll(".library-card p", null, bookInfo("sidebarDescription"));
   setTextForAll("#aboutPanel h3:first-of-type", null, bookInfo("aboutTitle"));
   setHtmlForAll("#aboutPanel > p:first-of-type", null, bookInfo("aboutLead"));
-  const aboutLabels = ["aboutSourceLabel", "aboutCopticLabel", "aboutMethodLabel", "aboutApparatusLabel", "aboutRightsLabel"];
-  const aboutValues = ["aboutSourceValue", "aboutCopticValue", "aboutMethodValue", "aboutApparatusValue", "aboutRightsValue"];
+  const standardAboutFields = [
+    ["aboutSourceLabel", "aboutSourceValue"],
+    ["aboutCopticLabel", "aboutCopticValue"],
+    ["aboutMethodLabel", "aboutMethodValue"],
+    ["aboutApparatusLabel", "aboutApparatusValue"],
+    ["aboutRightsLabel", "aboutRightsValue"]
+  ];
+  const pistisAboutFields = [
+    ["aboutSourceLabel", "aboutSourceValue"],
+    ["aboutComparisonLabel", "aboutComparisonValue"],
+    ["aboutProcessLabel", "aboutProcessValue"],
+    ["aboutCopticLabel", "aboutCopticValue"],
+    ["aboutMethodLabel", "aboutMethodValue"],
+    ["aboutTerminologyLabel", "aboutTerminologyValue"],
+    ["aboutApparatusLabel", "aboutApparatusValue"],
+    ["aboutRightsLabel", "aboutRightsValue"]
+  ];
+  const aboutFields = activeBook?.id === "pistis-sophia" ? pistisAboutFields : standardAboutFields;
   document.querySelectorAll("#aboutPanel dl div").forEach((item, index) => {
-    setText(item.querySelector("dt"), bookInfo(aboutLabels[index]));
-    item.querySelector("dd").innerHTML = bookInfo(aboutValues[index]);
+    const field = aboutFields[index];
+    item.hidden = !field;
+    if (!field) return;
+    setText(item.querySelector("dt"), bookInfo(field[0]));
+    item.querySelector("dd").innerHTML = bookInfo(field[1]);
   });
   setTextForAll("#aboutPanel h3:nth-of-type(2)", "citeTitle");
   setHtmlForAll("#aboutPanel > p:nth-of-type(2)", null, bookInfo("citeSimple").replace("{version}", libraryMeta.version));
@@ -4016,6 +4035,12 @@ restoreNotesFromStoredBackup();
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
+    fetch("./VERSION.json", { cache: "no-store" })
+      .then(response => response.ok ? response.json() : Promise.reject(new Error("version unavailable")))
+      .then(metadata => navigator.serviceWorker.register(
+        `./sw.js?app-version=${encodeURIComponent(metadata.version || "current")}`,
+        { updateViaCache: "none" }
+      ))
+      .catch(() => navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).catch(() => {}));
   });
 }

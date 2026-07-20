@@ -1,5 +1,53 @@
 # Changelog
 
+## 1.7.5 - Udokumentowana metoda polskiego przekładu
+
+### PL
+- Rozszerzono panel O przekładzie o podstawę, porównanie źródeł i metodę pracy.
+- Opisano kontrolę terminologii z użyciem Meada, MacDermot i warstwy koptyjskiej.
+- Dodano automatyczną ochronę pełnego opisu przed cofnięciem do starszej treści.
+
+### EN
+- Expanded the About panel with the source base, source comparison and working method.
+- Documented terminology control using Mead, MacDermot and the Coptic layer.
+- Added automated protection against reverting to the older shortened description.
+
+## 1.7.4 - Pełny opis źródeł w panelu O przekładzie
+
+### PL
+- Naprawiono nadpisywanie pełnego opisu przekładu przez starszą treść interfejsu.
+- Panel pokazuje osiem sekcji, w tym Porównanie, Metodę i Kontrolę terminologii.
+- Dodano test chroniący pełny opis źródeł w kolejnych wydaniach.
+
+### EN
+- Fixed the older interface content overwriting the complete translation description.
+- The panel now shows eight sections, including Comparison, Method and Terminology control.
+- Added a regression test protecting the complete source description in future releases.
+
+## 1.7.3 - Pewne uruchamianie właściwej kopii lokalnej
+
+### PL
+- Dodano launcher Windows otwierający index.html dokładnie z rozpakowanego katalogu wersji 1.7.3.
+- Panel otrzymał rozpoznawalny nagłówek «O przekładzie · pełny opis źródeł».
+- Dołączono prostą instrukcję pozwalającą wykryć otwieranie starego katalogu z historii Firefoksa.
+
+### EN
+- Added a Windows launcher that opens index.html directly from the extracted 1.7.3 folder.
+- The panel now has the unmistakable heading ‘About the translation · complete source description’.
+- Included a simple guide for detecting an old folder opened from Firefox history.
+
+## 1.7.2 - Opis przekładu zawsze aktualny w PWA
+
+### PL
+- Firefox pobiera service workera z numerem bieżącej wersji i pomija pamięć HTTP podczas kontroli aktualizacji.
+- Dodano test wymagający sekcji Porównanie, Metoda i Kontrola terminologii w panelu O przekładzie.
+- Paczka zawiera pełny opis podstawy Meada oraz porównań z MacDermot i tekstem koptyjskim.
+
+### EN
+- Firefox now fetches the service worker with the current version and bypasses the HTTP cache during update checks.
+- Added a test requiring the Comparison, Method, and Terminology control sections in the About translation panel.
+- The package contains the complete description of the Mead basis and comparisons with MacDermot and the Coptic text.
+
 ## 1.7.1 - Czytelniejszy opis kontroli terminologii
 
 ### PL

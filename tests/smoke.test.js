@@ -947,3 +947,29 @@ test("release workflow separates public milestones from the technical archive", 
   assert.ok(["public", "technical"].includes(metadata.releaseType));
   assert.match(metadata.latestPublicVersion, /^\d+\.\d+\.\d+$/);
 });
+
+test("Pistis Sophia explains the Polish translation method to readers", () => {
+  const html = read("index.html");
+  const content = read("app-content.js");
+  const app = read("app.js");
+  const translation = read("books/pistis-sophia/polish-translations.js");
+  const metadata = json("books/pistis-sophia/book.json");
+
+  for (const label of ["Porównanie", "Metoda", "Kontrola terminologii"]) {
+    assert.match(html, new RegExp(`<dt>${label}<\\/dt>`), `missing reader-facing section: ${label}`);
+  }
+  assert.match(html, /Violet MacDermot/);
+  assert.match(html, /automatyczne testy pilnują zatwierdzonych form/i);
+  assert.match(translation, /METODA POLSKIEGO PRZEKŁADU/);
+  assert.match(translation, /automatycznie sprawdzane w kolejnych wersjach/);
+  assert.match(metadata.translationBasis, /Mead.*MacDermot.*koptyjsk/i);
+  assert.match(metadata.translationMethod, /automatycznie sprawdzane/i);
+  assert.match(html, /O przekładzie <small>· pełny opis źródeł<\/small>/);
+  assert.match(content, /aboutTitle: "O przekładzie · pełny opis źródeł"/);
+  assert.match(content, /aboutComparisonLabel: "Porównanie"/);
+  assert.match(content, /aboutTerminologyLabel: "Kontrola terminologii"/);
+  assert.match(content, /Violet MacDermot/);
+  assert.match(app, /aboutComparisonLabel/);
+  assert.match(app, /aboutTerminologyLabel/);
+  assert.match(read("URUCHOM_1.7.3_WINDOWS.cmd"), /%~dp0index\.html/);
+});
