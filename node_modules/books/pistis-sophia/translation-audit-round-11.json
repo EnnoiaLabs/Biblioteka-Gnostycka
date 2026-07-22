@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.30",
+  "scope": "Audyt liczb, kierunków i zależności hierarchicznych w polskiej warstwie Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "twelve-aeons-not-moons",
+      "status": "approved-corrected",
+      "selectedPolish": "dwunastu eonów",
+      "readerPages": [143],
+      "manuscriptPages": [170],
+      "coptic": "Na stronie 170, wiersze 3–9, oba wskazania krainy Adamasa używają tej samej konstrukcji: ⲡⲙⲛ̅ⲧⲥⲛⲟⲟⲩⲥ ⲛ̅ ⲁⲓⲱⲛ, dosłownie „dwanaście eonów”. Nie występuje tu koptyjskie określenie księżyca.",
+      "mead": "Mead ma w jednym zdaniu najpierw „the twelve aeons”, a następnie „the twelve moons”. Wewnętrzna sprzeczność jest omyłką angielskiej podstawy, nie zmianą nazwy krainy.",
+      "macdermot": "Przekład MacDermot, oparty na tekście Schmidta, zachowuje w tym miejscu dwanaście eonów i potwierdza odczyt widoczny bezpośrednio w koptyjskim.",
+      "rationale": "Adamas spogląda z dwunastu eonów i w tym samym zdaniu jego kraina zostaje wskazana ponownie. Polska warstwa odziedziczyła od Meada przypadkowe „dwanaście księżyców”, tworząc nieistniejący drugi porządek kosmologiczny. Koptyjski powtarza ⲁⲓⲱⲛ, a najbliższy kontekst wielokrotnie nazywa tę samą krainę dwunastoma eonami. Korekta usuwa pojedynczą omyłkę liczbowo-hierarchiczną bez globalnego zastępowania zwykłych odniesień do księżyca.",
+      "textChanged": true,
+      "requiredPattern": "to jest do dwunastu eonów",
+      "requiredOccurrences": 1,
+      "forbiddenPattern": "do dwunastu księżyców"
+    },
+    {
+      "id": "right-left-middle-hierarchy",
+      "status": "approved-verified",
+      "selectedPolish": "Prawica, Lewica i Pośrodek zachowane jako odrębne nazwy porządków; zwykłe kierunki pozostają małoliterowe i zależne od zdania",
+      "readerPages": [48, 54, 56, 58, 59, 60, 62, 63, 64, 65, 66, 67, 68, 96, 115, 124, 125, 126, 127, 128, 143, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 170, 171, 172, 173, 174, 175, 176, 177, 178, 181, 182, 183, 184, 185, 186, 187, 188, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 213, 214, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 247, 248, 249, 250, 251, 252, 253, 254, 255],
+      "coptic": "Audyt konstrukcji przestrzennych potwierdza, że nazwy porządków i zwykłe relacje kierunkowe są rozpoznawane przez kontekst; nie istnieje podstawa do mechanicznego kapitalizowania każdego wskazania prawej, lewej, środka, góry lub dołu.",
+      "mead": "Mead rozróżnia systemowe Right, Left i Midst od opisowych right, left, above i below, choć kapitalizacja wydania nie zawsze jest wystarczającym kryterium sama w sobie.",
+      "macdermot": "MacDermot zachowuje hierarchię krain, a porównanie kolejności ponad/pod pozwala kontrolować relacje niezależnie od angielskiej kapitalizacji.",
+      "rationale": "Przegląd wszystkich wystąpień nazw porządków oraz relacji ponad, poniżej, po prawej i po lewej nie ujawnił odwrócenia kierunku ani zamiany poziomów hierarchii. Wielkie litery pozostają ograniczone do nazwanych krain Prawicy, Lewicy i Pośrodka. Opis położenia osoby lub emanacji zachowuje małą literę. Decyzja zabrania przyszłego globalnego ujednolicania, które zatarłoby tę granicę.",
+      "textChanged": false,
+      "requiredPattern": "Prawicy",
+      "minimumOccurrences": 10,
+      "forbiddenPattern": "Kraina Prawej Strony"
+    }
+  ]
+}

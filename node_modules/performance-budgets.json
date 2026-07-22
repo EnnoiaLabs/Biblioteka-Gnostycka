@@ -1,0 +1,7 @@
+{
+  "startupLocalRawBytes": 7000000,
+  "startupLocalGzipBytes": 2100000,
+  "largestStartupFileBytes": 2200000,
+  "appJavaScriptBytes": 200000,
+  "stylesheetBytes": 170000
+}

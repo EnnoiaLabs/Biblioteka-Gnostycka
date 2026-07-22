@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.24",
+  "scope": "Piąty zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "sphragis-seal-context",
+      "status": "approved-contextual",
+      "selectedPolish": "pieczęć oraz czasownik pieczętować zależnie od składni; termin obejmuje zarówno znaki Misteriów i Światłości, jak i pieczęcie, którymi władcy wiążą duszę",
+      "pages": [64, 141, 157, 158, 163, 180, 183, 192, 198, 202, 203, 204, 205, 206, 207, 208, 222, 223, 225, 228, 229, 230, 231, 232, 233, 239, 240],
+      "coptic": "ⲥⲫⲣⲁⲅⲓⲥ — greckie zapożyczenie występujące w dołączonej transkrypcji zarówno jako rzeczownik, jak i podstawa form czasownikowych; kontekst rozstrzyga funkcję ochronną, inicjacyjną albo wiążącą",
+      "mead": "seal / seals oraz sealeth; ten sam rdzeń opisuje znaki Misteriów, zabezpieczenie przez Światłość i więzy nakładane przez władców",
+      "macdermot": "seal / seals i odpowiadające formy czasownikowe, bez tworzenia osobnego terminu dla pieczęci światłości i pieczęci władców",
+      "rationale": "Polski rdzeń „pieczęć / pieczętować” poprawnie zachowuje wspólną terminologię źródła, ale nie oznacza jednej stałej funkcji. Pieczęć może otwierać drogę, potwierdzać przynależność albo wiązać ducha naśladowczego z duszą. Globalna kapitalizacja lub zastąpienie wszystkich form słowem „znak” zatarłoby tę celową wielofunkcyjność.",
+      "textChanged": false,
+      "requiredPattern": "pieczę",
+      "minimumOccurrences": 90,
+      "forbiddenPattern": "Pieczęć zawsze oznacza znak zbawienia"
+    },
+    {
+      "id": "katapetasma-veil-boundary",
+      "status": "approved-contextual",
+      "selectedPolish": "zasłona i zasłony jako granice krain oraz sfer; wielka litera tylko w utrwalonych nazwach, na przykład wewnątrz Zasłony Pierwszego Misterium",
+      "pages": [48, 58, 68, 69, 152, 155, 156, 166, 171, 217, 223, 225, 226, 241, 242, 243, 254],
+      "coptic": "ⲕⲁⲧⲁⲡⲉⲧⲁⲥⲙⲁ — greckie zapożyczenie poświadczone 19 razy w dołączonej transkrypcji; oznacza zasłonę oddzielającą regiony, a nie odrębny osobowy byt hierarchii",
+      "mead": "veil / veils, w tym veils of the thirteenth aeon, veil of the Treasury of Light i veils between the Right and the Left",
+      "macdermot": "veil / veils jako kosmiczna granica lub przegroda, z liczbą i kapitalizacją zależnymi od konstrukcji",
+      "rationale": "„Zasłona” wiernie oddaje przestrzenną funkcję terminu, obejmując zarówno pojedynczą granicę nazwanego regionu, jak i wiele zasłon pomiędzy sferami. Nie należy mechanicznie zmieniać go na „kurtynę”, „firmament” ani pisać każdej formy wielką literą, ponieważ źródło nie ustanawia jednej nazwy własnej dla wszystkich wystąpień.",
+      "textChanged": false,
+      "requiredPattern": "zasłon",
+      "minimumOccurrences": 25,
+      "forbiddenPattern": "Kurtyna Skarbca Światłości"
+    },
+    {
+      "id": "thesauros-treasury-of-light",
+      "status": "approved-contextual",
+      "selectedPolish": "Skarbiec Światłości jako nazwa kosmicznej krainy; zwykły skarbiec pozostaje rzeczownikiem pospolitym, gdy zdanie opisuje pojemność lub funkcję",
+      "pages": [49, 53, 54, 56, 63, 64, 65, 66, 68, 69, 91, 93, 97, 119, 142, 153, 154, 155, 156, 157, 158, 168, 175, 184, 187, 205, 223, 225, 226, 237, 240, 241, 244, 246, 247],
+      "coptic": "ⲑⲏⲥⲁⲩⲣⲟⲥ — greckie zapożyczenie poświadczone 59 razy w dołączonej transkrypcji; w formule ze Światłością nazywa wyższą krainę, lecz sam rzeczownik zachowuje także znaczenie skarbca",
+      "mead": "Treasury of the Light / Light-treasury jako utrwalona nazwa regionu; treasury małą literą w opisowych konstrukcjach",
+      "macdermot": "Treasury of Light jako nazwa kosmologiczna, odróżniona przez kontekst od zwykłego użycia treasury",
+      "rationale": "Obecne „Skarbiec Światłości” zachowuje rozpoznawalną nazwę systemową i jej miejsce w hierarchii. Nie należy zastępować jej „Skarbem” ani mechanicznie kapitalizować każdego słowa „skarbiec”: na stronie 187 zdanie „Zbawca jest ich skarbcem” opisuje relację Członków Niewypowiadalnego, a nie nazwę krainy.",
+      "textChanged": false,
+      "requiredPattern": "Skarbc",
+      "minimumOccurrences": 75,
+      "forbiddenPattern": "Skarb Światłości"
+    }
+  ]
+}

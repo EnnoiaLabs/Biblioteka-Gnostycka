@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.32",
+  "scope": "Pistis Sophia, polska warstwa czytelnicza, redakcja jednoznacznych kalek składniowych",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "polska warstwa czytelnicza stron 64, 104, 105, 120 i 160"
+  ],
+  "decisions": [
+    {
+      "id": "natural-polish-unambiguous-mead-calques",
+      "status": "approved-corrected",
+      "textChanged": true,
+      "readerPages": [64, 104, 105, 120, 160],
+      "changedOccurrences": 8,
+      "mead": [
+        "thou questionest finely with thy excellent question",
+        "I will reveal it to thee in all openness",
+        "shining very exceedingly / shone very exceedingly",
+        "in great immeasurable distance"
+      ],
+      "approvedPolish": [
+        "zadajesz piękne i doskonałe pytanie",
+        "objawię ci je jasno",
+        "jaśniejąc niezwykle jasno",
+        "jaśniał niezwykle jasno",
+        "niezmierzoną odległością"
+      ],
+      "forbiddenPolish": [
+        "pytasz pięknie swoim doskonałym pytaniem",
+        "objawię ci je w całej jawności",
+        "jaśniejąc bardzo nadzwyczajnie",
+        "jaśniał bardzo nadzwyczajnie",
+        "wielką niezmierzoną odległością"
+      ],
+      "rationale": "Wskazane konstrukcje są dosłownymi kalkami archaicznego angielskiego stopniowania i składni Meada, ale nie pełnią funkcji terminów systemowych ani stałych formuł narracyjnych. Korekty zachowują wszystkie składniki sensu: pochwałę pytania, jawność odpowiedzi, wyjątkową intensywność światłości oraz niezmierzoną odległość pomiędzy porządkami. Nie skrócono formuł «I stało się», «odpowiedział i rzekł» ani powtórzeń misteryjnych, ponieważ należą one do zamierzonego rytmu tekstu. Zakres jest ograniczony do ośmiu potwierdzonych wystąpień i nie ustanawia globalnej reguły swobodnego wygładzania przekładu."
+    }
+  ]
+}

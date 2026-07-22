@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.22",
+  "scope": "Trzeci zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "apologia-defence-context",
+      "status": "approved-retained",
+      "selectedPolish": "obrona jako techniczna formuła przejścia; obrona w zwykłym znaczeniu zależnie od kontekstu",
+      "pages": [80, 174, 178, 181, 183, 199, 204, 205, 206, 230],
+      "coptic": "ⲁⲡⲟⲗⲟⲅⲓⲁ — greckie zapożyczenie poświadczone 21 razy w dołączonej transkrypcji, m.in. 234/19, 242/12, 243/2, 289/21–291/16 i 293/14–295/2",
+      "mead": "apology / defence, zależnie od konstrukcji",
+      "macdermot": "apology jako techniczna wypowiedź lub formuła wobec władców",
+      "rationale": "W partiach opisujących przejście duszy «obrona» nie oznacza wyłącznie zwykłego usprawiedliwienia, lecz ustaloną wypowiedź kierowaną do władców. Polski termin pozostaje czytelny i zachowuje funkcję formuły. Nie wolno jednak kapitalizować każdego użycia ani zastępować wszystkich wystąpień zapożyczeniem «apologia», ponieważ część zdań używa słowa opisowo.",
+      "textChanged": false,
+      "requiredPattern": "daje obronę",
+      "minimumOccurrences": 6,
+      "forbiddenPattern": "Apologia władcom"
+    },
+    {
+      "id": "oikonomia-economy-context",
+      "status": "approved-retained",
+      "selectedPolish": "ekonomia jako techniczny porządek lub urządzenie kosmiczne, bez globalnej zamiany na gospodarkę albo porządek",
+      "pages": [156, 157, 158, 170, 171, 173, 174, 181, 184, 202, 204, 227, 228, 232],
+      "coptic": "ⲟⲓⲕⲟⲛⲟⲙⲓⲁ — greckie zapożyczenie poświadczone 13 razy, m.in. 193/22, 196/24–26, 220/26, 241/27, 284/20, 339/2–11 i 349/17",
+      "mead": "economy / economies w technicznym opisie urządzenia świata i losu dusz",
+      "macdermot": "economy / dispensation, z zachowaniem technicznego pola znaczeniowego zapożyczenia",
+      "rationale": "«Ekonomia» jest w tych miejscach terminem dawnej teologii i kosmologii: oznacza urządzenie, rozporządzenie lub plan działania, nie gospodarkę. Jedna globalna zamiana na «porządek» zatarłaby różnice składniowe i więź z koptyjskim zapożyczeniem. Termin pozostaje, a jego specjalistyczny sens powinien być objaśniany w glosariuszu.",
+      "textChanged": false,
+      "requiredPattern": "ekonomi",
+      "minimumOccurrences": 17,
+      "forbiddenPattern": "gospodarki kosmicznej"
+    },
+    {
+      "id": "metanoia-repentance-context",
+      "status": "approved-contextual",
+      "selectedPolish": "pokuta dla metanoia; numerowane Pokuty Sophii jako nazwana seria wypowiedzi pokutnych",
+      "pages": [70, 73, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 100, 102, 103, 104, 105, 106, 108, 109, 110, 114, 130, 131, 133, 134, 157, 158, 159, 166, 190, 191, 194, 195, 196, 197, 211, 212, 213, 214, 215, 216, 220, 222, 224, 225, 235, 238, 254],
+      "coptic": "ⲙⲉⲧⲁⲛⲟⲓⲁ / ⲙⲉⲧⲁⲛⲟⲓ̈ — greckie zapożyczenie poświadczone 137 razy w dołączonej transkrypcji",
+      "mead": "repentance zarówno dla aktu pokuty, jak i trzynastu Repentances of Pistis Sophia",
+      "macdermot": "repentance, z tym samym rozróżnieniem między terminem ogólnym a numerowaną serią Sophii",
+      "rationale": "Koptyjski używa tego samego zapożyczenia dla aktu pokuty oraz trzynastu nazwanych wypowiedzi Sophii. Polski tekst słusznie rozróżnia je składnią i wielką literą w nagłówkach, nie tworząc dwóch sztucznie odrębnych terminów. Globalna zamiana na «skruchę», «nawrócenie» albo «modlitwę» utraciłaby ciągłość serii i nie odpowiadałaby wszystkim kontekstom.",
+      "textChanged": false,
+      "requiredPattern": "Pierwsza pokuta Sophii",
+      "minimumOccurrences": 1,
+      "forbiddenPattern": "Pierwsza modlitwa Sophii"
+    }
+  ]
+}

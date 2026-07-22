@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.28",
+  "scope": "Dziewiąty zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "region-land-context",
+      "status": "approved-contextual",
+      "selectedPolish": "kraina jako kontekstowe określenie obszaru lub domeny kosmicznej, bez automatycznego utożsamiania jej z eonem albo sferą",
+      "pages": [124, 125, 128, 129, 133, 134, 135, 136, 137, 140, 141, 142, 143, 145, 147, 148, 149, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 166, 167, 168, 171, 172, 173, 174, 175, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 190, 192, 196, 197, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 210, 213, 214, 219, 220, 221, 222, 223, 224, 225, 227, 229, 230, 233, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 247, 248, 249, 250, 251, 252, 253, 254],
+      "coptic": "Tekst koptyjski posługuje się kilkoma konstrukcjami przestrzennymi, w tym rodzimym określeniem miejsca oraz greckim zapożyczeniem ⲧⲟⲡⲟⲥ. Nie tworzą one jednej technicznej klasy równoważnej ⲁⲓⲱⲛ lub ⲥⲫⲁⲓⲣⲁ; znaczenie rozstrzyga określenie i położenie w hierarchii.",
+      "mead": "Mead używa region i place elastycznie dla domen wyższych oraz niższych, zachowując aeon i sphere dla bardziej określonych struktur. Polska „kraina” słusznie pełni podobną funkcję kontekstową.",
+      "macdermot": "MacDermot utrzymuje rozróżnienie pomiędzy region/place a aeon i sphere. Porównanie potwierdza, że nie każda kraina jest samodzielnym eonem ani sferą kosmologiczną.",
+      "rationale": "W polskiej warstwie „kraina” nazywa obszar wyznaczony relacją, mieszkańcami lub funkcją, na przykład krainy Prawicy, Pośrodka, chaosu i poszczególnych porządków. To celowo szerszy termin niż eon i sfera. Globalna zamiana na „region” nie poprawiłaby wierności, natomiast utożsamienie krainy z eonem albo sferą wprowadziłoby strukturę nieobecną w źródle. Obecny przekład zachowuje wymagane rozróżnienie i nie wymaga korekty czytelniczej.",
+      "textChanged": false,
+      "requiredPattern": "krain",
+      "minimumOccurrences": 394,
+      "forbiddenPattern": "każda kraina jest eonem"
+    },
+    {
+      "id": "aeon-aion-context",
+      "status": "approved-contextual",
+      "selectedPolish": "eon jako nazwany porządek kosmologiczny i jego mieszkańcy, zachowany odrębnie od ogólnej krainy oraz od sfery",
+      "pages": [49, 51, 53, 54, 56, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 76, 81, 84, 90, 91, 95, 98, 99, 102, 104, 106, 107, 110, 114, 119, 120, 124, 125, 128, 133, 135, 137, 140, 141, 142, 143, 145, 146, 147, 151, 152, 154, 156, 166, 167, 169, 192, 202, 204, 205, 207, 217, 227, 228, 230, 233, 234, 235, 236, 237, 238, 239, 241, 242, 243, 248, 249, 251, 252, 254],
+      "coptic": "Greckie zapożyczenie ⲁⲓⲱⲛ występuje w nazwach dwunastu i trzynastego eonu, cyklach eonów oraz opisach ich władców. Zachowanie transliterowanego terminu odróżnia tę warstwę od ogólnych określeń miejsca i od ⲥⲫⲁⲓⲣⲁ.",
+      "mead": "Mead konsekwentnie zachowuje aeon w systemowych nazwach porządków oraz ich zbiorowości, nie zastępując go każdorazowo słowem region. Polski termin „eon” odpowiada tej praktyce.",
+      "macdermot": "MacDermot również używa aeon dla ⲁⲓⲱⲛ i rozróżnia je od sphere oraz region. Porównanie nie wskazuje miejsca, w którym obecne polskie użycie wymagałoby globalnego ujednolicenia.",
+      "rationale": "Eon może oznaczać wydzielony poziom kosmosu, porządek wraz z zamieszkującymi go mocami albo szerszy cykl, zależnie od konstrukcji. Właśnie dlatego nie powinien być mechanicznie zamieniany ani na „krainę”, ani na „wiek”. Polski tekst zachowuje rozpoznawalny termin gnostycki tam, gdzie źródła mają ⲁⲓⲱⲛ, a określenia przestrzenne pozostawia dla innych konstrukcji. Nie znaleziono jednoznacznego błędu do poprawienia.",
+      "textChanged": false,
+      "requiredPattern": "eon",
+      "minimumOccurrences": 225,
+      "forbiddenPattern": "każdy eon jest sferą"
+    },
+    {
+      "id": "sphere-sphaira-context",
+      "status": "approved-contextual",
+      "selectedPolish": "sfera jako techniczna struktura kosmologiczna, w tym pierwsza i druga sfera oraz sfera władców, bez zastępowania nią wszystkich krain i eonów",
+      "pages": [49, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 147, 151, 153, 166, 207, 220, 230, 237, 238, 240, 241, 242, 243, 247, 248, 249, 250, 251, 252, 253, 254, 255],
+      "coptic": "Greckie zapożyczenie ⲥⲫⲁⲓⲣⲁ występuje w opisach sfer władców, obrotów i domów sfery oraz cyklu eonów sfery. Jego techniczna forma uzasadnia zachowanie polskiego rzeczownika „sfera”.",
+      "mead": "Mead stosuje sphere w opisach pierwszej i drugiej sfery, ich domów, władców i ruchu. Nie rozszerza tego terminu na każdą domenę kosmiczną ani na wszystkie eony.",
+      "macdermot": "MacDermot potwierdza sphere jako odpowiednik ⲥⲫⲁⲓⲣⲁ, również w kontekstach astrologicznych i pośmiertnej drogi duszy, zachowując osobno aeon i region.",
+      "rationale": "Sfera jest w tekście strukturą o własnych bramach, domach, władcach i ruchu, a nie ogólnym synonimem miejsca. Może zawierać eony lub pozostawać z nimi w określonej relacji, co wyklucza prostą zamianę jednego terminu na drugi. Obecne polskie użycie „sfery” odpowiada greckiemu zapożyczeniu w koptyjskim i praktyce obu przekładów kontrolnych. Tekst czytelniczy nie wymaga zmiany.",
+      "textChanged": false,
+      "requiredPattern": "sfer",
+      "minimumOccurrences": 110,
+      "forbiddenPattern": "każda sfera jest krainą"
+    }
+  ]
+}

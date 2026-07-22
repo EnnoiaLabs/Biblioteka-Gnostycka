@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.20",
+  "scope": "Zbiorczy audyt sześciu grup wyłonionych w wersji 1.7.19",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "paralemptai-receivers",
+      "status": "approved-contextual",
+      "selectedPolish": "Odbiorca jako tytuł lub nazwa określonego bytu; odbiorcy jako nazwa funkcjonalnej klasy",
+      "pages": [54, 64, 65, 106, 155, 159, 167, 168, 174, 178, 181, 191, 198, 201, 202, 203, 204, 205, 207, 208, 223, 224, 225, 227, 232, 239, 248, 249, 250, 251, 252, 253, 254],
+      "coptic": "ⲡⲁⲣⲁⲗⲏⲙⲡⲧⲏⲥ",
+      "mead": "receiver / receivers",
+      "macdermot": "receiver(s), z odnotowaniem technicznego paralemptes",
+      "rationale": "Zapożyczenie oznacza tego, kto odbiera lub przejmuje duszę albo moc. Polski Odbiorca zachowuje funkcję lepiej niż nieobjaśniona transliteracja. Wielka litera jest właściwa w tytule jednostkowym, mała w opisowej nazwie klasy.",
+      "textChanged": false
+    },
+    {
+      "id": "type-technical-polysemy",
+      "status": "approved-contextual",
+      "selectedPolish": "typ jako termin techniczny; postać, rodzaj lub wzorzec tylko tam, gdzie wymaga tego składnia",
+      "pages": [151, 159, 160, 169, 173, 174, 179, 181, 183, 192, 193, 199, 202, 206, 208, 225, 228, 230, 231, 232, 237, 242, 243, 244],
+      "coptic": "ⲧⲩⲡⲟⲥ",
+      "mead": "type",
+      "macdermot": "type / form zależnie od konstrukcji",
+      "rationale": "Wszystkie sprawdzone konstrukcje wywodzą się z tego samego zapożyczenia, ale termin pełni kilka funkcji. Nie ustanawia się mechanicznej zamiany: techniczne pytania o strukturę misteriów zachowują typ, a przyszłe wygładzenia muszą być rozstrzygane zdaniami.",
+      "textChanged": false
+    },
+    {
+      "id": "helpers-assistants-order",
+      "status": "approved-contextual",
+      "selectedPolish": "Pomocnicy dla porządku pięciu bytów; pomocnik dla zwykłej funkcji",
+      "pages": [48, 49, 54, 56, 86, 93, 105, 138, 156, 158, 159, 160, 170, 176, 182, 224, 227],
+      "coptic": "ⲡⲁⲣⲁⲥⲧⲁⲧⲏⲥ",
+      "mead": "Helpers; Leaders w formule objaśniającej",
+      "macdermot": "helpers / supporters",
+      "rationale": "Źródło używa stałego zapożyczenia parastates. Wielka litera rozpoznaje kosmologiczny porządek Pięciu Pomocników, natomiast mała pozostaje poprawna w zdaniach mówiących jedynie o czyjejś funkcji pomocniczej.",
+      "textChanged": false
+    },
+    {
+      "id": "fate-canonical-scope",
+      "status": "approved-contextual",
+      "selectedPolish": "Los jako systemowa sfera Heimarmene; los jako zwykłe przeznaczenie lub następstwo",
+      "pages": [56, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 72, 96, 152, 153, 194, 198, 199, 201, 202, 203, 204, 205, 206, 209, 210, 213, 216, 221, 224, 225, 226, 227, 228, 230, 232, 233, 234, 238, 247],
+      "coptic": "ⲓⲙⲁⲣⲙⲉⲛⲏ",
+      "mead": "the Fate / fate",
+      "macdermot": "Fate (Heimarmene)",
+      "rationale": "Wielka litera należy do nazwanej sfery kosmicznej i jej władców, domów oraz porządków. Zwykłe wypowiedzi o losie człowieka nie stają się przez to nazwą własną.",
+      "textChanged": false
+    },
+    {
+      "id": "spreading-of-universe-calque",
+      "status": "approved-corrected",
+      "selectedPolish": "rozpostarcie Całości",
+      "pages": [156, 162, 169, 173, 177, 181, 192, 202, 204, 205, 210, 219, 221, 228, 231, 232, 234, 242],
+      "coptic": "ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅",
+      "mead": "the expansion of the universe / the expansion of the All",
+      "macdermot": "the extension of the All",
+      "rationale": "Koptyjskie ⲡⲧⲏⲣϥ̅ jest tym samym systemowym 'Wszystkim/Całością', które rejestr wcześniejszych decyzji każe oddawać jako Całość. Dawne 'wszechświat' zacierało spójność terminologiczną. Po wykryciu w 1.7.29 zbyt wąskiej ochrony wszystkie 28 wystąpień formuły zostały ujednolicone bez zmiany czasownika rozpostarcia.",
+      "textChanged": true,
+      "requiredPattern": "rozpostarcie Całości",
+      "requiredOccurrences": 3,
+      "requiredInflectedPattern": "rozpostarciu Całości",
+      "requiredInflectedOccurrences": 24,
+      "requiredGenitivePattern": "rozpostarcia Całości",
+      "requiredGenitiveOccurrences": 1,
+      "forbiddenPattern": "rozpostarcie wszechświata"
+    },
+    {
+      "id": "remaining-proper-name-transliteration",
+      "status": "approved-policy",
+      "selectedPolish": "jedna utrwalona pisownia każdej nazwy, bez globalnego spolszczania wszystkich form",
+      "pages": [48, 255],
+      "coptic": "nazwy greckie i koptyjskie zachowane w wielu odmiennych formach rękopiśmiennych",
+      "mead": "transliteracje anglojęzycznej edycji z diakrytykami",
+      "macdermot": "transliteracje tekstu Schmidta",
+      "rationale": "Audyt nie wykazał drugiego wariantu zatwierdzonych nazw Jeu, Jabraoth i Jaldabaoth. Pozostałe nazwy należy rozstrzygać pojedynczo według formy koptyjskiej i polskiego uzusu; nie wolno automatycznie usuwać diakrytyków ani zastępować Y/J w całym korpusie.",
+      "textChanged": false
+    }
+  ]
+}
