@@ -1,10 +1,10 @@
 {
   "name": "pistis-text-addenda",
-  "version": "1.7.37",
+  "version": "1.7.42",
   "updated": "2026-07-15",
-  "currentWork": "final-audited-public-release",
+  "currentWork": "final-complete-1-255-audited-release",
   "structure": "modular-books",
   "date": "2026-07-22",
   "releaseType": "public",
-  "latestPublicVersion": "1.7.37"
+  "latestPublicVersion": "1.7.42"
 }

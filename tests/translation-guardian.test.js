@@ -11,6 +11,35 @@ function countOccurrences(text, pattern) {
   return text.split(pattern).length - 1;
 }
 
+test("addendum pages 1-12 retain the first close-reading corrections", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 12 }, (_, index) => pages[index + 1]).join("\n");
+
+  for (const wording of [
+    "przestała uczestniczyć w ich misterium",
+    "towarzyszącym jej Niewidzialnym",
+    "Granice dróg przeznaczonych dla godnych",
+    "mogą pomóc ci, którzy pozostają na ziemi",
+    "Uczniów ogarnia uniesienie wobec wzniosłości ukazanej im perspektywy",
+  ]) {
+    assert.ok(audited.includes(wording), `missing audited wording: ${wording}`);
+  }
+
+  for (const rejected of [
+    "ustaje w ich misterium",
+    "współniewidzialnym",
+    "Granice dróg godnych",
+    "mogą pomóc ci na ziemi",
+    "popadają w zachwyt na wzniosłość",
+    "O takich wtajemniczonych",
+  ]) {
+    assert.equal(audited.includes(rejected), false, `rejected wording returned: ${rejected}`);
+  }
+});
+
 test("translation guardian requires evidence, rationale, footnotes, and enforced wording", () => {
   const registry = JSON.parse(read("books/pistis-sophia/translation-decisions.json"));
   assert.equal(registry.schemaVersion, 1);
@@ -512,4 +541,53 @@ test("version 1.7.33 formally closes the 208-page global consistency audit", () 
     JSON.parse(read(`books/pistis-sophia/${file}`)).completedForVersion
   );
   assert.deepEqual(completedVersions, finalAudit.includedStages);
+});
+
+test("version 1.7.39 preserves the corrected Addendum pages 13-24", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 12 }, (_, index) => pages[index + 13]).join("\n");
+
+  assert.match(pages[18], /Co do tego Crum i Schmidt są całkowicie zgodni/);
+  assert.match(pages[18], /Treść\. Z zewnętrznego punktu widzenia zawartość dzieli się na cztery główne części/);
+  assert.equal(countOccurrences(audited, "Następnie, wraz z rozdziałem 102"), 1);
+  assert.equal(countOccurrences(audited, "podatność na błąd"), 0);
+  assert.equal(countOccurrences(audited, "wielkim pokazem szczegółowej argumentacji"), 0);
+  assert.equal(countOccurrences(audited, "zaatakował problem"), 0);
+});
+
+test("version 1.7.40 preserves the restored Addendum pages 25-36", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 12 }, (_, index) => pages[index + 25]).join("\n");
+
+  assert.match(pages[32], /Nauka o eonach/);
+  assert.match(pages[32], /Epizod Sophii/);
+  assert.match(pages[32], /Wędrówka dusz/);
+  assert.match(pages[32], /Pistis Sophia jako dokument zastrzeżony/);
+  assert.match(pages[32], /Szkic schematu systemu/);
+  assert.equal(countOccurrences(audited, "najwyżej radosnemu faktowi"), 0);
+  assert.equal(countOccurrences(audited, "cofa swój oślepiający blask"), 0);
+});
+
+test("version 1.7.41 preserves the restored Addendum pages 37-48", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 12 }, (_, index) => pages[index + 37]).join("\n");
+
+  assert.match(pages[39], /Harnack uważa, że część III powinna nosić tytuł „Pytania Maryi”/);
+  assert.match(pages[39], /Księga Wielkiego Logosu według Misterium/);
+  assert.match(pages[41], /31\. 1893\. Legge/);
+  assert.match(pages[41], /35\. 1895\. Amélineau/);
+  assert.match(pages[43], /Liechtenhan uważa, że fragment obejmujący strony 128-175/);
+  assert.match(pages[43], /45\. 1905\. Schmidt/);
+  assert.equal(countOccurrences(audited, "Jej ogólna wartość. Jeśli Księgi Zbawcy"), 0);
+  assert.equal(countOccurrences(audited, "Woide uważał, że Pistis Sophia jest bardzo starym rękopisem"), 0);
+  assert.equal(countOccurrences(audited, "14. 1856. Anonimowy przekład w Dictionnaire des Apocryphes Migne'a"), 0);
 });

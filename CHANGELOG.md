@@ -1,5 +1,65 @@
 # Changelog
 
+## 1.7.42 - Finalne wydanie po pełnym audycie 1–255
+
+### PL
+- Formalnie zamknięto dokładny audyt całej polskiej warstwy Pistis Sophii: Dodatku na stronach 1–48 oraz właściwego tekstu na stronach 48–255.
+- Potwierdzono zgodność z angielskim tekstem Meada, kompletność treści, spójność terminologii i naturalność polszczyzny, z kontrolą koptyjską w miejscach wymagających rozstrzygnięcia.
+- Wydanie oparto na wersji 1.7.41, która przeszła pełny test Chromium na Windows; nie wprowadzono dalszych zmian w przekładzie ani interfejsie.
+
+### EN
+- Formally completed the close audit of the entire Polish Pistis Sophia layer: Addendum pages 1–48 and the main text on pages 48–255.
+- Confirmed agreement with Mead’s English text, content completeness, terminological consistency, and natural Polish, with Coptic verification where a reading required resolution.
+- Based this release on version 1.7.41, which passed the complete Chromium test on Windows; no further translation or interface changes were introduced.
+
+## 1.7.41 - Audyt Dodatku: strony 37–48
+
+### PL
+- Dokładnie porównano strony 37–48 Dodatku z angielskim tekstem Meada i zredagowano jednoznaczne niezręczności.
+- Przywrócono trzy całe strony bibliografii Meada, które były zastąpione duplikatami wcześniejszych partii: omówienia Harnacka i Schmidta oraz pozycje dotyczące Amélineau, Liechtenhana i Grangera.
+- Dodano zabezpieczenie kompletności końcowego zakresu i formalnie zamknięto audyt całego Dodatku od strony 1 do 48.
+
+### EN
+- Closely compared Addendum pages 37–48 against Mead’s English text and edited unambiguous Polish infelicities.
+- Restored three complete pages of Mead’s bibliography that had been replaced by duplicates of earlier material, including the discussions of Harnack, Schmidt, Amélineau, Liechtenhan, and Granger.
+- Added a completeness regression guard for the final range and formally closed the audit of the complete Addendum, pages 1–48.
+
+## 1.7.40 - Audyt Dodatku: strony 25–36
+
+### PL
+- Dokładnie porównano strony 25–36 Dodatku z angielskim tekstem Meada oraz zredagowano jednoznaczne kalki językowe.
+- Przywrócono obszerny pominięty blok przedmowy: naukę o eonach, epizod Sophii, etykę, misteria, astrologię, wędrówkę dusz, magię i charakter zastrzeżonego dokumentu.
+- Odtworzono prawidłowe przejście do szkicu systemu bez zmiany ustalonej terminologii.
+
+### EN
+- Closely compared Addendum pages 25–36 against Mead’s English text and edited unambiguous Polish calques.
+- Restored the extensive omitted preface block on aeon-lore, the Sophia episode, ethics, mysteries, astral lore, transmigration, magic, and the reserved nature of the document.
+- Restored the correct transition into the system outline without changing established terminology.
+
+## 1.7.39 - Audyt Dodatku: strony 13–24
+
+### PL
+- Dokładnie porównano strony 13–24 Dodatku z angielskim tekstem Meada i zredagowano nienaturalne kalki w spisie treści oraz przedmowie.
+- Przywrócono pominiętą informację o zgodności Cruma i Schmidta oraz wprowadzenie do czteroczęściowego podziału Kodeksu Askew.
+- Usunięto zdublowany na stronie 20 opis rozdziałów 102–144 i tytułu zbioru, zachowując pełną ciągłość treści.
+
+### EN
+- Closely compared Addendum pages 13–24 against Mead’s English text and edited unnatural Polish calques in the table of contents and preface.
+- Restored the omitted note on Crum and Schmidt’s agreement and the introduction to the four-part division of the Askew Codex.
+- Removed the duplicated page-20 discussion of chapters 102–144 and the collection title while preserving complete continuity.
+
+## 1.7.38 - Audyt Dodatku: strony 1–12
+
+### PL
+- Dokładnie porównano strony 1–12 Dodatku z angielskim tekstem Meada oraz sprawdzono naturalność polskiego spisu treści.
+- Poprawiono błąd „mogą pomóc ci na ziemi” na „mogą pomóc ci, którzy pozostają na ziemi” oraz pięć grup nienaturalnych konstrukcji.
+- Zachowano skrótowy charakter spisu treści, ustaloną terminologię i autorski opis metody przekładu.
+
+### EN
+- Closely compared Addendum pages 1–12 against Mead’s English text and reviewed the naturalness of the Polish table of contents.
+- Corrected the faulty “mogą pomóc ci na ziemi” wording to identify those remaining on earth, together with five groups of unnatural constructions.
+- Preserved the concise table-of-contents style, established terminology, and the original description of the translation method.
+
 ## 1.7.37 - Finalne wydanie po pełnym audycie
 
 ### PL
