@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.29",
+  "scope": "Domknięcie zatwierdzonej korekty formuły rozpostarcia Całości w polskiej warstwie Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "spreading-of-all-regression-completion",
+      "status": "approved-corrected",
+      "selectedPolish": "rozpostarcie Całości oraz jego formy odmienne we wszystkich wystąpieniach zatwierdzonej formuły systemowej",
+      "pages": [156, 162, 173, 177, 181, 192, 202, 204, 205, 210, 221, 228, 231, 232],
+      "coptic": "Formuła należy do systemowego opisu rozpostarcia wszystkich porządków i odwołuje się do Całości; wcześniejsza decyzja wskazała poświadczoną konstrukcję ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅ i nakazała zachować termin Całość.",
+      "mead": "Mead używa w tych miejscach formuły expansion of the universe lub równoważnej formuły dotyczącej rozwinięcia całego systemu, co wcześniej dało polską kalkę z rzeczownikiem wszechświat.",
+      "macdermot": "MacDermot oddaje systemową formułę jako extension of the All i pozwala rozpoznać, że chodzi o tę samą Całość, a nie o odrębny termin kosmologiczny wymagający słowa wszechświat.",
+      "rationale": "W wersji 1.7.20 poprawiono pięć wystąpień, lecz ochrona regresji sprawdzała tylko mianownikową formę „rozpostarcie wszechświata”. Nie wykryła 23 wystąpień odmienionej konstrukcji „przy/o/w rozpostarciu wszechświata” na czternastu stronach. Wszystkie należą do tej samej zatwierdzonej formuły systemowej, dlatego zostały poprawione na „rozpostarciu Całości”. Strażnik sprawdza teraz cały wzorzec fleksyjny, zamiast pojedynczej formy gramatycznej.",
+      "textChanged": true,
+      "minimumCorrectedOccurrences": 28,
+      "forbiddenPattern": "rozpostar\\w*\\s+wszechświata"
+    }
+  ]
+}

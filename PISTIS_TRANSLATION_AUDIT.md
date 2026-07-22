@@ -99,14 +99,26 @@ Polski przekład jest kompletny i w większości przekazuje tok narracji Meada. 
 
 ## Terminy wymagające decyzji słownikowej
 
+### Człowiek światłości
+
+- **Polski tekst:** 7 wystąpień na stronach 73, 86, 130, 158, 209, 217 i 218.
+- **Mead:** zmienne formy `indweller of light`, `light-dweller` i `light-man`.
+- **MacDermot:** `light-man`.
+- **Horner:** `man of light`.
+- **Koptyjski:** `ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ`, poświadczone m.in. w wierszach 52/22, 71/3 i 149/13.
+- **Decyzja:** zatwierdzono `mój człowiek światłości`; wycofano wygładzoną formę `zamieszkująca mnie moc światłości`, która zacierała różnicę między człowiekiem światłości a mocą światłości.
+- **Pewność:** wysoka; decyzja jest zapisana i egzekwowana przez Strażnika tłumaczenia.
+
 ### Pięć Znamion
 
 - **Polski tekst:** 4 wystąpienia na stronach 48, 49 i 56.
 - **Mead:** `five Impressions`.
 - **MacDermot:** `five incisions`.
-- `Znamiona` dobrze przekazują ideę odciśniętych znaków, ale nie oddają dosłownego obrazu nacięć.
-- **Zalecenie:** pozostawić `Pięć Znamion` w tekście głównym i odnotować `Pięć Nacięć` jako wariant filologiczny.
-- **Pewność:** średnia; brak podstaw do automatycznej zmiany.
+- **Horner:** `five Marks`.
+- **Koptyjski:** `ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ`, poświadczone w wierszach rękopisu 1/22, 3/13 i 18/9.
+- `Znamiona` dobrze przekazują ideę odciśniętych znaków, choć nie oddają tak dosłownie obrazu nacięć jak wariant MacDermot.
+- **Decyzja:** zatwierdzono `Pięć Znamion` w tekście głównym; `Pięć Nacięć` pozostaje wariantem filologicznym w przypisie.
+- **Pewność:** wysoka; decyzja jest zapisana i egzekwowana przez Strażnika tłumaczenia.
 
 ### Duch naśladowczy
 

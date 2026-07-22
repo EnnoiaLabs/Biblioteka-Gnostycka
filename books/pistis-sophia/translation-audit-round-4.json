@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.23",
+  "scope": "Czwarty zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "archon-ruler-context",
+      "status": "approved-retained",
+      "selectedPolish": "władca i władcy dla koptyjskiego ⲁⲣⲭⲱⲛ w narracji oraz nazwach grup; bez globalnej transliteracji jako archont",
+      "pages": [49, 54, 57, 58, 60, 63, 65, 67, 68, 69, 70, 71, 76, 81, 84, 90, 95, 102, 119, 140, 141, 142, 143, 144, 145, 146, 147, 150, 152, 156, 157, 158, 159, 160, 166, 174, 178, 179, 180, 184, 186, 189, 192, 198, 199, 200, 201, 202, 203, 204, 205, 206, 208, 210, 219, 220, 221, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 247, 248, 249, 250, 251, 252, 253, 255],
+      "coptic": "ⲁⲣⲭⲱⲛ — greckie zapożyczenie poświadczone 279 razy w dołączonej transkrypcji; oznacza członka lub zwierzchnika kosmicznego porządku władców",
+      "mead": "ruler / rulers; Mead przekłada funkcję, zamiast stale zachowywać formę archon",
+      "macdermot": "ruler / rulers, zgodnie z funkcją koptyjskiego ⲁⲣⲭⲱⲛ w poszczególnych hierarchiach",
+      "rationale": "Polski „władca” jest czytelny i odpowiada obu przekładom kontrolnym. Sama transliteracja „archont” mogłaby być przydatna w glosariuszu naukowym, lecz jej mechaniczne wprowadzenie w setkach zdań nie dodaje informacji i zaburza ustaloną polską warstwę. Wielka litera pozostaje zależna od tego, czy konstrukcja jest nazwą własną, czy opisem klasy.",
+      "textChanged": false,
+      "requiredPattern": "władc",
+      "minimumOccurrences": 250,
+      "forbiddenPattern": "Archontowie dróg"
+    },
+    {
+      "id": "exousia-authority-context",
+      "status": "approved-contextual",
+      "selectedPolish": "zwierzchność, władza albo zakres władzy zależnie od składni; termin pozostaje odróżniony od władców i ich mocy",
+      "pages": [49, 57, 58, 67, 89, 237, 247, 248],
+      "coptic": "ⲉⲝⲟⲩⲥⲓⲁ — greckie zapożyczenie poświadczone 46 razy w dołączonej transkrypcji, często w szeregach urzędów i sił kosmicznych",
+      "mead": "authority / authorities, niekiedy w formule rulers, authorities and powers",
+      "macdermot": "authority / authorities; termin jest odróżniany od archons oraz powers",
+      "rationale": "Koptyjski zachowuje osobny termin dla zwierzchności lub kompetencji władzy. Polski tekst słusznie dobiera formę do składni, dlatego nie należy wszędzie narzucać jednego rzeczownika ani utożsamiać zwierzchności z osobowymi władcami. Szczególnie ważne jest zachowanie trójczłonowych wyliczeń hierarchicznych.",
+      "textChanged": false,
+      "requiredPattern": "zwierzchno",
+      "minimumOccurrences": 8,
+      "forbiddenPattern": "archonci, archonci i archonci"
+    },
+    {
+      "id": "power-dynamis-chom-context",
+      "status": "approved-contextual",
+      "selectedPolish": "moc jako podstawowy odpowiednik ϭⲟⲙ i technicznych użyć ⲇⲩⲛⲁⲙⲓⲥ; znaczenie zdolności, siły lub bytu rozstrzyga kontekst",
+      "pages": [48, 49, 50, 51, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 76, 77, 78, 79, 80, 81, 82, 83, 84, 86, 88, 89, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 104, 105, 106, 107, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 151, 152, 153, 155, 156, 158, 159, 160, 161, 162, 168, 170, 174, 175, 176, 177, 178, 182, 184, 186, 191, 194, 201, 202, 204, 206, 208, 209, 210, 224, 227, 228, 229, 230, 231, 232, 233, 237, 238, 240, 241, 242, 243, 244, 245, 246, 247, 248, 253],
+      "coptic": "ϭⲟⲙ jest poświadczone 517 razy, a greckie zapożyczenie ⲇⲩⲛⲁⲙⲓⲥ 33 razy; oba mogą oznaczać moc, lecz składnia rozstrzyga, czy chodzi o zdolność, siłę czy uosobiony byt",
+      "mead": "power / powers, zarówno dla zdolności i energii, jak i dla uosobionych mocy kosmicznych",
+      "macdermot": "power / powers; kontekstowo zachowuje różnicę między mocą, zwierzchnością i władcą",
+      "rationale": "„Moc” jest najszerszym i utrwalonym polskim odpowiednikiem, ale nie każde wystąpienie jest nazwą klasy bytów. Globalna kapitalizacja albo zamiana na „Potęgę” stworzyłaby sztuczną jednolitość, której nie ma w składni koptyjskiej. Audyt zatwierdza rozstrzyganie osobowego i abstrakcyjnego sensu w obrębie zdania.",
+      "textChanged": false,
+      "requiredPattern": "moc",
+      "minimumOccurrences": 600,
+      "forbiddenPattern": "wszystkie Potęgi kosmiczne"
+    }
+  ]
+}

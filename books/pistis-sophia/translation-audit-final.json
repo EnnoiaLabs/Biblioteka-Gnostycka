@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.33",
+  "scope": "Końcowy audyt spójności polskiej warstwy czytelniczej Pistis Sophii, strony 48–255",
+  "readerPageStart": 48,
+  "readerPageEnd": 255,
+  "pagesAudited": 208,
+  "textChanged": false,
+  "status": "approved-complete",
+  "includedStages": [
+    "1.7.20",
+    "1.7.21",
+    "1.7.22",
+    "1.7.23",
+    "1.7.24",
+    "1.7.25",
+    "1.7.26",
+    "1.7.27",
+    "1.7.28",
+    "1.7.29",
+    "1.7.30",
+    "1.7.31",
+    "1.7.32"
+  ],
+  "checks": [
+    "kompletność i kolejność wszystkich 208 stron warstwy czytelniczej",
+    "zgodność dziewięciu zbiorczych pakietów terminologicznych",
+    "domknięcie wszystkich form fleksyjnych rozpostarcia Całości",
+    "spójność liczb, kierunków i hierarchii",
+    "spójność nazw własnych, ich odmiany i kapitalizacji nazw systemowych",
+    "brak ośmiu potwierdzonych kalek Meada usuniętych w 1.7.32",
+    "zachowanie celowych formuł narracyjnych i misteryjnych powtórzeń"
+  ],
+  "conclusion": "Zestawienie tekstu, rejestrów decyzji i automatycznych zabezpieczeń nie wykazało nowej sprzeczności wymagającej korekty czytelniczej. Audyt globalny zostaje formalnie zamknięty, a dalsze zmiany tekstu powinny wynikać z nowego, dokładnie udokumentowanego świadectwa źródłowego, nie z mechanicznego ujednolicania stylu."
+}

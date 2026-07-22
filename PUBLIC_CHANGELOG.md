@@ -1,5 +1,93 @@
 # Publiczna historia zmian / Public change history
 
+## 1.7.37 - Finalne wydanie po pełnym audycie
+
+### PL
+- Zakończono globalny audyt wszystkich 208 stron polskiej warstwy Pistis Sophii oraz utrwalono zatwierdzone decyzje przekładowe.
+- Rozszerzona bramka Chromium potwierdziła działanie ksiąg, trybów tekstu, nawigacji, motywów, języka, wyrównania, cytowania i widoku mobilnego.
+- Uporządkowano wydanie publiczne bez dalszych zmian w tekście czytelniczym ani interfejsie.
+
+### EN
+- Completed the global audit of all 208 pages of the Polish Pistis Sophia layer and preserved the approved translation decisions.
+- The expanded Chromium gate confirmed books, text modes, navigation, themes, language switching, alignment, citation, and mobile layout.
+- Prepared the public release without further reader-text or interface changes.
+
+## 1.7.32 - Naturalniejsza polszczyzna bez kalek Meada
+
+### PL
+- Poprawiono osiem jednoznacznych kalek archaicznej składni Meada na stronach 64, 104, 105, 120 i 160.
+- Naturalniej zapisano pochwałę pytania, jawność odpowiedzi, intensywność światłości oraz niezmierzoną odległość między porządkami.
+- Zachowano formuły narracyjne „I stało się”, „odpowiedział i rzekł” oraz misteryjne powtórzenia.
+
+### EN
+- Corrected eight unambiguous calques of Mead's archaic syntax on pages 64, 104, 105, 120, and 160.
+- Rendered the praise of a question, openness of an answer, intensity of light, and immeasurable distance between orders in more natural Polish.
+- Preserved the narrative formulas ‘And it came to pass,’ ‘answered and said,’ and the mystery repetitions.
+
+## 1.7.30 - Korekta dwunastu eonów
+
+### PL
+- Audyt liczb i hierarchii wykrył pojedynczą omyłkę Meada: „dwunastu księżyców” w opisie krainy Adamasa.
+- Poprawiono ją na „dwunastu eonów” zgodnie z koptyjskim tekstem, który dwukrotnie używa w tym zdaniu tej samej nazwy porządku.
+
+### EN
+- The numbers-and-hierarchy audit found a single Mead slip: “twelve moons” in the description of Adamas's region.
+- Corrected it to “twelve aeons,” following the Coptic text, which uses the same order name twice in the sentence.
+
+## 1.7.29 - Pełna korekta „rozpostarcia Całości”
+
+### PL
+- Poprawiono 23 pominięte formy „rozpostarciu wszechświata” na terminologicznie spójne „rozpostarciu Całości”.
+- Zmiana obejmuje 14 stron Pistis Sophii i domyka korektę rozpoczętą w wersji 1.7.20.
+
+### EN
+- Corrected 23 previously omitted inflected forms to the terminology-equivalent “spreading of the All.”
+- The change covers 14 pages of Pistis Sophia and completes the correction begun in version 1.7.20.
+
+## 1.7.20 - Zbiorczy audyt sześciu grup terminologicznych
+
+### PL
+- Rozstrzygnięto zbiorczo terminy Odbiorcy, Typ, Pomocnicy i Los oraz zasadę transliteracji nazw własnych na podstawie Meada, MacDermot i tekstu koptyjskiego.
+- Na stronach 169, 181 i 234 ujednolicono pięć wystąpień formuły „rozpostarcie wszechświata” jako „rozpostarcie Całości”, zgodnie z koptyjskim ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅.
+- Każda z sześciu grup otrzymała osobną decyzję, zakres stron i regułę ochronną; nie zastosowano ryzykownych globalnych zamian terminu Typ ani nazw własnych.
+
+### EN
+- Resolved the Receivers, Type, Helpers and Fate groups together with the proper-name transliteration policy from Mead, MacDermot and the Coptic text.
+- On reader pages 169, 181 and 234, five instances of ‘expansion of the universe’ were standardized as ‘expansion of the All’, following Coptic ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅.
+- Each of the six groups now has an individual decision, page scope and regression rule; no unsafe global replacement of Type or proper names was performed.
+
+## 1.7.17 - Powrót duszy do świata znajdującego się wyżej
+
+### PL
+- Na stronie 194 zastąpiono interpretacyjne „ponownie posłana ku światu ludzi” źródłowym „odesłana z powrotem do świata znajdującego się wyżej”.
+- Korektę oparto na Meadzie oraz koptyjskim ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ i objęto ochroną Strażnika.
+
+### EN
+- On page 194, the interpretive ‘sent again to the world of men’ was replaced with the source-based ‘sent back to the world above’.
+- The correction follows Mead and Coptic ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ and is now protected by the translation guardian.
+
+## 1.7.16 - Kontekstowy przekład terminu politeia
+
+### PL
+- Na stronie 180 zastąpiono mylące „obywatelstwo światłości” formą „praktyka życia w światłości”, zgodną z objaśnieniem terminu przez oczyszczenia i wyrzeczenie.
+- Zachowano kontekstowe „życie w wielkiej prawości” na stronie 196; oba użycia koptyjskiego ⲡⲟⲗⲓⲧⲓⲁ udokumentowano i objęto ochroną Strażnika.
+
+### EN
+- On page 180, the misleading literal ‘citizenship of the light’ was replaced with ‘practice of life in the light’, matching the following explanation through purities and renunciation.
+- The contextual ‘life in great righteousness’ on page 196 was retained; both uses of Coptic ⲡⲟⲗⲓⲧⲓⲁ are now documented and protected by the guardian.
+
+## 1.7.9 - Przywrócenie terminu człowiek światłości
+
+### PL
+- Na stronach 73, 86, 130 i 158 zastąpiono formę „zamieszkująca mnie moc światłości” źródłowym terminem „mój człowiek światłości”.
+- Ujednolicono wszystkie siedem wystąpień według koptyjskiego ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ oraz porównania przekładów Meada, MacDermot i Hornera.
+- Decyzję zapisano w rejestrze i objęto automatyczną ochroną Strażnika tłumaczenia.
+
+### EN
+- Replaced the paraphrase ‘my indwelling light-power’ on pages 73, 86, 130, and 158 with the source term ‘my light-man’.
+- Standardized all seven occurrences against Coptic ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ and the Mead, MacDermot, and Horner translations.
+- Recorded and enforced the decision in the translation guardian.
+
 ## 1.7.5 - Udokumentowana metoda polskiego przekładu
 
 ### PL

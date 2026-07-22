@@ -253,6 +253,18 @@ test("reader modes and all three themes remain available", () => {
   }
 });
 
+test("final browser gate exercises reader settings and the mobile layout", () => {
+  const browserTest = read("tests/browser-smoke.js");
+  for (const marker of [
+    "reader-settings", "#themeSetting", "data-text-align", "#citationFormat",
+    "data-language-switch", "mobile-layout", ".mobile-bottom-nav", "#mobileSheet",
+    "#mobileCopyButton"
+  ]) {
+    assert.ok(browserTest.includes(marker), `browser gate does not cover ${marker}`);
+  }
+  assert.match(browserTest, /width:\s*390,\s*height:\s*844/);
+});
+
 test("extracted Polish translations are lazy-loaded with Pistis Sophia and preserve the complete layer", () => {
   const loader = read("book-loader.js");
   const translationsScript = "books/pistis-sophia/polish-translations.js";
@@ -273,14 +285,16 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[48], /dwudziestego czwartego Misterium na zewnątrz i poniżej/);
   assert.doesNotMatch(translations[48], /dwudziestego czwartego Misterium od wewnątrz ku zewnętrzu/);
   assert.match(translations[49], /pięciu Znamionach/);
+  assert.match(translations[49], /Bliźniaczego Zbawiciela/);
   assert.match(translations[50], /wszyscy trwali w głębokim milczeniu/);
   assert.match(translations[52], /wszystkie trzęsienia ziemi\?/);
   assert.match(translations[55], /otrzymam od Pierwszego Misterium polecenie/);
   assert.match(translations[56], /Misterium pięciu Znamion/);
+  assert.match(translations[56], /Bliźniaczy Zbawiciel/);
   assert.match(translations[64], /w jaki sposób zostaną szybko oczyszczone/);
-  assert.match(translations[73], /zamieszkująca mnie moc światłości/);
+  assert.match(translations[73], /mój człowiek światłości/);
   assert.match(translations[85], /Filip wystąpił/);
-  assert.match(translations[86], /Zamieszkująca mnie moc światłości/);
+  assert.match(translations[86], /Mój człowiek światłości/);
   assert.match(translations[94], /jej pokuta zostanie przyjęta/);
   assert.match(translations[102], /mam dla niej zrozumienie/);
   assert.match(translations[108], /zwodniczym językiem obmawiali mnie/);
@@ -288,12 +302,13 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[114], /jej pokuta została przyjęta/);
   assert.match(translations[117], /miej dla mnie cierpliwość/);
   assert.match(translations[126], /mówię do was\?/);
-  assert.match(translations[130], /zamieszkująca mnie moc światłości/);
+  assert.match(translations[130], /mój człowiek światłości/);
   assert.match(translations[145], /zbawiła mnie od was\?/);
   assert.match(translations[154], /w Królestwie Światłości\?/);
   assert.match(translations[155], /Bliźniaczy Zbawiciele/);
+  assert.match(translations[155], /Bliźniaczych Zbawicieli/);
   assert.match(translations[157], /ochrzczą je/);
-  assert.match(translations[158], /zamieszkująca mnie moc światłości/);
+  assert.match(translations[158], /mój człowiek światłości/);
   assert.match(translations[160], /ponownie wystąpiła i mówiła dalej/);
   assert.match(translations[164], /powstały gady/);
   assert.match(translations[168], /Bliźniaczy Zbawiciele/);
@@ -360,12 +375,12 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[190], /Miłujcie ludzi/);
   assert.match(translations[193], /zachowa przy Życiu i zbawi choćby jedną duszę/);
   assert.match(translations[195], /nie oszukuje, nie udaje ani nie kieruje nim ciekawość/);
-  assert.match(translations[194], /ponownie posłana ku światu ludzi/);
+  assert.match(translations[194], /odesłana z powrotem do świata znajdującego się wyżej/);
   assert.match(translations[196], /prowadził życie w wielkiej prawości oraz trwał w głębokiej pokucie/);
   assert.match(translations[216], /To wyższe Misterium przyjmie jego pokutę i odpuści mu grzechy/);
   assert.match(translations[255], /Wyszli po trzech ku czterem strefom nieba/);
   assert.doesNotMatch(completePolishTranslation, /odgrywani(?:e|a) roli|odgrywaj(?:ą|ąc)|odgrywali przed nami rolę/);
-  assert.doesNotMatch(completePolishTranslation, /wielkim obywatelstwie|świat powyżej|to ostatnie dlatego/);
+  assert.doesNotMatch(completePolishTranslation, /wielkim obywatelstwie|świat powyżej|ponownie posłana ku światu ludzi|to ostatnie dlatego/);
   assert.doesNotMatch(
     completePolishTranslation,
     /przekładu przekładu|prawdziwie w prawdzie|pośpieszą szybko|będzie nieistniejąca|jakichś takich misteriów/

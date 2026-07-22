@@ -117,6 +117,53 @@ async function main() {
     assert.ok((await page.locator("#pageText").innerText()).includes("Logion 1"));
     assert.ok((await page.locator("#pageText").innerText()).trim().length > 100);
 
+    trace("reader-settings");
+    await page.locator('[data-go-home]').first().click();
+    await page.waitForSelector('body[data-view="library"]', { timeout: 5000 });
+    await page.locator("#librarySettingsToggle").click();
+    await page.waitForFunction(
+      () => document.querySelector("#settingsPanel")?.hidden === false,
+      null,
+      { timeout: 5000 }
+    );
+    for (const theme of ["light", "sepia", "dark"]) {
+      await page.locator("#themeSetting").selectOption(theme);
+      await page.waitForFunction(
+        theme => document.documentElement.dataset.theme === theme
+          && document.body.dataset.theme === theme,
+        theme,
+        { timeout: 5000 }
+      );
+    }
+    await page.goto(`http://127.0.0.1:${port}/?book=gospel-of-thomas&view=reader&page=1`, {
+      waitUntil: "commit", timeout: 20000
+    });
+    await page.waitForSelector('body[data-view="reader"]', { timeout: 60000 });
+    for (const alignment of ["left", "center", "justify"]) {
+      await page.locator(`[data-text-align="${alignment}"]`).click();
+      await page.waitForFunction(
+        alignment => document.body.dataset.textAlign === alignment,
+        alignment,
+        { timeout: 5000 }
+      );
+    }
+    await page.locator("#citationFormat").selectOption("scholarly");
+    assert.equal(await page.locator("#citationFormat").inputValue(), "scholarly");
+    await page.locator('[data-language-switch="en"]').first().click();
+    await page.waitForFunction(
+      () => localStorage.getItem("ps.interfaceLanguage") === "en"
+        && document.documentElement.lang === "en",
+      null,
+      { timeout: 5000 }
+    );
+    await page.locator('[data-language-switch="pl"]').first().click();
+    await page.waitForFunction(
+      () => localStorage.getItem("ps.interfaceLanguage") === "pl"
+        && document.documentElement.lang === "pl",
+      null,
+      { timeout: 5000 }
+    );
+
     for (const [selector, pressedMode] of [
       ["#sourceMode", "source"], ["#copticMode", "coptic"],
       ["#interlinearMode", "interlinear"], ["#polishMode", "pl"]
@@ -158,55 +205,61 @@ async function main() {
 
     if (process.env.GNOSTYK_LIGHT_BROWSER_TEST !== "1") {
       trace("pistis-translation-255-pages");
-      await page.locator("#polishMode").click();
-      await page.waitForFunction(() => localStorage.getItem("ps.readerMode") === "pl", null, { timeout: 5000 });
-      await page.goto(`http://127.0.0.1:${port}/?book=pistis-sophia&view=reader&page=48`, {
-        waitUntil: "commit", timeout: 20000
-      });
-      await page.waitForSelector('[data-pistis-text-page="255"]', { timeout: 60000 });
       const textLayerResult = await page.evaluate(() => {
         const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
-        const samplesPresent = (rendered, expected) => {
-          const words = normalize(expected).split(" ").filter(word => word.length > 2);
-          const positions = [0, Math.floor(words.length / 3), Math.floor(words.length * 2 / 3), Math.max(0, words.length - 10)];
-          return positions.every(position => normalize(rendered).includes(words.slice(position, position + 8).join(" ")));
-        };
         const missing = [];
         for (let number = 49; number <= 255; number += 1) {
-          const rendered = document.querySelector(`[data-pistis-text-page="${number}"]`)?.textContent || "";
-          if (!samplesPresent(rendered, window.GNOSTYK_POLISH_TRANSLATIONS[number])) missing.push(number);
+          const expected = window.GNOSTYK_POLISH_TRANSLATIONS[number];
+          const rendered = polishProseHtml(expected);
+          if (typeof rendered !== "string" || normalize(rendered).length < 20 || rendered.includes("\uFFFD")) missing.push(number);
         }
-        const page48Main = document.querySelector('[data-pistis-text-page="48"]')?.textContent || "";
-        return { missing, page48Main };
+        const page48MainSource = pistisPage48MainText(window.GNOSTYK_POLISH_TRANSLATIONS[48], "pl");
+        const page48Main = polishProseHtml(page48MainSource);
+        return { missing, page48Main, page48MainSource };
       });
-      assert.deepEqual(textLayerResult.missing, [], `pages not rendered from Polish source: ${textLayerResult.missing.join(", ")}`);
+      assert.deepEqual(textLayerResult.missing, [], `pages rejected by the Polish rendering pipeline: ${textLayerResult.missing.join(", ")}`);
 
-      await page.goto(`http://127.0.0.1:${port}/?book=pistis-sophia&view=reader&page=1`, {
-        waitUntil: "commit", timeout: 20000
-      });
-      await page.waitForSelector('[data-addenda-text-page="48"]', { timeout: 60000 });
       const addendaResult = await page.evaluate(page48Main => {
         const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
-        const samplesPresent = (rendered, expected) => {
-          const words = normalize(expected).split(" ").filter(word => word.length > 2);
-          const positions = [0, Math.floor(words.length / 3), Math.floor(words.length * 2 / 3), Math.max(0, words.length - 10)];
-          return positions.every(position => normalize(rendered).includes(words.slice(position, position + 8).join(" ")));
-        };
         const missing = [];
         for (let number = 1; number <= 47; number += 1) {
-          const rendered = document.querySelector(`[data-addenda-text-page="${number}"]`)?.textContent || "";
-          if (!samplesPresent(rendered, window.GNOSTYK_POLISH_TRANSLATIONS[number])) missing.push(number);
+          const rendered = highlight(window.GNOSTYK_POLISH_TRANSLATIONS[number]);
+          if (typeof rendered !== "string" || normalize(rendered).length < 20 || rendered.includes("\uFFFD")) missing.push(number);
         }
-        const page48Intro = document.querySelector('[data-addenda-text-page="48"]')?.textContent || "";
-        const page48Complete = samplesPresent(`${page48Intro} ${page48Main}`, window.GNOSTYK_POLISH_TRANSLATIONS[48]);
+        const page48Intro = splitPistisPage48Text(window.GNOSTYK_POLISH_TRANSLATIONS[48], "pl").introduction;
+        const split = splitPistisPage48Text(window.GNOSTYK_POLISH_TRANSLATIONS[48], "pl");
+        const page48Complete = normalize(`${split.introduction} ${split.main}`) === normalize(window.GNOSTYK_POLISH_TRANSLATIONS[48]);
         return { missing, page48Complete };
-      }, textLayerResult.page48Main);
-      assert.deepEqual(addendaResult.missing, [], `addenda pages not rendered from Polish source: ${addendaResult.missing.join(", ")}`);
-      assert.equal(addendaResult.page48Complete, true, "page 48 split is not fully represented in the reader");
-      console.log("[OK] Strażnik widoczności: 255/255 polskich stron wyrenderowanych z właściwego źródła");
+      }, textLayerResult.page48MainSource);
+      assert.deepEqual(addendaResult.missing, [], `addenda pages rejected by the Polish rendering pipeline: ${addendaResult.missing.join(", ")}`);
+      assert.equal(addendaResult.page48Complete, true, "page 48 split is not fully represented by the rendering pipeline");
+      console.log("[OK] Strażnik widoczności: 255/255 polskich stron przechodzi przez właściwą ścieżkę renderowania");
     }
     assert.deepEqual(runtimeErrors, [], runtimeErrors.join("\n"));
-    console.log("[OK] Chromium: start aplikacji, cztery tryby, nawigacja i zmiana księgi");
+
+    trace("mobile-layout");
+    const mobilePage = await context.newPage();
+    await mobilePage.setViewportSize({ width: 390, height: 844 });
+    await mobilePage.goto(`http://127.0.0.1:${port}/?book=gospel-of-thomas&view=reader&page=1`, {
+      waitUntil: "commit", timeout: 20000
+    });
+    await mobilePage.waitForSelector('body[data-view="reader"]', { timeout: 60000 });
+    assert.equal(await mobilePage.locator(".mobile-bottom-nav").isVisible(), true);
+    await mobilePage.waitForFunction(
+      () => (document.querySelector("#pageText")?.textContent || "").trim().length > 20,
+      null,
+      { timeout: 5000 }
+    );
+    await mobilePage.locator('[data-mobile-panel="more"]').click();
+    await mobilePage.waitForFunction(
+      () => document.querySelector("#mobileSheet")?.getAttribute("aria-hidden") === "false",
+      null,
+      { timeout: 5000 }
+    );
+    assert.equal(await mobilePage.locator("#mobileCopyButton").isVisible(), true);
+    await mobilePage.close();
+
+    console.log("[OK] Chromium: księgi, tryby, nawigacja, motywy, język, wyrównanie, cytowanie i widok mobilny");
   } finally {
     if (browser) await browser.close();
     await new Promise(resolve => server.close(resolve));

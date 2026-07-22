@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.21",
+  "scope": "Drugi zbiorczy skan terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "completion-of-all-completions",
+      "status": "approved-retained",
+      "selectedPolish": "spełnienie wszystkich spełnień",
+      "pages": [48, 49],
+      "coptic": "ⲡϫⲱⲕ ⲛ̅ ⲛ̅ϫⲱⲕ ⲧⲏⲣⲟⲩ",
+      "mead": "completion of all completions",
+      "macdermot": "completion of all completions",
+      "rationale": "Powtórzenie nie jest przypadkową kalką ani błędem stylistycznym, lecz celową formułą stopnia najwyższego, obecną także w koptyjskim. Wygładzenie jej do samej pełni albo ostatecznego spełnienia usunęłoby charakterystyczną budowę źródła.",
+      "textChanged": false,
+      "requiredPattern": "spełnieniem wszystkich spełnień",
+      "requiredOccurrences": 2
+    },
+    {
+      "id": "pleroma-fullness-context",
+      "status": "approved-contextual",
+      "selectedPolish": "Pełnia dla technicznego pleroma; pełnia i dopełnienie w użyciach opisowych",
+      "pages": [50, 55],
+      "coptic": "ⲡⲗⲏⲣⲱⲙⲁ; ϫⲱⲕ ⲉⲃⲟⲗ",
+      "mead": "Fullness; full completion",
+      "macdermot": "Pleroma / fullness; completion",
+      "rationale": "Źródło rozróżnia zapożyczone pleroma od czasownikowego dopełnienia. Wielka litera pozostaje przy systemowej Pełni, natomiast nie każde wystąpienie rdzenia oznaczającego dopełnienie staje się nazwą własną. Globalne ujednolicenie obu rodzin byłoby błędem.",
+      "textChanged": false,
+      "requiredPattern": "otrzymaliśmy Pełnię oraz całkowite spełnienie",
+      "requiredOccurrences": 1
+    },
+    {
+      "id": "chastisement-and-judgment-context",
+      "status": "approved-contextual",
+      "selectedPolish": "kary lub karania dla kolasis; sądy dla krisis i miejsc sądu",
+      "pages": [192, 198, 202, 208, 221, 224, 225, 230, 242, 244, 248, 253, 255],
+      "coptic": "ⲕⲟⲗⲁⲥⲓⲥ; ⲕⲣⲓⲥⲓⲥ; ⲧⲟⲡⲟⲥ",
+      "mead": "chastisement(s); judgment(s); regions of the judgments",
+      "macdermot": "punishment(s); judgment(s); places of judgment",
+      "rationale": "Skan nie potwierdził jednej nazwy własnej krainy karań. Koptyjski rozróżnia karę, sąd oraz miejsce lub krainę, dlatego polskie formy należy zachować kontekstowo. Mechaniczne zastąpienie wszystkich wystąpień jedną formułą zatarłoby składnię źródła.",
+      "textChanged": false,
+      "forbiddenPattern": "Kraina Karań"
+    }
+  ]
+}

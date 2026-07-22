@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.27",
+  "scope": "Ósmy zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "soul-psyche-context",
+      "status": "approved-contextual",
+      "selectedPolish": "dusza jako indywidualny podmiot wcielenia, drogi pośmiertnej, sądu i zbawienia; bez utożsamiania jej z duchem, mocą albo materialnym ciałem",
+      "pages": [53, 54, 63, 64, 65, 66, 67, 73, 74, 75, 78, 79, 81, 86, 89, 91, 92, 93, 96, 98, 100, 101, 103, 104, 109, 119, 120, 121, 122, 138, 139, 140, 144, 149, 154, 155, 156, 157, 158, 163, 174, 176, 178, 179, 182, 185, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 212, 213, 215, 217, 218, 220, 221, 222, 223, 224, 225, 227, 228, 229, 230, 231, 232, 235, 236, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255],
+      "coptic": "Greckie zapożyczenie ⲯⲩⲭⲏ i jego formy fleksyjne oznaczają duszę jako indywidualny podmiot. W narracji dusza jest kształtowana, wiązana z ciałem, prowadzona przez odbiorców i poddawana sądowi, co odróżnia ją od ⲡⲛⲉⲩⲙⲁ oraz od mocy.",
+      "mead": "Mead konsekwentnie używa soul w opisach wcielenia, wyjścia z ciała, wędrówki przez regiony i dziedziczenia Światłości, zachowując spirit dla odrębnych konstrukcji pneumatologicznych.",
+      "macdermot": "MacDermot również oddaje ⲯⲩⲭⲏ jako soul i utrzymuje rozróżnienie między duszą, duchem, mocą oraz ciałem w antropologicznych i eschatologicznych sekwencjach tekstu.",
+      "rationale": "Obecne użycie słowa „dusza” zachowuje ciągłość podmiotu od ukształtowania i wcielenia aż po sąd, oczyszczenie lub zbawienie. W wielu fragmentach dusza występuje obok ducha, mocy i ciała, dlatego zastąpienie jej którymkolwiek z tych terminów spłaszczyłoby budowę człowieka przedstawioną w traktacie. Tekst nie wymaga korekty.",
+      "textChanged": false,
+      "requiredPattern": "dusz",
+      "minimumOccurrences": 450,
+      "forbiddenPattern": "dusza i duch są tym samym"
+    },
+    {
+      "id": "spirit-pneuma-context",
+      "status": "approved-contextual",
+      "selectedPolish": "duch jako termin zależny od określenia i kontekstu: Duch udzielany z wysokości, duch człowieka oraz nazwane duchy naśladowcze lub zwodnicze; nie jako zamiennik duszy",
+      "pages": [60, 73, 77, 78, 79, 80, 84, 85, 86, 91, 93, 95, 96, 100, 103, 108, 110, 115, 116, 117, 138, 146, 157, 158, 161, 162, 165, 171, 172, 173, 184, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 213, 214, 215, 223, 225, 226, 227, 228, 229, 230, 231, 232, 244, 247],
+      "coptic": "Greckie zapożyczenie ⲡⲛⲉⲩⲙⲁ występuje samodzielnie i z określeniami rozstrzygającymi jego funkcję. Konstrukcje dotyczące Ducha z wysokości oraz ducha naśladowczego nie są tożsame z ⲯⲩⲭⲏ, choć oba terminy mogą występować w opisie jednego człowieka.",
+      "mead": "Mead zachowuje spirit, Spirit oraz counterfeiting spirit zależnie od kontekstu, nie zastępując nimi soul. Wielka litera wynika z odniesienia, a nie z automatycznej kapitalizacji każdego wystąpienia.",
+      "macdermot": "MacDermot rozróżnia Spirit, human spirit i counterfeiting spirit, a zarazem utrzymuje soul jako osobny składnik antropologii. Określenie towarzyszące terminowi jest niezbędne dla jego interpretacji.",
+      "rationale": "Polska warstwa słusznie nie nadaje wszystkim wystąpieniom „ducha” jednej wartości. Duch może pochodzić z wysokości, oznaczać wewnętrzną dyspozycję mówiącego albo należeć do nazwanej kategorii ducha naśladowczego. Mechaniczna kapitalizacja lub zamiana na „duszę” usunęłaby rozróżnienia obecne w źródłach. Tekst czytelniczy pozostaje bez zmian.",
+      "textChanged": false,
+      "requiredPattern": "duch",
+      "minimumOccurrences": 109,
+      "forbiddenPattern": "każdy duch jest Duszą"
+    },
+    {
+      "id": "body-soma-context",
+      "status": "approved-contextual",
+      "selectedPolish": "ciało jako cielesny nośnik duszy lub określona forma cielesna, w tym ciało materialne; bez utożsamiania każdego ciała z samą materią albo z duszą",
+      "pages": [53, 54, 64, 65, 82, 84, 96, 109, 113, 116, 119, 120, 122, 135, 136, 160, 164, 174, 178, 179, 180, 181, 184, 185, 186, 187, 191, 192, 198, 199, 201, 202, 203, 206, 207, 209, 210, 211, 212, 213, 214, 215, 216, 217, 222, 223, 224, 225, 227, 228, 229, 230, 231, 232, 233, 235, 236, 237, 243, 245, 247, 249, 250, 251, 252, 253, 254, 255],
+      "coptic": "Greckie zapożyczenie ⲥⲱⲙⲁ oraz konstrukcje koptyjskie odnoszą się do ciała, z którego dusza wychodzi lub w które zostaje wprowadzona. Dodatkowe określenie materialności opisuje rodzaj ciała, nie upoważnia do zastąpienia rzeczownika samą materią.",
+      "mead": "Mead używa body w stałych formułach entering, coming out of oraz casting into a body, a material body rezerwuje dla miejsc, w których tekst wyraźnie kwalifikuje cielesną formę.",
+      "macdermot": "MacDermot zachowuje body jako nośnik wcielenia i odróżnia je od matter. W opisach pośmiertnych dusza opuszcza ciało, a następnie może zostać wprowadzona do nowego ciała o określonych cechach.",
+      "rationale": "Obecny przekład prawidłowo używa „ciała” w powtarzalnych formułach wcielenia i śmierci, a „materialnego ciała” tylko tam, gdzie kwalifikacja ma znaczenie. Globalna zamiana ciała na materię zniszczyłaby różnicę między tworzywem a uformowanym nośnikiem duszy. Nie znaleziono jednoznacznego błędu wymagającego ingerencji w tekst.",
+      "textChanged": false,
+      "requiredPattern": "ciał",
+      "minimumOccurrences": 175,
+      "forbiddenPattern": "każde ciało jest tylko materią"
+    }
+  ]
+}

@@ -3,6 +3,318 @@
   "description": "Wiążący rejestr decyzji tłumaczeniowych Pistis Sophii.",
   "decisions": [
     {
+      "id": "twenty-fourth-mystery-direction",
+      "status": "approved",
+      "selectedPolish": "dwudzieste czwarte Misterium na zewnątrz i poniżej",
+      "scope": "Pierwsze zdanie rozdziału 1, strona 48 czytnika; rękopiśmienna strona 1/5–10. Decyzja nie obejmuje odmiennych opisów ruchu od wewnątrz ku zewnętrzu na stronach 50, 52 i 53.",
+      "rationale": "W pierwszym zdaniu tekst określa położenie dwudziestego czwartego Misterium względem Pierwszego Przykazania i Pierwszego Misterium. Koptyjskie przysłówki wskazują dwa zgodne kierunki: na zewnątrz oraz w dół. Dawne «od wewnątrz ku zewnętrzu» zacierało drugi kierunek i błędnie przedstawiało statyczną relację hierarchiczną jako ruch. Późniejsze użycia podobnego zwrotu opisują jednak rzeczywiste rozciągnięcie lub przejście i pozostają bez zmian.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, strona 1 przekładu, rozdział 1",
+          "rendering": "the four-and-twentieth mystery from without and below",
+          "basis": "Mead zachowuje oba określenia położenia: zewnętrzne i dolne, odróżniając je od późniejszych formuł «from within outwards»."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, rękopiśmienna strona 1/5–10",
+          "rendering": "the twenty-fourth mystery outside and below",
+          "basis": "Przekład bezpośrednio z tekstu Schmidta potwierdza zewnętrzne i niższe położenie dwudziestego czwartego Misterium."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, początek księgi I, rękopiśmienna strona 1",
+          "rendering": "the twenty-fourth mystery without and beneath",
+          "basis": "Niezależny przekład koptyjskiego zachowuje oba kierunki i wspiera odczytanie hierarchiczne."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Wiersze 1/5–10 mają: ⲡⲙⲉϩ ϫⲟⲩⲧⲁϥⲧⲉ ⲙ̅ ⲙⲩⲥⲧⲏⲣⲓⲟⲛ ⲉⲃⲟⲗ· ⲁⲩⲱ ⲉ ⲡⲉⲥⲏⲧ — «dwudzieste czwarte Misterium na zewnątrz i w dół/poniżej». ⲉⲃⲟⲗ wyznacza kierunek zewnętrzny, a ⲉ ⲡⲉⲥⲏⲧ kierunek dolny.",
+        "exactForm": "ⲡⲙⲉϩ ϫⲟⲩⲧⲁϥⲧⲉ ⲙ̅ ⲙⲩⲥⲧⲏⲣⲓⲟⲛ ⲉⲃⲟⲗ· ⲁⲩⲱ ⲉ ⲡⲉⲥⲏⲧ",
+        "uncertaintyNote": "Polskie «poniżej» oddaje relację hierarchiczną naturalniej niż dosłowne «w dół»; nie należy tej formuły przenosić na późniejsze zdania o ruchu od wewnątrz ku zewnętrzu."
+      },
+      "footnote": "Mead (1921) ma «from without and below», a MacDermot (1978), przekładająca koptyjski tekst Schmidta, potwierdza zewnętrzne i dolne położenie. Koptyjskie ⲉⲃⲟⲗ· ⲁⲩⲱ ⲉ ⲡⲉⲥⲏⲧ oznacza «na zewnątrz i poniżej»; nie jest to ta sama konstrukcja co późniejsze opisy ruchu od wewnątrz ku zewnętrzu.",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["dwudziestego czwartego Misterium na zewnątrz i poniżej"],
+        "forbiddenPatterns": ["dwudziestego czwartego Misterium od wewnątrz ku zewnętrzu"]
+      }
+    },
+    {
+      "id": "soul-return-to-upper-world",
+      "status": "approved",
+      "selectedPolish": "odesłana z powrotem do świata znajdującego się wyżej",
+      "scope": "Dusza człowieka po ostatnim odrzuceniu pokuty, strona 194 czytnika; rękopiśmienne strony 267/25–268/3.",
+      "rationale": "Koptyjski opisuje skierowanie duszy z powrotem do świata położonego wyżej względem siedzib smoka zewnętrznej ciemności. Nie występuje tu rzeczownik «ludzie», dlatego wcześniejsze «ku światu ludzi» było interpretacją, która usuwała przestrzenny kontrast źródła. Forma «odesłana z powrotem» zachowuje sens koptyjskiego czasownika ⲧⲥⲧⲟ, a «świat znajdujący się wyżej» oddaje ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ bez niezręcznej kalki «świat powyżej».",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, strona 224, paginacja koptyjska 268",
+          "rendering": "be cast back into the world above",
+          "basis": "Mead zachowuje zarówno znaczenie powrotu, jak i przestrzenne określenie świata położonego wyżej."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, karta odpowiadająca stronom 267–268 edycji Schwartzego/Petermanna",
+          "rendering": "sent back to the world above",
+          "basis": "Przekład bezpośrednio z koptyjskiego zachowuje kierunek powrotu duszy i przeciwstawienie wyższego świata siedzibom smoka."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, miejsce odpowiadające rękopiśmiennym stronom 267/25–268/3",
+          "rendering": "return of the soul to the world above",
+          "basis": "Niezależny przekład z koptyjskiego wspiera przestrzenne odczytanie wyrażenia, a nie dopowiedzenie «świat ludzi»."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Zdanie rozpoczyna się w 267/25 i trwa do 268/3: ⲙ̅ⲙⲛ̅ⲧⲟⲩ ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ ... ⲁⲗⲗⲁ ⲉⲥⲛⲁϣⲱⲡⲉ ϩⲛ̅ ⲙ̅ⲙⲁ ⲛ̅ϣⲱⲡⲉ ⲙ̅ⲡⲉⲇⲣⲁⲕⲱⲛ — dusza nie zostanie skierowana z powrotem ku światu na wysokości, lecz będzie w siedzibach smoka.",
+        "exactForm": "ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ",
+        "uncertaintyNote": "«Znajdujący się wyżej» opisuje relację przestrzenną w kosmologii fragmentu; nie ustanawia osobnej nazwy własnej «Wyższy Świat»."
+      },
+      "footnote": "Mead (1921) ma «be cast back into the world above». Koptyjskie ⲧⲥⲧⲟ oznacza skierowanie lub odesłanie z powrotem, a ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ — «świat znajdujący się wyżej». Chodzi o świat położony ponad siedzibami smoka zewnętrznej ciemności; źródło nie zawiera tu określenia «świat ludzi».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["odesłana z powrotem do świata znajdującego się wyżej"],
+        "forbiddenPatterns": ["ponownie posłana ku światu ludzi", "świat powyżej"]
+      }
+    },
+    {
+      "id": "politeia-contextual-rendering",
+      "status": "approved",
+      "selectedPolish": "praktyka życia w światłości (strona 180); życie w wielkiej prawości (strona 196)",
+      "scope": "Dwa wystąpienia koptyjskiego zapożyczenia ⲡⲟⲗⲓⲧⲓⲁ: rękopiśmienne strony 239 i 271, odpowiadające stronom 180 i 196 w czytniku.",
+      "rationale": "Greckie politeia ma szeroki zakres znaczeń: obywatelstwo, sposób życia, postępowanie lub praktykę. Na stronie 180 dopełnienie czasownika «dopełnić» oraz następujące objaśnienie przez oczyszczenia wskazują na pełną praktykę życia wymaganą przez Misterium, dlatego dosłowne «obywatelstwo światłości» jest mylące. Na stronie 196 połączenie z wielką pokutą opisuje natomiast sposób prowadzenia życia; obecne «życie w wielkiej prawości» trafnie oddaje funkcję terminu. Różnica jest kontekstowa i celowa.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, strony 200 i 227",
+          "rendering": "the total citizenship of the light; in great citizenship",
+          "basis": "Mead zachowuje dosłowną kalkę citizenship w obu miejscach, lecz składnia i objaśnienie pierwszego wystąpienia pokazują sens praktyki wymaganej przez Misterium."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, rękopiśmienne strony 239 i 271",
+          "rendering": "conduct / way of life in the two contexts of ⲡⲟⲗⲓⲧⲓⲁ",
+          "basis": "Przekład bezpośrednio z tekstu Schmidta wspiera etyczno-praktyczny sens zapożyczenia, a nie nowożytne znaczenie przynależności państwowej."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, miejsca odpowiadające rękopiśmiennym stronom 239 i 271",
+          "rendering": "manner of life / conduct",
+          "basis": "Niezależny przekład z koptyjskiego potwierdza, że termin opisuje postępowanie i praktykę życiową."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja ma ⲧⲡⲟⲗⲓⲧⲓⲁ ⲧⲏⲣⲥ̅ w 239/10–13, dopełnianą przez «światłość owego Misterium» i objaśnioną jako oczyszczenia wyrzeczenia się świata oraz materii. W 271/10 termin występuje w konstrukcji ϩⲛ̅ ⲟⲩ ⲛⲟϭ ⲙ̅ ⲡⲟⲗⲓⲧⲓⲁ ⲙⲛ̅ ⲟⲩ ⲛⲟϭ ⲙ̅ ⲙⲉⲧⲁⲛⲟⲓⲁ — «w wielkiej politeia i wielkiej pokucie». Oba miejsca używają tego samego zapożyczenia w odmiennej składni.",
+        "exactForm": "ⲧⲡⲟⲗⲓⲧⲓⲁ ⲧⲏⲣⲥ̅ / ϩⲛ̅ ⲟⲩ ⲛⲟϭ ⲙ̅ ⲡⲟⲗⲓⲧⲓⲁ",
+        "uncertaintyNote": "Polskie odpowiedniki są kontekstowe; nie zakłada się jednego mechanicznego tłumaczenia każdego wystąpienia greckiego zapożyczenia."
+      },
+      "footnote": "Mead (1921) oddaje koptyjskie zapożyczenie ⲡⲟⲗⲓⲧⲓⲁ dosłownie jako «citizenship». Porównanie tekstu Schmidta oraz przekładów MacDermot (1978) i Hornera pokazuje jednak sens sposobu życia, postępowania lub praktyki. Dlatego na stronie 180 przyjęto «praktykę życia w światłości», a na stronie 196 — zgodnie z odmienną składnią — «życie w wielkiej prawości».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["dopełni całej praktyki życia w światłości właściwej owemu Misterium", "prowadził życie w wielkiej prawości"],
+        "forbiddenPatterns": ["obywatelstwa światłości", "w wielkim obywatelstwie"]
+      }
+    },
+    {
+      "id": "kingdom-of-light-canonical-name",
+      "status": "approved",
+      "selectedPolish": "Królestwo Światłości; formy odmienne: Królestwa Światłości, Królestwu Światłości, Królestwie Światłości",
+      "scope": "Pełna nazwa systemowa Królestwa Światłości we wszystkich 88 wystąpieniach polskiego przekładu; nie obejmuje zwykłych konstrukcji typu «moje królestwo» ani nazw królestw poszczególnych Misteriów.",
+      "rationale": "Pełne wyrażenie oznacza w dziele określoną rzeczywistość i obszar zbawienia, dlatego jest nazwą systemową i oba jego człony zapisuje się wielką literą. Nie oznacza to kapitalizacji każdego wystąpienia rzeczownika «królestwo»: tam, gdzie tekst mówi opisowo o czyimś królestwie, władzy albo królestwie konkretnego Misterium, pozostaje mała litera zgodna z polską składnią.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, zwłaszcza rozdziały 44, 86–101 i 129–135",
+          "rendering": "the Light-kingdom / the kingdom of the Light",
+          "basis": "Mead traktuje pełne wyrażenie jako nazwę nadrzędnego obszaru Światłości, choć stosuje dwa angielskie warianty składniowe."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, zwłaszcza karty rękopisu 188a–276b i dalsze wykłady o misteriach",
+          "rendering": "the Kingdom of the Light",
+          "basis": "MacDermot zachowuje nazwowy charakter koptyjskiego wyrażenia i jego odniesienie do określonej rzeczywistości zbawienia."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, miejsca odpowiadające wykładom o dziedziczeniu Światłości i misteriach Królestwa",
+          "rendering": "the kingdom of the Light",
+          "basis": "Niezależny przekład z koptyjskiego potwierdza połączenie królestwa z określoną Światłością, a nie ogólny opis świetlistego królestwa."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja poświadcza formułę ⲧⲙⲛ̅ⲧⲉⲣⲟ ⲙ̅ ⲡⲟⲩⲟⲉⲓⲛ czterdzieści razy, m.in. w wierszach 188/11, 199/20, 206/26, 218/3, 237/6, 249/5, 251/18, 259/12–21, 260/3–19, 263/2–13, 272/8–23 i 276/21. ⲙⲛ̅ⲧⲉⲣⲟ oznacza królestwo, a ⲡⲟⲩⲟⲉⲓⲛ — Światłość.",
+        "exactForm": "ⲧⲙⲛ̅ⲧⲉⲣⲟ ⲙ̅ ⲡⲟⲩⲟⲉⲓⲛ",
+        "uncertaintyNote": "Wielka litera jest polską decyzją redakcyjną sygnalizującą nazwę systemową; pismo koptyjskie samo nie rozróżnia małych i wielkich liter w ten sposób."
+      },
+      "footnote": "Mead (1921) używa wariantów «the Light-kingdom» i «the kingdom of the Light», a Violet MacDermot (1978), przekładająca koptyjski tekst Schmidta, ma «the Kingdom of the Light». Koptyjskie ⲧⲙⲛ̅ⲧⲉⲣⲟ ⲙ̅ ⲡⲟⲩⲟⲉⲓⲛ oznacza «Królestwo Światłości»; wielkie litery w polskim przekładzie sygnalizują stałą nazwę systemową, nie ogólną zasadę dla każdego słowa «królestwo».",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["Królestwo Światłości", "Królestwa Światłości", "Królestwu Światłości", "Królestwie Światłości"],
+        "forbiddenPatterns": ["królestwo Światłości", "królestwa Światłości", "królestwu Światłości", "królestwie Światłości", "Królestwo światłości", "Królestwa światłości", "Królestwu światłości", "Królestwie światłości"]
+      }
+    },
+    {
+      "id": "ineffable-canonical-name",
+      "status": "approved",
+      "selectedPolish": "Niewypowiadalny; formy odmienne: Niewypowiadalnego, Niewypowiadalnym, Niewypowiadalne",
+      "scope": "Kanoniczna nazwa najwyższej rzeczywistości, jej Misterium, przestrzeni, Członków, królestwa, słowa, znaku i pieczęci; wszystkie 162 wystąpienia w polskim tekście.",
+      "rationale": "Koptyjska formuła jest substantywizowanym określeniem odnoszonym stale do najwyższej rzeczywistości, a nie swobodnym epitetem opisowym. Wielka litera sygnalizuje nazwę systemową i odróżnia ją od zwykłych przymiotników oznaczających coś trudnego lub niemożliwego do wyrażenia. Rodzaj gramatyczny zmienia się wyłącznie zgodnie z polską składnią: osobowe «Niewypowiadalny» oraz rzeczownikowe «Niewypowiadalne». Nie należy zastępować nazwy wariantami «Niewysłowiony» ani «Niewyrażalny».",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, zwłaszcza rozdziały 1, 91–101 i 129–135",
+          "rendering": "the Ineffable",
+          "basis": "Mead konsekwentnie zapisuje określenie wielką literą jako nazwę najwyższej rzeczywistości oraz jej Misterium i przestrzeni."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, zwłaszcza karty rękopisu 1b–18b, 203b–254b i 271a–334b",
+          "rendering": "the Ineffable",
+          "basis": "MacDermot zachowuje nazwowy charakter koptyjskiej formuły poświadczonej w tekście Schmidta."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, miejsca odpowiadające rozdziałom 91–101 oraz dalszym wykładom o misteriach",
+          "rendering": "the Unutterable",
+          "basis": "Niezależny przekład z koptyjskiego potwierdza, że chodzi o stałe substantywizowane określenie, mimo odmiennego angielskiego odpowiednika."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja wielokrotnie poświadcza formułę ⲡⲓ ⲁⲧϣⲁϫⲉ ⲉ ⲣⲟϥ, m.in. w wierszach 241/6, 241/24, 243/28, 244/4, 248/14, 253/8, 271/15–16 i 304/10. Konstrukcja ⲁⲧϣⲁϫⲉ ⲉⲣⲟϥ znaczy dosłownie «ten, o którym nie można mówić», a rodzajnik ⲡⲓ substantywizuje określenie.",
+        "exactForm": "ⲡⲓ ⲁⲧϣⲁϫⲉ ⲉ ⲣⲟϥ",
+        "uncertaintyNote": "Polska forma «Niewypowiadalny» jest nazwą techniczną; jej rodzaj gramatyczny może zmienić się na nijaki tylko wtedy, gdy składnia odnosi nazwę do Misterium lub absolutu jako «Niewypowiadalnego»."
+      },
+      "footnote": "Mead (1921) i Violet MacDermot (1978), przekładająca koptyjski tekst Schmidta, używają nazwy «the Ineffable», natomiast Horner (1924) ma «the Unutterable». Koptyjskie ⲡⲓ ⲁⲧϣⲁϫⲉ ⲉ ⲣⲟϥ znaczy dosłownie «Ten, o którym nie można mówić»; dlatego w polskim tekście zachowano systemową nazwę «Niewypowiadalny» pisaną wielką literą.",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["Niewypowiadalny", "Niewypowiadalnego", "Niewypowiadalnym", "Niewypowiadalne"],
+        "forbiddenPatterns": ["niewypowiadalny", "niewypowiadalnego", "niewypowiadalnym", "niewypowiadalne", "Misterium Niewysłowionego", "przestrzeni Niewysłowionego", "Misterium Niewyrażalnego", "przestrzeni Niewyrażalnego"]
+      }
+    },
+    {
+      "id": "twin-saviour-number",
+      "status": "approved",
+      "selectedPolish": "Bliźniaczy Zbawiciel (liczba pojedyncza); Bliźniaczy Zbawiciele (liczba mnoga)",
+      "scope": "Liczba pojedyncza na stronach 49 i 56 oraz liczba mnoga na stronach 155, 157, 168 i 176.",
+      "rationale": "Nie należy mechanicznie ujednolicać terminu do jednej liczby. W początkowym opisie Skarbca tekst przedstawia jednego Bliźniaczego Zbawiciela, utożsamionego z Dziecięciem Dziecięcia. W późniejszym opisie hierarchii rękopis przechodzi do liczby mnogiej i mówi o Bliźniaczych Zbawicielach. Polski przekład zachowuje tę zmianę.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdział 1 oraz rozdziały 86–97",
+          "rendering": "Twin-saviour / Twin-saviours",
+          "basis": "Mead stosuje liczbę pojedynczą w początkowym opisie regionu Skarbca, a liczbę mnogą w późniejszym opisie hierarchii Światłości."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, karty rękopisu 2b, 18b, 192a–b, 195b i 216a",
+          "rendering": "twin saviour / twin saviours",
+          "basis": "Przekład MacDermot zachowuje zmianę liczby poświadczoną przez koptyjski tekst Schmidta."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, miejsca odpowiadające kartom rękopisu 2b, 18b, 192a–b, 195b i 216a",
+          "rendering": "twin saviour / twin saviours",
+          "basis": "Niezależny przekład z koptyjskiego potwierdza, że liczba terminu zmienia się między wcześniejszą i późniejszą partią dzieła."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Liczbę pojedynczą poświadczają formy ⲡⲥⲱⲧⲏⲣ ⲛ̅ ϩⲁⲧⲣⲉⲉⲩ w wierszach 2/24 i 18/20. Liczbę mnogą poświadczają formy ⲛ̅ ϩⲁⲧⲣⲉⲉⲩ ⲛ̅ ⲥⲱⲧⲏⲣ w wierszach 192/13, 192/16 i 216/2; kontekst liczby mnogiej jest obecny także w 192/4 i 230/18.",
+        "exactForm": "ⲡⲥⲱⲧⲏⲣ ⲛ̅ ϩⲁⲧⲣⲉⲉⲩ / ⲛ̅ ϩⲁⲧⲣⲉⲉⲩ ⲛ̅ ⲥⲱⲧⲏⲣ",
+        "uncertaintyNote": "Nietypowe przejście od jednego Zbawiciela do Zbawicieli należy do źródła i nie powinno być wygładzane jako pozorna niespójność redakcyjna."
+      },
+      "footnote": "Mead (1921) i MacDermot (1978) zachowują zmianę poświadczoną w koptyjskim tekście: w pierwszej części dzieło mówi w liczbie pojedynczej o „Bliźniaczym Zbawicielu”, utożsamionym z Dziecięciem Dziecięcia, natomiast w późniejszym opisie hierarchii pojawia się liczba mnoga: „Bliźniaczy Zbawiciele”. Rozróżnienie zostało zachowane celowo.",
+      "enforcement": {
+        "minOccurrences": 1,
+        "requiredPatterns": ["Bliźniaczego Zbawiciela", "Bliźniaczy Zbawiciele", "Bliźniaczych Zbawicieli", "Bliźniaczymi Zbawicielami"],
+        "forbiddenPatterns": ["Bliźniacze Zbawiciele", "Bliźniacy Zbawiciele", "Bliźniaczych Zbawiciele"]
+      }
+    },
+    {
+      "id": "light-man-terminology",
+      "status": "approved",
+      "selectedPolish": "mój człowiek światłości",
+      "scope": "Stały termin w wypowiedziach Maryi i Tomasza na stronach 73, 86, 130, 158, 209, 217 i 218.",
+      "rationale": "Dosłowna forma zachowuje gnostycki termin antropologiczny i odpowiada koptyjskiemu wyrażeniu «mój człowiek światłości». Wcześniejsze «zamieszkująca mnie moc światłości» mieszało ten termin z odrębną mocą światłości i powodowało niespójność z dalszymi partiami tego samego przekładu.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 33, 43, 69, 87, 113, 124 i 125",
+          "rendering": "my indweller of light / my light-dweller / my light-man",
+          "basis": "Mead stosuje kilka angielskich wariantów dla jednego powracającego terminu."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, odpowiednio karty rękopisu 52b, 71a, 149b i 197b",
+          "rendering": "my light-man",
+          "basis": "Przekład MacDermot zachowuje termin antropologiczny poświadczony w koptyjskim tekście Schmidta."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, rozdziały odpowiadające kartom 52b, 71a, 149b i 197b",
+          "rendering": "my man of light",
+          "basis": "Dosłowny przekład z koptyjskiego potwierdza rzeczownik «człowiek», a nie «moc»."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja poświadcza formę ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ w wierszach 52/22, 71/3 i 149/13 oraz wariant rękopiśmienny ⲙⲁⲣⲙ̅, skorygowany w edycji do ⲡⲁⲣⲙ̅, w 197/9. Element ⲣⲙ̅ oznacza człowieka/osobę, natomiast ⲟⲩⲟⲉⲓⲛ — światłość.",
+        "exactForm": "ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ",
+        "uncertaintyNote": "Termin jest celowo dosłowny i może brzmieć nietypowo po polsku; nie należy wygładzać go do «mocy światłości», ponieważ moc jest w tekście odrębnym pojęciem."
+      },
+      "footnote": "Mead (1921) waha się między «indweller of light», «light-dweller» i «light-man». Violet MacDermot (1978), przekładając koptyjski tekst Schmidta, zachowuje «light-man», a Horner (1924) ma «man of light». Koptyjskie ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ dosłownie wskazuje na «mojego człowieka światłości», dlatego nie utożsamiamy go z odrębną «mocą światłości».",
+      "enforcement": {
+        "minOccurrences": 7,
+        "requiredPatterns": ["człowiek światłości"],
+        "forbiddenPatterns": ["zamieszkująca mnie moc światłości", "Zamieszkująca mnie moc światłości", "mój mieszkaniec światłości", "moja moc światłości ma uszy"]
+      }
+    },
+    {
+      "id": "impressions-as-znamiona",
+      "status": "approved",
+      "selectedPolish": "Pięć Znamion; w dopełniaczu: pięciu Znamion",
+      "scope": "Termin systemowy na stronach 48, 49 i 56; wszystkie cztery wystąpienia w polskim przekładzie.",
+      "rationale": "«Znamiona» zachowują religijny i symboliczny charakter terminu, a zarazem obejmują sens znaków odciśniętych lub wyrytych obecny w koptyjskim zapożyczeniu z greki. Bardziej dosłowne «Nacięcia» pozostaje wariantem filologicznym w przypisie, nie drugą nazwą w tekście głównym.",
+      "sources": [
+        {
+          "id": "mead-1921",
+          "citation": "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921, rozdziały 1 i 10, s. 2–3 i 18",
+          "rendering": "five Impressions",
+          "basis": "Angielska podstawa przekładu użyta w aplikacji konsekwentnie mówi o pięciu Impressions."
+        },
+        {
+          "id": "macdermot-1978",
+          "citation": "Carl Schmidt (tekst), Violet MacDermot (przekład), Pistis Sophia, Brill, 1978, księga I, rozdziały 1 i 10",
+          "rendering": "five incisions",
+          "basis": "MacDermot wybiera dosłowniejszy obraz nacięć na podstawie koptyjskiego tekstu Schmidta."
+        },
+        {
+          "id": "horner-1924",
+          "citation": "George Horner, Pistis Sophia, 1924, księga I, karty 1b, 3b i 17b–18a",
+          "rendering": "five Marks",
+          "basis": "Niezależny przekład dosłowny z koptyjskiego potwierdza pole znaczeniowe znaku lub znamienia."
+        }
+      ],
+      "coptic": {
+        "status": "verified",
+        "evidence": "Dołączona transkrypcja poświadcza frazę ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ w wierszach rękopisu 1/22, 3/13 i 18/9. Rzeczownik ⲭⲁⲣⲁⲅⲙⲏ jest greckim zapożyczeniem związanym ze znakiem, nacięciem lub odciskiem.",
+        "exactForm": "ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ",
+        "uncertaintyNote": "Polskie «Znamiona» jest decyzją interpretacyjną; wariant «Nacięcia» dokładniej uwydatnia materialny obraz terminu."
+      },
+      "footnote": "Mead (1921) ma «five Impressions», Horner (1924) «five Marks», a Violet MacDermot (1978), przekładając koptyjski tekst Schmidta, «five incisions». Koptyjski zapis ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ wskazuje na pięć znaków lub nacięć; w tekście głównym przyjęto nazwę «Pięć Znamion», natomiast «Pięć Nacięć» zachowano jako wariant filologiczny.",
+      "enforcement": {
+        "minOccurrences": 4,
+        "requiredPatterns": ["Znamion"],
+        "forbiddenPatterns": ["pięć Impresji", "pięciu Impresji", "pięć Nacięć", "pięciu Nacięć", "pięć Odcisków", "pięciu Odcisków"]
+      }
+    },
+    {
       "id": "numbered-commandments",
       "status": "approved",
       "selectedPolish": "Pierwsze Przykazanie; Drugie Przykazanie; analogiczne nazwy numerowane",

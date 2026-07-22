@@ -20,6 +20,9 @@ Decyzje przekładowe *Pistis Sophii* chroni dodatkowo rejestr
 `TRANSLATION_GUARDIAN.md`. Wydanie zostaje zatrzymane, gdy decyzja nie zawiera
 źródeł, podstawy koptyjskiej, uzasadnienia i przypisu albo gdy tekst narusza
 zatwierdzone brzmienie.
+Historyczne poprawki oczekujące na pełne odtworzenie źródeł są przechowywane w
+`books/pistis-sophia/translation-decision-backlog.json`. Nie wolno automatycznie
+uznawać ich za zatwierdzone ani dopisywać niezweryfikowanych form koptyjskich.
 Kompletność całej polskiej warstwy kontroluje `tools/check-pistis-translation.js`.
 Strażnik wymaga obecności i poprawnego podłączenia wszystkich 255 stron, sprawdza
 brak pustych lub uciętych stron oraz potwierdza ładowanie tłumaczenia przed

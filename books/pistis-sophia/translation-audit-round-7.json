@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.26",
+  "scope": "Siódmy zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "baptism-ritual-context",
+      "status": "approved-contextual",
+      "selectedPolish": "chrzest i chrzty jako misteryjne obmycie oraz czynność oczyszczająca; nie jako zbiorcza nazwa każdego Misterium odpuszczającego grzechy",
+      "pages": [53, 54, 110, 116, 117, 119, 157, 163, 205, 208, 209, 210, 214, 215, 223, 225, 233, 235, 239, 240, 247],
+      "coptic": "Greckie zapożyczenie Ⲳⲁⲡⲧⲓⲥⲙⲡⲁ i jego formy czasownikowe są poświadczone w transkrypcji jako nazwa obmycia misteryjnego; tekst odróżnia je od pieczęci, namaszczenia oraz szerszego działania Misteriów.",
+      "mead": "Mead używa baptism i baptisms zarówno przy chrzcie Jana, jak i przy misteryjnych chrztach oczyszczających duszę, lecz nie zastępuje tym słowem wszystkich sposobów remission of sins.",
+      "macdermot": "MacDermot zachowuje baptism jako odrębny ryt obok sealing i spiritual anointing; jego skutkiem może być oczyszczenie, ale termin nie obejmuje całego systemu odpuszczenia.",
+      "rationale": "Polski tekst prawidłowo zachowuje liczbę pojedynczą i mnogą zależnie od kontekstu oraz odróżnia chrzest Jana od chrztów misteryjnych. Globalne zastąpienie każdego odpuszczenia chrztem zatarłoby wyraźne objaśnienie, że Misteria wyższych przestrzeni mogą odpuszczać grzechy inaczej niż chrzty. Nie ma podstaw do zmiany tekstu czytelniczego.",
+      "textChanged": false,
+      "requiredPattern": "chrz",
+      "minimumOccurrences": 40,
+      "forbiddenPattern": "każde odpuszczenie jest chrztem"
+    },
+    {
+      "id": "spiritual-anointing-context",
+      "status": "approved-contextual",
+      "selectedPolish": "duchowe namaszczenie jako osobny akt udzielany duszy obok chrztu i pieczęci, bez zastępowania go terminem chrzest albo ogólnym uświęceniem",
+      "pages": [157, 205],
+      "coptic": "Forma ⲭⲣⲓⲥⲙⲁ, greckie zapożyczenie odpowiadające chrism, występuje w transkrypcji niezależnie od form chrzcielnych i pieczęci, potwierdzając osobną czynność rytualną.",
+      "mead": "Mead oddaje termin jako spiritual anointment w sekwencji, w której dusze są baptised, given spiritual anointment i sealed with seals; kolejność pokazuje trzy rozróżnione działania.",
+      "macdermot": "MacDermot również zachowuje spiritual ointment lub anointing jako element odrębny od baptism i sealing, a nie stylistyczny wariant jednego obrzędu.",
+      "rationale": "Dwa miejsca polskiej warstwy trafnie mówią o duchowym namaszczeniu po chrzcie i przed pieczętowaniem. Mała liczba wystąpień nie uzasadnia zastępowania terminu bardziej ogólną formą. Ujednolicenie go z chrztem usunęłoby trójczłonową strukturę rytualną obecną w obu przekładach kontrolnych i w koptyjskim.",
+      "textChanged": false,
+      "requiredPattern": "duchowe namaszczenie",
+      "minimumOccurrences": 2,
+      "forbiddenPattern": "duchowy chrzest i zapieczętowanie"
+    },
+    {
+      "id": "remission-and-forgiveness-context",
+      "status": "approved-contextual",
+      "selectedPolish": "odpuszczenie grzechów jako termin soteriologiczny dotyczący działania chrztów i Misteriów; przebaczenie w wypowiedziach modlitewnych i relacyjnych zależnie od składni",
+      "pages": [53, 87, 88, 90, 91, 92, 93, 110, 116, 117, 139, 186, 190, 191, 193, 194, 195, 196, 197, 208, 209, 210, 211, 212, 213, 214, 215, 216, 222, 224, 233, 236, 245, 246, 247],
+      "coptic": "Koptyjski używa konstrukcji czasownikowych związanych z puszczeniem lub darowaniem win, a kontekst rozstrzyga między formalnym odpuszczeniem grzechów przez Misterium i osobistą prośbą o przebaczenie; nie tworzy z nich nazwy jednego obrzędu.",
+      "mead": "Mead rozróżnia remission of sins w objaśnieniach skuteczności Mysteries od forgive i forgiveness w prośbach, cytatach psalmicznych oraz relacjach między ludźmi.",
+      "macdermot": "MacDermot zachowuje odpowiednio remission, forgive i forgiveness; wskazuje zarazem, że baptisms oraz wyższe Mysteries odpuszczają grzechy w różny sposób.",
+      "rationale": "Obecne polskie odpuszczenie jest właściwym terminem w systemowych formułach o grzechach, natomiast przebaczenie naturalnie występuje w modlitwie i wypowiedziach osobowych. Mechaniczne ujednolicenie wszystkich form byłoby stylistycznie ciężkie i semantycznie mylące. Równie błędne byłoby ograniczenie odpuszczenia wyłącznie do chrztu, skoro tekst wprost omawia odpuszczenie przez wyższe Misteria.",
+      "textChanged": false,
+      "requiredPattern": "odpuszcz",
+      "minimumOccurrences": 60,
+      "forbiddenPattern": "wyłącznie chrzest odpuszcza grzechy"
+    }
+  ]
+}

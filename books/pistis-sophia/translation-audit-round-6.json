@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.25",
+  "scope": "Szósty zbiorczy audyt terminologiczny polskiej warstwy Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "gnosis-and-knowing-context",
+      "status": "approved-contextual",
+      "selectedPolish": "Gnoza jako termin techniczny w formułach pełni i doskonałości; wiedza, poznanie, poznać i wiedzieć jako kontekstowe odpowiedniki zwykłego aktu poznawczego",
+      "pages": [55, 89, 90, 94, 99, 151, 153, 162, 164, 165, 169, 170, 173, 174, 177, 183, 187, 218, 228, 234, 236, 239, 240],
+      "coptic": "ⲅⲛⲱⲥⲓⲥ jest greckim zapożyczeniem używanym w formule technicznej, natomiast liczny koptyjski rdzeń ⲥⲟⲟⲩⲛ wyraża wiedzenie, rozpoznanie i poznanie zależnie od składni",
+      "mead": "gnosis w podniosłych formułach terminologicznych oraz know, knowledge i knew w zwykłych zdaniach o rozpoznawaniu, rozumieniu albo posiadaniu wiadomości",
+      "macdermot": "gnosis pozostaje terminem technicznym, podczas gdy know i knowledge oddają formy czasownikowe oraz opisowy akt poznania bez nadawania mu automatycznie rangi Gnozy",
+      "rationale": "Polski tekst słusznie zachowuje „Gnozę” w formułach takich jak „Gnoza wszystkich gnoz”, lecz w setkach zwykłych konstrukcji używa „wiedzieć”, „poznać” i „wiedza”. Zastąpienie wszystkich tych form jednym terminem stworzyłoby doktrynalną nazwę tam, gdzie źródło opisuje zwykłe rozpoznanie, pamięć lub zrozumienie. Odwrotna globalna zamiana Gnozy na wiedzę usunęłaby świadome greckie zapożyczenie.",
+      "textChanged": false,
+      "requiredPattern": "gnoz",
+      "minimumOccurrences": 45,
+      "forbiddenPattern": "Wiedza wszystkich wiedzy"
+    },
+    {
+      "id": "mysterion-and-secret-context",
+      "status": "approved-contextual",
+      "selectedPolish": "Misterium jako termin rytualny, objawieniowy i hierarchiczny; tajemnica tylko w opisowych konstrukcjach, w których tekst mówi o czymś ukrytym, a nie o nazwanym Misterium",
+      "pages": [48, 49, 50, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 66, 67, 68, 69, 71, 72, 73, 76, 77, 78, 79, 80, 81, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 94, 98, 99, 102, 105, 107, 110, 111, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 128, 129, 130, 133, 134, 137, 138, 139, 140, 141, 142, 144, 145, 146, 148, 150, 152, 153, 154, 155, 156, 157, 158, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 202, 203, 204, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 222, 223, 224, 225, 226, 228, 229, 230, 232, 233, 234, 235, 236, 237, 238, 239, 240, 245, 247, 253, 254, 255],
+      "coptic": "ⲙⲩⲥⲧⲏⲣⲓⲟⲛ jest bardzo licznie poświadczonym greckim zapożyczeniem i nazywa obrzęd, treść objawienia, moc lub szczebel hierarchii; nie każda rzecz ukryta jest przez to Misterium",
+      "mead": "mystery i mysteries dominują w terminologii rytualnej oraz kosmologicznej, natomiast opisowe secret albo hidden zależą od kontekstu zdania i nie ustanawiają dodatkowego szczebla hierarchii",
+      "macdermot": "mystery zachowuje grecko-koptyjski termin w formułach inicjacyjnych i nazwach porządków; zwykła tajemnica pozostaje opisem ukrycia, a nie automatyczną nazwą własną",
+      "rationale": "Obecny przekład trafnie używa „Misterium” w nazwach bytów, porządków, pieczęci i obrzędów, a małej litery lub słowa „tajemnica” w nielicznych konstrukcjach opisowych. Mechaniczne zastąpienie wszystkich form słowem „tajemnica” zniszczyłoby techniczny słownik dzieła; kapitalizacja każdej tajemnicy stworzyłaby natomiast nieistniejące nazwy systemowe. Rozstrzygnięcie musi pozostać zależne od funkcji w zdaniu.",
+      "textChanged": false,
+      "requiredPattern": "misteri",
+      "minimumOccurrences": 450,
+      "forbiddenPattern": "Tajemnica naczelna"
+    },
+    {
+      "id": "name-and-mystery-formula-context",
+      "status": "approved-contextual",
+      "selectedPolish": "imię w formułach Misterium, pieczęci i mocy pozostaje imieniem; nazywać i nazwa są używane tylko wtedy, gdy składnia opisuje akt nazwania, wariant językowy albo identyfikację osoby",
+      "pages": [55, 56, 57, 58, 62, 67, 68, 73, 75, 81, 83, 84, 87, 88, 91, 92, 94, 96, 104, 105, 107, 108, 109, 118, 127, 129, 135, 136, 139, 156, 180, 198, 199, 200, 219, 220, 221, 225, 226, 228, 230, 232, 237, 238, 239, 241, 243, 244, 245, 246, 247, 248],
+      "coptic": "ⲣⲁⲛ jest podstawowym koptyjskim rzeczownikiem „imię”, zaś nieliczne formy greckiego ⲟⲛⲟⲙⲁ występują obok niego; konstrukcja i czasownik rozstrzygają, czy chodzi o imię misteryjne, czy o nazwanie",
+      "mead": "name w formułach the mystery of the name, the name of the seal i utter the name; call oraz is called pojawiają się wtedy, gdy tekst przedstawia sposób nazwania lub identyfikację",
+      "macdermot": "name zachowuje funkcję performatywną i rytualną w formułach Misteriów, natomiast called i named służą zwykłemu wskazaniu, jak osoba, moc lub region są określane",
+      "rationale": "W Pistis Sophii imię może być nośnikiem mocy i częścią Misterium, dlatego zastąpienie go neutralną „nazwą” osłabiłoby sens formuł pieczęci, obrony i przejścia. Nie oznacza to jednak, że każdy czasownik „nazywać” powinien zostać zmieniony na konstrukcję z imieniem. Polski tekst poprawnie rozdziela funkcję rytualną rzeczownika od zwykłego aktu określania osoby lub rzeczy i nie wymaga globalnego ujednolicenia.",
+      "textChanged": false,
+      "requiredPattern": "imi",
+      "minimumOccurrences": 120,
+      "forbiddenPattern": "Nazwa Misterium wszystkich misteriów"
+    }
+  ]
+}

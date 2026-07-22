@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "completedForVersion": "1.7.31",
+  "scope": "Audyt nazw własnych, ich polskiej odmiany i kapitalizacji nazw systemowych w polskiej warstwie Pistis Sophii, strony 48–255",
+  "sources": [
+    "G. R. S. Mead, Pistis Sophia: A Gnostic Miscellany, 1921",
+    "Carl Schmidt / Violet MacDermot, Pistis Sophia, 1978",
+    "koptyjska transkrypcja edycji Schwartzego-Petermanna dołączona do projektu"
+  ],
+  "decisions": [
+    {
+      "id": "proper-name-spelling-and-inflection",
+      "status": "approved-verified",
+      "selectedPolish": "Sophia, Adamas, Authades, Barbelo, Sabaoth, Jeu, Jabraoth, Jaldabaoth i Melchizedek wraz ze spójnymi polskimi formami przypadkowymi",
+      "readerPages": [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255],
+      "coptic": "Nazwy własne są w rękopisie przekazywane jako transliterowane formy greckie lub koptyjskie. Audyt nie uzasadnia mechanicznego spolszczenia wszystkich nazw ani mieszania różnych systemów transliteracji w jednym tekście.",
+      "mead": "Mead zachowuje rozpoznawalne formy nazw własnych, ale angielska odmiana nie rozstrzyga polskich końcówek przypadkowych.",
+      "macdermot": "MacDermot potwierdza tożsamość postaci i pozwala oddzielić wariant edytorski od rzeczywiście innej nazwy.",
+      "rationale": "Skan całej warstwy nie wykazał konkurencyjnych form Sofia, Melchisedek ani alternatywnych zapisów zatwierdzonych nazw Jeu, Jabraoth i Jaldabaoth. Formy przypadkowe Adamasa, Authadesa, Sabaotha i Melchizedeka są konsekwentne. Zachowanie jednej pisowni każdej postaci jest czytelniejsze i zgodne z wcześniejszą polityką transliteracji, natomiast globalne spolszczanie mogłoby połączyć odrębne nazwy lub wprowadzić hybrydowe warianty.",
+      "textChanged": false,
+      "requiredPattern": "Authadesa",
+      "minimumOccurrences": 100,
+      "forbiddenPatterns": ["Sofia", "Melchisedek", "Yeu", "Yabraoth", "Yaldabaoth"]
+    },
+    {
+      "id": "system-name-capitalization-boundaries",
+      "status": "approved-verified",
+      "selectedPolish": "wielka litera wyłącznie w nazwach systemowych, między innymi Niewypowiadalny, Skarbiec Światłości, Prawica, Lewica, Pośrodek i Los",
+      "readerPages": [48, 54, 56, 58, 64, 65, 68, 96, 115, 124, 143, 151, 156, 170, 181, 192, 202, 213, 224, 234, 245, 255],
+      "coptic": "Koptyjski zapis nie dostarcza nowożytnej kapitalizacji; status nazwy trzeba ustalać z konstrukcji, powtarzalności formuły i miejsca w kosmologii.",
+      "mead": "Kapitalizacja Meada pomaga rozpoznać nazwy porządków, lecz nie jest stosowana jako automatyczna reguła dla polskiego tekstu.",
+      "macdermot": "MacDermot potwierdza funkcję nazwanych krain i bytów; użycia opisowe pozostają zależne od zdania.",
+      "rationale": "Przegląd kapitalizacji nie wykazał miejsca, w którym zwykły opis został jednoznacznie podniesiony do nazwy własnej albo utrwalona nazwa systemowa utraciła wielką literę. Obowiązuje rozróżnienie kontekstowe: Prawica, Lewica, Pośrodek, Los, Skarbiec Światłości i Niewypowiadalny są nazwami w swoich technicznych konstrukcjach, lecz odpowiadające im zwykłe rzeczowniki nie podlegają globalnej kapitalizacji.",
+      "textChanged": false,
+      "requiredPattern": "Skarbiec Światłości",
+      "minimumOccurrences": 9,
+      "forbiddenPatterns": ["Skarbiec światłości", "skarbiec Światłości", "niewypowiadalny Niewypowiadalny"]
+    }
+  ]
+}

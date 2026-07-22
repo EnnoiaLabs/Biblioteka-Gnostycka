@@ -2,10 +2,10 @@
   "library": {
     "id": "gnostyk-biblioteka",
     "name": "Gnostic Library",
-    "version": "1.7.6",
+    "version": "1.7.37",
     "rightsNote": "Teksty źródłowe w domenie publicznej lub według wskazanych licencji; polski przekład, opracowanie, terminologia, układ czytelniczy i aparat biblioteki jako nowa warstwa twórcza.",
     "moduleIndex": "books/index.json",
-    "updated": "2026-07-20"
+    "updated": "2026-07-22"
   },
   "works": [
     {
@@ -112,6 +112,6 @@
       "unitCount": 18
     }
   ],
-  "version": "1.7.6",
+  "version": "1.7.37",
   "updated": "2026-07-14"
 }

@@ -1,10 +1,10 @@
 {
   "name": "pistis-text-addenda",
-  "version": "1.7.6",
+  "version": "1.7.37",
   "updated": "2026-07-15",
-  "currentWork": "pistis-translation-completeness-guardian",
+  "currentWork": "final-audited-public-release",
   "structure": "modular-books",
-  "date": "2026-07-20",
-  "releaseType": "technical",
-  "latestPublicVersion": "1.7.5"
+  "date": "2026-07-22",
+  "releaseType": "public",
+  "latestPublicVersion": "1.7.37"
 }

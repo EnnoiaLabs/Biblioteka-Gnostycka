@@ -24,6 +24,8 @@ REQUIRED = [
     "VERSION.json", "CHANGELOG.md", "PUBLIC_CHANGELOG.md", "index.html", "app.js", "styles.css",
     "manifest.webmanifest", "sw.js", "library.json", "books/index.json", "package.json", "package-lock.json",
     "books/pistis-sophia/polish-translations.js",
+    "books/pistis-sophia/translation-decision-backlog.json",
+    "books/pistis-sophia/translation-audit-queue.json",
     "app-content.js",
     "book-loader.js",
     "coptic-config.js",

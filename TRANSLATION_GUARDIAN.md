@@ -2,6 +2,12 @@
 
 Wiążące decyzje dotyczące przekładu *Pistis Sophii* są zapisane w pliku `books/pistis-sophia/translation-decisions.json`. Test automatyczny zatrzymuje wydanie, jeżeli zatwierdzona decyzja jest niepełna albo tekst przestaje być z nią zgodny.
 
+Wcześniejsze poprawki, których pełna dokumentacja źródłowa nie została jeszcze
+odtworzona, trafiają do `books/pistis-sophia/translation-decision-backlog.json`.
+Kolejka nie nadaje decyzji statusu zatwierdzonego. Każdy wpis musi zostać osobno
+porównany z Meadem, MacDermot i koptyjskim, zanim zostanie przeniesiony do
+wiążącego rejestru.
+
 ## Wymagane dane decyzji
 
 Każda decyzja musi zawierać:

@@ -1,5 +1,353 @@
 # Changelog
 
+## 1.7.37 - Finalne wydanie po pełnym audycie
+
+### PL
+- Zakończono globalny audyt wszystkich 208 stron polskiej warstwy Pistis Sophii oraz utrwalono zatwierdzone decyzje przekładowe.
+- Rozszerzona bramka Chromium potwierdziła działanie ksiąg, trybów tekstu, nawigacji, motywów, języka, wyrównania, cytowania i widoku mobilnego.
+- Uporządkowano wydanie publiczne bez dalszych zmian w tekście czytelniczym ani interfejsie.
+
+### EN
+- Completed the global audit of all 208 pages of the Polish Pistis Sophia layer and preserved the approved translation decisions.
+- The expanded Chromium gate confirmed books, text modes, navigation, themes, language switching, alignment, citation, and mobile layout.
+- Prepared the public release without further reader-text or interface changes.
+
+## 1.7.36 - Poprawiona kontrola mobilnego czytnika
+
+### PL
+- Test mobilny czeka teraz na rzeczywiście wyrenderowaną treść czytnika zamiast wymagać przejściowego stanu widoczności całego kontenera.
+- Kontrola nadal sprawdza mobilną nawigację, otwarcie panelu Więcej i przycisk kopiowania.
+
+### EN
+- The mobile test now waits for actually rendered reader content instead of requiring the whole container's transient visibility state.
+- The gate still verifies mobile navigation, the More sheet, and its copy control.
+
+## 1.7.35 - Poprawiona ścieżka testu ustawień
+
+### PL
+- Poprawiono rozszerzony test Chromium: przed zmianą motywu otwiera on teraz widoczny panel Ustawienia, a następnie wraca do czytnika.
+- Usunięto fałszywy timeout powodowany próbą obsługi ukrytego pola themeSetting; kod aplikacji i tekst czytelniczy pozostały bez zmian.
+
+### EN
+- Corrected the extended Chromium test so it opens the visible Settings panel before changing themes, then returns to the reader.
+- Removed the false timeout caused by interacting with the hidden themeSetting control; application code and reader text remain unchanged.
+
+## 1.7.34 - Końcowa bramka funkcjonalna aplikacji
+
+### PL
+- Rozszerzono test Chromium o rzeczywiste przełączanie motywów Light, Sepia i Dark, wyrównania tekstu, języka PL/EN oraz formatu cytowania.
+- Dodano kontrolę mobilnego układu czytnika i otwierania panelu narzędzi przy szerokości 390 px.
+- Historia widoczna w aplikacji pozostaje uporządkowana do wydań publicznych, a pełne archiwum techniczne zachowuje ciągłość.
+
+### EN
+- Extended the Chromium test to exercise Light, Sepia and Dark themes, text alignment, PL/EN language switching, and citation formats.
+- Added a mobile reader-layout and tool-sheet check at a 390 px viewport width.
+- The in-app history remains curated to public milestones while the complete technical archive preserves continuity.
+
+## 1.7.33 - Końcowy audyt spójności 208 stron
+
+### PL
+- Formalnie zamknięto końcowy audyt spójności polskiej warstwy Pistis Sophii na stronach 48–255.
+- Powiązano trzynaście etapów od 1.7.20 do 1.7.32 i dodano automatyczną kontrolę ich kompletności oraz kolejności.
+- Tekst czytelniczy nie wymagał zmian; ostatnią wersją publiczną pozostaje 1.7.32.
+
+### EN
+- Formally completed the final consistency audit of the Polish Pistis Sophia layer on pages 48–255.
+- Linked all thirteen stages from 1.7.20 through 1.7.32 and added automated checks for their completeness and order.
+- No reader-facing text change was required; 1.7.32 remains the latest public version.
+
+## 1.7.32 - Naturalniejsza polszczyzna bez kalek Meada
+
+### PL
+- Poprawiono osiem jednoznacznych kalek archaicznej składni Meada na stronach 64, 104, 105, 120 i 160.
+- Naturalniej zapisano pochwałę pytania, jawność odpowiedzi, intensywność światłości oraz niezmierzoną odległość między porządkami.
+- Zachowano formuły narracyjne „I stało się”, „odpowiedział i rzekł” oraz misteryjne powtórzenia.
+
+### EN
+- Corrected eight unambiguous calques of Mead's archaic syntax on pages 64, 104, 105, 120, and 160.
+- Rendered the praise of a question, openness of an answer, intensity of light, and immeasurable distance between orders in more natural Polish.
+- Preserved the narrative formulas ‘And it came to pass,’ ‘answered and said,’ and the mystery repetitions.
+
+## 1.7.31 - Audyt nazw własnych i wielkich liter
+
+### PL
+- Sprawdzono w całej polskiej warstwie Pistis Sophii pisownię i odmianę nazw Sophia, Adamas, Authades, Barbelo, Sabaoth, Jeu, Jabraoth, Jaldabaoth i Melchizedek.
+- Potwierdzono kontekstową kapitalizację nazw systemowych, między innymi Niewypowiadalnego, Skarbca Światłości, Prawicy, Lewicy, Pośrodka i Losu.
+- Tekst czytelniczy nie wymagał zmian; dodano ochronę przed wprowadzeniem konkurencyjnych transliteracji i mechaniczną kapitalizacją zwykłych rzeczowników.
+
+### EN
+- Audited the spelling and Polish inflection of Sophia, Adamas, Authades, Barbelo, Sabaoth, Jeu, Jabraoth, Jaldabaoth, and Melchizedek throughout the Polish Pistis Sophia layer.
+- Confirmed contextual capitalization of system names including the Ineffable, Treasury of Light, Right, Left, Midst, and Fate.
+- No reader-facing change was required; regression protection now rejects competing transliterations and mechanical capitalization of ordinary nouns.
+
+## 1.7.30 - Audyt liczb, kierunków i hierarchii
+
+### PL
+- Sprawdzono liczby porządków oraz relacje Prawicy, Lewicy, Pośrodka, ponad i poniżej w całej polskiej warstwie Pistis Sophii.
+- Na stronie 143 czytnika poprawiono odziedziczoną od Meada omyłkę „dwunastu księżyców” na źródłowe „dwunastu eonów”, zgodnie z koptyjskim tekstem strony 170.
+- Dodano ochronę przed przywróceniem omyłki i przed mechanicznym spłaszczeniem nazw porządków do zwykłych kierunków.
+
+### EN
+- Audited order numbers and the relations of the Right, Left, Midst, above, and below throughout the Polish layer of Pistis Sophia.
+- On reader page 143, corrected Mead's inherited “twelve moons” slip to the source-based “twelve aeons,” following Coptic manuscript page 170.
+- Added protection against restoring the slip or flattening named orders into ordinary directions.
+
+## 1.7.29 - Domknięcie korekty „rozpostarcia Całości”
+
+### PL
+- Wykryto, że wcześniejsza ochrona sprawdzała tylko jedną formę gramatyczną i nie obejmowała odmienionej konstrukcji „rozpostarciu wszechświata”.
+- Poprawiono 23 pominięte wystąpienia na 14 stronach, domykając zatwierdzoną w 1.7.20 terminologię „rozpostarcia Całości”.
+- Strażnik kontroluje teraz wszystkie formy fleksyjne tej konstrukcji, a nie wyłącznie mianownik.
+
+### EN
+- Detected that the earlier regression guard checked only one grammatical form and missed the inflected Polish construction corresponding to “expansion of the universe.”
+- Corrected 23 omitted occurrences across 14 pages, completing the “spreading of the All” terminology approved in 1.7.20.
+- The guardian now checks every inflected form of the construction instead of the nominative form alone.
+
+## 1.7.28 - Dziewiąty zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano rozróżnienie między krainą, eonem i sferą w całej polskiej warstwie Pistis Sophii.
+- Zachowano kontekstowe użycie określeń przestrzennych oraz techniczne terminy ⲁⲓⲱⲛ i ⲥⲫⲁⲓⲣⲁ; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i automatyczną ochroną przed spłaszczeniem kosmologii tekstu.
+
+### EN
+- Verified the distinction between land or region, aeon, and sphere throughout the Polish layer of Pistis Sophia.
+- Preserved contextual spatial terms and the technical terms ⲁⲓⲱⲛ and ⲥⲫⲁⲓⲣⲁ; no reader-facing text change was required.
+- Added three page-scoped decisions with automated protection against flattening the text’s cosmology.
+
+## 1.7.27 - Ósmy zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano rozróżnienie między duszą, duchem i ciałem w całej polskiej warstwie Pistis Sophii.
+- Zachowano odrębne funkcje koptyjskich terminów ⲯⲩⲭⲏ, ⲡⲛⲉⲩⲙⲁ i ⲥⲱⲙⲁ; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i automatyczną ochroną przed spłaszczeniem antropologii tekstu.
+
+### EN
+- Verified the distinction between soul, spirit, and body throughout the Polish layer of Pistis Sophia.
+- Preserved the distinct functions of the Coptic terms ⲯⲩⲭⲏ, ⲡⲛⲉⲩⲙⲁ, and ⲥⲱⲙⲁ; no reader-facing text change was required.
+- Added three page-scoped decisions with automated protection against flattening the text's anthropology.
+
+## 1.7.26 - Siódmy zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano chrzest, duchowe namaszczenie i odpuszczenie grzechów jako trzy kontekstowo rozróżnione elementy terminologii rytualnej i soteriologicznej.
+- Zachowano odrębność koptyjskich form chrzcielnych i `ⲭⲣⲓⲥⲙⲁ` oraz rozróżnienie między systemowym odpuszczeniem a osobistym przebaczeniem; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i automatyczną ochroną przed utożsamieniem każdego odpuszczenia z chrztem.
+
+### EN
+- Verified baptism, spiritual anointing, and remission of sins as three contextually distinct elements of ritual and soteriological terminology.
+- Preserved the distinction between the Coptic baptismal forms and `ⲭⲣⲓⲥⲙⲁ`, and between systemic remission and personal forgiveness; no reader-facing text change was required.
+- Added three page-scoped decisions with automatic protection against reducing every form of remission to baptism.
+
+## 1.7.25 - Szósty zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano granice między Gnozą a zwykłą wiedzą i poznaniem, Misterium a tajemnicą oraz imieniem misteryjnym a zwykłym aktem nazwania.
+- Zachowano kontekstowe odpowiedniki koptyjskich i greckich form ⲅⲛⲱⲥⲓⲥ, ⲥⲟⲟⲩⲛ, ⲙⲩⲥⲧⲏⲣⲓⲟⲛ, ⲣⲁⲛ i ⲟⲛⲟⲙⲁ; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i automatyczną ochroną przed spłaszczeniem znaczeń.
+
+### EN
+- Verified the boundaries between Gnosis and ordinary knowledge or knowing, Mystery and a descriptive secret, and a mystery-name and the ordinary act of naming.
+- Retained contextual renderings of the Coptic and Greek forms ⲅⲛⲱⲥⲓⲥ, ⲥⲟⲟⲩⲛ, ⲙⲩⲥⲧⲏⲣⲓⲟⲛ, ⲣⲁⲛ, and ⲟⲛⲟⲙⲁ; no reader-facing text change was required.
+- Added three page-scoped decisions with automated protection against semantic flattening.
+
+## 1.7.24 - Piąty zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano terminy pieczęć, zasłona i Skarbiec Światłości względem Meada, MacDermot oraz form koptyjskich.
+- Zachowano kontekstowe funkcje pieczęci, zasłon jako granic krain i Skarbca Światłości jako nazwy systemowej; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i ochroną przed błędną kapitalizacją lub spłaszczeniem znaczeń.
+
+### EN
+- Verified the terms seal, veil, and Treasury of Light against Mead, MacDermot, and the Coptic forms.
+- Retained the contextual functions of seals, veils as boundaries between regions, and the Treasury of Light as a system name; no reader-facing text change was required.
+- Added three page-scoped decisions with protection against incorrect capitalization or semantic flattening.
+
+## 1.7.23 - Czwarty zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano rozróżnienie między władcami, zwierzchnościami i mocami względem Meada, MacDermot oraz terminów koptyjskich.
+- Zachowano kontekstowe odpowiedniki `ⲁⲣⲭⲱⲛ`, `ⲉⲝⲟⲩⲥⲓⲁ`, `ϭⲟⲙ` i `ⲇⲩⲛⲁⲙⲓⲥ`, bez mechanicznego zastępowania ich „archontami” albo „potęgami”.
+- Tekst czytelniczy nie wymagał zmian; trzy decyzje otrzymały zakres stron i automatyczną ochronę rozróżnień hierarchicznych.
+
+### EN
+- Verified the distinction between rulers, authorities, and powers against Mead, MacDermot, and the Coptic terminology.
+- Retained contextual renderings of `ⲁⲣⲭⲱⲛ`, `ⲉⲝⲟⲩⲥⲓⲁ`, `ϭⲟⲙ`, and `ⲇⲩⲛⲁⲙⲓⲥ` without mechanically replacing them with transliterations or a single flattened term.
+- No reader-facing text change was required; three decisions now have page scopes and automated protection of hierarchical distinctions.
+
+## 1.7.22 - Trzeci zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano techniczne znaczenia terminów „obrona”, „ekonomia” i „pokuta” względem Meada, MacDermot oraz koptyjskich zapożyczeń.
+- Zachowano numerowane Pokuty Sophii jako nazwaną serię wypowiedzi, odróżniając je od zwykłych opisów pokuty.
+- Tekst czytelniczy nie wymagał zmian; trzy decyzje otrzymały zakres stron i ochronę przed mechanicznym spłaszczeniem terminologii.
+
+### EN
+- Verified the technical meanings of the Polish terms for defence, economy, and repentance against Mead, MacDermot, and the Coptic loanwords.
+- Retained Sophia's numbered Repentances as a named sequence while distinguishing them from descriptive uses of repentance.
+- No reader-facing text change was required; three decisions now have page scopes and regression protection.
+
+## 1.7.21 - Drugi zbiorczy audyt terminologiczny
+
+### PL
+- Zweryfikowano źródłowo formułę „spełnienie wszystkich spełnień” i zachowano ją jako celową konstrukcję poświadczoną w koptyjskim.
+- Rozdzielono techniczną nazwę „Pełnia” od opisowych użyć dopełnienia oraz kary od sądów i miejsc sądu; tekst czytelniczy nie wymagał zmian.
+- Dodano trzy decyzje z zakresem stron i automatyczną ochroną przed spłaszczeniem terminologii.
+
+### EN
+- Source verification confirmed “completion of all completions” as an intentional formula attested in Coptic.
+- The technical Fullness was distinguished from descriptive completion, and chastisements from judgments and places of judgment; no reader text change was required.
+- Added three page-scoped decisions with automatic protection against terminological flattening.
+
+## 1.7.20 - Zbiorczy audyt sześciu grup terminologicznych
+
+### PL
+- Rozstrzygnięto zbiorczo terminy Odbiorcy, Typ, Pomocnicy i Los oraz zasadę transliteracji nazw własnych na podstawie Meada, MacDermot i tekstu koptyjskiego.
+- Na stronach 169, 181 i 234 ujednolicono pięć wystąpień formuły „rozpostarcie wszechświata” jako „rozpostarcie Całości”, zgodnie z koptyjskim ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅.
+- Każda z sześciu grup otrzymała osobną decyzję, zakres stron i regułę ochronną; nie zastosowano ryzykownych globalnych zamian terminu Typ ani nazw własnych.
+
+### EN
+- Resolved the Receivers, Type, Helpers and Fate groups together with the proper-name transliteration policy from Mead, MacDermot and the Coptic text.
+- On reader pages 169, 181 and 234, five instances of ‘expansion of the universe’ were standardized as ‘expansion of the All’, following Coptic ⲡⲥⲱⲣ ⲉⲃⲟⲗ ⲙ̅ ⲡⲧⲏⲣϥ̅.
+- Each of the six groups now has an individual decision, page scope and regression rule; no unsafe global replacement of Type or proper names was performed.
+
+## 1.7.19 - Nowa kolejka globalnego audytu przekładu
+
+### PL
+- Przeskanowano wszystkie 208 stron tekstu właściwego Pistis Sophii bez zmiany treści czytelniczej.
+- Utworzono oddzielną kolejkę sześciu grup kandydatów z numerami stron, priorytetami i planem dowodowym.
+- Hipotezy audytowe pozostają oddzielone od wiążącego rejestru zatwierdzonych decyzji.
+
+### EN
+- Scanned all 208 pages of the main Pistis Sophia text without changing reader-facing content.
+- Created a separate queue of six candidate groups with page references, priorities, and evidence plans.
+- Audit hypotheses remain separate from the binding registry of approved decisions.
+
+## 1.7.18 - Zamknięcie kolejki odzyskanych decyzji
+
+### PL
+- Zatwierdzono formę „dwudzieste czwarte Misterium na zewnątrz i poniżej” na podstawie Meada, MacDermot i koptyjskiego ⲉⲃⲟⲗ· ⲁⲩⲱ ⲉ ⲡⲉⲥⲏⲧ.
+- Odróżniono to miejsce od późniejszych, poprawnych opisów ruchu od wewnątrz ku zewnętrzu; po weryfikacji wszystkich ośmiu pozycji kolejka odzyskanych decyzji jest pusta.
+
+### EN
+- Approved ‘the twenty-fourth Mystery outside and below’ from Mead, MacDermot, and Coptic ⲉⲃⲟⲗ· ⲁⲩⲱ ⲉ ⲡⲉⲥⲏⲧ.
+- Distinguished this location statement from later valid descriptions of movement from within outwards; all eight recovered decisions are now verified and the backlog is empty.
+
+## 1.7.17 - Powrót duszy do świata znajdującego się wyżej
+
+### PL
+- Na stronie 194 zastąpiono interpretacyjne „ponownie posłana ku światu ludzi” źródłowym „odesłana z powrotem do świata znajdującego się wyżej”.
+- Korektę oparto na Meadzie oraz koptyjskim ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ i objęto ochroną Strażnika.
+
+### EN
+- On page 194, the interpretive ‘sent again to the world of men’ was replaced with the source-based ‘sent back to the world above’.
+- The correction follows Mead and Coptic ⲧⲥⲧⲟ ⲛ̅ ⲧⲉϥⲯⲩⲭⲏ ⲉ ⲡⲕⲟⲥⲙⲟⲥ ⲉⲧ ϩⲓ ⲡϫⲓⲥⲉ and is now protected by the translation guardian.
+
+## 1.7.16 - Kontekstowy przekład terminu politeia
+
+### PL
+- Na stronie 180 zastąpiono mylące „obywatelstwo światłości” formą „praktyka życia w światłości”, zgodną z objaśnieniem terminu przez oczyszczenia i wyrzeczenie.
+- Zachowano kontekstowe „życie w wielkiej prawości” na stronie 196; oba użycia koptyjskiego ⲡⲟⲗⲓⲧⲓⲁ udokumentowano i objęto ochroną Strażnika.
+
+### EN
+- On page 180, the misleading literal ‘citizenship of the light’ was replaced with ‘practice of life in the light’, matching the following explanation through purities and renunciation.
+- The contextual ‘life in great righteousness’ on page 196 was retained; both uses of Coptic ⲡⲟⲗⲓⲧⲓⲁ are now documented and protected by the guardian.
+
+## 1.7.15 - Zatwierdzenie nazwy Królestwo Światłości
+
+### PL
+- Zatwierdzono systemową nazwę „Królestwo Światłości” na podstawie Meada, MacDermot, Hornera i koptyjskiej formuły ⲧⲙⲛ̅ⲧⲉⲣⲟ ⲙ̅ ⲡⲟⲩⲟⲉⲓⲛ.
+- Strażnik chroni oba człony nazwy pisane wielką literą, nie zmieniając zwykłych opisowych wystąpień słowa „królestwo”.
+
+### EN
+- Approved the canonical name ‘Królestwo Światłości’ using Mead, MacDermot, Horner, and the Coptic formula ⲧⲙⲛ̅ⲧⲉⲣⲟ ⲙ̅ ⲡⲟⲩⲟⲉⲓⲛ.
+- The guardian protects capitalization of both parts of the canonical name without altering ordinary descriptive uses of ‘kingdom’.
+
+## 1.7.14 - Zatwierdzenie nazwy Niewypowiadalny
+
+### PL
+- Zatwierdzono systemową nazwę „Niewypowiadalny” na podstawie Meada, MacDermot, Hornera i koptyjskiej formuły ⲡⲓ ⲁⲧϣⲁϫⲉ ⲉ ⲣⲟϥ.
+- Odróżniono nazwę Niewypowiadalnego od osobnej klasy dwunastu Niewysłowionych i objęto obie formy ochroną przed regresją.
+
+### EN
+- Approved the canonical name ‘Niewypowiadalny’ from Mead, MacDermot, Horner, and the Coptic formula ⲡⲓ ⲁⲧϣⲁϫⲉ ⲉ ⲣⲟϥ.
+- Distinguished the Ineffable from the separate order of twelve Unspeakables and protected both terms against regression.
+
+## 1.7.13 - Udokumentowanie Bliźniaczego Zbawiciela i Bliźniaczych Zbawicieli
+
+### PL
+- Zatwierdzono rozróżnienie liczby pojedynczej „Bliźniaczy Zbawiciel” i mnogiej „Bliźniaczy Zbawiciele” na podstawie Meada, MacDermot, Hornera i tekstu koptyjskiego.
+- Strażnik chroni odtąd właściwą liczbę terminu na stronach 49, 56, 155, 157, 168 i 176.
+
+### EN
+- Approved the singular ‘Twin Saviour’ and plural ‘Twin Saviours’ distinction using Mead, MacDermot, Horner, and the Coptic text.
+- The guardian now protects the correct grammatical number on pages 49, 56, 155, 157, 168, and 176.
+
+## 1.7.12 - Stabilna kontrola renderowania 255 stron
+
+### PL
+- Zastąpiono podatne na formatowanie porównanie próbek kontrolą, czy każda z 255 stron jest przyjmowana przez właściwy formatter i zwraca pełny, niepusty wynik bez uszkodzonych znaków.
+- Osobno sprawdzana jest kompletność podziału strony 48 między wstęp i tekst główny.
+
+### EN
+- Replaced formatting-sensitive sample matching with validation that all 255 pages pass through the correct formatter and produce non-empty output without damaged characters.
+- The page-48 split between introduction and main text is verified separately.
+
+## 1.7.11 - Odciążenie testu 255 stron
+
+### PL
+- Pełna kontrola tłumaczenia nie przełącza już czytnika w kosztowny tryb ciągłego renderowania całej książki.
+- Każda z 255 stron nadal jest sprawdzana w Chromium za pomocą tych samych funkcji formatowania, a działanie widoku czytnika pozostaje testowane osobno.
+
+### EN
+- The full translation check no longer switches the reader into the expensive whole-book continuous rendering mode.
+- All 255 pages are still checked in Chromium using the same formatting functions, while the reader view remains covered separately.
+
+## 1.7.10 - Usunięcie timeoutu pełnego testu tłumaczenia
+
+### PL
+- Test przeglądarkowy nadal sprawdza wszystkie 255 stron polskiego przekładu przez rzeczywistą ścieżkę renderowania, ale nie umieszcza już całej książki jednocześnie w DOM.
+- Usunięto oczekiwanie na niewidoczny element strony 255, które powodowało 60-sekundowy timeout na Windows.
+
+### EN
+- The browser test still validates all 255 Polish pages through the actual rendering pipeline without inserting the entire book into the DOM at once.
+- Removed the wait for an invisible page-255 element that caused a 60-second timeout on Windows.
+
+## 1.7.9 - Przywrócenie terminu człowiek światłości
+
+### PL
+- Na stronach 73, 86, 130 i 158 zastąpiono formę „zamieszkująca mnie moc światłości” źródłowym terminem „mój człowiek światłości”.
+- Ujednolicono wszystkie siedem wystąpień według koptyjskiego ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ oraz porównania przekładów Meada, MacDermot i Hornera.
+- Decyzję zapisano w rejestrze i objęto automatyczną ochroną Strażnika tłumaczenia.
+
+### EN
+- Replaced the paraphrase ‘my indwelling light-power’ on pages 73, 86, 130, and 158 with the source term ‘my light-man’.
+- Standardized all seven occurrences against Coptic ⲡⲁⲣⲙ̅ ⲛ̅ ⲟⲩⲟⲉⲓⲛ and the Mead, MacDermot, and Horner translations.
+- Recorded and enforced the decision in the translation guardian.
+
+## 1.7.8 - Zatwierdzenie terminu Pięć Znamion
+
+### PL
+- Zweryfikowano termin Pięć Znamion względem Meada, MacDermot, Hornera oraz koptyjskiej formy ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ.
+- Przeniesiono decyzję z kolejki odtworzeniowej do wiążącego rejestru i objęto jej brzmienie kontrolą Strażnika tłumaczenia.
+
+### EN
+- Verified the Five Impressions term against Mead, MacDermot, Horner, and the Coptic form ⲡϯⲟⲩ ⲛ̅ ⲭⲁⲣⲁⲅⲙⲏ.
+- Promoted the decision from the recovery backlog to the binding registry and added translation-guardian enforcement.
+
+## 1.7.7 - Kolejka wcześniejszych decyzji tłumaczeniowych
+
+### PL
+- Odtworzono listę ośmiu wcześniejszych decyzji tłumaczeniowych opisanych w historii wersji.
+- Każda pozycja wskazuje obecne brzmienie, zakres, wersję pochodzenia i dowody wymagane przed zatwierdzeniem.
+- Strażnik nie pozwala mylić kolejki weryfikacyjnej z wiążącym rejestrem decyzji.
+
+### EN
+- Recovered a list of eight historical translation decisions described in the release history.
+- Each item records the current wording, scope, originating version and evidence required before approval.
+- The guardian keeps the verification backlog distinct from the binding decision registry.
+
 ## 1.7.6 - Strażnik kompletności tłumaczenia Pistis Sophii
 
 ### PL
