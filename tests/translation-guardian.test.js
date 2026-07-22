@@ -40,6 +40,34 @@ test("addendum pages 1-12 retain the first close-reading corrections", () => {
   }
 });
 
+test("Mead's detailed contents is clearly identified and retains natural Polish", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const contents = Array.from({ length: 14 }, (_, index) => pages[index + 2]).join("\n");
+
+  for (const wording of [
+    "SZCZEGÓŁOWY SPIS TREŚCI WYDANIA MEADA",
+    "Nie są częścią narracji Pistis Sophii",
+    "Obiecuje wyjawić im wszystko",
+    "Jan był Eliaszem w poprzednim wcieleniu",
+    "Takie dusze jednoczą się z Pierwszym Misterium",
+    "Pokutującemu bratu można ponownie udzielić nawet trzech misteriów z drugiej przestrzeni",
+  ]) {
+    assert.ok(contents.includes(wording), `missing contents wording: ${wording}`);
+  }
+
+  for (const rejected of [
+    "Obiecuje powiedzieć im wszystkie rzeczy",
+    "w dawnym narodzeniu",
+    "Takie dusze są jednym z Pierwszym Misterium",
+    "aż do trzech z drugiej przestrzeni",
+  ]) {
+    assert.equal(contents.includes(rejected), false, `rejected contents wording returned: ${rejected}`);
+  }
+});
+
 test("translation guardian requires evidence, rationale, footnotes, and enforced wording", () => {
   const registry = JSON.parse(read("books/pistis-sophia/translation-decisions.json"));
   assert.equal(registry.schemaVersion, 1);

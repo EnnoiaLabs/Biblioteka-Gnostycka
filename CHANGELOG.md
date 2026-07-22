@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.43 - Czytelny szczegółowy spis treści Meada
+
+### PL
+- Wyraźnie oznaczono strony 2–15 Dodatku jako szczegółowy spis treści wydania Meada, a nie część narracji Pistis Sophii.
+- Zredagowano jednoznaczne kalki, niejasne zaimki i błędne konstrukcje w polskich opisach rozdziałów bez zmiany ich sensu.
+- Dodano ochronę rozróżnienia między spisem a właściwym tekstem oraz najważniejszych naturalnych brzmień.
+
+### EN
+- Clearly identified Addendum pages 2–15 as Mead’s detailed table of contents rather than part of the Pistis Sophia narrative.
+- Edited unambiguous calques, unclear pronouns, and faulty constructions in the Polish chapter descriptions without changing their meaning.
+- Added regression protection for the distinction between contents and narrative and for the principal natural Polish readings.
+
 ## 1.7.42 - Finalne wydanie po pełnym audycie 1–255
 
 ### PL
