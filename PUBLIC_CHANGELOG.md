@@ -1,5 +1,17 @@
 # Publiczna historia zmian / Public change history
 
+## 1.7.44 - Finalna redakcja czytelnicza Dodatku 1–48
+
+### PL
+- Przeczytano cały Dodatek 1–48 jako jeden ciąg i wygładzono pozostałe jednoznaczne kalki oraz angielski szyk bez zmiany sensu i terminologii.
+- Naturalnie zredagowano opis kopistów, stan badań, założenie komentarza oraz wybrane omówienia bibliograficzne Schmidta.
+- Poprawiono nagłówek o kopistach, notę dopisaną późniejszą ręką i niezręczne określenia wydania znajdującego się w domenie publicznej; dodano ochronę tych brzmień.
+
+### EN
+- Read the complete Addendum, pages 1–48, as a continuous reader text and smoothed the remaining unambiguous calques and English syntax without changing meaning or terminology.
+- Naturally edited the discussion of the scribes, the state of research, the intended scope of commentary, and selected bibliographical discussions of Schmidt.
+- Corrected the scribes heading, the later-hand note, and awkward public-domain wording, and added regression protection for the approved readings.
+
 ## 1.7.43 - Czytelny szczegółowy spis treści Meada
 
 ### PL

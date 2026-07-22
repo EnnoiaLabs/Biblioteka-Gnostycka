@@ -578,7 +578,7 @@ test("version 1.7.39 preserves the corrected Addendum pages 13-24", () => {
   const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
   const audited = Array.from({ length: 12 }, (_, index) => pages[index + 13]).join("\n");
 
-  assert.match(pages[18], /Co do tego Crum i Schmidt są całkowicie zgodni/);
+  assert.match(pages[18], /Crum i Schmidt są w tej kwestii całkowicie zgodni/);
   assert.match(pages[18], /Treść\. Z zewnętrznego punktu widzenia zawartość dzieli się na cztery główne części/);
   assert.equal(countOccurrences(audited, "Następnie, wraz z rozdziałem 102"), 1);
   assert.equal(countOccurrences(audited, "podatność na błąd"), 0);
@@ -618,4 +618,33 @@ test("version 1.7.41 preserves the restored Addendum pages 37-48", () => {
   assert.equal(countOccurrences(audited, "Jej ogólna wartość. Jeśli Księgi Zbawcy"), 0);
   assert.equal(countOccurrences(audited, "Woide uważał, że Pistis Sophia jest bardzo starym rękopisem"), 0);
   assert.equal(countOccurrences(audited, "14. 1856. Anonimowy przekład w Dictionnaire des Apocryphes Migne'a"), 0);
+});
+
+test("version 1.7.44 preserves the final reader-language edit of Addendum pages 1-48", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const addendum = Array.from({ length: 48 }, (_, index) => pages[index + 1]).join("\n");
+
+  for (const approved of [
+    "Kopiści i ich pismo",
+    "Nota dopisana późniejszą ręką",
+    "Niniejszy przekład nie ma być opatrzony rozbudowanym komentarzem",
+    "Schmidt wykorzystuje tu również wyniki swoich wcześniejszych badań",
+    "może wyjaśnić niektóre z najtrudniejszych zagadnień"
+  ]) {
+    assert.match(addendum, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "Nota późniejszą ręką",
+    "Z tego, co dotąd zbieramy z powyższych wskazań",
+    "Nie jest planem tego przekładu",
+    "Schmidt wciąga tu do badań",
+    "najbardziej zagadkowych ciemności",
+    "publiczno-domenowe angielskie wydanie"
+  ]) {
+    assert.equal(countOccurrences(addendum, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
 });
