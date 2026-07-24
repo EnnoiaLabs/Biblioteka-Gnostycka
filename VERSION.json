@@ -1,10 +1,10 @@
 {
   "name": "pistis-text-addenda",
-  "version": "1.7.44",
+  "version": "1.7.43",
   "updated": "2026-07-15",
-  "currentWork": "final-addendum-reader-language-edit",
+  "currentWork": "readable-mead-detailed-contents",
   "structure": "modular-books",
   "date": "2026-07-22",
   "releaseType": "public",
-  "latestPublicVersion": "1.7.44"
+  "latestPublicVersion": "1.7.43"
 }
