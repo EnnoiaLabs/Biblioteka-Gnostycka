@@ -309,15 +309,15 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[155], /Bliźniaczych Zbawicieli/);
   assert.match(translations[157], /ochrzczą je/);
   assert.match(translations[158], /mój człowiek światłości/);
-  assert.match(translations[160], /ponownie wystąpiła i mówiła dalej/);
+  assert.match(translations[160], /ponownie wystąpiła i zapytała/);
   assert.match(translations[164], /powstały gady/);
   assert.match(translations[168], /Bliźniaczy Zbawiciele/);
   assert.match(translations[169], /każdego, kto was usłucha/);
   assert.match(translations[176], /Bliźniaczymi Zbawicielami/);
   assert.match(translations[177], /Królestwa Światłości\?/);
-  assert.match(translations[182], /jednym rokiem Światłości\?/);
+  assert.match(translations[182], /jeden rok Światłości\?/);
   assert.match(translations[193], /misteriów drugiej przestrzeni\?/);
-  assert.match(translations[196], /z dokładnością i pewnością/);
+  assert.match(translations[196], /dokładnie i z całą pewnością/);
   assert.match(translations[201], /I stopniowo moc i dusza/);
   assert.match(translations[205], /Maryja ponownie wystąpiła/);
   assert.match(translations[209], /naprawdę badam dokładnie/);
@@ -369,7 +369,7 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   );
   assert.doesNotMatch(completePolishTranslation, /\bNiewysłowion(?:y|ego|ym)\b/);
   assert.match(translations[171], /dwanaście porządków Niewysłowionych/);
-  assert.match(translations[64], /Maryja odpowiedziała i rzekła do Jezusa/);
+  assert.match(translations[64], /Maryja odpowiedziała do Jezusa/);
   assert.doesNotMatch(completePolishTranslation, /\bkrólestw(?:o|a|ie|em|u) Światłości/);
   assert.match(translations[190], /ponownie posłani ku światu/);
   assert.match(translations[190], /Miłujcie ludzi/);
@@ -378,7 +378,7 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.match(translations[194], /odesłana z powrotem do świata znajdującego się wyżej/);
   assert.match(translations[196], /prowadził życie w wielkiej prawości oraz trwał w głębokiej pokucie/);
   assert.match(translations[216], /To wyższe Misterium przyjmie jego pokutę i odpuści mu grzechy/);
-  assert.match(translations[255], /Wyszli po trzech ku czterem strefom nieba/);
+  assert.match(translations[255], /Wyruszyli trójkami ku czterem strefom nieba/);
   assert.doesNotMatch(completePolishTranslation, /odgrywani(?:e|a) roli|odgrywaj(?:ą|ąc)|odgrywali przed nami rolę/);
   assert.doesNotMatch(completePolishTranslation, /wielkim obywatelstwie|świat powyżej|ponownie posłana ku światu ludzi|to ostatnie dlatego/);
   assert.doesNotMatch(
@@ -388,7 +388,7 @@ test("extracted Polish translations are lazy-loaded with Pistis Sophia and prese
   assert.doesNotMatch(completePolishTranslation, /(?:kontynuowała|kontynuował) i rzekł[ae]?/);
   assert.match(translations[17], /przekładu dokonanego z innego przekładu/);
   assert.match(translations[196], /przestanie istnieć na wieki/);
-  assert.match(translations[199], /dokonamy jednego z takich misteriów/);
+  assert.match(translations[199], /dokonując tam jednego z takich misteriów/);
   assert.match(translations[216], /dwa lub trzy misteria \|315\. drugiej albo trzeciej przestrzeni/);
   assert.match(translations[242], /Jezus mówił dalej: „Czwarty porządek/);
   assert.doesNotMatch(completePolishTranslation, /(^|\s)'(?=\S)|(\S)'(?=$|\s)/m);

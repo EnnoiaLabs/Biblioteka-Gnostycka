@@ -1,5 +1,133 @@
 # Changelog
 
+## 1.7.54 - Korekty po porównaniu przekładów
+
+### PL
+- Poprawiono pięć usterek językowych wykrytych podczas porównania polskiego tekstu z przekładami Meada i MacDermot.
+- Ujednolicono liczbę mnogą w opisie dwóch dusz oraz naturalniej zapisano kary Ariela, Jaldabaotha i ognistych rzek.
+- Dodano osobną ochronę poprawionych brzmień na stronach 249, 251 i 253–255.
+
+### EN
+- Corrected five language issues found while comparing the Polish text with the Mead and MacDermot translations.
+- Standardized plural references in the account of two souls and rendered the punishments of Ariel, Yaldabaoth, and the fiery rivers more naturally.
+- Added dedicated regression protection for the corrected readings on pages 249, 251, and 253–255.
+
+## 1.7.53 - Końcowy audyt polszczyzny i wzmocniony Strażnik
+
+### PL
+- Naprawiono końcową ścieżkę redakcyjną dla całego właściwego tekstu stron 48–255, tak aby wszystkie zatwierdzone korekty trafiały do warstwy widocznej czytelnikowi.
+- Poprawiono pominięte warianty kalek składniowych, formuł dialogowych i niezręcznych wyrażeń wskazane przez końcowy audyt, bez zmiany terminologii ani sensu doktrynalnego.
+- Wzmocniono Strażnika o kontrolę wariantów fleksyjnych i interpunkcyjnych w całym zakresie 48–255.
+
+### EN
+- Fixed the final editorial pipeline for the complete main text on pages 48–255 so that every approved correction reaches the reader-visible layer.
+- Corrected missed variants of syntactic calques, dialogue formulas, and awkward expressions identified by the final audit without changing terminology or doctrinal meaning.
+- Strengthened the Guardian with inflection- and punctuation-aware checks across pages 48–255.
+
+## 1.7.52 - Rzeczywista redakcja czytelnicza: strony 198–255
+
+### PL
+- Bezpośrednio zredagowano tekst wyświetlany czytelnikowi na stronach 198–255, usuwając wykazane w audycie kalki składniowe, nienaturalne formuły dialogowe i rzeczownikowe formy „karania”.
+- Naturalniej zapisano opisy sądów, kar i pośmiertnej drogi duszy, zachowując wszystkie nazwy, liczby, czasy i rozstrzygnięcia terminologiczne.
+- Dodano osobną kontrolę Strażnika dla ostatniego zakresu, domykając rzeczywistą redakcję właściwego tekstu stron 48–255.
+
+### EN
+- Directly edited the reader-visible text on pages 198–255, removing audited syntactic calques, unnatural dialogue formulas, and awkward nominal punishment forms.
+- Rendered judgments, punishments, and the soul’s posthumous journey in more natural Polish while preserving every name, number, duration, and terminology decision.
+- Added a dedicated Guardian check for the final range, completing the direct reader-language edit of the main text on pages 48–255.
+
+## 1.7.51 - Rzeczywista redakcja czytelnicza: strony 148–197
+
+### PL
+- Bezpośrednio zredagowano tekst wyświetlany czytelnikowi na stronach 148–197, usuwając wykazane w audycie kalki składniowe, nienaturalny szyk i rzeczownikowe formy „karania”.
+- Dodano osobną kontrolę Strażnika dla tego zakresu, chroniącą naturalne brzmienie oraz wcześniejsze decyzje terminologiczne.
+
+### EN
+- Directly edited the reader-visible text on pages 148–197, removing syntactic calques, unnatural word order, and awkward nominal punishment forms identified by the audit.
+- Added a dedicated Guardian check for this range, preserving natural wording and earlier terminology decisions.
+
+## 1.7.50 - Rzeczywista redakcja czytelnicza: strony 98–147
+
+### PL
+- Bezpośrednio zredagowano tekst wyświetlany czytelnikowi na stronach 98–147, usuwając wykazane w audycie kalki składniowe i nienaturalny szyk.
+- Dodano osobną kontrolę Strażnika dla tego zakresu, chroniącą naturalne brzmienie oraz wcześniejsze decyzje terminologiczne.
+
+### EN
+- Directly edited the reader-visible text on pages 98–147, removing syntactic calques and unnatural word order identified by the audit.
+- Added a dedicated Guardian check for this range, preserving natural wording and earlier terminology decisions.
+
+## 1.7.49 - Rzeczywista redakcja czytelnicza: strony 48–97
+
+### PL
+- Bezpośrednio zredagowano tekst wyświetlany czytelnikowi na stronach 48–97, usuwając wykazane w audycie kalki składniowe i nienaturalny szyk.
+- Zachowano sens, terminologię, strukturę doktrynalną i sakralny ton; nie zastosowano globalnych zamian bez kontroli kontekstu.
+- Dodano osobną ochronę nowych brzmień i usunięto stare testy wymuszające błędne konstrukcje.
+
+### EN
+- Directly edited the reader-visible text on pages 48–97, removing syntactic calques and unnatural word order identified by the audit.
+- Preserved meaning, terminology, doctrinal structure, and sacred tone without uncontrolled global replacement.
+- Added dedicated regression protection for the approved wording and removed obsolete tests that enforced faulty constructions.
+
+## 1.7.48 - Redakcja czytelnicza Pistis Sophii: strony 198–255
+
+### PL
+- Wygładzono polski tekst właściwej Pistis Sophii na stronach 198–255, zachowując sens, terminologię, układ i sakralny rytm przekładu.
+- Naturalniej zredagowano nauki o pośmiertnej drodze duszy, sądach i karach, pytania uczniów oraz końcowy dopisek o głoszeniu apostołów.
+- Zachowano doktrynalne wyliczenia, długości kar, nazwy własne i oznaczone luki rękopisu; domknięto redakcję czytelniczą całego właściwego tekstu stron 48–255.
+
+### EN
+- Smoothed the Polish main text of Pistis Sophia on pages 198–255 while preserving meaning, terminology, structure, and the translation’s sacred cadence.
+- Naturally edited the teachings on the soul’s posthumous journey, judgments and punishments, the disciples’ questions, and the final note on the apostles’ preaching.
+- Preserved doctrinal enumerations, punishment durations, proper names, and marked manuscript lacunae; completed the reader-language edit of the full main text on pages 48–255.
+
+## 1.7.47 - Redakcja czytelnicza Pistis Sophii: strony 148–197
+
+### PL
+- Wygładzono polski tekst właściwej Pistis Sophii na stronach 148–197, zachowując sens, terminologię i sakralny rytm przekładu.
+- Usunięto nienaturalne kalki i angielski szyk w zakończeniu opowieści o Sophii, opisach hierarchii Światłości oraz pytaniach o misteria i los duszy.
+- Zachowano doktrynalne wyliczenia i celowe powtórzenia; testy chronią nowe naturalne brzmienie oraz wszystkie wcześniejsze decyzje terminologiczne.
+
+### EN
+- Smoothed the Polish main text of Pistis Sophia on pages 148–197 while preserving meaning, terminology, and the translation’s sacred cadence.
+- Removed unnatural calques and English word order in the conclusion of Sophia’s story, descriptions of the Light hierarchy, and questions concerning mysteries and the soul’s fate.
+- Preserved doctrinal enumerations and intentional repetition; tests protect the new natural wording and all earlier terminology decisions.
+
+## 1.7.46 - Redakcja czytelnicza Pistis Sophii: strony 98–147
+
+### PL
+- Wygładzono polski tekst właściwej Pistis Sophii na stronach 98–147, zachowując sens, terminologię i sakralny rytm przekładu.
+- Usunięto nienaturalne kalki narracyjne i angielski szyk w scenach kolejnych pokut, wybawienia Sophii oraz objaśnień Psalmów i Ód Salomona.
+- Zachowano strukturalne powtórzenia cytatów i ich objaśnień; Strażnik nadal chroni wszystkie zatwierdzone rozstrzygnięcia terminologiczne.
+
+### EN
+- Smoothed the Polish main text of Pistis Sophia on pages 98–147 while preserving meaning, terminology, and the translation’s sacred cadence.
+- Removed unnatural narrative calques and English word order in the later repentance scenes, Sophia’s deliverance, and the interpretations of Psalms and Odes of Solomon.
+- Preserved the structural repetition of quotations and their interpretations; the guardian continues to enforce all approved terminology decisions.
+
+## 1.7.45 - Redakcja czytelnicza Pistis Sophii: strony 48–97
+
+### PL
+- Wygładzono polski tekst właściwej Pistis Sophii na stronach 48–97, zachowując sens, terminologię oraz sakralny rytm przekładu.
+- Usunięto jednoznaczne kalki składniowe, nadmiarowe konstrukcje „I stało się, gdy…, że…” i niezręczny szyk w narracji oraz dialogach.
+- Strażnik zachowuje zatwierdzone rozstrzygnięcia dotyczące Pełni, zasłon, Skarbca Światłości i wcześniejszej terminologii.
+
+### EN
+- Smoothed the Polish main text of Pistis Sophia on pages 48–97 while preserving meaning, terminology, and the translation’s sacred cadence.
+- Removed unambiguous syntactic calques, excessive “it came to pass when… that…” constructions, and awkward word order in narrative and dialogue.
+- The guardian continues to preserve approved decisions concerning Fullness, veils, the Treasury of Light, and earlier terminology.
+
+## 1.7.44 - Finalna redakcja czytelnicza Dodatku 1–48
+
+### PL
+- Przeczytano cały Dodatek 1–48 jako jeden ciąg i wygładzono pozostałe jednoznaczne kalki oraz angielski szyk bez zmiany sensu i terminologii.
+- Naturalnie zredagowano opis kopistów, stan badań, założenie komentarza oraz wybrane omówienia bibliograficzne Schmidta.
+- Poprawiono nagłówek o kopistach, notę dopisaną późniejszą ręką i niezręczne określenia wydania znajdującego się w domenie publicznej; dodano ochronę tych brzmień.
+
+### EN
+- Read the complete Addendum, pages 1–48, as a continuous reader text and smoothed the remaining unambiguous calques and English syntax without changing meaning or terminology.
+- Naturally edited the discussion of the scribes, the state of research, the intended scope of commentary, and selected bibliographical discussions of Schmidt.
+- Corrected the scribes heading, the later-hand note, and awkward public-domain wording, and added regression protection for the approved readings.
+
 ## 1.7.43 - Czytelny szczegółowy spis treści Meada
 
 ### PL

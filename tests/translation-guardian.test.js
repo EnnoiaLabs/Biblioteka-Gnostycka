@@ -526,8 +526,7 @@ test("version 1.7.32 removes only confirmed archaic Mead calques", () => {
   for (const forbidden of decision.forbiddenPolish) {
     assert.equal(countOccurrences(translation, forbidden), 0, `obsolete calque remains: ${forbidden}`);
   }
-  assert.ok(countOccurrences(translation, "I stało się") >= 50, "narrative formula must remain intact");
-  assert.ok(countOccurrences(translation, "odpowiedział i rzekł") >= 50, "dialogue formula must remain intact");
+  assert.ok(countOccurrences(translation, "rzekł") >= 200, "ritual dialogue vocabulary remains available");
 });
 
 test("version 1.7.33 formally closes the 208-page global consistency audit", () => {
@@ -578,7 +577,7 @@ test("version 1.7.39 preserves the corrected Addendum pages 13-24", () => {
   const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
   const audited = Array.from({ length: 12 }, (_, index) => pages[index + 13]).join("\n");
 
-  assert.match(pages[18], /Co do tego Crum i Schmidt są całkowicie zgodni/);
+  assert.match(pages[18], /Crum i Schmidt są w tej kwestii całkowicie zgodni/);
   assert.match(pages[18], /Treść\. Z zewnętrznego punktu widzenia zawartość dzieli się na cztery główne części/);
   assert.equal(countOccurrences(audited, "Następnie, wraz z rozdziałem 102"), 1);
   assert.equal(countOccurrences(audited, "podatność na błąd"), 0);
@@ -618,4 +617,218 @@ test("version 1.7.41 preserves the restored Addendum pages 37-48", () => {
   assert.equal(countOccurrences(audited, "Jej ogólna wartość. Jeśli Księgi Zbawcy"), 0);
   assert.equal(countOccurrences(audited, "Woide uważał, że Pistis Sophia jest bardzo starym rękopisem"), 0);
   assert.equal(countOccurrences(audited, "14. 1856. Anonimowy przekład w Dictionnaire des Apocryphes Migne'a"), 0);
+});
+
+test("version 1.7.44 preserves the final reader-language edit of Addendum pages 1-48", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const addendum = Array.from({ length: 48 }, (_, index) => pages[index + 1]).join("\n");
+
+  for (const approved of [
+    "Kopiści i ich pismo",
+    "Nota dopisana późniejszą ręką",
+    "Niniejszy przekład nie ma być opatrzony rozbudowanym komentarzem",
+    "Schmidt wykorzystuje tu również wyniki swoich wcześniejszych badań",
+    "może wyjaśnić niektóre z najtrudniejszych zagadnień"
+  ]) {
+    assert.match(addendum, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "Nota późniejszą ręką",
+    "Z tego, co dotąd zbieramy z powyższych wskazań",
+    "Nie jest planem tego przekładu",
+    "Schmidt wciąga tu do badań",
+    "najbardziej zagadkowych ciemności",
+    "publiczno-domenowe angielskie wydanie"
+  ]) {
+    assert.equal(countOccurrences(addendum, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
+});
+
+test("version 1.7.49 preserves the direct reader-language edit of pages 48-97", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 50 }, (_, index) => pages[index + 48]).join("\n");
+
+  for (const approved of [
+    "światłość, która była na nim, nie miała granic",
+    "Wtedy wszystkich ludzi na świecie, a także uczniów, ogarnęło poruszenie",
+    "wszystkie jej bramy zatrzęsły się i same otworzyły",
+    "Gdy Pistis Sophia wypowiedziała siódmą pokutę w chaosie"
+  ]) {
+    assert.match(audited, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "popadli w poruszenie jedni przeciw drugim",
+    "bramy zostały wrzucone w poruszenie",
+    "nie było miary dla światłości",
+    "ich moc została w nich pomniejszona",
+    "I stało się, gdy Pistis Sophia wypowiedziała siódmą pokutę"
+  ]) {
+    assert.equal(countOccurrences(audited, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
+});
+
+test("version 1.7.50 preserves the direct reader-language edit of pages 98-147", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 50 }, (_, index) => pages[index + 98]).join("\n");
+
+  for (const approved of [
+    "Pierwsze Misterium mówiło dalej",
+    "Gdy Andrzej wyłożył myśl Pistis Sophii",
+    "Gdy nadszedł ów czas",
+    "światłość, która mnie otaczała, nie miała granic"
+  ]) {
+    assert.match(audited, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "ciągnęło mowę",
+    "podjął mowę i rzekł",
+    "odpowiedział i rzekł",
+    "odpowiedziała i rzekła",
+    "odpowiedziało i rzekło",
+    "nie było miary światłości",
+    "I stało się więc, gdy"
+  ]) {
+    assert.equal(countOccurrences(audited, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
+});
+
+test("version 1.7.51 preserves the direct reader-language edit of pages 148-197", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 50 }, (_, index) => pages[index + 148]).join("\n");
+
+  for (const approved of [
+    "Gdy Maryja usłyszała te słowa Zbawcy, uradowała się niezmiernie",
+    "Gdy Jezus usłyszał słowa Maryi i zobaczył, że uczniowie stracili odwagę",
+    "ile lat świata składa się na jeden rok Światłości",
+    "Trudno mi to pojąć",
+    "poddany karom i sądom"
+  ]) {
+    assert.match(audited, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "odpowiedział i rzekł",
+    "odpowiedziała i rzekła",
+    "I stało się, gdy",
+    "I stało się więc, gdy",
+    "kontynuował mowę",
+    "w karaniach",
+    "ogień karania"
+  ]) {
+    assert.equal(countOccurrences(audited, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
+});
+
+test("version 1.7.52 preserves the direct reader-language edit of pages 198-255", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 58 }, (_, index) => pages[index + 198]).join("\n");
+
+  for (const approved of [
+    "Gdy Jezus usłyszał te słowa Maryi, rzekł",
+    "Gdy Zbawca usłyszał te słowa Maryi, nazwał ją wielce błogosławioną",
+    "Kiedy odpuścisz nam popełnione grzechy i nieprawości",
+    "wymierza jej karę",
+    "pośród kar"
+  ]) {
+    assert.match(audited, new RegExp(approved));
+  }
+
+  for (const obsolete of [
+    "odpowiedział i rzekł",
+    "odpowiedziała i rzekła",
+    "I stało się, gdy",
+    "I stało się więc, gdy",
+    "kontynuował mowę",
+    "mści się na",
+    "mszczą się na",
+    "karania",
+    "karaniami",
+    "w karaniach",
+    "najzupełniej błogosławioną",
+    "słów które",
+    "czas dopełni się przez sferę"
+  ]) {
+    assert.equal(countOccurrences(audited, obsolete), 0, `obsolete calque remains: ${obsolete}`);
+  }
+});
+
+test("version 1.7.53 enforces the final reader-language audit across pages 48-255", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+  const audited = Array.from({ length: 208 }, (_, index) => pages[index + 48]).join("\n");
+
+  for (const approved of [
+    "jego światłość nie miała granic",
+    "Jezus ponownie zabrał głos",
+    "dokładnie poznali",
+    "Maryjo, czysta w Światłości",
+    "pierwsze przyjście na świat",
+    "przestaną istnieć na wieki",
+    "w jaki sposób do was mówię"
+  ]) {
+    assert.match(audited, new RegExp(approved));
+  }
+
+  for (const obsoletePattern of [
+    /odpowiedział\s*,?\s+i rzekł/u,
+    /odpowiedziała\s*,?\s+i rzekła/u,
+    /odpowiedziało\s*,?\s+i rzekło/u,
+    /odpowiedziałem\s*,?\s+i rzekłem/u,
+    /nie było miary dla (?:jego światłości|(?:jej )?promieni)/u,
+    /Jezus (?:znowu|ponownie) podjął mowę/u,
+    /Albowiem stało się, gdy/u,
+    /w jaki sposób rozprawiam z wami/u,
+    /światło-czysta Maryjo/u,
+    /pierwszy raz przyjścia na świat/u,
+    /będ(?:ą nieistniejące|zie nieistniejąca) na wieki/u
+  ]) {
+    assert.doesNotMatch(audited, obsoletePattern);
+  }
+});
+
+test("version 1.7.54 preserves corrections found by the translation comparison", () => {
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(read("books/pistis-sophia/polish-translations.js"), context);
+  const pages = context.window.GNOSTYK_POLISH_TRANSLATIONS;
+
+  assert.match(pages[249], /Ariela, a on poddaje ją swoim karom jedenaście miesięcy i dwadzieścia jeden dni/u);
+  assert.match(pages[251], /Ariela, a on poddaje ją swoim karom trzy miesiące, osiem dni i dwie godziny/u);
+  assert.match(pages[253], /odbiorcy Jaldabaotha przychodzą po ich dusze/u);
+  assert.match(pages[253], /poddaje je karom przez jedenaście lat/u);
+  assert.match(pages[253], /poddają ich karom w ognistych rzekach/u);
+  assert.match(pages[254], /jeśli popełnił trzy grzechy, otrzyma karę za każdy z nich/u);
+  assert.match(pages[255], /zostaną poddani tym karom/u);
+
+  const audited = [pages[249], pages[251], pages[253], pages[254], pages[255]].join("\n");
+  for (const obsoletePattern of [
+    /(?:karze|wymierza jej karę) w swoich karach/u,
+    /przychodzą po ich duszę/u,
+    /wymierza jej karę jedenaście lat/u,
+    /wymierzają im karę w ognistych rzekach/u,
+    /otrzyma kara za trzy/u,
+    /zostaną poprowadzeni do tych kar/u
+  ]) {
+    assert.doesNotMatch(audited, obsoletePattern);
+  }
 });

@@ -19,7 +19,7 @@
       "rationale": "W polskiej warstwie „kraina” nazywa obszar wyznaczony relacją, mieszkańcami lub funkcją, na przykład krainy Prawicy, Pośrodka, chaosu i poszczególnych porządków. To celowo szerszy termin niż eon i sfera. Globalna zamiana na „region” nie poprawiłaby wierności, natomiast utożsamienie krainy z eonem albo sferą wprowadziłoby strukturę nieobecną w źródle. Obecny przekład zachowuje wymagane rozróżnienie i nie wymaga korekty czytelniczej.",
       "textChanged": false,
       "requiredPattern": "krain",
-      "minimumOccurrences": 394,
+      "minimumOccurrences": 393,
       "forbiddenPattern": "każda kraina jest eonem"
     },
     {

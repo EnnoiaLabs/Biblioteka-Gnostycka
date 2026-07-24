@@ -1,7 +1,7 @@
 {
   "name": "gnostyk-biblioteka",
   "private": true,
-  "version": "1.7.43",
+  "version": "1.7.54",
   "description": "Testy zabezpieczające Biblioteki Gnozy",
   "scripts": {
     "test": "node --test tests/*.test.js",

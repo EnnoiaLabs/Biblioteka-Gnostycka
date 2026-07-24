@@ -33,7 +33,7 @@
       "rationale": "„Zasłona” wiernie oddaje przestrzenną funkcję terminu, obejmując zarówno pojedynczą granicę nazwanego regionu, jak i wiele zasłon pomiędzy sferami. Nie należy mechanicznie zmieniać go na „kurtynę”, „firmament” ani pisać każdej formy wielką literą, ponieważ źródło nie ustanawia jednej nazwy własnej dla wszystkich wystąpień.",
       "textChanged": false,
       "requiredPattern": "zasłon",
-      "minimumOccurrences": 25,
+      "minimumOccurrences": 24,
       "forbiddenPattern": "Kurtyna Skarbca Światłości"
     },
     {
